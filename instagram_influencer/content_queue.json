@@ -23,7 +23,8 @@
       "notes": "Mid-shot, Maya at a beautifully set outdoor cafe table, perhaps overlooking greenery or the sea. Wearing a sophisticated yet relaxed linen co-ord set in earthy tones, statement sunglasses slightly pushed down. Soft, natural sunlight, an exquisite coffee cup in frame. Relaxed but knowing smile, one hand gracefully supporting her chin. | generated_by=gemini:gemini-2.5-flash",
       "publish_error": null,
       "posted_at": "2026-02-25T16:20:28Z",
-      "platform_post_id": "3840442103013086666"
+      "platform_post_id": "3840442103013086666",
+      "last_storied_at": "2026-02-25T19:25:20Z"
     },
     {
       "id": "maya-003",
@@ -73,7 +74,7 @@
     {
       "id": "maya-007",
       "status": "draft",
-      "topic": "Mumbai rooftop soir\u00e9e, commanding attention.",
+      "topic": "Mumbai rooftop soirée, commanding attention.",
       "caption": "They thought the skyline was the view.\nSweetie, I am the view.",
       "image_url": "",
       "video_url": null,
@@ -115,7 +116,8 @@
       "notes": "Warm cafe interior, white kurta, gold jhumkas, natural morning light, holding coffee cup. | generated_by=replicate:flux-kontext-pro",
       "publish_error": null,
       "posted_at": "2026-02-24T17:37:14Z",
-      "platform_post_id": "unknown"
+      "platform_post_id": "unknown",
+      "last_storied_at": "2026-02-25T19:25:20Z"
     },
     {
       "id": "maya-011",
@@ -143,7 +145,7 @@
       "id": "maya-013",
       "status": "draft",
       "topic": "Owning the night at a luxury Mumbai rooftop bar.",
-      "caption": "The city lights are pretty. I think I know why they\u2019re looking this way.",
+      "caption": "The city lights are pretty. I think I know why they’re looking this way.",
       "image_url": "",
       "video_url": null,
       "is_reel": true,
@@ -198,7 +200,7 @@
       "id": "maya-018",
       "status": "draft",
       "topic": "Lounging elegantly in a luxurious apartment with a city skyline view.",
-      "caption": "It\u2019s called effortless. Maybe you\u2019ve heard of it.",
+      "caption": "It’s called effortless. Maybe you’ve heard of it.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
