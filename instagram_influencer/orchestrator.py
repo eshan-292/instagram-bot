@@ -179,35 +179,33 @@ def main() -> int:
             chosen = find_eligible(posts)
             if chosen is None:
                 log.info("No eligible posts to publish")
-                return 0
+            else:
+                idx, item = chosen
+                caption = str(item.get("caption", ""))
+                image_url = str(item.get("image_url", ""))
+                video_url = str(item.get("video_url") or "").strip() or None
+                is_reel = bool(item.get("is_reel", False))
 
-            idx, item = chosen
-            caption = str(item.get("caption", ""))
-            image_url = str(item.get("image_url", ""))
-            video_url = str(item.get("video_url") or "").strip() or None
-            is_reel = bool(item.get("is_reel", False))
+                if not image_url and not video_url:
+                    log.warning("Post %s has no media, skipping", item.get("id"))
+                else:
+                    # Inject hashtags for discoverability
+                    full_caption = _build_hashtags(caption, str(item.get("topic", "")))
 
-            if not image_url and not video_url:
-                log.warning("Post %s has no media, skipping", item.get("id"))
-                return 0
+                    try:
+                        post_id = publish(cfg, full_caption, image_url,
+                                          video_url=video_url, is_reel=is_reel)
+                        posts[idx]["status"] = "posted"
+                        posts[idx]["posted_at"] = _utc_now_iso()
+                        posts[idx]["platform_post_id"] = post_id
+                        posts[idx]["publish_error"] = None
+                        log.info("Published %s → %s", item.get("id"), post_id)
+                    except Exception as exc:
+                        posts[idx]["status"] = "failed"
+                        posts[idx]["publish_error"] = str(exc)
+                        log.error("Publish failed for %s: %s", item.get("id"), exc)
 
-            # Inject hashtags for discoverability
-            full_caption = _build_hashtags(caption, str(item.get("topic", "")))
-
-            try:
-                post_id = publish(cfg, full_caption, image_url,
-                                  video_url=video_url, is_reel=is_reel)
-                posts[idx]["status"] = "posted"
-                posts[idx]["posted_at"] = _utc_now_iso()
-                posts[idx]["platform_post_id"] = post_id
-                posts[idx]["publish_error"] = None
-                log.info("Published %s → %s", item.get("id"), post_id)
-            except Exception as exc:
-                posts[idx]["status"] = "failed"
-                posts[idx]["publish_error"] = str(exc)
-                log.error("Publish failed for %s: %s", item.get("id"), exc)
-
-            write_queue(args.queue_file, posts)
+                    write_queue(args.queue_file, posts)
 
         # 6. Engagement (like/comment/follow on niche posts)
         if args.session:
