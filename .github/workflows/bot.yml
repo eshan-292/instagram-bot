@@ -32,6 +32,9 @@ concurrency:
   group: instagram-bot
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   run:
     runs-on: ubuntu-latest
