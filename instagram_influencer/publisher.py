@@ -20,6 +20,19 @@ import instagrapi_patch  # noqa: F401 — applies monkey-patches on import
 log = logging.getLogger(__name__)
 
 
+def _challenge_handler(username: str, choice) -> str:
+    """Non-interactive challenge handler for CI/cloud environments.
+
+    Instead of blocking on input(), raises an error so the bot
+    can skip this run gracefully and retry later with a valid session.
+    """
+    raise ChallengeRequired(
+        f"Instagram challenge for {username} (choice={choice}) — "
+        "cannot complete in non-interactive mode. "
+        "Re-seed the session from a local login."
+    )
+
+
 def _new_client() -> Client:
     """Create a fresh Client with realistic, up-to-date device settings."""
     cl = Client()
@@ -27,6 +40,9 @@ def _new_client() -> Client:
     cl.set_locale("en_IN")
     cl.set_country_code(91)
     cl.set_timezone_offset(19800)  # IST = UTC+5:30
+
+    # Non-interactive challenge handler (avoids input() blocking in CI)
+    cl.challenge_code_handler = _challenge_handler
 
     # Override outdated default app version (269.x) — Instagram blocks old versions
     cl.set_device({
