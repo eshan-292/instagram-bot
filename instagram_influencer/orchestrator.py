@@ -96,8 +96,15 @@ _NICHE_POOLS = {
 }
 
 
+_KEYWORD_PHRASES = [
+    "Mumbai fashion", "Indian street style", "Outfit inspiration",
+    "Desi fashion diaries", "Style tips India", "Fashion influencer Mumbai",
+    "Ethnic modern fusion", "Indian girl style", "Bollywood fashion vibes",
+]
+
+
 def _build_hashtags(caption: str, topic: str) -> str:
-    """Append a block of 25-30 hashtags to the caption."""
+    """Append keyword phrases + hashtags to the caption for algorithm reach."""
     tags = list(_BRAND_TAGS)
 
     # Pick from each pool
@@ -116,8 +123,10 @@ def _build_hashtags(caption: str, topic: str) -> str:
     random.shuffle(unique)
     unique = unique[:30]
 
+    # Keywords (2-3 phrases, separated by pipes) — drives 30% more reach than hashtags alone
+    keywords = " | ".join(random.sample(_KEYWORD_PHRASES, min(3, len(_KEYWORD_PHRASES))))
     hashtag_block = " ".join(f"#{t}" for t in unique)
-    return f"{caption}\n.\n.\n.\n{hashtag_block}"
+    return f"{caption}\n.\n{keywords}\n.\n{hashtag_block}"
 
 
 def main() -> int:

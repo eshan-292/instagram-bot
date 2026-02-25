@@ -8,7 +8,7 @@ import logging
 import os
 import random
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -61,12 +61,39 @@ def actions_today(data: dict[str, Any], action_type: str) -> int:
     )
 
 
+def warmup_multiplier() -> float:
+    """Return a multiplier (0.5-1.0) based on account age.
+
+    Ramps limits gradually to avoid action blocks on new accounts:
+      Days 1-14:  0.5x (half limits)
+      Days 15-21: 0.75x
+      Days 22+:   1.0x (full limits)
+    """
+    created = os.getenv("ACCOUNT_CREATED_DATE", "").strip()
+    if not created:
+        return 1.0
+    try:
+        created_dt = datetime.strptime(created, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return 1.0
+    age_days = (datetime.now(timezone.utc) - created_dt).days
+    if age_days < 14:
+        return 0.5
+    if age_days < 21:
+        return 0.75
+    return 1.0
+
+
 def can_act(data: dict[str, Any], action_type: str, limit: int | None = None) -> bool:
-    """Check if we're still under the daily limit for `action_type`."""
+    """Check if we're still under the daily limit for `action_type`.
+
+    Applies warmup multiplier for new accounts.
+    """
     max_count = limit if limit is not None else DAILY_LIMITS.get(action_type, 0)
     if max_count <= 0:
         return False
-    return actions_today(data, action_type) < max_count
+    effective = int(max_count * warmup_multiplier())
+    return actions_today(data, action_type) < effective
 
 
 def record_action(data: dict[str, Any], action_type: str, target_id: str) -> None:

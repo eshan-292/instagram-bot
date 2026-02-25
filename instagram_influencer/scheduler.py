@@ -9,16 +9,19 @@ Usage:
 Schedule (all IST):
     7:00 AM  - Morning engagement: light likes + follows (catch early scrollers)
     9:00 AM  - Reply to comments on own posts (algorithm boost)
+   10:00 AM  - Story repost (mid-morning)
    11:00 AM  - Hashtag engagement: like/comment/follow/stories
     1:00 PM  - PUBLISH + explore engagement (lunch break)
+    2:00 PM  - Story repost (post-lunch)
     3:00 PM  - Hashtag engagement
     5:00 PM  - Maintenance: auto-unfollow + welcome DMs
+    6:00 PM  - Story repost (pre-prime time)
     7:00 PM  - PUBLISH + full engagement (prime time — best reach)
     8:30 PM  - Hashtag engagement (still peak hours)
     9:30 PM  - Reply to evening comments
    11:00 PM  - Maintenance: auto-unfollow + welcome DMs
 
-Total: 10 sessions/day, 2 posts/day, ~8 engagement sessions.
+Total: 13 sessions/day, 2 posts/day, 3 story reposts, ~8 engagement sessions.
 This mimics natural human behavior — active throughout the day,
 with varied activity types and human-like pauses between sessions.
 """
@@ -46,10 +49,13 @@ IST = timezone(timedelta(hours=5, minutes=30))
 SCHEDULE = [
     (7,  0,  False, "morning"),      # light likes + follows
     (9,  0,  False, "replies"),      # reply to comments
+    (10, 0,  False, "stories"),      # story repost (mid-morning)
     (11, 0,  False, "hashtags"),     # full hashtag engagement
     (13, 0,  True,  "explore"),      # PUBLISH + explore
+    (14, 0,  False, "stories"),      # story repost (post-lunch)
     (15, 0,  False, "hashtags"),     # hashtag engagement
     (17, 0,  False, "maintenance"),  # unfollow + DMs
+    (18, 0,  False, "stories"),      # story repost (pre-prime time)
     (19, 0,  True,  "full"),         # PUBLISH + full engagement (prime time)
     (20, 30, False, "hashtags"),     # still peak hours
     (21, 30, False, "replies"),      # catch evening comments

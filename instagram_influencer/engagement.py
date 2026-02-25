@@ -124,7 +124,7 @@ def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG)
 
 
 def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
-    """View a user's stories — sends them a profile visit notification."""
+    """View a user's stories + like ~30% for stronger engagement signal."""
     try:
         stories = cl.user_stories(int(user_id))
         if stories:
@@ -132,6 +132,13 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
             record_action(data, "story_views", user_id)
             stats["story_views"] = stats.get("story_views", 0) + 1
             log.debug("Viewed story of user %s", user_id)
+            # Like ~30% of stories for stronger signal
+            if random.random() < 0.3:
+                try:
+                    cl.story_like(stories[0].pk)
+                    stats["story_likes"] = stats.get("story_likes", 0) + 1
+                except Exception:
+                    pass
     except Exception as exc:
         log.debug("Story view failed for %s: %s", user_id, exc)
 
@@ -475,6 +482,7 @@ SESSION_TYPES = [
     "hashtags",    # full hashtag engagement (like/comment/follow/stories)
     "explore",     # explore page engagement
     "maintenance", # unfollow old follows + welcome DMs
+    "stories",     # repost past posts as stories + add to highlights
     "full",        # all phases (backward compat)
 ]
 
@@ -514,6 +522,11 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
         stats["dms"] = run_welcome_dms(cl, cfg)
+
+    elif session_type == "stories":
+        from stories import run_story_session
+        story_stats = run_story_session(cl, cfg)
+        stats.update(story_stats)
 
     else:  # "full" — all phases
         stats["unfollows"] = run_auto_unfollow(cl, data)
