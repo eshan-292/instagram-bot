@@ -1,0 +1,22 @@
+# Secrets
+.env
+*.env.local
+
+# Session (contains auth tokens — persisted via GitHub Actions cache)
+.ig_session.json
+instagram_influencer/.ig_session.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Local-only
+comfyui/
+instagram_influencer/.playwright/
+instagram_influencer/.openclaw/
+instagram_influencer/generated_images/
+*.log
+.DS_Store
+
+# State files ARE tracked (engagement_log.json, followers.json, content_queue.json)

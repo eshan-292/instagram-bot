@@ -1,0 +1,131 @@
+name: Instagram Bot
+
+on:
+  schedule:
+    # All cron times in UTC. IST = UTC + 5:30
+    - cron: '30 1 * * *'   # 07:00 IST — morning engagement
+    - cron: '30 3 * * *'   # 09:00 IST — reply to comments
+    - cron: '30 5 * * *'   # 11:00 IST — hashtag engagement
+    - cron: '30 7 * * *'   # 13:00 IST — PUBLISH + explore
+    - cron: '30 9 * * *'   # 15:00 IST — hashtag engagement
+    - cron: '30 11 * * *'  # 17:00 IST — maintenance (unfollow + DMs)
+    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH + full engagement
+    - cron: '0 15 * * *'   # 20:30 IST — hashtag engagement
+    - cron: '0 16 * * *'   # 21:30 IST — reply to comments
+    - cron: '30 17 * * *'  # 23:00 IST — maintenance
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'Session type'
+        required: true
+        default: 'full'
+        type: choice
+        options: [morning, replies, hashtags, explore, maintenance, full]
+      publish:
+        description: 'Also publish a post?'
+        type: boolean
+        default: false
+
+# Only one bot run at a time (queue others, don't cancel)
+concurrency:
+  group: instagram-bot
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Restore Instagram session from cache (avoids re-login each run)
+      - name: Restore session cache
+        uses: actions/cache/restore@v4
+        with:
+          path: instagram_influencer/.ig_session.json
+          key: ig-session
+          restore-keys: ig-session
+
+      # Create .env from the DOTENV secret
+      - name: Create .env
+        run: echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
+
+      # Determine which session to run based on the trigger
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+            if [ "${{ inputs.publish }}" = "true" ]; then
+              echo "publish=true" >> $GITHUB_OUTPUT
+            else
+              echo "publish=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            # Scheduled run — map UTC hour to session type
+            HOUR=$(date -u +%H)
+            case "${HOUR}" in
+              01) echo "type=morning"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              03) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              05) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              07) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              09) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              11) echo "type=maintenance" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              13) echo "type=full"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              15) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              16) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              17) echo "type=maintenance" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              *)  echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "Publish: ${{ steps.session.outputs.publish }}"
+          echo "Trigger: ${{ github.event_name }}"
+
+      # Run the bot
+      - name: Run bot
+        run: |
+          cd instagram_influencer
+          FLAGS="--session ${{ steps.session.outputs.type }}"
+          if [ "${{ steps.session.outputs.publish }}" = "false" ]; then
+            FLAGS="$FLAGS --no-publish --no-generate"
+          fi
+          echo "Running: python orchestrator.py $FLAGS"
+          python orchestrator.py $FLAGS
+
+      # Save updated session to cache
+      - name: Save session cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: instagram_influencer/.ig_session.json
+          key: ig-session-${{ github.run_id }}
+
+      # Commit updated state files back to the repo
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f instagram_influencer/engagement_log.json \
+                     instagram_influencer/followers.json \
+                     instagram_influencer/content_queue.json 2>/dev/null || true
+          git diff --staged --quiet || (
+            git commit -m "bot: state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git push
+          )
