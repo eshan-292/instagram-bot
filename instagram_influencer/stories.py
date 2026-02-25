@@ -168,7 +168,8 @@ def add_story_to_highlight(cl: Any, story_pk: str, category: str) -> bool:
             log.info("Created highlight '%s' with story", category)
             return True
         except Exception as exc:
-            log.warning("Failed to create highlight '%s': %s", category, exc)
+            # highlight_create/create_reel API is unstable — log quietly
+            log.debug("Highlight create failed for '%s': %s", category, exc)
             return False
 
 
