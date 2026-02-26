@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Daily report — generates an end-of-day summary of bot activity.
 
-Outputs a formatted report to both the logs and GitHub Actions step summary.
+Sends report to Telegram (if configured) and GitHub Actions step summary.
 """
 
 from __future__ import annotations
@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import requests as req
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Any
@@ -164,6 +165,54 @@ def generate_report() -> str:
     return report
 
 
+def _send_telegram(text: str) -> bool:
+    """Send a message to Telegram. Returns True on success."""
+    bot_token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+    chat_id = os.getenv("TELEGRAM_CHAT_ID", "").strip()
+    if not bot_token or not chat_id:
+        log.debug("Telegram not configured (missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID)")
+        return False
+
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+
+    # Telegram has a 4096 char limit per message — split if needed
+    chunks = []
+    if len(text) <= 4096:
+        chunks = [text]
+    else:
+        # Split at line boundaries
+        lines = text.split("\n")
+        chunk = ""
+        for line in lines:
+            if len(chunk) + len(line) + 1 > 4000:
+                chunks.append(chunk)
+                chunk = line + "\n"
+            else:
+                chunk += line + "\n"
+        if chunk:
+            chunks.append(chunk)
+
+    sent = False
+    for chunk in chunks:
+        try:
+            resp = req.post(url, json={
+                "chat_id": chat_id,
+                "text": chunk,
+                "parse_mode": "Markdown",
+                "disable_web_page_preview": True,
+            }, timeout=10)
+            if resp.status_code == 200:
+                sent = True
+            else:
+                log.warning("Telegram API returned %d: %s", resp.status_code, resp.text[:200])
+        except Exception as exc:
+            log.warning("Telegram send failed: %s", exc)
+
+    if sent:
+        log.info("Report sent to Telegram")
+    return sent
+
+
 def run_daily_report() -> str:
     """Generate and save the daily report. Returns the report text."""
     report = generate_report()
@@ -175,6 +224,9 @@ def run_daily_report() -> str:
         log.info("Daily report saved to %s", REPORT_FILE)
     except Exception as exc:
         log.warning("Could not save report file: %s", exc)
+
+    # Send to Telegram
+    _send_telegram(report)
 
     # Write to GitHub Actions step summary if available
     summary_path = os.getenv("GITHUB_STEP_SUMMARY")

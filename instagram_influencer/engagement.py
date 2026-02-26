@@ -530,7 +530,6 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     elif session_type == "maintenance":
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        stats["dms"] = run_welcome_dms(cl, cfg)
 
     elif session_type == "stories":
         from stories import run_story_session
@@ -547,7 +546,6 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         save_log(LOG_FILE, data)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
-        stats["dms"] = run_welcome_dms(cl, cfg)
         _run_hashtag_engagement(cl, cfg, data, stats, max_posts=40)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
