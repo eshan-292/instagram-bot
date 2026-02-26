@@ -28,14 +28,17 @@
     },
     {
       "id": "maya-003",
-      "status": "approved",
+      "status": "posted",
       "topic": "Command the night in a dazzling evening ensemble on a Mumbai rooftop.",
       "caption": "Some stars shine. Others just show up and outshine. Choose your fighter.",
       "image_url": "",
       "video_url": "generated_images/maya-003.mp4",
       "is_reel": true,
       "scheduled_at": "2026-02-25T19:00:00Z",
-      "notes": "Three-quarter shot, Maya on a luxurious Mumbai rooftop bar at dusk. Wearing a sequined or metallic bodycon dress, perhaps with an asymmetrical cut. City skyline lights sparkling in the background, a dramatic cocktail in hand. Warm ambient lighting, focused on her, strong contouring. A slight smirk, intense eye contact. | generated_by=gemini:gemini-2.5-flash"
+      "notes": "Three-quarter shot, Maya on a luxurious Mumbai rooftop bar at dusk. Wearing a sequined or metallic bodycon dress, perhaps with an asymmetrical cut. City skyline lights sparkling in the background, a dramatic cocktail in hand. Warm ambient lighting, focused on her, strong contouring. A slight smirk, intense eye contact. | generated_by=gemini:gemini-2.5-flash",
+      "posted_at": "2026-02-26T13:51:39Z",
+      "platform_post_id": "3841092010292050691",
+      "publish_error": null
     },
     {
       "id": "maya-004",
@@ -74,7 +77,7 @@
     {
       "id": "maya-007",
       "status": "draft",
-      "topic": "Mumbai rooftop soirée, commanding attention.",
+      "topic": "Mumbai rooftop soir\u00e9e, commanding attention.",
       "caption": "They thought the skyline was the view.\nSweetie, I am the view.",
       "image_url": "",
       "video_url": null,
@@ -145,7 +148,7 @@
       "id": "maya-013",
       "status": "draft",
       "topic": "Owning the night at a luxury Mumbai rooftop bar.",
-      "caption": "The city lights are pretty. I think I know why they’re looking this way.",
+      "caption": "The city lights are pretty. I think I know why they\u2019re looking this way.",
       "image_url": "",
       "video_url": null,
       "is_reel": true,
@@ -200,7 +203,7 @@
       "id": "maya-018",
       "status": "draft",
       "topic": "Lounging elegantly in a luxurious apartment with a city skyline view.",
-      "caption": "It’s called effortless. Maybe you’ve heard of it.",
+      "caption": "It\u2019s called effortless. Maybe you\u2019ve heard of it.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -217,6 +220,39 @@
       "is_reel": false,
       "scheduled_at": "2026-02-26T04:14:32Z",
       "notes": "Dynamic shot. Maya pausing dramatically at the entrance of a high-end club or bar. Dressed in a striking evening gown or a chic, edgy party outfit (e.g., sequined mini dress, sharp cut-out details). Low, ambient lighting with neon accents or a spotlight on her. Her back is slightly turned, looking over her shoulder with a captivating, almost mischievous smirk. Focus on the silhouette and sparkle. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "maya-020",
+      "status": "draft",
+      "topic": "Monsoon glam in Mumbai",
+      "caption": "They said rain ruins everything. Clearly, they haven't seen me in it.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "scheduled_at": "2026-02-26T17:50:09Z",
+      "notes": "Medium shot. Maya confidently walking through a lightly rain-slicked Mumbai street, a vibrant designer raincoat (e.g., in a bold print or neon) over a sleek outfit. Reflective puddles, diffused natural light, dramatic but not dark mood. Focus on her stride and the pop of the raincoat. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "maya-021",
+      "status": "draft",
+      "topic": "Evening soiree at a Mumbai rooftop bar",
+      "caption": "Views are nice, but let's be honest, you're looking at me.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "scheduled_at": "2026-02-26T21:50:09Z",
+      "notes": "Full body shot. Maya standing at a chic rooftop bar overlooking the Mumbai skyline at dusk. Wearing a fitted, architectural-design cocktail dress (e.g., sharp shoulders, unique cut). Warm, ambient bar lighting mixed with city lights. Confident, poised, slightly aloof expression. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "maya-022",
+      "status": "draft",
+      "topic": "Effortless chic at an artisan coffee shop",
+      "caption": "Some people try too hard. I just exist.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "scheduled_at": "2026-02-27T01:50:09Z",
+      "notes": "Close-up to mid-shot. Maya casually leaning against an exposed brick wall inside a stylish, minimalist coffee shop. Wearing an oversized but structured linen blazer over a silk cami, delicate layered gold jewelry. Soft, natural light coming from a large window. Relaxed, knowing smile, focus on textural details and her serene confidence. | generated_by=gemini:gemini-2.5-flash"
     }
   ]
 }
