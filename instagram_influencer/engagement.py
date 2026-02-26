@@ -27,7 +27,7 @@ from rate_limiter import (
 log = logging.getLogger(__name__)
 
 # Persistent files
-POSTS_PER_HASHTAG = 10
+POSTS_PER_HASHTAG = 15
 FOLLOWERS_FILE = BASE_DIR / "followers.json"
 UNFOLLOW_DAYS = 3  # unfollow after this many days
 
@@ -159,7 +159,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
     """Unfollow users we followed more than UNFOLLOW_DAYS ago. Returns count."""
     cutoff = datetime.now(timezone.utc) - timedelta(days=UNFOLLOW_DAYS)
     unfollowed = 0
-    daily_limit = 30  # conservative unfollow limit per run
+    daily_limit = 50  # unfollow limit per run
 
     # Find follow actions older than cutoff that haven't been unfollowed yet
     unfollowed_set: set[str] = {
@@ -275,7 +275,7 @@ def run_welcome_dms(cl: Any, cfg: Config) -> int:
 def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
     """Reply to comments on our own recent posts. Returns reply count."""
     replied = 0
-    daily_reply_limit = 20
+    daily_reply_limit = 35
 
     try:
         my_id = cl.user_id
@@ -333,7 +333,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to comment %s: %s", comment_id, reply[:40])
-                random_delay(20, 50)
+                random_delay(15, 40)
             except Exception as exc:
                 log.warning("Reply failed for comment %s: %s", comment_id, exc)
 
@@ -349,7 +349,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
 def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[str, int]:
     """Like/comment on posts from the Explore feed. Returns action counts."""
     stats: dict[str, int] = {"explore_likes": 0, "explore_comments": 0}
-    explore_limit = 25  # posts to engage with from explore
+    explore_limit = 40  # posts to engage with from explore
 
     try:
         # Fetch explore reels (returns List[Media], unlike explore_page which returns raw dict)
@@ -386,7 +386,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                     log.debug("Explore comment failed: %s", exc)
 
         save_log(LOG_FILE, data)
-        random_delay(10, 30)
+        random_delay(8, 20)
 
     if stats["explore_likes"] or stats["explore_comments"]:
         log.info("Explore engagement: %s", stats)
@@ -409,7 +409,7 @@ def _run_hashtag_engagement(
     like_limit = cfg.engagement_daily_likes
     comment_limit = cfg.engagement_daily_comments
     follow_limit = cfg.engagement_daily_follows
-    story_limit = 80
+    story_limit = 120
 
     if (
         not can_act(data, "likes", like_limit)
@@ -468,7 +468,7 @@ def _run_hashtag_engagement(
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(20, 60)
+        random_delay(15, 45)
 
         if (
             not can_act(data, "likes", like_limit)
@@ -514,14 +514,14 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     log.info("Starting engagement session: %s", session_type)
 
     if session_type == "morning":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=15)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=25)
 
     elif session_type == "replies":
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
 
     elif session_type == "hashtags":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=30)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
 
     elif session_type == "explore":
         explore_stats = run_explore_engagement(cl, cfg, data)
@@ -546,7 +546,7 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         save_log(LOG_FILE, data)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=40)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=60)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
 

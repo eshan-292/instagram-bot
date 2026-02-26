@@ -16,6 +16,7 @@ comfyui/
 instagram_influencer/.playwright/
 instagram_influencer/.openclaw/
 instagram_influencer/generated_images/
+!instagram_influencer/generated_images/IMAGE_PROMPTS.md
 *.log
 .DS_Store
 

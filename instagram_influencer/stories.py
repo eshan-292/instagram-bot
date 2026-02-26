@@ -42,6 +42,30 @@ _POLL_CHOICES = [
     ("Would you wear this?", ["100%", "Not my style"]),
     ("Rate this outfit", ["10/10", "Needs work"]),
     ("This or something edgy?", ["This!", "Edgy"]),
+    ("Casual or dressy?", ["Casual", "Dressy"]),
+    ("Ethnic or western?", ["Ethnic", "Western"]),
+    ("Day look or night?", ["Day", "Night"]),
+]
+
+# Question box prompts (AMA / open-ended — drives DMs and saves)
+_QUESTION_PROMPTS = [
+    "What should I wear to Bandra next? 👗",
+    "Style advice you wish someone gave you sooner?",
+    "Best Mumbai shopping spot — tell me!",
+    "What's your go-to outfit for a house party?",
+    "Budget fashion find of the month?",
+    "Which outfit vibe should I try next?",
+    "Ethnic or western for a sangeet — what would you pick?",
+    "Monsoon fashion struggle? Tell me 🌧️",
+]
+
+# Quiz questions with options and correct_answer index
+_QUIZ_CHOICES = [
+    ("Which fabric wins for Mumbai heat?", ["Silk", "Linen", "Polyester", "Denim"], 1),
+    ("One piece, 5 ways — which is hardest?", ["Blazer", "Saree", "Kurta", "Jeans"], 1),
+    ("Best Mumbai street for thrift finds?", ["Colaba Causeway", "Linking Road", "Hill Road", "Dharavi"], 0),
+    ("Which colour never goes out of style?", ["Neon", "White", "Pastel pink", "Electric blue"], 1),
+    ("Quiet luxury rule number 1?", ["Less is more", "Logos are everything", "Match perfectly", "Bold prints only"], 0),
 ]
 
 # Highlight categories with keyword matchers
@@ -178,24 +202,36 @@ def add_story_to_highlight(cl: Any, story_pk: str, category: str) -> bool:
 # ---------------------------------------------------------------------------
 
 def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
-    """Build stickers for a story upload."""
-    from instagrapi.types import Hashtag, StoryHashtag, StoryPoll
+    """Build stickers for a story upload.
 
+    Always adds a hashtag sticker. Then picks ONE interactive sticker type
+    based on weighted probability:
+      35% poll  — quick binary choice, great for engagement
+      30% question box — drives DMs and saves
+      20% quiz  — educational, shareable
+      15% none  — keep some stories clean
+
+    Only one interactive sticker per story to avoid visual clutter.
+    """
     sticker_args: dict[str, list] = {}
 
-    # Hashtag sticker
+    # Hashtag sticker (always)
     try:
-        tag_name = "mayavarma"
+        from instagrapi.types import Hashtag, StoryHashtag
         sticker_args["hashtags"] = [StoryHashtag(
-            hashtag=Hashtag(id="0", name=tag_name),
-            x=0.5, y=0.15, width=0.3, height=0.05, rotation=0.0,
+            hashtag=Hashtag(id="0", name="mayavarma"),
+            x=0.5, y=0.12, width=0.3, height=0.05, rotation=0.0,
         )]
     except Exception as exc:
         log.debug("Could not create hashtag sticker: %s", exc)
 
-    # Poll sticker (~50% of stories)
-    if random.random() < 0.5:
+    # Pick one interactive sticker (weighted)
+    roll = random.random()
+
+    if roll < 0.35:
+        # Poll sticker
         try:
+            from instagrapi.types import StoryPoll
             question, options = random.choice(_POLL_CHOICES)
             sticker_args["polls"] = [StoryPoll(
                 x=0.5, y=0.75, width=0.6, height=0.15, rotation=0.0,
@@ -203,6 +239,35 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
             )]
         except Exception as exc:
             log.debug("Could not create poll sticker: %s", exc)
+
+    elif roll < 0.65:
+        # Question box sticker (AMA — high DM driver)
+        try:
+            from instagrapi.types import StoryQuestion
+            prompt = random.choice(_QUESTION_PROMPTS)
+            sticker_args["questions"] = [StoryQuestion(
+                x=0.5, y=0.75, width=0.8, height=0.18, rotation=0.0,
+                question=prompt,
+                type="text",
+            )]
+        except Exception as exc:
+            log.debug("Could not create question sticker: %s", exc)
+
+    elif roll < 0.85:
+        # Quiz sticker (shareable, educational)
+        try:
+            from instagrapi.types import StoryQuiz
+            question, options, correct_idx = random.choice(_QUIZ_CHOICES)
+            sticker_args["quizs"] = [StoryQuiz(
+                x=0.5, y=0.75, width=0.8, height=0.22, rotation=0.0,
+                question=question,
+                options=options,
+                correct_answer=correct_idx,
+            )]
+        except Exception as exc:
+            log.debug("Could not create quiz sticker: %s", exc)
+
+    # else: no interactive sticker (clean story — 15% of the time)
 
     return sticker_args
 

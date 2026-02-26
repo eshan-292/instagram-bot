@@ -144,9 +144,9 @@ def load_config() -> Config:
         # Engagement
         engagement_enabled=_bool(os.getenv("ENGAGEMENT_ENABLED")),
         engagement_hashtags=_str(os.getenv("ENGAGEMENT_HASHTAGS"), "indianfashion,mumbaifashion,desistyle,indianfashionblogger,mumbailifestyle"),
-        engagement_daily_likes=_int(os.getenv("ENGAGEMENT_DAILY_LIKES"), 100, minimum=0),
-        engagement_daily_comments=_int(os.getenv("ENGAGEMENT_DAILY_COMMENTS"), 30, minimum=0),
-        engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 50, minimum=0),
+        engagement_daily_likes=_int(os.getenv("ENGAGEMENT_DAILY_LIKES"), 200, minimum=0),
+        engagement_daily_comments=_int(os.getenv("ENGAGEMENT_DAILY_COMMENTS"), 60, minimum=0),
+        engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 80, minimum=0),
         engagement_comment_enabled=_bool(os.getenv("ENGAGEMENT_COMMENT_ENABLED")),
         engagement_follow_enabled=_bool(os.getenv("ENGAGEMENT_FOLLOW_ENABLED")),
     )

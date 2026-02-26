@@ -18,29 +18,78 @@ log = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[str, Any]:
-    return {
+    post_type = str(item.get("post_type", "reel")).strip().lower()
+    if post_type not in ("reel", "carousel", "single"):
+        post_type = "reel"
+
+    slides = item.get("slides", [])
+    if not isinstance(slides, list):
+        slides = []
+
+    draft: dict[str, Any] = {
         "id": post_id,
         "status": "draft",
         "topic": str(item.get("topic", "")).strip() or "Mumbai street-luxe confidence fit",
         "caption": str(item.get("caption", "")).strip() or "My standards are not seasonal.",
         "image_url": "",
         "video_url": None,
-        "is_reel": False,
+        "is_reel": post_type == "reel",
+        "post_type": post_type,
         "scheduled_at": format_utc(slot),
         "notes": str(item.get("notes", "")).strip() or "full-body editorial frame",
     }
+    if post_type == "carousel" and slides:
+        draft["slides"] = [str(s).strip() for s in slides[:6] if str(s).strip()]
+    return draft
 
 
 TEMPLATES = [
-    {"topic": "Power blazer with street-luxe edge",
-     "caption": "Polite is not my default setting.\nPresence is.",
-     "notes": "mid shot, blazer silhouette, clean city lines"},
-    {"topic": "Monochrome evening fit in Mumbai",
-     "caption": "Soft voice. Sharp boundaries.",
-     "notes": "golden hour, full-body frame, confident walk"},
-    {"topic": "Minimal makeup, maximal authority look",
-     "caption": "You wanted sweet.\nI brought standards.",
-     "notes": "close-up, natural skin texture, structured hair"},
+    {
+        "topic": "3 budget looks under ₹2000 — Mumbai street style",
+        "caption": "Mumbai street style under ₹2000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
+        "notes": "full-body frame, bright Mumbai street background",
+        "post_type": "carousel",
+        "slides": [
+            "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '₹2000. 3 outfits. No compromises.'",
+            "Look 1: casual chic — white linen coord set, gold hoops, kolhapuri chappals",
+            "Look 2: street glam — floral co-ord in rust tones, minimal jewelry, white sneakers",
+            "Look 3: indo-western fusion — cropped kurta with wide-leg jeans, block print dupatta",
+            "Outfit detail close-up — accessories and fabric texture",
+            "Final pose: all three outfits side by side, confidence energy",
+        ],
+    },
+    {
+        "topic": "Power blazer with street-luxe edge",
+        "caption": "Mumbai streets hit different in a blazer.\nPolite is not my default setting. Presence is.",
+        "notes": "mid shot, blazer silhouette, clean city background",
+        "post_type": "reel",
+    },
+    {
+        "topic": "One kurta, 5 ways — ethnic modern fusion",
+        "caption": "One kurta. Five personalities. Which one are you?\nSave this — you'll need it.",
+        "notes": "clean studio-style background, full-body each look",
+        "post_type": "carousel",
+        "slides": [
+            "Hook: Maya with kurta on hanger, caption '1 piece. 5 vibes.'",
+            "Style 1: classic — kurta with palazzo and kolhapuris",
+            "Style 2: fusion — kurta belted with straight jeans and boots",
+            "Style 3: street — kurta knotted, denim shorts, sneakers",
+            "Style 4: evening — kurta with statement earrings, heels, minimal clutch",
+            "Style 5: lounge — oversized kurta as a dress, slides",
+        ],
+    },
+    {
+        "topic": "Minimal makeup, maximal authority look",
+        "caption": "You wanted sweet.\nI brought standards.",
+        "notes": "close-up, natural skin texture, structured hair",
+        "post_type": "single",
+    },
+    {
+        "topic": "GRWM for a Bandra house party",
+        "caption": "Getting ready for a Bandra house party — my way.\nSend this to the one who always asks what to wear.",
+        "notes": "bedroom/vanity setting, warm lighting, candid getting-ready vibe",
+        "post_type": "reel",
+    },
 ]
 
 
@@ -62,14 +111,31 @@ GEMINI_PROMPT = (
     "You are generating Instagram draft posts for Maya Varma, a 23-year-old Indian "
     "fashion influencer in Mumbai.\n\n"
     "VOICE: bold, confident, teasing, emotionally intelligent, unapologetic but not rude. "
-    "Short punchy lines, sharp hooks, subtle roasts, feminine dominance energy. "
+    "Short punchy lines, sharp hooks, subtle wit, feminine dominance energy. "
     "Casual human tone — never robotic or generic.\n\n"
-    "RULES:\n"
-    "- Each caption: 1-3 short lines, no hashtags, no emojis\n"
-    "- Topic: a specific fashion/lifestyle scene (not generic)\n"
-    "- Notes: photography direction (framing, lighting, mood) for image generation\n"
-    "- Every post must feel different — vary settings, moods, outfits\n\n"
-    "Return ONLY a JSON array of {count} objects with keys: topic, caption, notes.\n"
+    "2026 ALGORITHM RULES:\n"
+    "- Front-load keywords (Instagram is a search engine now): start with the topic, "
+    "not 'Hey guys'. E.g. 'Mumbai street style under ₹2000' not 'So today I...'\n"
+    "- Drives saves and shares > likes. Last line MUST be a CTA that drives saves or "
+    "shares: 'save this', 'send this to your bestie', 'which one would you wear?'\n"
+    "- Max 1-2 emojis total\n\n"
+    "CONTENT MIX (spread across {count} posts):\n"
+    "- 40% carousels: '3 looks', 'one piece 5 ways', styling tips, before/after, budget fits\n"
+    "- 40% reels: outfit transitions, GRWM for Indian occasions (haldi, sangeet, party), "
+    "before/after thrift transformations\n"
+    "- 20% single: aesthetic/editorial, minimal-caption power shots\n\n"
+    "TOPIC IDEAS (rotate — nothing generic):\n"
+    "Budget styling (₹1500-₹2000 Indian rupees), GRWM for Indian events, one piece N ways, "
+    "ethnic+modern fusion, Mumbai-specific looks (Bandra, Colaba, Kala Ghoda), monsoon fashion, "
+    "office-to-party transitions, thrift-to-chic, Indo-western street style.\n\n"
+    "For carousel posts, include 'slides': array of 5-6 short scene descriptions "
+    "(what each slide should visually show — be specific about clothing, pose, setting).\n\n"
+    "Return ONLY a JSON array of {count} objects:\n"
+    "- topic: specific scene (not generic, include location/occasion/price if relevant)\n"
+    "- caption: 2-4 lines, front-loaded keyword, ends with save/share CTA, no hashtags\n"
+    "- notes: photography direction for image generation (framing, lighting, mood)\n"
+    "- post_type: 'reel' | 'carousel' | 'single'\n"
+    "- slides: array of 5-6 scene descriptions (only for carousel, omit for reel/single)\n\n"
     "No markdown, no explanation, just the JSON array."
 )
 
@@ -77,7 +143,6 @@ GEMINI_PROMPT = (
 def _extract_json(text: str) -> str:
     """Extract JSON array from response text, stripping markdown fences etc."""
     raw = text.strip()
-    # Strip markdown code fences
     if raw.startswith("```"):
         lines = raw.split("\n")
         lines = [l for l in lines if not l.strip().startswith("```")]
@@ -138,5 +203,7 @@ def generate_content(queue_path: str, cfg: Config) -> bool:
 
     posts.extend(drafts)
     write_queue(queue_path, posts)
-    log.info("Added %d drafts via %s", len(drafts), method)
+    log.info("Added %d drafts via %s (types: %s)",
+             len(drafts), method,
+             [d.get("post_type", "reel") for d in drafts])
     return True

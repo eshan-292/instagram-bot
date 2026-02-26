@@ -89,7 +89,7 @@ def find_eligible(posts: list[dict[str, Any]]) -> tuple[int, dict[str, Any]] | N
     - status is 'ready' or 'approved'
     - scheduled_at is in the past (or unset)
     - has a caption
-    - has media (image_url or video_url)
+    - has media: carousel_images (for carousel) or image_url/video_url (for reel/single)
     """
     now = datetime.now(timezone.utc)
     for idx, item in enumerate(posts):
@@ -101,8 +101,13 @@ def find_eligible(posts: list[dict[str, Any]]) -> tuple[int, dict[str, Any]] | N
             continue
         if not str(item.get("caption", "")).strip():
             continue
-        if not str(item.get("image_url", "")).strip() and not str(item.get("video_url", "")).strip():
-            continue
+        post_type = str(item.get("post_type", "reel")).strip().lower()
+        if post_type == "carousel":
+            if not item.get("carousel_images"):
+                continue
+        else:
+            if not str(item.get("image_url", "")).strip() and not str(item.get("video_url", "")).strip():
+                continue
         return idx, item
     return None
 
