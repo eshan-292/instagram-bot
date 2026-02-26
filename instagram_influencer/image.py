@@ -1,207 +1,251 @@
 #!/usr/bin/env python3
-"""Image generation: Replicate/BFL FLUX Kontext (reference-based)."""
+"""Image management: manual image lookup + prompt generation for user reference.
+
+Since the Replicate/BFL API quota is exhausted, images are now generated manually
+using the Gemini app. This module:
+  1. Generates descriptive prompts for each post and saves them for the user.
+  2. Scans the generated_images/pending/ directory for user-placed images.
+  3. Links found images back to draft posts in the queue.
+
+Directory structure:
+  generated_images/
+    pending/
+      maya-042.jpg             ← single image / reel (user places this)
+      maya-043/
+        1.jpg                  ← carousel slide 1
+        2.jpg                  ← carousel slide 2
+        ...
+    prompts/
+      maya-042.txt             ← Gemini prompt for reference
+    IMAGE_PROMPTS.md           ← master summary (easy to read at a glance)
+"""
 
 from __future__ import annotations
 
-import base64
 import logging
 import os
-import random
-import time
+from pathlib import Path
 from typing import Any
 
-import requests as http_requests
-
-from config import Config, GENERATED_IMAGES_DIR, REFERENCE_DIR
+from config import Config, GENERATED_IMAGES_DIR
 
 log = logging.getLogger(__name__)
 
+PENDING_DIR = GENERATED_IMAGES_DIR / "pending"
+PROMPTS_DIR = GENERATED_IMAGES_DIR / "prompts"
 
 # ---------------------------------------------------------------------------
-# Reference image helpers
+# Maya's appearance — used to anchor all Gemini image prompts
 # ---------------------------------------------------------------------------
 
-def _pick_reference_image() -> str | None:
-    """Pick a random Maya reference photo (only real photos, not text-only)."""
-    if not REFERENCE_DIR.is_dir():
-        return None
-    photos = [
-        f for f in sorted(REFERENCE_DIR.iterdir())
-        if f.suffix.lower() in {".jpg", ".jpeg", ".png"}
-        and f.stat().st_size > 50_000  # skip tiny/text-only images
-    ]
-    return str(random.choice(photos)) if photos else None
+_MAYA_DESCRIPTION = (
+    "Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. "
+    "She has warm light-olive brown skin, large dark expressive eyes, "
+    "long dark wavy hair past her shoulders, slim petite build, "
+    "natural minimal makeup, soft confident expression."
+)
 
-
-def _image_to_base64(path: str) -> str:
-    """Read an image file and return base64 string."""
-    with open(path, "rb") as f:
-        return base64.b64encode(f.read()).decode("utf-8")
-
+_PHOTO_STYLE = (
+    "Photography style: shot on iPhone 15 Pro, natural ambient lighting, "
+    "candid real-photo feel, visible skin texture, warm natural color grading, "
+    "slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio."
+)
 
 # ---------------------------------------------------------------------------
-# Replicate FLUX Kontext (reference-image-based — preserves Maya's face)
+# Prompt builders
 # ---------------------------------------------------------------------------
 
-def _generate_via_replicate(post: dict[str, Any], cfg: Config) -> str:
-    """Generate image via Replicate FLUX Kontext Pro using Maya's reference photo."""
-    import replicate
-    import os as _os
+def _build_single_prompt(post: dict[str, Any]) -> str:
+    """Build a Gemini image prompt for a single-image or reel post."""
+    topic = str(post.get("topic", "")).strip()
+    notes = str(post.get("notes", "")).strip().split("| generated_by=")[0].strip()
 
-    # Set token for replicate SDK
-    _os.environ["REPLICATE_API_TOKEN"] = cfg.replicate_api_token
-
-    ref_path = _pick_reference_image()
-    if not ref_path:
-        raise RuntimeError("No reference images found in reference/maya/")
-
-    post_id = str(post.get("id", "unknown")).strip()
-    output_path = str(GENERATED_IMAGES_DIR / f"{post_id}.png")
-    prompt = _build_kontext_prompt(post)
-
-    log.debug("Replicate Kontext for %s (ref: %s): %s", post_id, os.path.basename(ref_path), prompt[:120])
-
-    output = replicate.run(
-        "black-forest-labs/flux-kontext-pro",
-        input={
-            "prompt": prompt,
-            "input_image": open(ref_path, "rb"),
-            "aspect_ratio": "3:4",
-        },
-    )
-
-    # output is a FileOutput or list of FileOutput — download and save
-    file_output = output[0] if isinstance(output, list) else output
-    with open(output_path, "wb") as f:
-        f.write(file_output.read())
-
-    file_size = os.path.getsize(output_path)
-    log.info("Replicate Kontext image: %s (%d bytes)", output_path, file_size)
-    return output_path
-
-
-# ---------------------------------------------------------------------------
-# BFL FLUX Kontext (reference-image-based — preserves Maya's face)
-# ---------------------------------------------------------------------------
-
-BFL_API_URL = "https://api.bfl.ai/v1/flux-kontext-pro"
-BFL_POLL_INTERVAL = 1.5
-BFL_MAX_POLLS = 60  # ~90 seconds max wait
-
-
-def _build_kontext_prompt(post: dict[str, Any]) -> str:
-    """Build editing prompt for Kontext — hyper-realistic Instagram photography."""
-    topic = str(post.get("topic", "")).strip() or "stylish casual outfit"
-    notes = str(post.get("notes", "")).strip()
-
-    parts = [
-        "Keep this exact same woman — same face, same features, same skin tone, same hair.",
-        f"Scene: {topic[:200]}.",
-        "Shot on iPhone 15 Pro, natural ambient lighting, slight bokeh background.",
-        "Raw unedited photo feel — visible skin texture, natural pores, tiny flyaway hairs.",
-        "No airbrushing, no plastic skin, no symmetrical perfection.",
-        "Candid relaxed pose, genuine expression, like a real Instagram selfie or friend-took-this photo.",
-        "Warm natural color grading, slight golden hour tones, no oversaturation.",
-    ]
+    parts = [_MAYA_DESCRIPTION, f"Scene: {topic}.", _PHOTO_STYLE]
     if notes:
-        clean = notes.split("| generated_by=")[0].strip()
-        if clean:
-            parts.append(f"Mood: {clean[:150]}.")
+        parts.append(f"Framing/mood: {notes}.")
     return " ".join(parts)
 
 
-def _generate_via_bfl(post: dict[str, Any], cfg: Config) -> str:
-    """Generate image via BFL FLUX Kontext Pro using Maya's reference photo."""
-    ref_path = _pick_reference_image()
-    if not ref_path:
-        raise RuntimeError("No reference images found in reference/maya/")
+def _build_carousel_prompts(post: dict[str, Any]) -> list[str]:
+    """Build per-slide prompts for a carousel post (5-6 slides)."""
+    topic = str(post.get("topic", "")).strip()
+    slides = post.get("slides", [])
 
-    post_id = str(post.get("id", "unknown")).strip()
-    output_path = str(GENERATED_IMAGES_DIR / f"{post_id}.png")
-    prompt = _build_kontext_prompt(post)
-    ref_b64 = _image_to_base64(ref_path)
+    if not slides:
+        # Default slide structure for fashion carousels
+        slides = [
+            f"Hook/hero shot — {topic}. Strong first impression, camera-facing.",
+            f"Detail close-up — fabric, accessories, or styling element of {topic}.",
+            f"Full-body reveal — complete outfit for {topic}, confident pose.",
+            f"Lifestyle/in-action shot — candid moment, {topic}.",
+            f"Alternate angle or close-up face shot for {topic}.",
+            f"Final pose — CTA energy, looking at camera, {topic}.",
+        ]
 
-    log.debug("BFL Kontext for %s (ref: %s): %s", post_id, os.path.basename(ref_path), prompt[:120])
+    prompts = []
+    for i, slide_desc in enumerate(slides[:6], 1):
+        parts = [
+            _MAYA_DESCRIPTION,
+            f"(Slide {i} of a carousel post.)",
+            f"Scene: {slide_desc}",
+            _PHOTO_STYLE,
+        ]
+        prompts.append(" ".join(parts))
+    return prompts
 
-    # Submit generation request
-    resp = http_requests.post(
-        BFL_API_URL,
-        headers={
-            "accept": "application/json",
-            "x-key": cfg.bfl_api_key,
-            "Content-Type": "application/json",
-        },
-        json={
-            "prompt": prompt,
-            "input_image": ref_b64,
-            "aspect_ratio": "3:4",
-        },
-        timeout=30,
+
+# ---------------------------------------------------------------------------
+# Prompt saving
+# ---------------------------------------------------------------------------
+
+def _save_post_prompts(post: dict[str, Any]) -> None:
+    """Save image prompts for a post to prompts/ directory."""
+    PROMPTS_DIR.mkdir(parents=True, exist_ok=True)
+    post_id = str(post.get("id", "unknown"))
+    post_type = str(post.get("post_type", "reel")).lower()
+
+    lines = [
+        f"=== {post_id} | {post_type.upper()} ===",
+        f"Topic: {post.get('topic', '')}",
+        f"Caption: {post.get('caption', '')}",
+        "",
+    ]
+
+    if post_type == "carousel":
+        prompts = _build_carousel_prompts(post)
+        lines.append(f"CAROUSEL — {len(prompts)} slides")
+        lines.append(f"Place in: generated_images/pending/{post_id}/1.jpg, 2.jpg, ...")
+        lines.append("")
+        for i, prompt in enumerate(prompts, 1):
+            lines.append(f"--- Slide {i} ---")
+            lines.append(prompt)
+            lines.append("")
+    else:
+        prompt = _build_single_prompt(post)
+        lines.append(f"Place at: generated_images/pending/{post_id}.jpg")
+        lines.append("")
+        lines.append("--- Prompt ---")
+        lines.append(prompt)
+        lines.append("")
+
+    prompt_file = PROMPTS_DIR / f"{post_id}.txt"
+    prompt_file.write_text("\n".join(lines), encoding="utf-8")
+    log.debug("Saved prompt for %s → %s", post_id, prompt_file.name)
+
+
+def write_prompts_summary(posts: list[dict[str, Any]]) -> None:
+    """Write IMAGE_PROMPTS.md — a readable summary of all posts needing images."""
+    GENERATED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+
+    pending = [
+        p for p in posts
+        if str(p.get("status", "")).lower() in {"draft", "approved"}
+        and not _has_images(p)
+    ]
+
+    if not pending:
+        return
+
+    lines = [
+        "# Maya — Image Prompts",
+        "",
+        "Generate these images in the Gemini app and place them at the paths shown.",
+        "",
+        "---",
+        "",
+    ]
+
+    for post in pending:
+        post_id = str(post.get("id", "unknown"))
+        post_type = str(post.get("post_type", "reel")).lower()
+        topic = str(post.get("topic", ""))
+
+        lines += [
+            f"## {post_id} — {post_type.upper()}",
+            f"**Topic:** {topic}",
+            f"**Caption:** {post.get('caption', '')}",
+            "",
+        ]
+
+        if post_type == "carousel":
+            prompts = _build_carousel_prompts(post)
+            lines.append(
+                f"**Place {len(prompts)} images in:** "
+                f"`generated_images/pending/{post_id}/1.jpg`, `2.jpg`, ..."
+            )
+            lines.append("")
+            for i, prompt in enumerate(prompts, 1):
+                lines.append(f"**Slide {i}:** {prompt}")
+                lines.append("")
+        else:
+            prompt = _build_single_prompt(post)
+            lines.append(f"**Place image at:** `generated_images/pending/{post_id}.jpg`")
+            lines.append("")
+            lines.append(f"**Prompt:**")
+            lines.append(f"> {prompt}")
+            lines.append("")
+
+        lines += ["---", ""]
+
+    summary = GENERATED_IMAGES_DIR / "IMAGE_PROMPTS.md"
+    summary.write_text("\n".join(lines), encoding="utf-8")
+    log.info("Updated IMAGE_PROMPTS.md — %d posts need images", len(pending))
+
+
+# ---------------------------------------------------------------------------
+# Pending image discovery
+# ---------------------------------------------------------------------------
+
+def _has_images(post: dict[str, Any]) -> bool:
+    """Check if a post already has valid images linked."""
+    post_type = str(post.get("post_type", "reel")).lower()
+    if post_type == "carousel":
+        images = post.get("carousel_images", [])
+        return bool(images) and all(os.path.exists(p) for p in images)
+    image = str(post.get("image_url", "")).strip()
+    return bool(image) and os.path.exists(image)
+
+
+def _find_pending_single(post_id: str) -> str | None:
+    """Look for user-placed image at pending/{post_id}.(jpg|png|webp)."""
+    if not PENDING_DIR.is_dir():
+        return None
+    for ext in (".jpg", ".jpeg", ".png", ".webp"):
+        path = PENDING_DIR / f"{post_id}{ext}"
+        if path.exists() and path.stat().st_size > 10_000:
+            return str(path)
+    return None
+
+
+def _find_pending_carousel(post_id: str) -> list[str]:
+    """Look for carousel images in pending/{post_id}/ directory."""
+    carousel_dir = PENDING_DIR / post_id
+    if not carousel_dir.is_dir():
+        return []
+    images = sorted(
+        [
+            str(f) for f in carousel_dir.iterdir()
+            if f.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}
+            and f.stat().st_size > 10_000
+        ],
+        key=lambda p: Path(p).stem,  # sort by 1, 2, 3, ...
     )
-    if resp.status_code >= 400:
-        raise RuntimeError(f"BFL submit failed ({resp.status_code}): {resp.text[:300]}")
-
-    data = resp.json()
-    polling_url = data.get("polling_url")
-    if not polling_url:
-        raise RuntimeError(f"BFL did not return polling_url: {data}")
-
-    # Poll for result
-    for _ in range(BFL_MAX_POLLS):
-        time.sleep(BFL_POLL_INTERVAL)
-        poll = http_requests.get(
-            polling_url,
-            headers={"accept": "application/json", "x-key": cfg.bfl_api_key},
-            timeout=15,
-        ).json()
-
-        status = poll.get("status", "")
-        if status == "Ready":
-            image_url = poll.get("result", {}).get("sample", "")
-            if not image_url:
-                raise RuntimeError(f"BFL Ready but no image URL: {poll}")
-            # Download the image
-            img_resp = http_requests.get(image_url, timeout=60)
-            if img_resp.status_code >= 400:
-                raise RuntimeError(f"Failed to download BFL image ({img_resp.status_code})")
-            with open(output_path, "wb") as f:
-                f.write(img_resp.content)
-            log.info("BFL Kontext image: %s (%d bytes)", output_path, len(img_resp.content))
-            return output_path
-        elif status in {"Error", "Failed", "Request Moderated"}:
-            raise RuntimeError(f"BFL generation failed: {poll}")
-
-    raise RuntimeError("BFL polling timed out")
+    return images
 
 
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
 
-def _is_placeholder(url: str) -> bool:
-    value = url.strip().lower()
-    if not value:
-        return True
-    if "example.com" in value or "pollinations.ai" in value:
-        return True
-    if not value.startswith(("http://", "https://")) and not os.path.exists(value):
-        return True
-    return False
-
-
 def fill_image_urls(posts: list[dict[str, Any]], cfg: Config) -> int:
-    """Generate images for posts missing them. Returns count updated.
+    """Scan pending/ for user-placed images and link them to draft posts.
 
-    Priority: Replicate Kontext → BFL Kontext. Errors if both fail.
+    Also saves/updates image prompts for any post that still needs images.
+    Returns count of posts updated.
     """
-    has_replicate = bool(cfg.replicate_api_token)
-    has_bfl = bool(cfg.bfl_api_key)
+    PENDING_DIR.mkdir(parents=True, exist_ok=True)
+    PROMPTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    if not has_replicate and not has_bfl:
-        log.warning("No image API keys set (need REPLICATE_API_TOKEN or BFL_API_KEY)")
-        return 0
-
-    GENERATED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     updated = 0
 
     for post in posts:
@@ -209,35 +253,43 @@ def fill_image_urls(posts: list[dict[str, Any]], cfg: Config) -> int:
         if status in {"posted", "failed"}:
             continue
 
-        image = str(post.get("image_url", "")).strip()
-        video = str(post.get("video_url", "")).strip()
-        if video and not _is_placeholder(video):
-            continue
-        if image and not _is_placeholder(image):
+        post_id = str(post.get("id", "")).strip()
+        if not post_id:
             continue
 
-        # Fallback chain: Replicate → BFL → HF
-        local_path = None
+        post_type = str(post.get("post_type", "reel")).strip().lower()
 
-        if local_path is None and has_replicate:
-            try:
-                local_path = _generate_via_replicate(post, cfg)
-            except Exception as exc:
-                log.warning("Replicate Kontext failed for %s: %s", post.get("id"), exc)
+        # Always refresh prompts for posts that still need images
+        if not _has_images(post):
+            _save_post_prompts(post)
 
-        if local_path is None and has_bfl:
-            try:
-                local_path = _generate_via_bfl(post, cfg)
-            except Exception as exc:
-                log.warning("BFL Kontext failed for %s: %s", post.get("id"), exc)
+        if post_type == "carousel":
+            if _has_images(post):
+                continue
+            images = _find_pending_carousel(post_id)
+            if images and len(images) >= 2:
+                post["carousel_images"] = images
+                post["image_url"] = images[0]  # thumbnail fallback
+                post["is_reel"] = False
+                updated += 1
+                log.info("Linked carousel for %s: %d slides", post_id, len(images))
+        else:
+            if _has_images(post):
+                continue
+            image_path = _find_pending_single(post_id)
+            if image_path:
+                post["image_url"] = image_path
+                post["is_reel"] = post_type == "reel"
+                updated += 1
+                log.info("Linked image for %s (%s): %s", post_id, post_type, image_path)
 
-        if local_path is None:
-            log.error("All image providers failed for %s — no fallback available", post.get("id"))
+    # Write the master summary for the user
+    write_prompts_summary(posts)
 
-        if local_path:
-            post["image_url"] = local_path
-            post["video_url"] = None
-            post["is_reel"] = False
-            updated += 1
+    if updated == 0 and not any(_has_images(p) for p in posts
+                                if str(p.get("status", "")).lower() in {"draft", "approved"}):
+        log.info(
+            "No images found in pending/. See generated_images/IMAGE_PROMPTS.md for prompts."
+        )
 
     return updated

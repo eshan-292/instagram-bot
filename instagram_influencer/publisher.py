@@ -171,15 +171,22 @@ def _find_trending_track(cl: Client) -> Any | None:
 
 
 def publish(cfg: Config, caption: str, image_url: str,
-            video_url: str | None = None, is_reel: bool = False) -> str:
-    """Publish to Instagram. Uploads as Reel if is_reel=True, else as photo.
+            video_url: str | None = None, is_reel: bool = False,
+            carousel_images: list[str] | None = None,
+            post_type: str = "reel") -> str:
+    """Publish to Instagram.
 
-    Falls back to photo upload if Reel upload fails.
+    - carousel: album of 2-10 images via album_upload
+    - reel: short video upload (with music)
+    - single/photo: standard photo upload
+
+    Falls back to photo if Reel upload fails.
     Retries once with a fresh login if login_required is detected.
     """
     try:
         cl = _get_client(cfg)
-        return _do_upload(cl, caption, image_url, video_url, is_reel)
+        return _do_upload(cl, caption, image_url, video_url, is_reel,
+                          carousel_images=carousel_images, post_type=post_type)
     except Exception as exc:
         if not _is_login_required_error(exc):
             raise
@@ -188,11 +195,37 @@ def publish(cfg: Config, caption: str, image_url: str,
         log.warning("Upload got login_required, forcing fresh login and retrying")
         _delete_session()
         cl = _get_client(cfg)
-        return _do_upload(cl, caption, image_url, video_url, is_reel)
+        return _do_upload(cl, caption, image_url, video_url, is_reel,
+                          carousel_images=carousel_images, post_type=post_type)
 
 
 def _do_upload(cl: Client, caption: str, image_url: str,
-               video_url: str | None, is_reel: bool) -> str:
+               video_url: str | None, is_reel: bool,
+               carousel_images: list[str] | None = None,
+               post_type: str = "reel") -> str:
+    # Carousel upload — multiple images as an album
+    if post_type == "carousel" and carousel_images:
+        valid_paths = [Path(p) for p in carousel_images if os.path.exists(p)]
+        if not valid_paths:
+            raise RuntimeError(f"No carousel image files found: {carousel_images}")
+        try:
+            media = cl.album_upload(valid_paths, caption)
+            log.info(
+                "Published carousel (%d slides): https://www.instagram.com/p/%s/",
+                len(valid_paths), media.code,
+            )
+            return str(media.pk)
+        except ValidationError as exc:
+            # Uploaded but response parsing failed — carousel is live
+            log.warning("Carousel uploaded but response parsing failed: %s", exc)
+            return "unknown"
+        except Exception as exc:
+            if _is_login_required_error(exc):
+                raise
+            log.warning("Carousel upload failed, falling back to single photo: %s", exc)
+            # Fall through to photo upload using first image
+            image_url = str(valid_paths[0])
+
     # Try Reel upload if we have a video
     if is_reel and video_url:
         local_video, is_temp_video = _resolve_media(video_url)

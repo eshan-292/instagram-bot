@@ -7,10 +7,12 @@ on:
     - cron: '30 3 * * *'   # 09:00 IST — reply to comments
     - cron: '30 4 * * *'   # 10:00 IST — story repost
     - cron: '30 5 * * *'   # 11:00 IST — hashtag engagement
+    - cron: '0 6 * * *'    # 11:30 IST — PUBLISH (carousel/single)
     - cron: '30 7 * * *'   # 13:00 IST — PUBLISH + explore
     - cron: '30 8 * * *'   # 14:00 IST — story repost
     - cron: '30 9 * * *'   # 15:00 IST — hashtag engagement
-    - cron: '30 11 * * *'  # 17:00 IST — maintenance (unfollow + DMs)
+    - cron: '30 10 * * *'  # 16:00 IST — explore engagement
+    - cron: '30 11 * * *'  # 17:00 IST — maintenance (unfollow)
     - cron: '30 12 * * *'  # 18:00 IST — story repost
     - cron: '30 13 * * *'  # 19:00 IST — PUBLISH + full engagement
     - cron: '0 15 * * *'   # 20:30 IST — hashtag engagement
@@ -103,9 +105,11 @@ jobs:
               03) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               04) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               05) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              06) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
               07) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
               08) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               09) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              10) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               11) echo "type=maintenance" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               12) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               13) echo "type=full"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
@@ -159,7 +163,8 @@ jobs:
                      instagram_influencer/content_queue.json \
                      instagram_influencer/highlights.json \
                      instagram_influencer/daily_report.md \
-                     instagram_influencer/.ig_session.json 2>/dev/null || true
+                     instagram_influencer/.ig_session.json \
+                     "instagram_influencer/generated_images/IMAGE_PROMPTS.md" 2>/dev/null || true
           git diff --staged --quiet || (
             git commit -m "bot: state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
             git push

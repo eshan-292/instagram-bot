@@ -47,7 +47,15 @@ def _promote_drafts(posts: list[dict[str, Any]], cfg: Config) -> int:
     for item in posts:
         if str(item.get("status", "")).strip().lower() != "draft":
             continue
-        if not item.get("caption") or (not item.get("image_url") and not item.get("video_url")):
+        if not item.get("caption"):
+            continue
+        post_type = str(item.get("post_type", "reel")).lower()
+        has_media = (
+            (post_type == "carousel" and item.get("carousel_images"))
+            or item.get("image_url")
+            or item.get("video_url")
+        )
+        if not has_media:
             continue
         item["status"] = cfg.auto_promote_status
         dt = parse_scheduled_at(item.get("scheduled_at"))
@@ -65,68 +73,68 @@ def _utc_now_iso() -> str:
 # ---------------------------------------------------------------------------
 # Hashtag injection — appended to caption at publish time
 # ---------------------------------------------------------------------------
+# 2026 algorithm: 3-5 targeted hashtags > 30 generic ones.
+# Instagram now treats captions as keyword search — front-loaded topic keywords
+# carry more reach weight than hashtag spraying.
 
-# Brand / personal (always included)
-_BRAND_TAGS = ["mayavarma", "mayastyle"]
+# Core hashtag pool — pick 3-5 per post for variety without spam signals
+_HASHTAG_POOL = [
+    "mayavarma",          # brand (always included)
+    "indianfashion",
+    "mumbaifashion",
+    "ootd",
+    "indianstreetstyle",
+    "desistyle",
+    "ethnicwear",
+    "fashionreels",
+    "outfitoftheday",
+    "mumbaiblogger",
+    "fusionwear",
+    "desivibes",
+    "styleblogger",
+    "browngirlmagic",
+    "southasianstyle",
+]
 
-# Niche pools — pick a random subset each time to avoid shadow bans
-_NICHE_POOLS = {
-    "indian_fashion": [
-        "indianfashion", "desifashion", "indianstreetstyle", "desistyle",
-        "indianfashionblogger", "bollywoodfashion", "lehengalove",
-        "indianwear", "ethnicwear", "fusionwear", "desivibes",
-    ],
-    "mumbai": [
-        "mumbai", "mumbailifestyle", "mumbaifashion", "mumbaigirl",
-        "mumbaiblogger", "mumbailife", "bandradiaries",
-    ],
-    "style": [
-        "ootd", "styleinspo", "fashionreels", "outfitoftheday",
-        "fashiongram", "stylediaries", "lookoftheday", "whatiwore",
-        "fashioninfluencer", "styleblogger",
-    ],
-    "reels": [
-        "reelsinstagram", "reelsindia", "trendingreels", "viralreels",
-        "explorepage", "reelitfeelit", "instareels",
-    ],
-    "lifestyle": [
-        "girlboss", "confidentwomen", "luxurylifestyle", "aestheticfeed",
-        "browngirlmagic", "southasianstyle", "desigirl",
-    ],
-}
-
+# Carousel-specific tags (drives saves — the highest-weight signal)
+_CAROUSEL_TAGS = [
+    "indianfashiontips",
+    "styleinspo",
+    "savethis",
+    "fashionguide",
+    "outfitideas",
+]
 
 _KEYWORD_PHRASES = [
     "Mumbai fashion", "Indian street style", "Outfit inspiration",
     "Desi fashion diaries", "Style tips India", "Fashion influencer Mumbai",
-    "Ethnic modern fusion", "Indian girl style", "Bollywood fashion vibes",
+    "Ethnic modern fusion", "Indian girl style",
 ]
 
 
-def _build_hashtags(caption: str, topic: str) -> str:
-    """Append keyword phrases + hashtags to the caption for algorithm reach."""
-    tags = list(_BRAND_TAGS)
+def _build_hashtags(caption: str, topic: str, post_type: str = "reel") -> str:
+    """Append 3-5 targeted hashtags + keyword phrase to caption.
 
-    # Pick from each pool
-    for pool_name, pool_tags in _NICHE_POOLS.items():
-        pick = min(4, len(pool_tags))
-        tags.extend(random.sample(pool_tags, pick))
+    2026 algorithm: fewer, more relevant hashtags outperform tag-spraying.
+    Keywords in the caption body drive more reach than the hashtag block.
+    """
+    # Always include brand tag
+    tags = ["mayavarma"]
 
-    # Dedupe, shuffle, cap at 30
-    seen: set[str] = set()
-    unique: list[str] = []
-    for t in tags:
-        low = t.lower()
-        if low not in seen:
-            seen.add(low)
-            unique.append(low)
-    random.shuffle(unique)
-    unique = unique[:30]
+    # Pick 3-4 more from pool (carousel gets save-focused tags)
+    pool = _CAROUSEL_TAGS if post_type == "carousel" else _HASHTAG_POOL[1:]
+    extras = random.sample(pool, min(3, len(pool)))
+    for t in extras:
+        if t not in tags:
+            tags.append(t)
 
-    # Keywords (2-3 phrases, separated by pipes) — drives 30% more reach than hashtags alone
-    keywords = " | ".join(random.sample(_KEYWORD_PHRASES, min(3, len(_KEYWORD_PHRASES))))
-    hashtag_block = " ".join(f"#{t}" for t in unique)
-    return f"{caption}\n.\n{keywords}\n.\n{hashtag_block}"
+    # Cap at 5
+    tags = tags[:5]
+
+    # One keyword phrase (drives search discovery)
+    keyword = random.choice(_KEYWORD_PHRASES)
+    hashtag_block = " ".join(f"#{t}" for t in tags)
+    return f"{caption}\n.\n{keyword}\n.\n{hashtag_block}"
 
 
 def main() -> int:
@@ -151,7 +159,8 @@ def main() -> int:
             chosen = find_eligible(posts)
             if chosen:
                 print(json.dumps({k: chosen[1].get(k) for k in
-                    ("id", "status", "scheduled_at", "caption", "image_url")}, ensure_ascii=True))
+                    ("id", "status", "post_type", "scheduled_at", "caption",
+                     "image_url", "carousel_images")}, ensure_ascii=True))
             else:
                 print("No eligible posts")
             return 0
@@ -194,16 +203,27 @@ def main() -> int:
                 image_url = str(item.get("image_url", ""))
                 video_url = str(item.get("video_url") or "").strip() or None
                 is_reel = bool(item.get("is_reel", False))
+                post_type = str(item.get("post_type", "reel")).strip().lower()
+                carousel_images = item.get("carousel_images") or None
 
-                if not image_url and not video_url:
+                has_media = (
+                    (post_type == "carousel" and carousel_images)
+                    or image_url
+                    or video_url
+                )
+                if not has_media:
                     log.warning("Post %s has no media, skipping", item.get("id"))
                 else:
                     # Inject hashtags for discoverability
-                    full_caption = _build_hashtags(caption, str(item.get("topic", "")))
+                    full_caption = _build_hashtags(
+                        caption, str(item.get("topic", "")), post_type
+                    )
 
                     try:
                         post_id = publish(cfg, full_caption, image_url,
-                                          video_url=video_url, is_reel=is_reel)
+                                          video_url=video_url, is_reel=is_reel,
+                                          carousel_images=carousel_images,
+                                          post_type=post_type)
                         posts[idx]["status"] = "posted"
                         posts[idx]["posted_at"] = _utc_now_iso()
                         posts[idx]["platform_post_id"] = post_id
