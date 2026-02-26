@@ -20,8 +20,9 @@ Schedule (all IST):
     8:30 PM  - Hashtag engagement (still peak hours)
     9:30 PM  - Reply to evening comments
    11:00 PM  - Maintenance: auto-unfollow + welcome DMs
+   11:30 PM  - Daily summary report
 
-Total: 13 sessions/day, 2 posts/day, 3 story reposts, ~8 engagement sessions.
+Total: 14 sessions/day, 2 posts/day, 3 story reposts, ~8 engagement sessions.
 This mimics natural human behavior — active throughout the day,
 with varied activity types and human-like pauses between sessions.
 """
@@ -60,6 +61,7 @@ SCHEDULE = [
     (20, 30, False, "hashtags"),     # still peak hours
     (21, 30, False, "replies"),      # catch evening comments
     (23, 0,  False, "maintenance"),  # end of day cleanup
+    (23, 30, False, "report"),       # daily summary report
 ]
 
 # How long after scheduled time a session is still valid (minutes)

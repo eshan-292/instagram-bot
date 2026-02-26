@@ -85,13 +85,21 @@ def _generate_dm(cfg: Config, username: str) -> str | None:
         return None
     from gemini_helper import generate
     prompt = (
-        "You are Maya Varma, a 23-year-old Indian fashion influencer in Mumbai. "
-        "A new person just followed you on Instagram. Write a short, warm welcome DM "
-        "(2-3 sentences max). Be genuine, inviting, and casual — not salesy. "
-        "Mention you post fashion/style content. End with something engaging "
-        "(like asking about their style or what they liked). "
-        "No hashtags. Max 1-2 emojis. Just the message text.\n\n"
-        f"Their username: @{username}"
+        "You are Maya, a 23-year-old girl from Mumbai who posts fashion/style content. "
+        "Someone just followed you. Send them a quick casual DM like a real person would — "
+        "NOT like a brand or a page. Think of how a college girl would text a new follower.\n\n"
+        "Rules:\n"
+        "- 1-2 short sentences MAX. Keep it chill.\n"
+        "- Sound like you're texting a friend, use lowercase, abbreviations are fine\n"
+        "- Do NOT introduce yourself or say 'I'm Maya' or 'I'm a fashion influencer'\n"
+        "- Do NOT say 'welcome to my page' or anything that sounds like a page\n"
+        "- Do NOT be overly thankful or say 'thanks for the follow'\n"
+        "- Just be friendly and maybe react to their profile or ask something casual\n"
+        "- Max 1 emoji, no hashtags\n"
+        "- Examples of the RIGHT vibe: 'heyy love your feed! that last fit was fire 🔥', "
+        "'omg your style tho 😍 where do u shop??', 'ayy thanks for the follow! ur pics go hard'\n\n"
+        f"Their username: @{username}\n"
+        "Just the message text, nothing else."
     )
     dm = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if dm and 10 < len(dm) < 500:
@@ -341,7 +349,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
 def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[str, int]:
     """Like/comment on posts from the Explore feed. Returns action counts."""
     stats: dict[str, int] = {"explore_likes": 0, "explore_comments": 0}
-    explore_limit = 15  # posts to engage with from explore
+    explore_limit = 25  # posts to engage with from explore
 
     try:
         # Fetch explore reels (returns List[Media], unlike explore_page which returns raw dict)
@@ -378,7 +386,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                     log.debug("Explore comment failed: %s", exc)
 
         save_log(LOG_FILE, data)
-        random_delay(15, 45)
+        random_delay(10, 30)
 
     if stats["explore_likes"] or stats["explore_comments"]:
         log.info("Explore engagement: %s", stats)
@@ -460,7 +468,7 @@ def _run_hashtag_engagement(
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(30, 90)
+        random_delay(20, 60)
 
         if (
             not can_act(data, "likes", like_limit)
@@ -483,6 +491,7 @@ SESSION_TYPES = [
     "explore",     # explore page engagement
     "maintenance", # unfollow old follows + welcome DMs
     "stories",     # repost past posts as stories + add to highlights
+    "report",      # end-of-day summary report
     "full",        # all phases (backward compat)
 ]
 
@@ -505,14 +514,14 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     log.info("Starting engagement session: %s", session_type)
 
     if session_type == "morning":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=10)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=15)
 
     elif session_type == "replies":
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
 
     elif session_type == "hashtags":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=20)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=30)
 
     elif session_type == "explore":
         explore_stats = run_explore_engagement(cl, cfg, data)
@@ -528,13 +537,18 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         story_stats = run_story_session(cl, cfg)
         stats.update(story_stats)
 
+    elif session_type == "report":
+        from report import run_daily_report
+        run_daily_report()
+        stats["report"] = 1
+
     else:  # "full" — all phases
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
         stats["dms"] = run_welcome_dms(cl, cfg)
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=30)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=40)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
 
