@@ -12,6 +12,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+import requests as http_requests
 from PIL import Image, ImageDraw, ImageFont
 
 from config import BASE_DIR, Config
@@ -272,8 +273,60 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
     return sticker_args
 
 
+def _download_media_from_ig(cl: Any, post: dict[str, Any]) -> tuple[str | None, bool, bool]:
+    """Download post media from Instagram when local files don't exist.
+
+    Returns (path, is_video, is_temp). Caller must clean up temp files.
+    """
+    post_pk = post.get("platform_post_id")
+    if not post_pk or str(post_pk) == "unknown":
+        return None, False, False
+
+    try:
+        media_info = cl.media_info(int(post_pk))
+    except Exception as exc:
+        log.debug("Could not fetch media_info for %s: %s", post.get("id"), exc)
+        return None, False, False
+
+    # Prefer image (cleaner for story overlay)
+    thumb = getattr(media_info, "thumbnail_url", None)
+    if thumb:
+        try:
+            resp = http_requests.get(str(thumb), timeout=30)
+            if resp.status_code == 200 and len(resp.content) > 5000:
+                fd, tmp = tempfile.mkstemp(suffix=".jpg", prefix="story_dl_")
+                os.close(fd)
+                with open(tmp, "wb") as f:
+                    f.write(resp.content)
+                log.debug("Downloaded thumbnail for story: %s (%d bytes)", post.get("id"), len(resp.content))
+                return tmp, False, True
+        except Exception as exc:
+            log.debug("Thumbnail download failed for %s: %s", post.get("id"), exc)
+
+    # Fallback to video
+    vid = getattr(media_info, "video_url", None)
+    if vid:
+        try:
+            resp = http_requests.get(str(vid), timeout=60)
+            if resp.status_code == 200 and len(resp.content) > 10000:
+                fd, tmp = tempfile.mkstemp(suffix=".mp4", prefix="story_dl_")
+                os.close(fd)
+                with open(tmp, "wb") as f:
+                    f.write(resp.content)
+                log.debug("Downloaded video for story: %s (%d bytes)", post.get("id"), len(resp.content))
+                return tmp, True, True
+        except Exception as exc:
+            log.debug("Video download failed for %s: %s", post.get("id"), exc)
+
+    return None, False, False
+
+
 def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
     """Repost a published post as a story with text overlay + stickers.
+
+    If local media files don't exist (typical in CI/GitHub Actions since
+    generated_images/ is gitignored), downloads media from Instagram
+    using the platform_post_id.
 
     Returns the story PK or None on failure.
     """
@@ -283,14 +336,20 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
 
     media_path = None
     is_video = False
+    downloaded_temp = False
+
+    # Try local files first
     if image_url and os.path.exists(image_url):
         media_path = image_url
     elif video_url and os.path.exists(video_url):
         media_path = video_url
         is_video = True
     else:
-        log.debug("No local media for story repost of %s", post.get("id"))
-        return None
+        # Download from Instagram (local files don't exist in CI)
+        media_path, is_video, downloaded_temp = _download_media_from_ig(cl, post)
+        if not media_path:
+            log.debug("No media available for story repost of %s (local missing, IG download failed)", post.get("id"))
+            return None
 
     # Add text overlay (only for images)
     overlay_path = None
@@ -330,6 +389,12 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
         if overlay_path and os.path.exists(overlay_path):
             try:
                 os.remove(overlay_path)
+            except OSError:
+                pass
+        # Clean up downloaded media temp file
+        if downloaded_temp and media_path and os.path.exists(media_path):
+            try:
+                os.remove(media_path)
             except OSError:
                 pass
 

@@ -54,25 +54,58 @@ make run
 
 ## Image Generation (Manual via Gemini App)
 
-Since the Replicate API quota is exhausted, images are generated manually:
+Since the Replicate API quota is exhausted, images are generated manually via the Gemini app.
 
-1. Bot generates prompts → saved to `generated_images/IMAGE_PROMPTS.md`
-2. You copy prompts into the Gemini app and generate images
-3. Place images in the right location:
+### Step-by-step workflow
 
-```
-generated_images/pending/
-├── maya-042.jpg                  ← single image or reel
-├── maya-043/
-│   ├── 1.jpg                    ← carousel slide 1
-│   ├── 2.jpg                    ← carousel slide 2
-│   ├── 3.jpg                    ← carousel slide 3
-│   └── ...                      ← up to 6 slides
+**1. Check what images are needed:**
+```bash
+# Option A: Look at the committed file on GitHub
+# → instagram_influencer/generated_images/IMAGE_PROMPTS.md
+
+# Option B: Generate prompts locally
+make generate
+# → Creates instagram_influencer/generated_images/IMAGE_PROMPTS.md
 ```
 
-4. On next bot run, images are auto-linked to drafts and promoted for publishing.
+**2. Generate images in the Gemini app:**
+- Open the [Gemini app](https://gemini.google.com/)
+- Copy each prompt from `IMAGE_PROMPTS.md` and paste it into Gemini
+- Download the generated image
 
-Individual prompts are also saved to `generated_images/prompts/{post_id}.txt`.
+**3. Place images in the right directory:**
+
+```
+instagram_influencer/generated_images/pending/
+├── maya-042.jpg                  ← single image or reel (match the post ID)
+├── maya-043/                     ← carousel (create a folder named by post ID)
+│   ├── 1.jpg                    ← slide 1
+│   ├── 2.jpg                    ← slide 2
+│   ├── 3.jpg                    ← slide 3
+│   ├── 4.jpg                    ← slide 4
+│   └── 5.jpg                    ← slide 5 (up to 6)
+```
+
+**4. Commit and push the images:**
+```bash
+cd instagram_influencer
+git add -f generated_images/pending/
+git commit -m "add images for maya-042, maya-043"
+git push
+```
+
+**5. The bot handles the rest automatically:**
+- Next publish session picks up the images
+- Links them to the matching drafts
+- Promotes drafts → approved → publishes at the next scheduled slot
+
+### Notes
+- Image filenames must match the post ID exactly (e.g., `maya-042.jpg` for post `maya-042`)
+- Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`
+- Minimum file size: 10 KB (smaller files are ignored)
+- Carousel posts need at least 2 images in the folder
+- Individual prompts are also saved to `generated_images/prompts/{post_id}.txt`
+- The `IMAGE_PROMPTS.md` file is auto-committed to the repo after each generation run
 
 ## Daily Schedule (GitHub Actions)
 
@@ -116,6 +149,7 @@ The bot runs **16 sessions per day** via GitHub Actions cron, with **3 publish s
 
 - **3 story sessions/day** (10:00, 14:00, 18:00 IST)
 - Reposts 2-3 past posts with text overlays
+- **Auto-downloads media from Instagram** if local files don't exist (works seamlessly in CI)
 - Interactive stickers: 35% poll, 30% question box (AMA), 20% quiz, 15% clean
 - Auto-categorized into highlights (OOTD, Mumbai Style, Ethnic Vibes, Tips, BTS, Glam)
 

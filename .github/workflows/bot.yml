@@ -164,7 +164,8 @@ jobs:
                      instagram_influencer/highlights.json \
                      instagram_influencer/daily_report.md \
                      instagram_influencer/.ig_session.json \
-                     "instagram_influencer/generated_images/IMAGE_PROMPTS.md" 2>/dev/null || true
+                     "instagram_influencer/generated_images/IMAGE_PROMPTS.md" \
+                     "instagram_influencer/generated_images/pending/" 2>/dev/null || true
           git diff --staged --quiet || (
             git commit -m "bot: state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
             git push
