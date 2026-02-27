@@ -17,6 +17,7 @@ instagram_influencer/.playwright/
 instagram_influencer/.openclaw/
 instagram_influencer/generated_images/
 !instagram_influencer/generated_images/IMAGE_PROMPTS.md
+!instagram_influencer/generated_images/pending/
 *.log
 .DS_Store
 
