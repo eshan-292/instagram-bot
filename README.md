@@ -150,8 +150,21 @@ The bot automatically picks up the images at 19:00 IST and publishes them.
 
 ## Daily Schedule (GitHub Actions)
 
-The bot runs **29 micro-sessions per day** — mimics a real person checking their phone every 30-45 min. **1 post per day** at prime time (19:00 IST). Each session has 0-4 min random startup jitter.
+The bot runs **37 sessions per day — 24-hour coverage**. **1 post per day** at prime time (19:00 IST). Each session has 0-4 min random startup jitter.
 
+### Night sessions (midnight–7am IST)
+| IST Time | Session |
+|----------|---------|
+| 00:00 | Explore (night owl) |
+| 00:45 | Hashtags |
+| 01:30 | Explore |
+| 02:30 | Hashtags (deep night) |
+| 03:30 | Explore |
+| 04:30 | Hashtags |
+| 05:30 | Explore (early bird) |
+| 06:15 | Hashtags |
+
+### Day sessions (7am–midnight IST)
 | IST Time | Session | Publishes? |
 |----------|---------|------------|
 | 07:00 | Morning engagement (~15 posts) | No |
@@ -202,9 +215,9 @@ The bot mimics real human Instagram usage patterns:
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 180 | Spread across 29 sessions (~6/session) |
-| Comments | 40 | AI-generated, ~20% of seen posts |
-| Follows | 60 | With profile browse before follow (~45% rate) |
+| Likes | 250 | Spread across 37 sessions (~7/session) |
+| Comments | 55 | AI-generated, ~20% of seen posts |
+| Follows | 80 | With profile browse before follow (~45% rate) |
 | Story views | 100 | ~65% chance per user, ~25% like rate |
 | Replies | 30 | On own posts (last 24h) |
 | Unfollows | 40/run | After 3+ days |
@@ -266,9 +279,9 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, and grow
 | `AUTO_MODE` | `false` | Enable auto publishing |
 | `AUTO_PROMOTE_DRAFTS` | `false` | Auto-promote drafts to approved |
 | `ENGAGEMENT_ENABLED` | `false` | Enable engagement automation |
-| `ENGAGEMENT_DAILY_LIKES` | `180` | Max likes/day |
-| `ENGAGEMENT_DAILY_COMMENTS` | `40` | Max comments/day |
-| `ENGAGEMENT_DAILY_FOLLOWS` | `60` | Max follows/day |
+| `ENGAGEMENT_DAILY_LIKES` | `250` | Max likes/day |
+| `ENGAGEMENT_DAILY_COMMENTS` | `55` | Max comments/day |
+| `ENGAGEMENT_DAILY_FOLLOWS` | `80` | Max follows/day |
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `TELEGRAM_BOT_TOKEN` | — | Telegram bot token for daily reports |
