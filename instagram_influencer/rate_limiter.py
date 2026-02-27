@@ -106,10 +106,44 @@ def record_action(data: dict[str, Any], action_type: str, target_id: str) -> Non
 
 
 def random_delay(min_s: int = 30, max_s: int = 90) -> None:
-    """Human-like random sleep between actions."""
-    delay = random.uniform(min_s, max_s)
+    """Human-like sleep between actions using gaussian distribution.
+
+    Instead of uniform random (which bots use), this uses a gaussian curve
+    centered between min and max, so most delays cluster near the middle
+    with occasional short or long waits — like a real person scrolling.
+
+    15% chance of a 'micro-break' (90-300s) — simulates getting distracted,
+    checking another app, replying to a text, etc.
+    """
+    # Micro-break: simulate getting distracted (checking texts, switching apps)
+    if random.random() < 0.15:
+        pause = random.uniform(90, 300)
+        log.debug("Micro-break: %.0fs (simulating distraction)", pause)
+        time.sleep(pause)
+        return
+
+    # Gaussian distribution: most delays cluster around the midpoint
+    mid = (min_s + max_s) / 2
+    std = (max_s - min_s) / 4  # ~95% of values within min-max range
+    delay = random.gauss(mid, std)
+    delay = max(min_s * 0.8, min(max_s * 1.3, delay))  # soft clamp
+
+    # Add small sub-second jitter (humans aren't precise)
+    delay += random.uniform(0.2, 1.8)
+
     log.debug("Sleeping %.1fs", delay)
     time.sleep(delay)
+
+
+def session_startup_jitter() -> None:
+    """Random delay at session start to avoid running at exact cron times.
+
+    Real people don't open Instagram at exactly :00 or :30. This adds
+    0-4 minutes of jitter so sessions start at varied times.
+    """
+    jitter = random.uniform(10, 240)  # 10s to 4 minutes
+    log.info("Session startup jitter: %.0fs", jitter)
+    time.sleep(jitter)
 
 
 def daily_summary(data: dict[str, Any]) -> dict[str, int]:

@@ -109,45 +109,69 @@ git push
 
 ## Daily Schedule (GitHub Actions)
 
-The bot runs **16 sessions per day** via GitHub Actions cron, with **3 publish slots** and engagement throughout.
+The bot runs **25 micro-sessions per day** — designed to mimic a real person checking their phone throughout the day. Each session is short (5-15 min) with 0-4 min random startup jitter so actions never start at exact cron times.
 
-| IST Time | UTC Cron | Session | Publishes? |
-|----------|----------|---------|------------|
-| 07:00 | `30 1 * * *` | Morning engagement (likes + follows, 25 posts) | No |
-| 09:00 | `30 3 * * *` | Reply to comments on own posts | No |
-| 10:00 | `30 4 * * *` | Story repost (2-3 stories + highlights) | No |
-| 11:00 | `30 5 * * *` | Hashtag engagement (50 posts) | No |
-| **11:30** | `0 6 * * *` | **PUBLISH** + hashtag engagement | **Yes** |
-| **13:00** | `30 7 * * *` | **PUBLISH** + explore engagement | **Yes** |
-| 14:00 | `30 8 * * *` | Story repost | No |
-| 15:00 | `30 9 * * *` | Hashtag engagement (50 posts) | No |
-| 16:00 | `30 10 * * *` | Explore engagement (40 posts) | No |
-| 17:00 | `30 11 * * *` | Maintenance (auto-unfollow) | No |
-| 18:00 | `30 12 * * *` | Story repost | No |
-| **19:00** | `30 13 * * *` | **PUBLISH** + full engagement | **Yes** |
-| 20:30 | `0 15 * * *` | Hashtag engagement (50 posts) | No |
-| 21:30 | `0 16 * * *` | Reply to comments | No |
-| 23:00 | `30 17 * * *` | Maintenance (auto-unfollow) | No |
-| 23:30 | `0 18 * * *` | Daily report (Telegram + Actions summary) | No |
+| IST Time | Session | Publishes? |
+|----------|---------|------------|
+| 07:00 | Morning engagement (~10 posts) | No |
+| 07:45 | Explore (casual scroll) | No |
+| 08:30 | Hashtags | No |
+| 09:00 | Reply to comments | No |
+| 09:45 | Story repost | No |
+| 10:30 | Hashtags | No |
+| **11:30** | **PUBLISH** + explore | **Yes** |
+| 12:00 | Hashtags (lunch break) | No |
+| **13:00** | **PUBLISH** + hashtags | **Yes** |
+| 13:30 | Explore | No |
+| 14:00 | Story repost | No |
+| 14:45 | Hashtags | No |
+| 15:30 | Explore | No |
+| 16:00 | Reply to comments | No |
+| 16:45 | Hashtags | No |
+| 17:30 | Explore | No |
+| 18:00 | Story repost | No |
+| **19:00** | **PUBLISH** + hashtags (prime time) | **Yes** |
+| 19:30 | Explore | No |
+| 20:00 | Hashtags | No |
+| 20:45 | Reply to comments | No |
+| 21:30 | Explore (evening wind-down) | No |
+| 22:00 | Maintenance (auto-unfollow) | No |
+| 23:00 | Maintenance | No |
+| 23:30 | Daily report | No |
+
+## Anti-Detection & Human-Like Behavior
+
+The bot is designed to be undetectable by mimicking real human patterns:
+
+- **Gaussian delays** — Most pauses cluster around a natural midpoint instead of uniform random
+- **Micro-breaks** (15% chance) — 90-300s pauses simulating checking texts, switching apps
+- **Session startup jitter** — 10s-4min random delay so nothing runs at exact times
+- **Skip behavior** — ~25% of posts are scrolled past without engaging (humans are selective)
+- **Profile browsing** — Views user profile before following (like a real person checking who they are)
+- **Randomized session sizes** — ±40% variation so no two sessions look identical
+- **Selective commenting** — Only ~15% of posts get comments (genuine, not spammy)
+- **Selective following** — Only ~30% of users get followed
+- **Story viewing** — Only ~50% chance to view stories, ~15% to like
 
 ## Engagement Limits
 
-| Action | Daily Limit | Per Session |
-|--------|------------|-------------|
-| ❤️ Likes | 200 | 25-60 posts depending on session |
-| 💬 Comments | 60 | AI-generated, context-aware |
-| ➕ Follows | 80 | From hashtag + explore targets |
-| 👀 Story views | 120 | + like ~30% for stronger signal |
-| 💬 Replies | 35 | On own posts (last 24h) |
-| ➖ Unfollows | 50/run | After 3+ days |
+| Action | Daily Limit | Notes |
+|--------|------------|-------|
+| Likes | 130 | Spread across 25 sessions |
+| Comments | 25 | AI-generated, selective (~15% of seen posts) |
+| Follows | 40 | With profile browse before follow |
+| Story views | 60 | ~50% chance per user, ~15% like rate |
+| Replies | 20 | On own posts (last 24h) |
+| Unfollows | 25/run | After 3+ days, long delays between |
+| Welcome DMs | 5/day | Very conservative, 60-180s gaps |
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-7), 0.8x (days 8-14), 1.0x (day 15+).
 
-**Delays:** 15-45s between hashtag actions, 8-20s explore, 15-40s replies (human-like pacing).
+**Delays:** 20-60s between hashtag actions, 15-45s explore, 30-90s replies/comments — with gaussian distribution + micro-breaks.
 
 ## Stories
 
-- **3 story sessions/day** (10:00, 14:00, 18:00 IST)
+- **3 story sessions/day** (09:45, 14:00, 18:00 IST)
 - Reposts 2-3 past posts with text overlays
 - **Auto-downloads media from Instagram** if local files don't exist (works seamlessly in CI)
 - Interactive stickers: 35% poll, 30% question box (AMA), 20% quiz, 15% clean
@@ -197,9 +221,9 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, and grow
 | `AUTO_MODE` | `false` | Enable auto publishing |
 | `AUTO_PROMOTE_DRAFTS` | `false` | Auto-promote drafts to approved |
 | `ENGAGEMENT_ENABLED` | `false` | Enable engagement automation |
-| `ENGAGEMENT_DAILY_LIKES` | `200` | Max likes/day |
-| `ENGAGEMENT_DAILY_COMMENTS` | `60` | Max comments/day |
-| `ENGAGEMENT_DAILY_FOLLOWS` | `80` | Max follows/day |
+| `ENGAGEMENT_DAILY_LIKES` | `130` | Max likes/day (safe zone) |
+| `ENGAGEMENT_DAILY_COMMENTS` | `25` | Max comments/day (conservative) |
+| `ENGAGEMENT_DAILY_FOLLOWS` | `40` | Max follows/day (with profile browse) |
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `TELEGRAM_BOT_TOKEN` | — | Telegram bot token for daily reports |
