@@ -307,6 +307,50 @@
         "Style 4: evening \u2014 kurta with statement earrings, heels, minimal clutch",
         "Style 5: lounge \u2014 oversized kurta as a dress, slides"
       ]
+    },
+    {
+      "id": "maya-026",
+      "status": "draft",
+      "topic": "Bandra Budget Brunch Looks Under \u20b92000",
+      "caption": "Bandra brunch on a budget? \ud83d\udc85 No problem. These 3 looks prove style isn't about the price tag, darling. You're welcome. Save this for your next Sunday outing.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-02-27T17:39:42Z",
+      "notes": "Bright natural light, candid feel, vibrant Bandra backdrops. Poses should be self-assured and elegant, showcasing the comfort and chicness of each outfit. Focus on aspirational yet achievable style. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Maya confidently stands outside a minimalist cafe in Bandra, wearing a pastel floral co-ord set (crop top + flowy midi skirt), white chunky sneakers, and a small beige crossbody bag. Subtle smile.",
+        "Maya poses elegantly at an outdoor cafe table, sipping iced coffee. She's wearing high-waisted light denim culottes, a fitted white ribbed tank, an unbuttoned oversized printed shirt (e.g., abstract floral), and gold hoop earrings. Relaxed yet chic.",
+        "Maya walks down a vibrant Bandra street near Ranwar Village murals, wearing a vibrant orange linen midi dress, a denim jacket tied around her waist, tan slip-on sandals, and oversized black sunglasses. Powerful stride.",
+        "Close-up of accessories: Stacked rings on Maya's fingers, layered delicate gold necklaces peeking from her top, a textured vegan leather bag.",
+        "Flat lay on a simple background: The three main outfit pieces (co-ord, culottes, dress) arranged with a small label indicating 'Under \u20b92000' subtly.",
+        "Maya laughing candidly while adjusting her sunglasses, showcasing genuine happiness and ease."
+      ]
+    },
+    {
+      "id": "maya-027",
+      "status": "draft",
+      "topic": "GRWM Sangeet Edition: Modern Twist",
+      "caption": "My sangeet mantra: ditch the basic, embrace the drama. \u2728 Getting ready for a night of dance and dazzle, with an unapologetic twist. Who says traditional can't be edgy? Send this to your friend who needs a style upgrade.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-02-27T21:39:42Z",
+      "notes": "Dynamic, fast-paced transitions. Opens with Maya in casual wear, quick cuts to makeup application, hair styling, then a grand reveal of an Indo-western fusion outfit (e.g., a modern crop top with a heavily embellished skirt, or a chic saree drape over pants). Confident poses, playful expressions. Warm, festive lighting with some dramatic shadows. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "maya-028",
+      "status": "draft",
+      "topic": "Colaba Causeway Indo-Western Power Shot",
+      "caption": "Walking through Colaba like I own the place, because honestly, I kinda do. This Indo-western fusion is a whole mood. Unapologetically me, always. Which part of this look speaks to your soul?",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-02-28T01:39:42Z",
+      "notes": "Low-angle shot of Maya walking away from the camera, looking over her shoulder with a confident, slightly teasing smirk. She wears a structured blazer over a bandeau top, wide-leg ethnic print trousers, and pointed heels. The background is a busy yet aesthetically pleasing Colaba street scene with old buildings. Sharp focus on Maya, slightly blurred background, moody lighting catching highlights. | generated_by=gemini:gemini-2.5-flash"
     }
   ]
 }

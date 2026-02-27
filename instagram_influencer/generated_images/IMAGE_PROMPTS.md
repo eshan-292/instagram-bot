@@ -261,3 +261,45 @@ Save this — you'll need it.
 **Slide 6:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 6 of a carousel post.) Scene: Style 5: lounge — oversized kurta as a dress, slides Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
+
+## maya-026 — CAROUSEL
+**Topic:** Bandra Budget Brunch Looks Under ₹2000
+**Caption:** Bandra brunch on a budget? 💅 No problem. These 3 looks prove style isn't about the price tag, darling. You're welcome. Save this for your next Sunday outing.
+
+**Place 6 images in:** `generated_images/pending/maya-026/1.jpg`, `2.jpg`, ...
+
+**Slide 1:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 1 of a carousel post.) Scene: Maya confidently stands outside a minimalist cafe in Bandra, wearing a pastel floral co-ord set (crop top + flowy midi skirt), white chunky sneakers, and a small beige crossbody bag. Subtle smile. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 2:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 2 of a carousel post.) Scene: Maya poses elegantly at an outdoor cafe table, sipping iced coffee. She's wearing high-waisted light denim culottes, a fitted white ribbed tank, an unbuttoned oversized printed shirt (e.g., abstract floral), and gold hoop earrings. Relaxed yet chic. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 3:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 3 of a carousel post.) Scene: Maya walks down a vibrant Bandra street near Ranwar Village murals, wearing a vibrant orange linen midi dress, a denim jacket tied around her waist, tan slip-on sandals, and oversized black sunglasses. Powerful stride. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 4:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 4 of a carousel post.) Scene: Close-up of accessories: Stacked rings on Maya's fingers, layered delicate gold necklaces peeking from her top, a textured vegan leather bag. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 5:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 5 of a carousel post.) Scene: Flat lay on a simple background: The three main outfit pieces (co-ord, culottes, dress) arranged with a small label indicating 'Under ₹2000' subtly. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 6:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 6 of a carousel post.) Scene: Maya laughing candidly while adjusting her sunglasses, showcasing genuine happiness and ease. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## maya-027 — REEL
+**Topic:** GRWM Sangeet Edition: Modern Twist
+**Caption:** My sangeet mantra: ditch the basic, embrace the drama. ✨ Getting ready for a night of dance and dazzle, with an unapologetic twist. Who says traditional can't be edgy? Send this to your friend who needs a style upgrade.
+
+**Place image at:** `generated_images/pending/maya-027.jpg`
+
+**Prompt:**
+> Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. Scene: GRWM Sangeet Edition: Modern Twist. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Dynamic, fast-paced transitions. Opens with Maya in casual wear, quick cuts to makeup application, hair styling, then a grand reveal of an Indo-western fusion outfit (e.g., a modern crop top with a heavily embellished skirt, or a chic saree drape over pants). Confident poses, playful expressions. Warm, festive lighting with some dramatic shadows..
+
+---
+
+## maya-028 — SINGLE
+**Topic:** Colaba Causeway Indo-Western Power Shot
+**Caption:** Walking through Colaba like I own the place, because honestly, I kinda do. This Indo-western fusion is a whole mood. Unapologetically me, always. Which part of this look speaks to your soul?
+
+**Place image at:** `generated_images/pending/maya-028.jpg`
+
+**Prompt:**
+> Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. Scene: Colaba Causeway Indo-Western Power Shot. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Low-angle shot of Maya walking away from the camera, looking over her shoulder with a confident, slightly teasing smirk. She wears a structured blazer over a bandeau top, wide-leg ethnic print trousers, and pointed heels. The background is a busy yet aesthetically pleasing Colaba street scene with old buildings. Sharp focus on Maya, slightly blurred background, moody lighting catching highlights..
+
+---
