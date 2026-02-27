@@ -3,9 +3,21 @@ name: Instagram Bot
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # Strategy: many small sessions = human phone-check pattern
-    # 1 post/day at prime time + maximum engagement spread throughout
+    # 24-HOUR COVERAGE: 37 micro-sessions = constant presence
+    # 1 post/day at prime time + maximum engagement round the clock
     # Each session has 0-4min startup jitter built into the code
+    #
+    # ── NIGHT (midnight–7am IST) — late-night / insomnia scrolling ──
+    - cron: '30 18 * * *'  # 00:00 IST — explore (night owl)
+    - cron: '15 19 * * *'  # 00:45 IST — hashtags
+    - cron: '0 20 * * *'   # 01:30 IST — explore
+    - cron: '0 21 * * *'   # 02:30 IST — hashtags (deep night)
+    - cron: '0 22 * * *'   # 03:30 IST — explore
+    - cron: '0 23 * * *'   # 04:30 IST — hashtags
+    - cron: '0 0 * * *'    # 05:30 IST — explore (early bird)
+    - cron: '45 0 * * *'   # 06:15 IST — hashtags
+    #
+    # ── DAY (7am–midnight IST) — normal usage ──
     - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
     - cron: '15 2 * * *'   # 07:45 IST — explore (morning scroll)
     - cron: '0 3 * * *'    # 08:30 IST — hashtags
@@ -119,6 +131,16 @@ jobs:
             # Only 19:00 IST (UTC 1330) publishes — 1 post/day like a normal person
             HHMM=$(date -u +%H%M)
             case "${HHMM}" in
+              # Night sessions (midnight–7am IST = UTC 18:30–01:29)
+              183*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              191*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              200*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              210*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              220*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              230*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              000*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              004*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Day sessions (7am–midnight IST = UTC 01:30–18:00)
               013*) echo "type=morning"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               021*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               030*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
