@@ -53,7 +53,7 @@
     },
     {
       "id": "maya-005",
-      "status": "approved",
+      "status": "posted",
       "topic": "Sipping chai at a trendy, sun-drenched cafe in Kala Ghoda, Mumbai.",
       "caption": "This chai hits different.\nMust be the company.",
       "image_url": "generated_images/maya-005.png",
@@ -61,7 +61,9 @@
       "is_reel": true,
       "scheduled_at": "2026-02-26T13:00:00Z",
       "notes": "Close-up shot, Maya holding a cutting chai glass with a gentle, knowing smile. Dressed in an oversized crisp white shirt and tailored linen trousers. Soft, natural sunlight streaming in, creating warm highlights. Focus on hands and face, with a hint of the cafe's minimalist decor in the background. Relaxed, elegant posture. | generated_by=gemini:gemini-2.5-flash",
-      "publish_error": null
+      "publish_error": null,
+      "posted_at": "2026-02-27T06:32:52Z",
+      "platform_post_id": "3841595937647250536"
     },
     {
       "id": "maya-006",
@@ -253,6 +255,58 @@
       "is_reel": false,
       "scheduled_at": "2026-02-27T01:50:09Z",
       "notes": "Close-up to mid-shot. Maya casually leaning against an exposed brick wall inside a stylish, minimalist coffee shop. Wearing an oversized but structured linen blazer over a silk cami, delicate layered gold jewelry. Soft, natural light coming from a large window. Relaxed, knowing smile, focus on textural details and her serene confidence. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "maya-023",
+      "status": "draft",
+      "topic": "3 budget looks under \u20b92000 \u2014 Mumbai street style",
+      "caption": "Mumbai street style under \u20b92000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-02-27T10:31:30Z",
+      "notes": "full-body frame, bright Mumbai street background | generated_by=template",
+      "slides": [
+        "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '\u20b92000. 3 outfits. No compromises.'",
+        "Look 1: casual chic \u2014 white linen coord set, gold hoops, kolhapuri chappals",
+        "Look 2: street glam \u2014 floral co-ord in rust tones, minimal jewelry, white sneakers",
+        "Look 3: indo-western fusion \u2014 cropped kurta with wide-leg jeans, block print dupatta",
+        "Outfit detail close-up \u2014 accessories and fabric texture",
+        "Final pose: all three outfits side by side, confidence energy"
+      ]
+    },
+    {
+      "id": "maya-024",
+      "status": "draft",
+      "topic": "Power blazer with street-luxe edge",
+      "caption": "Mumbai streets hit different in a blazer.\nPolite is not my default setting. Presence is.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-02-27T14:31:30Z",
+      "notes": "mid shot, blazer silhouette, clean city background | generated_by=template"
+    },
+    {
+      "id": "maya-025",
+      "status": "draft",
+      "topic": "One kurta, 5 ways \u2014 ethnic modern fusion",
+      "caption": "One kurta. Five personalities. Which one are you?\nSave this \u2014 you'll need it.",
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-02-27T18:31:30Z",
+      "notes": "clean studio-style background, full-body each look | generated_by=template",
+      "slides": [
+        "Hook: Maya with kurta on hanger, caption '1 piece. 5 vibes.'",
+        "Style 1: classic \u2014 kurta with palazzo and kolhapuris",
+        "Style 2: fusion \u2014 kurta belted with straight jeans and boots",
+        "Style 3: street \u2014 kurta knotted, denim shorts, sneakers",
+        "Style 4: evening \u2014 kurta with statement earrings, heels, minimal clutch",
+        "Style 5: lounge \u2014 oversized kurta as a dress, slides"
+      ]
     }
   ]
 }
