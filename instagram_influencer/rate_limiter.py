@@ -116,8 +116,8 @@ def random_delay(min_s: int = 30, max_s: int = 90) -> None:
     checking another app, replying to a text, etc.
     """
     # Micro-break: simulate getting distracted (checking texts, switching apps)
-    if random.random() < 0.15:
-        pause = random.uniform(90, 300)
+    if random.random() < 0.10:
+        pause = random.uniform(60, 180)
         log.debug("Micro-break: %.0fs (simulating distraction)", pause)
         time.sleep(pause)
         return

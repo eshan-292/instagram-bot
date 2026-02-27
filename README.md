@@ -107,67 +107,112 @@ git push
 - Individual prompts are also saved to `generated_images/prompts/{post_id}.txt`
 - The `IMAGE_PROMPTS.md` file is auto-committed to the repo after each generation run
 
+## What You Need To Do (Image Generation)
+
+The bot generates captions and prompts automatically. **You just need to generate the images and push them.** Here's the exact workflow:
+
+### Step 1: Check what images are needed
+```bash
+# Look at the committed file on GitHub:
+# → instagram_influencer/generated_images/IMAGE_PROMPTS.md
+# Or generate prompts locally:
+make generate
+```
+
+### Step 2: Generate images in Gemini app
+1. Open [gemini.google.com](https://gemini.google.com/)
+2. Copy each prompt from `IMAGE_PROMPTS.md`
+3. Paste into Gemini → download the generated image
+
+### Step 3: Place images in the right folder
+```
+instagram_influencer/generated_images/pending/
+├── maya-042.jpg              ← single/reel (filename = post ID)
+├── maya-043/                 ← carousel (folder = post ID)
+│   ├── 1.jpg
+│   ├── 2.jpg
+│   └── 3.jpg
+```
+
+### Step 4: Push to GitHub
+```bash
+cd instagram_influencer
+git add -f generated_images/pending/
+git commit -m "add images for maya-042, maya-043"
+git push
+```
+
+The bot automatically picks up the images at 19:00 IST and publishes them.
+
+**Notes:** Filenames must match post IDs exactly. Formats: `.jpg`, `.jpeg`, `.png`, `.webp`. Min 10 KB. Carousels need 2+ images.
+
+---
+
 ## Daily Schedule (GitHub Actions)
 
-The bot runs **25 micro-sessions per day** — designed to mimic a real person checking their phone throughout the day. Each session is short (5-15 min) with 0-4 min random startup jitter so actions never start at exact cron times.
+The bot runs **29 micro-sessions per day** — mimics a real person checking their phone every 30-45 min. **1 post per day** at prime time (19:00 IST). Each session has 0-4 min random startup jitter.
 
 | IST Time | Session | Publishes? |
 |----------|---------|------------|
-| 07:00 | Morning engagement (~10 posts) | No |
-| 07:45 | Explore (casual scroll) | No |
+| 07:00 | Morning engagement (~15 posts) | No |
+| 07:45 | Explore (morning scroll) | No |
 | 08:30 | Hashtags | No |
 | 09:00 | Reply to comments | No |
 | 09:45 | Story repost | No |
 | 10:30 | Hashtags | No |
-| **11:30** | **PUBLISH** + explore | **Yes** |
-| 12:00 | Hashtags (lunch break) | No |
-| **13:00** | **PUBLISH** + hashtags | **Yes** |
-| 13:30 | Explore | No |
+| 11:00 | Explore | No |
+| 11:30 | Hashtags | No |
+| 12:00 | Explore (lunch break) | No |
+| 12:30 | Hashtags | No |
+| 13:00 | Explore | No |
+| 13:30 | Hashtags | No |
 | 14:00 | Story repost | No |
-| 14:45 | Hashtags | No |
-| 15:30 | Explore | No |
+| 14:45 | Explore | No |
+| 15:30 | Hashtags | No |
 | 16:00 | Reply to comments | No |
 | 16:45 | Hashtags | No |
 | 17:30 | Explore | No |
 | 18:00 | Story repost | No |
+| 18:30 | Hashtags | No |
 | **19:00** | **PUBLISH** + hashtags (prime time) | **Yes** |
 | 19:30 | Explore | No |
 | 20:00 | Hashtags | No |
 | 20:45 | Reply to comments | No |
 | 21:30 | Explore (evening wind-down) | No |
 | 22:00 | Maintenance (auto-unfollow) | No |
+| 22:30 | Hashtags (late night) | No |
 | 23:00 | Maintenance | No |
 | 23:30 | Daily report | No |
 
 ## Anti-Detection & Human-Like Behavior
 
-The bot is designed to be undetectable by mimicking real human patterns:
+The bot mimics real human Instagram usage patterns:
 
-- **Gaussian delays** — Most pauses cluster around a natural midpoint instead of uniform random
-- **Micro-breaks** (15% chance) — 90-300s pauses simulating checking texts, switching apps
+- **Gaussian delays** — Pauses cluster around a natural midpoint (not uniform random)
+- **Micro-breaks** (10% chance) — 60-180s pauses simulating checking texts, switching apps
 - **Session startup jitter** — 10s-4min random delay so nothing runs at exact times
-- **Skip behavior** — ~25% of posts are scrolled past without engaging (humans are selective)
-- **Profile browsing** — Views user profile before following (like a real person checking who they are)
-- **Randomized session sizes** — ±40% variation so no two sessions look identical
-- **Selective commenting** — Only ~15% of posts get comments (genuine, not spammy)
-- **Selective following** — Only ~30% of users get followed
-- **Story viewing** — Only ~50% chance to view stories, ~15% to like
+- **Skip behavior** — ~18% of posts are scrolled past without engaging
+- **Profile browsing** — Views user profile before following
+- **Randomized session sizes** — ±40% variation per session
+- **Selective commenting** — ~20% of posts get comments (genuine, not spammy)
+- **Selective following** — ~45% of users get followed (with profile browse first)
+- **Story viewing** — ~65% chance to view stories, ~25% to like
 
-## Engagement Limits
+## Engagement Limits (Maximized)
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 130 | Spread across 25 sessions |
-| Comments | 25 | AI-generated, selective (~15% of seen posts) |
-| Follows | 40 | With profile browse before follow |
-| Story views | 60 | ~50% chance per user, ~15% like rate |
-| Replies | 20 | On own posts (last 24h) |
-| Unfollows | 25/run | After 3+ days, long delays between |
-| Welcome DMs | 5/day | Very conservative, 60-180s gaps |
+| Likes | 180 | Spread across 29 sessions (~6/session) |
+| Comments | 40 | AI-generated, ~20% of seen posts |
+| Follows | 60 | With profile browse before follow (~45% rate) |
+| Story views | 100 | ~65% chance per user, ~25% like rate |
+| Replies | 30 | On own posts (last 24h) |
+| Unfollows | 40/run | After 3+ days |
+| Welcome DMs | 8/day | 60-180s gaps between DMs |
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-7), 0.8x (days 8-14), 1.0x (day 15+).
 
-**Delays:** 20-60s between hashtag actions, 15-45s explore, 30-90s replies/comments — with gaussian distribution + micro-breaks.
+**Delays:** 20-60s between hashtag actions, 15-45s explore, 30-90s replies — with gaussian distribution + micro-breaks.
 
 ## Stories
 
@@ -221,9 +266,9 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, and grow
 | `AUTO_MODE` | `false` | Enable auto publishing |
 | `AUTO_PROMOTE_DRAFTS` | `false` | Auto-promote drafts to approved |
 | `ENGAGEMENT_ENABLED` | `false` | Enable engagement automation |
-| `ENGAGEMENT_DAILY_LIKES` | `130` | Max likes/day (safe zone) |
-| `ENGAGEMENT_DAILY_COMMENTS` | `25` | Max comments/day (conservative) |
-| `ENGAGEMENT_DAILY_FOLLOWS` | `40` | Max follows/day (with profile browse) |
+| `ENGAGEMENT_DAILY_LIKES` | `180` | Max likes/day |
+| `ENGAGEMENT_DAILY_COMMENTS` | `40` | Max comments/day |
+| `ENGAGEMENT_DAILY_FOLLOWS` | `60` | Max follows/day |
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `TELEGRAM_BOT_TOKEN` | — | Telegram bot token for daily reports |
