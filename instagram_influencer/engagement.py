@@ -30,7 +30,6 @@ log = logging.getLogger(__name__)
 
 # Persistent files
 POSTS_PER_HASHTAG = 12          # moderate per tag — casual but productive
-FOLLOWERS_FILE = BASE_DIR / "followers.json"
 UNFOLLOW_DAYS = 3  # unfollow after this many days
 
 
@@ -108,33 +107,6 @@ def _generate_reply(cfg: Config, original_caption: str, their_comment: str) -> s
         return reply
     return None
 
-
-def _generate_dm(cfg: Config, username: str) -> str | None:
-    """Generate a welcome DM for a new follower."""
-    if not cfg.gemini_api_key:
-        return None
-    from gemini_helper import generate
-    prompt = (
-        "You are Maya, a 23-year-old girl from Mumbai who posts fashion/style content. "
-        "Someone just followed you. Send them a quick casual DM like a real person would — "
-        "NOT like a brand or a page. Think of how a college girl would text a new follower.\n\n"
-        "Rules:\n"
-        "- 1-2 short sentences MAX. Keep it chill.\n"
-        "- Sound like you're texting a friend, use lowercase, abbreviations are fine\n"
-        "- Do NOT introduce yourself or say 'I'm Maya' or 'I'm a fashion influencer'\n"
-        "- Do NOT say 'welcome to my page' or anything that sounds like a page\n"
-        "- Do NOT be overly thankful or say 'thanks for the follow'\n"
-        "- Just be friendly and maybe react to their profile or ask something casual\n"
-        "- Max 1 emoji, no hashtags\n"
-        "- Examples of the RIGHT vibe: 'heyy love your feed! that last fit was fire 🔥', "
-        "'omg your style tho 😍 where do u shop??', 'ayy thanks for the follow! ur pics go hard'\n\n"
-        f"Their username: @{username}\n"
-        "Just the message text, nothing else."
-    )
-    dm = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
-    if dm and 10 < len(dm) < 500:
-        return dm
-    return None
 
 
 def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG) -> list[Any]:
@@ -239,10 +211,10 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
 
 
 # ---------------------------------------------------------------------------
-# Feature: DM welcome to new followers
+# Feature: Track followers (for unfollow targeting)
 # ---------------------------------------------------------------------------
 
-def _load_followers(path: Path = FOLLOWERS_FILE) -> set[str]:
+def _load_followers(path: Path = BASE_DIR / "followers.json") -> set[str]:
     if not path.exists():
         return set()
     try:
@@ -252,57 +224,9 @@ def _load_followers(path: Path = FOLLOWERS_FILE) -> set[str]:
         return set()
 
 
-def _save_followers(ids: set[str], path: Path = FOLLOWERS_FILE) -> None:
+def _save_followers(ids: set[str], path: Path = BASE_DIR / "followers.json") -> None:
     with open(path, "w") as f:
         json.dump(sorted(ids), f)
-
-
-def run_welcome_dms(cl: Any, cfg: Config) -> int:
-    """Send welcome DMs to new followers. Returns count sent."""
-    try:
-        my_id = cl.user_id
-        current = cl.user_followers(my_id, amount=200)
-    except Exception as exc:
-        log.warning("Could not fetch followers: %s", exc)
-        return 0
-
-    current_ids = {str(uid) for uid in current.keys()}
-    known = _load_followers()
-
-    # First run: just store current followers, don't DM everyone
-    if not known:
-        _save_followers(current_ids)
-        log.info("Stored %d existing followers (first run, no DMs sent)", len(current_ids))
-        return 0
-
-    new_ids = current_ids - known
-    if not new_ids:
-        log.debug("No new followers detected")
-        _save_followers(current_ids | known)
-        return 0
-
-    sent = 0
-    daily_dm_limit = 8  # moderate — DMs drive engagement but are monitored
-
-    for uid in list(new_ids)[:daily_dm_limit]:
-        user = current.get(int(uid))
-        username = user.username if user else "friend"
-        dm_text = _generate_dm(cfg, username)
-        if not dm_text:
-            continue
-        try:
-            cl.direct_send(dm_text, user_ids=[int(uid)])
-            sent += 1
-            log.info("Welcome DM sent to @%s", username)
-            random_delay(60, 180)  # long gaps between DMs
-        except Exception as exc:
-            log.warning("DM failed for @%s: %s", username, exc)
-
-    # Update stored followers
-    _save_followers(current_ids | known)
-    if sent:
-        log.info("Sent %d welcome DMs to new followers", sent)
-    return sent
 
 
 # ---------------------------------------------------------------------------
@@ -571,7 +495,7 @@ SESSION_TYPES = [
     "replies",     # reply to comments on own posts (algorithm boost)
     "hashtags",    # full hashtag engagement (like/comment/follow/stories)
     "explore",     # explore page engagement
-    "maintenance", # unfollow old follows + welcome DMs
+    "maintenance", # unfollow old follows
     "stories",     # repost past posts as stories + add to highlights
     "report",      # end-of-day summary report
     "full",        # all phases (backward compat)
@@ -589,7 +513,7 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
       replies     - Reply to comments on own posts
       hashtags    - Hashtag engagement (like/comment/follow/stories)
       explore     - Explore page casual scrolling
-      maintenance - Auto-unfollow + welcome DMs
+      maintenance - Auto-unfollow non-followers
       stories     - Repost past posts as stories
       report      - Daily report
       full        - All phases (used sparingly)

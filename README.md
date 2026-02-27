@@ -273,7 +273,6 @@ The bot mimics real human Instagram usage patterns:
 | Story views | 100 | ~65% chance per user, ~25% like rate |
 | Replies | 30 | On own posts (last 24h) |
 | Unfollows | 40/run | After 3+ days |
-| Welcome DMs | 8/day | 60-180s gaps between DMs |
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-7), 0.8x (days 8-14), 1.0x (day 15+).
 
