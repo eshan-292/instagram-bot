@@ -193,6 +193,14 @@ def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
 
 
 def main() -> int:
+    # Load .env FIRST so PERSONA is available before any lazy path resolution
+    # (argparse defaults trigger str(DEFAULT_QUEUE_FILE) which needs PERSONA)
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ModuleNotFoundError:
+        pass
+
     parser = argparse.ArgumentParser(description="Instagram + YouTube bot pipeline")
     parser.add_argument("--queue-file", default=str(DEFAULT_QUEUE_FILE))
     parser.add_argument("--dry-run", action="store_true", help="Preview only")
