@@ -3,50 +3,38 @@ name: Instagram Bot
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # 24-HOUR COVERAGE: 37 micro-sessions = constant presence
-    # 1 post/day at prime time + maximum engagement round the clock
-    # Each session has 0-4min startup jitter built into the code
+    # NATURAL PATTERN: 18 sessions = realistic daily phone usage
+    # Real humans check IG ~10-15 times/day with irregular gaps
+    # Each session has 30s-6min startup jitter + 20% random skip chance
+    # Total effective sessions: ~14/day (after random skips)
     #
-    # ── NIGHT (midnight–7am IST) — late-night / insomnia scrolling ──
-    - cron: '30 18 * * *'  # 00:00 IST — explore (night owl)
-    - cron: '15 19 * * *'  # 00:45 IST — hashtags
-    - cron: '0 20 * * *'   # 01:30 IST — explore
-    - cron: '0 21 * * *'   # 02:30 IST — hashtags (deep night)
-    - cron: '0 22 * * *'   # 03:30 IST — explore
-    - cron: '0 23 * * *'   # 04:30 IST — hashtags
-    - cron: '0 0 * * *'    # 05:30 IST — explore (early bird)
-    - cron: '45 0 * * *'   # 06:15 IST — hashtags
+    # ── NIGHT (only 2 sessions — realistic insomnia/early-bird) ──
+    - cron: '0 20 * * *'    # 01:30 IST — late night explore (can't sleep)
+    - cron: '0 0 * * *'     # 05:30 IST — early bird hashtags
     #
-    # ── DAY (7am–midnight IST) — normal usage ──
-    - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
-    - cron: '15 2 * * *'   # 07:45 IST — explore (morning scroll)
-    - cron: '0 3 * * *'    # 08:30 IST — hashtags
-    - cron: '30 3 * * *'   # 09:00 IST — replies
-    - cron: '15 4 * * *'   # 09:45 IST — stories
-    - cron: '0 5 * * *'    # 10:30 IST — hashtags
-    - cron: '30 5 * * *'   # 11:00 IST — explore
-    - cron: '0 6 * * *'    # 11:30 IST — hashtags
-    - cron: '30 6 * * *'   # 12:00 IST — explore (lunch break)
-    - cron: '0 7 * * *'    # 12:30 IST — hashtags
-    - cron: '30 7 * * *'   # 13:00 IST — explore
-    - cron: '0 8 * * *'    # 13:30 IST — hashtags
-    - cron: '30 8 * * *'   # 14:00 IST — stories
-    - cron: '15 9 * * *'   # 14:45 IST — explore
-    - cron: '0 10 * * *'   # 15:30 IST — hashtags
-    - cron: '30 10 * * *'  # 16:00 IST — replies
-    - cron: '15 11 * * *'  # 16:45 IST — hashtags
-    - cron: '0 12 * * *'   # 17:30 IST — explore
-    - cron: '30 12 * * *'  # 18:00 IST — stories
-    - cron: '0 13 * * *'   # 18:30 IST — hashtags
-    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH + hashtags (PRIME TIME)
-    - cron: '0 14 * * *'   # 19:30 IST — explore
-    - cron: '30 14 * * *'  # 20:00 IST — hashtags
-    - cron: '15 15 * * *'  # 20:45 IST — replies
-    - cron: '0 16 * * *'   # 21:30 IST — explore (evening wind-down)
-    - cron: '30 16 * * *'  # 22:00 IST — maintenance (unfollow)
-    - cron: '0 17 * * *'   # 22:30 IST — hashtags (late night)
-    - cron: '30 17 * * *'  # 23:00 IST — maintenance
-    - cron: '0 18 * * *'   # 23:30 IST — daily report
+    # ── MORNING (7am-12pm IST) — wake up + commute ──
+    - cron: '30 1 * * *'    # 07:00 IST — morning engagement (wake up)
+    - cron: '0 3 * * *'     # 08:30 IST — hashtags (commute scroll)
+    - cron: '30 4 * * *'    # 10:00 IST — explore
+    - cron: '30 5 * * *'    # 11:00 IST — replies
+    #
+    # ── AFTERNOON (12pm-5pm IST) — lunch + work breaks ──
+    - cron: '30 6 * * *'    # 12:00 IST — hashtags (lunch break)
+    - cron: '0 8 * * *'     # 13:30 IST — PUBLISH + hashtags (PRIME TIME)
+    - cron: '15 9 * * *'    # 14:45 IST — explore
+    - cron: '30 10 * * *'   # 16:00 IST — stories
+    #
+    # ── EVENING (5pm-10pm IST) — peak engagement hours ──
+    - cron: '0 12 * * *'    # 17:30 IST — hashtags
+    - cron: '30 12 * * *'   # 18:00 IST — explore
+    - cron: '30 13 * * *'   # 19:00 IST — hashtags (evening prime)
+    - cron: '0 15 * * *'    # 20:30 IST — replies
+    - cron: '0 16 * * *'    # 21:30 IST — explore (winding down)
+    #
+    # ── LATE NIGHT (10pm-midnight IST) ──
+    - cron: '30 16 * * *'   # 22:00 IST — maintenance (unfollow)
+    - cron: '0 17 * * *'    # 22:30 IST — stories
+    - cron: '0 18 * * *'    # 23:30 IST — daily report
 
   workflow_dispatch:
     inputs:
@@ -127,48 +115,31 @@ jobs:
             fi
           else
             # Scheduled run — map UTC hour+minute to session type
-            # Uses HHMM format for precise mapping with multiple sessions per hour
-            # Only 19:00 IST (UTC 1330) publishes — 1 post/day like a normal person
+            # Natural pattern: irregular gaps, varied session types
             HHMM=$(date -u +%H%M)
             case "${HHMM}" in
-              # Night sessions (midnight–7am IST = UTC 18:30–01:29)
-              183*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              191*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Night (2 sessions)
               200*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              210*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              220*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              230*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              000*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              004*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              # Day sessions (7am–midnight IST = UTC 01:30–18:00)
+              000*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Morning
               013*) echo "type=morning"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              021*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               030*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              033*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              041*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              050*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              053*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              060*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              063*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              070*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              073*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              080*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              083*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              043*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              053*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Afternoon
+              063*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              080*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
               091*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              100*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              103*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              111*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              120*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              123*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              130*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              133*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
-              140*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              143*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              151*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              103*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Evening
+              120*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              123*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              133*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              150*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               160*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Late night
               163*) echo "type=maintenance" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              170*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              173*) echo "type=maintenance" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              170*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               180*) echo "type=report"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               *)    echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
             esac
