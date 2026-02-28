@@ -8,7 +8,7 @@ using the Gemini app. This module:
   3. Links found images back to draft posts in the queue.
 
 Directory structure:
-  generated_images/
+  data/{persona}/generated_images/
     pending/
       maya-042.jpg             ← single image / reel (user places this)
       maya-043/
@@ -27,23 +27,27 @@ import os
 from pathlib import Path
 from typing import Any
 
-from config import Config, GENERATED_IMAGES_DIR
+from config import Config
+from persona import get_persona, persona_images_dir
 
 log = logging.getLogger(__name__)
 
-PENDING_DIR = GENERATED_IMAGES_DIR / "pending"
-PROMPTS_DIR = GENERATED_IMAGES_DIR / "prompts"
+
+def _pending_dir():
+    return persona_images_dir() / "pending"
+
+
+def _prompts_dir():
+    return persona_images_dir() / "prompts"
+
 
 # ---------------------------------------------------------------------------
-# Maya's appearance — used to anchor all Gemini image prompts
+# Character appearance — loaded from persona config
 # ---------------------------------------------------------------------------
 
-_MAYA_DESCRIPTION = (
-    "Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. "
-    "She has warm light-olive brown skin, large dark expressive eyes, "
-    "long dark wavy hair past her shoulders, slim petite build, "
-    "natural minimal makeup, soft confident expression."
-)
+def _character_description():
+    return get_persona().get("physical_description", "")
+
 
 _PHOTO_STYLE = (
     "Photography style: shot on iPhone 15 Pro, natural ambient lighting, "
@@ -60,7 +64,7 @@ def _build_single_prompt(post: dict[str, Any]) -> str:
     topic = str(post.get("topic", "")).strip()
     notes = str(post.get("notes", "")).strip().split("| generated_by=")[0].strip()
 
-    parts = [_MAYA_DESCRIPTION, f"Scene: {topic}.", _PHOTO_STYLE]
+    parts = [_character_description(), f"Scene: {topic}.", _PHOTO_STYLE]
     if notes:
         parts.append(f"Framing/mood: {notes}.")
     return " ".join(parts)
@@ -85,7 +89,7 @@ def _build_carousel_prompts(post: dict[str, Any]) -> list[str]:
     prompts = []
     for i, slide_desc in enumerate(slides[:6], 1):
         parts = [
-            _MAYA_DESCRIPTION,
+            _character_description(),
             f"(Slide {i} of a carousel post.)",
             f"Scene: {slide_desc}",
             _PHOTO_STYLE,
@@ -100,7 +104,8 @@ def _build_carousel_prompts(post: dict[str, Any]) -> list[str]:
 
 def _save_post_prompts(post: dict[str, Any]) -> None:
     """Save image prompts for a post to prompts/ directory."""
-    PROMPTS_DIR.mkdir(parents=True, exist_ok=True)
+    prompts_dir = _prompts_dir()
+    prompts_dir.mkdir(parents=True, exist_ok=True)
     post_id = str(post.get("id", "unknown"))
     post_type = str(post.get("post_type", "reel")).lower()
 
@@ -128,14 +133,15 @@ def _save_post_prompts(post: dict[str, Any]) -> None:
         lines.append(prompt)
         lines.append("")
 
-    prompt_file = PROMPTS_DIR / f"{post_id}.txt"
+    prompt_file = prompts_dir / f"{post_id}.txt"
     prompt_file.write_text("\n".join(lines), encoding="utf-8")
     log.debug("Saved prompt for %s → %s", post_id, prompt_file.name)
 
 
 def write_prompts_summary(posts: list[dict[str, Any]]) -> None:
     """Write IMAGE_PROMPTS.md — a readable summary of all posts needing images."""
-    GENERATED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    images_dir = persona_images_dir()
+    images_dir.mkdir(parents=True, exist_ok=True)
 
     pending = [
         p for p in posts
@@ -146,8 +152,9 @@ def write_prompts_summary(posts: list[dict[str, Any]]) -> None:
     if not pending:
         return
 
+    persona_name = get_persona()['name']
     lines = [
-        "# Maya — Image Prompts",
+        f"# {persona_name} — Image Prompts",
         "",
         "Generate these images in the Gemini app and place them at the paths shown.",
         "",
@@ -187,7 +194,7 @@ def write_prompts_summary(posts: list[dict[str, Any]]) -> None:
 
         lines += ["---", ""]
 
-    summary = GENERATED_IMAGES_DIR / "IMAGE_PROMPTS.md"
+    summary = images_dir / "IMAGE_PROMPTS.md"
     summary.write_text("\n".join(lines), encoding="utf-8")
     log.info("Updated IMAGE_PROMPTS.md — %d posts need images", len(pending))
 
@@ -208,10 +215,11 @@ def _has_images(post: dict[str, Any]) -> bool:
 
 def _find_pending_single(post_id: str) -> str | None:
     """Look for user-placed image at pending/{post_id}.(jpg|png|webp)."""
-    if not PENDING_DIR.is_dir():
+    pending_dir = _pending_dir()
+    if not pending_dir.is_dir():
         return None
     for ext in (".jpg", ".jpeg", ".png", ".webp"):
-        path = PENDING_DIR / f"{post_id}{ext}"
+        path = pending_dir / f"{post_id}{ext}"
         if path.exists() and path.stat().st_size > 10_000:
             return str(path)
     return None
@@ -219,7 +227,7 @@ def _find_pending_single(post_id: str) -> str | None:
 
 def _find_pending_carousel(post_id: str) -> list[str]:
     """Look for carousel images in pending/{post_id}/ directory."""
-    carousel_dir = PENDING_DIR / post_id
+    carousel_dir = _pending_dir() / post_id
     if not carousel_dir.is_dir():
         return []
     images = sorted(
@@ -243,8 +251,10 @@ def fill_image_urls(posts: list[dict[str, Any]], cfg: Config) -> int:
     Also saves/updates image prompts for any post that still needs images.
     Returns count of posts updated.
     """
-    PENDING_DIR.mkdir(parents=True, exist_ok=True)
-    PROMPTS_DIR.mkdir(parents=True, exist_ok=True)
+    pending_dir = _pending_dir()
+    prompts_dir = _prompts_dir()
+    pending_dir.mkdir(parents=True, exist_ok=True)
+    prompts_dir.mkdir(parents=True, exist_ok=True)
 
     updated = 0
 

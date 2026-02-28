@@ -16,10 +16,10 @@ import requests as http_requests
 from PIL import Image, ImageDraw, ImageFont
 
 from config import BASE_DIR, Config
+from persona import get_persona, persona_data_dir
 
 log = logging.getLogger(__name__)
 
-HIGHLIGHTS_FILE = BASE_DIR / "highlights.json"
 QUEUE_FILE = BASE_DIR / "content_queue.json"
 
 # Text overlays — randomly picked per story
@@ -48,36 +48,25 @@ _POLL_CHOICES = [
     ("Day look or night?", ["Day", "Night"]),
 ]
 
-# Question box prompts (AMA / open-ended — drives DMs and saves)
-_QUESTION_PROMPTS = [
-    "What should I wear to Bandra next? 👗",
-    "Style advice you wish someone gave you sooner?",
-    "Best Mumbai shopping spot — tell me!",
-    "What's your go-to outfit for a house party?",
-    "Budget fashion find of the month?",
-    "Which outfit vibe should I try next?",
-    "Ethnic or western for a sangeet — what would you pick?",
-    "Monsoon fashion struggle? Tell me 🌧️",
-]
 
-# Quiz questions with options and correct_answer index
-_QUIZ_CHOICES = [
-    ("Which fabric wins for Mumbai heat?", ["Silk", "Linen", "Polyester", "Denim"], 1),
-    ("One piece, 5 ways — which is hardest?", ["Blazer", "Saree", "Kurta", "Jeans"], 1),
-    ("Best Mumbai street for thrift finds?", ["Colaba Causeway", "Linking Road", "Hill Road", "Dharavi"], 0),
-    ("Which colour never goes out of style?", ["Neon", "White", "Pastel pink", "Electric blue"], 1),
-    ("Quiet luxury rule number 1?", ["Less is more", "Logos are everything", "Match perfectly", "Bold prints only"], 0),
-]
+# ---------------------------------------------------------------------------
+# Persona-aware accessors (replace hardcoded constants)
+# ---------------------------------------------------------------------------
 
-# Highlight categories with keyword matchers
-HIGHLIGHT_CATEGORIES = {
-    "OOTD": ["outfit", "ootd", "look", "style", "glam", "dressed", "fashion", "ensemble", "wearing"],
-    "Mumbai Style": ["mumbai", "bandra", "colaba", "kala ghoda", "cafe", "brunch", "rooftop", "street"],
-    "Ethnic Vibes": ["ethnic", "saree", "kurta", "jhumka", "desi", "indian", "traditional", "fusion"],
-    "Tips": ["tip", "hack", "how to", "guide", "styling", "pair"],
-    "BTS": ["behind", "shoot", "wind-down", "penthouse", "process", "making"],
-    "Glam": ["night", "evening", "gala", "party", "cocktail", "sequin", "club"],
-}
+def _highlights_file():
+    return persona_data_dir() / "highlights.json"
+
+
+def _question_prompts():
+    return get_persona().get("stories", {}).get("question_prompts", ["What's on your mind?"])
+
+
+def _quiz_choices():
+    return get_persona().get("stories", {}).get("quiz_choices", [])
+
+
+def _highlight_categories():
+    return get_persona().get("stories", {}).get("highlight_categories", {})
 
 
 # ---------------------------------------------------------------------------
@@ -124,26 +113,30 @@ def _add_text_overlay(image_path: str, text: str) -> str:
 
 def _load_highlights() -> dict[str, str]:
     """Load highlight PKs from file: {category: highlight_pk}."""
-    if not HIGHLIGHTS_FILE.exists():
+    hl_file = _highlights_file()
+    if not hl_file.exists():
         return {}
     try:
-        with open(HIGHLIGHTS_FILE) as f:
+        with open(hl_file) as f:
             return json.load(f)
     except (json.JSONDecodeError, OSError):
         return {}
 
 
 def _save_highlights(data: dict[str, str]) -> None:
-    with open(HIGHLIGHTS_FILE, "w") as f:
+    hl_file = _highlights_file()
+    hl_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(hl_file, "w") as f:
         json.dump(data, f, indent=2)
 
 
 def _categorize_post(post: dict[str, Any]) -> str:
     """Determine highlight category from post topic/notes."""
     text = f"{post.get('topic', '')} {post.get('notes', '')}".lower()
+    categories = _highlight_categories()
     best_cat = "OOTD"  # default
     best_score = 0
-    for cat, keywords in HIGHLIGHT_CATEGORIES.items():
+    for cat, keywords in categories.items():
         score = sum(1 for kw in keywords if kw in text)
         if score > best_score:
             best_score = score
@@ -154,7 +147,8 @@ def _categorize_post(post: dict[str, Any]) -> str:
 def ensure_highlights(cl: Any) -> dict[str, str]:
     """Create highlights if they don't exist. Returns {category: highlight_pk}."""
     existing = _load_highlights()
-    if len(existing) >= len(HIGHLIGHT_CATEGORIES):
+    categories = _highlight_categories()
+    if len(existing) >= len(categories):
         return existing
 
     # Check what highlights already exist on the profile
@@ -162,7 +156,7 @@ def ensure_highlights(cl: Any) -> dict[str, str]:
         my_highlights = cl.user_highlights(cl.user_id)
         for hl in my_highlights:
             title = str(getattr(hl, "title", ""))
-            for cat in HIGHLIGHT_CATEGORIES:
+            for cat in categories:
                 if cat.lower() == title.lower() and cat not in existing:
                     existing[cat] = str(hl.pk)
     except Exception as exc:
@@ -219,8 +213,11 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
     # Hashtag sticker (always)
     try:
         from instagrapi.types import Hashtag, StoryHashtag
+        persona = get_persona()
+        hashtag_name = persona.get("stories", {}).get(
+            "hashtag_sticker_name", persona.get("brand_tag", ""))
         sticker_args["hashtags"] = [StoryHashtag(
-            hashtag=Hashtag(id="0", name="mayavarma"),
+            hashtag=Hashtag(id="0", name=hashtag_name),
             x=0.5, y=0.12, width=0.3, height=0.05, rotation=0.0,
         )]
     except Exception as exc:
@@ -245,7 +242,7 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
         # Question box sticker (AMA — high DM driver)
         try:
             from instagrapi.types import StoryQuestion
-            prompt = random.choice(_QUESTION_PROMPTS)
+            prompt = random.choice(_question_prompts())
             sticker_args["questions"] = [StoryQuestion(
                 x=0.5, y=0.75, width=0.8, height=0.18, rotation=0.0,
                 question=prompt,
@@ -258,7 +255,16 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
         # Quiz sticker (shareable, educational)
         try:
             from instagrapi.types import StoryQuiz
-            question, options, correct_idx = random.choice(_QUIZ_CHOICES)
+            quiz_list = _quiz_choices()
+            if quiz_list:
+                quiz = random.choice(quiz_list)
+                question = quiz["question"]
+                options = quiz["options"]
+                correct_idx = quiz["correct"]
+            else:
+                question = "Which fabric wins for Mumbai heat?"
+                options = ["Silk", "Linen", "Polyester", "Denim"]
+                correct_idx = 1
             sticker_args["quizs"] = [StoryQuiz(
                 x=0.5, y=0.75, width=0.8, height=0.22, rotation=0.0,
                 question=question,

@@ -1,0 +1,25 @@
+{
+  "id": "sat3",
+  "name": "Satellite Account 3",
+  "mode": "satellite",
+  "brand_tag": "sat3",
+  "post_id_prefix": "sat3",
+  "voice": {
+    "tone": "supportive, hype, encouraging, high-energy",
+    "gemini_identity": "a young Indian person who is always hyping up creators and loves motivational and fashion content",
+    "dm_persona": null
+  },
+  "boost_targets": ["maya", "aryan"],
+  "engagement": {
+    "default_hashtags": "fashion,fitness,indianstyle,motivation,lifestyle",
+    "daily_limits": {
+      "likes": 40,
+      "comments": 6,
+      "saves": 6,
+      "story_views": 20
+    },
+    "session_skip_probability": 0.20,
+    "startup_jitter_range": [120, 480]
+  },
+  "background_hashtags": ["supportsmallcreators", "indiancreators", "fitfam", "fashioninspo", "positivevibes", "grindset", "styleicon", "hustle"]
+}

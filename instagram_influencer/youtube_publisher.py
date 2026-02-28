@@ -20,25 +20,20 @@ import random
 from pathlib import Path
 from typing import Any
 
+from persona import get_persona
+
 log = logging.getLogger(__name__)
 
 # Category IDs: 22=People & Blogs, 26=Howto & Style, 24=Entertainment
 _CATEGORY_ID = "26"  # Howto & Style — best for fashion content
 
 # Hashtag pool for YouTube Shorts descriptions
-_YT_HASHTAG_POOL = [
-    "Shorts", "FashionShorts", "OOTD", "IndianFashion",
-    "MumbaiFashion", "StyleTips", "DesiFashion", "OutfitIdeas",
-    "IndianStreetStyle", "FashionReels", "BrownGirlMagic",
-    "EthnicWear", "FusionFashion", "DesiVibes", "StyleInspo",
-]
+def _yt_hashtag_pool():
+    return get_persona().get("youtube", {}).get("hashtag_pool", ["Shorts"])
 
 # YouTube-optimized keyword phrases
-_YT_KEYWORDS = [
-    "indian fashion shorts", "mumbai style tips", "outfit ideas india",
-    "desi fashion 2026", "ethnic modern fusion", "budget fashion india",
-    "street style mumbai", "indian girl style", "fashion influencer india",
-]
+def _yt_keywords():
+    return get_persona().get("youtube", {}).get("keywords", [])
 
 
 def _build_credentials():
@@ -122,8 +117,11 @@ def _build_description(caption: str, topic: str) -> str:
     desc = "\n".join(desc_lines).strip()
 
     # Add YouTube-specific elements
-    keywords = random.sample(_YT_KEYWORDS, min(2, len(_YT_KEYWORDS)))
-    tags = ["Shorts", "MayaVarma"] + random.sample(_YT_HASHTAG_POOL[2:], 4)
+    yt_kw = _yt_keywords()
+    keywords = random.sample(yt_kw, min(2, len(yt_kw)))
+    persona = get_persona()
+    pool = _yt_hashtag_pool()
+    tags = [persona.get("brand_tag", "")] + random.sample(pool, min(4, len(pool)))
     hashtag_line = " ".join(f"#{t}" for t in tags)
 
     return f"{desc}\n\n{' | '.join(keywords)}\n\n{hashtag_line}"
@@ -131,10 +129,8 @@ def _build_description(caption: str, topic: str) -> str:
 
 def _build_tags(topic: str) -> list[str]:
     """Build YouTube video tags for SEO."""
-    base_tags = [
-        "Shorts", "Maya Varma", "Indian Fashion", "Mumbai Fashion",
-        "OOTD", "Style Tips", "Desi Fashion", "Fashion Influencer",
-    ]
+    persona = get_persona()
+    base_tags = persona.get("youtube", {}).get("tags_base", ["Shorts"])
 
     # Add topic-specific tags
     topic_words = [w.strip().title() for w in topic.split() if len(w) > 3][:5]

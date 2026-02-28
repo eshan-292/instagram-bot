@@ -1,0 +1,104 @@
+name: Satellite 3
+
+on:
+  schedule:
+    # 6 sessions/day: 3 sat_boost + 3 sat_background
+    # Staggered +40 min from satellite-1
+    - cron: '10 3 * * *'   # 08:40 IST — sat_background
+    - cron: '10 6 * * *'   # 11:40 IST — sat_boost
+    - cron: '10 9 * * *'   # 14:40 IST — sat_background
+    - cron: '10 12 * * *'  # 17:40 IST — sat_boost
+    - cron: '10 15 * * *'  # 20:40 IST — sat_boost (after main publish)
+    - cron: '10 17 * * *'  # 22:40 IST — sat_background
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'Session type'
+        required: true
+        default: 'sat_boost'
+        type: choice
+        options: [sat_boost, sat_background]
+
+concurrency:
+  group: satellite-3
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: echo "${{ secrets.DOTENV_SAT3 }}" > instagram_influencer/.env
+
+      - name: Seed session from secret
+        run: |
+          if [ -n "$SESS_B64" ]; then
+            mkdir -p instagram_influencer/data/sat3
+            echo "$SESS_B64" | base64 -d > instagram_influencer/data/sat3/.ig_session.json
+          fi
+        env:
+          SESS_B64: ${{ secrets.INSTAGRAM_SESSION_B64_SAT3 }}
+
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+          else
+            CRON="${{ github.event.schedule }}"
+            case "${CRON}" in
+              "10 3 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
+              "10 6 * * *")  echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 9 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
+              "10 12 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 15 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 17 * * *") echo "type=sat_background" >> $GITHUB_OUTPUT ;;
+              *)             echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "Trigger: ${{ github.event_name }}"
+
+      - name: Run satellite
+        id: bot
+        continue-on-error: true
+        run: |
+          cd instagram_influencer
+          python orchestrator.py --session ${{ steps.session.outputs.type }} --no-publish --no-generate
+
+      - name: Check result
+        if: steps.bot.outcome == 'failure'
+        run: echo "::warning::Satellite 3 run failed"
+
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f instagram_influencer/data/sat3/engagement_log.json 2>/dev/null || true
+          git diff --staged --quiet || (
+            git commit -m "bot: sat3 state $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git pull --rebase origin main || true
+            git push
+          )

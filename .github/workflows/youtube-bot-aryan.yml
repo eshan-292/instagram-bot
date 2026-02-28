@@ -1,0 +1,117 @@
+name: YouTube Bot - Aryan
+
+on:
+  schedule:
+    # All cron times in UTC. IST = UTC + 5:30
+    # Staggered +15 min from Maya's YT schedule to avoid overlap
+    # ~12 YT sessions/day — 07:45 to 22:30 IST, every 1-1.5 hours
+    # Alternates yt_engage (niche browsing) and yt_replies (respond to comments)
+    - cron: '15 2 * * *'   # 07:45 IST — yt_engage (morning niche browsing)
+    - cron: '45 3 * * *'   # 09:15 IST — yt_replies (reply to overnight comments)
+    - cron: '0 5 * * *'    # 10:30 IST — yt_engage
+    - cron: '15 6 * * *'   # 11:45 IST — yt_replies
+    - cron: '45 7 * * *'   # 13:15 IST — yt_engage (lunch break YouTube)
+    - cron: '15 9 * * *'   # 14:45 IST — yt_replies
+    - cron: '30 10 * * *'  # 16:00 IST — yt_engage
+    - cron: '45 11 * * *'  # 17:15 IST — yt_replies
+    - cron: '0 13 * * *'   # 18:30 IST — yt_engage (pre-prime)
+    - cron: '15 14 * * *'  # 19:45 IST — yt_replies (post-publish, new Short comments)
+    - cron: '30 15 * * *'  # 21:00 IST — yt_engage (evening YouTube binge)
+    - cron: '0 17 * * *'   # 22:30 IST — yt_replies (last reply pass)
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'YouTube session type'
+        required: true
+        default: 'yt_engage'
+        type: choice
+        options: [yt_engage, yt_replies, yt_full]
+
+# YT sessions queue behind each other — INDEPENDENT from Instagram workflow
+concurrency:
+  group: youtube-bot-aryan
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Create .env from the DOTENV_ARYAN secret (needed for YouTube API keys)
+      - name: Create .env
+        run: echo "${{ secrets.DOTENV_ARYAN }}" > instagram_influencer/.env
+
+      # Determine which YT session to run based on the trigger
+      # Uses github.event.schedule (exact cron expression) instead of wall-clock time
+      # to avoid misrouting due to GitHub Actions cron delays (can be 10-20+ min)
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+          else
+            CRON="${{ github.event.schedule }}"
+            case "${CRON}" in
+              "15 2 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "45 3 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "0 5 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "15 6 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 7 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "15 9 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 10 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "45 11 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "0 13 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "15 14 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 15 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 17 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              *)             echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "Trigger: ${{ github.event_name }}"
+
+      # Run YouTube engagement (continue-on-error so state still gets committed)
+      - name: Run YouTube engagement
+        id: bot
+        continue-on-error: true
+        run: |
+          cd instagram_influencer
+          echo "Running: python orchestrator.py --session ${{ steps.session.outputs.type }} --no-publish --no-generate"
+          python orchestrator.py --session ${{ steps.session.outputs.type }} --no-publish --no-generate
+
+      - name: Check bot result
+        if: steps.bot.outcome == 'failure'
+        run: echo "::warning::YouTube bot run failed — check logs above"
+
+      # Commit updated state files back to the repo
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f instagram_influencer/data/aryan/engagement_log.json 2>/dev/null || true
+          git diff --staged --quiet || (
+            git commit -m "bot: aryan yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git pull --rebase origin main || true
+            git push
+          )

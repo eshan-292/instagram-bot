@@ -79,35 +79,25 @@ def _utc_now_iso() -> str:
 
 # Hashtag pyramid strategy (2026):
 # 1 brand + 1 broad + 1-2 medium + 1 niche = 4-5 total (categorization, not discovery)
-_BROAD_TAGS = ["indianfashion", "ootd", "fashionreels", "outfitoftheday"]
-_MEDIUM_TAGS = [
-    "mumbaifashion", "indianstreetstyle", "desistyle", "ethnicwear",
-    "fusionwear", "browngirlmagic", "southasianstyle", "desivibes",
-]
-_NICHE_TAGS = [
-    "mumbaiblogger", "styleblogger", "desifashionista",
-    "indiangirlstyle", "mumbaigirlstyle", "indianfashionblogger",
-]
+# All loaded from persona JSON at runtime.
 
-# Carousel-specific tags (drives saves — highest-weight signal for carousels)
-_CAROUSEL_TAGS = [
-    "indianfashiontips", "styleinspo", "savethis", "fashionguide", "outfitideas",
-]
+def _get_hashtags():
+    from persona import get_persona
+    h = get_persona().get("hashtags", {})
+    return {
+        "brand": h.get("brand", []),
+        "broad": h.get("broad", []),
+        "medium": h.get("medium", []),
+        "niche": h.get("niche", []),
+        "carousel": h.get("carousel", []),
+        "keyword_phrases": h.get("keyword_phrases", []),
+    }
 
-_KEYWORD_PHRASES = [
-    "Mumbai fashion", "Indian street style", "Outfit inspiration",
-    "Desi fashion diaries", "Style tips India", "Fashion influencer Mumbai",
-    "Ethnic modern fusion", "Indian girl style", "Budget styling India",
-    "College outfit ideas", "Indian fashion 2026", "Desi girl style",
-]
-
-# Cross-platform promotion CTAs — drives YouTube subscribers from IG
-_CROSS_PROMO_CTAS = [
-    "More on my YouTube \u2192 Maya Varma",
-    "Full video on YouTube! Link in bio",
-    "Watch the full styling on my YT channel",
-    "Extended version on YouTube \u2014 go check it out!",
-]
+def _get_cross_promo_ctas():
+    from persona import get_persona
+    return get_persona().get("cross_promo", {}).get("youtube_ctas", [
+        "Full video on YouTube! Link in bio",
+    ])
 
 
 def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
@@ -119,30 +109,39 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
     Cross-platform promotion drives YouTube subscribers from Instagram.
     """
     # Pyramid strategy: 1 brand + 1 broad + 1-2 medium + 1 niche = 4-5 total
-    tags = ["mayavarma"]  # brand (always)
+    h = _get_hashtags()
+    tags = list(h["brand"])  # brand (always)
 
     if post_type == "carousel":
         # Carousel: use save-focused tags instead of general pool
-        tags.extend(random.sample(_CAROUSEL_TAGS, min(3, len(_CAROUSEL_TAGS))))
+        carousel = h["carousel"]
+        tags.extend(random.sample(carousel, min(3, len(carousel))))
     else:
         # Reel/single: pyramid mix
-        tags.append(random.choice(_BROAD_TAGS))
-        tags.extend(random.sample(_MEDIUM_TAGS, min(2, len(_MEDIUM_TAGS))))
-        tags.append(random.choice(_NICHE_TAGS))
+        broad, medium, niche = h["broad"], h["medium"], h["niche"]
+        if broad: tags.append(random.choice(broad))
+        if medium: tags.extend(random.sample(medium, min(2, len(medium))))
+        if niche: tags.append(random.choice(niche))
 
     # Cap at 5 (2026 best practice: 3-5 only)
     tags = tags[:5]
 
     # One keyword phrase (drives search discovery)
-    keyword = random.choice(_KEYWORD_PHRASES)
+    kw = h["keyword_phrases"]
+    keyword = random.choice(kw) if kw else ""
     hashtag_block = " ".join(f"#{t}" for t in tags)
 
-    result = f"{caption}\n.\n{keyword}\n.\n{hashtag_block}"
+    result = f"{caption}\n.\n{keyword}\n.\n{hashtag_block}" if keyword else f"{caption}\n.\n{hashtag_block}"
 
     # Cross-platform promo on ~40% of posts when YouTube is enabled
-    if youtube_enabled and random.random() < 0.40:
-        promo = random.choice(_CROSS_PROMO_CTAS)
+    ctas = _get_cross_promo_ctas()
+    if youtube_enabled and ctas and random.random() < 0.40:
+        promo = random.choice(ctas)
         result += f"\n.\n{promo}"
+
+    # Subtle cross-promo partner mention (~12% of posts)
+    from cross_promo import maybe_add_partner_mention
+    result = maybe_add_partner_mention(result)
 
     return result
 
@@ -202,7 +201,8 @@ def main() -> int:
     parser.add_argument("--no-engage", action="store_true")
     parser.add_argument("--session", type=str, default=None,
                         help="Run a specific session type (morning/replies/hashtags/explore/"
-                             "maintenance/stories/report/yt_engage/yt_replies/yt_full)")
+                             "maintenance/stories/report/yt_engage/yt_replies/yt_full/"
+                             "cross_promo/sat_boost/sat_background)")
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
     setup_logging(args.verbose)
@@ -211,6 +211,15 @@ def main() -> int:
         cfg = load_config()
         posts = read_queue(args.queue_file)
         log.info("Queue: %s", status_counts(posts))
+
+        # Satellite accounts have a simplified pipeline — engagement only
+        from persona import is_satellite
+        if is_satellite():
+            if args.session:
+                from satellite import run_satellite_session
+                sat_stats = run_satellite_session(cfg, args.session)
+                log.info("Satellite session '%s': %s", args.session, sat_stats)
+            return 0
 
         if args.dry_run:
             chosen = find_eligible(posts)
@@ -326,6 +335,15 @@ def main() -> int:
                     log.info("YouTube session '%s': %s", args.session, yt_stats)
                 else:
                     log.info("YouTube engagement disabled, skipping %s", args.session)
+            elif args.session == "cross_promo":
+                from cross_promo import run_cross_promo_engagement
+                from publisher import _get_client as get_cl
+                from rate_limiter import load_log, save_log, LOG_FILE
+                data = load_log(str(LOG_FILE))
+                xp_cl = get_cl(cfg)
+                xp_stats = run_cross_promo_engagement(xp_cl, cfg, data)
+                save_log(str(LOG_FILE), data)
+                log.info("Cross-promo session: %s", xp_stats)
             else:
                 # Instagram session
                 engagement_stats = run_session(cfg, args.session)

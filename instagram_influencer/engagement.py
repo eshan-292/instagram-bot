@@ -28,12 +28,15 @@ from rate_limiter import (
     save_log,
     session_startup_jitter,
 )
+from persona import get_persona
 
 log = logging.getLogger(__name__)
 
 # Persistent files
 POSTS_PER_HASHTAG = 18          # aggressive — mine more per tag
-FOLLOWERS_FILE = BASE_DIR / "followers.json"
+def _followers_file():
+    from persona import persona_data_dir
+    return persona_data_dir() / "followers.json"
 UNFOLLOW_DAYS = 2  # unfollow after 2 days (was 3) — faster churn = more room for new follows
 
 
@@ -109,7 +112,7 @@ def _generate_comment(cfg: Config, caption_text: str) -> str | None:
         return None
     from gemini_helper import generate
     prompt = (
-        "You are Maya Varma, a 23-year-old Indian fashion influencer in Mumbai. "
+        f"You are {get_persona()["voice"]["gemini_identity"]}. "
         "Write a short, genuine Instagram comment (1 sentence, max 15 words) on this post. "
         "Be warm, specific to the content, and authentic — NOT generic spam. "
         "No hashtags, no emojis spam (max 1 emoji). No 'nice pic' or 'great post' type comments. "
@@ -129,7 +132,7 @@ def _generate_reply(cfg: Config, original_caption: str, their_comment: str) -> s
         return None
     from gemini_helper import generate
     prompt = (
-        "You are Maya Varma, a 23-year-old Indian fashion influencer in Mumbai. "
+        f"You are {get_persona()["voice"]["gemini_identity"]}. "
         "Someone commented on your post. Write a warm, short reply (max 15 words). "
         "Be genuine and grateful but stay in character — bold, confident, witty. "
         "Ask them a question back to keep the conversation going (drives algorithm). "
@@ -149,13 +152,13 @@ def _generate_dm(cfg: Config, username: str) -> str | None:
         return None
     from gemini_helper import generate
     prompt = (
-        "You are Maya, a 23-year-old girl from Mumbai who posts fashion/style content. "
+        f"You are {get_persona()["voice"]["dm_persona"]} "
         "Someone just followed you. Send them a quick casual DM like a real person would — "
         "NOT like a brand or a page. Think of how a college girl would text a new follower.\n\n"
         "Rules:\n"
         "- 1-2 short sentences MAX. Keep it chill.\n"
         "- Sound like you're texting a friend, use lowercase, abbreviations are fine\n"
-        "- Do NOT introduce yourself or say 'I'm Maya' or 'I'm a fashion influencer'\n"
+        f"- {get_persona()['voice'].get('dm_dont', 'Do NOT introduce yourself.')}\n"
         "- Do NOT say 'welcome to my page' or anything that sounds like a page\n"
         "- Do NOT be overly thankful or say 'thanks for the follow'\n"
         "- Just be friendly and maybe react to their profile or ask something casual\n"
@@ -280,7 +283,9 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
 # Feature: DM welcome to new followers
 # ---------------------------------------------------------------------------
 
-def _load_followers(path: Path = FOLLOWERS_FILE) -> set[str]:
+def _load_followers(path: Path | None = None) -> set[str]:
+    if path is None:
+        path = _followers_file()
     if not path.exists():
         return set()
     try:
@@ -290,7 +295,9 @@ def _load_followers(path: Path = FOLLOWERS_FILE) -> set[str]:
         return set()
 
 
-def _save_followers(ids: set[str], path: Path = FOLLOWERS_FILE) -> None:
+def _save_followers(ids: set[str], path: Path | None = None) -> None:
+    if path is None:
+        path = _followers_file()
     with open(path, "w") as f:
         json.dump(sorted(ids), f)
 
@@ -766,7 +773,7 @@ def _generate_pin_comment(cfg: Config, caption: str, topic: str) -> str | None:
         return None
     from gemini_helper import generate
     prompt = (
-        "You are Maya Varma, 23-year-old Indian fashion influencer. "
+        f"You are {get_persona()["voice"]["gemini_identity"]}. "
         "Generate a SHORT pinning comment for your own Instagram post (max 12 words). "
         "Ask a specific question that makes people reply in comments. "
         "NOT generic. Relate to the specific topic. Be playful and bold.\n"
@@ -970,7 +977,7 @@ def _generate_comment_followup_dm(
         return None
     from gemini_helper import generate
     prompt = (
-        "You are Maya, 23-year-old fashion influencer from Mumbai. "
+        f"You are {get_persona()['voice']['dm_persona']} "
         "Someone just commented on your post. Send them a casual DM that:\n"
         "1. References their specific comment (shows you read it)\n"
         "2. Asks a follow-up question about their style\n"

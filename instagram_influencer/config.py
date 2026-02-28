@@ -10,10 +10,42 @@ from dataclasses import dataclass
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-DEFAULT_QUEUE_FILE = BASE_DIR / "content_queue.json"
-SESSION_FILE = BASE_DIR / ".ig_session.json"
-REFERENCE_DIR = BASE_DIR / "reference" / "maya"
-GENERATED_IMAGES_DIR = BASE_DIR / "generated_images"
+
+# These are now dynamically resolved via persona.persona_data_dir().
+# Legacy constants point to maya's data dir for backward compatibility.
+# Import persona lazily to avoid circular imports.
+def _persona_data_dir():
+    from persona import persona_data_dir
+    return persona_data_dir()
+
+def _persona_images_dir():
+    from persona import persona_images_dir
+    return persona_images_dir()
+
+def _persona_reference_dir():
+    from persona import persona_reference_dir
+    return persona_reference_dir()
+
+# Lazy properties — modules that import these at module level still work
+class _LazyPath:
+    """Defers path resolution until first access (avoids import-time persona load)."""
+    def __init__(self, resolver):
+        self._resolver = resolver
+        self._path = None
+    def __fspath__(self):
+        if self._path is None: self._path = self._resolver()
+        return str(self._path)
+    def __str__(self):
+        return self.__fspath__()
+    def __truediv__(self, other):
+        return Path(self.__fspath__()) / other
+    def __repr__(self):
+        return f"LazyPath({self.__fspath__()})"
+
+DEFAULT_QUEUE_FILE = _LazyPath(lambda: _persona_data_dir() / "content_queue.json")
+SESSION_FILE = _LazyPath(lambda: _persona_data_dir() / ".ig_session.json")
+REFERENCE_DIR = _LazyPath(_persona_reference_dir)
+GENERATED_IMAGES_DIR = _LazyPath(_persona_images_dir)
 
 
 def setup_logging(verbose: bool = False) -> None:
@@ -41,36 +73,23 @@ def _str(val: str | None, default: str = "") -> str:
 
 
 # ---------------------------------------------------------------------------
-# Maya's character prompt (text-to-image fallback — matches her actual look)
+# Image prompts — loaded from persona JSON (no more hardcoded character data)
 # ---------------------------------------------------------------------------
 
-DEFAULT_IMAGE_STYLE_PROMPT = (
-    "Real Instagram photo of a young Indian woman, 23 years old. "
-    "FACE: fair light-olive Indian complexion, soft oval face shape, "
-    "large doe-like dark brown eyes with natural brows, small slightly rounded nose, "
-    "medium-full natural pink lips, gentle soft features, no sharp angles. "
-    "HAIR: very long voluminous dark brown-black wavy curly hair past shoulders, "
-    "center-parted, thick and flowing. "
-    "BUILD: slim petite figure. "
-    "EXPRESSION: soft approachable confidence, warm subtle smile, natural look. "
-    "MAKEUP: minimal natural makeup, bare skin visible, no heavy contouring. "
-    "STYLE: casual chic Indian girl-next-door with quiet confidence. "
-    "Shot on iPhone 15 Pro, natural ambient lighting, slight background bokeh, "
-    "visible skin texture, natural pores, no airbrushing, 4:5 portrait ratio."
-)
+def _persona_image_prompt():
+    from persona import get_persona
+    return get_persona().get("image_style_prompt", "")
 
-DEFAULT_NEGATIVE_PROMPT = (
-    "blurry, low quality, distorted face, extra fingers, extra limbs, "
-    "disfigured, deformed, ugly, text on image, watermark, logo, signature, "
-    "cartoon, anime, illustration, painting, drawing, 3d render, cgi, "
-    "overexposed, underexposed, grainy, noisy, cropped head, bad anatomy, "
-    "bad hands, bad proportions, duplicate, out of frame, dark skin, "
-    "sharp jawline, heavy makeup, fierce expression"
-)
+def _persona_negative_prompt():
+    from persona import get_persona
+    return get_persona().get("image_negative_prompt", "")
 
 
 @dataclass(frozen=True)
 class Config:
+    # Persona identifier
+    persona_id: str
+
     # Instagram credentials
     instagram_username: str
     instagram_password: str
@@ -125,11 +144,21 @@ def load_config() -> Config:
     except ModuleNotFoundError:
         pass
 
+    # Load persona (initializes data dirs, provides defaults)
+    from persona import get_persona
+    persona = get_persona()
+
     status = _str(os.getenv("AUTO_PROMOTE_STATUS"), "approved").lower()
     if status not in {"ready", "approved"}:
         raise ValueError("AUTO_PROMOTE_STATUS must be 'ready' or 'approved'")
 
+    # Persona-aware defaults for engagement
+    eng = persona.get("engagement", {})
+    default_hashtags = eng.get("default_hashtags", "")
+    default_targets = eng.get("default_target_accounts", "")
+
     return Config(
+        persona_id=persona["id"],
         instagram_username=_str(os.getenv("INSTAGRAM_USERNAME")),
         instagram_password=_str(os.getenv("INSTAGRAM_PASSWORD")),
         instagram_session_id=_str(os.getenv("INSTAGRAM_SESSION_ID")),
@@ -141,28 +170,23 @@ def load_config() -> Config:
         bfl_api_key=_str(os.getenv("BFL_API_KEY")),
         hf_token=_str(os.getenv("HF_TOKEN")),
         hf_image_model=_str(os.getenv("HF_IMAGE_MODEL"), "black-forest-labs/FLUX.1-schnell"),
-        image_style_prompt=_str(os.getenv("IMAGE_STYLE_PROMPT"), DEFAULT_IMAGE_STYLE_PROMPT),
-        image_negative_prompt=_str(os.getenv("IMAGE_NEGATIVE_PROMPT"), DEFAULT_NEGATIVE_PROMPT),
+        image_style_prompt=_str(os.getenv("IMAGE_STYLE_PROMPT"), _persona_image_prompt()),
+        image_negative_prompt=_str(os.getenv("IMAGE_NEGATIVE_PROMPT"), _persona_negative_prompt()),
         image_steps=_int(os.getenv("IMAGE_STEPS"), 4, minimum=1),
         auto_mode=_bool(os.getenv("AUTO_MODE")),
         auto_promote_drafts=_bool(os.getenv("AUTO_PROMOTE_DRAFTS")),
         auto_promote_status=status,
         schedule_interval_minutes=_int(os.getenv("AUTO_SCHEDULE_INTERVAL_MINUTES"), 240, minimum=1),
         schedule_lead_minutes=_int(os.getenv("AUTO_SCHEDULE_LEAD_MINUTES"), 30, minimum=0),
-        # Engagement
+        # Engagement — defaults from persona JSON
         engagement_enabled=_bool(os.getenv("ENGAGEMENT_ENABLED")),
-        engagement_hashtags=_str(os.getenv("ENGAGEMENT_HASHTAGS"),
-            "indianfashion,mumbaifashion,desistyle,indianfashionblogger,mumbailifestyle,"
-            "indianstreetstyle,ethnicwear,indiangirlstyle,browngirlmagic,southasianfashion,"
-            "mumbailifestyle,desifashion,indianootd,bollywoodfashion,fashionbloggerindia"),
+        engagement_hashtags=_str(os.getenv("ENGAGEMENT_HASHTAGS"), default_hashtags),
         engagement_daily_likes=_int(os.getenv("ENGAGEMENT_DAILY_LIKES"), 250, minimum=0),
         engagement_daily_comments=_int(os.getenv("ENGAGEMENT_DAILY_COMMENTS"), 60, minimum=0),
         engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 80, minimum=0),
         engagement_comment_enabled=_bool(os.getenv("ENGAGEMENT_COMMENT_ENABLED")),
         engagement_follow_enabled=_bool(os.getenv("ENGAGEMENT_FOLLOW_ENABLED")),
-        engagement_target_accounts=_str(os.getenv("ENGAGEMENT_TARGET_ACCOUNTS"),
-            "koaborofficial,sakshisindhwani,diksha_rawat,sejal_kumar,theformaledit,"
-            "thatbohogirl,stylemeupwithsakshi,missmalini"),
+        engagement_target_accounts=_str(os.getenv("ENGAGEMENT_TARGET_ACCOUNTS"), default_targets),
         # YouTube
         youtube_enabled=_bool(os.getenv("YOUTUBE_ENABLED")),
         youtube_client_id=_str(os.getenv("YOUTUBE_CLIENT_ID")),

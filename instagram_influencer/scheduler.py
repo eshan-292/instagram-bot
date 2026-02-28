@@ -142,7 +142,11 @@ def run_loop() -> None:
 # macOS LaunchAgent install/uninstall
 # ---------------------------------------------------------------------------
 
-PLIST_NAME = "com.mayavarma.instagram-bot"
+def _plist_name():
+    from persona import get_persona
+    return get_persona().get("scheduler_plist_name", "com.instagram-bot")
+
+PLIST_NAME = _plist_name()
 PLIST_PATH = Path.home() / "Library" / "LaunchAgents" / f"{PLIST_NAME}.plist"
 
 

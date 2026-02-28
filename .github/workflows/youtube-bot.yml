@@ -1,4 +1,4 @@
-name: YouTube Bot
+name: YouTube Bot (Maya)
 
 on:
   schedule:
@@ -60,9 +60,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Create .env from the DOTENV secret (needed for YouTube API keys)
+      # Create .env from the DOTENV secret (includes PERSONA=maya)
       - name: Create .env
-        run: echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
+        run: |
+          echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
+          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=maya" >> instagram_influencer/.env
 
       # Determine which YT session to run based on the trigger
       # Uses github.event.schedule (exact cron expression) instead of wall-clock time
@@ -115,9 +117,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f instagram_influencer/engagement_log.json 2>/dev/null || true
+          git add -f instagram_influencer/data/maya/engagement_log.json 2>/dev/null || true
           git diff --staged --quiet || (
-            git commit -m "bot: yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git commit -m "bot: maya yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
             git pull --rebase origin main || true
             git push
           )

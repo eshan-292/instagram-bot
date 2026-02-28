@@ -1,4 +1,4 @@
-name: Instagram Bot
+name: Instagram Bot (Maya)
 
 on:
   schedule:
@@ -85,17 +85,18 @@ jobs:
         id: cache
         uses: actions/cache/restore@v4
         with:
-          path: instagram_influencer/.ig_session.json
-          key: ig-session
-          restore-keys: ig-session
+          path: instagram_influencer/data/maya/.ig_session.json
+          key: ig-session-maya
+          restore-keys: ig-session-maya
 
       # Seed session from secret if no cache was restored
       - name: Seed session from secret
         run: |
-          if [ -f instagram_influencer/.ig_session.json ]; then
+          mkdir -p instagram_influencer/data/maya
+          if [ -f instagram_influencer/data/maya/.ig_session.json ]; then
             echo "Session restored from cache"
           elif [ -n "$SESS_B64" ]; then
-            echo "$SESS_B64" | base64 -d > instagram_influencer/.ig_session.json
+            echo "$SESS_B64" | base64 -d > instagram_influencer/data/maya/.ig_session.json
             echo "Seeded session from secret"
           else
             echo "WARNING: No session available — bot will attempt fresh login"
@@ -103,9 +104,11 @@ jobs:
         env:
           SESS_B64: ${{ secrets.INSTAGRAM_SESSION_B64 }}
 
-      # Create .env from the DOTENV secret
+      # Create .env from the DOTENV secret (includes PERSONA=maya)
       - name: Create .env
-        run: echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
+        run: |
+          echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
+          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=maya" >> instagram_influencer/.env
 
       # Determine which session to run based on the trigger
       # IMPORTANT: Uses github.event.schedule (the exact cron expression) instead of
@@ -188,8 +191,8 @@ jobs:
         if: always()
         uses: actions/cache/save@v4
         with:
-          path: instagram_influencer/.ig_session.json
-          key: ig-session-${{ github.run_id }}
+          path: instagram_influencer/data/maya/.ig_session.json
+          key: ig-session-maya-${{ github.run_id }}
 
       # Commit updated state files + session back to the repo
       - name: Commit state
@@ -197,16 +200,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f instagram_influencer/engagement_log.json \
-                     instagram_influencer/followers.json \
-                     instagram_influencer/content_queue.json \
-                     instagram_influencer/highlights.json \
-                     instagram_influencer/daily_report.md \
-                     instagram_influencer/.ig_session.json \
-                     "instagram_influencer/generated_images/IMAGE_PROMPTS.md" \
-                     "instagram_influencer/generated_images/pending/" 2>/dev/null || true
+          git add -f instagram_influencer/data/maya/engagement_log.json \
+                     instagram_influencer/data/maya/followers.json \
+                     instagram_influencer/data/maya/content_queue.json \
+                     instagram_influencer/data/maya/highlights.json \
+                     instagram_influencer/data/maya/daily_report.md \
+                     instagram_influencer/data/maya/.ig_session.json \
+                     "instagram_influencer/data/maya/generated_images/IMAGE_PROMPTS.md" \
+                     "instagram_influencer/data/maya/generated_images/pending/" 2>/dev/null || true
           git diff --staged --quiet || (
-            git commit -m "bot: state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git commit -m "bot: maya state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
             git pull --rebase origin main || true
             git push
           )

@@ -27,6 +27,7 @@ import time
 from typing import Any
 
 from config import Config
+from persona import get_persona
 from rate_limiter import (
     LOG_FILE,
     can_act,
@@ -47,13 +48,8 @@ YT_DAILY_COMMENTS = 20
 YT_DAILY_REPLIES = 30
 
 # Search queries for finding niche Shorts to engage with
-_NICHE_QUERIES = [
-    "indian fashion shorts", "mumbai style tips", "desi outfit ideas",
-    "indian street style", "ethnic wear styling", "budget fashion india",
-    "indian girl style", "bollywood fashion", "mumbai fashion influencer",
-    "saree styling tips", "kurti styling ideas", "indian wedding outfit",
-    "desi fashion 2026", "indo western outfit", "college outfit india",
-]
+def _niche_queries():
+    return get_persona().get("youtube", {}).get("niche_queries", ["shorts", "trending"])
 
 
 def _get_youtube_service():
@@ -72,7 +68,7 @@ def _generate_yt_comment(cfg: Config, video_title: str) -> str | None:
     from gemini_helper import generate
 
     prompt = (
-        "You are Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. "
+        f"You are {get_persona()['voice']['gemini_identity']}. "
         "Write a short, genuine YouTube comment (1-2 sentences, max 20 words) on a Short. "
         "Be warm, specific to the content, and authentic — NOT generic spam. "
         "No hashtags, max 1 emoji. Sound like a real viewer. "
@@ -94,7 +90,7 @@ def _generate_yt_reply(cfg: Config, video_title: str, their_comment: str) -> str
     from gemini_helper import generate
 
     prompt = (
-        "You are Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. "
+        f"You are {get_persona()['voice']['gemini_identity']}. "
         "Someone commented on your YouTube Short. Write a warm, short reply (max 15 words). "
         "Be genuine and grateful but stay in character — bold, confident, witty. "
         "No hashtags. Max 1 emoji. Just the reply text.\n\n"
@@ -138,7 +134,8 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
         return stats
 
     # Pick 1-2 search queries (humans search one topic at a time)
-    queries = random.sample(_NICHE_QUERIES, min(2, len(_NICHE_QUERIES)))
+    nq = _niche_queries()
+    queries = random.sample(nq, min(2, len(nq)))
     all_videos: list[dict] = []
 
     for query in queries:

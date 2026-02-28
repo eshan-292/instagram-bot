@@ -1,0 +1,25 @@
+{
+  "id": "sat2",
+  "name": "Satellite Account 2",
+  "mode": "satellite",
+  "brand_tag": "sat2",
+  "post_id_prefix": "sat2",
+  "voice": {
+    "tone": "chill, sarcastic, witty, laid-back",
+    "gemini_identity": "a young Indian person with a dry sense of humor who casually follows fashion and fitness trends",
+    "dm_persona": null
+  },
+  "boost_targets": ["maya", "aryan"],
+  "engagement": {
+    "default_hashtags": "fashion,fitness,indianstyle,motivation,lifestyle",
+    "daily_limits": {
+      "likes": 40,
+      "comments": 6,
+      "saves": 6,
+      "story_views": 20
+    },
+    "session_skip_probability": 0.20,
+    "startup_jitter_range": [120, 480]
+  },
+  "background_hashtags": ["streetstyle", "gymlife", "indianvibes", "sarcasm", "reels", "memes", "fitnessmotivation", "explorepage"]
+}

@@ -14,7 +14,22 @@ from typing import Any
 
 log = logging.getLogger(__name__)
 
-LOG_FILE = Path(__file__).resolve().parent / "engagement_log.json"
+def _default_log_file():
+    from persona import persona_data_dir
+    return persona_data_dir() / "engagement_log.json"
+
+class _LazyLogFile:
+    """Defers log file path resolution to avoid import-time persona load."""
+    _path = None
+    def __fspath__(self):
+        if self._path is None: self._path = _default_log_file()
+        return str(self._path)
+    def __str__(self):
+        return self.__fspath__()
+    def __repr__(self):
+        return f"LogFile({self.__fspath__()})"
+
+LOG_FILE = _LazyLogFile()
 
 # Maximum growth defaults — warmup multiplier keeps these safe for new accounts.
 # Override via Config fields.

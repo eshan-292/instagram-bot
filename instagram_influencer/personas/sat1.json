@@ -1,0 +1,25 @@
+{
+  "id": "sat1",
+  "name": "Satellite Account 1",
+  "mode": "satellite",
+  "brand_tag": "sat1",
+  "post_id_prefix": "sat1",
+  "voice": {
+    "tone": "friendly, casual, genuine, enthusiastic",
+    "gemini_identity": "a young Indian person who loves fashion and fitness content",
+    "dm_persona": null
+  },
+  "boost_targets": ["maya", "aryan"],
+  "engagement": {
+    "default_hashtags": "fashion,fitness,indianstyle,motivation,lifestyle",
+    "daily_limits": {
+      "likes": 40,
+      "comments": 6,
+      "saves": 6,
+      "story_views": 20
+    },
+    "session_skip_probability": 0.20,
+    "startup_jitter_range": [120, 480]
+  },
+  "background_hashtags": ["indianfashion", "fitness", "lifestyle", "motivation", "dailylife", "indianstyle", "foodie", "travel"]
+}

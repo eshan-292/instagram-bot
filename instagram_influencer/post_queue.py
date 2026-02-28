@@ -113,13 +113,9 @@ def find_eligible(posts: list[dict[str, Any]]) -> tuple[int, dict[str, Any]] | N
 
 
 def next_maya_id(existing: list[dict[str, Any]], offset: int = 1) -> str:
-    """Generate the next maya-NNN ID based on existing posts."""
-    max_num = 0
-    for item in existing:
-        post_id = str(item.get("id", "")).strip().lower()
-        if not post_id.startswith("maya-"):
-            continue
-        tail = post_id[5:]
-        if tail.isdigit():
-            max_num = max(max_num, int(tail))
-    return f"maya-{max_num + offset:03d}"
+    """Generate the next post ID based on persona prefix.
+
+    Legacy name kept for backward compatibility. Uses persona.next_post_id() internally.
+    """
+    from persona import next_post_id
+    return next_post_id(existing, offset)
