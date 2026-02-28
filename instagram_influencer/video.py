@@ -189,17 +189,23 @@ def image_to_video(
     pan_x = f"iw/2-(iw/zoom/2)+10*on/{total_frames}"
     pan_y = "ih/2-(ih/zoom/2)"
 
-    # Cover-mode scale: ensure image is at least 2x target in BOTH dimensions,
-    # then center-crop to exact 2x size. This handles any aspect ratio source →
-    # any target ratio (e.g., 4:5 source → 9:16 YT output).
-    # NOTE: fade=in MUST come AFTER zoompan — zoompan reads only the first input
-    # frame; if fade is before zoompan, frame 0 is fully black → all output black.
+    # Fit-with-blur: Show the FULL image (no cropping) with a blurred version
+    # of itself filling any empty space. This preserves all content regardless
+    # of source vs target aspect ratio differences.
+    #   1. split → background (cover-scale + blur) + foreground (fit-scale)
+    #   2. overlay foreground centered on blurred background
+    #   3. zoompan for the zoom animation
+    #   4. fade=in AFTER zoompan (zoompan reads only frame 0)
+    tw, th = width * 2, height * 2  # 2x target for zoompan headroom
     vf = (
-        f"scale={width * 2}:{height * 2}:force_original_aspect_ratio=increase,"
-        f"crop={width * 2}:{height * 2},"
+        f"split[bg][fg];"
+        f"[bg]scale={tw}:{th}:force_original_aspect_ratio=increase,"
+        f"crop={tw}:{th},gblur=sigma=40[bgblur];"
+        f"[fg]scale={tw}:{th}:force_original_aspect_ratio=decrease[fgfit];"
+        f"[bgblur][fgfit]overlay=(W-w)/2:(H-h)/2,"
         f"zoompan=z='{zoom_expr}':x='{pan_x}':y='{pan_y}':"
         f"d={total_frames}:s={width}x{height}:fps={FPS},"
-        f"fade=in:0:5,"  # subtle fade-in flash (5 frames = 0.17s) — after zoompan!
+        f"fade=in:0:5,"
         f"format=yuv420p"
     )
 
