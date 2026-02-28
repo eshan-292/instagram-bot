@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Engagement automation — like, comment, follow, unfollow, DM, explore, reply."""
+"""Engagement automation — human-like browsing with likes, comments, follows, stories."""
 
 from __future__ import annotations
 
@@ -17,19 +17,24 @@ import instagrapi_patch  # noqa: F401 — applies monkey-patches on import
 from publisher import _get_client
 from rate_limiter import (
     LOG_FILE,
+    action_delay,
+    browsing_pause,
     can_act,
     daily_summary,
     load_log,
+    maybe_abort_session,
     random_delay,
     record_action,
+    reset_session_fatigue,
     save_log,
     session_startup_jitter,
+    should_skip_session,
 )
 
 log = logging.getLogger(__name__)
 
 # Persistent files
-POSTS_PER_HASHTAG = 12          # moderate per tag — casual but productive
+POSTS_PER_HASHTAG = 10          # conservative — casual browsing
 UNFOLLOW_DAYS = 3  # unfollow after this many days
 
 
@@ -43,31 +48,55 @@ def _parse_hashtags(raw: str) -> list[str]:
 
 
 def _should_skip_post() -> bool:
-    """Randomly skip some posts — humans don't engage with everything they see.
+    """Randomly skip some posts — humans don't engage with everything.
 
-    ~18% skip rate: scroll past some posts, but stay active.
+    ~22% skip rate: scroll past without any action.
     """
-    return random.random() < 0.18
+    return random.random() < 0.22
 
 
 def _randomize_session_size(base: int) -> int:
-    """Vary session size by ±40% so no two sessions look identical."""
-    lo = max(3, int(base * 0.6))
-    hi = int(base * 1.4)
+    """Vary session size by ±50% so no two sessions look identical."""
+    lo = max(2, int(base * 0.5))
+    hi = int(base * 1.5)
     return random.randint(lo, hi)
 
 
 def _browse_before_engage(cl: Any, user_id: str) -> None:
-    """View a user's profile before engaging — humans check who they're interacting with.
-
-    This adds a realistic delay and a profile view API call.
-    """
+    """View a user's profile before engaging — humans check who they're interacting with."""
     try:
         cl.user_info(int(user_id))
-        # Short pause like reading their bio
-        time.sleep(random.uniform(2, 6))
+        # Pause like reading their bio + scrolling their grid
+        time.sleep(random.uniform(3, 10))
     except Exception:
         pass
+
+
+def _simulate_scrolling(cl: Any, count: int = 0) -> None:
+    """Simulate passive scrolling — watching content without engaging.
+
+    Real humans spend most of their time just watching, not liking.
+    This makes the action density more natural (fewer actions per minute).
+    """
+    if count <= 0:
+        count = random.randint(1, 4)
+    for _ in range(count):
+        browsing_pause()
+
+
+def _maybe_save_post(cl: Any, media_pk: Any, data: dict, stats: dict) -> None:
+    """Occasionally save a post — strong interest signal, very safe action.
+
+    ~8% of viewed posts get saved. Saves are NOT rate-limited by IG
+    and signal genuine interest to the algorithm.
+    """
+    if random.random() < 0.08:
+        try:
+            cl.media_save(media_pk)
+            stats["saves"] = stats.get("saves", 0) + 1
+            log.debug("Saved post %s", media_pk)
+        except Exception:
+            pass
 
 
 def _generate_comment(cfg: Config, caption_text: str) -> str | None:
@@ -108,7 +137,6 @@ def _generate_reply(cfg: Config, original_caption: str, their_comment: str) -> s
     return None
 
 
-
 def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG) -> list[Any]:
     """Fetch recent posts from a random hashtag."""
     if not hashtags:
@@ -117,7 +145,6 @@ def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG)
     log.info("Mining hashtag: #%s", tag)
     try:
         medias = cl.hashtag_medias_recent(tag, amount=amount)
-        # Filter out None items (from extract_media_v1 fallback) and items without .pk
         medias = [m for m in medias if m is not None and getattr(m, "pk", None)]
         log.info("Found %d posts from #%s", len(medias), tag)
         return medias
@@ -134,25 +161,27 @@ def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG)
 
 
 def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
-    """Maybe view a user's stories — humans don't watch every story they see.
+    """Maybe view a user's stories — humans don't watch every story.
 
-    ~65% chance to view stories, ~25% chance to like (strong engagement signal).
+    ~50% chance to view stories, ~15% chance to like.
     """
-    if random.random() > 0.65:
-        return  # skip some stories
+    if random.random() > 0.50:
+        return  # skip most stories
     try:
         stories = cl.user_stories(int(user_id))
         if stories:
-            cl.story_seen([stories[0].pk])
+            # Watch 1-2 stories, not all of them
+            to_watch = stories[:random.randint(1, min(2, len(stories)))]
+            cl.story_seen([s.pk for s in to_watch])
             record_action(data, "story_views", user_id)
             stats["story_views"] = stats.get("story_views", 0) + 1
-            log.debug("Viewed story of user %s", user_id)
-            # Brief pause like actually watching
-            time.sleep(random.uniform(3, 8))
-            # Like ~25% of stories (strong signal for follow-back)
-            if random.random() < 0.25:
+            log.debug("Viewed %d stories of user %s", len(to_watch), user_id)
+            # Pause like actually watching each story
+            time.sleep(random.uniform(4, 12))
+            # Like ~15% of stories
+            if random.random() < 0.15:
                 try:
-                    cl.story_like(stories[0].pk)
+                    cl.story_like(to_watch[0].pk)
                     stats["story_likes"] = stats.get("story_likes", 0) + 1
                 except Exception:
                     pass
@@ -168,9 +197,8 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
     """Unfollow users we followed more than UNFOLLOW_DAYS ago. Returns count."""
     cutoff = datetime.now(timezone.utc) - timedelta(days=UNFOLLOW_DAYS)
     unfollowed = 0
-    daily_limit = 40  # need to clear room for new follows
+    daily_limit = 30  # conservative — unfollows are monitored
 
-    # Find follow actions older than cutoff that haven't been unfollowed yet
     unfollowed_set: set[str] = {
         a["target"] for a in data.get("actions", []) if a.get("type") == "unfollows"
     }
@@ -191,17 +219,18 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
         if followed_at < cutoff:
             candidates.append(target)
 
-    # Deduplicate
     candidates = list(dict.fromkeys(candidates))
     random.shuffle(candidates)
 
     for user_id in candidates[:daily_limit]:
+        if maybe_abort_session():
+            break
         try:
             cl.user_unfollow(int(user_id))
             record_action(data, "unfollows", user_id)
             unfollowed += 1
             log.debug("Unfollowed user %s", user_id)
-            random_delay(30, 90)
+            action_delay("unfollows")
         except Exception as exc:
             log.warning("Unfollow failed for %s: %s", user_id, exc)
 
@@ -211,7 +240,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
 
 
 # ---------------------------------------------------------------------------
-# Feature: Track followers (for unfollow targeting)
+# Feature: Track followers
 # ---------------------------------------------------------------------------
 
 def _load_followers(path: Path = BASE_DIR / "followers.json") -> set[str]:
@@ -236,17 +265,15 @@ def _save_followers(ids: set[str], path: Path = BASE_DIR / "followers.json") -> 
 def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
     """Reply to comments on our own recent posts. Returns reply count."""
     replied = 0
-    daily_reply_limit = 30  # replies on own posts are safe — algorithm loves them
+    daily_reply_limit = 25  # replies on own posts are safe
 
     try:
         my_id = cl.user_id
-        # Get our recent media (last 5 posts)
         medias = cl.user_medias(my_id, amount=5)
     except Exception as exc:
         log.warning("Could not fetch own media for replies: %s", exc)
         return 0
 
-    # Track which comments we've already replied to
     replied_set: set[str] = {
         a["target"] for a in data.get("actions", []) if a.get("type") == "replies"
     }
@@ -254,16 +281,17 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
     for media in medias:
         if replied >= daily_reply_limit:
             break
+        if maybe_abort_session():
+            break
 
-        # Only reply to posts from last 24 hours (first-hour engagement boost)
         taken_at = getattr(media, "taken_at", None)
         if taken_at:
             age = datetime.now(timezone.utc) - taken_at.replace(tzinfo=timezone.utc)
-            if age > timedelta(hours=24):
+            if age > timedelta(hours=48):
                 continue
 
         try:
-            comments = cl.media_comments(media.pk, amount=20)
+            comments = cl.media_comments(media.pk, amount=15)
         except Exception as exc:
             log.debug("Could not fetch comments for %s: %s", media.pk, exc)
             continue
@@ -274,7 +302,6 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
             if replied >= daily_reply_limit:
                 break
             comment_id = str(comment.pk)
-            # Skip our own comments and already-replied ones
             if str(getattr(comment.user, "pk", "")) == str(my_id):
                 continue
             if comment_id in replied_set:
@@ -294,7 +321,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to comment %s: %s", comment_id, reply[:40])
-                random_delay(30, 90)  # takes time to type a thoughtful reply
+                action_delay("replies")
             except Exception as exc:
                 log.warning("Reply failed for comment %s: %s", comment_id, exc)
 
@@ -308,34 +335,45 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
 # ---------------------------------------------------------------------------
 
 def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[str, int]:
-    """Like/comment on posts from the Explore feed — mimics casual scrolling.
+    """Like/comment on Explore feed — mimics casual scrolling.
 
-    Humans browse explore for 5-10 minutes, skip most posts, and only
-    engage with ones that genuinely interest them.
+    Key pattern: mostly just watching, occasional like, rare comment.
     """
     stats: dict[str, int] = {"explore_likes": 0, "explore_comments": 0}
-    explore_limit = _randomize_session_size(18)  # moderate browsing session
+    explore_limit = _randomize_session_size(12)  # casual browsing
 
     try:
-        medias = cl.explore_reels(amount=explore_limit + 10)
+        medias = cl.explore_reels(amount=explore_limit + 8)
         log.info("Fetched %d reels from Explore", len(medias))
     except Exception as exc:
         log.warning("Could not fetch Explore page: %s", exc)
         return stats
 
-    for media in medias[:explore_limit]:
-        # Skip some posts — humans scroll past most content
+    # Session warmup: first 2-3 items, just watch (no engagement)
+    warmup_count = random.randint(2, 4)
+
+    for i, media in enumerate(medias[:explore_limit]):
+        if maybe_abort_session():
+            log.info("Aborting explore session early (boredom)")
+            break
+
+        # Skip some posts
         if _should_skip_post():
-            time.sleep(random.uniform(1, 4))  # quick scroll past
+            time.sleep(random.uniform(1, 5))
             continue
 
         media_id = str(media.pk)
 
-        # Pause like actually watching the reel
-        time.sleep(random.uniform(3, 10))
+        # Watch the reel/post (variable time based on content)
+        time.sleep(random.uniform(4, 18))
 
-        # Like
-        if can_act(data, "likes", cfg.engagement_daily_likes):
+        # Warmup phase — just watch, no actions
+        if i < warmup_count:
+            _simulate_scrolling(cl, random.randint(0, 2))
+            continue
+
+        # Like (~65% of non-skipped posts)
+        if random.random() < 0.65 and can_act(data, "likes", cfg.engagement_daily_likes):
             try:
                 cl.media_like(media.pk)
                 record_action(data, "likes", media_id)
@@ -343,9 +381,12 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             except Exception as exc:
                 log.debug("Explore like failed: %s", exc)
 
-        # Comment on ~18% of explore posts
+        # Maybe save
+        _maybe_save_post(cl, media.pk, data, stats)
+
+        # Comment rarely (~8% — explore is more passive)
         if (cfg.engagement_comment_enabled
-                and random.random() < 0.18
+                and random.random() < 0.08
                 and can_act(data, "comments", cfg.engagement_daily_comments)):
             caption_text = str(getattr(media, "caption_text", "") or "")
             comment = _generate_comment(cfg, caption_text)
@@ -358,7 +399,11 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                     log.debug("Explore comment failed: %s", exc)
 
         save_log(LOG_FILE, data)
-        random_delay(15, 45)  # real scrolling pace
+
+        # Simulate natural scrolling pace
+        if random.random() < 0.3:
+            _simulate_scrolling(cl, random.randint(1, 3))
+        action_delay("likes")
 
     if stats["explore_likes"] or stats["explore_comments"]:
         log.info("Explore engagement: %s", stats)
@@ -366,22 +411,24 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
 
 
 # ---------------------------------------------------------------------------
-# Core hashtag engagement loop (used by both full and session runs)
+# Core hashtag engagement loop
 # ---------------------------------------------------------------------------
 
 def _run_hashtag_engagement(
     cl: Any, cfg: Config, data: dict[str, Any], stats: dict[str, int],
-    max_posts: int = 15,
+    max_posts: int = 12,
 ) -> None:
-    """Like/comment/follow from hashtag posts — mimics real browsing behavior.
+    """Like/comment/follow from hashtag posts — mimics real browsing.
 
-    Key human-like patterns:
-    - Browse only 1-2 hashtags per session (not 3+)
-    - Skip ~25% of posts (not interested)
+    Human-like patterns:
+    - Browse only 1 hashtag per session (focused searching)
+    - Skip ~22% of posts
     - View profiles before following
-    - Don't comment on every post — only ~15% that genuinely resonate
-    - Follow only ~30% of users (selective)
-    - Vary session sizes ±40%
+    - Comment rarely (~10%) — only posts that resonate
+    - Follow selectively (~20%) — check profile first
+    - Vary session sizes ±50%
+    - Session warmup: first few posts, just look
+    - Random early exit (got bored)
     """
     hashtags = _parse_hashtags(cfg.engagement_hashtags)
     if not hashtags:
@@ -390,7 +437,7 @@ def _run_hashtag_engagement(
     like_limit = cfg.engagement_daily_likes
     comment_limit = cfg.engagement_daily_comments
     follow_limit = cfg.engagement_daily_follows
-    story_limit = 100  # story views are safe and drive profile visits
+    story_limit = 80
 
     if (
         not can_act(data, "likes", like_limit)
@@ -400,41 +447,45 @@ def _run_hashtag_engagement(
         log.info("All daily limits reached: %s", daily_summary(data))
         return
 
-    # Browse 1-2 hashtags — humans search one topic at a time
-    all_medias: list[Any] = []
-    tags_to_try = random.sample(hashtags, min(random.randint(1, 2), len(hashtags)))
-    for tag in tags_to_try:
-        medias = _mine_targets(cl, [tag])
-        all_medias.extend(medias)
-        # Small pause between hashtag searches
-        time.sleep(random.uniform(2, 6))
+    # Browse just 1 hashtag — humans search one topic at a time
+    tag = random.choice(hashtags)
+    medias = _mine_targets(cl, [tag])
 
-    random.shuffle(all_medias)
+    random.shuffle(medias)
     seen_pks: set[str] = set()
-    medias = []
-    for m in all_medias:
+    unique_medias = []
+    for m in medias:
         pk = str(m.pk)
         if pk not in seen_pks:
             seen_pks.add(pk)
-            medias.append(m)
+            unique_medias.append(m)
 
-    # Randomize session size
     actual_max = _randomize_session_size(max_posts)
+    warmup_count = random.randint(1, 3)
 
-    for media in medias[:actual_max]:
-        # Skip some posts — humans scroll past content they don't vibe with
+    for i, media in enumerate(unique_medias[:actual_max]):
+        if maybe_abort_session():
+            log.info("Aborting hashtag session early (distraction)")
+            break
+
+        # Skip some posts
         if _should_skip_post():
-            time.sleep(random.uniform(1, 3))  # quick scroll
+            time.sleep(random.uniform(1, 4))
             continue
 
         media_id = str(media.pk)
         user_id = str(media.user.pk) if media.user else None
 
         # Pause like actually looking at the post
-        time.sleep(random.uniform(2, 7))
+        time.sleep(random.uniform(3, 12))
 
-        # Like (most common action)
-        if can_act(data, "likes", like_limit):
+        # Warmup phase — just browse, no actions
+        if i < warmup_count:
+            _simulate_scrolling(cl, random.randint(0, 1))
+            continue
+
+        # Like (most common action — ~70% of non-skipped, non-warmup posts)
+        if random.random() < 0.70 and can_act(data, "likes", like_limit):
             try:
                 cl.media_like(media.pk)
                 record_action(data, "likes", media_id)
@@ -442,9 +493,12 @@ def _run_hashtag_engagement(
             except Exception as exc:
                 log.warning("Like failed for %s: %s", media_id, exc)
 
-        # Comment on ~20% of posts (comments drive profile visits)
+        # Maybe save
+        _maybe_save_post(cl, media.pk, data, stats)
+
+        # Comment on ~10% of posts
         if (cfg.engagement_comment_enabled
-                and random.random() < 0.20
+                and random.random() < 0.10
                 and can_act(data, "comments", comment_limit)):
             caption_text = str(media.caption_text or "") if hasattr(media, "caption_text") else ""
             comment = _generate_comment(cfg, caption_text)
@@ -456,12 +510,12 @@ def _run_hashtag_engagement(
                 except Exception as exc:
                     log.warning("Comment failed for %s: %s", media_id, exc)
 
-        # Follow ~45% of users (browse their profile first — main follower driver)
+        # Follow ~20% of users (browse profile first)
         if (cfg.engagement_follow_enabled
                 and user_id
-                and random.random() < 0.45
+                and random.random() < 0.20
                 and can_act(data, "follows", follow_limit)):
-            _browse_before_engage(cl, user_id)  # view profile first
+            _browse_before_engage(cl, user_id)
             try:
                 cl.user_follow(int(user_id))
                 record_action(data, "follows", user_id)
@@ -469,12 +523,17 @@ def _run_hashtag_engagement(
             except Exception as exc:
                 log.warning("Follow failed for %s: %s", user_id, exc)
 
-        # View stories occasionally
+        # View stories sometimes
         if user_id and can_act(data, "story_views", story_limit):
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(20, 60)  # natural browsing pace
+
+        # Variable-pace scrolling between posts
+        if random.random() < 0.25:
+            _simulate_scrolling(cl, random.randint(1, 2))
+
+        action_delay("likes")
 
         if (
             not can_act(data, "likes", like_limit)
@@ -489,11 +548,10 @@ def _run_hashtag_engagement(
 # Session-based engagement (for scheduler — short focused bursts)
 # ---------------------------------------------------------------------------
 
-# Session types for the scheduler to call throughout the day
 SESSION_TYPES = [
     "morning",     # likes + follows from hashtags (catch early risers)
     "replies",     # reply to comments on own posts (algorithm boost)
-    "hashtags",    # full hashtag engagement (like/comment/follow/stories)
+    "hashtags",    # hashtag engagement (like/comment/follow/stories)
     "explore",     # explore page engagement
     "maintenance", # unfollow old follows
     "stories",     # repost past posts as stories + add to highlights
@@ -505,11 +563,12 @@ SESSION_TYPES = [
 def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     """Run a focused engagement session — designed to mimic human phone checks.
 
-    Each session is short (5-15 min), with randomized startup delay so
-    we never run at exact cron times. Session sizes are randomized ±40%.
+    Each session is short (5-15 min), with randomized startup delay.
+    20% of sessions are randomly skipped (simulating being busy).
+    12% chance of aborting mid-session (getting bored/distracted).
 
     Session types:
-      morning     - Light hashtag likes + follows (~10 posts)
+      morning     - Light hashtag likes + follows (~8 posts)
       replies     - Reply to comments on own posts
       hashtags    - Hashtag engagement (like/comment/follow/stories)
       explore     - Explore page casual scrolling
@@ -518,6 +577,14 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
       report      - Daily report
       full        - All phases (used sparingly)
     """
+    # Reset fatigue for new session
+    reset_session_fatigue()
+
+    # Random session skip — simulates being busy/away
+    if session_type not in ("report", "maintenance") and should_skip_session():
+        log.info("Session '%s' skipped (simulating being busy)", session_type)
+        return {}
+
     data = load_log(LOG_FILE)
     stats: dict[str, int] = {}
 
@@ -529,14 +596,15 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     log.info("Starting engagement session: %s", session_type)
 
     if session_type == "morning":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=15)
+        # Morning: lighter session
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=8)
 
     elif session_type == "replies":
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
 
     elif session_type == "hashtags":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=20)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=12)
 
     elif session_type == "explore":
         explore_stats = run_explore_engagement(cl, cfg, data)
@@ -556,15 +624,15 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         run_daily_report()
         stats["report"] = 1
 
-    else:  # "full" — all phases (used sparingly, 1x/day max)
+    else:  # "full" — all phases
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        random_delay(30, 120)  # pause between phases
+        random_delay(60, 180)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
-        random_delay(30, 120)
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=25)
-        random_delay(30, 120)
+        random_delay(60, 180)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=15)
+        random_delay(60, 180)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
 
