@@ -14,7 +14,8 @@ API Quota Budget (10,000 units/day default):
   - commentThreads.list = 1 unit
   - commentThreads.insert = 50 units
   - videos.rate (like) = 50 units
-  Budget: 1 upload + ~20 searches + ~30 likes + ~10 comments + ~15 replies = ~5,850 units
+  Budget: 1 upload + 6×engage(12 searches + 50 likes + 20 comments)
+          + 6×replies(30 list + 30 replies) ≈ 7,330 units (73% of quota)
 """
 
 from __future__ import annotations
@@ -39,10 +40,11 @@ from rate_limiter import (
 
 log = logging.getLogger(__name__)
 
-# YouTube daily limits (increased for growth phase — stay within API quota)
-YT_DAILY_LIKES = 40
-YT_DAILY_COMMENTS = 15
-YT_DAILY_REPLIES = 25
+# YouTube daily limits (aggressive — 12 parallel sessions/day, spread over 15 hours)
+# Budget: 1 upload + 6×engage + 6×replies ≈ 7,330 of 10,000 API quota units
+YT_DAILY_LIKES = 50
+YT_DAILY_COMMENTS = 20
+YT_DAILY_REPLIES = 30
 
 # Search queries for finding niche Shorts to engage with
 _NICHE_QUERIES = [

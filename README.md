@@ -180,43 +180,68 @@ Place your own `.mp3` or `.wav` files in `generated_images/music/` and the bot w
 
 ---
 
-## Daily Schedule (GitHub Actions)
+## Daily Schedule (GitHub Actions — Parallel Dual Workflow)
 
-The bot runs **35 sessions per day** — mimicking real phone-check patterns. **1 post/day** published to both platforms at prime time (19:00 IST).
+Two **independent workflows** run in parallel with separate concurrency groups — IG and YT sessions never block each other:
 
-Engagement mix: warm audience targeting (3x/day), hashtag engagement, explore, stories, YouTube engagement, replies, maintenance.
+- **`instagram-bot.yml`** — 28 IG sessions/day (concurrency: `instagram-bot`)
+- **`youtube-bot.yml`** — 12 YT sessions/day (concurrency: `youtube-bot`)
 
-| IST Time | Session | Platform | Publishes? |
-|----------|---------|----------|------------|
-| 07:00 | Morning engagement + welcome DMs | IG | No |
-| 07:45 | Explore (morning scroll) | IG | No |
-| 08:30 | **Warm audience targeting** | IG | No |
-| 09:00 | Reply to comments | IG | No |
-| 09:45 | Story repost | IG | No |
-| 10:30 | **YT niche engagement** | **YT** | No |
-| 11:00 | Explore | IG | No |
-| 11:30 | Hashtags | IG | No |
-| 12:00 | **Warm audience targeting** | IG | No |
-| 12:30 | Hashtags | IG | No |
-| 13:00 | **YT reply to comments** | **YT** | No |
-| 13:30 | Hashtags | IG | No |
-| 14:00 | Story repost | IG | No |
-| 14:45 | Explore | IG | No |
-| 15:30 | **Warm audience targeting** | IG | No |
-| 16:00 | Reply to comments | IG | No |
-| 16:45 | **YT niche engagement** | **YT** | No |
-| 17:30 | Explore | IG | No |
-| 18:00 | Story repost | IG | No |
-| 18:30 | **YT reply to comments** | **YT** | No |
-| **19:00** | **PUBLISH + hashtags** | **IG + YT** | **Yes** |
-| 19:30 | Explore | IG | No |
-| 20:00 | **YT niche engagement** | **YT** | No |
-| 20:45 | Reply to comments | IG | No |
-| 21:30 | Explore (evening wind-down) | IG | No |
-| 22:00 | Maintenance (unfollow + DMs) | IG | No |
-| 22:30 | **YT reply to comments** | **YT** | No |
-| 23:00 | Maintenance | IG | No |
-| 23:30 | Daily report | Both | No |
+**1 post/day** published to both platforms at prime time (19:00 IST) via the IG workflow.
+
+### Instagram Schedule (28 sessions — `instagram-bot.yml`)
+
+| IST Time | Session | Notes |
+|----------|---------|-------|
+| 07:00 | Morning engagement | Wake up, check overnight |
+| 07:40 | Explore | Morning scroll |
+| 08:15 | Warm audience | High-ROI targeting |
+| 08:50 | Hashtags | |
+| 09:30 | Replies | |
+| 10:05 | Stories | |
+| 10:40 | Explore | |
+| 11:15 | Hashtags | |
+| 11:50 | Warm audience | Pre-lunch targeting |
+| 12:30 | Explore | Lunch scroll |
+| 13:05 | Hashtags | |
+| 13:40 | Replies | |
+| 14:15 | Warm audience | Afternoon targeting |
+| 14:50 | Explore | |
+| 15:30 | Hashtags | |
+| 16:10 | Stories | |
+| 16:45 | Explore | |
+| 17:20 | Warm audience | |
+| 18:00 | Hashtags | |
+| 18:35 | Stories | |
+| **19:00** | **PUBLISH + explore** | **PRIME TIME — publishes to IG + YT** |
+| 19:40 | Hashtags | Post-publish engagement boost |
+| 20:15 | Replies | |
+| 20:50 | Explore | Evening wind-down |
+| 21:30 | Warm audience | |
+| 22:05 | Maintenance | Unfollow + welcome DMs |
+| 22:45 | Maintenance | Second pass |
+| 23:15 | Daily report | |
+
+### YouTube Schedule (12 sessions — `youtube-bot.yml`)
+
+Runs **in parallel** with IG — never blocks or is blocked by IG sessions.
+
+| IST Time | Session | Notes |
+|----------|---------|-------|
+| 07:30 | YT engage | Morning niche browsing |
+| 09:00 | YT replies | Reply to overnight comments |
+| 10:15 | YT engage | |
+| 11:30 | YT replies | |
+| 13:00 | YT engage | Lunch break YouTube |
+| 14:30 | YT replies | |
+| 15:45 | YT engage | |
+| 17:00 | YT replies | |
+| 18:15 | YT engage | Pre-prime |
+| 19:30 | YT replies | Post-publish — reply to new Short comments |
+| 20:45 | YT engage | Evening YouTube binge |
+| 22:15 | YT replies | Last reply pass |
+
+**Total: 40 sessions/day** (28 IG + 12 YT) running in parallel.
 
 ## Anti-Detection & Human-Like Behavior
 
@@ -238,7 +263,7 @@ The bot mimics real human usage patterns to avoid detection:
 
 Instead of follow/unfollow churn, the bot engages followers of similar niche accounts. These users already consume similar content and are 3-5x more likely to follow back.
 
-- **3 warm sessions/day** (08:30, 12:00, 15:30 IST)
+- **5 warm sessions/day** (08:15, 11:50, 14:15, 17:20, 21:30 IST)
 - Target accounts: similar Indian fashion influencers (configurable via `ENGAGEMENT_TARGET_ACCOUNTS`)
 - Per user: like 2-3 posts + genuine comment + optional follow (~40%)
 - Follow rate reduced from hashtags (35%, down from 55%) — budget shifted to warm targeting
@@ -259,9 +284,11 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 40 | On trending niche Shorts |
-| Comments | 15 | AI-generated, quality comments only |
-| Replies | 25 | On own video comments — reply to ALL |
+| Likes | 50 | Spread across 6 yt_engage sessions |
+| Comments | 20 | AI-generated, quality comments only |
+| Replies | 30 | On own video comments — reply to ALL |
+
+**API quota budget:** ~7,330 of 10,000 units/day (73% utilization — safe margin).
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-7), 0.8x (days 8-14), 1.0x (day 15+).
 
@@ -277,7 +304,7 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 
 ## Stories
 
-- **3 story sessions/day** (09:45, 14:00, 18:00 IST)
+- **3 story sessions/day** (10:05, 16:10, 18:35 IST)
 - Reposts 2-3 past posts with text overlays
 - **Auto-downloads media from Instagram** if local files don't exist (works in CI)
 - Resolves relative paths correctly (fixes CI path issues)

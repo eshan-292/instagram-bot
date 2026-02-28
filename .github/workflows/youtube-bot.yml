@@ -1,0 +1,122 @@
+name: YouTube Bot
+
+on:
+  schedule:
+    # All cron times in UTC. IST = UTC + 5:30
+    # Strategy: packed YT engagement — alternating engage/replies throughout the day
+    # NO publishing here — YouTube Shorts publish happens in instagram-bot.yml at prime time
+    # Each session has 0-4min startup jitter built into the code
+    #
+    # PARALLEL: Instagram engagement runs on a SEPARATE workflow (instagram-bot.yml)
+    # so YT and IG never block each other.
+    #
+    # ~12 YT sessions/day — 07:30 to 22:15 IST, every 1-1.5 hours
+    # Alternates yt_engage (niche browsing) and yt_replies (respond to comments)
+    - cron: '0 2 * * *'    # 07:30 IST — yt_engage (morning niche browsing)
+    - cron: '30 3 * * *'   # 09:00 IST — yt_replies (reply to overnight comments)
+    - cron: '45 4 * * *'   # 10:15 IST — yt_engage
+    - cron: '0 6 * * *'    # 11:30 IST — yt_replies
+    - cron: '30 7 * * *'   # 13:00 IST — yt_engage (lunch break YouTube)
+    - cron: '0 9 * * *'    # 14:30 IST — yt_replies
+    - cron: '15 10 * * *'  # 15:45 IST — yt_engage
+    - cron: '30 11 * * *'  # 17:00 IST — yt_replies
+    - cron: '45 12 * * *'  # 18:15 IST — yt_engage (pre-prime)
+    - cron: '0 14 * * *'   # 19:30 IST — yt_replies (post-publish, new Short comments)
+    - cron: '15 15 * * *'  # 20:45 IST — yt_engage (evening YouTube binge)
+    - cron: '45 16 * * *'  # 22:15 IST — yt_replies (last reply pass)
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'YouTube session type'
+        required: true
+        default: 'yt_engage'
+        type: choice
+        options: [yt_engage, yt_replies, yt_full]
+
+# YT sessions queue behind each other — INDEPENDENT from Instagram workflow
+concurrency:
+  group: youtube-bot
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Create .env from the DOTENV secret (needed for YouTube API keys)
+      - name: Create .env
+        run: echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
+
+      # Determine which YT session to run based on the trigger
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+          else
+            # Scheduled run — map UTC hour+minute to YT session type
+            # Alternates: even slots = yt_engage, odd slots = yt_replies
+            HHMM=$(date -u +%H%M)
+            case "${HHMM}" in
+              020*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              033*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              044*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              060*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              073*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              090*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              101*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              113*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              124*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              140*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              151*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              164*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              *)    echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "Trigger: ${{ github.event_name }}"
+
+      # Run YouTube engagement (continue-on-error so state still gets committed)
+      - name: Run YouTube engagement
+        id: bot
+        continue-on-error: true
+        run: |
+          cd instagram_influencer
+          echo "Running: python orchestrator.py --session ${{ steps.session.outputs.type }} --no-publish --no-generate"
+          python orchestrator.py --session ${{ steps.session.outputs.type }} --no-publish --no-generate
+
+      - name: Check bot result
+        if: steps.bot.outcome == 'failure'
+        run: echo "::warning::YouTube bot run failed — check logs above"
+
+      # Commit updated state files back to the repo
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f instagram_influencer/engagement_log.json 2>/dev/null || true
+          git diff --staged --quiet || (
+            git commit -m "bot: yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git push
+          )

@@ -1,0 +1,205 @@
+name: Instagram Bot
+
+on:
+  schedule:
+    # All cron times in UTC. IST = UTC + 5:30
+    # Strategy: packed IG engagement — many small sessions = human phone-check pattern
+    # 1 post/day at prime time (publishes to both IG + YT) + engagement spread throughout
+    # Each session has 0-4min startup jitter built into the code
+    #
+    # PARALLEL: YouTube engagement runs on a SEPARATE workflow (youtube-bot.yml)
+    # so IG and YT never block each other.
+    #
+    # ~28 IG sessions/day — 07:00 to 23:15 IST, every 30-45 min with variation
+    - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
+    - cron: '10 2 * * *'   # 07:40 IST — explore (morning scroll)
+    - cron: '45 2 * * *'   # 08:15 IST — warm_audience (high-ROI targeting)
+    - cron: '20 3 * * *'   # 08:50 IST — hashtags
+    - cron: '0 4 * * *'    # 09:30 IST — replies
+    - cron: '35 4 * * *'   # 10:05 IST — stories
+    - cron: '10 5 * * *'   # 10:40 IST — explore
+    - cron: '45 5 * * *'   # 11:15 IST — hashtags
+    - cron: '20 6 * * *'   # 11:50 IST — warm_audience (pre-lunch targeting)
+    - cron: '0 7 * * *'    # 12:30 IST — explore (lunch scroll)
+    - cron: '35 7 * * *'   # 13:05 IST — hashtags
+    - cron: '10 8 * * *'   # 13:40 IST — replies
+    - cron: '45 8 * * *'   # 14:15 IST — warm_audience (afternoon targeting)
+    - cron: '20 9 * * *'   # 14:50 IST — explore
+    - cron: '0 10 * * *'   # 15:30 IST — hashtags
+    - cron: '40 10 * * *'  # 16:10 IST — stories
+    - cron: '15 11 * * *'  # 16:45 IST — explore
+    - cron: '50 11 * * *'  # 17:20 IST — warm_audience
+    - cron: '30 12 * * *'  # 18:00 IST — hashtags
+    - cron: '5 13 * * *'   # 18:35 IST — stories
+    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH + explore (PRIME TIME)
+    - cron: '10 14 * * *'  # 19:40 IST — hashtags (post-publish engagement boost)
+    - cron: '45 14 * * *'  # 20:15 IST — replies
+    - cron: '20 15 * * *'  # 20:50 IST — explore (evening wind-down)
+    - cron: '0 16 * * *'   # 21:30 IST — warm_audience
+    - cron: '35 16 * * *'  # 22:05 IST — maintenance (unfollow + welcome DMs)
+    - cron: '15 17 * * *'  # 22:45 IST — maintenance (second pass)
+    - cron: '45 17 * * *'  # 23:15 IST — daily report
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'Session type'
+        required: true
+        default: 'full'
+        type: choice
+        options: [morning, replies, hashtags, explore, warm_audience, maintenance, stories, report, full, yt_engage, yt_replies, yt_full]
+      publish:
+        description: 'Also publish a post?'
+        type: boolean
+        default: false
+
+# IG sessions queue behind each other (YT runs independently on youtube-bot.yml)
+concurrency:
+  group: instagram-bot
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Restore Instagram session from cache (avoids re-login each run)
+      - name: Restore session cache
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: instagram_influencer/.ig_session.json
+          key: ig-session
+          restore-keys: ig-session
+
+      # Seed session from secret if no cache was restored
+      - name: Seed session from secret
+        run: |
+          if [ -f instagram_influencer/.ig_session.json ]; then
+            echo "Session restored from cache"
+          elif [ -n "$SESS_B64" ]; then
+            echo "$SESS_B64" | base64 -d > instagram_influencer/.ig_session.json
+            echo "Seeded session from secret"
+          else
+            echo "WARNING: No session available — bot will attempt fresh login"
+          fi
+        env:
+          SESS_B64: ${{ secrets.INSTAGRAM_SESSION_B64 }}
+
+      # Create .env from the DOTENV secret
+      - name: Create .env
+        run: echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
+
+      # Determine which session to run based on the trigger
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+            if [ "${{ inputs.publish }}" = "true" ]; then
+              echo "publish=true" >> $GITHUB_OUTPUT
+            else
+              echo "publish=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            # Scheduled run — map UTC hour+minute to IG session type
+            # Only 19:00 IST (UTC 1330) publishes — 1 post/day like a normal person
+            HHMM=$(date -u +%H%M)
+            case "${HHMM}" in
+              013*) echo "type=morning"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              021*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              024*) echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              032*) echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              040*) echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              043*) echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              051*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              054*) echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              062*) echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              070*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              073*) echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              081*) echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              084*) echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              092*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              100*) echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              104*) echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              111*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              115*) echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              123*) echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              130*) echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              133*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              141*) echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              144*) echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              152*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              160*) echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              163*) echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              171*) echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              174*) echo "type=report"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              *)    echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "Publish: ${{ steps.session.outputs.publish }}"
+          echo "Trigger: ${{ github.event_name }}"
+
+      # Run the bot (continue-on-error so state still gets committed)
+      - name: Run bot
+        id: bot
+        continue-on-error: true
+        run: |
+          cd instagram_influencer
+          FLAGS="--session ${{ steps.session.outputs.type }}"
+          if [ "${{ steps.session.outputs.publish }}" = "false" ]; then
+            FLAGS="$FLAGS --no-publish --no-generate"
+          fi
+          echo "Running: python orchestrator.py $FLAGS"
+          python orchestrator.py $FLAGS
+
+      - name: Check bot result
+        if: steps.bot.outcome == 'failure'
+        run: echo "::warning::Bot run failed — check logs above"
+
+      # Save updated session to cache
+      - name: Save session cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: instagram_influencer/.ig_session.json
+          key: ig-session-${{ github.run_id }}
+
+      # Commit updated state files + session back to the repo
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f instagram_influencer/engagement_log.json \
+                     instagram_influencer/followers.json \
+                     instagram_influencer/content_queue.json \
+                     instagram_influencer/highlights.json \
+                     instagram_influencer/daily_report.md \
+                     instagram_influencer/.ig_session.json \
+                     "instagram_influencer/generated_images/IMAGE_PROMPTS.md" \
+                     "instagram_influencer/generated_images/pending/" 2>/dev/null || true
+          git diff --staged --quiet || (
+            git commit -m "bot: state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git push
+          )
