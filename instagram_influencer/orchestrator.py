@@ -14,7 +14,7 @@ from config import DEFAULT_QUEUE_FILE, Config, load_config, setup_logging
 from engagement import run_engagement, run_session
 from generator import generate_content
 from image import fill_image_urls
-from publisher import publish
+from publisher import publish, _get_client
 from video import convert_posts_to_video
 from post_queue import (
     find_eligible,
@@ -300,6 +300,21 @@ def main() -> int:
                     # Publish to YouTube Shorts (non-blocking — IG publish is primary)
                     if posts[idx].get("status") == "posted":
                         _publish_to_youtube(cfg, posts[idx], idx, posts, args.queue_file)
+
+                        # Post-publish engagement burst (first 30 min = algorithmic fate)
+                        # Pin CTA comment + story repost + mini engagement burst
+                        if cfg.engagement_enabled:
+                            try:
+                                from engagement import run_post_publish_burst
+                                pub_cl = _get_client(cfg)
+                                burst_stats = run_post_publish_burst(
+                                    pub_cl, cfg,
+                                    str(posts[idx].get("platform_post_id", "")),
+                                    posts[idx],
+                                )
+                                log.info("Post-publish burst: %s", burst_stats)
+                            except Exception as exc:
+                                log.warning("Post-publish burst failed: %s", exc)
 
         # 6. Engagement (Instagram + YouTube sessions)
         if args.session:

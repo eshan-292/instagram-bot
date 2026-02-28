@@ -189,7 +189,7 @@ Two **independent workflows** run in parallel with separate concurrency groups �
 
 **1 post/day** published to both platforms at prime time (19:00 IST) via the IG workflow.
 
-### Instagram Schedule (28 sessions — `instagram-bot.yml`)
+### Instagram Schedule (29 sessions — `instagram-bot.yml`)
 
 | IST Time | Session | Notes |
 |----------|---------|-------|
@@ -213,12 +213,13 @@ Two **independent workflows** run in parallel with separate concurrency groups �
 | 17:20 | Warm audience | |
 | 18:00 | Hashtags | |
 | 18:35 | Stories | |
-| **19:00** | **PUBLISH + explore** | **PRIME TIME — publishes to IG + YT** |
+| **19:00** | **PUBLISH + explore** | **PRIME TIME — publishes to IG + YT + pin comment + story repost + burst** |
 | 19:40 | Hashtags | Post-publish engagement boost |
+| **20:00** | **Boost** | **Viral detection — auto-boost posts with 2x+ avg engagement** |
 | 20:15 | Replies | |
 | 20:50 | Explore | Evening wind-down |
 | 21:30 | Warm audience | |
-| 22:05 | Maintenance | Unfollow + welcome DMs |
+| 22:05 | Maintenance | Unfollow + welcome DMs + comment follow-up DMs |
 | 22:45 | Maintenance | Second pass |
 | 23:15 | Daily report | |
 
@@ -241,7 +242,7 @@ Runs **in parallel** with IG — never blocks or is blocked by IG sessions.
 | 20:45 | YT engage | Evening YouTube binge |
 | 22:15 | YT replies | Last reply pass |
 
-**Total: 40 sessions/day** (28 IG + 12 YT) running in parallel.
+**Total: 41 sessions/day** (29 IG + 12 YT) running in parallel.
 
 ## Anti-Detection & Human-Like Behavior
 
@@ -266,7 +267,21 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 - **5 warm sessions/day** (08:15, 11:50, 14:15, 17:20, 21:30 IST)
 - Target accounts: similar Indian fashion influencers (configurable via `ENGAGEMENT_TARGET_ACCOUNTS`)
 - Per user: like 2-3 posts + genuine comment + optional follow (~40%)
-- Follow rate reduced from hashtags (35%, down from 55%) — budget shifted to warm targeting
+- Follow rate reduced from hashtags — budget shifted to warm targeting
+- Smart follow targeting: micro-influencers (1K-50K followers) followed at 70% rate, others at 20%
+
+### Viral Growth Features (2026 Algorithm)
+
+| Feature | Impact | How It Works |
+|---------|--------|-------------|
+| **Video text overlays** | +80-150% watch completion | Bold on-screen hook/body/CTA on every Reel (85% watch mute) |
+| **Snap zoom hook** | +40-60% 3-sec hold rate | Visual punch in first 0.5s (1.0x→1.3x snap then settle) |
+| **Post-publish burst** | +50-100% reach per post | Pin CTA comment + instant story + mini engagement burst |
+| **Viral auto-boost** | Snowball viral posts | Detects 2x+ avg engagement → re-story + boost engagement |
+| **Comment-to-DM** | 5-10x follow-back rate | Personalized DM to commenters referencing their comment |
+| **Power user targeting** | +20-30% follow-back rate | Prioritize micro-influencers (1K-50K followers) |
+| **Carousel montage** | +24% shares, +19% reach | 5-slide carousel → 30s Reel with transitions |
+| **Viral hook patterns** | Higher scroll-stop rate | POV:, numbers, curiosity gaps in Gemini prompt |
 
 ### Instagram Limits
 
@@ -274,11 +289,12 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 |--------|------------|-------|
 | Likes | 250 | Spread across all sessions |
 | Comments | 60 | AI-generated, context-aware |
-| Follows | 80 | Mix of warm targeting (40%) + hashtag (35%) + explore (30%) |
+| Follows | 80 | Smart targeting: 70% micro-influencers, 20% others |
 | Story views | 150 | ~75% chance per user, ~35% like rate |
 | Replies | 50 | On own posts (last 48h) — reply to ALL |
 | Unfollows | 60/run | After 2+ days |
 | Welcome DMs | 15/day | Run during morning + maintenance |
+| Comment DMs | 8/day | Personalized follow-up to commenters |
 
 ### YouTube Limits
 

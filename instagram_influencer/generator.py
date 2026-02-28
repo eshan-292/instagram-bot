@@ -26,6 +26,30 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
     if not isinstance(slides, list):
         slides = []
 
+    # Video text overlay — 3 short lines for on-screen display (85% watch on mute)
+    video_text_raw = item.get("video_text")
+    if isinstance(video_text_raw, list):
+        video_text = [str(t).strip() for t in video_text_raw if str(t).strip()][:3]
+    else:
+        video_text = None
+
+    # Auto-generate video_text from caption if Gemini didn't provide it
+    if not video_text:
+        caption = str(item.get("caption", "")).strip()
+        if caption:
+            lines = [l.strip() for l in caption.split("\n") if l.strip()]
+            video_text = []
+            if len(lines) >= 1:
+                # Hook: first line, truncated to ~8 words
+                hook = " ".join(lines[0].split()[:8])
+                video_text.append(hook)
+            if len(lines) >= 3:
+                # Body: middle question line
+                video_text.append(" ".join(lines[len(lines) // 2].split()[:8]))
+            if len(lines) >= 2:
+                # CTA: last line
+                video_text.append(" ".join(lines[-1].split()[:8]))
+
     draft: dict[str, Any] = {
         "id": post_id,
         "status": "draft",
@@ -33,6 +57,7 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
         "caption": str(item.get("caption", "")).strip() or "My standards are not seasonal.",
         "alt_text": str(item.get("alt_text", "")).strip() or "",
         "youtube_title": str(item.get("youtube_title", "")).strip() or "",
+        "video_text": video_text or [],
         "image_url": "",
         "video_url": None,
         "is_reel": post_type == "reel",
@@ -51,6 +76,7 @@ TEMPLATES = [
         "caption": "3 Mumbai street looks under ₹2000.\nThree outfits. One rule: don't look broke.\nWhich one are you wearing first?\nSend this to your shopping bestie.",
         "alt_text": "Young Indian woman showcasing three budget-friendly street style outfits on a Mumbai street",
         "youtube_title": "3 Budget Outfits Under ₹2000 That Look Expensive",
+        "video_text": ["3 looks. ₹2000. Zero compromises.", "Which one are you stealing?", "Send to your shopping bestie"],
         "notes": "full-body frame, bright Mumbai street background",
         "post_type": "carousel",
         "slides": [
@@ -67,6 +93,7 @@ TEMPLATES = [
         "caption": "Blazer on Mumbai streets.\nPolite is not my default setting. Presence is.\nWould you rock this?\nSend to someone who needs this energy.",
         "alt_text": "Indian woman in a structured blazer walking confidently on a Mumbai city street",
         "youtube_title": "Power Blazer Street Style That Commands Attention",
+        "video_text": ["Blazer. Mumbai streets. Main character.", "Would you rock this?", "Send to someone who needs this"],
         "notes": "mid shot, blazer silhouette, clean city background",
         "post_type": "reel",
     },
@@ -75,6 +102,7 @@ TEMPLATES = [
         "caption": "One kurta. Five personalities.\nWhich one are you?\nSave this — your wardrobe will thank you.\nTag your friend who needs this hack.",
         "alt_text": "Young Indian woman styling a single kurta five different ways from casual to evening",
         "youtube_title": "1 Kurta Styled 5 Ways - Ethnic to Street",
+        "video_text": ["1 kurta. 5 completely different vibes.", "Which style is you?", "Save this for your next outfit crisis"],
         "notes": "clean studio-style background, full-body each look",
         "post_type": "carousel",
         "slides": [
@@ -91,6 +119,7 @@ TEMPLATES = [
         "caption": "Minimal makeup authority look.\nYou wanted sweet — I brought standards.\nCould you pull this off?\nScreenshot this for your next power moment.",
         "alt_text": "Close-up portrait of Indian woman with minimal natural makeup and structured hair",
         "youtube_title": "Minimal Makeup Maximum Confidence - Natural Look",
+        "video_text": ["Minimal makeup. Maximum authority.", "Could you pull this off?", "Screenshot this for your next moment"],
         "notes": "close-up, natural skin texture, structured hair",
         "post_type": "single",
     },
@@ -99,6 +128,7 @@ TEMPLATES = [
         "caption": "GRWM for a Bandra house party.\nThat 'what do I wear' panic? Been there.\nWhat's your go-to party outfit?\nSend this to the one who always asks what to wear.",
         "alt_text": "Young Indian woman getting ready for a party in her bedroom with warm lighting",
         "youtube_title": "Get Ready With Me - Bandra House Party Edition",
+        "video_text": ["POV: getting ready for Bandra party", "That outfit panic? Been there.", "Send to your always-late bestie"],
         "notes": "bedroom/vanity setting, warm lighting, candid getting-ready vibe",
         "post_type": "reel",
     },
@@ -132,8 +162,14 @@ GEMINI_PROMPT = (
     "   - 'Your bestie needs to see this' / 'POV: showing this to your friends'\n"
     "   - Relatable content people share in DMs (budget finds, outfit debates, hot takes)\n"
     "   - Numbered lists and 'save for later' formats\n"
-    "2. HOOK in first 3 words: the first line MUST stop the scroll. Use a number, question, "
-    "or bold statement. E.g. '3 outfits. ₹2000. Zero compromises.' NOT 'So today I styled...'\n"
+    "2. HOOK — FIRST 3 WORDS MUST CREATE PATTERN INTERRUPT. Use these PROVEN viral formats:\n"
+    "   - Numbers stop scrolls: '3 outfits.', '5 ways to...', '₹2000. Zero compromises.'\n"
+    "   - POV format: 'POV: your bestie styled you', 'POV: Mumbai streets at 7am'\n"
+    "   - Bold claims: 'This outfit costs ₹800.', 'Stop buying basics.'\n"
+    "   - Curiosity gaps: 'Wait for the last one.', 'Nobody talks about this.'\n"
+    "   - Direct commands: 'Stop scrolling if you...', 'Save this before it gets buried.'\n"
+    "   Include a specific NUMBER in at least 50% of hooks (numbers stop scrolls).\n"
+    "   NEVER start with 'So today I...' or 'Hey guys' — instant scroll-past.\n"
     "3. Front-load SEARCHABLE KEYWORDS in the first line (Instagram + YouTube are search engines). "
     "Start with the topic keyword, not a pronoun.\n"
     "4. Line 2: relatable pain point or hot take that drives comments\n"
@@ -163,6 +199,12 @@ GEMINI_PROMPT = (
     "- topic: specific scene (not generic, include location/occasion/price if relevant)\n"
     "- caption: 3-5 lines — scroll-stopping hook first, question in middle, send/share CTA last, "
     "NO hashtags\n"
+    "- video_text: array of EXACTLY 3 short text lines (max 8 words each) for ON-SCREEN overlay "
+    "in the Reel video. These appear as bold text on the video for viewers watching on mute (85%%). "
+    "Line 1 = hook (same energy as caption hook but shorter), "
+    "Line 2 = key point or question, Line 3 = CTA. "
+    "Examples: ['3 looks. ₹2000. No compromises.', 'Which one are you wearing?', 'Save this for later'], "
+    "['POV: Bandra party. Zero budget.', 'That outfit panic? Been there.', 'Send to your always-late bestie']\n"
     "- alt_text: descriptive accessibility text for the image (60-120 chars). Describe what's "
     "visually shown for screen readers + Instagram SEO. E.g. 'Young Indian woman in a rust "
     "linen coord set walking through Bandra street market'\n"

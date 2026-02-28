@@ -98,6 +98,7 @@ def generate_report() -> str:
         "story_likes": "⭐ Story Likes",
         "replies": "↩️ Comment Replies",
         "dms": "✉️ Welcome DMs",
+        "comment_dms": "💬✉️ Comment Follow-up DMs",
         "stories_posted": "📸 Stories Posted",
         "yt_likes": "▶️ YT Likes",
         "yt_comments": "▶️ YT Comments",
