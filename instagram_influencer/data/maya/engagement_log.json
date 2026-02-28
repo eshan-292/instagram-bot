@@ -3284,6 +3284,81 @@
       "type": "follows",
       "target": "79582740884",
       "at": "2026-02-28T12:21:21Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "Byq7-NaQ4u0",
+      "at": "2026-02-28T15:38:47Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "tegKaSEpFf4",
+      "at": "2026-02-28T15:39:38Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "gPhxdSyxQ9c",
+      "at": "2026-02-28T15:40:06Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "gPhxdSyxQ9c",
+      "at": "2026-02-28T15:40:09Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "QmFHQhftYYY",
+      "at": "2026-02-28T15:41:02Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "xaK09WQMYE0",
+      "at": "2026-02-28T15:41:27Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "xaK09WQMYE0",
+      "at": "2026-02-28T15:41:32Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "NMouUI_EPsE",
+      "at": "2026-02-28T15:41:59Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "NMouUI_EPsE",
+      "at": "2026-02-28T15:42:03Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "jruXbPgNKzg",
+      "at": "2026-02-28T15:42:30Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "8QfqPKbBntI",
+      "at": "2026-02-28T15:43:13Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "8QfqPKbBntI",
+      "at": "2026-02-28T15:43:17Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "MmVWI1XrCjg",
+      "at": "2026-02-28T15:43:58Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "obK_fwjPdEc",
+      "at": "2026-02-28T15:44:35Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "L1Q1MOAxnRM",
+      "at": "2026-02-28T15:45:18Z"
     }
   ]
 }
