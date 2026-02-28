@@ -1,38 +1,41 @@
-name: Instagram Bot
+name: Instagram + YouTube Bot
 
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
     # Strategy: many small sessions = human phone-check pattern
-    # 1 post/day at prime time + maximum engagement spread throughout
+    # 1 post/day at prime time (both IG + YT) + engagement spread throughout
     # Each session has 0-4min startup jitter built into the code
+    #
+    # YouTube sessions interspersed with Instagram sessions
+    # YT engagement 4x/day, YT replies 2x/day
     - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
     - cron: '15 2 * * *'   # 07:45 IST — explore (morning scroll)
     - cron: '0 3 * * *'    # 08:30 IST — hashtags
     - cron: '30 3 * * *'   # 09:00 IST — replies
     - cron: '15 4 * * *'   # 09:45 IST — stories
-    - cron: '0 5 * * *'    # 10:30 IST — hashtags
+    - cron: '0 5 * * *'    # 10:30 IST — YT engage (morning YouTube browse)
     - cron: '30 5 * * *'   # 11:00 IST — explore
     - cron: '0 6 * * *'    # 11:30 IST — hashtags
     - cron: '30 6 * * *'   # 12:00 IST — explore (lunch break)
     - cron: '0 7 * * *'    # 12:30 IST — hashtags
-    - cron: '30 7 * * *'   # 13:00 IST — explore
+    - cron: '30 7 * * *'   # 13:00 IST — YT replies (respond to comments)
     - cron: '0 8 * * *'    # 13:30 IST — hashtags
     - cron: '30 8 * * *'   # 14:00 IST — stories
     - cron: '15 9 * * *'   # 14:45 IST — explore
     - cron: '0 10 * * *'   # 15:30 IST — hashtags
     - cron: '30 10 * * *'  # 16:00 IST — replies
-    - cron: '15 11 * * *'  # 16:45 IST — hashtags
+    - cron: '15 11 * * *'  # 16:45 IST — YT engage (afternoon YouTube)
     - cron: '0 12 * * *'   # 17:30 IST — explore
     - cron: '30 12 * * *'  # 18:00 IST — stories
     - cron: '0 13 * * *'   # 18:30 IST — hashtags
-    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH + hashtags (PRIME TIME)
+    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH (IG + YT) + hashtags (PRIME TIME)
     - cron: '0 14 * * *'   # 19:30 IST — explore
-    - cron: '30 14 * * *'  # 20:00 IST — hashtags
+    - cron: '30 14 * * *'  # 20:00 IST — YT engage (evening YouTube)
     - cron: '15 15 * * *'  # 20:45 IST — replies
     - cron: '0 16 * * *'   # 21:30 IST — explore (evening wind-down)
     - cron: '30 16 * * *'  # 22:00 IST — maintenance (unfollow)
-    - cron: '0 17 * * *'   # 22:30 IST — hashtags (late night)
+    - cron: '0 17 * * *'   # 22:30 IST — YT replies (evening reply session)
     - cron: '30 17 * * *'  # 23:00 IST — maintenance
     - cron: '0 18 * * *'   # 23:30 IST — daily report
 
@@ -43,7 +46,7 @@ on:
         required: true
         default: 'full'
         type: choice
-        options: [morning, replies, hashtags, explore, maintenance, stories, report, full]
+        options: [morning, replies, hashtags, explore, maintenance, stories, report, full, yt_engage, yt_replies, yt_full]
       publish:
         description: 'Also publish a post?'
         type: boolean
@@ -124,28 +127,28 @@ jobs:
               030*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               033*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               041*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              050*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              050*) echo "type=yt_engage"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               053*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               060*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               063*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               070*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              073*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              073*) echo "type=yt_replies"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               080*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               083*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               091*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               100*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               103*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              111*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              111*) echo "type=yt_engage"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               120*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               123*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               130*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               133*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
               140*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              143*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              143*) echo "type=yt_engage"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               151*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               160*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               163*) echo "type=maintenance" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              170*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              170*) echo "type=yt_replies"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               173*) echo "type=maintenance" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               180*) echo "type=report"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               *)    echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;

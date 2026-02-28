@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Main pipeline: generate → images → video → promote → publish."""
+"""Main pipeline: generate → images → video → promote → publish (IG + YouTube)."""
 
 from __future__ import annotations
 
@@ -108,22 +108,33 @@ _CAROUSEL_TAGS = [
 _KEYWORD_PHRASES = [
     "Mumbai fashion", "Indian street style", "Outfit inspiration",
     "Desi fashion diaries", "Style tips India", "Fashion influencer Mumbai",
-    "Ethnic modern fusion", "Indian girl style",
+    "Ethnic modern fusion", "Indian girl style", "Budget styling India",
+    "College outfit ideas", "Indian fashion 2026", "Desi girl style",
+]
+
+# Cross-platform promotion CTAs — drives YouTube subscribers from IG
+_CROSS_PROMO_CTAS = [
+    "More on my YouTube \u2192 Maya Varma",
+    "Full video on YouTube! Link in bio",
+    "Watch the full styling on my YT channel",
+    "Extended version on YouTube \u2014 go check it out!",
 ]
 
 
-def _build_hashtags(caption: str, topic: str, post_type: str = "reel") -> str:
-    """Append 3-5 targeted hashtags + keyword phrase to caption.
+def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
+                    youtube_enabled: bool = False) -> str:
+    """Append hashtags + keyword phrase + optional YT cross-promo to caption.
 
     2026 algorithm: fewer, more relevant hashtags outperform tag-spraying.
     Keywords in the caption body drive more reach than the hashtag block.
+    Cross-platform promotion drives YouTube subscribers from Instagram.
     """
     # Always include brand tag
     tags = ["mayavarma"]
 
     # Pick 3-4 more from pool (carousel gets save-focused tags)
     pool = _CAROUSEL_TAGS if post_type == "carousel" else _HASHTAG_POOL[1:]
-    extras = random.sample(pool, min(3, len(pool)))
+    extras = random.sample(pool, min(4, len(pool)))
     for t in extras:
         if t not in tags:
             tags.append(t)
@@ -134,18 +145,70 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel") -> str:
     # One keyword phrase (drives search discovery)
     keyword = random.choice(_KEYWORD_PHRASES)
     hashtag_block = " ".join(f"#{t}" for t in tags)
-    return f"{caption}\n.\n{keyword}\n.\n{hashtag_block}"
+
+    result = f"{caption}\n.\n{keyword}\n.\n{hashtag_block}"
+
+    # Cross-platform promo on ~40% of posts when YouTube is enabled
+    if youtube_enabled and random.random() < 0.40:
+        promo = random.choice(_CROSS_PROMO_CTAS)
+        result += f"\n.\n{promo}"
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# YouTube Shorts publishing
+# ---------------------------------------------------------------------------
+
+def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
+                        posts: list[dict[str, Any]], queue_file: str) -> None:
+    """Publish a post to YouTube Shorts alongside Instagram.
+
+    Uses the YouTube-optimized 9:16 video if available, otherwise falls back
+    to the Instagram 4:5 video.
+    """
+    if not cfg.youtube_enabled:
+        return
+
+    from youtube_publisher import publish_short
+
+    # Prefer YouTube-format video, fall back to Instagram video
+    yt_video = str(item.get("youtube_video_url") or "").strip()
+    ig_video = str(item.get("video_url") or "").strip()
+    video_path = yt_video or ig_video
+
+    if not video_path:
+        log.debug("No video for YouTube upload of %s", item.get("id"))
+        return
+
+    topic = str(item.get("topic", ""))
+    caption = str(item.get("caption", ""))
+    thumbnail = str(item.get("image_url", "")) or None
+
+    try:
+        yt_id = publish_short(video_path, topic, caption, thumbnail_path=thumbnail)
+        if yt_id:
+            posts[idx]["youtube_video_id"] = yt_id
+            posts[idx]["youtube_posted_at"] = _utc_now_iso()
+            write_queue(queue_file, posts)
+            log.info("Published to YouTube: %s → https://youtube.com/shorts/%s",
+                     item.get("id"), yt_id)
+        else:
+            log.warning("YouTube upload returned no ID for %s", item.get("id"))
+    except Exception as exc:
+        log.error("YouTube publish failed for %s: %s", item.get("id"), exc)
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Instagram bot pipeline")
+    parser = argparse.ArgumentParser(description="Instagram + YouTube bot pipeline")
     parser.add_argument("--queue-file", default=str(DEFAULT_QUEUE_FILE))
     parser.add_argument("--dry-run", action="store_true", help="Preview only")
     parser.add_argument("--no-generate", action="store_true")
     parser.add_argument("--no-publish", action="store_true")
     parser.add_argument("--no-engage", action="store_true")
     parser.add_argument("--session", type=str, default=None,
-                        help="Run a specific engagement session type (morning/replies/hashtags/explore/maintenance)")
+                        help="Run a specific session type (morning/replies/hashtags/explore/"
+                             "maintenance/stories/report/yt_engage/yt_replies/yt_full)")
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
     setup_logging(args.verbose)
@@ -160,7 +223,7 @@ def main() -> int:
             if chosen:
                 print(json.dumps({k: chosen[1].get(k) for k in
                     ("id", "status", "post_type", "scheduled_at", "caption",
-                     "image_url", "carousel_images")}, ensure_ascii=True))
+                     "image_url", "carousel_images", "youtube_video_url")}, ensure_ascii=True))
             else:
                 print("No eligible posts")
             return 0
@@ -179,8 +242,8 @@ def main() -> int:
                 write_queue(args.queue_file, posts)
                 log.info("Filled %d image URLs", updated)
 
-            # 3. Convert images to video (for Reels — 2.25x more reach)
-            video_count = convert_posts_to_video(posts)
+            # 3. Convert images to video (IG Reels + YouTube Shorts)
+            video_count = convert_posts_to_video(posts, youtube=cfg.youtube_enabled)
             if video_count:
                 write_queue(args.queue_file, posts)
                 log.info("Converted %d posts to video", video_count)
@@ -192,7 +255,7 @@ def main() -> int:
                     write_queue(args.queue_file, posts)
                     log.info("Promoted %d drafts", promoted)
 
-        # 5. Publish next eligible post
+        # 5. Publish next eligible post (Instagram + YouTube)
         if not args.no_publish:
             chosen = find_eligible(posts)
             if chosen is None:
@@ -214,11 +277,13 @@ def main() -> int:
                 if not has_media:
                     log.warning("Post %s has no media, skipping", item.get("id"))
                 else:
-                    # Inject hashtags for discoverability
+                    # Inject hashtags + cross-platform promo for discoverability
                     full_caption = _build_hashtags(
-                        caption, str(item.get("topic", "")), post_type
+                        caption, str(item.get("topic", "")), post_type,
+                        youtube_enabled=cfg.youtube_enabled,
                     )
 
+                    # Publish to Instagram
                     try:
                         post_id = publish(cfg, full_caption, image_url,
                                           video_url=video_url, is_reel=is_reel,
@@ -236,11 +301,24 @@ def main() -> int:
 
                     write_queue(args.queue_file, posts)
 
-        # 6. Engagement (like/comment/follow on niche posts)
+                    # Publish to YouTube Shorts (non-blocking — IG publish is primary)
+                    if posts[idx].get("status") == "posted":
+                        _publish_to_youtube(cfg, posts[idx], idx, posts, args.queue_file)
+
+        # 6. Engagement (Instagram + YouTube sessions)
         if args.session:
-            # Session-only mode: skip publishing, just run engagement session
-            engagement_stats = run_session(cfg, args.session)
-            log.info("Session '%s': %s", args.session, engagement_stats)
+            # YouTube-specific sessions
+            if args.session.startswith("yt_"):
+                if cfg.youtube_enabled and cfg.youtube_engagement_enabled:
+                    from youtube_engagement import run_yt_session
+                    yt_stats = run_yt_session(cfg, args.session)
+                    log.info("YouTube session '%s': %s", args.session, yt_stats)
+                else:
+                    log.info("YouTube engagement disabled, skipping %s", args.session)
+            else:
+                # Instagram session
+                engagement_stats = run_session(cfg, args.session)
+                log.info("Session '%s': %s", args.session, engagement_stats)
         elif not args.no_engage and cfg.engagement_enabled:
             engagement_stats = run_engagement(cfg)
             log.info("Engagement: %s", engagement_stats)

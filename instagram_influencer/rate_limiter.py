@@ -16,12 +16,12 @@ log = logging.getLogger(__name__)
 
 LOG_FILE = Path(__file__).resolve().parent / "engagement_log.json"
 
-# Aggressive growth defaults — warmup multiplier keeps these safe for new accounts.
+# Maximum growth defaults — warmup multiplier keeps these safe for new accounts.
 # Override via Config fields.
 DAILY_LIMITS = {
-    "likes": 200,
-    "comments": 60,
-    "follows": 100,
+    "likes": 300,
+    "comments": 80,
+    "follows": 120,
 }
 
 
