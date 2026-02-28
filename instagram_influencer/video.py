@@ -60,8 +60,11 @@ def image_to_video(
     pan_x = f"iw/2-(iw/zoom/2)+10*on/{total_frames}"
     pan_y = "ih/2-(ih/zoom/2)"
 
+    # Cover-mode scale: ensure image is at least 2x target in BOTH dimensions,
+    # then center-crop to exact 2x size. This handles any aspect ratio source →
+    # any target ratio (e.g., 4:5 source → 9:16 YT output).
     vf = (
-        f"scale={width * 2}:-1,"
+        f"scale={width * 2}:{height * 2}:force_original_aspect_ratio=increase,"
         f"crop={width * 2}:{height * 2},"
         f"zoompan=z='{zoom_expr}':x='{pan_x}':y='{pan_y}':"
         f"d={total_frames}:s={width}x{height}:fps={FPS},"
