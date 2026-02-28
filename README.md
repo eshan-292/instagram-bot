@@ -150,7 +150,7 @@ The bot automatically picks up the images at 19:00 IST and publishes them.
 
 ## Daily Schedule (GitHub Actions)
 
-The bot runs **18 scheduled sessions/day** — matching real human phone usage patterns. ~20% of sessions are randomly skipped (simulating being busy), so effective sessions are **~14/day**. **1 post per day** at prime time (13:30 UTC / 19:00 IST). Each session has 30s-6min random startup jitter.
+The bot runs **19 scheduled sessions/day** — matching real human phone usage patterns. ~20% of sessions are randomly skipped (simulating being busy), so effective sessions are **~15/day**. **1 post per day** at prime time (13:30 UTC / 19:00 IST). Each session has 30s-6min random startup jitter.
 
 ### Schedule
 
@@ -160,19 +160,20 @@ The bot runs **18 scheduled sessions/day** — matching real human phone usage p
 | 05:30 | Hashtags | Early bird |
 | 07:00 | Morning engagement | Wake up scroll |
 | 08:30 | Hashtags | Commute scroll |
-| 10:00 | Explore | Mid-morning |
+| 10:00 | **Stories** | Morning stories |
 | 11:00 | Replies | Reply to comments |
 | 12:00 | Hashtags | Lunch break |
 | **13:30** | **PUBLISH + Hashtags** | **Prime time** |
+| 14:00 | **Stories** | Post-publish stories |
 | 14:45 | Explore | Afternoon |
-| 16:00 | Stories | Story repost |
+| 16:00 | **Stories** | Afternoon stories |
 | 17:30 | Hashtags | Evening prime |
-| 18:00 | Explore | After work |
+| 18:00 | **Stories** | Evening stories |
 | 19:00 | Hashtags | Evening engagement |
 | 20:30 | Replies | Reply to comments |
 | 21:30 | Explore | Winding down |
 | 22:00 | Maintenance | Auto-unfollow |
-| 22:30 | Stories | Late stories |
+| 22:30 | **Stories** | Late night stories |
 | 23:30 | Report | Daily summary |
 
 ## What Each Session Does
@@ -209,7 +210,7 @@ Fetches comments on Maya's own posts from the **last 48 hours** and replies usin
 
 ---
 
-### 📖 `stories` — Repost content as stories (2x/day)
+### 📖 `stories` — Repost content as stories (5x/day: 10:00, 14:00, 16:00, 18:00, 22:30)
 Picks 2-3 already-published posts and reposts them as stories with:
 - A text overlay ("In case you missed it", "Still obsessed", etc.)
 - An interactive sticker: **poll** (35%), **question box/AMA** (30%), **quiz** (20%), or clean (15%)
@@ -271,7 +272,7 @@ The bot uses multiple layers of human simulation to avoid detection:
 
 ## Stories
 
-- **2 story sessions/day** (16:00, 22:30 IST)
+- **5 story sessions/day** (10:00, 14:00, 16:00, 18:00, 22:30 IST)
 - Reposts 2-3 past posts with text overlays
 - **Auto-downloads media from Instagram** if local files don't exist (works seamlessly in CI)
 - Interactive stickers: 35% poll, 30% question box (AMA), 20% quiz, 15% clean
