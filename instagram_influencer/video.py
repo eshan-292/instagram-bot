@@ -192,12 +192,14 @@ def image_to_video(
     # Cover-mode scale: ensure image is at least 2x target in BOTH dimensions,
     # then center-crop to exact 2x size. This handles any aspect ratio source →
     # any target ratio (e.g., 4:5 source → 9:16 YT output).
+    # NOTE: fade=in MUST come AFTER zoompan — zoompan reads only the first input
+    # frame; if fade is before zoompan, frame 0 is fully black → all output black.
     vf = (
-        f"fade=in:0:5,"  # subtle fade-in flash (5 frames = 0.17s)
         f"scale={width * 2}:{height * 2}:force_original_aspect_ratio=increase,"
         f"crop={width * 2}:{height * 2},"
         f"zoompan=z='{zoom_expr}':x='{pan_x}':y='{pan_y}':"
         f"d={total_frames}:s={width}x{height}:fps={FPS},"
+        f"fade=in:0:5,"  # subtle fade-in flash (5 frames = 0.17s) — after zoompan!
         f"format=yuv420p"
     )
 

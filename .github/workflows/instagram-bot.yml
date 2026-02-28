@@ -10,7 +10,14 @@ on:
     # PARALLEL: YouTube engagement runs on a SEPARATE workflow (youtube-bot.yml)
     # so IG and YT never block each other.
     #
-    # ~28 IG sessions/day — 07:00 to 23:15 IST, every 30-45 min with variation
+    # OVERNIGHT — lighter sessions every ~90 min (00:00-06:00 IST)
+    - cron: '30 18 * * *'  # 00:00 IST — explore (late night scroll)
+    - cron: '0 20 * * *'   # 01:30 IST — warm_audience
+    - cron: '30 21 * * *'  # 03:00 IST — hashtags
+    - cron: '0 23 * * *'   # 04:30 IST — explore
+    - cron: '30 0 * * *'   # 06:00 IST — warm_audience (early morning)
+    #
+    # DAYTIME — ~28 IG sessions, 07:00 to 23:15 IST, every 30-45 min
     - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
     - cron: '10 2 * * *'   # 07:40 IST — explore (morning scroll)
     - cron: '45 2 * * *'   # 08:15 IST — warm_audience (high-ROI targeting)
@@ -31,9 +38,9 @@ on:
     - cron: '50 11 * * *'  # 17:20 IST — warm_audience
     - cron: '30 12 * * *'  # 18:00 IST — hashtags
     - cron: '5 13 * * *'   # 18:35 IST — stories
-    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH + explore (PRIME TIME)
+    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH (videos pre-rendered, --no-generate)
     - cron: '10 14 * * *'  # 19:40 IST — hashtags (post-publish engagement boost)
-    - cron: '30 14 * * *'  # 20:00 IST — boost (viral detection + auto-boost, 1hr after publish)
+    - cron: '30 14 * * *'  # 20:00 IST — boost (viral detection, 1hr after publish)
     - cron: '45 14 * * *'  # 20:15 IST — replies
     - cron: '20 15 * * *'  # 20:50 IST — explore (evening wind-down)
     - cron: '0 16 * * *'   # 21:30 IST — warm_audience
@@ -56,7 +63,7 @@ on:
 
 # IG sessions queue behind each other (YT runs independently on youtube-bot.yml)
 concurrency:
-  group: instagram-bot
+  group: instagram-bot-maya
   cancel-in-progress: false
 
 permissions:
@@ -113,53 +120,55 @@ jobs:
       # Determine which session to run based on the trigger
       # IMPORTANT: Uses github.event.schedule (the exact cron expression) instead of
       # wall-clock time. GitHub Actions cron can delay 10-20+ minutes, so checking
-      # `date` would misroute sessions (e.g. publish at 13:30 UTC starts at 13:50,
-      # misses the 133* pattern and falls to default hashtags — post never publishes).
+      # `date` would misroute sessions.
       - name: Determine session
         id: session
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
-            if [ "${{ inputs.publish }}" = "true" ]; then
-              echo "publish=true" >> $GITHUB_OUTPUT
-            else
-              echo "publish=false" >> $GITHUB_OUTPUT
-            fi
+            PUBLISH="${{ inputs.publish }}"
+            echo "publish=${PUBLISH}" >> $GITHUB_OUTPUT
           else
             # Scheduled run — map exact cron expression to session type
-            # github.event.schedule is the cron that triggered this run (delay-proof)
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              "30 1 * * *")  echo "type=morning"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "10 2 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 2 * * *")  echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 3 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 4 * * *")   echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "35 4 * * *")  echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "10 5 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 5 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 6 * * *")  echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 7 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "35 7 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "10 8 * * *")  echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 8 * * *")  echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 9 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 10 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "40 10 * * *") echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "15 11 * * *") echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "50 11 * * *") echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 12 * * *") echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "5 13 * * *")  echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 13 * * *") echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
-              "10 14 * * *") echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 14 * * *") echo "type=boost"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 14 * * *") echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 15 * * *") echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 16 * * *")  echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "35 16 * * *") echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "15 17 * * *") echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 17 * * *") echo "type=report"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              *)             echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Overnight sessions (00:00-06:00 IST)
+              "30 18 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 20 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 21 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 23 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 0 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Daytime sessions (07:00-23:15 IST)
+              "30 1 * * *")   echo "type=morning"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "10 2 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 2 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "20 3 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 4 * * *")    echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "35 4 * * *")   echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "10 5 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 5 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "20 6 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 7 * * *")    echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "35 7 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "10 8 * * *")   echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 8 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "20 9 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 10 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "40 10 * * *")  echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "15 11 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "50 11 * * *")  echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 12 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "5 13 * * *")   echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 13 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              "10 14 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 14 * * *")  echo "type=boost"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 14 * * *")  echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "20 15 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 16 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "35 16 * * *")  echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "15 17 * * *")  echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 17 * * *")  echo "type=report"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              *)              echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
             esac
           fi
 
@@ -170,14 +179,16 @@ jobs:
           echo "Trigger: ${{ github.event_name }}"
 
       # Run the bot (continue-on-error so state still gets committed)
+      # Videos are pre-rendered locally/manually — always pass --no-generate
+      # Only the publish session gets to publish; all others are engagement-only
       - name: Run bot
         id: bot
         continue-on-error: true
         run: |
           cd instagram_influencer
-          FLAGS="--session ${{ steps.session.outputs.type }}"
+          FLAGS="--session ${{ steps.session.outputs.type }} --no-generate"
           if [ "${{ steps.session.outputs.publish }}" = "false" ]; then
-            FLAGS="$FLAGS --no-publish --no-generate"
+            FLAGS="$FLAGS --no-publish"
           fi
           echo "Running: python orchestrator.py $FLAGS"
           python orchestrator.py $FLAGS

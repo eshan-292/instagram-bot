@@ -1,10 +1,18 @@
-name: Instagram Bot - Aryan
+name: Instagram Bot (Aryan)
 
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
     # Staggered +15 min from Maya's schedule to avoid overlap
-    # ~28 IG sessions/day — 07:15 to 23:30 IST, every 30-45 min with variation
+    #
+    # OVERNIGHT — lighter sessions every ~90 min (00:15-06:15 IST)
+    - cron: '45 18 * * *'  # 00:15 IST — explore (late night scroll)
+    - cron: '15 20 * * *'  # 01:45 IST — warm_audience
+    - cron: '45 21 * * *'  # 03:15 IST — hashtags
+    - cron: '15 23 * * *'  # 04:45 IST — explore
+    - cron: '45 0 * * *'   # 06:15 IST — warm_audience (early morning)
+    #
+    # DAYTIME — ~28 IG sessions, 07:15 to 23:30 IST, every 30-45 min
     - cron: '45 1 * * *'   # 07:15 IST — morning engagement (wake up)
     - cron: '25 2 * * *'   # 07:55 IST — explore (morning scroll)
     - cron: '0 3 * * *'    # 08:30 IST — warm_audience (high-ROI targeting)
@@ -118,6 +126,13 @@ jobs:
           else
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
+              # Overnight
+              "45 18 * * *")  echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "15 20 * * *")  echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 21 * * *")  echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "15 23 * * *")  echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 0 * * *")   echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Daytime
               "45 1 * * *")  echo "type=morning"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "25 2 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "0 3 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
@@ -158,14 +173,15 @@ jobs:
           echo "Trigger: ${{ github.event_name }}"
 
       # Run the bot (continue-on-error so state still gets committed)
+      # Videos are pre-rendered locally/manually — always pass --no-generate
       - name: Run bot
         id: bot
         continue-on-error: true
         run: |
           cd instagram_influencer
-          FLAGS="--session ${{ steps.session.outputs.type }}"
+          FLAGS="--session ${{ steps.session.outputs.type }} --no-generate"
           if [ "${{ steps.session.outputs.publish }}" = "false" ]; then
-            FLAGS="$FLAGS --no-publish --no-generate"
+            FLAGS="$FLAGS --no-publish"
           fi
           echo "Running: python orchestrator.py $FLAGS"
           python orchestrator.py $FLAGS
