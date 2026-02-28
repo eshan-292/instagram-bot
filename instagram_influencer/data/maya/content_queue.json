@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "maya-001",
-      "status": "approved",
+      "status": "failed",
       "topic": "Defying Mumbai's monsoon in avant-garde street style.",
       "caption": "They said stay home. I said, make an entrance. Some weather report.",
       "image_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/maya/generated_images/pending/maya-001.jpg",
@@ -10,7 +10,8 @@
       "is_reel": true,
       "scheduled_at": "2026-02-28T10:00:00Z",
       "notes": "Full shot, Maya in a structured, waterproof trench coat over a vibrant outfit, perhaps designer gumboots. Rain streaks visible but not obscuring her. Dark, moody overcast sky, street lights reflecting on wet asphalt. Confident, direct gaze, walking towards the camera. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/maya/generated_images/pending/maya-001_yt.mp4"
+      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/maya/generated_images/pending/maya-001_yt.mp4",
+      "publish_error": "Local file not found: /Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/maya/generated_images/pending/maya-001.mp4"
     },
     {
       "id": "maya-002",
