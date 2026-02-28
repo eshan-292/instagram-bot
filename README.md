@@ -189,6 +189,8 @@ Two **independent workflows** run in parallel with separate concurrency groups â
 
 **1 post/day** published to both platforms at prime time (19:00 IST) via the IG workflow.
 
+**Reliability:** Session routing uses `github.event.schedule` (the exact cron expression) instead of wall-clock time, making it immune to GitHub Actions cron delays (which can be 10-20+ minutes). State commits use `git pull --rebase` before push to handle parallel workflow race conditions.
+
 ### Instagram Schedule (29 sessions â€” `instagram-bot.yml`)
 
 | IST Time | Session | Notes |

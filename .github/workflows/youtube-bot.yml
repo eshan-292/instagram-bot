@@ -65,29 +65,29 @@ jobs:
         run: echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
 
       # Determine which YT session to run based on the trigger
+      # Uses github.event.schedule (exact cron expression) instead of wall-clock time
+      # to avoid misrouting due to GitHub Actions cron delays (can be 10-20+ min)
       - name: Determine session
         id: session
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
           else
-            # Scheduled run — map UTC hour+minute to YT session type
-            # Alternates: even slots = yt_engage, odd slots = yt_replies
-            HHMM=$(date -u +%H%M)
-            case "${HHMM}" in
-              020*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              033*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              044*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              060*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              073*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              090*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              101*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              113*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              124*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              140*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              151*) echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              164*) echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              *)    echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+            CRON="${{ github.event.schedule }}"
+            case "${CRON}" in
+              "0 2 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 3 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 4 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 6 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 7 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 9 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "15 10 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 11 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 12 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 14 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "15 15 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "45 16 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              *)             echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
             esac
           fi
 
@@ -118,5 +118,6 @@ jobs:
           git add -f instagram_influencer/engagement_log.json 2>/dev/null || true
           git diff --staged --quiet || (
             git commit -m "bot: yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git pull --rebase origin main || true
             git push
           )
