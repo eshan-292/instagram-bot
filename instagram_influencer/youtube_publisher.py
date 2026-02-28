@@ -149,8 +149,12 @@ def publish_short(
     topic: str,
     caption: str,
     thumbnail_path: str | None = None,
+    custom_title: str | None = None,
 ) -> str | None:
     """Upload a video as a YouTube Short.
+
+    Args:
+        custom_title: Gemini-generated SEO title. Falls back to _build_title() if empty.
 
     Returns the YouTube video ID on success, None on failure.
     """
@@ -167,7 +171,16 @@ def publish_short(
         log.warning("YouTube auth failed (skipping upload): %s", exc)
         return None
 
-    title = _build_title(topic, caption)
+    # Use Gemini-generated title if available, otherwise build from topic
+    if custom_title:
+        # Ensure #Shorts is appended and title fits under 100 chars
+        if "#Shorts" not in custom_title:
+            max_len = 100 - len(" #Shorts") - 1
+            title = custom_title[:max_len].strip() + " #Shorts"
+        else:
+            title = custom_title[:100]
+    else:
+        title = _build_title(topic, caption)
     description = _build_description(caption, topic)
     tags = _build_tags(topic)
 

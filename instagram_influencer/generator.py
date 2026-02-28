@@ -31,6 +31,8 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
         "status": "draft",
         "topic": str(item.get("topic", "")).strip() or "Mumbai street-luxe confidence fit",
         "caption": str(item.get("caption", "")).strip() or "My standards are not seasonal.",
+        "alt_text": str(item.get("alt_text", "")).strip() or "",
+        "youtube_title": str(item.get("youtube_title", "")).strip() or "",
         "image_url": "",
         "video_url": None,
         "is_reel": post_type == "reel",
@@ -46,7 +48,9 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
 TEMPLATES = [
     {
         "topic": "3 budget looks under ₹2000 — Mumbai street style",
-        "caption": "Mumbai street style under ₹2000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
+        "caption": "3 Mumbai street looks under ₹2000.\nThree outfits. One rule: don't look broke.\nWhich one are you wearing first?\nSend this to your shopping bestie.",
+        "alt_text": "Young Indian woman showcasing three budget-friendly street style outfits on a Mumbai street",
+        "youtube_title": "3 Budget Outfits Under ₹2000 That Look Expensive",
         "notes": "full-body frame, bright Mumbai street background",
         "post_type": "carousel",
         "slides": [
@@ -60,13 +64,17 @@ TEMPLATES = [
     },
     {
         "topic": "Power blazer with street-luxe edge",
-        "caption": "Mumbai streets hit different in a blazer.\nPolite is not my default setting. Presence is.",
+        "caption": "Blazer on Mumbai streets.\nPolite is not my default setting. Presence is.\nWould you rock this?\nSend to someone who needs this energy.",
+        "alt_text": "Indian woman in a structured blazer walking confidently on a Mumbai city street",
+        "youtube_title": "Power Blazer Street Style That Commands Attention",
         "notes": "mid shot, blazer silhouette, clean city background",
         "post_type": "reel",
     },
     {
         "topic": "One kurta, 5 ways — ethnic modern fusion",
-        "caption": "One kurta. Five personalities. Which one are you?\nSave this — you'll need it.",
+        "caption": "One kurta. Five personalities.\nWhich one are you?\nSave this — your wardrobe will thank you.\nTag your friend who needs this hack.",
+        "alt_text": "Young Indian woman styling a single kurta five different ways from casual to evening",
+        "youtube_title": "1 Kurta Styled 5 Ways - Ethnic to Street",
         "notes": "clean studio-style background, full-body each look",
         "post_type": "carousel",
         "slides": [
@@ -80,13 +88,17 @@ TEMPLATES = [
     },
     {
         "topic": "Minimal makeup, maximal authority look",
-        "caption": "You wanted sweet.\nI brought standards.",
+        "caption": "Minimal makeup authority look.\nYou wanted sweet — I brought standards.\nCould you pull this off?\nScreenshot this for your next power moment.",
+        "alt_text": "Close-up portrait of Indian woman with minimal natural makeup and structured hair",
+        "youtube_title": "Minimal Makeup Maximum Confidence - Natural Look",
         "notes": "close-up, natural skin texture, structured hair",
         "post_type": "single",
     },
     {
         "topic": "GRWM for a Bandra house party",
-        "caption": "Getting ready for a Bandra house party — my way.\nSend this to the one who always asks what to wear.",
+        "caption": "GRWM for a Bandra house party.\nThat 'what do I wear' panic? Been there.\nWhat's your go-to party outfit?\nSend this to the one who always asks what to wear.",
+        "alt_text": "Young Indian woman getting ready for a party in her bedroom with warm lighting",
+        "youtube_title": "Get Ready With Me - Bandra House Party Edition",
         "notes": "bedroom/vanity setting, warm lighting, candid getting-ready vibe",
         "post_type": "reel",
     },
@@ -114,19 +126,26 @@ GEMINI_PROMPT = (
     "Short punchy lines, sharp hooks, subtle wit, feminine dominance energy. "
     "Casual human tone — never robotic or generic.\n\n"
     "2026 ALGORITHM RULES (CRITICAL — follow these exactly):\n"
-    "- HOOK in first 3 words: the first line MUST stop the scroll. Use a number, question, "
+    "1. SENDS = #1 SIGNAL: 'Sends per reach' (DM shares) is weighted 3-5x over likes. "
+    "EVERY caption MUST be designed to be SENT to a friend. Use patterns that trigger sharing:\n"
+    "   - 'Send this to someone who...' / 'Tag the friend who needs this'\n"
+    "   - 'Your bestie needs to see this' / 'POV: showing this to your friends'\n"
+    "   - Relatable content people share in DMs (budget finds, outfit debates, hot takes)\n"
+    "   - Numbered lists and 'save for later' formats\n"
+    "2. HOOK in first 3 words: the first line MUST stop the scroll. Use a number, question, "
     "or bold statement. E.g. '3 outfits. ₹2000. Zero compromises.' NOT 'So today I styled...'\n"
-    "- Front-load keywords (Instagram + YouTube are search engines now): start with the topic.\n"
-    "- EVERY caption MUST end with a save/share CTA that creates FOMO or urgency: "
-    "'save before this gets buried', 'send to the one who needs this', "
-    "'screenshot this for later', 'which one are you wearing first?', "
-    "'tag someone who needs to see this'\n"
-    "- Line 2 should be a relatable pain point or hot take that drives comments\n"
-    "- Max 1-2 emojis total\n"
-    "- Ask a QUESTION in every caption (drives comments = algorithm boost)\n\n"
+    "3. Front-load SEARCHABLE KEYWORDS in the first line (Instagram + YouTube are search engines). "
+    "Start with the topic keyword, not a pronoun.\n"
+    "4. Line 2: relatable pain point or hot take that drives comments\n"
+    "5. Middle: ask a QUESTION (drives comments = algorithm signal)\n"
+    "6. LAST LINE: MUST be a send/share/save CTA that creates FOMO. Alternate between:\n"
+    "   'send this to someone who...', 'screenshot before this gets buried',\n"
+    "   'tag your friend who needs this', 'save this for your next shopping trip',\n"
+    "   'share this with the one who always asks what to wear'\n"
+    "7. Max 1-2 emojis total. NO hashtags in caption.\n\n"
     "CONTENT MIX (spread across {count} posts):\n"
     "- 40% carousels: '3 looks', 'one piece 5 ways', styling tips, before/after, budget fits, "
-    "'what I ordered vs what I got', wardrobe hacks\n"
+    "'what I ordered vs what I got', wardrobe hacks — carousels get highest saves+sends\n"
     "- 40% reels: outfit transitions, GRWM for Indian occasions (haldi, sangeet, party), "
     "before/after thrift transformations, 'style this with me', POV fashion moments\n"
     "- 20% single: aesthetic/editorial, minimal-caption power shots, quote overlays\n\n"
@@ -140,10 +159,15 @@ GEMINI_PROMPT = (
     "wedding season prep on a budget, styling my mom's old clothes\n\n"
     "For carousel posts, include 'slides': array of 5-6 short scene descriptions "
     "(what each slide should visually show — be specific about clothing, pose, setting).\n\n"
-    "Return ONLY a JSON array of {count} objects:\n"
+    "Return ONLY a JSON array of {count} objects with these fields:\n"
     "- topic: specific scene (not generic, include location/occasion/price if relevant)\n"
-    "- caption: 3-5 lines, scroll-stopping hook first, question in the middle, save/share CTA last, "
-    "no hashtags\n"
+    "- caption: 3-5 lines — scroll-stopping hook first, question in middle, send/share CTA last, "
+    "NO hashtags\n"
+    "- alt_text: descriptive accessibility text for the image (60-120 chars). Describe what's "
+    "visually shown for screen readers + Instagram SEO. E.g. 'Young Indian woman in a rust "
+    "linen coord set walking through Bandra street market'\n"
+    "- youtube_title: catchy YouTube Shorts title under 70 chars, keyword-rich, hooks viewer. "
+    "E.g. '3 Budget Outfits Under ₹2000 That Look Expensive' — do NOT include #Shorts\n"
     "- notes: photography direction for image generation (framing, lighting, mood)\n"
     "- post_type: 'reel' | 'carousel' | 'single'\n"
     "- slides: array of 5-6 scene descriptions (only for carousel, omit for reel/single)\n\n"

@@ -167,7 +167,13 @@ def image_to_youtube_short(image_path: str, output_path: str | None = None) -> s
 
 
 def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -> int:
-    """Convert images to videos for posts that need it. Returns count converted."""
+    """Convert images to videos for posts that need it. Returns count converted.
+
+    Audio strategy (2026 algorithm):
+      - Instagram Reels: SILENT video — trending music is overlaid at publish time
+        via publisher._find_trending_track() (Instagram algorithm boosts trending audio)
+      - YouTube Shorts: WITH audio — royalty-free music baked in (Pixabay/user/ambient)
+    """
     converted = 0
     for post in posts:
         status = str(post.get("status", "")).strip().lower()
@@ -179,18 +185,18 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
         if not image_url or not os.path.exists(image_url):
             continue
 
-        # Instagram video (4:5)
+        # Instagram video (4:5) — SILENT: trending audio added at publish time
         video_url = str(post.get("video_url") or "").strip()
         if not video_url or not os.path.exists(video_url):
             try:
-                video_path = image_to_video(image_url)
+                video_path = image_to_video(image_url, add_audio=False)
                 post["video_url"] = video_path
                 post["is_reel"] = True
                 converted += 1
             except Exception as exc:
                 log.warning("IG video conversion failed for %s: %s", post.get("id"), exc)
 
-        # YouTube Shorts video (9:16)
+        # YouTube Shorts video (9:16) — WITH audio: royalty-free music baked in
         if youtube:
             yt_video = str(post.get("youtube_video_url") or "").strip()
             if not yt_video or not os.path.exists(yt_video):

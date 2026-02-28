@@ -77,32 +77,21 @@ def _utc_now_iso() -> str:
 # Instagram now treats captions as keyword search — front-loaded topic keywords
 # carry more reach weight than hashtag spraying.
 
-# Core hashtag pool — pick 3-5 per post for variety without spam signals
-_HASHTAG_POOL = [
-    "mayavarma",          # brand (always included)
-    "indianfashion",
-    "mumbaifashion",
-    "ootd",
-    "indianstreetstyle",
-    "desistyle",
-    "ethnicwear",
-    "fashionreels",
-    "outfitoftheday",
-    "mumbaiblogger",
-    "fusionwear",
-    "desivibes",
-    "styleblogger",
-    "browngirlmagic",
-    "southasianstyle",
+# Hashtag pyramid strategy (2026):
+# 1 brand + 1 broad + 1-2 medium + 1 niche = 4-5 total (categorization, not discovery)
+_BROAD_TAGS = ["indianfashion", "ootd", "fashionreels", "outfitoftheday"]
+_MEDIUM_TAGS = [
+    "mumbaifashion", "indianstreetstyle", "desistyle", "ethnicwear",
+    "fusionwear", "browngirlmagic", "southasianstyle", "desivibes",
+]
+_NICHE_TAGS = [
+    "mumbaiblogger", "styleblogger", "desifashionista",
+    "indiangirlstyle", "mumbaigirlstyle", "indianfashionblogger",
 ]
 
-# Carousel-specific tags (drives saves — the highest-weight signal)
+# Carousel-specific tags (drives saves — highest-weight signal for carousels)
 _CAROUSEL_TAGS = [
-    "indianfashiontips",
-    "styleinspo",
-    "savethis",
-    "fashionguide",
-    "outfitideas",
+    "indianfashiontips", "styleinspo", "savethis", "fashionguide", "outfitideas",
 ]
 
 _KEYWORD_PHRASES = [
@@ -129,17 +118,19 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
     Keywords in the caption body drive more reach than the hashtag block.
     Cross-platform promotion drives YouTube subscribers from Instagram.
     """
-    # Always include brand tag
-    tags = ["mayavarma"]
+    # Pyramid strategy: 1 brand + 1 broad + 1-2 medium + 1 niche = 4-5 total
+    tags = ["mayavarma"]  # brand (always)
 
-    # Pick 3-4 more from pool (carousel gets save-focused tags)
-    pool = _CAROUSEL_TAGS if post_type == "carousel" else _HASHTAG_POOL[1:]
-    extras = random.sample(pool, min(4, len(pool)))
-    for t in extras:
-        if t not in tags:
-            tags.append(t)
+    if post_type == "carousel":
+        # Carousel: use save-focused tags instead of general pool
+        tags.extend(random.sample(_CAROUSEL_TAGS, min(3, len(_CAROUSEL_TAGS))))
+    else:
+        # Reel/single: pyramid mix
+        tags.append(random.choice(_BROAD_TAGS))
+        tags.extend(random.sample(_MEDIUM_TAGS, min(2, len(_MEDIUM_TAGS))))
+        tags.append(random.choice(_NICHE_TAGS))
 
-    # Cap at 5
+    # Cap at 5 (2026 best practice: 3-5 only)
     tags = tags[:5]
 
     # One keyword phrase (drives search discovery)
@@ -183,10 +174,13 @@ def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
 
     topic = str(item.get("topic", ""))
     caption = str(item.get("caption", ""))
+    youtube_title = str(item.get("youtube_title", "")).strip() or None
     thumbnail = str(item.get("image_url", "")) or None
 
     try:
-        yt_id = publish_short(video_path, topic, caption, thumbnail_path=thumbnail)
+        yt_id = publish_short(video_path, topic, caption,
+                              thumbnail_path=thumbnail,
+                              custom_title=youtube_title)
         if yt_id:
             posts[idx]["youtube_video_id"] = yt_id
             posts[idx]["youtube_posted_at"] = _utc_now_iso()
@@ -283,12 +277,14 @@ def main() -> int:
                         youtube_enabled=cfg.youtube_enabled,
                     )
 
-                    # Publish to Instagram
+                    # Publish to Instagram (with alt_text for SEO + accessibility)
+                    alt_text = str(item.get("alt_text", "")).strip() or None
                     try:
                         post_id = publish(cfg, full_caption, image_url,
                                           video_url=video_url, is_reel=is_reel,
                                           carousel_images=carousel_images,
-                                          post_type=post_type)
+                                          post_type=post_type,
+                                          alt_text=alt_text)
                         posts[idx]["status"] = "posted"
                         posts[idx]["posted_at"] = _utc_now_iso()
                         posts[idx]["platform_post_id"] = post_id

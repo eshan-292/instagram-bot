@@ -39,10 +39,10 @@ from rate_limiter import (
 
 log = logging.getLogger(__name__)
 
-# YouTube daily limits (conservative — YouTube is stricter than Instagram)
-YT_DAILY_LIKES = 30
-YT_DAILY_COMMENTS = 10
-YT_DAILY_REPLIES = 15
+# YouTube daily limits (increased for growth phase — stay within API quota)
+YT_DAILY_LIKES = 40
+YT_DAILY_COMMENTS = 15
+YT_DAILY_REPLIES = 25
 
 # Search queries for finding niche Shorts to engage with
 _NICHE_QUERIES = [
@@ -299,10 +299,7 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
             # Skip our own comments
             # (We'd need our channel ID to check, but most won't match)
 
-            # Only reply to ~30% of comments (selective like a real person)
-            if random.random() > 0.30:
-                continue
-
+            # Reply to ALL eligible comments — every reply drives algorithm signal
             reply = _generate_yt_reply(cfg, video_title, comment_text)
             if not reply:
                 continue

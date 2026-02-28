@@ -145,35 +145,54 @@ def _safe_remove(path: str) -> None:
         pass
 
 
-# Trending music search queries rotated per upload for variety
+# Trending music search queries — expanded for Indian fashion niche variety
+# Rotated per upload so the bot never repeats the same audio pattern
 _MUSIC_QUERIES = [
-    "trending bollywood", "trending hindi", "indian aesthetic",
-    "fashion vibes", "trending reels", "chill vibes", "lo-fi beats",
-    "aesthetic music", "mumbai nights", "desi beats",
+    # Bollywood / Indian pop (highest trending potential in India)
+    "trending bollywood", "trending hindi", "bollywood 2026",
+    "arijit singh trending", "desi pop", "hindi viral",
+    "bollywood aesthetic", "bollywood remix trending",
+    # Fashion / lifestyle (niche trending audio)
+    "fashion vibes", "runway music", "aesthetic music",
+    "chill vibes", "confidence anthem", "girl boss energy",
+    "stylish beat", "trendy pop", "feel good music",
+    # Indian aesthetic / cultural
+    "indian aesthetic", "mumbai nights", "desi beats",
+    "ethnic fusion music", "indian lo-fi", "desi vibes",
+    # Viral / trending general
+    "trending reels", "viral audio", "trending sound",
+    "lo-fi beats", "trending 2026", "viral reel sound",
 ]
 
 
 def _find_trending_track(cl: Client) -> Any | None:
-    """Search for a trending track to overlay on the Reel."""
+    """Search for a trending track to overlay on the Reel.
+
+    Tries up to 5 different queries for better hit rate.
+    Returns an Instagram music track object or None.
+    """
     import random as _rnd
-    queries = _rnd.sample(_MUSIC_QUERIES, min(3, len(_MUSIC_QUERIES)))
+    queries = _rnd.sample(_MUSIC_QUERIES, min(5, len(_MUSIC_QUERIES)))
     for query in queries:
         try:
             tracks = cl.search_music(query)
             if tracks:
                 # Pick a random track from the first few results
                 track = _rnd.choice(tracks[:5])
-                log.info("Found trending track: %s", getattr(track, "title", "unknown"))
+                log.info("Found trending track: '%s' (query='%s')",
+                         getattr(track, "title", "unknown"), query)
                 return track
         except Exception as exc:
             log.debug("Music search '%s' failed: %s", query, exc)
+    log.warning("No trending tracks found after %d queries", len(queries))
     return None
 
 
 def publish(cfg: Config, caption: str, image_url: str,
             video_url: str | None = None, is_reel: bool = False,
             carousel_images: list[str] | None = None,
-            post_type: str = "reel") -> str:
+            post_type: str = "reel",
+            alt_text: str | None = None) -> str:
     """Publish to Instagram.
 
     - carousel: album of 2-10 images via album_upload
@@ -186,7 +205,8 @@ def publish(cfg: Config, caption: str, image_url: str,
     try:
         cl = _get_client(cfg)
         return _do_upload(cl, caption, image_url, video_url, is_reel,
-                          carousel_images=carousel_images, post_type=post_type)
+                          carousel_images=carousel_images, post_type=post_type,
+                          alt_text=alt_text)
     except Exception as exc:
         if not _is_login_required_error(exc):
             raise
@@ -196,13 +216,15 @@ def publish(cfg: Config, caption: str, image_url: str,
         _delete_session()
         cl = _get_client(cfg)
         return _do_upload(cl, caption, image_url, video_url, is_reel,
-                          carousel_images=carousel_images, post_type=post_type)
+                          carousel_images=carousel_images, post_type=post_type,
+                          alt_text=alt_text)
 
 
 def _do_upload(cl: Client, caption: str, image_url: str,
                video_url: str | None, is_reel: bool,
                carousel_images: list[str] | None = None,
-               post_type: str = "reel") -> str:
+               post_type: str = "reel",
+               alt_text: str | None = None) -> str:
     # Carousel upload — multiple images as an album
     if post_type == "carousel" and carousel_images:
         valid_paths = [Path(p) for p in carousel_images if os.path.exists(p)]
@@ -283,7 +305,10 @@ def _do_upload(cl: Client, caption: str, image_url: str,
 
     local_path, is_temp = _resolve_media(image_url)
     try:
-        media = cl.photo_upload(Path(local_path), caption)
+        extra = {}
+        if alt_text:
+            extra["custom_accessibility_caption"] = alt_text
+        media = cl.photo_upload(Path(local_path), caption, extra_data=extra)
         log.info("Published photo: https://www.instagram.com/p/%s/", media.code)
         return str(media.pk)
     finally:

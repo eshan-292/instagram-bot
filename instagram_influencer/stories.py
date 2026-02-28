@@ -224,7 +224,7 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
             x=0.5, y=0.12, width=0.3, height=0.05, rotation=0.0,
         )]
     except Exception as exc:
-        log.debug("Could not create hashtag sticker: %s", exc)
+        log.warning("Could not create hashtag sticker: %s", exc)
 
     # Pick one interactive sticker (weighted)
     roll = random.random()
@@ -239,7 +239,7 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
                 question=question, options=options,
             )]
         except Exception as exc:
-            log.debug("Could not create poll sticker: %s", exc)
+            log.warning("Could not create poll sticker: %s", exc)
 
     elif roll < 0.65:
         # Question box sticker (AMA — high DM driver)
@@ -252,7 +252,7 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
                 type="text",
             )]
         except Exception as exc:
-            log.debug("Could not create question sticker: %s", exc)
+            log.warning("Could not create question sticker: %s", exc)
 
     elif roll < 0.85:
         # Quiz sticker (shareable, educational)
@@ -266,7 +266,7 @@ def _build_story_stickers(post: dict[str, Any]) -> dict[str, list]:
                 correct_answer=correct_idx,
             )]
         except Exception as exc:
-            log.debug("Could not create quiz sticker: %s", exc)
+            log.warning("Could not create quiz sticker: %s", exc)
 
     # else: no interactive sticker (clean story — 15% of the time)
 
@@ -338,11 +338,30 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
     is_video = False
     downloaded_temp = False
 
+    # Resolve paths relative to BASE_DIR (content_queue.json stores relative paths
+    # like "generated_images/maya-005.png" which only work if cwd is instagram_influencer/)
+    def _resolve(p: str) -> str | None:
+        if not p:
+            return None
+        if os.path.isabs(p) and os.path.exists(p):
+            return p
+        # Try relative to BASE_DIR first (most common in CI)
+        resolved = str(BASE_DIR / p)
+        if os.path.exists(resolved):
+            return resolved
+        # Try as-is (works when cwd is already instagram_influencer/)
+        if os.path.exists(p):
+            return p
+        return None
+
     # Try local files first
-    if image_url and os.path.exists(image_url):
-        media_path = image_url
-    elif video_url and os.path.exists(video_url):
-        media_path = video_url
+    resolved_image = _resolve(image_url)
+    resolved_video = _resolve(video_url)
+
+    if resolved_image:
+        media_path = resolved_image
+    elif resolved_video:
+        media_path = resolved_video
         is_video = True
     else:
         # Download from Instagram (local files don't exist in CI)
@@ -382,7 +401,7 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
         log.info("Reposted %s as story (pk=%s)", post.get("id"), story.pk)
         return str(story.pk)
     except Exception as exc:
-        log.warning("Story upload failed for %s: %s", post.get("id"), exc)
+        log.error("Story upload failed for %s: %s", post.get("id"), exc)
         return None
     finally:
         # Clean up overlay temp file
@@ -436,7 +455,9 @@ def run_story_session(cl: Any, cfg: Config) -> dict[str, int]:
         candidates.append(post)
 
     if not candidates:
-        log.info("No eligible posts for story reposting")
+        log.warning("No eligible posts for story reposting (total posted: %d, "
+                     "all either storied within 7 days or missing media)",
+                     sum(1 for p in posts if str(p.get("status", "")).lower() == "posted"))
         return stats
 
     # Pick 2-3 random posts
@@ -466,5 +487,6 @@ def run_story_session(cl: Any, cfg: Config) -> dict[str, int]:
     except OSError as exc:
         log.warning("Could not save queue after story session: %s", exc)
 
-    log.info("Story session done: %s", stats)
+    log.info("Story session done: %d/%d stories posted, %d highlights added (candidates: %d)",
+             stats["stories_posted"], pick_count, stats["highlights_added"], len(candidates))
     return stats

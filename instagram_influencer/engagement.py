@@ -562,10 +562,10 @@ def _run_hashtag_engagement(
                 except Exception as exc:
                     log.warning("Comment failed for %s: %s", media_id, exc)
 
-        # Follow ~55% of users (was 45% — profile browse first, main follower driver)
+        # Follow ~35% from hashtags (reduced from 55% — warm targeting is higher ROI)
         if (cfg.engagement_follow_enabled
                 and user_id
-                and random.random() < 0.55
+                and random.random() < 0.35
                 and can_act(data, "follows", follow_limit)):
             _browse_before_engage(cl, user_id)  # view profile first
             try:
@@ -592,19 +592,151 @@ def _run_hashtag_engagement(
 
 
 # ---------------------------------------------------------------------------
+# Feature: Warm audience targeting (engage followers of similar accounts)
+# ---------------------------------------------------------------------------
+
+def _parse_target_accounts(raw: str) -> list[str]:
+    """Parse comma-separated account usernames."""
+    return [a.strip().lstrip("@").lower() for a in raw.split(",") if a.strip()]
+
+
+def run_warm_audience_session(
+    cl: Any, cfg: Config, data: dict[str, Any],
+) -> dict[str, int]:
+    """Engage with followers of similar accounts in the niche.
+
+    Warm audience targeting converts 3-5x better than random follow/unfollow
+    because these users already consume similar content.
+
+    Strategy:
+      1. Pick a random target account (similar niche influencer)
+      2. Get their recent followers
+      3. For each: like 2-3 recent posts + leave a genuine comment on one
+      4. Optionally follow (~40% — lower than hashtag since quality > quantity)
+
+    This is the highest-ROI engagement strategy in 2026.
+    """
+    stats: dict[str, int] = {
+        "warm_likes": 0, "warm_comments": 0, "warm_follows": 0, "warm_story_views": 0,
+    }
+
+    targets = _parse_target_accounts(cfg.engagement_target_accounts)
+    if not targets:
+        log.info("No target accounts configured for warm audience targeting")
+        return stats
+
+    account = random.choice(targets)
+    log.info("Warm targeting: engaging followers of @%s", account)
+
+    # Resolve username to user_id
+    try:
+        target_user = cl.user_info_by_username(account)
+        target_id = target_user.pk
+    except Exception as exc:
+        log.warning("Could not resolve @%s: %s", account, exc)
+        return stats
+
+    # Get recent followers of the target account
+    try:
+        followers = cl.user_followers(target_id, amount=60)
+    except Exception as exc:
+        log.warning("Could not fetch followers of @%s: %s", account, exc)
+        return stats
+
+    follower_ids = list(followers.keys())
+    random.shuffle(follower_ids)
+
+    session_size = _randomize_session_size(12)
+    log.info("Warm audience: browsing %d followers of @%s", min(session_size, len(follower_ids)), account)
+
+    for uid in follower_ids[:session_size]:
+        user_id = str(uid)
+
+        # Skip some — human behavior
+        if _should_skip_post():
+            time.sleep(random.uniform(1, 3))
+            continue
+
+        # Browse profile first (realistic)
+        _browse_before_engage(cl, user_id)
+
+        # Like 2-3 recent posts
+        try:
+            user_medias = cl.user_medias(int(user_id), amount=4)
+        except Exception:
+            user_medias = []
+
+        like_count = min(random.randint(2, 3), len(user_medias))
+        for media in user_medias[:like_count]:
+            if can_act(data, "likes", cfg.engagement_daily_likes):
+                try:
+                    cl.media_like(media.pk)
+                    record_action(data, "likes", str(media.pk))
+                    stats["warm_likes"] += 1
+                except Exception:
+                    pass
+                time.sleep(random.uniform(2, 5))
+
+        # Comment on the first post (~45% — higher rate for warm targets)
+        if (cfg.engagement_comment_enabled
+                and user_medias
+                and random.random() < 0.45
+                and can_act(data, "comments", cfg.engagement_daily_comments)):
+            caption_text = str(getattr(user_medias[0], "caption_text", "") or "")
+            comment = _generate_comment(cfg, caption_text)
+            if comment:
+                try:
+                    cl.media_comment(user_medias[0].pk, comment)
+                    record_action(data, "comments", str(user_medias[0].pk))
+                    stats["warm_comments"] += 1
+                except Exception as exc:
+                    log.debug("Warm comment failed: %s", exc)
+
+        # Follow ~40% (lower than hashtag — quality over quantity)
+        if (cfg.engagement_follow_enabled
+                and random.random() < 0.40
+                and can_act(data, "follows", cfg.engagement_daily_follows)):
+            try:
+                cl.user_follow(int(user_id))
+                record_action(data, "follows", user_id)
+                stats["warm_follows"] += 1
+            except Exception as exc:
+                log.debug("Warm follow failed: %s", exc)
+
+        # View their stories (strong signal)
+        if can_act(data, "story_views", 150):
+            _view_user_stories(cl, user_id, data, stats)
+            stats["warm_story_views"] = stats.get("story_views", 0)
+
+        save_log(LOG_FILE, data)
+        random_delay(20, 50)
+
+        # Check daily limits
+        if (not can_act(data, "likes", cfg.engagement_daily_likes)
+                and not can_act(data, "comments", cfg.engagement_daily_comments)):
+            log.info("Daily limits reached during warm targeting")
+            break
+
+    if any(v > 0 for v in stats.values()):
+        log.info("Warm audience engagement (@%s): %s", account, stats)
+    return stats
+
+
+# ---------------------------------------------------------------------------
 # Session-based engagement (for scheduler — short focused bursts)
 # ---------------------------------------------------------------------------
 
 # Session types for the scheduler to call throughout the day
 SESSION_TYPES = [
-    "morning",     # likes + follows from hashtags (catch early risers)
-    "replies",     # reply to comments on own posts (algorithm boost)
-    "hashtags",    # full hashtag engagement (like/comment/follow/stories)
-    "explore",     # explore page engagement
-    "maintenance", # unfollow old follows + welcome DMs
-    "stories",     # repost past posts as stories + add to highlights
-    "report",      # end-of-day summary report
-    "full",        # all phases (backward compat)
+    "morning",      # likes + follows from hashtags (catch early risers)
+    "replies",      # reply to comments on own posts (algorithm boost)
+    "hashtags",     # full hashtag engagement (like/comment/follow/stories)
+    "explore",      # explore page engagement
+    "warm_audience", # engage followers of similar niche accounts (3-5x better ROI)
+    "maintenance",  # unfollow old follows + welcome DMs
+    "stories",      # repost past posts as stories + add to highlights
+    "report",       # end-of-day summary report
+    "full",         # all phases (backward compat)
 ]
 
 
@@ -643,6 +775,10 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     elif session_type == "explore":
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
+
+    elif session_type == "warm_audience":
+        warm_stats = run_warm_audience_session(cl, cfg, data)
+        stats.update(warm_stats)
 
     elif session_type == "maintenance":
         stats["unfollows"] = run_auto_unfollow(cl, data)

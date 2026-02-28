@@ -108,6 +108,7 @@ class Config:
     engagement_daily_follows: int
     engagement_comment_enabled: bool
     engagement_follow_enabled: bool
+    engagement_target_accounts: str  # comma-separated similar niche accounts for warm targeting
 
     # YouTube Shorts
     youtube_enabled: bool
@@ -159,6 +160,9 @@ def load_config() -> Config:
         engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 80, minimum=0),
         engagement_comment_enabled=_bool(os.getenv("ENGAGEMENT_COMMENT_ENABLED")),
         engagement_follow_enabled=_bool(os.getenv("ENGAGEMENT_FOLLOW_ENABLED")),
+        engagement_target_accounts=_str(os.getenv("ENGAGEMENT_TARGET_ACCOUNTS"),
+            "koaborofficial,sakshisindhwani,diksha_rawat,sejal_kumar,theformaledit,"
+            "thatbohogirl,stylemeupwithsakshi,missmalini"),
         # YouTube
         youtube_enabled=_bool(os.getenv("YOUTUBE_ENABLED")),
         youtube_client_id=_str(os.getenv("YOUTUBE_CLIENT_ID")),

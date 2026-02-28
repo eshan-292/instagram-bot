@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Background music management — user-provided tracks or ffmpeg-generated ambient audio."""
+"""Background music management — Pixabay royalty-free tracks, user-provided, or ambient fallback.
+
+Audio strategy (2026):
+  - Instagram Reels: NO baked-in audio — trending music overlaid at publish time via
+    publisher._find_trending_track() (Instagram's algorithm favours trending audio)
+  - YouTube Shorts: Royalty-free music baked in (Pixabay API → user tracks → ambient fallback)
+"""
 
 from __future__ import annotations
 
@@ -10,6 +16,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+import requests as http_requests
+
 from config import GENERATED_IMAGES_DIR
 
 log = logging.getLogger(__name__)
@@ -18,6 +26,16 @@ MUSIC_DIR = GENERATED_IMAGES_DIR / "music"
 
 # Supported audio formats
 _AUDIO_EXTENSIONS = {".mp3", ".wav", ".aac", ".m4a", ".ogg", ".flac"}
+
+# Pixabay Music API — free, no attribution required, huge royalty-free library
+_PIXABAY_API_URL = "https://pixabay.com/api/"
+
+# Genre/mood queries for fashion/lifestyle Shorts background music
+_PIXABAY_QUERIES = [
+    "upbeat fashion", "trendy pop", "chill lo-fi", "aesthetic vibes",
+    "indian pop", "modern bollywood", "stylish beat", "confident walk",
+    "runway music", "urban lifestyle", "groovy beat", "feel good pop",
+]
 
 
 def _get_ffmpeg() -> str:
@@ -29,16 +47,85 @@ def _get_ffmpeg() -> str:
         return "ffmpeg"
 
 
+def _fetch_pixabay_track(duration: float) -> str | None:
+    """Fetch a royalty-free track from Pixabay Music API.
+
+    Returns path to downloaded audio file (temp), or None on failure.
+    """
+    api_key = os.getenv("PIXABAY_API_KEY", "").strip()
+    if not api_key:
+        log.debug("PIXABAY_API_KEY not set, skipping Pixabay audio")
+        return None
+
+    query = random.choice(_PIXABAY_QUERIES)
+    min_dur = max(5, int(duration) - 5)
+    max_dur = int(duration) + 30  # allow slightly longer (we'll trim)
+
+    params = {
+        "key": api_key,
+        "q": query,
+        "audio_type": "music",
+        "min_duration": min_dur,
+        "max_duration": max_dur,
+        "per_page": 10,
+        "safesearch": "true",
+        "order": "popular",
+    }
+
+    try:
+        resp = http_requests.get(_PIXABAY_API_URL, params=params, timeout=15)
+        if resp.status_code != 200:
+            log.debug("Pixabay API returned %d for '%s'", resp.status_code, query)
+            return None
+
+        data = resp.json()
+        hits = data.get("hits", [])
+        if not hits:
+            log.debug("No Pixabay results for '%s'", query)
+            return None
+
+        # Pick random track from top results
+        track = random.choice(hits[:5])
+        audio_url = track.get("audio", "") or track.get("previewURL", "")
+        if not audio_url:
+            return None
+
+        # Download the audio file
+        dl = http_requests.get(audio_url, timeout=30)
+        if dl.status_code != 200 or len(dl.content) < 5000:
+            return None
+
+        suffix = ".mp3" if "mp3" in audio_url else ".wav"
+        fd, tmp_path = tempfile.mkstemp(suffix=suffix, prefix="pixabay_")
+        os.close(fd)
+        with open(tmp_path, "wb") as f:
+            f.write(dl.content)
+
+        log.info("Fetched Pixabay track: '%s' (%d bytes, query='%s')",
+                 track.get("title", "unknown"), len(dl.content), query)
+        return tmp_path
+
+    except Exception as exc:
+        log.debug("Pixabay fetch failed: %s", exc)
+        return None
+
+
 def get_background_track(duration: float) -> str | None:
-    """Get a background audio track for video overlay.
+    """Get a background audio track for video overlay (YouTube Shorts).
 
     Priority:
-      1. Random user-provided track from generated_images/music/
-      2. FFmpeg-generated ambient lo-fi pad (warm pink noise + gentle chord)
+      1. Pixabay royalty-free track (trending, fresh, varied)
+      2. User-provided track from generated_images/music/
+      3. FFmpeg-generated ambient lo-fi pad (last resort)
 
-    Returns path to audio file, or None if generation fails.
+    Returns path to audio file, or None if everything fails.
     """
-    # 1. Check for user-provided music files
+    # 1. Try Pixabay royalty-free music
+    pixabay_track = _fetch_pixabay_track(duration)
+    if pixabay_track:
+        return pixabay_track
+
+    # 2. Check for user-provided music files
     if MUSIC_DIR.exists():
         tracks = [
             f for f in MUSIC_DIR.iterdir()
@@ -49,7 +136,7 @@ def get_background_track(duration: float) -> str | None:
             log.info("Using user-provided track: %s", chosen.name)
             return str(chosen)
 
-    # 2. Generate ambient audio with ffmpeg
+    # 3. Generate ambient audio with ffmpeg (fallback)
     return _generate_ambient(duration)
 
 

@@ -11,24 +11,24 @@ on:
     # YT engagement 4x/day, YT replies 2x/day
     - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
     - cron: '15 2 * * *'   # 07:45 IST — explore (morning scroll)
-    - cron: '0 3 * * *'    # 08:30 IST — hashtags
+    - cron: '0 3 * * *'    # 08:30 IST — warm_audience (high-ROI targeting)
     - cron: '30 3 * * *'   # 09:00 IST — replies
     - cron: '15 4 * * *'   # 09:45 IST — stories
     - cron: '0 5 * * *'    # 10:30 IST — YT engage (morning YouTube browse)
     - cron: '30 5 * * *'   # 11:00 IST — explore
     - cron: '0 6 * * *'    # 11:30 IST — hashtags
-    - cron: '30 6 * * *'   # 12:00 IST — explore (lunch break)
+    - cron: '30 6 * * *'   # 12:00 IST — warm_audience (lunch break targeting)
     - cron: '0 7 * * *'    # 12:30 IST — hashtags
     - cron: '30 7 * * *'   # 13:00 IST — YT replies (respond to comments)
     - cron: '0 8 * * *'    # 13:30 IST — hashtags
     - cron: '30 8 * * *'   # 14:00 IST — stories
     - cron: '15 9 * * *'   # 14:45 IST — explore
-    - cron: '0 10 * * *'   # 15:30 IST — hashtags
+    - cron: '0 10 * * *'   # 15:30 IST — warm_audience (afternoon targeting)
     - cron: '30 10 * * *'  # 16:00 IST — replies
     - cron: '15 11 * * *'  # 16:45 IST — YT engage (afternoon YouTube)
     - cron: '0 12 * * *'   # 17:30 IST — explore
     - cron: '30 12 * * *'  # 18:00 IST — stories
-    - cron: '0 13 * * *'   # 18:30 IST — hashtags
+    - cron: '0 13 * * *'   # 18:30 IST — YT replies (pre-prime time)
     - cron: '30 13 * * *'  # 19:00 IST — PUBLISH (IG + YT) + hashtags (PRIME TIME)
     - cron: '0 14 * * *'   # 19:30 IST — explore
     - cron: '30 14 * * *'  # 20:00 IST — YT engage (evening YouTube)
@@ -46,7 +46,7 @@ on:
         required: true
         default: 'full'
         type: choice
-        options: [morning, replies, hashtags, explore, maintenance, stories, report, full, yt_engage, yt_replies, yt_full]
+        options: [morning, replies, hashtags, explore, warm_audience, maintenance, stories, report, full, yt_engage, yt_replies, yt_full]
       publish:
         description: 'Also publish a post?'
         type: boolean
@@ -124,24 +124,24 @@ jobs:
             case "${HHMM}" in
               013*) echo "type=morning"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               021*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              030*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              030*) echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               033*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               041*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               050*) echo "type=yt_engage"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               053*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               060*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              063*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              063*) echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               070*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               073*) echo "type=yt_replies"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               080*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               083*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               091*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              100*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              100*) echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               103*) echo "type=replies"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               111*) echo "type=yt_engage"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               120*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               123*) echo "type=stories"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              130*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              130*) echo "type=yt_replies"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               133*) echo "type=hashtags"    >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
               140*) echo "type=explore"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               143*) echo "type=yt_engage"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;

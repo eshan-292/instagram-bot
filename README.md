@@ -5,7 +5,7 @@ Automated dual-platform growth pipeline for **Maya Varma** — AI fashion influe
 Posts to **Instagram** (Reels, Carousels, Single) and **YouTube Shorts** simultaneously, with aggressive engagement automation on both platforms.
 
 ```
-Gemini (captions) → Image gen (Gemini app) → ffmpeg (video + audio) → Publish (IG + YT) → Engage (both)
+Gemini (captions) → Image gen (Gemini app) → ffmpeg (video) → Publish (IG + YT) → Engage (both)
 ```
 
 ## How It Works
@@ -14,9 +14,9 @@ Gemini (captions) → Image gen (Gemini app) → ffmpeg (video + audio) → Publ
 2. **Generate image prompts** — Bot creates Gemini-ready prompts and saves to `IMAGE_PROMPTS.md`
 3. **You generate images** — Copy prompts into the Gemini app, save images to `generated_images/pending/`
 4. **Bot picks up images** — Links images to drafts and promotes them
-5. **Convert to video** — Ken Burns effect with background audio (IG 4:5 + YT 9:16)
+5. **Convert to video** — Ken Burns effect (IG silent, YT with royalty-free music)
 6. **Publish to both platforms** — Instagram via instagrapi + YouTube Shorts via YouTube Data API
-7. **Engage aggressively** — Automated likes, comments, follows, story views, replies on both platforms
+7. **Engage aggressively** — Warm audience targeting, hashtag engagement, replies, stories on both platforms
 
 Post lifecycle: `draft` → `approved` → `ready` → `posted` (IG + YT simultaneously)
 
@@ -25,15 +25,23 @@ Post lifecycle: `draft` → `approved` → `ready` → `posted` (IG + YT simulta
 | Format | % of Content | Why |
 |--------|-------------|-----|
 | **Reels/Shorts** (7-10 sec) | 40% | 55% of views from non-followers. THE discovery tool. |
-| **Carousels** (5-6 slides) | 40% | 3x higher engagement, most saved format. |
+| **Carousels** (5-6 slides) | 40% | 3x higher engagement, most saved+shared format. |
 | **Single images** | 20% | Aesthetic/editorial brand posts. |
 
-**Caption strategy:**
+**Caption strategy (optimized for "sends" — the #1 algorithm signal in 2026):**
 - Scroll-stopping hook in first 3 words (number, question, or bold statement)
+- Front-loaded searchable keywords (Instagram = search engine now)
 - Question in every caption (drives comments = algorithm boost)
-- Save/share CTA on every post with urgency
+- Every caption ends with a send/share CTA: "Send this to someone who...", "Tag your bestie"
+- `alt_text` on every post (accessibility + Instagram SEO)
 - Cross-platform promotion (40% of posts mention YouTube channel)
-- Only 3-5 targeted hashtags (quality > quantity)
+- Only 3-5 hashtags using pyramid strategy (1 brand + 1 broad + 2 medium + 1 niche)
+
+## Audio Strategy (2026)
+
+- **Instagram Reels:** SILENT videos — trending music overlaid at publish time via Instagram's music API (algorithm favors trending audio)
+- **YouTube Shorts:** Royalty-free music baked in (Pixabay API → user tracks → ambient lo-fi fallback)
+- **Instagram also tries:** 30+ trending music search queries (Bollywood, Indian pop, fashion, viral)
 
 ## Quick Start
 
@@ -157,12 +165,12 @@ git push
 **5. The bot handles the rest automatically:**
 - Next publish session picks up the images
 - Links them to the matching drafts
-- Converts to video with background audio (IG 4:5 + YT 9:16)
+- Converts to video (IG silent + YT with music)
 - Promotes drafts → approved → publishes at the next scheduled slot
 
 ### Custom Background Music
 
-Place your own `.mp3` or `.wav` files in `generated_images/music/` and the bot will randomly pick one as the background track for videos. If no custom music is provided, it generates a pleasant ambient lo-fi pad automatically.
+Place your own `.mp3` or `.wav` files in `generated_images/music/` and the bot will use them as background tracks for YouTube Shorts. If no custom music is provided, it fetches royalty-free tracks from Pixabay, or falls back to a generated ambient lo-fi pad.
 
 ### Notes
 - Image filenames must match the post ID exactly (e.g., `maya-042.jpg` for post `maya-042`)
@@ -174,30 +182,32 @@ Place your own `.mp3` or `.wav` files in `generated_images/music/` and the bot w
 
 ## Daily Schedule (GitHub Actions)
 
-The bot runs **35 sessions per day** — 29 Instagram + 6 YouTube — mimicking real phone-check patterns. **1 post/day** published to both platforms at prime time (19:00 IST).
+The bot runs **35 sessions per day** — mimicking real phone-check patterns. **1 post/day** published to both platforms at prime time (19:00 IST).
+
+Engagement mix: warm audience targeting (3x/day), hashtag engagement, explore, stories, YouTube engagement, replies, maintenance.
 
 | IST Time | Session | Platform | Publishes? |
 |----------|---------|----------|------------|
 | 07:00 | Morning engagement + welcome DMs | IG | No |
 | 07:45 | Explore (morning scroll) | IG | No |
-| 08:30 | Hashtags | IG | No |
+| 08:30 | **Warm audience targeting** | IG | No |
 | 09:00 | Reply to comments | IG | No |
 | 09:45 | Story repost | IG | No |
 | 10:30 | **YT niche engagement** | **YT** | No |
 | 11:00 | Explore | IG | No |
 | 11:30 | Hashtags | IG | No |
-| 12:00 | Explore (lunch break) | IG | No |
+| 12:00 | **Warm audience targeting** | IG | No |
 | 12:30 | Hashtags | IG | No |
 | 13:00 | **YT reply to comments** | **YT** | No |
 | 13:30 | Hashtags | IG | No |
 | 14:00 | Story repost | IG | No |
 | 14:45 | Explore | IG | No |
-| 15:30 | Hashtags | IG | No |
+| 15:30 | **Warm audience targeting** | IG | No |
 | 16:00 | Reply to comments | IG | No |
 | 16:45 | **YT niche engagement** | **YT** | No |
 | 17:30 | Explore | IG | No |
 | 18:00 | Story repost | IG | No |
-| 18:30 | Hashtags | IG | No |
+| 18:30 | **YT reply to comments** | **YT** | No |
 | **19:00** | **PUBLISH + hashtags** | **IG + YT** | **Yes** |
 | 19:30 | Explore | IG | No |
 | 20:00 | **YT niche engagement** | **YT** | No |
@@ -219,47 +229,58 @@ The bot mimics real human usage patterns to avoid detection:
 - **Profile browsing** — Views user profile before following
 - **Randomized session sizes** — ±30% variation per session
 - **Multi-story viewing** — Views 1-3 stories per user (not always just 1)
-- **Selective commenting** — ~28% of hashtag posts, ~25% of explore posts
-- **Selective following** — ~55% of hashtag users, ~30% of explore users
+- **Selective commenting** — ~28% of hashtag posts, ~25% of explore, ~45% of warm targets
+- **Selective following** — ~35% from hashtags, ~40% from warm audience, ~30% from explore
 
-## Engagement Limits (Aggressive Growth)
+## Engagement Strategy (2026 Algorithm)
 
-### Instagram
+### Warm Audience Targeting (NEW — highest ROI)
+
+Instead of follow/unfollow churn, the bot engages followers of similar niche accounts. These users already consume similar content and are 3-5x more likely to follow back.
+
+- **3 warm sessions/day** (08:30, 12:00, 15:30 IST)
+- Target accounts: similar Indian fashion influencers (configurable via `ENGAGEMENT_TARGET_ACCOUNTS`)
+- Per user: like 2-3 posts + genuine comment + optional follow (~40%)
+- Follow rate reduced from hashtags (35%, down from 55%) — budget shifted to warm targeting
+
+### Instagram Limits
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 250 | Spread across 29 sessions |
-| Comments | 60 | AI-generated, ~28% of seen posts |
-| Follows | 80 | With profile browse before follow (~55% rate) |
+| Likes | 250 | Spread across all sessions |
+| Comments | 60 | AI-generated, context-aware |
+| Follows | 80 | Mix of warm targeting (40%) + hashtag (35%) + explore (30%) |
 | Story views | 150 | ~75% chance per user, ~35% like rate |
 | Replies | 50 | On own posts (last 48h) — reply to ALL |
-| Unfollows | 60/run | After 2+ days (fast churn) |
+| Unfollows | 60/run | After 2+ days |
 | Welcome DMs | 15/day | Run during morning + maintenance |
 
-### YouTube
+### YouTube Limits
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 30 | On trending niche Shorts |
-| Comments | 10 | AI-generated, quality comments only |
-| Replies | 15 | On own video comments |
+| Likes | 40 | On trending niche Shorts |
+| Comments | 15 | AI-generated, quality comments only |
+| Replies | 25 | On own video comments — reply to ALL |
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-7), 0.8x (days 8-14), 1.0x (day 15+).
 
 ## Video & Audio
 
-- **Instagram Reels:** 1080x1350 (4:5), 7 seconds, Ken Burns zoom effect
-- **YouTube Shorts:** 1080x1920 (9:16), 10 seconds, Ken Burns zoom effect
-- **Audio:** Background music baked into every video
-  - Priority 1: Custom tracks from `generated_images/music/`
-  - Priority 2: Auto-generated ambient lo-fi pad (pink noise + Am7 chord)
-- **Instagram also tries:** Trending music overlay via API (bonus reach)
+- **Instagram Reels:** 1080x1350 (4:5), 7 seconds, Ken Burns zoom effect, SILENT (trending audio added at publish)
+- **YouTube Shorts:** 1080x1920 (9:16), 10 seconds, Ken Burns zoom effect, WITH audio
+- **YouTube audio priority:**
+  1. Pixabay royalty-free tracks (if `PIXABAY_API_KEY` set)
+  2. Custom tracks from `generated_images/music/`
+  3. Auto-generated ambient lo-fi pad (pink noise + Am7 chord)
+- **Instagram audio:** Trending music overlay via Instagram music search API (30+ queries)
 
 ## Stories
 
 - **3 story sessions/day** (09:45, 14:00, 18:00 IST)
 - Reposts 2-3 past posts with text overlays
 - **Auto-downloads media from Instagram** if local files don't exist (works in CI)
+- Resolves relative paths correctly (fixes CI path issues)
 - Interactive stickers: 35% poll, 30% question box (AMA), 20% quiz, 15% clean
 - Auto-categorized into highlights (OOTD, Mumbai Style, Ethnic Vibes, Tips, BTS, Glam)
 
@@ -317,6 +338,12 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, YouTube 
 | `ENGAGEMENT_DAILY_FOLLOWS` | `80` | Max follows/day |
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
+| `ENGAGEMENT_TARGET_ACCOUNTS` | (Indian fashion influencers) | Comma-separated similar accounts for warm targeting |
+
+**Audio:**
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PIXABAY_API_KEY` | — | Pixabay API key for royalty-free YouTube audio ([free](https://pixabay.com/api/docs/)) |
 
 **Other:**
 | Variable | Default | Description |
@@ -334,16 +361,16 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, YouTube 
 
 ```
 instagram_influencer/
-├── config.py              # Configuration (~30 env vars)
+├── config.py              # Configuration (~35 env vars)
 ├── orchestrator.py        # Pipeline CLI (single entry point, dual-platform)
 ├── generator.py           # Caption generation (Gemini + template fallback)
 ├── image.py               # Manual image system (prompts + pending/ lookup)
-├── audio.py               # Background music (user tracks + ffmpeg generation)
-├── video.py               # Ken Burns effect (IG 4:5 + YT 9:16 with audio)
+├── audio.py               # Background music (Pixabay + user tracks + ambient)
+├── video.py               # Ken Burns effect (IG silent + YT with audio)
 ├── publisher.py           # Instagram publishing (reels, carousels, photos)
 ├── youtube_publisher.py   # YouTube Shorts publishing (OAuth2 + Data API v3)
 ├── youtube_engagement.py  # YouTube engagement (like, comment, reply on Shorts)
-├── engagement.py          # Instagram engagement (like/comment/follow/reply)
+├── engagement.py          # Instagram engagement (warm targeting/hashtags/explore/replies)
 ├── stories.py             # Story reposting + highlights + interactive stickers
 ├── report.py              # Daily report (Telegram + GitHub Actions + YT stats)
 ├── rate_limiter.py        # Action rate limiting + warmup multiplier
