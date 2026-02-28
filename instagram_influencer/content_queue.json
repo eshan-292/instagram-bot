@@ -38,7 +38,8 @@
       "notes": "Three-quarter shot, Maya on a luxurious Mumbai rooftop bar at dusk. Wearing a sequined or metallic bodycon dress, perhaps with an asymmetrical cut. City skyline lights sparkling in the background, a dramatic cocktail in hand. Warm ambient lighting, focused on her, strong contouring. A slight smirk, intense eye contact. | generated_by=gemini:gemini-2.5-flash",
       "posted_at": "2026-02-26T13:51:39Z",
       "platform_post_id": "3841092010292050691",
-      "publish_error": null
+      "publish_error": null,
+      "last_storied_at": "2026-02-28T12:35:38Z"
     },
     {
       "id": "maya-004",
@@ -63,7 +64,8 @@
       "notes": "Close-up shot, Maya holding a cutting chai glass with a gentle, knowing smile. Dressed in an oversized crisp white shirt and tailored linen trousers. Soft, natural sunlight streaming in, creating warm highlights. Focus on hands and face, with a hint of the cafe's minimalist decor in the background. Relaxed, elegant posture. | generated_by=gemini:gemini-2.5-flash",
       "publish_error": null,
       "posted_at": "2026-02-27T06:32:52Z",
-      "platform_post_id": "3841595937647250536"
+      "platform_post_id": "3841595937647250536",
+      "last_storied_at": "2026-02-28T12:35:38Z"
     },
     {
       "id": "maya-006",
@@ -79,7 +81,7 @@
     {
       "id": "maya-007",
       "status": "draft",
-      "topic": "Mumbai rooftop soir\u00e9e, commanding attention.",
+      "topic": "Mumbai rooftop soirée, commanding attention.",
       "caption": "They thought the skyline was the view.\nSweetie, I am the view.",
       "image_url": "",
       "video_url": null,
@@ -150,7 +152,7 @@
       "id": "maya-013",
       "status": "draft",
       "topic": "Owning the night at a luxury Mumbai rooftop bar.",
-      "caption": "The city lights are pretty. I think I know why they\u2019re looking this way.",
+      "caption": "The city lights are pretty. I think I know why they’re looking this way.",
       "image_url": "",
       "video_url": null,
       "is_reel": true,
@@ -205,7 +207,7 @@
       "id": "maya-018",
       "status": "draft",
       "topic": "Lounging elegantly in a luxurious apartment with a city skyline view.",
-      "caption": "It\u2019s called effortless. Maybe you\u2019ve heard of it.",
+      "caption": "It’s called effortless. Maybe you’ve heard of it.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -259,8 +261,8 @@
     {
       "id": "maya-023",
       "status": "draft",
-      "topic": "3 budget looks under \u20b92000 \u2014 Mumbai street style",
-      "caption": "Mumbai street style under \u20b92000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
+      "topic": "3 budget looks under ₹2000 — Mumbai street style",
+      "caption": "Mumbai street style under ₹2000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -268,11 +270,11 @@
       "scheduled_at": "2026-02-27T10:31:30Z",
       "notes": "full-body frame, bright Mumbai street background | generated_by=template",
       "slides": [
-        "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '\u20b92000. 3 outfits. No compromises.'",
-        "Look 1: casual chic \u2014 white linen coord set, gold hoops, kolhapuri chappals",
-        "Look 2: street glam \u2014 floral co-ord in rust tones, minimal jewelry, white sneakers",
-        "Look 3: indo-western fusion \u2014 cropped kurta with wide-leg jeans, block print dupatta",
-        "Outfit detail close-up \u2014 accessories and fabric texture",
+        "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '₹2000. 3 outfits. No compromises.'",
+        "Look 1: casual chic — white linen coord set, gold hoops, kolhapuri chappals",
+        "Look 2: street glam — floral co-ord in rust tones, minimal jewelry, white sneakers",
+        "Look 3: indo-western fusion — cropped kurta with wide-leg jeans, block print dupatta",
+        "Outfit detail close-up — accessories and fabric texture",
         "Final pose: all three outfits side by side, confidence energy"
       ]
     },
@@ -291,8 +293,8 @@
     {
       "id": "maya-025",
       "status": "draft",
-      "topic": "One kurta, 5 ways \u2014 ethnic modern fusion",
-      "caption": "One kurta. Five personalities. Which one are you?\nSave this \u2014 you'll need it.",
+      "topic": "One kurta, 5 ways — ethnic modern fusion",
+      "caption": "One kurta. Five personalities. Which one are you?\nSave this — you'll need it.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -301,18 +303,18 @@
       "notes": "clean studio-style background, full-body each look | generated_by=template",
       "slides": [
         "Hook: Maya with kurta on hanger, caption '1 piece. 5 vibes.'",
-        "Style 1: classic \u2014 kurta with palazzo and kolhapuris",
-        "Style 2: fusion \u2014 kurta belted with straight jeans and boots",
-        "Style 3: street \u2014 kurta knotted, denim shorts, sneakers",
-        "Style 4: evening \u2014 kurta with statement earrings, heels, minimal clutch",
-        "Style 5: lounge \u2014 oversized kurta as a dress, slides"
+        "Style 1: classic — kurta with palazzo and kolhapuris",
+        "Style 2: fusion — kurta belted with straight jeans and boots",
+        "Style 3: street — kurta knotted, denim shorts, sneakers",
+        "Style 4: evening — kurta with statement earrings, heels, minimal clutch",
+        "Style 5: lounge — oversized kurta as a dress, slides"
       ]
     },
     {
       "id": "maya-026",
       "status": "draft",
-      "topic": "Bandra Budget Brunch Looks Under \u20b92000",
-      "caption": "Bandra brunch on a budget? \ud83d\udc85 No problem. These 3 looks prove style isn't about the price tag, darling. You're welcome. Save this for your next Sunday outing.",
+      "topic": "Bandra Budget Brunch Looks Under ₹2000",
+      "caption": "Bandra brunch on a budget? 💅 No problem. These 3 looks prove style isn't about the price tag, darling. You're welcome. Save this for your next Sunday outing.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -324,7 +326,7 @@
         "Maya poses elegantly at an outdoor cafe table, sipping iced coffee. She's wearing high-waisted light denim culottes, a fitted white ribbed tank, an unbuttoned oversized printed shirt (e.g., abstract floral), and gold hoop earrings. Relaxed yet chic.",
         "Maya walks down a vibrant Bandra street near Ranwar Village murals, wearing a vibrant orange linen midi dress, a denim jacket tied around her waist, tan slip-on sandals, and oversized black sunglasses. Powerful stride.",
         "Close-up of accessories: Stacked rings on Maya's fingers, layered delicate gold necklaces peeking from her top, a textured vegan leather bag.",
-        "Flat lay on a simple background: The three main outfit pieces (co-ord, culottes, dress) arranged with a small label indicating 'Under \u20b92000' subtly.",
+        "Flat lay on a simple background: The three main outfit pieces (co-ord, culottes, dress) arranged with a small label indicating 'Under ₹2000' subtly.",
         "Maya laughing candidly while adjusting her sunglasses, showcasing genuine happiness and ease."
       ]
     },
@@ -332,7 +334,7 @@
       "id": "maya-027",
       "status": "draft",
       "topic": "GRWM Sangeet Edition: Modern Twist",
-      "caption": "My sangeet mantra: ditch the basic, embrace the drama. \u2728 Getting ready for a night of dance and dazzle, with an unapologetic twist. Who says traditional can't be edgy? Send this to your friend who needs a style upgrade.",
+      "caption": "My sangeet mantra: ditch the basic, embrace the drama. ✨ Getting ready for a night of dance and dazzle, with an unapologetic twist. Who says traditional can't be edgy? Send this to your friend who needs a style upgrade.",
       "image_url": "",
       "video_url": null,
       "is_reel": true,
