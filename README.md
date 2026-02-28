@@ -1,9 +1,11 @@
-# Instagram Influencer Bot
+# Instagram + YouTube Influencer Bot
 
-Automated Instagram growth pipeline for **Maya Varma** — AI fashion influencer from Mumbai.
+Automated dual-platform growth pipeline for **Maya Varma** — AI fashion influencer from Mumbai.
+
+Posts to **Instagram** (Reels, Carousels, Single) and **YouTube Shorts** simultaneously, with aggressive engagement automation on both platforms.
 
 ```
-Gemini (captions + prompts) → Manual image gen (Gemini app) → instagrapi (publish)
+Gemini (captions) → Image gen (Gemini app) → ffmpeg (video + audio) → Publish (IG + YT) → Engage (both)
 ```
 
 ## How It Works
@@ -11,23 +13,26 @@ Gemini (captions + prompts) → Manual image gen (Gemini app) → instagrapi (pu
 1. **Generate captions** — Gemini 2.5 Flash creates posts in Maya's voice (bold, teasing, confident)
 2. **Generate image prompts** — Bot creates Gemini-ready prompts and saves to `IMAGE_PROMPTS.md`
 3. **You generate images** — Copy prompts into the Gemini app, save images to `generated_images/pending/`
-4. **Bot picks up images** — On next run, links images to drafts and promotes them
-5. **Publish** — Posts to Instagram via instagrapi (reels, carousels, or single photos)
-6. **Engage** — Automated likes, comments, follows, story views, replies throughout the day
+4. **Bot picks up images** — Links images to drafts and promotes them
+5. **Convert to video** — Ken Burns effect with background audio (IG 4:5 + YT 9:16)
+6. **Publish to both platforms** — Instagram via instagrapi + YouTube Shorts via YouTube Data API
+7. **Engage aggressively** — Automated likes, comments, follows, story views, replies on both platforms
 
-Post lifecycle: `draft` → `approved` → `ready` → `posted`
+Post lifecycle: `draft` → `approved` → `ready` → `posted` (IG + YT simultaneously)
 
 ## Content Strategy (2026 Algorithm)
 
 | Format | % of Content | Why |
 |--------|-------------|-----|
-| **Reels** (7-15 sec) | 40% | 55% of views from non-followers. THE discovery tool. |
+| **Reels/Shorts** (7-10 sec) | 40% | 55% of views from non-followers. THE discovery tool. |
 | **Carousels** (5-6 slides) | 40% | 3x higher engagement, most saved format. |
 | **Single images** | 20% | Aesthetic/editorial brand posts. |
 
 **Caption strategy:**
-- Front-loaded keywords (Instagram is a search engine now)
-- Save/share CTAs on every post ("save this", "send to your bestie")
+- Scroll-stopping hook in first 3 words (number, question, or bold statement)
+- Question in every caption (drives comments = algorithm boost)
+- Save/share CTA on every post with urgency
+- Cross-platform promotion (40% of posts mention YouTube channel)
 - Only 3-5 targeted hashtags (quality > quantity)
 
 ## Quick Start
@@ -48,13 +53,69 @@ make generate
 # 4. Check IMAGE_PROMPTS.md, generate images in Gemini app,
 #    place them in generated_images/pending/
 
-# 5. Full pipeline (pick up images + promote + publish)
+# 5. Full pipeline (pick up images + promote + publish to IG + YT)
 make run
 ```
 
-## Image Generation (Manual via Gemini App)
+## YouTube Shorts Setup
 
-Since the Replicate API quota is exhausted, images are generated manually via the Gemini app.
+YouTube is optional but strongly recommended for aggressive growth — same content, 2x the audience.
+
+### Step 1: Google Cloud Project (5 min)
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Click **"Create Project"** → name it `maya-bot` → create
+3. In the sidebar: **APIs & Services** → **Library**
+4. Search for **"YouTube Data API v3"** → click **Enable**
+5. In the sidebar: **APIs & Services** → **Credentials**
+6. Click **"+ CREATE CREDENTIALS"** → **OAuth client ID**
+7. If prompted, configure the **OAuth consent screen**:
+   - User Type: **External** → Create
+   - App name: `Maya Bot` (anything works)
+   - User support email: your email
+   - Developer contact: your email
+   - Click **Save and Continue** through all steps
+   - Under **Test users**, add your Google email
+   - **Publish App** (move from testing to production) — or keep in testing if only you use it
+8. Back in Credentials → **+ CREATE CREDENTIALS** → **OAuth client ID**:
+   - Application type: **Desktop app**
+   - Name: `Maya Bot`
+   - Click **Create**
+9. **Copy the Client ID and Client Secret** — you'll need them next
+
+### Step 2: Get Refresh Token (2 min)
+
+```bash
+# Add to your .env file:
+YOUTUBE_CLIENT_ID=your-client-id-here.apps.googleusercontent.com
+YOUTUBE_CLIENT_SECRET=your-client-secret-here
+
+# Run the one-time auth flow:
+make yt-auth
+```
+
+This opens a browser window. Sign in with the Google account that owns the YouTube channel, grant permissions, and the script prints your refresh token.
+
+### Step 3: Enable YouTube in .env
+
+Add these to your `.env` file:
+```env
+YOUTUBE_ENABLED=true
+YOUTUBE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+YOUTUBE_CLIENT_SECRET=your-client-secret
+YOUTUBE_REFRESH_TOKEN=your-refresh-token-from-step-2
+YOUTUBE_ENGAGEMENT_ENABLED=true
+```
+
+### Step 4: Update GitHub Secrets
+
+```bash
+gh secret set DOTENV --repo your-username/your-repo < instagram_influencer/.env
+```
+
+That's it. The bot will now upload every post to YouTube Shorts alongside Instagram.
+
+## Image Generation (Manual via Gemini App)
 
 ### Step-by-step workflow
 
@@ -65,7 +126,6 @@ Since the Replicate API quota is exhausted, images are generated manually via th
 
 # Option B: Generate prompts locally
 make generate
-# → Creates instagram_influencer/generated_images/IMAGE_PROMPTS.md
 ```
 
 **2. Generate images in the Gemini app:**
@@ -97,190 +157,115 @@ git push
 **5. The bot handles the rest automatically:**
 - Next publish session picks up the images
 - Links them to the matching drafts
+- Converts to video with background audio (IG 4:5 + YT 9:16)
 - Promotes drafts → approved → publishes at the next scheduled slot
+
+### Custom Background Music
+
+Place your own `.mp3` or `.wav` files in `generated_images/music/` and the bot will randomly pick one as the background track for videos. If no custom music is provided, it generates a pleasant ambient lo-fi pad automatically.
 
 ### Notes
 - Image filenames must match the post ID exactly (e.g., `maya-042.jpg` for post `maya-042`)
 - Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`
 - Minimum file size: 10 KB (smaller files are ignored)
 - Carousel posts need at least 2 images in the folder
-- Individual prompts are also saved to `generated_images/prompts/{post_id}.txt`
-- The `IMAGE_PROMPTS.md` file is auto-committed to the repo after each generation run
-
-## What You Need To Do (Image Generation)
-
-The bot generates captions and prompts automatically. **You just need to generate the images and push them.** Here's the exact workflow:
-
-### Step 1: Check what images are needed
-```bash
-# Look at the committed file on GitHub:
-# → instagram_influencer/generated_images/IMAGE_PROMPTS.md
-# Or generate prompts locally:
-make generate
-```
-
-### Step 2: Generate images in Gemini app
-1. Open [gemini.google.com](https://gemini.google.com/)
-2. Copy each prompt from `IMAGE_PROMPTS.md`
-3. Paste into Gemini → download the generated image
-
-### Step 3: Place images in the right folder
-```
-instagram_influencer/generated_images/pending/
-├── maya-042.jpg              ← single/reel (filename = post ID)
-├── maya-043/                 ← carousel (folder = post ID)
-│   ├── 1.jpg
-│   ├── 2.jpg
-│   └── 3.jpg
-```
-
-### Step 4: Push to GitHub
-```bash
-cd instagram_influencer
-git add -f generated_images/pending/
-git commit -m "add images for maya-042, maya-043"
-git push
-```
-
-The bot automatically picks up the images at 19:00 IST and publishes them.
-
-**Notes:** Filenames must match post IDs exactly. Formats: `.jpg`, `.jpeg`, `.png`, `.webp`. Min 10 KB. Carousels need 2+ images.
 
 ---
 
 ## Daily Schedule (GitHub Actions)
 
-The bot runs **19 scheduled sessions/day** — matching real human phone usage patterns. ~20% of sessions are randomly skipped (simulating being busy), so effective sessions are **~15/day**. **1 post per day** at prime time (13:30 UTC / 19:00 IST). Each session has 30s-6min random startup jitter.
+The bot runs **35 sessions per day** — 29 Instagram + 6 YouTube — mimicking real phone-check patterns. **1 post/day** published to both platforms at prime time (19:00 IST).
 
-### Schedule
-
-| IST Time | Session | Notes |
-|----------|---------|-------|
-| 01:30 | Explore | Late night / can't sleep |
-| 05:30 | Hashtags | Early bird |
-| 07:00 | Morning engagement | Wake up scroll |
-| 08:30 | Hashtags | Commute scroll |
-| 10:00 | **Stories** | Morning stories |
-| 11:00 | Replies | Reply to comments |
-| 12:00 | Hashtags | Lunch break |
-| **13:30** | **PUBLISH + Hashtags** | **Prime time** |
-| 14:00 | **Stories** | Post-publish stories |
-| 14:45 | Explore | Afternoon |
-| 16:00 | **Stories** | Afternoon stories |
-| 17:30 | Hashtags | Evening prime |
-| 18:00 | **Stories** | Evening stories |
-| 19:00 | Hashtags | Evening engagement |
-| 20:30 | Replies | Reply to comments |
-| 21:30 | Explore | Winding down |
-| 22:00 | Maintenance | Auto-unfollow |
-| 22:30 | **Stories** | Late night stories |
-| 23:30 | Report | Daily summary |
-
-## What Each Session Does
-
-There are 7 session types that run throughout the day. Here's exactly what each one does:
-
----
-
-### 🌅 `morning` — Warm-up engagement (07:00 IST)
-Runs once at the start of the day. Browses 1 hashtag and likes + follows users from fresh posts. Light session (~8 posts) with a warm-up phase (first few posts: just look, no actions).
-
----
-
-### #️⃣ `hashtags` — Core follower growth engine (runs ~6x/day)
-The main growth driver. Each session:
-1. Picks 1 hashtag from your niche list (`indianfashion`, `mumbaifashion`, etc.)
-2. Fetches ~10 recent posts
-3. Warms up: first 1-3 posts, just browses (no actions)
-4. For each remaining post: **likes** ~70%, **comments** on ~10% (AI-generated by Gemini), **follows** ~20% (after viewing their profile first)
-5. Views their **stories** (~50% chance) and likes ~15% of them
-6. Occasionally saves posts (~8%) — strong interest signal
-
-> **Why this gets followers:** Following someone + liking their post + viewing their story = 3 notifications. They check your profile and follow back if they like what they see. Lower rates per session, but smarter targeting.
-
----
-
-### 🔍 `explore` — Reach new audiences (runs ~5x/day)
-Browses the Instagram Explore/Reels feed — the content Instagram shows to non-followers. Mostly passive (simulates casual scrolling), likes some posts, comments on ~8%. Session starts with 2-4 posts of just watching (warmup). Occasionally saves posts. This gets Maya's activity seen by Instagram's algorithm.
-
----
-
-### 💬 `replies` — Reply to comments on own posts (2x/day)
-Fetches comments on Maya's own posts from the **last 48 hours** and replies using Gemini-generated responses in Maya's voice. Replying signals to Instagram's algorithm that the post is actively engaging. Also makes followers feel seen.
-
----
-
-### 📖 `stories` — Repost content as stories (5x/day: 10:00, 14:00, 16:00, 18:00, 22:30)
-Picks 2-3 already-published posts and reposts them as stories with:
-- A text overlay ("In case you missed it", "Still obsessed", etc.)
-- An interactive sticker: **poll** (35%), **question box/AMA** (30%), **quiz** (20%), or clean (15%)
-- Auto-adds the story to the right **highlight** (OOTD, Mumbai Style, Ethnic Vibes, Tips, BTS, or Glam)
-
-Stories expire after 24h but the highlights stay permanently.
-
----
-
-### 🧹 `maintenance` — Clean up follows (1x/day at 22:00)
-Unfollows users followed **3+ days ago** that didn't follow back. Keeps following count low. Does up to 30 unfollows per run with long delays between each.
-
----
-
-### 📊 `report` — Daily summary (23:30 IST)
-Runs once at the end of the day. Generates a summary of engagement stats, posts published, and growth signals.
-
----
+| IST Time | Session | Platform | Publishes? |
+|----------|---------|----------|------------|
+| 07:00 | Morning engagement + welcome DMs | IG | No |
+| 07:45 | Explore (morning scroll) | IG | No |
+| 08:30 | Hashtags | IG | No |
+| 09:00 | Reply to comments | IG | No |
+| 09:45 | Story repost | IG | No |
+| 10:30 | **YT niche engagement** | **YT** | No |
+| 11:00 | Explore | IG | No |
+| 11:30 | Hashtags | IG | No |
+| 12:00 | Explore (lunch break) | IG | No |
+| 12:30 | Hashtags | IG | No |
+| 13:00 | **YT reply to comments** | **YT** | No |
+| 13:30 | Hashtags | IG | No |
+| 14:00 | Story repost | IG | No |
+| 14:45 | Explore | IG | No |
+| 15:30 | Hashtags | IG | No |
+| 16:00 | Reply to comments | IG | No |
+| 16:45 | **YT niche engagement** | **YT** | No |
+| 17:30 | Explore | IG | No |
+| 18:00 | Story repost | IG | No |
+| 18:30 | Hashtags | IG | No |
+| **19:00** | **PUBLISH + hashtags** | **IG + YT** | **Yes** |
+| 19:30 | Explore | IG | No |
+| 20:00 | **YT niche engagement** | **YT** | No |
+| 20:45 | Reply to comments | IG | No |
+| 21:30 | Explore (evening wind-down) | IG | No |
+| 22:00 | Maintenance (unfollow + DMs) | IG | No |
+| 22:30 | **YT reply to comments** | **YT** | No |
+| 23:00 | Maintenance | IG | No |
+| 23:30 | Daily report | Both | No |
 
 ## Anti-Detection & Human-Like Behavior
 
-The bot uses multiple layers of human simulation to avoid detection:
+The bot mimics real human usage patterns to avoid detection:
 
-### Timing
-- **Gaussian delays** — Pauses cluster around a natural midpoint (not uniform random like bots)
-- **Action-specific delays** — Likes are fast (8-25s), comments are slow (40-120s), follows medium (30-80s)
-- **Session fatigue** — Actions get slower as session progresses (1.0x → 1.2x → 1.5x → 1.8x)
-- **Micro-breaks** (15% chance) — 1.5-7 min pauses (checking another app, replying to texts)
-- **Night slowdown** — 1.4x slower during late night hours (IST 11pm-7am)
-- **Session startup jitter** — 30s-6min random delay so nothing runs at exact cron times
-
-### Behavior
-- **Session warmup** — First 1-4 posts in each session, just browse (no actions)
-- **Scrolling simulation** — Passive watching between actions (like real browsing)
-- **Skip behavior** — ~22% of posts are scrolled past without engaging
-- **Random session skip** — 20% of scheduled sessions don't run (simulating being busy)
-- **Random session abort** — 12% chance of stopping mid-session (got bored/distracted)
+- **Gaussian delays** — Pauses cluster around a natural midpoint (not uniform random)
+- **Micro-breaks** (10% chance) — 60-180s pauses simulating checking texts, switching apps
+- **Session startup jitter** — 10s-4min random delay so nothing runs at exact times
+- **Skip behavior** — ~12% of posts are scrolled past without engaging
 - **Profile browsing** — Views user profile before following
-- **Post saves** — ~8% save rate (safe signal, shows genuine interest)
+- **Randomized session sizes** — ±30% variation per session
+- **Multi-story viewing** — Views 1-3 stories per user (not always just 1)
+- **Selective commenting** — ~28% of hashtag posts, ~25% of explore posts
+- **Selective following** — ~55% of hashtag users, ~30% of explore users
 
-### Rates (conservative)
-- **Selective commenting** — ~10% of hashtag posts, ~8% of explore posts
-- **Selective following** — ~20% of users (with profile browse first)
-- **Story viewing** — ~50% chance to view, ~15% to like
+## Engagement Limits (Aggressive Growth)
 
-## Engagement Limits
+### Instagram
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 150 | Spread across ~14 effective sessions |
-| Comments | 30 | AI-generated, ~10% of seen posts |
-| Follows | 40 | With profile browse before follow (~20% rate) |
-| Story views | 80 | ~50% chance per user, ~15% like rate |
-| Replies | 25 | On own posts (last 48h) |
-| Unfollows | 30/run | After 3+ days |
-| Saves | Unlimited | ~8% of viewed posts |
+| Likes | 250 | Spread across 29 sessions |
+| Comments | 60 | AI-generated, ~28% of seen posts |
+| Follows | 80 | With profile browse before follow (~55% rate) |
+| Story views | 150 | ~75% chance per user, ~35% like rate |
+| Replies | 50 | On own posts (last 48h) — reply to ALL |
+| Unfollows | 60/run | After 2+ days (fast churn) |
+| Welcome DMs | 15/day | Run during morning + maintenance |
 
-**Warmup multiplier** for new accounts: 0.5x (days 1-7), 0.7x (days 8-14), 0.85x (days 15-21), 1.0x (day 22+).
+### YouTube
+
+| Action | Daily Limit | Notes |
+|--------|------------|-------|
+| Likes | 30 | On trending niche Shorts |
+| Comments | 10 | AI-generated, quality comments only |
+| Replies | 15 | On own video comments |
+
+**Warmup multiplier** for new accounts: 0.6x (days 1-7), 0.8x (days 8-14), 1.0x (day 15+).
+
+## Video & Audio
+
+- **Instagram Reels:** 1080x1350 (4:5), 7 seconds, Ken Burns zoom effect
+- **YouTube Shorts:** 1080x1920 (9:16), 10 seconds, Ken Burns zoom effect
+- **Audio:** Background music baked into every video
+  - Priority 1: Custom tracks from `generated_images/music/`
+  - Priority 2: Auto-generated ambient lo-fi pad (pink noise + Am7 chord)
+- **Instagram also tries:** Trending music overlay via API (bonus reach)
 
 ## Stories
 
-- **5 story sessions/day** (10:00, 14:00, 16:00, 18:00, 22:30 IST)
+- **3 story sessions/day** (09:45, 14:00, 18:00 IST)
 - Reposts 2-3 past posts with text overlays
-- **Auto-downloads media from Instagram** if local files don't exist (works seamlessly in CI)
+- **Auto-downloads media from Instagram** if local files don't exist (works in CI)
 - Interactive stickers: 35% poll, 30% question box (AMA), 20% quiz, 15% clean
 - Auto-categorized into highlights (OOTD, Mumbai Style, Ethnic Vibes, Tips, BTS, Glam)
 
 ## Daily Reports
 
-End-of-day summary at 23:30 IST with engagement stats, posts published, and growth signals.
+End-of-day summary at 23:30 IST with engagement stats, posts published, YouTube channel stats, and growth signals.
 
 **Telegram setup:**
 1. Create a bot via @BotFather → get token
@@ -290,17 +275,18 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, and grow
    TELEGRAM_BOT_TOKEN=7123456789:AAHxxxxx
    TELEGRAM_CHAT_ID=123456789
    ```
-4. Update secret: `gh secret set DOTENV --repo eshan-292/instagram-bot < .env`
 
 ## Make Commands
 
 | Command | What it does |
 |---------|-------------|
 | `make generate` | Generate captions + image prompts (no publishing) |
-| `make run` | Full pipeline: generate → pick up images → promote → publish → engage |
+| `make run` | Full pipeline: generate → video → publish (IG + YT) → engage |
 | `make dry-run` | Preview next post that would be published |
 | `make publish` | Publish next eligible post only |
-| `make engage` | Run engagement only (skip generation/publishing) |
+| `make engage` | Run IG engagement only (skip generation/publishing) |
+| `make yt-auth` | One-time YouTube OAuth2 setup (run locally) |
+| `make yt-engage` | Run YouTube engagement only |
 | `make check` | Syntax check all Python files |
 | `make deps` | Install dependencies |
 
@@ -313,7 +299,26 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, and grow
 | `INSTAGRAM_PASSWORD` | Instagram account password |
 | `GEMINI_API_KEY` | Google AI Studio API key ([free](https://aistudio.google.com/apikey)) |
 
-**Optional:**
+**YouTube (optional but recommended):**
+| Variable | Description |
+|----------|-------------|
+| `YOUTUBE_ENABLED` | `true` to enable YouTube Shorts publishing |
+| `YOUTUBE_CLIENT_ID` | Google OAuth2 client ID |
+| `YOUTUBE_CLIENT_SECRET` | Google OAuth2 client secret |
+| `YOUTUBE_REFRESH_TOKEN` | OAuth2 refresh token (from `make yt-auth`) |
+| `YOUTUBE_ENGAGEMENT_ENABLED` | `true` to enable YouTube engagement automation |
+
+**Engagement:**
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `ENGAGEMENT_ENABLED` | `false` | Enable Instagram engagement automation |
+| `ENGAGEMENT_DAILY_LIKES` | `250` | Max likes/day |
+| `ENGAGEMENT_DAILY_COMMENTS` | `60` | Max comments/day |
+| `ENGAGEMENT_DAILY_FOLLOWS` | `80` | Max follows/day |
+| `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
+| `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
+
+**Other:**
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `GEMINI_MODEL` | `gemini-2.5-flash` | Gemini model for caption generation |
@@ -321,12 +326,6 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, and grow
 | `MIN_READY_QUEUE` | `5` | Min ready posts before generating more |
 | `AUTO_MODE` | `false` | Enable auto publishing |
 | `AUTO_PROMOTE_DRAFTS` | `false` | Auto-promote drafts to approved |
-| `ENGAGEMENT_ENABLED` | `false` | Enable engagement automation |
-| `ENGAGEMENT_DAILY_LIKES` | `150` | Max likes/day |
-| `ENGAGEMENT_DAILY_COMMENTS` | `30` | Max comments/day |
-| `ENGAGEMENT_DAILY_FOLLOWS` | `40` | Max follows/day |
-| `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
-| `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `TELEGRAM_BOT_TOKEN` | — | Telegram bot token for daily reports |
 | `TELEGRAM_CHAT_ID` | — | Telegram chat ID for daily reports |
 | `ACCOUNT_CREATED_DATE` | — | `YYYY-MM-DD` for warmup multiplier |
@@ -335,16 +334,19 @@ End-of-day summary at 23:30 IST with engagement stats, posts published, and grow
 
 ```
 instagram_influencer/
-├── config.py              # Configuration (~25 env vars)
-├── orchestrator.py        # Pipeline CLI (single entry point)
+├── config.py              # Configuration (~30 env vars)
+├── orchestrator.py        # Pipeline CLI (single entry point, dual-platform)
 ├── generator.py           # Caption generation (Gemini + template fallback)
 ├── image.py               # Manual image system (prompts + pending/ lookup)
+├── audio.py               # Background music (user tracks + ffmpeg generation)
+├── video.py               # Ken Burns effect (IG 4:5 + YT 9:16 with audio)
 ├── publisher.py           # Instagram publishing (reels, carousels, photos)
-├── video.py               # Ken Burns effect (image → 5s MP4 for reels)
-├── engagement.py          # Engagement automation (like/comment/follow/reply)
+├── youtube_publisher.py   # YouTube Shorts publishing (OAuth2 + Data API v3)
+├── youtube_engagement.py  # YouTube engagement (like, comment, reply on Shorts)
+├── engagement.py          # Instagram engagement (like/comment/follow/reply)
 ├── stories.py             # Story reposting + highlights + interactive stickers
-├── report.py              # Daily report (Telegram + GitHub Actions summary)
-├── rate_limiter.py        # Action rate limiting + human-like timing
+├── report.py              # Daily report (Telegram + GitHub Actions + YT stats)
+├── rate_limiter.py        # Action rate limiting + warmup multiplier
 ├── gemini_helper.py       # Gemini API with model rotation (5 models, 100+ RPM)
 ├── post_queue.py          # Queue I/O (content_queue.json)
 ├── instagrapi_patch.py    # Monkey-patches for instagrapi resilience
@@ -352,9 +354,10 @@ instagram_influencer/
 ├── generated_images/
 │   ├── pending/           # Place your generated images here
 │   ├── prompts/           # Auto-generated per-post prompts
+│   ├── music/             # Place custom background music (.mp3/.wav) here
 │   └── IMAGE_PROMPTS.md   # Master prompt summary (committed to repo)
 ├── content_queue.json     # Post queue state
-├── engagement_log.json    # Action history
+├── engagement_log.json    # Action history (IG + YT)
 ├── followers.json         # Tracked follower IDs
 └── highlights.json        # Highlight PKs
 ```

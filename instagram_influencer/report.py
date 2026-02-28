@@ -99,6 +99,9 @@ def generate_report() -> str:
         "replies": "↩️ Comment Replies",
         "dms": "✉️ Welcome DMs",
         "stories_posted": "📸 Stories Posted",
+        "yt_likes": "▶️ YT Likes",
+        "yt_comments": "▶️ YT Comments",
+        "yt_replies": "▶️ YT Replies",
     }
 
     total_actions = 0
@@ -122,12 +125,29 @@ def generate_report() -> str:
             pid = p.get("id", "?")
             topic = p.get("topic", "")[:60]
             post_id = p.get("platform_post_id", "")
+            yt_id = p.get("youtube_video_id", "")
             lines.append(f"- **{pid}**: {topic}")
             if post_id:
-                lines.append(f"  - https://instagram.com/p/{post_id}/")
+                lines.append(f"  - IG: https://instagram.com/p/{post_id}/")
+            if yt_id:
+                lines.append(f"  - YT: https://youtube.com/shorts/{yt_id}")
     else:
         lines.append("*No posts published today*")
     lines.append("")
+
+    # YouTube channel stats
+    try:
+        from youtube_publisher import get_channel_stats
+        yt_stats = get_channel_stats()
+        if yt_stats:
+            lines.append("## YouTube Channel")
+            lines.append("")
+            lines.append(f"- Subscribers: **{yt_stats['subscribers']}**")
+            lines.append(f"- Total views: **{yt_stats['total_views']}**")
+            lines.append(f"- Videos: **{yt_stats['video_count']}**")
+            lines.append("")
+    except Exception:
+        pass
 
     # Content pipeline
     lines.append("## Content Pipeline")

@@ -109,6 +109,13 @@ class Config:
     engagement_comment_enabled: bool
     engagement_follow_enabled: bool
 
+    # YouTube Shorts
+    youtube_enabled: bool
+    youtube_client_id: str
+    youtube_client_secret: str
+    youtube_refresh_token: str
+    youtube_engagement_enabled: bool
+
 
 def load_config() -> Config:
     try:
@@ -143,10 +150,19 @@ def load_config() -> Config:
         schedule_lead_minutes=_int(os.getenv("AUTO_SCHEDULE_LEAD_MINUTES"), 30, minimum=0),
         # Engagement
         engagement_enabled=_bool(os.getenv("ENGAGEMENT_ENABLED")),
-        engagement_hashtags=_str(os.getenv("ENGAGEMENT_HASHTAGS"), "indianfashion,mumbaifashion,desistyle,indianfashionblogger,mumbailifestyle"),
-        engagement_daily_likes=_int(os.getenv("ENGAGEMENT_DAILY_LIKES"), 150, minimum=0),
-        engagement_daily_comments=_int(os.getenv("ENGAGEMENT_DAILY_COMMENTS"), 30, minimum=0),
-        engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 40, minimum=0),
+        engagement_hashtags=_str(os.getenv("ENGAGEMENT_HASHTAGS"),
+            "indianfashion,mumbaifashion,desistyle,indianfashionblogger,mumbailifestyle,"
+            "indianstreetstyle,ethnicwear,indiangirlstyle,browngirlmagic,southasianfashion,"
+            "mumbailifestyle,desifashion,indianootd,bollywoodfashion,fashionbloggerindia"),
+        engagement_daily_likes=_int(os.getenv("ENGAGEMENT_DAILY_LIKES"), 250, minimum=0),
+        engagement_daily_comments=_int(os.getenv("ENGAGEMENT_DAILY_COMMENTS"), 60, minimum=0),
+        engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 80, minimum=0),
         engagement_comment_enabled=_bool(os.getenv("ENGAGEMENT_COMMENT_ENABLED")),
         engagement_follow_enabled=_bool(os.getenv("ENGAGEMENT_FOLLOW_ENABLED")),
+        # YouTube
+        youtube_enabled=_bool(os.getenv("YOUTUBE_ENABLED")),
+        youtube_client_id=_str(os.getenv("YOUTUBE_CLIENT_ID")),
+        youtube_client_secret=_str(os.getenv("YOUTUBE_CLIENT_SECRET")),
+        youtube_refresh_token=_str(os.getenv("YOUTUBE_REFRESH_TOKEN")),
+        youtube_engagement_enabled=_bool(os.getenv("YOUTUBE_ENGAGEMENT_ENABLED")),
     )

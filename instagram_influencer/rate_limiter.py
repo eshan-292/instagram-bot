@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rate limiter — human-like timing, action-specific delays, session fatigue."""
+"""Rate limiter — tracks engagement actions and enforces daily limits."""
 
 from __future__ import annotations
 
@@ -16,16 +16,13 @@ log = logging.getLogger(__name__)
 
 LOG_FILE = Path(__file__).resolve().parent / "engagement_log.json"
 
-# Conservative daily limits — quality over quantity.
+# Maximum growth defaults — warmup multiplier keeps these safe for new accounts.
 # Override via Config fields.
 DAILY_LIMITS = {
-    "likes": 150,
-    "comments": 40,
-    "follows": 60,
+    "likes": 300,
+    "comments": 80,
+    "follows": 120,
 }
-
-# Track how many actions this session has done (for fatigue simulation)
-_session_action_count = 0
 
 
 def load_log(path: str | Path = LOG_FILE) -> dict[str, Any]:
@@ -65,13 +62,12 @@ def actions_today(data: dict[str, Any], action_type: str) -> int:
 
 
 def warmup_multiplier() -> float:
-    """Return a multiplier (0.5-1.0) based on account age.
+    """Return a multiplier (0.6-1.0) based on account age.
 
     Ramps limits gradually to avoid action blocks on new accounts:
-      Days 1-7:   0.5x
-      Days 8-14:  0.7x
-      Days 15-21: 0.85x
-      Days 22+:   1.0x (full limits)
+      Days 1-7:   0.6x
+      Days 8-14:  0.8x
+      Days 15+:   1.0x (full limits)
     """
     created = os.getenv("ACCOUNT_CREATED_DATE", "").strip()
     if not created:
@@ -82,16 +78,17 @@ def warmup_multiplier() -> float:
         return 1.0
     age_days = (datetime.now(timezone.utc) - created_dt).days
     if age_days < 7:
-        return 0.5
+        return 0.6
     if age_days < 14:
-        return 0.7
-    if age_days < 21:
-        return 0.85
+        return 0.8
     return 1.0
 
 
 def can_act(data: dict[str, Any], action_type: str, limit: int | None = None) -> bool:
-    """Check if we're still under the daily limit for `action_type`."""
+    """Check if we're still under the daily limit for `action_type`.
+
+    Applies warmup multiplier for new accounts.
+    """
     max_count = limit if limit is not None else DAILY_LIMITS.get(action_type, 0)
     if max_count <= 0:
         return False
@@ -101,8 +98,6 @@ def can_act(data: dict[str, Any], action_type: str, limit: int | None = None) ->
 
 def record_action(data: dict[str, Any], action_type: str, target_id: str) -> None:
     """Append an action to the log."""
-    global _session_action_count
-    _session_action_count += 1
     data.setdefault("actions", []).append({
         "type": action_type,
         "target": target_id,
@@ -110,146 +105,45 @@ def record_action(data: dict[str, Any], action_type: str, target_id: str) -> Non
     })
 
 
-# ---------------------------------------------------------------------------
-# Human-like timing system
-# ---------------------------------------------------------------------------
+def random_delay(min_s: int = 30, max_s: int = 90) -> None:
+    """Human-like sleep between actions using gaussian distribution.
 
-def _is_night_hours() -> bool:
-    """Check if it's late night IST (midnight-7am) — should be slower."""
-    utc_now = datetime.now(timezone.utc)
-    ist_hour = (utc_now.hour + 5) % 24  # rough IST conversion
-    if utc_now.minute >= 30:
-        ist_hour = (ist_hour + 1) % 24
-    return ist_hour < 7 or ist_hour >= 23
+    Instead of uniform random (which bots use), this uses a gaussian curve
+    centered between min and max, so most delays cluster near the middle
+    with occasional short or long waits — like a real person scrolling.
 
-
-def _fatigue_multiplier() -> float:
-    """Sessions get slower as more actions are taken — like a real person losing interest.
-
-    First 5 actions: normal speed (1.0x)
-    Actions 6-12:    slightly slower (1.2x)
-    Actions 13-20:   noticeably slower (1.5x)
-    Actions 20+:     tired scrolling (1.8x)
+    15% chance of a 'micro-break' (90-300s) — simulates getting distracted,
+    checking another app, replying to a text, etc.
     """
-    if _session_action_count < 5:
-        return 1.0
-    if _session_action_count < 12:
-        return 1.2
-    if _session_action_count < 20:
-        return 1.5
-    return 1.8
-
-
-def random_delay(min_s: int = 25, max_s: int = 75) -> None:
-    """Human-like sleep between actions using gaussian distribution + fatigue.
-
-    Behaviour:
-    - Gaussian curve centered between min/max (not uniform)
-    - 15% chance of micro-break (checking another app, replying to text)
-    - Gets slower as session progresses (fatigue)
-    - Slower during night hours
-    - Occasional very short delays (quick double-tap scroll)
-    """
-    # Micro-break: simulate getting distracted
-    if random.random() < 0.15:
-        pause = random.uniform(90, 420)  # 1.5 - 7 minutes
+    # Micro-break: simulate getting distracted (checking texts, switching apps)
+    if random.random() < 0.10:
+        pause = random.uniform(60, 180)
         log.debug("Micro-break: %.0fs (simulating distraction)", pause)
         time.sleep(pause)
         return
 
-    # Occasional quick action (3% — rapid scroll + like)
-    if random.random() < 0.03:
-        quick = random.uniform(3, 8)
-        time.sleep(quick)
-        return
-
-    # Gaussian distribution with fatigue
-    fatigue = _fatigue_multiplier()
-    night_mult = 1.4 if _is_night_hours() else 1.0
-
-    mid = (min_s + max_s) / 2 * fatigue * night_mult
-    std = (max_s - min_s) / 3.5
+    # Gaussian distribution: most delays cluster around the midpoint
+    mid = (min_s + max_s) / 2
+    std = (max_s - min_s) / 4  # ~95% of values within min-max range
     delay = random.gauss(mid, std)
-    delay = max(min_s * 0.7, min(max_s * 2.0, delay))
+    delay = max(min_s * 0.8, min(max_s * 1.3, delay))  # soft clamp
 
-    # Sub-second human jitter
-    delay += random.uniform(0.3, 2.5)
+    # Add small sub-second jitter (humans aren't precise)
+    delay += random.uniform(0.2, 1.8)
 
-    log.debug("Sleeping %.1fs (fatigue=%.1fx)", delay, fatigue)
+    log.debug("Sleeping %.1fs", delay)
     time.sleep(delay)
 
 
-def action_delay(action_type: str) -> None:
-    """Action-specific delays — different actions take different time.
-
-    Likes:      fast (tap + scroll)           8-25s
-    Comments:   slow (read, think, type)      40-120s
-    Follows:    medium (check profile first)  30-80s
-    Story views: fast (swipe through)         5-15s
-    Unfollows:  medium                        25-70s
-    Default:    moderate                       20-60s
-    """
-    ranges = {
-        "likes":       (8, 25),
-        "comments":    (40, 120),
-        "follows":     (30, 80),
-        "story_views": (5, 15),
-        "unfollows":   (25, 70),
-        "replies":     (35, 100),
-    }
-    min_s, max_s = ranges.get(action_type, (20, 60))
-    random_delay(min_s, max_s)
-
-
-def browsing_pause() -> None:
-    """Simulate passively watching content — no action, just looking.
-
-    Like a real person scrolling through feed without engaging.
-    """
-    pause = random.uniform(3, 15)
-    log.debug("Browsing pause: %.1fs (just watching)", pause)
-    time.sleep(pause)
-
-
 def session_startup_jitter() -> None:
-    """Random delay at session start — real people don't open IG at exact times.
+    """Random delay at session start to avoid running at exact cron times.
 
-    Wider range than before: 30s to 6 minutes.
+    Real people don't open Instagram at exactly :00 or :30. This adds
+    0-4 minutes of jitter so sessions start at varied times.
     """
-    jitter = random.uniform(30, 360)
+    jitter = random.uniform(10, 240)  # 10s to 4 minutes
     log.info("Session startup jitter: %.0fs", jitter)
     time.sleep(jitter)
-
-
-def maybe_abort_session() -> bool:
-    """12% chance to abort the current session early — simulates getting bored,
-    phone ringing, switching to another app, etc.
-
-    Call this periodically during engagement loops. Returns True if session
-    should be abandoned.
-    """
-    if random.random() < 0.12:
-        log.info("Session abort — simulating distraction/boredom")
-        return True
-    return False
-
-
-def should_skip_session() -> bool:
-    """20% chance to skip a scheduled session entirely.
-
-    Real people don't check Instagram on a perfect schedule. Sometimes they're
-    busy, sleeping, in a meeting, etc. This makes the pattern less predictable.
-    """
-    if random.random() < 0.20:
-        log.info("Skipping this scheduled session (simulating being busy)")
-        return True
-    return False
-
-
-def reset_session_fatigue() -> None:
-    """Reset the fatigue counter — call at start of each new session."""
-    global _session_action_count
-    _session_action_count = 0
 
 
 def daily_summary(data: dict[str, Any]) -> dict[str, int]:
