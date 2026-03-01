@@ -46,8 +46,10 @@ def _generate_partner_comment(cfg: Config, caption: str, partner_name: str) -> s
     )
 
     try:
-        from gemini_helper import ask_gemini
-        return ask_gemini(cfg.gemini_api_key, cfg.gemini_model, prompt).strip().strip('"')
+        from gemini_helper import generate as ask_gemini
+        result = ask_gemini(cfg.gemini_api_key, prompt, cfg.gemini_model)
+        if result:
+            return result.strip().strip('"')
     except Exception as exc:
         log.warning("Partner comment gen failed: %s", exc)
         fallbacks = [

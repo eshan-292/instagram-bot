@@ -52,8 +52,10 @@ def _generate_satellite_comment(cfg: Config, caption: str, target_name: str) -> 
     )
 
     try:
-        from gemini_helper import ask_gemini
-        return ask_gemini(cfg.gemini_api_key, cfg.gemini_model, prompt).strip().strip('"')
+        from gemini_helper import generate as ask_gemini
+        result = ask_gemini(cfg.gemini_api_key, prompt, cfg.gemini_model)
+        if result:
+            return result.strip().strip('"')
     except Exception as exc:
         log.warning("Satellite comment gen failed: %s", exc)
         # Fallback generic comments
