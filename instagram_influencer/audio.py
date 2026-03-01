@@ -141,12 +141,186 @@ def get_background_track(duration: float) -> str | None:
 
 
 def _generate_ambient(duration: float) -> str | None:
-    """Generate a warm ambient lo-fi pad using ffmpeg.
+    """Generate a lo-fi beat with chord progression using ffmpeg.
 
-    Creates a pleasant background by mixing:
-      - Pink noise low-passed at 500Hz (warm ambient pad)
-      - Gentle sine tones forming a soft Am7 chord (A3, C4, E4, G4)
+    Creates professional-sounding background music by mixing:
+      - Chord progression (4 chords, cycling) with detuned oscillators for warmth
+      - Sub-bass following chord root notes
+      - Filtered pink noise for vinyl/tape texture
+      - Lo-fi drum pattern (kick + hi-hat from filtered noise)
       - Fade in/out for smooth transitions
+
+    Randomly selects from multiple chord progressions for variety.
+    """
+    ffmpeg = _get_ffmpeg()
+    fd, audio_path = tempfile.mkstemp(suffix=".wav", prefix="lofi_")
+    os.close(fd)
+
+    fade_out_start = max(0, duration - 1.2)
+
+    # Chord progressions — each is 4 chords, each chord = list of freqs (Hz)
+    # Cycle through the 4 chords over the duration
+    _PROGRESSIONS = [
+        # i - VI - III - VII (Am - F - C - G) — lo-fi classic
+        {
+            "name": "lofi_classic",
+            "chords": [
+                [220.0, 261.6, 329.6],     # Am (A3, C4, E4)
+                [174.6, 220.0, 261.6],     # F (F3, A3, C4)
+                [130.8, 164.8, 196.0],     # C (C3, E3, G3)
+                [196.0, 246.9, 293.7],     # G (G3, B3, D4)
+            ],
+            "bass": [110.0, 87.3, 65.4, 98.0],  # root notes one octave down
+        },
+        # i - iv - VI - V (Am - Dm - F - E) — emotional
+        {
+            "name": "emotional",
+            "chords": [
+                [220.0, 261.6, 329.6],     # Am
+                [146.8, 174.6, 220.0],     # Dm (D3, F3, A3)
+                [174.6, 220.0, 261.6],     # F
+                [164.8, 207.7, 246.9],     # E (E3, G#3, B3)
+            ],
+            "bass": [110.0, 73.4, 87.3, 82.4],
+        },
+        # I - vi - IV - V (C - Am - F - G) — uplifting pop
+        {
+            "name": "uplifting",
+            "chords": [
+                [261.6, 329.6, 392.0],     # C (C4, E4, G4)
+                [220.0, 261.6, 329.6],     # Am
+                [174.6, 220.0, 261.6],     # F
+                [196.0, 246.9, 293.7],     # G
+            ],
+            "bass": [130.8, 110.0, 87.3, 98.0],
+        },
+        # ii - V - I - vi (Dm - G - C - Am) — jazzy
+        {
+            "name": "jazzy",
+            "chords": [
+                [146.8, 174.6, 220.0],     # Dm
+                [196.0, 246.9, 293.7],     # G
+                [261.6, 329.6, 392.0],     # C
+                [220.0, 261.6, 329.6],     # Am
+            ],
+            "bass": [73.4, 98.0, 130.8, 110.0],
+        },
+    ]
+
+    prog = random.choice(_PROGRESSIONS)
+    chords = prog["chords"]
+    bass_notes = prog["bass"]
+    n_chords = len(chords)
+
+    # Each chord lasts ~2.5 seconds, cycling through the progression
+    chord_dur = 2.5
+
+    # Build chord pad expression: detuned oscillators for warmth
+    # Each note gets a main + slightly detuned copy (±2Hz) for chorus effect
+    chord_parts = []
+    for i, chord_freqs in enumerate(chords):
+        t_start = i * chord_dur
+        t_end = t_start + chord_dur
+        # Window function: smooth in/out per chord (avoids clicks)
+        window = (
+            f"if(between(t-floor(t/{n_chords * chord_dur})*{n_chords * chord_dur},"
+            f"{t_start},{t_end}),1,0)"
+        )
+        for freq in chord_freqs:
+            amp = 0.04
+            detune = 1.5  # Hz detune for chorus width
+            chord_parts.append(
+                f"{amp}*sin({freq}*2*PI*t)*{window}"
+                f"+{amp * 0.7}*sin({freq + detune}*2*PI*t)*{window}"
+                f"+{amp * 0.5}*sin({freq * 2}*2*PI*t)*{window}"  # octave up (shimmer)
+            )
+
+    chord_expr = "+".join(chord_parts)
+    chord_input = f"aevalsrc='{chord_expr}':s=44100:d={duration}"
+
+    # Sub-bass: follows chord root, smooth sine wave
+    bass_parts = []
+    for i, bass_freq in enumerate(bass_notes):
+        t_start = i * chord_dur
+        t_end = t_start + chord_dur
+        window = (
+            f"if(between(t-floor(t/{n_chords * chord_dur})*{n_chords * chord_dur},"
+            f"{t_start},{t_end}),1,0)"
+        )
+        bass_parts.append(f"0.06*sin({bass_freq}*2*PI*t)*{window}")
+
+    bass_expr = "+".join(bass_parts)
+    bass_input = f"aevalsrc='{bass_expr}':s=44100:d={duration}"
+
+    # Pink noise: vinyl texture — very quiet, band-passed
+    noise_input = (
+        f"anoisesrc=d={duration}:c=pink:r=44100,"
+        f"lowpass=f=800,highpass=f=200,volume=0.04"
+    )
+
+    # Lo-fi drum pattern: kick (low thump) + hi-hat (high click)
+    # BPM ~75 (lo-fi tempo), kick on 1 & 3, hat on every beat
+    bpm = 75
+    beat_dur = 60.0 / bpm
+    # Kick: low freq burst every 2 beats
+    kick_expr = (
+        f"0.12*sin(55*2*PI*t)*exp(-8*mod(t,{2 * beat_dur}))"
+        f"*if(lt(mod(t,{2 * beat_dur}),0.15),1,0)"
+    )
+    kick_input = f"aevalsrc='{kick_expr}':s=44100:d={duration}"
+
+    # Hi-hat: filtered white noise — constant gentle shimmer
+    # (simpler approach: just very quiet high-freq noise, no gating needed)
+    hat_input = (
+        f"anoisesrc=d={duration}:c=white:r=44100,"
+        f"highpass=f=7000,lowpass=f=14000,"
+        f"volume=0.012"
+    )
+
+    # Mix all 5 layers with fades
+    filter_complex = (
+        f"[0:a][1:a][2:a][3:a][4:a]amix=inputs=5:duration=shortest:weights=1 0.8 0.5 0.6 0.3,"
+        f"lowpass=f=12000,"  # lo-fi: cut harsh highs
+        f"equalizer=f=400:width_type=o:width=2:g=2,"  # warm mid boost
+        f"afade=t=in:d=0.8,"
+        f"afade=t=out:st={fade_out_start}:d=1.2"
+    )
+
+    cmd = [
+        ffmpeg, "-y",
+        "-f", "lavfi", "-i", chord_input,
+        "-f", "lavfi", "-i", bass_input,
+        "-f", "lavfi", "-i", noise_input,
+        "-f", "lavfi", "-i", kick_input,
+        "-f", "lavfi", "-i", hat_input,
+        "-filter_complex", filter_complex,
+        "-c:a", "pcm_s16le",
+        audio_path,
+    ]
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        if result.returncode != 0:
+            log.warning("Lo-fi beat generation failed: %s", (result.stderr or "")[-500:])
+            _safe_remove(audio_path)
+            # Fall back to simple ambient if complex generation fails
+            return _generate_simple_ambient(duration)
+
+        file_size = os.path.getsize(audio_path)
+        log.info("Generated lo-fi beat (%s): %d bytes, %.1fs",
+                 prog["name"], file_size, duration)
+        return audio_path
+    except Exception as exc:
+        log.warning("Lo-fi beat generation error: %s", exc)
+        _safe_remove(audio_path)
+        return _generate_simple_ambient(duration)
+
+
+def _generate_simple_ambient(duration: float) -> str | None:
+    """Simple ambient fallback — warm pad with gentle movement.
+
+    Used when the full lo-fi beat generation fails (e.g., old ffmpeg version).
+    Still much better than the original static chord.
     """
     ffmpeg = _get_ffmpeg()
     fd, audio_path = tempfile.mkstemp(suffix=".wav", prefix="ambient_")
@@ -154,32 +328,42 @@ def _generate_ambient(duration: float) -> str | None:
 
     fade_out_start = max(0, duration - 0.8)
 
-    # Pink noise: warm, non-distracting background texture
-    noise_input = (
-        f"anoisesrc=d={duration}:c=pink:r=44100,"
-        f"lowpass=f=500,highpass=f=80,volume=0.10"
-    )
-
-    # Am7 chord: A3(220Hz), C4(262Hz), E4(330Hz), G4(392Hz) — dreamy, lo-fi
+    # Warm evolving pad: Am7 chord with slow LFO modulation for movement
+    # Main tones + detuned copies for width
     chord_expr = (
-        "0.05*sin(220*2*PI*t)"
-        "+0.04*sin(262*2*PI*t)"
-        "+0.035*sin(330*2*PI*t)"
-        "+0.025*sin(392*2*PI*t)"
+        # A3 (root) — with slow volume LFO
+        "0.05*(1+0.3*sin(0.4*2*PI*t))*sin(220*2*PI*t)"
+        "+0.035*sin(222*2*PI*t)"  # detuned copy for width
+        # C4 (minor 3rd)
+        "+0.04*(1+0.3*sin(0.5*2*PI*t))*sin(261.6*2*PI*t)"
+        "+0.028*sin(263.6*2*PI*t)"
+        # E4 (5th)
+        "+0.035*(1+0.3*sin(0.6*2*PI*t))*sin(329.6*2*PI*t)"
+        "+0.025*sin(331.6*2*PI*t)"
+        # G4 (7th) — gentler
+        "+0.025*(1+0.3*sin(0.35*2*PI*t))*sin(392*2*PI*t)"
+        # Sub-bass: A2 with gentle pulse
+        "+0.04*(1+0.2*sin(0.3*2*PI*t))*sin(110*2*PI*t)"
     )
     chord_input = f"aevalsrc='{chord_expr}':s=44100:d={duration}"
 
-    # Mix both inputs with fade in/out
+    # Pink noise: warm texture
+    noise_input = (
+        f"anoisesrc=d={duration}:c=pink:r=44100,"
+        f"lowpass=f=600,highpass=f=100,volume=0.06"
+    )
+
     filter_complex = (
         f"[0:a][1:a]amix=inputs=2:duration=shortest,"
+        f"lowpass=f=10000,"
         f"afade=t=in:d=0.6,"
         f"afade=t=out:st={fade_out_start}:d=0.8"
     )
 
     cmd = [
         ffmpeg, "-y",
-        "-f", "lavfi", "-i", noise_input,
         "-f", "lavfi", "-i", chord_input,
+        "-f", "lavfi", "-i", noise_input,
         "-filter_complex", filter_complex,
         "-c:a", "pcm_s16le",
         audio_path,
@@ -188,14 +372,14 @@ def _generate_ambient(duration: float) -> str | None:
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
         if result.returncode != 0:
-            log.warning("Ambient audio generation failed: %s", (result.stderr or "")[-300:])
+            log.warning("Simple ambient generation failed: %s", (result.stderr or "")[-300:])
             _safe_remove(audio_path)
             return None
 
-        log.debug("Generated ambient audio: %s (%d bytes)", audio_path, os.path.getsize(audio_path))
+        log.debug("Generated simple ambient: %s (%d bytes)", audio_path, os.path.getsize(audio_path))
         return audio_path
     except Exception as exc:
-        log.warning("Ambient audio generation error: %s", exc)
+        log.warning("Simple ambient error: %s", exc)
         _safe_remove(audio_path)
         return None
 

@@ -210,17 +210,22 @@ def main() -> int:
 
     try:
         cfg = load_config()
-        posts = read_queue(args.queue_file)
-        log.info("Queue: %s", status_counts(posts))
 
         # Satellite accounts have a simplified pipeline — engagement only
+        # (no content queue, no publishing, no generation)
+        # Check BEFORE reading queue since satellites don't have content_queue.json
         from persona import is_satellite
         if is_satellite():
             if args.session:
                 from satellite import run_satellite_session
                 sat_stats = run_satellite_session(cfg, args.session)
                 log.info("Satellite session '%s': %s", args.session, sat_stats)
+            else:
+                log.info("Satellite mode — no session specified, nothing to do")
             return 0
+
+        posts = read_queue(args.queue_file)
+        log.info("Queue: %s", status_counts(posts))
 
         if args.dry_run:
             chosen = find_eligible(posts)

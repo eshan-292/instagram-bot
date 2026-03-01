@@ -168,23 +168,36 @@ _MUSIC_QUERIES = [
 def _find_trending_track(cl: Client) -> Any | None:
     """Search for a trending track to overlay on the Reel.
 
-    Tries up to 5 different queries for better hit rate.
+    Tries up to 5 different queries with retry delays for 429/500 errors.
     Returns an Instagram music track object or None.
     """
     import random as _rnd
     queries = _rnd.sample(_MUSIC_QUERIES, min(5, len(_MUSIC_QUERIES)))
-    for query in queries:
+    last_exc = None
+    for attempt, query in enumerate(queries):
         try:
+            # Brief delay between attempts to avoid rate limiting
+            if attempt > 0:
+                time.sleep(_rnd.uniform(3, 8))
             tracks = cl.search_music(query)
             if tracks:
-                # Pick a random track from the first few results
                 track = _rnd.choice(tracks[:5])
                 log.info("Found trending track: '%s' (query='%s')",
                          getattr(track, "title", "unknown"), query)
                 return track
         except Exception as exc:
-            log.debug("Music search '%s' failed: %s", query, exc)
-    log.warning("No trending tracks found after %d queries", len(queries))
+            last_exc = exc
+            err_str = str(exc).lower()
+            if "429" in err_str or "500" in err_str or "too many" in err_str:
+                # Rate limited or server error — wait longer before retry
+                wait = _rnd.uniform(10, 20)
+                log.debug("Music search rate limited (query='%s'), waiting %.0fs: %s",
+                          query, wait, exc)
+                time.sleep(wait)
+            else:
+                log.debug("Music search '%s' failed: %s", query, exc)
+    log.warning("No trending tracks found after %d queries (last error: %s)",
+                len(queries), last_exc)
     return None
 
 
@@ -282,17 +295,30 @@ def _do_upload(cl: Client, caption: str, image_url: str,
             # Try uploading with trending music first (boosts reach)
             track = _find_trending_track(cl)
             if track:
-                try:
-                    media = cl.clip_upload_as_reel_with_music(
-                        Path(local_video),
-                        caption,
-                        track,
-                        extra_data=extra,
-                    )
-                    log.info("Published Reel with music: https://www.instagram.com/reel/%s/", media.code)
-                    return str(media.pk)
-                except Exception as exc:
-                    log.warning("Music reel upload failed, trying without music: %s", exc)
+                for music_attempt in range(2):
+                    try:
+                        if music_attempt > 0:
+                            log.info("Retrying music upload after delay...")
+                            time.sleep(15)
+                            # Try a different track on retry
+                            retry_track = _find_trending_track(cl)
+                            if retry_track:
+                                track = retry_track
+                        media = cl.clip_upload_as_reel_with_music(
+                            Path(local_video),
+                            caption,
+                            track,
+                            extra_data=extra,
+                        )
+                        log.info("Published Reel with music: https://www.instagram.com/reel/%s/", media.code)
+                        return str(media.pk)
+                    except Exception as exc:
+                        err_str = str(exc).lower()
+                        if music_attempt == 0 and ("500" in err_str or "too many" in err_str):
+                            log.warning("Music upload got server error, will retry: %s", exc)
+                            continue
+                        log.warning("Music reel upload failed, trying without music: %s", exc)
+                        break
 
             # Fallback: upload without music
             media = cl.clip_upload(
