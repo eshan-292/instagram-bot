@@ -3814,6 +3814,56 @@
       "type": "follows",
       "target": "68228919889",
       "at": "2026-03-01T04:01:37Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "DtmK_jvPyZw",
+      "at": "2026-03-01T04:17:46Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "CVdS89gmOFY",
+      "at": "2026-03-01T04:18:36Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "tDonodkl-zM",
+      "at": "2026-03-01T04:19:12Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "YOg_yXqYYzs",
+      "at": "2026-03-01T04:21:54Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "UJcNyn7IFvQ",
+      "at": "2026-03-01T04:22:22Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "NBWEkAumURo",
+      "at": "2026-03-01T04:23:21Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "NT7EjIIHxNU",
+      "at": "2026-03-01T04:23:48Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "OrCdhEp2wqI",
+      "at": "2026-03-01T04:25:17Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "vbCW7dm7adM",
+      "at": "2026-03-01T04:26:41Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "vbCW7dm7adM",
+      "at": "2026-03-01T04:26:43Z"
     }
   ]
 }
