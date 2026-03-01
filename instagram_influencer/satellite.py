@@ -229,15 +229,8 @@ def run_satellite_session(cfg: Config, session_type: str) -> dict[str, int]:
     """Main entry point for satellite account sessions."""
     persona = get_persona()
 
-    # Random session skip (20% of the time, do nothing — looks more human)
-    skip_prob = persona.get("engagement", {}).get("session_skip_probability", 0.20)
-    if random.random() < skip_prob:
-        log.info("Satellite session skipped (random skip for human-like behavior)")
-        return {"skipped": 1}
-
-    # Extended startup jitter for satellites (2-8 minutes)
-    jitter_range = persona.get("engagement", {}).get("startup_jitter_range", [120, 480])
-    jitter = random.uniform(*jitter_range)
+    # Brief startup jitter (30-90s) so sessions don't start at exact cron time
+    jitter = random.uniform(30, 90)
     log.info("Satellite startup jitter: %.0fs", jitter)
     time.sleep(jitter)
 

@@ -50,11 +50,8 @@ def _parse_hashtags(raw: str) -> list[str]:
 
 
 def _should_skip_post() -> bool:
-    """Randomly skip some posts — humans don't engage with everything they see.
-
-    ~12% skip rate: lower than before — we want to maximize engagement actions.
-    """
-    return random.random() < 0.12
+    """Skip disabled — engage with everything to maximize growth."""
+    return False
 
 
 def _randomize_session_size(base: int) -> int:
@@ -204,8 +201,7 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
     ~75% chance to view stories (up from 65%), ~35% chance to like (up from 25%).
     Story likes are the strongest engagement signal for follow-backs.
     """
-    if random.random() > 0.75:
-        return  # skip some stories
+    # Always view stories — no skipping
     try:
         stories = cl.user_stories(int(user_id))
         if stories:

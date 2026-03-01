@@ -318,13 +318,13 @@ The bot mimics real human usage patterns to avoid detection:
 - **Gaussian delays** -- Pauses cluster around a natural midpoint (not uniform random)
 - **Micro-breaks** (10% chance) -- 60-180s pauses simulating checking texts, switching apps
 - **Session startup jitter** -- 10s-4min random delay so nothing runs at exact times
-- **Skip behavior** -- ~12% of posts are scrolled past without engaging
+- ~~**Skip behavior**~~ -- **Disabled** — engage with everything for maximum growth
 - **Profile browsing** -- Views user profile before following
 - **Randomized session sizes** -- +/-30% variation per session
 - **Multi-story viewing** -- Views 1-3 stories per user (not always just 1)
 - **Selective commenting** -- ~28% of hashtag posts, ~25% of explore, ~45% of warm targets
 - **Selective following** -- ~35% from hashtags, ~40% from warm audience, ~30% from explore
-- **Satellite anti-detection** -- 20% random session skip, 2-8 min startup jitter, low daily limits
+- **Satellite jitter** -- 30-90s startup jitter, low daily limits
 
 ## Engagement Strategy (2026 Algorithm)
 
@@ -526,7 +526,7 @@ This single command logs in, creates the .env, and sets both GitHub secrets auto
 
 Go to GitHub → **Actions** → **Satellite 1** → **Run workflow** → choose `sat_boost` → **Run workflow**. Watch logs to confirm it works. Repeat for Satellite 2 and 3.
 
-After that, satellites auto-run 6 sessions/day each (3 boost + 3 background). They skip ~20% of sessions randomly and wait 2-8 minutes before starting (anti-detection).
+After that, satellites auto-run 6 sessions/day each (3 boost + 3 background).
 
 **Troubleshooting:**
 - If login fails, re-export the session cookie and re-run `get_session.py`
