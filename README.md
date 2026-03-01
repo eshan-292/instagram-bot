@@ -469,7 +469,7 @@ End-of-day summary with engagement stats, posts published, YouTube channel stats
 **Other:**
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `GEMINI_MODEL` | `gemini-2.5-flash` | Gemini model for caption generation |
+| `GEMINI_MODEL` | `gemini-2.5-flash` | Preferred Gemini model (auto-falls back to 4 others on rate limits) |
 | `DRAFT_COUNT` | `3` | Posts to generate per run |
 | `MIN_READY_QUEUE` | `5` | Min ready posts before generating more |
 | `AUTO_MODE` | `false` | Enable auto publishing |
@@ -496,6 +496,114 @@ Each account needs its own secrets:
 | `INSTAGRAM_SESSION_B64_SAT3` | Satellite 3's IG session |
 
 Shared API keys (GEMINI_API_KEY, PIXABAY_API_KEY) go in every account's .env file.
+
+## Satellite Account Setup (Step-by-Step)
+
+Satellites are lightweight Instagram accounts that boost engagement signals for your main accounts. They like, comment, save, and view stories on Maya's and Aryan's posts — acting like an organic engagement pod.
+
+### Step 1: Create 3 Instagram Accounts
+
+Create 3 new Instagram accounts. They don't need to look polished — just real enough:
+- Add a profile picture (anything — a landscape, pet, food)
+- Add a short bio (1 line, casual)
+- Follow 20-30 random accounts (mix of interests)
+- Post 2-3 photos (anything — food, scenery, random)
+- Use each account normally for a day or two before activating the bot (Instagram flags brand-new accounts that immediately start engaging heavily)
+
+**Tip:** Use different email addresses for each account. If you create them on the same phone, space them out over a few days.
+
+### Step 2: Get Session Cookies
+
+For each satellite account, you need to export the Instagram session cookie as base64. Run this **locally** (not in CI):
+
+```bash
+cd instagram_influencer
+
+# For satellite 1:
+PERSONA=sat1 INSTAGRAM_USERNAME=sat1_username INSTAGRAM_PASSWORD=sat1_password \
+  python -c "
+from publisher import _get_client
+from config import load_config
+import json, base64, os
+os.environ['PERSONA'] = 'sat1'
+os.environ['ENGAGEMENT_ENABLED'] = 'true'
+cfg = load_config()
+cl = _get_client(cfg)
+settings = cl.get_settings()
+b64 = base64.b64encode(json.dumps(settings).encode()).decode()
+print(b64)
+"
+```
+
+This prints a base64 string — that's your `INSTAGRAM_SESSION_B64_SAT1`.
+
+Repeat for sat2 and sat3 with the appropriate usernames/passwords.
+
+**Alternative (manual):** If the above doesn't work, you can log in via the bot once, then find the session file at `data/sat1/.ig_session.json` and encode it:
+
+```bash
+base64 -i instagram_influencer/data/sat1/.ig_session.json
+```
+
+### Step 3: Create .env Files for Each Satellite
+
+Each satellite needs a minimal `.env` file. Create one per satellite:
+
+**Satellite 1 `.env`:**
+```env
+PERSONA=sat1
+INSTAGRAM_USERNAME=your_sat1_username
+INSTAGRAM_PASSWORD=your_sat1_password
+GEMINI_API_KEY=your_gemini_api_key
+ENGAGEMENT_ENABLED=true
+ENGAGEMENT_COMMENT_ENABLED=true
+```
+
+**Satellite 2 and 3:** Same format, just change `PERSONA=sat2`/`sat3` and the Instagram credentials.
+
+**Notes:**
+- Satellites don't need YouTube keys, Replicate/BFL/HF tokens, Pixabay keys, or Telegram keys
+- They DO need `GEMINI_API_KEY` (for generating comments)
+- They DO need `ENGAGEMENT_ENABLED=true` and `ENGAGEMENT_COMMENT_ENABLED=true`
+
+### Step 4: Add GitHub Secrets
+
+Go to your repo → Settings → Secrets and variables → Actions → New repository secret.
+
+Add these 6 secrets (2 per satellite):
+
+| Secret Name | Value |
+|------------|-------|
+| `DOTENV_SAT1` | Paste the entire contents of satellite 1's `.env` file |
+| `INSTAGRAM_SESSION_B64_SAT1` | The base64 string from Step 2 |
+| `DOTENV_SAT2` | Satellite 2's `.env` contents |
+| `INSTAGRAM_SESSION_B64_SAT2` | Satellite 2's base64 session |
+| `DOTENV_SAT3` | Satellite 3's `.env` contents |
+| `INSTAGRAM_SESSION_B64_SAT3` | Satellite 3's base64 session |
+
+### Step 5: Test with Manual Dispatch
+
+Before waiting for the cron schedule, test each satellite manually:
+
+1. Go to **Actions** tab in your GitHub repo
+2. Click **Satellite 1** in the left sidebar
+3. Click **Run workflow** → choose `sat_boost` → click **Run workflow**
+4. Watch the logs to confirm it logs in, finds Maya's and Aryan's posts, and engages
+
+Repeat for Satellite 2 and Satellite 3.
+
+### Step 6: Done!
+
+The satellites will now run automatically on their cron schedules (6 sessions/day each). They'll:
+- Boost both Maya's and Aryan's posts 3x/day (`sat_boost`)
+- Do light background browsing 3x/day (`sat_background`)
+- Skip ~20% of sessions randomly (anti-detection)
+- Wait 2-8 minutes before starting each session (jitter)
+
+**Troubleshooting:**
+- If a satellite fails to log in, re-export the session cookie (Step 2) and update the `INSTAGRAM_SESSION_B64_SATx` secret
+- Instagram sessions expire after ~90 days — you'll need to refresh them periodically
+- If you see "challenge required" errors, log into the account manually on your phone, complete any verification, then re-export the session
 
 ## Files
 
