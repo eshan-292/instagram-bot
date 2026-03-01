@@ -4344,6 +4344,16 @@
       "type": "likes",
       "target": "2879345607913154436",
       "at": "2026-03-01T14:07:35Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "b-S9nkxxPlA",
+      "at": "2026-03-01T15:44:00Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "wPQqXEWE-sI",
+      "at": "2026-03-01T15:45:29Z"
     }
   ]
 }
