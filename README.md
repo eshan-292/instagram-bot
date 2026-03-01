@@ -34,7 +34,7 @@ data/
 - **Maya Varma** — 23yo fashion influencer from Mumbai. Bold, teasing, confident voice.
 - **Aryan Dhar** — 25yo fitness influencer from Delhi. Confident, disciplined, motivating, no-BS.
 
-Both get: content generation, image prompts, video creation, IG + YT publishing, full engagement (warm audience, hashtags, explore, replies, stories, DMs), cross-promotion with each other.
+Both get: content generation, image prompts, video creation, IG + YT publishing, full engagement (warm audience, hashtags, explore, replies, stories), cross-promotion with each other.
 
 ### Satellite Accounts (Engagement Support)
 3 lightweight accounts that boost engagement signals for both main accounts:
@@ -53,7 +53,7 @@ Main accounts subtly support each other without being overtly linked:
 
 ## How It Works
 
-1. **Generate captions** -- Gemini 2.5 Flash creates posts in the persona's voice
+1. **Generate captions** -- Gemini creates posts in the persona's voice (auto-rotates models on rate limits)
 2. **Generate image prompts** -- Bot creates Gemini-ready prompts and saves to `IMAGE_PROMPTS.md`
 3. **You generate images** -- Copy prompts into the Gemini app, save images to `data/{persona}/generated_images/pending/`
 4. **Bot picks up images** -- Links images to drafts and promotes them
@@ -253,7 +253,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 
 **1 post/day per main account** at prime time (Maya 19:00 IST, Aryan 19:15 IST).
 
-**Reliability:** Session routing uses `github.event.schedule` (the exact cron expression) instead of wall-clock time, making it immune to GitHub Actions cron delays (which can be 10-20+ minutes). State commits use `git pull --rebase` before push to handle parallel workflow race conditions.
+**Reliability:** Session routing uses `github.event.schedule` (the exact cron expression) instead of wall-clock time, making it immune to GitHub Actions cron delays (which can be 10-20+ minutes). State commits add each file individually (avoiding failures from missing files), use `git pull --rebase` before push, and retry up to 3 times on push failure to handle parallel workflow race conditions.
 
 ### Maya Instagram Schedule (29 sessions)
 
@@ -286,7 +286,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | 20:50 | Explore | Evening wind-down |
 | **21:00** | **Cross-promo** | **Engage partner's latest post** |
 | 21:30 | Warm audience | |
-| 22:05 | Maintenance | Unfollow + welcome DMs |
+| 22:05 | Maintenance | Unfollow (DMs disabled) |
 | 22:45 | Maintenance | Second pass |
 | 23:15 | Daily report | |
 
@@ -345,7 +345,7 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 | **Snap zoom hook** | +40-60% 3-sec hold rate | Visual punch in first 0.5s |
 | **Post-publish burst** | +50-100% reach per post | Pin CTA comment + instant story + mini engagement burst |
 | **Viral auto-boost** | Snowball viral posts | Detects 2x+ avg engagement -> re-story + boost |
-| **Comment-to-DM** | 5-10x follow-back rate | Personalized DM to commenters |
+| ~~**Comment-to-DM**~~ | ~~5-10x follow-back rate~~ | **Disabled** -- AI DMs sound unnatural and cause unfollows |
 | **Power user targeting** | +20-30% follow-back rate | Prioritize micro-influencers (1K-50K) |
 | **Carousel montage** | +24% shares, +19% reach | 5-slide carousel -> 30s Reel with transitions |
 | **Viral hook patterns** | Higher scroll-stop rate | POV:, numbers, curiosity gaps |
@@ -362,8 +362,8 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 | Story views | 150 | ~75% chance per user, ~35% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
 | Unfollows | 60/run | After 2+ days |
-| Welcome DMs | 15/day | Run during morning + maintenance |
-| Comment DMs | 8/day | Personalized follow-up to commenters |
+| ~~Welcome DMs~~ | ~~15/day~~ | **Disabled** -- caused unfollows |
+| ~~Comment DMs~~ | ~~8/day~~ | **Disabled** -- sounded unnatural |
 
 ### Satellite Limits (per satellite account)
 

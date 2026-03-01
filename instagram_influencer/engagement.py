@@ -1116,11 +1116,8 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     log.info("Starting engagement session: %s", session_type)
 
     if session_type == "morning":
-        # Morning: aggressive start — hashtags + welcome DMs
+        # Morning: aggressive start — hashtags
         _run_hashtag_engagement(cl, cfg, data, stats, max_posts=20)
-        # Also run welcome DMs during morning (catch overnight followers)
-        dm_count = run_welcome_dms(cl, cfg)
-        stats["dms"] = dm_count
 
     elif session_type == "replies":
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
@@ -1145,13 +1142,7 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     elif session_type == "maintenance":
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        # Welcome DMs (new followers)
-        dm_count = run_welcome_dms(cl, cfg)
-        stats["dms"] = dm_count
-        random_delay(10, 30)
-        # Comment follow-up DMs (5-10x better follow-back rate)
-        comment_dm_count = run_comment_followup_dms(cl, cfg, data)
-        stats["comment_dms"] = comment_dm_count
+        # DMs disabled — they sound unnatural and cause unfollows
 
     elif session_type == "stories":
         from stories import run_story_session
@@ -1174,8 +1165,6 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         random_delay(20, 90)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
-        dm_count = run_welcome_dms(cl, cfg)
-        stats["dms"] = dm_count
 
     save_log(LOG_FILE, data)
     log.info("Session '%s' done: %s (daily: %s)", session_type, stats, daily_summary(data))

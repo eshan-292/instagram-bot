@@ -215,16 +215,25 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f instagram_influencer/data/maya/engagement_log.json \
-                     instagram_influencer/data/maya/followers.json \
-                     instagram_influencer/data/maya/content_queue.json \
-                     instagram_influencer/data/maya/highlights.json \
-                     instagram_influencer/data/maya/daily_report.md \
-                     instagram_influencer/data/maya/.ig_session.json \
-                     "instagram_influencer/data/maya/generated_images/IMAGE_PROMPTS.md" \
-                     "instagram_influencer/data/maya/generated_images/pending/" 2>/dev/null || true
+          # Add each file individually to avoid one missing file blocking all staging
+          for f in \
+            instagram_influencer/data/maya/engagement_log.json \
+            instagram_influencer/data/maya/followers.json \
+            instagram_influencer/data/maya/content_queue.json \
+            instagram_influencer/data/maya/highlights.json \
+            instagram_influencer/data/maya/daily_report.md \
+            instagram_influencer/data/maya/.ig_session.json; do
+            [ -f "$f" ] && git add -f "$f" 2>/dev/null || true
+          done
+          [ -f "instagram_influencer/data/maya/generated_images/IMAGE_PROMPTS.md" ] && \
+            git add -f "instagram_influencer/data/maya/generated_images/IMAGE_PROMPTS.md" 2>/dev/null || true
+          [ -d "instagram_influencer/data/maya/generated_images/pending" ] && \
+            git add -f "instagram_influencer/data/maya/generated_images/pending/" 2>/dev/null || true
           git diff --staged --quiet || (
             git commit -m "bot: maya state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
-            git pull --rebase origin main || true
-            git push
+            for attempt in 1 2 3; do
+              git pull --rebase origin main 2>/dev/null && git push && break
+              echo "Push attempt $attempt failed, retrying..."
+              sleep 2
+            done
           )
