@@ -116,6 +116,8 @@ jobs:
         run: |
           echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
           grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=maya" >> instagram_influencer/.env
+          # Also export PERSONA to the environment for reliability
+          echo "PERSONA=maya" >> $GITHUB_ENV
 
       # Determine which session to run based on the trigger
       # IMPORTANT: Uses github.event.schedule (the exact cron expression) instead of

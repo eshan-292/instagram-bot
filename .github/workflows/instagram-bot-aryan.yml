@@ -108,7 +108,11 @@ jobs:
 
       # Create .env from the DOTENV_ARYAN secret
       - name: Create .env
-        run: echo "${{ secrets.DOTENV_ARYAN }}" > instagram_influencer/.env
+        run: |
+          echo "${{ secrets.DOTENV_ARYAN }}" > instagram_influencer/.env
+          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=aryan" >> instagram_influencer/.env
+          # Also export PERSONA to the environment for reliability
+          echo "PERSONA=aryan" >> $GITHUB_ENV
 
       # Determine which session to run based on the trigger
       # Uses github.event.schedule (exact cron expression) instead of wall-clock time

@@ -65,6 +65,7 @@ jobs:
         run: |
           echo "${{ secrets.DOTENV }}" > instagram_influencer/.env
           grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=maya" >> instagram_influencer/.env
+          echo "PERSONA=maya" >> $GITHUB_ENV
 
       # Determine which YT session to run based on the trigger
       # Uses github.event.schedule (exact cron expression) instead of wall-clock time

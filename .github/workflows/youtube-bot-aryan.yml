@@ -56,7 +56,10 @@ jobs:
 
       # Create .env from the DOTENV_ARYAN secret (needed for YouTube API keys)
       - name: Create .env
-        run: echo "${{ secrets.DOTENV_ARYAN }}" > instagram_influencer/.env
+        run: |
+          echo "${{ secrets.DOTENV_ARYAN }}" > instagram_influencer/.env
+          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=aryan" >> instagram_influencer/.env
+          echo "PERSONA=aryan" >> $GITHUB_ENV
 
       # Determine which YT session to run based on the trigger
       # Uses github.event.schedule (exact cron expression) instead of wall-clock time
