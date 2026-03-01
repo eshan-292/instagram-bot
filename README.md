@@ -44,10 +44,11 @@ Both get: content generation, image prompts, video creation, IG + YT publishing,
 - Anti-detection: 20% random session skip, extended jitter, low daily limits
 
 ### Cross-Promotion
-Main accounts subtly support each other:
-- ~12% of captions include a partner mention
-- Dedicated cross-promo engagement sessions (like + comment on partner's posts)
-- Warm audience cross-targeting (each account's followers see the other's content)
+Main accounts subtly support each other without being overtly linked:
+- Daily cross-promo engagement sessions (like + comment + story views on partner's posts)
+- Timed ~2hrs after partner publishes for natural engagement signal
+- No @mentions in captions — accounts appear independent publicly
+- Satellite accounts engage both main accounts for additional signal boost
 - Max 2 partner comments/day to stay subtle
 
 ## How It Works
@@ -76,14 +77,24 @@ Post lifecycle: `draft` -> `approved` -> `ready` -> `posted` (IG + YT simultaneo
 - Question in every caption (drives comments = algorithm boost)
 - Every caption ends with a send/share CTA: "Send this to someone who...", "Tag your bestie"
 - `alt_text` on every post (accessibility + Instagram SEO)
-- Cross-platform promotion (40% of posts mention YouTube channel)
-- Only 3-5 hashtags using pyramid strategy (1 brand + 1 broad + 2 medium + 1 niche)
+- 3-5 hashtags in caption (pyramid: 1 brand + 1 broad + 2 medium + 1 niche)
+- 15-20 extra hashtags posted as **first comment** for maximum discovery
+- Like counts hidden on all posts (reduces comparison anxiety, boosts engagement)
+- No cross-platform mentions in captions (IG and YT kept separate)
 
 ## Audio Strategy (2026)
 
-- **Instagram Reels:** SILENT videos -- trending music overlaid at publish time via Instagram's music API (algorithm favors trending audio)
-- **YouTube Shorts:** Royalty-free music baked in (Pixabay API -> user tracks -> ambient lo-fi fallback)
-- **Instagram also tries:** 30+ trending music search queries (Bollywood, Indian pop, fashion, viral)
+- **Instagram Reels:** SILENT videos -- trending music overlaid at publish time via Instagram's music API
+  - 30+ trending music search queries (Bollywood, Indian pop, fashion, viral)
+  - Auto-retry with backoff on 429/500 server errors
+  - Falls back to no-music upload if trending audio unavailable
+- **YouTube Shorts:** Background music baked into video
+  - Priority 1: Pixabay royalty-free tracks (needs API key)
+  - Priority 2: User-provided tracks from `generated_images/music/`
+  - Priority 3: Lo-fi beat generator (chord progressions + bass + drums + vinyl noise)
+    - 4 random chord progressions for variety (classic, emotional, uplifting, jazzy)
+    - Sub-bass following root notes, lo-fi kick pattern, hi-hat shimmer
+    - Warm mixing with mid-boost and high-cut for lo-fi feel
 
 ## Quick Start
 
@@ -273,6 +284,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | **20:00** | **Boost** | **Viral detection -- auto-boost** |
 | 20:15 | Replies | |
 | 20:50 | Explore | Evening wind-down |
+| **21:00** | **Cross-promo** | **Engage partner's latest post** |
 | 21:30 | Warm audience | |
 | 22:05 | Maintenance | Unfollow + welcome DMs |
 | 22:45 | Maintenance | Second pass |
@@ -280,7 +292,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 
 ### Aryan Instagram Schedule (29 sessions)
 
-Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**.
+Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**. Cross-promo at **20:45 IST** (1.75hrs after Maya publishes).
 
 ### YouTube Schedules (12 sessions each)
 
@@ -344,9 +356,9 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 250 | Spread across all sessions |
-| Comments | 60 | AI-generated, context-aware |
-| Follows | 80 | Smart targeting: 70% micro-influencers, 20% others |
+| Likes | 400 | Spread across all sessions |
+| Comments | 100 | AI-generated, context-aware |
+| Follows | 120 | Smart targeting: 70% micro-influencers, 20% others |
 | Story views | 150 | ~75% chance per user, ~35% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
 | Unfollows | 60/run | After 2+ days |
