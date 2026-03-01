@@ -230,15 +230,15 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 
 | Workflow | Sessions/Day | Concurrency Group | Purpose |
 |----------|-------------|-------------------|---------|
-| `instagram-bot.yml` | 29 | `instagram-bot` | Maya IG |
+| `instagram-bot.yml` | 33 | `instagram-bot-maya` | Maya IG |
 | `youtube-bot.yml` | 12 | `youtube-bot` | Maya YT |
-| `instagram-bot-aryan.yml` | 29 | `instagram-bot-aryan` | Aryan IG |
+| `instagram-bot-aryan.yml` | 33 | `instagram-bot-aryan` | Aryan IG |
 | `youtube-bot-aryan.yml` | 12 | `youtube-bot-aryan` | Aryan YT |
 | `satellite-1.yml` | 6 | `satellite-1` | Satellite 1 |
 | `satellite-2.yml` | 6 | `satellite-2` | Satellite 2 |
 | `satellite-3.yml` | 6 | `satellite-3` | Satellite 3 |
 
-**Total: ~100 sessions/day** across all accounts.
+**Total: ~108 sessions/day** across all accounts (including 5 overnight sessions per main account).
 
 **1 post/day per main account** at prime time (Maya 19:00 IST, Aryan 19:15 IST).
 
