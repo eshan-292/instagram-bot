@@ -2,12 +2,15 @@ name: Satellite 1
 
 on:
   schedule:
-    # 6 sessions/day: 3 sat_boost + 3 sat_background
-    - cron: '30 2 * * *'   # 08:00 IST — sat_background
-    - cron: '30 5 * * *'   # 11:00 IST — sat_boost
+    # 9 sessions/day: 5 sat_boost + 4 sat_background — max growth mode
+    - cron: '30 2 * * *'   # 08:00 IST — sat_boost (morning)
+    - cron: '30 4 * * *'   # 10:00 IST — sat_background
+    - cron: '30 6 * * *'   # 12:00 IST — sat_boost (lunch)
     - cron: '30 8 * * *'   # 14:00 IST — sat_background
-    - cron: '30 11 * * *'  # 17:00 IST — sat_boost
+    - cron: '30 10 * * *'  # 16:00 IST — sat_boost (evening)
+    - cron: '30 12 * * *'  # 18:00 IST — sat_background
     - cron: '30 14 * * *'  # 20:00 IST — sat_boost (after main publish)
+    - cron: '30 15 * * *'  # 21:00 IST — sat_boost (prime time)
     - cron: '30 16 * * *'  # 22:00 IST — sat_background
 
   workflow_dispatch:
@@ -67,11 +70,14 @@ jobs:
           else
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              "30 2 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
-              "30 5 * * *")  echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "30 2 * * *")  echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "30 4 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
+              "30 6 * * *")  echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
               "30 8 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
-              "30 11 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "30 10 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "30 12 * * *") echo "type=sat_background" >> $GITHUB_OUTPUT ;;
               "30 14 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "30 15 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
               "30 16 * * *") echo "type=sat_background" >> $GITHUB_OUTPUT ;;
               *)             echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
             esac

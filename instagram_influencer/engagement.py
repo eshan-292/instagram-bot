@@ -33,7 +33,7 @@ from persona import get_persona
 log = logging.getLogger(__name__)
 
 # Persistent files
-POSTS_PER_HASHTAG = 30          # highly aggressive — mine max per tag
+POSTS_PER_HASHTAG = 40          # max growth — mine as many as possible per tag
 def _followers_file():
     from persona import persona_data_dir
     return persona_data_dir() / "followers.json"
@@ -434,7 +434,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
     Aggressive mode: larger session sizes, higher comment and follow rates.
     """
     stats: dict[str, int] = {"explore_likes": 0, "explore_comments": 0, "explore_follows": 0}
-    explore_limit = _randomize_session_size(35)  # highly aggressive
+    explore_limit = _randomize_session_size(45)  # max growth mode
 
     try:
         medias = cl.explore_reels(amount=explore_limit + 10)
@@ -675,7 +675,7 @@ def run_warm_audience_session(
     follower_ids = list(followers.keys())
     random.shuffle(follower_ids)
 
-    session_size = _randomize_session_size(20)
+    session_size = _randomize_session_size(30)  # max growth — engage more warm targets
     log.info("Warm audience: browsing %d followers of @%s", min(session_size, len(follower_ids)), account)
 
     for uid in follower_ids[:session_size]:
@@ -1102,15 +1102,15 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     log.info("Starting engagement session: %s", session_type)
 
     if session_type == "morning":
-        # Morning: aggressive start — hashtags
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=30)
+        # Morning: max growth start — hashtags
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
 
     elif session_type == "replies":
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
 
     elif session_type == "hashtags":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=35)  # aggressive
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=45)  # max growth
 
     elif session_type == "explore":
         explore_stats = run_explore_engagement(cl, cfg, data)
@@ -1147,7 +1147,7 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
         random_delay(20, 90)
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=40)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
         random_delay(20, 90)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)

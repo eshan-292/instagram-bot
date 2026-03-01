@@ -14,14 +14,14 @@
   "engagement": {
     "default_hashtags": "fashion,fitness,indianstyle,motivation,lifestyle",
     "daily_limits": {
-      "likes": 80,
-      "comments": 12,
-      "saves": 12,
-      "story_views": 40,
-      "comment_likes": 30,
-      "story_likes": 20,
-      "story_reposts": 2,
-      "dm_shares": 6
+      "likes": 150,
+      "comments": 25,
+      "saves": 25,
+      "story_views": 80,
+      "comment_likes": 60,
+      "story_likes": 40,
+      "story_reposts": 5,
+      "dm_shares": 12
     }
   },
   "background_hashtags": ["indianfashion", "fitness", "lifestyle", "motivation", "dailylife", "indianstyle", "foodie", "travel"]

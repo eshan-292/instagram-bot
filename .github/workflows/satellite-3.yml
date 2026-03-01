@@ -2,13 +2,16 @@ name: Satellite 3
 
 on:
   schedule:
-    # 6 sessions/day: 3 sat_boost + 3 sat_background
+    # 9 sessions/day: 5 sat_boost + 4 sat_background — max growth mode
     # Staggered +40 min from satellite-1
-    - cron: '10 3 * * *'   # 08:40 IST — sat_background
-    - cron: '10 6 * * *'   # 11:40 IST — sat_boost
+    - cron: '10 3 * * *'   # 08:40 IST — sat_boost
+    - cron: '10 5 * * *'   # 10:40 IST — sat_background
+    - cron: '10 7 * * *'   # 12:40 IST — sat_boost
     - cron: '10 9 * * *'   # 14:40 IST — sat_background
-    - cron: '10 12 * * *'  # 17:40 IST — sat_boost
+    - cron: '10 11 * * *'  # 16:40 IST — sat_boost
+    - cron: '10 13 * * *'  # 18:40 IST — sat_background
     - cron: '10 15 * * *'  # 20:40 IST — sat_boost (after main publish)
+    - cron: '10 16 * * *'  # 21:40 IST — sat_boost (prime time)
     - cron: '10 17 * * *'  # 22:40 IST — sat_background
 
   workflow_dispatch:
@@ -68,11 +71,14 @@ jobs:
           else
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              "10 3 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
-              "10 6 * * *")  echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 3 * * *")  echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 5 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
+              "10 7 * * *")  echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
               "10 9 * * *")  echo "type=sat_background" >> $GITHUB_OUTPUT ;;
-              "10 12 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 11 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 13 * * *") echo "type=sat_background" >> $GITHUB_OUTPUT ;;
               "10 15 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
+              "10 16 * * *") echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
               "10 17 * * *") echo "type=sat_background" >> $GITHUB_OUTPUT ;;
               *)             echo "type=sat_boost"      >> $GITHUB_OUTPUT ;;
             esac
