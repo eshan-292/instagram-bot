@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-command satellite setup. Logs in via browser cookie, creates .env, sets GitHub secrets.
+"""One-command satellite setup. Builds session from browser cookie, creates .env, sets GitHub secrets.
 
 Usage:
     python get_session.py sat1 username password sessionid gemini_api_key
@@ -8,16 +8,71 @@ Usage:
 import base64
 import json
 import os
+import random
+import re
 import subprocess
 import sys
+import time
+import uuid
 from pathlib import Path
 from urllib.parse import unquote
 
 os.chdir(Path(__file__).resolve().parent)
 
-from instagrapi import Client
-
 REPO = "eshan-292/instagram-bot"
+
+
+def _random_uuid():
+    return str(uuid.uuid4())
+
+
+def _build_session(session_id: str) -> dict:
+    """Build a minimal instagrapi-compatible session dict from a sessionid cookie.
+    No API calls needed — the bot will validate on first run."""
+
+    # Extract user_id from sessionid (the number before the first colon)
+    user_id = re.search(r"^\d+", session_id).group()
+
+    # Generate realistic device fingerprint
+    android_device_id = f"android-{random.randbytes(8).hex()}"
+
+    return {
+        "uuids": {
+            "phone_id": _random_uuid(),
+            "uuid": _random_uuid(),
+            "client_session_id": _random_uuid(),
+            "advertising_id": _random_uuid(),
+            "android_device_id": android_device_id,
+            "request_id": _random_uuid(),
+            "tray_session_id": _random_uuid(),
+        },
+        "mid": "",
+        "ig_u_rur": None,
+        "ig_www_claim": None,
+        "authorization_data": {
+            "ds_user_id": user_id,
+            "sessionid": session_id,
+        },
+        "cookies": {},
+        "last_login": time.time(),
+        "device_settings": {
+            "android_version": 34,
+            "android_release": "14",
+            "dpi": "480dpi",
+            "resolution": "1080x2340",
+            "manufacturer": "Samsung",
+            "device": "dm1q",
+            "model": "SM-S911B",
+            "cpu": "qcom",
+            "app_version": "357.0.0.25.101",
+            "version_code": "608720130",
+        },
+        "user_agent": "Instagram 357.0.0.25.101 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 608720130)",
+        "country": "IN",
+        "country_code": 91,
+        "locale": "en_IN",
+        "timezone_offset": 19800,
+    }
 
 
 def main():
@@ -42,30 +97,25 @@ def main():
     # URL-decode the sessionid (Chrome shows %3A instead of :)
     session_id = unquote(raw_session_id)
 
-    # ── Step 1: Log in with session cookie ──────────────────────
-    print(f"\n[1/4] Logging in as @{ig_username} with session cookie...")
-    cl = Client()
-    try:
-        cl.login_by_sessionid(session_id)
-    except Exception as e:
-        print(f"❌ Login failed: {e}")
-        print("\nMake sure you're logged into this account on instagram.com and the sessionid is fresh.")
+    # Validate sessionid format
+    if not re.match(r"^\d+:", session_id):
+        print(f"❌ Invalid sessionid format. Expected something like '48259330886:xxx...'")
+        print(f"   Got: {session_id[:50]}...")
         sys.exit(1)
-    print(f"  ✅ Logged in as @{cl.username}")
 
-    # ── Step 2: Save session file + base64 ──────────────────────
-    print(f"\n[2/4] Saving session...")
+    # ── Step 1: Build session file ──────────────────────────────
+    print(f"\n[1/3] Building session for @{ig_username}...")
+    settings = _build_session(session_id)
+
     data_dir = Path("data") / persona
     data_dir.mkdir(parents=True, exist_ok=True)
     session_file = data_dir / ".ig_session.json"
-
-    settings = cl.get_settings()
     session_file.write_text(json.dumps(settings))
     session_b64 = base64.b64encode(json.dumps(settings).encode()).decode()
     print(f"  ✅ Session saved to {session_file}")
 
-    # ── Step 3: Create .env content ─────────────────────────────
-    print(f"\n[3/4] Creating .env...")
+    # ── Step 2: Create .env ─────────────────────────────────────
+    print(f"\n[2/3] Creating .env...")
     dotenv_content = (
         f"PERSONA={persona}\n"
         f"INSTAGRAM_USERNAME={ig_username}\n"
@@ -77,8 +127,8 @@ def main():
     )
     print(f"  ✅ .env ready")
 
-    # ── Step 4: Set GitHub secrets ──────────────────────────────
-    print(f"\n[4/4] Setting GitHub secrets...")
+    # ── Step 3: Set GitHub secrets ──────────────────────────────
+    print(f"\n[3/3] Setting GitHub secrets...")
     secret_session = f"INSTAGRAM_SESSION_B64_{persona.upper()}"
     secret_dotenv = f"DOTENV_{persona.upper()}"
 
@@ -103,9 +153,6 @@ def main():
 
     except FileNotFoundError:
         print("  ⚠️  'gh' CLI not found. Install it: brew install gh")
-        print(f"\n  Manually set these GitHub secrets:")
-        print(f"  {secret_session} = {session_b64[:40]}...")
-        print(f"  {secret_dotenv} = (the .env content above)")
         sys.exit(1)
     except Exception as e:
         print(f"  ❌ Failed to set secrets: {e}")
