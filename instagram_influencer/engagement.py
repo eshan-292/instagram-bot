@@ -196,10 +196,9 @@ def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG)
 
 
 def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
-    """Maybe view a user's stories — humans don't watch every story they see.
+    """View a user's stories and like them — maximum engagement signals.
 
-    ~75% chance to view stories (up from 65%), ~35% chance to like (up from 25%).
-    Story likes are the strongest engagement signal for follow-backs.
+    Always view stories and always like — strongest signal for follow-backs.
     """
     # Always view stories — no skipping
     try:
@@ -214,8 +213,8 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
             log.debug("Viewed %d stories of user %s", view_count, user_id)
             # Brief pause like actually watching
             time.sleep(random.uniform(2, 6) * view_count)
-            # Like ~60% of stories (strong signal for follow-back)
-            if random.random() < 0.60:
+            # Always like stories (strong signal for follow-back)
+            if True:
                 try:
                     cl.story_like(stories[0].pk)
                     stats["story_likes"] = stats.get("story_likes", 0) + 1
@@ -465,9 +464,8 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             except Exception as exc:
                 log.debug("Explore like failed: %s", exc)
 
-        # Comment on ~40% of explore posts (aggressive)
+        # Always comment on explore posts
         if (cfg.engagement_comment_enabled
-                and random.random() < 0.40
                 and can_act(data, "comments", cfg.engagement_daily_comments)):
             caption_text = str(getattr(media, "caption_text", "") or "")
             comment = _generate_comment(cfg, caption_text)
@@ -479,10 +477,9 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                 except Exception as exc:
                     log.debug("Explore comment failed: %s", exc)
 
-        # Follow from Explore — ~45% chance (aggressive)
+        # Always follow from Explore
         if (cfg.engagement_follow_enabled
                 and user_id
-                and random.random() < 0.45
                 and can_act(data, "follows", cfg.engagement_daily_follows)):
             _browse_before_engage(cl, user_id)
             try:
@@ -580,9 +577,8 @@ def _run_hashtag_engagement(
             except Exception as exc:
                 log.warning("Like failed for %s: %s", media_id, exc)
 
-        # Comment on ~45% of posts (highly aggressive — comments drive profile visits)
+        # Always comment on hashtag posts
         if (cfg.engagement_comment_enabled
-                and random.random() < 0.45
                 and can_act(data, "comments", comment_limit)):
             caption_text = str(media.caption_text or "") if hasattr(media, "caption_text") else ""
             comment = _generate_comment(cfg, caption_text)
@@ -598,19 +594,15 @@ def _run_hashtag_engagement(
         if (cfg.engagement_follow_enabled
                 and user_id
                 and can_act(data, "follows", follow_limit)):
-            user_info = _browse_before_engage(cl, user_id)  # view profile first
-            quality = _is_quality_follow_target(user_info)
-            # Quality targets: 80% follow rate. Others: 35%.
-            follow_chance = 0.80 if quality else 0.35
-            if random.random() < follow_chance:
-                try:
-                    cl.user_follow(int(user_id))
-                    record_action(data, "follows", user_id)
-                    stats["follows"] = stats.get("follows", 0) + 1
-                    if quality:
-                        log.debug("Followed quality target %s", user_id)
-                except Exception as exc:
-                    log.warning("Follow failed for %s: %s", user_id, exc)
+            _browse_before_engage(cl, user_id)  # view profile first
+            # Always follow — maximum growth
+            try:
+                cl.user_follow(int(user_id))
+                record_action(data, "follows", user_id)
+                stats["follows"] = stats.get("follows", 0) + 1
+                log.debug("Followed %s from hashtag", user_id)
+            except Exception as exc:
+                log.warning("Follow failed for %s: %s", user_id, exc)
 
         # View stories more aggressively
         if user_id and can_act(data, "story_views", story_limit):
@@ -714,10 +706,9 @@ def run_warm_audience_session(
                     pass
                 time.sleep(random.uniform(2, 5))
 
-        # Comment on the first post (~65% — aggressive for warm targets)
+        # Always comment on warm targets
         if (cfg.engagement_comment_enabled
                 and user_medias
-                and random.random() < 0.65
                 and can_act(data, "comments", cfg.engagement_daily_comments)):
             caption_text = str(getattr(user_medias[0], "caption_text", "") or "")
             comment = _generate_comment(cfg, caption_text)
@@ -729,9 +720,8 @@ def run_warm_audience_session(
                 except Exception as exc:
                     log.debug("Warm comment failed: %s", exc)
 
-        # Follow ~60% (aggressive for warm targets)
+        # Always follow warm targets — maximum growth
         if (cfg.engagement_follow_enabled
-                and random.random() < 0.60
                 and can_act(data, "follows", cfg.engagement_daily_follows)):
             try:
                 cl.user_follow(int(user_id))

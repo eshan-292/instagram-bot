@@ -322,8 +322,8 @@ The bot mimics real human usage patterns to avoid detection:
 - **Profile browsing** -- Views user profile before following
 - **Randomized session sizes** -- +/-30% variation per session
 - **Multi-story viewing** -- Views 1-3 stories per user (not always just 1)
-- **Aggressive commenting** -- ~45% of hashtag posts, ~40% of explore, ~65% of warm targets
-- **Aggressive following** -- ~50% from hashtags, ~60% from warm audience, ~45% from explore
+- **Maximum commenting** -- comment on EVERY post (no probability gating)
+- **Maximum following** -- follow EVERY user encountered (no probability gating)
 - **Satellite jitter** -- 30-90s startup jitter, low daily limits
 
 ## Engagement Strategy (2026 Algorithm)
@@ -334,8 +334,8 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 
 - **5 warm sessions/day** per main account
 - Target accounts: configurable per persona via `engagement.default_target_accounts` in persona JSON
-- Per user: like 2-3 posts + genuine comment + optional follow (~40%)
-- Smart follow targeting: micro-influencers (1K-50K followers) followed at 70% rate, others at 20%
+- Per user: like 2-3 posts + genuine comment + follow (100% — no probability gating)
+- Smart quality filtering still active (skip follow-farms, inactive accounts)
 
 ### Viral Growth Features (2026 Algorithm)
 
@@ -359,7 +359,7 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 | Likes | 400 | Spread across all sessions |
 | Comments | 100 | AI-generated, context-aware |
 | Follows | 120 | Smart targeting: 80% micro-influencers, 35% others |
-| Story views | 150 | 100% view, ~60% like rate |
+| Story views | 150 | 100% view, 100% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
 | Unfollows | 60/run | After 2+ days |
 | ~~Welcome DMs~~ | ~~15/day~~ | **Disabled** -- caused unfollows |

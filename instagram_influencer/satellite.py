@@ -361,8 +361,8 @@ def run_satellite_background(cl, cfg: Config, data: dict[str, Any]) -> dict[str,
                         pass
                     random_delay(10, 30)
 
-                # Like a comment on ~30% of posts
-                if random.random() < 0.3 and can_act(data, "comment_likes", limits.get("comment_likes", 30)):
+                # Always like a comment — maximum engagement
+                if can_act(data, "comment_likes", limits.get("comment_likes", 30)):
                     try:
                         comments = cl.media_comments(str(media.pk), amount=3)
                         if comments:
