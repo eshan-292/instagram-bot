@@ -37,6 +37,7 @@ on:
     - cron: '25 14 * * *'  # 19:55 IST — hashtags (post-publish engagement boost)
     - cron: '45 14 * * *'  # 20:15 IST — boost (viral detection + auto-boost, 1hr after publish)
     - cron: '0 15 * * *'   # 20:30 IST — replies
+    - cron: '15 15 * * *'  # 20:45 IST — cross_promo (engage partner's latest post)
     - cron: '35 15 * * *'  # 21:05 IST — explore (evening wind-down)
     - cron: '15 16 * * *'  # 21:45 IST — warm_audience
     - cron: '50 16 * * *'  # 22:20 IST — maintenance (unfollow + welcome DMs)
@@ -50,7 +51,7 @@ on:
         required: true
         default: 'full'
         type: choice
-        options: [morning, replies, hashtags, explore, warm_audience, boost, maintenance, stories, report, full, yt_engage, yt_replies, yt_full]
+        options: [morning, replies, hashtags, explore, warm_audience, boost, maintenance, stories, cross_promo, report, full, yt_engage, yt_replies, yt_full]
       publish:
         description: 'Also publish a post?'
         type: boolean
@@ -161,6 +162,7 @@ jobs:
               "25 14 * * *") echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "45 14 * * *") echo "type=boost"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "0 15 * * *")  echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "15 15 * * *") echo "type=cross_promo"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "35 15 * * *") echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "15 16 * * *") echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "50 16 * * *") echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
