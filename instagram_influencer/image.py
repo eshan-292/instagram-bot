@@ -27,10 +27,17 @@ import os
 from pathlib import Path
 from typing import Any
 
+from PIL import Image
+
 from config import Config
 from persona import get_persona, persona_images_dir
 
 log = logging.getLogger(__name__)
+
+# Watermark removal: crop this fraction off the bottom of Gemini-generated images.
+# Gemini places a small "Made with Google AI" badge in the bottom-right.
+# 5% is enough to remove it without losing meaningful content.
+WATERMARK_CROP_FRACTION = 0.05
 
 
 def _pending_dir():
@@ -200,6 +207,41 @@ def write_prompts_summary(posts: list[dict[str, Any]]) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Watermark removal (Gemini "Made with Google AI" badge)
+# ---------------------------------------------------------------------------
+
+def _remove_watermark(image_path: str) -> None:
+    """Crop the bottom ~5% of an image to remove Gemini's watermark.
+
+    Operates in-place — overwrites the original file.
+    Skips if the image has already been processed (tracked via a sidecar marker).
+    """
+    marker = Path(image_path).with_suffix(".nowm")
+    if marker.exists():
+        return  # already processed
+
+    try:
+        img = Image.open(image_path)
+        w, h = img.size
+        crop_px = int(h * WATERMARK_CROP_FRACTION)
+        if crop_px < 10:
+            return  # image too small to bother
+
+        cropped = img.crop((0, 0, w, h - crop_px))
+        cropped.save(image_path, quality=95)
+        marker.touch()  # mark as processed so we don't re-crop on next run
+        log.info("Removed watermark from %s (cropped %dpx off bottom)", Path(image_path).name, crop_px)
+    except Exception as exc:
+        log.warning("Watermark removal failed for %s: %s", image_path, exc)
+
+
+def _remove_watermarks_batch(image_paths: list[str]) -> None:
+    """Remove watermarks from a list of images."""
+    for path in image_paths:
+        _remove_watermark(path)
+
+
+# ---------------------------------------------------------------------------
 # Pending image discovery
 # ---------------------------------------------------------------------------
 
@@ -278,6 +320,7 @@ def fill_image_urls(posts: list[dict[str, Any]], cfg: Config) -> int:
                 continue
             images = _find_pending_carousel(post_id)
             if images and len(images) >= 2:
+                _remove_watermarks_batch(images)
                 post["carousel_images"] = images
                 post["image_url"] = images[0]  # thumbnail fallback
                 post["is_reel"] = False
@@ -288,6 +331,7 @@ def fill_image_urls(posts: list[dict[str, Any]], cfg: Config) -> int:
                 continue
             image_path = _find_pending_single(post_id)
             if image_path:
+                _remove_watermark(image_path)
                 post["image_url"] = image_path
                 post["is_reel"] = post_type == "reel"
                 updated += 1
