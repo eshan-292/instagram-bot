@@ -4,6 +4,7 @@
   "mode": "satellite",
   "brand_tag": "sat2",
   "post_id_prefix": "sat2",
+  "instagram_handle": "thetechvaultdaily",
   "voice": {
     "tone": "chill, sarcastic, witty, laid-back",
     "gemini_identity": "a young Indian person with a dry sense of humor who casually follows fashion and fitness trends",
@@ -13,13 +14,15 @@
   "engagement": {
     "default_hashtags": "fashion,fitness,indianstyle,motivation,lifestyle",
     "daily_limits": {
-      "likes": 40,
-      "comments": 6,
-      "saves": 6,
-      "story_views": 20
-    },
-    "session_skip_probability": 0.20,
-    "startup_jitter_range": [120, 480]
+      "likes": 80,
+      "comments": 12,
+      "saves": 12,
+      "story_views": 40,
+      "comment_likes": 30,
+      "story_likes": 20,
+      "story_reposts": 2,
+      "dm_shares": 6
+    }
   },
   "background_hashtags": ["streetstyle", "gymlife", "indianvibes", "sarcasm", "reels", "memes", "fitnessmotivation", "explorepage"]
 }

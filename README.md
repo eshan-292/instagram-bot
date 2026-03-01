@@ -322,8 +322,8 @@ The bot mimics real human usage patterns to avoid detection:
 - **Profile browsing** -- Views user profile before following
 - **Randomized session sizes** -- +/-30% variation per session
 - **Multi-story viewing** -- Views 1-3 stories per user (not always just 1)
-- **Selective commenting** -- ~28% of hashtag posts, ~25% of explore, ~45% of warm targets
-- **Selective following** -- ~35% from hashtags, ~40% from warm audience, ~30% from explore
+- **Aggressive commenting** -- ~45% of hashtag posts, ~40% of explore, ~65% of warm targets
+- **Aggressive following** -- ~50% from hashtags, ~60% from warm audience, ~45% from explore
 - **Satellite jitter** -- 30-90s startup jitter, low daily limits
 
 ## Engagement Strategy (2026 Algorithm)
@@ -349,8 +349,8 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 | **Power user targeting** | +20-30% follow-back rate | Prioritize micro-influencers (1K-50K) |
 | **Carousel montage** | +24% shares, +19% reach | 5-slide carousel -> 30s Reel with transitions |
 | **Viral hook patterns** | Higher scroll-stop rate | POV:, numbers, curiosity gaps |
-| **Satellite boost** | +3x early engagement | 3 accounts like+comment+save within 1hr of publish |
-| **Cross-promo** | +20-30% cross-audience reach | Partner mentions + mutual engagement |
+| **Satellite boost** | +3x early engagement | 3 accounts: like+comment+save+comment-like+reply+story-like+repost+DM-share |
+| **Cross-promo** | +20-30% cross-audience reach | Partner: like+save+comment+comment-like+reply+story-like+repost+DM-share |
 
 ### Instagram Limits (per main account)
 
@@ -358,8 +358,8 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 |--------|------------|-------|
 | Likes | 400 | Spread across all sessions |
 | Comments | 100 | AI-generated, context-aware |
-| Follows | 120 | Smart targeting: 70% micro-influencers, 20% others |
-| Story views | 150 | ~75% chance per user, ~35% like rate |
+| Follows | 120 | Smart targeting: 80% micro-influencers, 35% others |
+| Story views | 150 | 100% view, ~60% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
 | Unfollows | 60/run | After 2+ days |
 | ~~Welcome DMs~~ | ~~15/day~~ | **Disabled** -- caused unfollows |
@@ -369,10 +369,14 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 40 | Mostly on main accounts' posts |
-| Comments | 6 | Only on main accounts' posts |
-| Saves | 6 | Main accounts' posts only |
-| Story views | 20 | Main accounts + light browsing |
+| Likes | 80 | Main accounts' posts + background hashtags |
+| Comments | 12 | On main accounts' posts (comments + replies) |
+| Saves | 12 | Main accounts' posts |
+| Story views | 40 | Main accounts + background browsing |
+| Comment likes | 30 | Like top comments on main accounts' posts |
+| Story likes | 20 | Like main accounts' stories |
+| Story reposts | 2 | Repost main accounts' posts to own story |
+| DM shares | 6 | Share main accounts' posts between satellites |
 
 ### YouTube Limits (per main account)
 

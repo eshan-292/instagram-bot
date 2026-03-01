@@ -33,7 +33,7 @@ from persona import get_persona
 log = logging.getLogger(__name__)
 
 # Persistent files
-POSTS_PER_HASHTAG = 18          # aggressive — mine more per tag
+POSTS_PER_HASHTAG = 30          # highly aggressive — mine max per tag
 def _followers_file():
     from persona import persona_data_dir
     return persona_data_dir() / "followers.json"
@@ -214,8 +214,8 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
             log.debug("Viewed %d stories of user %s", view_count, user_id)
             # Brief pause like actually watching
             time.sleep(random.uniform(2, 6) * view_count)
-            # Like ~35% of stories (strong signal for follow-back)
-            if random.random() < 0.35:
+            # Like ~60% of stories (strong signal for follow-back)
+            if random.random() < 0.60:
                 try:
                     cl.story_like(stories[0].pk)
                     stats["story_likes"] = stats.get("story_likes", 0) + 1
@@ -435,7 +435,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
     Aggressive mode: larger session sizes, higher comment and follow rates.
     """
     stats: dict[str, int] = {"explore_likes": 0, "explore_comments": 0, "explore_follows": 0}
-    explore_limit = _randomize_session_size(24)  # larger sessions (was 18)
+    explore_limit = _randomize_session_size(35)  # highly aggressive
 
     try:
         medias = cl.explore_reels(amount=explore_limit + 10)
@@ -465,9 +465,9 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             except Exception as exc:
                 log.debug("Explore like failed: %s", exc)
 
-        # Comment on ~25% of explore posts (was 18%)
+        # Comment on ~40% of explore posts (aggressive)
         if (cfg.engagement_comment_enabled
-                and random.random() < 0.25
+                and random.random() < 0.40
                 and can_act(data, "comments", cfg.engagement_daily_comments)):
             caption_text = str(getattr(media, "caption_text", "") or "")
             comment = _generate_comment(cfg, caption_text)
@@ -479,10 +479,10 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                 except Exception as exc:
                     log.debug("Explore comment failed: %s", exc)
 
-        # Follow from Explore too — ~30% chance (new: explore follows)
+        # Follow from Explore — ~45% chance (aggressive)
         if (cfg.engagement_follow_enabled
                 and user_id
-                and random.random() < 0.30
+                and random.random() < 0.45
                 and can_act(data, "follows", cfg.engagement_daily_follows)):
             _browse_before_engage(cl, user_id)
             try:
@@ -510,13 +510,13 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
 
 def _run_hashtag_engagement(
     cl: Any, cfg: Config, data: dict[str, Any], stats: dict[str, int],
-    max_posts: int = 20,
+    max_posts: int = 30,
 ) -> None:
-    """Like/comment/follow from hashtag posts — mimics real browsing behavior.
+    """Like/comment/follow from hashtag posts — highly aggressive growth.
 
     Aggressive growth mode:
-    - Browse 2-3 hashtags per session (was 1-2)
-    - Higher comment rate: 28% (was 20%)
+    - Browse 2-3 hashtags per session
+    - Higher comment rate: 45%
     - Higher follow rate: 55% (was 45%)
     - Faster pace between actions
     - View more stories
@@ -580,9 +580,9 @@ def _run_hashtag_engagement(
             except Exception as exc:
                 log.warning("Like failed for %s: %s", media_id, exc)
 
-        # Comment on ~28% of posts (was 20% — comments drive profile visits)
+        # Comment on ~45% of posts (highly aggressive — comments drive profile visits)
         if (cfg.engagement_comment_enabled
-                and random.random() < 0.28
+                and random.random() < 0.45
                 and can_act(data, "comments", comment_limit)):
             caption_text = str(media.caption_text or "") if hasattr(media, "caption_text") else ""
             comment = _generate_comment(cfg, caption_text)
@@ -600,8 +600,8 @@ def _run_hashtag_engagement(
                 and can_act(data, "follows", follow_limit)):
             user_info = _browse_before_engage(cl, user_id)  # view profile first
             quality = _is_quality_follow_target(user_info)
-            # Quality targets: 70% follow rate. Others: 20%.
-            follow_chance = 0.70 if quality else 0.20
+            # Quality targets: 80% follow rate. Others: 35%.
+            follow_chance = 0.80 if quality else 0.35
             if random.random() < follow_chance:
                 try:
                     cl.user_follow(int(user_id))
@@ -683,7 +683,7 @@ def run_warm_audience_session(
     follower_ids = list(followers.keys())
     random.shuffle(follower_ids)
 
-    session_size = _randomize_session_size(12)
+    session_size = _randomize_session_size(20)
     log.info("Warm audience: browsing %d followers of @%s", min(session_size, len(follower_ids)), account)
 
     for uid in follower_ids[:session_size]:
@@ -714,10 +714,10 @@ def run_warm_audience_session(
                     pass
                 time.sleep(random.uniform(2, 5))
 
-        # Comment on the first post (~45% — higher rate for warm targets)
+        # Comment on the first post (~65% — aggressive for warm targets)
         if (cfg.engagement_comment_enabled
                 and user_medias
-                and random.random() < 0.45
+                and random.random() < 0.65
                 and can_act(data, "comments", cfg.engagement_daily_comments)):
             caption_text = str(getattr(user_medias[0], "caption_text", "") or "")
             comment = _generate_comment(cfg, caption_text)
@@ -729,9 +729,9 @@ def run_warm_audience_session(
                 except Exception as exc:
                     log.debug("Warm comment failed: %s", exc)
 
-        # Follow ~40% (lower than hashtag — quality over quantity)
+        # Follow ~60% (aggressive for warm targets)
         if (cfg.engagement_follow_enabled
-                and random.random() < 0.40
+                and random.random() < 0.60
                 and can_act(data, "follows", cfg.engagement_daily_follows)):
             try:
                 cl.user_follow(int(user_id))
@@ -1113,14 +1113,14 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
 
     if session_type == "morning":
         # Morning: aggressive start — hashtags
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=20)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=30)
 
     elif session_type == "replies":
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
 
     elif session_type == "hashtags":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=25)  # was 20
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=35)  # aggressive
 
     elif session_type == "explore":
         explore_stats = run_explore_engagement(cl, cfg, data)
@@ -1157,7 +1157,7 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
         random_delay(20, 90)
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=30)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=40)
         random_delay(20, 90)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
