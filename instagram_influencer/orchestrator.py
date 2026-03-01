@@ -93,57 +93,50 @@ def _get_hashtags():
         "keyword_phrases": h.get("keyword_phrases", []),
     }
 
-def _get_cross_promo_ctas():
-    from persona import get_persona
-    return get_persona().get("cross_promo", {}).get("youtube_ctas", [
-        "Full video on YouTube! Link in bio",
-    ])
-
-
 def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
-                    youtube_enabled: bool = False) -> str:
-    """Append hashtags + keyword phrase + optional YT cross-promo to caption.
+                    youtube_enabled: bool = False) -> tuple[str, str]:
+    """Append 3-5 hashtags to caption; return (caption, first_comment_hashtags).
 
-    2026 algorithm: fewer, more relevant hashtags outperform tag-spraying.
-    Keywords in the caption body drive more reach than the hashtag block.
-    Cross-platform promotion drives YouTube subscribers from Instagram.
+    Caption gets 3-5 targeted hashtags (pyramid strategy).
+    First comment gets 15-20 extra hashtags for maximum discovery.
+    No YouTube mentions or partner @mentions in captions.
     """
-    # Pyramid strategy: 1 brand + 1 broad + 1-2 medium + 1 niche = 4-5 total
     h = _get_hashtags()
-    tags = list(h["brand"])  # brand (always)
+    # Caption hashtags: 1 brand + 1 broad + 1-2 medium + 1 niche = 3-5 total
+    caption_tags = list(h["brand"])  # brand (always)
+
+    broad, medium, niche = h["broad"], h["medium"], h["niche"]
+    carousel = h["carousel"]
 
     if post_type == "carousel":
-        # Carousel: use save-focused tags instead of general pool
-        carousel = h["carousel"]
-        tags.extend(random.sample(carousel, min(3, len(carousel))))
+        caption_tags.extend(random.sample(carousel, min(3, len(carousel))))
     else:
-        # Reel/single: pyramid mix
-        broad, medium, niche = h["broad"], h["medium"], h["niche"]
-        if broad: tags.append(random.choice(broad))
-        if medium: tags.extend(random.sample(medium, min(2, len(medium))))
-        if niche: tags.append(random.choice(niche))
+        if broad: caption_tags.append(random.choice(broad))
+        if medium: caption_tags.extend(random.sample(medium, min(2, len(medium))))
+        if niche: caption_tags.append(random.choice(niche))
 
-    # Cap at 5 (2026 best practice: 3-5 only)
-    tags = tags[:5]
+    caption_tags = caption_tags[:5]
 
     # One keyword phrase (drives search discovery)
     kw = h["keyword_phrases"]
     keyword = random.choice(kw) if kw else ""
-    hashtag_block = " ".join(f"#{t}" for t in tags)
+    hashtag_block = " ".join(f"#{t}" for t in caption_tags)
 
     result = f"{caption}\n.\n{keyword}\n.\n{hashtag_block}" if keyword else f"{caption}\n.\n{hashtag_block}"
 
-    # Cross-platform promo on ~40% of posts when YouTube is enabled
-    ctas = _get_cross_promo_ctas()
-    if youtube_enabled and ctas and random.random() < 0.40:
-        promo = random.choice(ctas)
-        result += f"\n.\n{promo}"
+    # First comment: 15-20 extra hashtags for maximum reach
+    # Mix from all pools, excluding the ones already in caption
+    extra_tags = []
+    all_pools = broad + medium + niche + carousel
+    remaining = [t for t in all_pools if t not in caption_tags]
+    random.shuffle(remaining)
+    extra_tags = remaining[:18]
 
-    # Subtle cross-promo partner mention (~12% of posts)
-    from cross_promo import maybe_add_partner_mention
-    result = maybe_add_partner_mention(result)
+    first_comment = ""
+    if extra_tags:
+        first_comment = ".\n" + " ".join(f"#{t}" for t in extra_tags)
 
-    return result
+    return result, first_comment
 
 
 # ---------------------------------------------------------------------------
@@ -288,8 +281,8 @@ def main() -> int:
                 if not has_media:
                     log.warning("Post %s has no media, skipping", item.get("id"))
                 else:
-                    # Inject hashtags + cross-platform promo for discoverability
-                    full_caption = _build_hashtags(
+                    # Inject hashtags (caption + first comment for extra reach)
+                    full_caption, first_comment_hashtags = _build_hashtags(
                         caption, str(item.get("topic", "")), post_type,
                         youtube_enabled=cfg.youtube_enabled,
                     )
@@ -301,7 +294,8 @@ def main() -> int:
                                           video_url=video_url, is_reel=is_reel,
                                           carousel_images=carousel_images,
                                           post_type=post_type,
-                                          alt_text=alt_text)
+                                          alt_text=alt_text,
+                                          first_comment=first_comment_hashtags)
                         posts[idx]["status"] = "posted"
                         posts[idx]["posted_at"] = _utc_now_iso()
                         posts[idx]["platform_post_id"] = post_id

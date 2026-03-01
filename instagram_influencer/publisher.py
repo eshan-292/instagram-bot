@@ -192,7 +192,8 @@ def publish(cfg: Config, caption: str, image_url: str,
             video_url: str | None = None, is_reel: bool = False,
             carousel_images: list[str] | None = None,
             post_type: str = "reel",
-            alt_text: str | None = None) -> str:
+            alt_text: str | None = None,
+            first_comment: str | None = None) -> str:
     """Publish to Instagram.
 
     - carousel: album of 2-10 images via album_upload
@@ -201,12 +202,13 @@ def publish(cfg: Config, caption: str, image_url: str,
 
     Falls back to photo if Reel upload fails.
     Retries once with a fresh login if login_required is detected.
+    Posts first_comment (extra hashtags) right after publishing.
     """
     try:
         cl = _get_client(cfg)
-        return _do_upload(cl, caption, image_url, video_url, is_reel,
-                          carousel_images=carousel_images, post_type=post_type,
-                          alt_text=alt_text)
+        post_id = _do_upload(cl, caption, image_url, video_url, is_reel,
+                             carousel_images=carousel_images, post_type=post_type,
+                             alt_text=alt_text)
     except Exception as exc:
         if not _is_login_required_error(exc):
             raise
@@ -215,9 +217,22 @@ def publish(cfg: Config, caption: str, image_url: str,
         log.warning("Upload got login_required, forcing fresh login and retrying")
         _delete_session()
         cl = _get_client(cfg)
-        return _do_upload(cl, caption, image_url, video_url, is_reel,
-                          carousel_images=carousel_images, post_type=post_type,
-                          alt_text=alt_text)
+        post_id = _do_upload(cl, caption, image_url, video_url, is_reel,
+                             carousel_images=carousel_images, post_type=post_type,
+                             alt_text=alt_text)
+
+    # Post first comment with extra hashtags for discovery
+    if first_comment and first_comment.strip() and post_id and post_id != "unknown":
+        try:
+            import time as _time
+            _time.sleep(3)  # brief delay before commenting
+            cl = _get_client(cfg)
+            cl.media_comment(post_id, first_comment.strip())
+            log.info("Posted first comment (hashtags) on %s", post_id)
+        except Exception as exc:
+            log.warning("Failed to post first comment: %s", exc)
+
+    return post_id
 
 
 def _do_upload(cl: Client, caption: str, image_url: str,
@@ -261,6 +276,9 @@ def _do_upload(cl: Client, caption: str, image_url: str,
                 except Exception:
                     pass
 
+            # Extra data: hide like counts
+            extra = {"like_and_view_counts_disabled": "1"}
+
             # Try uploading with trending music first (boosts reach)
             track = _find_trending_track(cl)
             if track:
@@ -269,6 +287,7 @@ def _do_upload(cl: Client, caption: str, image_url: str,
                         Path(local_video),
                         caption,
                         track,
+                        extra_data=extra,
                     )
                     log.info("Published Reel with music: https://www.instagram.com/reel/%s/", media.code)
                     return str(media.pk)
@@ -280,6 +299,7 @@ def _do_upload(cl: Client, caption: str, image_url: str,
                 Path(local_video),
                 caption,
                 thumbnail=Path(thumbnail) if thumbnail else None,
+                extra_data=extra,
             )
             log.info("Published Reel: https://www.instagram.com/reel/%s/", media.code)
             return str(media.pk)
