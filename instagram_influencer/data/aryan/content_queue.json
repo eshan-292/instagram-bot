@@ -85,7 +85,7 @@
     },
     {
       "id": "aryan-004",
-      "status": "approved",
+      "status": "posted",
       "topic": "Physique check -- 6 month transformation",
       "caption": "6 months. Same guy. Different discipline.\nNo shortcuts. No steroids. Just consistency.\nCould you commit to 6 months?\nScreenshot this as your motivation.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-004.jpg",
@@ -101,7 +101,10 @@
         "6 months. Same guy.",
         "No shortcuts. Just consistency.",
         "Screenshot this as motivation"
-      ]
+      ],
+      "posted_at": "2026-03-02T15:53:45Z",
+      "platform_post_id": "3844052695003696638",
+      "publish_error": null
     },
     {
       "id": "aryan-005",
@@ -200,7 +203,7 @@
       "id": "aryan-009",
       "status": "approved",
       "topic": "Gym selfie -- consistency check",
-      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a 💪 if you showed up today.",
+      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a \ud83d\udcaa if you showed up today.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-009.jpg",
       "video_url": null,
       "is_reel": false,
@@ -213,7 +216,7 @@
       "video_text": [
         "No filter. No edit.",
         "365 days. No quitting.",
-        "Drop a 💪"
+        "Drop a \ud83d\udcaa"
       ]
     },
     {
