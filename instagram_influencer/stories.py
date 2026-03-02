@@ -431,23 +431,99 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
 # Native post-to-story reshare (Instagram's "Add post to your story")
 # ---------------------------------------------------------------------------
 
-def _create_blank_story_bg() -> str:
-    """Create a 1080x1920 gradient background for the story.
+def _create_story_bg_from_post(cl: Any, media_pk: int) -> str | None:
+    """Download the post image and create a story-sized background from it.
 
-    Instagram requires an image even when using StoryMedia sticker.
-    Uses a subtle gradient matching common story aesthetics.
+    Fetches the post thumbnail, center-crops to 9:16 (story aspect ratio),
+    applies a subtle blur + dim overlay so the StoryMedia card stands out.
+    This makes the story thumbnail show the actual post content instead of
+    a black screen.
+    """
+    try:
+        from PIL import ImageFilter
+
+        media_info = cl.media_info(media_pk)
+        thumb_url = str(getattr(media_info, "thumbnail_url", "") or "")
+        if not thumb_url:
+            # Try first image resource
+            resources = getattr(media_info, "resources", []) or []
+            if resources:
+                thumb_url = str(getattr(resources[0], "thumbnail_url", "") or "")
+        if not thumb_url:
+            log.debug("No thumbnail URL for post %s", media_pk)
+            return None
+
+        resp = http_requests.get(thumb_url, timeout=30)
+        if resp.status_code >= 400:
+            return None
+
+        # Save temp file and open as image
+        fd, dl_path = tempfile.mkstemp(suffix=".jpg", prefix="story_dl_")
+        os.close(fd)
+        with open(dl_path, "wb") as f:
+            f.write(resp.content)
+
+        img = Image.open(dl_path)
+        img = img.convert("RGB")
+
+        # Target: 1080x1920 (9:16 story ratio)
+        target_w, target_h = 1080, 1920
+        target_ratio = target_w / target_h  # 0.5625
+
+        # Center-crop to 9:16
+        src_w, src_h = img.size
+        src_ratio = src_w / src_h
+        if src_ratio > target_ratio:
+            # Source is wider — crop sides
+            new_w = int(src_h * target_ratio)
+            left = (src_w - new_w) // 2
+            img = img.crop((left, 0, left + new_w, src_h))
+        else:
+            # Source is taller — crop top/bottom
+            new_h = int(src_w / target_ratio)
+            top = (src_h - new_h) // 2
+            img = img.crop((0, top, src_w, top + new_h))
+
+        img = img.resize((target_w, target_h), Image.LANCZOS)
+
+        # Slight blur + dim so the StoryMedia card is readable
+        img = img.filter(ImageFilter.GaussianBlur(radius=8))
+        # Dim overlay (semi-transparent black)
+        overlay = Image.new("RGB", (target_w, target_h), (0, 0, 0))
+        img = Image.blend(img, overlay, alpha=0.35)
+
+        fd, out_path = tempfile.mkstemp(suffix=".jpg", prefix="story_bg_")
+        os.close(fd)
+        img.save(out_path, "JPEG", quality=85)
+
+        # Clean up download temp
+        try:
+            os.remove(dl_path)
+        except OSError:
+            pass
+
+        return out_path
+    except Exception as exc:
+        log.debug("Could not create story bg from post %s: %s", media_pk, exc)
+        return None
+
+
+def _create_blank_story_bg() -> str:
+    """Fallback: create a light gradient background for the story.
+
+    Used only when the post image can't be fetched.
     """
     w, h = 1080, 1920
     img = Image.new("RGB", (w, h))
     draw = ImageDraw.Draw(img)
 
-    # Random gradient from persona-appropriate colors
+    # Light gradients — visible in thumbnails (not black)
     gradients = [
-        ((25, 25, 35), (45, 25, 60)),       # dark purple
-        ((15, 15, 25), (35, 45, 65)),        # dark blue
-        ((30, 20, 20), (50, 30, 40)),        # dark rose
-        ((20, 25, 20), (35, 50, 45)),        # dark teal
-        ((25, 20, 30), (55, 35, 50)),        # dark mauve
+        ((180, 160, 200), (220, 180, 210)),   # soft lavender
+        ((170, 190, 210), (200, 210, 230)),    # soft blue
+        ((210, 180, 180), (230, 200, 200)),    # soft rose
+        ((180, 200, 190), (200, 220, 210)),    # soft mint
+        ((200, 185, 210), (220, 200, 225)),    # soft mauve
     ]
     top_color, bot_color = random.choice(gradients)
 
@@ -481,7 +557,10 @@ def reshare_post_to_story(cl: Any, media_pk: int, user_pk: int) -> str | None:
 
     bg_path = None
     try:
-        bg_path = _create_blank_story_bg()
+        # Use the post image as background (blurred + dimmed)
+        bg_path = _create_story_bg_from_post(cl, media_pk)
+        if not bg_path:
+            bg_path = _create_blank_story_bg()  # fallback to gradient
 
         # StoryMedia creates the native post-card sticker
         media_sticker = StoryMedia(
