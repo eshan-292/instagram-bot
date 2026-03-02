@@ -197,28 +197,26 @@ def image_to_video(
     #   3. zoompan for the zoom animation
     #   4. fade=in AFTER zoompan (zoompan reads only frame 0)
     tw, th = width * 2, height * 2  # 2x target for zoompan headroom
-    vf = (
-        f"format=rgb24,"  # Handle RGBA/palette PNG inputs
-        f"split[bg][fg];"
-        f"[bg]scale={tw}:{th}:force_original_aspect_ratio=increase,"
-        f"crop={tw}:{th},gblur=sigma=40[bgblur];"
-        f"[fg]scale={tw}:{th}:force_original_aspect_ratio=decrease[fgfit];"
-        f"[bgblur][fgfit]overlay=(W-w)/2:(H-h)/2,"
-        f"zoompan=z='{zoom_expr}':x='{pan_x}':y='{pan_y}':"
-        f"d={total_frames}:s={width}x{height}:fps={FPS},"
-        f"fade=in:0:5,"
-        f"format=yuv420p"
-    )
 
-    # Add text overlays if provided (85% watch on mute — text = +80% completion)
-    if text_lines:
-        drawtext = _build_drawtext_filters(text_lines, width, height, duration)
-        if drawtext:
-            # Insert drawtext between zoompan and format=yuv420p
-            if vf.endswith("format=yuv420p"):
-                vf = vf[:-len("format=yuv420p")] + drawtext + ",format=yuv420p"
-            else:
-                vf = vf + "," + drawtext
+    def _build_vf(use_text: bool = True) -> str:
+        base = (
+            f"split[bg][fg];"
+            f"[bg]scale={tw}:{th}:force_original_aspect_ratio=increase,"
+            f"crop={tw}:{th},gblur=sigma=40[bgblur];"
+            f"[fg]scale={tw}:{th}:force_original_aspect_ratio=decrease[fgfit];"
+            f"[bgblur][fgfit]overlay=(W-w)/2:(H-h)/2,"
+            f"zoompan=z='{zoom_expr}':x='{pan_x}':y='{pan_y}':"
+            f"d={total_frames}:s={width}x{height}:fps={FPS},"
+            f"fade=in:0:5,"
+            f"format=yuv420p"
+        )
+        if use_text and text_lines:
+            drawtext = _build_drawtext_filters(text_lines, width, height, duration)
+            if drawtext and base.endswith("format=yuv420p"):
+                base = base[:-len("format=yuv420p")] + drawtext + ",format=yuv420p"
+        return base
+
+    vf = _build_vf(use_text=True)
 
     # Try to get background audio
     audio_path = None
@@ -240,44 +238,53 @@ def image_to_video(
                 audio_path = raw_audio
                 audio_is_temp = True
 
-    if audio_path:
-        # Video with audio
-        cmd = [
-            ffmpeg, "-y",
-            "-loop", "1",
-            "-i", image_path,
-            "-i", audio_path,
-            "-vf", vf,
-            "-c:v", "libx264",
-            "-preset", "fast",
-            "-crf", "23",
-            "-c:a", "aac",
-            "-b:a", "128k",
-            "-t", str(duration),
-            "-map", "0:v",
-            "-map", "1:a",
-            output_path,
-        ]
-    else:
-        # Fallback: silent video (if audio generation completely fails)
-        log.warning("No audio available, creating silent video")
-        cmd = [
-            ffmpeg, "-y",
-            "-loop", "1",
-            "-i", image_path,
-            "-vf", vf,
-            "-c:v", "libx264",
-            "-preset", "fast",
-            "-crf", "23",
-            "-t", str(duration),
-            "-an",
-            output_path,
-        ]
+    def _build_cmd(filter_str: str) -> list[str]:
+        if audio_path:
+            return [
+                ffmpeg, "-y",
+                "-loop", "1",
+                "-i", image_path,
+                "-i", audio_path,
+                "-vf", filter_str,
+                "-c:v", "libx264",
+                "-preset", "fast",
+                "-crf", "23",
+                "-c:a", "aac",
+                "-b:a", "128k",
+                "-t", str(duration),
+                "-map", "0:v",
+                "-map", "1:a",
+                output_path,
+            ]
+        else:
+            log.warning("No audio available, creating silent video")
+            return [
+                ffmpeg, "-y",
+                "-loop", "1",
+                "-i", image_path,
+                "-vf", filter_str,
+                "-c:v", "libx264",
+                "-preset", "fast",
+                "-crf", "23",
+                "-t", str(duration),
+                "-an",
+                output_path,
+            ]
 
+    cmd = _build_cmd(vf)
     log.debug("ffmpeg: %s", " ".join(cmd[:6]) + " ...")
 
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+
+        # If ffmpeg fails and we used text overlays, retry without them
+        # (drawtext filter requires libfreetype which may not be compiled in)
+        if result.returncode != 0 and text_lines:
+            log.warning("ffmpeg failed with text overlays, retrying without: %s",
+                        (result.stderr or "")[-200:])
+            vf_plain = _build_vf(use_text=False)
+            cmd = _build_cmd(vf_plain)
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
 
         if result.returncode != 0:
             log.error("ffmpeg stderr: %s", (result.stderr or "")[-500:])
@@ -350,6 +357,9 @@ def images_to_montage(
     ffmpeg = _get_ffmpeg()
     temp_clips: list[str] = []
 
+    audio_path = None
+    audio_is_temp = False
+
     try:
         # Generate individual Ken Burns clips per image
         for i, img_path in enumerate(image_paths):
@@ -383,8 +393,6 @@ def images_to_montage(
         total_duration = len(image_paths) * duration_per_image
 
         # Get audio for the full montage if needed
-        audio_path = None
-        audio_is_temp = False
         if add_audio:
             raw_audio = get_background_track(total_duration)
             if raw_audio:
