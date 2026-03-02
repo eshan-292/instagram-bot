@@ -6,8 +6,8 @@
       "topic": "5 exercises you're doing wrong in the gym",
       "caption": "5 exercises. You're doing ALL of them wrong.\nI wasted 2 years before someone told me.\nWhich one surprised you most?\nSend this to your gym partner before they hurt themselves.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
-      "video_url": null,
-      "is_reel": false,
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_montage.mp4",
+      "is_reel": true,
       "post_type": "carousel",
       "carousel_images": [
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
@@ -33,7 +33,8 @@
         "5 exercises. All wrong.",
         "I wasted 2 years.",
         "Send to your gym partner"
-      ]
+      ],
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4"
     },
     {
       "id": "aryan-002",
@@ -69,7 +70,7 @@
       "topic": "Push day complete routine -- chest and shoulders",
       "caption": "Push day. 45 minutes. No fluff.\nThis routine added 2 inches to my chest in 3 months.\nWhat's your push day split?\nSend to someone who needs a real push day routine.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003.jpg",
-      "video_url": null,
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -81,7 +82,8 @@
         "Push day. 45 min. No fluff.",
         "+2 inches in 3 months.",
         "Send to your gym buddy"
-      ]
+      ],
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4"
     },
     {
       "id": "aryan-004",
@@ -112,7 +114,7 @@
       "topic": "Morning routine for maximum gains",
       "caption": "5 AM. No alarm snooze. This is how gains start.\nMost guys lose their workout before they wake up.\nWhat time do you hit the gym?\nSend to the friend who always says 'I'll start Monday'.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005.jpg",
-      "video_url": null,
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -124,7 +126,8 @@
         "5 AM. No snooze.",
         "Gains start before sunrise.",
         "Send to your 'Monday' friend"
-      ]
+      ],
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005_yt.mp4"
     },
     {
       "id": "aryan-006",
@@ -157,7 +160,8 @@
         "Bhai protein kahan se laaun?",
         "Ranked by Rs per gram.",
         "Save this NOW"
-      ]
+      ],
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/1_yt.mp4"
     },
     {
       "id": "aryan-007",
@@ -165,7 +169,7 @@
       "topic": "Shoulder workout for a broader look -- 4 exercises",
       "caption": "Shoulders make or break your physique.\n4 exercises. 30 minutes. Wider by next month.\nWhich exercise hits hardest for you?\nSave this for your next shoulder day.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-007.jpg",
-      "video_url": null,
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-007.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -177,7 +181,8 @@
         "Shoulders make or break it.",
         "4 exercises. 30 min.",
         "Save for shoulder day"
-      ]
+      ],
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-007_yt.mp4"
     },
     {
       "id": "aryan-008",
@@ -185,7 +190,7 @@
       "topic": "Leg day you can't skip -- complete routine",
       "caption": "\"I train legs.\" No you don't.\nThis is what a real leg day looks like.\nWhy do 90% of guys skip this?\nSend to the friend with the chicken legs.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-008.jpg",
-      "video_url": null,
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-008.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -197,7 +202,8 @@
         "You don't train legs.",
         "This is real leg day.",
         "Send to chicken legs guy"
-      ]
+      ],
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-008_yt.mp4"
     },
     {
       "id": "aryan-009",
