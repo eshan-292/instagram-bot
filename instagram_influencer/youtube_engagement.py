@@ -250,8 +250,10 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
     videos = get_recent_videos(max_results=5)
 
     if not videos:
-        log.debug("No recent YouTube videos to check for comments")
+        log.info("No recent YouTube videos to check for comments")
         return 0
+
+    log.info("yt_replies: checking %d recent videos for comments", len(videos))
 
     # Track which comments we've already replied to
     replied_set: set[str] = {
@@ -276,8 +278,14 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
                 order="time",  # newest first
             ).execute()
         except Exception as exc:
-            log.debug("Could not fetch comments for %s: %s", video_id, exc)
+            log.info("Could not fetch comments for %s: %s", video_id, exc)
             continue
+
+        comment_count = len(response.get("items", []))
+        if comment_count == 0:
+            log.info("yt_replies: video %s (%s) has no comments", video_id, video_title[:40])
+        else:
+            log.info("yt_replies: video %s (%s) has %d comments", video_id, video_title[:40], comment_count)
 
         for item in response.get("items", []):
             if replied >= YT_DAILY_REPLIES:
