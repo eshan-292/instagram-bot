@@ -81,7 +81,7 @@
     },
     {
       "id": "maya-006",
-      "status": "approved",
+      "status": "failed",
       "topic": "Post-shoot wind-down in a luxurious penthouse apartment, hair slightly undone but makeup still flawless.",
       "caption": "Made them look, then made my exit.\nThat's the formula, darling.",
       "image_url": "data/maya/generated_images/pending/maya-006.jpg",
@@ -89,7 +89,8 @@
       "is_reel": true,
       "scheduled_at": "2026-03-01T15:25:40Z",
       "notes": "Medium close-up, Maya lounging artfully on a plush sofa in a loose, comfortable robe, revealing a statement necklace. Eyes slightly lidded, a hint of a smirk. Golden hour light streaming through large windows, creating dramatic shadows and highlights. Hair casually disheveled. Alluring, powerful, slightly tired but captivating mood. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-006_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-006_yt.mp4",
+      "publish_error": "{\"message\":\"challenge_required\",\"challenge\":{\"url\":\"https://www.instagram.com/challenge/?challenge_node_id=17859410964612578\",\"api_path\":\"/challenge/?challenge_node_id=17859410964612578\",\"hide_webview_header\":true,\"lock\":true,\"logout\":false,\"native_flow\":true,\"flow_render_type\":0,\"challenge_context\":\"AaVYbK-uBGGKJClxMIDpc-efTbRg6LssXxINsnoYKMzWrEp3azoI5k3nWTS9vAnUWIqBG_OZjplm8nBZFNWJJpnAnbMB4hvlRhzHkbFYOFLcXuFMohytzRYH96VAS_zg8SGxyroM31pcDTIj2lWyQ1x95ZVXG7PnHOO4dSC87SMInBhAIU5ZxIyGNdN09PbYl8EtZgJvLO6RscHZTQZ-itIxA9FnfwfJ-vpOPjxOfGeW0Y_VufwpwdnttkUXHQ\"},\"status\":\"fail\",\"error_type\":\"checkpoint_challenge_required\"}"
     },
     {
       "id": "maya-007",
