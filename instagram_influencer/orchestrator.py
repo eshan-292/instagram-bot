@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import random
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -334,27 +335,44 @@ def main() -> int:
 
         # 6. Engagement (Instagram + YouTube sessions)
         if args.session:
-            # YouTube-specific sessions
-            if args.session.startswith("yt_"):
-                if cfg.youtube_enabled and cfg.youtube_engagement_enabled:
-                    from youtube_engagement import run_yt_session
-                    yt_stats = run_yt_session(cfg, args.session)
-                    log.info("YouTube session '%s': %s", args.session, yt_stats)
+            session_stats = {}
+            session_error = None
+            try:
+                # YouTube-specific sessions
+                if args.session.startswith("yt_"):
+                    if cfg.youtube_enabled and cfg.youtube_engagement_enabled:
+                        from youtube_engagement import run_yt_session
+                        session_stats = run_yt_session(cfg, args.session)
+                        log.info("YouTube session '%s': %s", args.session, session_stats)
+                    else:
+                        log.info("YouTube engagement disabled, skipping %s", args.session)
+                elif args.session == "cross_promo":
+                    from cross_promo import run_cross_promo_engagement
+                    from publisher import _get_client as get_cl
+                    from rate_limiter import load_log, save_log, LOG_FILE
+                    data = load_log(str(LOG_FILE))
+                    xp_cl = get_cl(cfg)
+                    session_stats = run_cross_promo_engagement(xp_cl, cfg, data)
+                    save_log(str(LOG_FILE), data)
+                    log.info("Cross-promo session: %s", session_stats)
                 else:
-                    log.info("YouTube engagement disabled, skipping %s", args.session)
-            elif args.session == "cross_promo":
-                from cross_promo import run_cross_promo_engagement
-                from publisher import _get_client as get_cl
-                from rate_limiter import load_log, save_log, LOG_FILE
-                data = load_log(str(LOG_FILE))
-                xp_cl = get_cl(cfg)
-                xp_stats = run_cross_promo_engagement(xp_cl, cfg, data)
-                save_log(str(LOG_FILE), data)
-                log.info("Cross-promo session: %s", xp_stats)
-            else:
-                # Instagram session
-                engagement_stats = run_session(cfg, args.session)
-                log.info("Session '%s': %s", args.session, engagement_stats)
+                    # Instagram session
+                    session_stats = run_session(cfg, args.session)
+                    log.info("Session '%s': %s", args.session, session_stats)
+            except Exception as exc:
+                session_error = str(exc)
+                log.error("Session '%s' failed: %s", args.session, exc)
+
+            # Send Telegram alert for every session (not just daily report)
+            try:
+                from report import send_session_alert
+                from persona import get_persona
+                pid = get_persona().get("id", "unknown")
+                send_session_alert(pid, args.session, session_stats or {},
+                                   error=session_error)
+            except Exception:
+                pass
+
         elif not args.no_engage and cfg.engagement_enabled:
             engagement_stats = run_engagement(cfg)
             log.info("Engagement: %s", engagement_stats)
@@ -362,6 +380,14 @@ def main() -> int:
         return 0
     except Exception as exc:
         log.error("Pipeline failed: %s", exc)
+        # Send alert for pipeline crash
+        try:
+            from report import send_session_alert
+            persona_id = os.getenv("PERSONA", "unknown")
+            send_session_alert(persona_id, "pipeline", {},
+                               error=str(exc))
+        except Exception:
+            pass
         return 1
 
 

@@ -14,6 +14,7 @@ They don't create content or publish — they:
 
 from __future__ import annotations
 
+import json
 import logging
 import random
 import tempfile
@@ -22,13 +23,82 @@ from pathlib import Path
 from typing import Any
 
 from config import Config
-from persona import get_persona, load_persona
+from persona import get_persona, load_persona, persona_data_dir
 from rate_limiter import (
     can_act, load_log, random_delay, record_action, save_log, session_startup_jitter,
     LOG_FILE,
 )
 
 log = logging.getLogger(__name__)
+
+# ── User PK cache — avoids repeated user_info_by_username API calls ────────
+# Instagram rate-limits username→PK lookups aggressively on fresh/satellite
+# accounts (429 errors).  PKs never change, so we cache them to disk after
+# the first successful lookup and reuse them forever.
+
+_PK_CACHE_FILE = "user_pk_cache.json"
+
+
+def _pk_cache_path() -> Path:
+    return persona_data_dir() / _PK_CACHE_FILE
+
+
+def _load_pk_cache() -> dict[str, str]:
+    p = _pk_cache_path()
+    if p.exists():
+        try:
+            with open(p) as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+
+def _save_pk_cache(cache: dict[str, str]) -> None:
+    p = _pk_cache_path()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    with open(p, "w") as f:
+        json.dump(cache, f, indent=2)
+
+
+def _resolve_user_id(cl, handle: str) -> str | None:
+    """Resolve an Instagram handle to a user PK, using cache first.
+
+    Returns the user PK as a string, or None if lookup fails.
+    """
+    if not handle:
+        return None
+
+    cache = _load_pk_cache()
+    cached_pk = cache.get(handle)
+    if cached_pk:
+        log.debug("User PK cache hit: @%s → %s", handle, cached_pk)
+        return cached_pk
+
+    # Cache miss — do API lookup with retry + exponential backoff
+    for attempt in range(1, 4):
+        try:
+            user_info = cl.user_info_by_username_v1(handle)
+            pk = str(user_info.pk)
+            # Cache for future use
+            cache[handle] = pk
+            _save_pk_cache(cache)
+            log.info("Resolved @%s → %s (cached for future)", handle, pk)
+            return pk
+        except Exception as exc:
+            err_str = str(exc).lower()
+            if "429" in err_str or "too many" in err_str or "rate" in err_str:
+                wait = 15 * (2 ** (attempt - 1))  # 15s, 30s, 60s
+                log.warning("Rate limited resolving @%s (attempt %d/3), waiting %ds: %s",
+                            handle, attempt, wait, exc)
+                time.sleep(wait)
+            else:
+                log.warning("Cannot resolve @%s (attempt %d/3): %s", handle, attempt, exc)
+                if attempt < 3:
+                    time.sleep(5)
+
+    log.error("Failed to resolve @%s after 3 attempts", handle)
+    return None
 
 
 def _get_client(cfg: Config):
@@ -107,7 +177,7 @@ def _generate_reply(cfg: Config, comment_text: str, target_name: str) -> str:
 
 
 def _get_other_satellite_user_ids(cl, current_persona_id: str) -> list[int]:
-    """Look up Instagram user IDs for the other satellite accounts."""
+    """Look up Instagram user IDs for the other satellite accounts (cached)."""
     user_ids = []
     for sat_id in ["sat1", "sat2", "sat3"]:
         if sat_id == current_persona_id:
@@ -116,8 +186,9 @@ def _get_other_satellite_user_ids(cl, current_persona_id: str) -> list[int]:
             sat_persona = load_persona(sat_id)
             handle = sat_persona.get("instagram_handle", "")
             if handle:
-                user_info = cl.user_info_by_username_v1(handle)
-                user_ids.append(int(user_info.pk))
+                pk = _resolve_user_id(cl, handle)
+                if pk:
+                    user_ids.append(int(pk))
         except Exception as exc:
             log.debug("Could not find satellite @%s: %s", sat_id, exc)
     return user_ids
@@ -162,11 +233,9 @@ def run_satellite_boost(cl, cfg: Config, data: dict[str, Any]) -> dict[str, int]
 
         log.info("Boosting target: @%s (%s)", target_handle, target_name)
 
-        try:
-            user_info = cl.user_info_by_username_v1(target_handle)
-            user_id = str(user_info.pk)
-        except Exception as exc:
-            log.warning("Cannot find user @%s: %s", target_handle, exc)
+        user_id = _resolve_user_id(cl, target_handle)
+        if not user_id:
+            log.warning("Cannot resolve @%s — skipping target", target_handle)
             continue
 
         # Fetch their recent posts
@@ -414,6 +483,7 @@ def run_satellite_session(cfg: Config, session_type: str) -> dict[str, int]:
         cl = _get_client(cfg)
     except Exception as exc:
         log.error("Satellite client login failed: %s", exc)
+        _alert(persona["id"], session_type, {}, error=str(exc))
         return {"error": str(exc)}
 
     try:
@@ -428,4 +498,15 @@ def run_satellite_session(cfg: Config, session_type: str) -> dict[str, int]:
         save_log(str(LOG_FILE), data)
 
     log.info("Satellite session '%s' complete: %s", session_type, stats)
+    _alert(persona["id"], session_type, stats)
     return stats
+
+
+def _alert(persona_id: str, session_type: str, stats: dict,
+           error: str | None = None) -> None:
+    """Send Telegram alert for satellite session result."""
+    try:
+        from report import send_session_alert
+        send_session_alert(persona_id, session_type, stats, error=error)
+    except Exception as exc:
+        log.debug("Telegram alert failed: %s", exc)

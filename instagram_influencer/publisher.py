@@ -77,6 +77,24 @@ def _delete_session() -> None:
         pass
 
 
+def _session_health_check(cl: Client) -> bool:
+    """Quick API call to verify the session works for media endpoints.
+
+    A stale/web-origin session can succeed at login but 403 on media
+    endpoints.  We catch this early and force a fresh login.
+    """
+    try:
+        cl.account_info()
+        return True
+    except Exception as exc:
+        msg = str(exc).lower()
+        if "403" in msg or "forbidden" in msg:
+            log.warning("Session health check failed (403) — needs fresh login")
+            return False
+        # Other errors (network, timeout) aren't session issues
+        return True
+
+
 def _get_client(cfg: Config) -> Client:
     """Login via saved session or username/password.
 
@@ -97,8 +115,13 @@ def _get_client(cfg: Config) -> Client:
             cl.load_settings(session_path)
             cl.login(cfg.instagram_username, cfg.instagram_password)
             log.debug("Logged in via saved session")
-            cl.dump_settings(session_path)
-            return cl
+            # Validate the session still works for media endpoints
+            if not _session_health_check(cl):
+                log.warning("Saved session gets 403 on API — forcing fresh login")
+                _delete_session()
+            else:
+                cl.dump_settings(session_path)
+                return cl
         except (LoginRequired, ChallengeRequired) as exc:
             log.warning("Saved session invalid (%s), deleting", exc)
             _delete_session()

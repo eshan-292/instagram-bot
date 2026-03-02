@@ -105,7 +105,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           for f in instagram_influencer/data/sat1/engagement_log.json \
-                   instagram_influencer/data/sat1/followers.json; do
+                   instagram_influencer/data/sat1/followers.json \
+                   instagram_influencer/data/sat1/user_pk_cache.json; do
             [ -f "$f" ] && git add -f "$f" 2>/dev/null || true
           done
           git diff --staged --quiet || (

@@ -246,6 +246,40 @@ def _send_telegram(text: str) -> bool:
     return sent
 
 
+def send_session_alert(persona_id: str, session_type: str, stats: dict,
+                       error: str | None = None) -> None:
+    """Send a quick Telegram alert after each engagement session.
+
+    Fires after every session so the user gets real-time visibility into
+    what's running vs failing, instead of waiting for the 23:15 daily report.
+    """
+    now_ist = datetime.now(IST)
+    time_str = now_ist.strftime("%I:%M %p")
+
+    if error:
+        emoji = "🔴"
+        status = "FAILED"
+        detail = f"Error: `{str(error)[:200]}`"
+    else:
+        total = sum(v for v in stats.values() if isinstance(v, int))
+        if total == 0:
+            emoji = "🟡"
+            status = "ZERO ACTIONS"
+            detail = "No engagement actions completed"
+        else:
+            emoji = "🟢"
+            status = "OK"
+            parts = [f"{k}: {v}" for k, v in stats.items() if isinstance(v, int) and v > 0]
+            detail = ", ".join(parts) if parts else "—"
+
+    msg = (
+        f"{emoji} *{persona_id}* | `{session_type}` | {status}\n"
+        f"⏰ {time_str} IST\n"
+        f"{detail}"
+    )
+    _send_telegram(msg)
+
+
 def run_daily_report() -> str:
     """Generate and save the daily report. Returns the report text."""
     report = generate_report()

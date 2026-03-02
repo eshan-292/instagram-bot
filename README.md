@@ -245,11 +245,11 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | `youtube-bot.yml` | 12 | `youtube-bot` | Maya YT |
 | `instagram-bot-aryan.yml` | 33 | `instagram-bot-aryan` | Aryan IG |
 | `youtube-bot-aryan.yml` | 12 | `youtube-bot-aryan` | Aryan YT |
-| `satellite-1.yml` | 6 | `satellite-1` | Satellite 1 |
-| `satellite-2.yml` | 6 | `satellite-2` | Satellite 2 |
-| `satellite-3.yml` | 6 | `satellite-3` | Satellite 3 |
+| `satellite-1.yml` | 9 | `satellite-1` | Satellite 1 |
+| `satellite-2.yml` | 9 | `satellite-2` | Satellite 2 |
+| `satellite-3.yml` | 9 | `satellite-3` | Satellite 3 |
 
-**Total: ~108 sessions/day** across all accounts (including 5 overnight sessions per main account).
+**Total: ~117 sessions/day** across all accounts (including 5 overnight sessions per main account).
 
 **1 post/day per main account** at prime time (Maya 19:00 IST, Aryan 19:15 IST).
 
@@ -298,18 +298,21 @@ Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**.
 
 Maya and Aryan each get 12 YT sessions/day (alternating engage/replies). Aryan's are staggered +15 min.
 
-### Satellite Schedules (6 sessions each)
+### Satellite Schedules (9 sessions each)
 
 | IST Time | Session | Purpose |
 |----------|---------|---------|
-| 08:00/08:20/08:40 | sat_background | Light explore + stories |
-| 11:00/11:20/11:40 | sat_boost | Like + comment + save main accounts' posts |
+| 08:00/08:20/08:40 | sat_boost | Morning boost |
+| 10:00/10:20/10:40 | sat_background | Background engagement |
+| 12:00/12:20/12:40 | sat_boost | Midday boost |
 | 14:00/14:20/14:40 | sat_background | Background engagement |
-| 17:00/17:20/17:40 | sat_boost | Second boost pass |
-| 20:00/20:20/20:40 | sat_boost | Critical post-publish boost |
+| 16:00/16:20/16:40 | sat_boost | Afternoon boost |
+| 18:00/18:20/18:40 | sat_background | Background engagement |
+| 20:00/20:20/20:40 | sat_boost | Post-publish boost |
+| 21:00/21:20/21:40 | sat_boost | Prime time boost |
 | 22:00/22:20/22:40 | sat_background | Final background pass |
 
-Satellites are staggered so they don't hit the main accounts simultaneously.
+Satellites are staggered (SAT1 at :00, SAT2 at :20, SAT3 at :40) so they don't hit the main accounts simultaneously.
 
 ## Anti-Detection & Human-Like Behavior
 
@@ -325,6 +328,9 @@ The bot mimics real human usage patterns to avoid detection:
 - **Maximum commenting** -- comment on EVERY post (no probability gating)
 - **Maximum following** -- follow EVERY user encountered (no probability gating)
 - **Satellite jitter** -- 30-90s startup jitter, low daily limits
+- **User PK caching** -- Satellite accounts cache Instagram user PKs to avoid rate-limited username lookups (429 errors)
+- **Session health check** -- Detects stale/web-origin sessions (403 errors) and forces fresh mobile login
+- **Retry with exponential backoff** -- API calls retry 3x with increasing wait (15s, 30s, 60s) on rate limits
 
 ## Engagement Strategy (2026 Algorithm)
 
@@ -369,14 +375,14 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 80 | Main accounts' posts + background hashtags |
-| Comments | 12 | On main accounts' posts (comments + replies) |
-| Saves | 12 | Main accounts' posts |
-| Story views | 40 | Main accounts + background browsing |
-| Comment likes | 30 | Like top comments on main accounts' posts |
-| Story likes | 20 | Like main accounts' stories |
-| Story reposts | 2 | Repost main accounts' posts to own story |
-| DM shares | 6 | Share main accounts' posts between satellites |
+| Likes | 150 | Main accounts' posts + background hashtags |
+| Comments | 25 | On main accounts' posts (comments + replies) |
+| Saves | 25 | Main accounts' posts |
+| Story views | 80 | Main accounts + background browsing |
+| Comment likes | 60 | Like top comments on main accounts' posts |
+| Story likes | 40 | Like main accounts' stories |
+| Story reposts | 5 | Repost main accounts' posts to own story |
+| DM shares | 12 | Share main accounts' posts between satellites |
 
 ### YouTube Limits (per main account)
 
@@ -408,18 +414,28 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 - Interactive stickers: 35% poll, 30% question box (AMA), 20% quiz, 15% clean
 - Auto-categorized into highlights (persona-specific categories)
 
-## Daily Reports
+## Monitoring & Alerts
 
-End-of-day summary with engagement stats, posts published, YouTube channel stats, and growth signals.
+### Per-Session Telegram Alerts
+
+Every engagement session (main accounts + satellites) sends a real-time Telegram alert:
+- 🟢 **OK** — session completed with engagement actions
+- 🟡 **ZERO ACTIONS** — session ran but no actions completed (rate limit / session issue)
+- 🔴 **FAILED** — session crashed with an error
+
+### Daily Report
+
+End-of-day summary at 23:15 IST with engagement stats, posts published, YouTube channel stats, and growth signals.
 
 **Telegram setup:**
 1. Create a bot via @BotFather -> get token
 2. Send a message to your bot, then get chat ID from `https://api.telegram.org/bot<TOKEN>/getUpdates`
-3. Add to `.env`:
+3. Add to `.env` (for ALL accounts — main AND satellites):
    ```
    TELEGRAM_BOT_TOKEN=7123456789:AAHxxxxx
    TELEGRAM_CHAT_ID=123456789
    ```
+4. **Important:** Ensure these tokens are in EVERY DOTENV secret (DOTENV, DOTENV_ARYAN, DOTENV_SAT1/2/3)
 
 ## Make Commands
 
@@ -458,9 +474,9 @@ End-of-day summary with engagement stats, posts published, YouTube channel stats
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `ENGAGEMENT_ENABLED` | `false` | Enable Instagram engagement automation |
-| `ENGAGEMENT_DAILY_LIKES` | `250` | Max likes/day |
-| `ENGAGEMENT_DAILY_COMMENTS` | `60` | Max comments/day |
-| `ENGAGEMENT_DAILY_FOLLOWS` | `80` | Max follows/day |
+| `ENGAGEMENT_DAILY_LIKES` | `400` | Max likes/day |
+| `ENGAGEMENT_DAILY_COMMENTS` | `100` | Max comments/day |
+| `ENGAGEMENT_DAILY_FOLLOWS` | `120` | Max follows/day |
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `ENGAGEMENT_TARGET_ACCOUNTS` | (from persona JSON) | Comma-separated similar accounts for warm targeting |
@@ -530,7 +546,7 @@ This single command logs in, creates the .env, and sets both GitHub secrets auto
 
 Go to GitHub → **Actions** → **Satellite 1** → **Run workflow** → choose `sat_boost` → **Run workflow**. Watch logs to confirm it works. Repeat for Satellite 2 and 3.
 
-After that, satellites auto-run 6 sessions/day each (3 boost + 3 background).
+After that, satellites auto-run 9 sessions/day each (5 boost + 4 background).
 
 **Troubleshooting:**
 - If login fails, re-export the session cookie and re-run `get_session.py`
@@ -592,6 +608,7 @@ instagram_influencer/
       engagement_log.json
       .ig_session.json
       followers.json
+      user_pk_cache.json   # Cached Instagram user PKs (avoids 429s)
     sat2/
       (same as sat1)
     sat3/
