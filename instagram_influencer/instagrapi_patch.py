@@ -203,15 +203,32 @@ def _patch_reels_timeline_media() -> None:
                 self.logger.exception(e)
                 return total_items
 
+            # Log top-level keys to diagnose response structure changes
+            top_keys = list(result.keys())
             items = result.get("items", [])
             if not items:
                 empty_pages += 1
+                log.info(
+                    "explore_reels: page %d empty (keys=%s, paging=%s)",
+                    empty_pages,
+                    top_keys,
+                    result.get("paging_info"),
+                )
                 if empty_pages >= 3:
                     log.info("explore_reels: %d consecutive empty pages — stopping", empty_pages)
                     return total_items
             else:
                 empty_pages = 0
+                # Log first item's keys to understand structure
+                sample = items[0]
+                sample_keys = list(sample.keys())
+                has_media = "media" in sample
+                log.info(
+                    "explore_reels: page has %d items (first item keys=%s, has_media=%s)",
+                    len(items), sample_keys[:10], has_media,
+                )
 
+            parsed_count = 0
             for item in items:
                 media_data = item.get("media")
                 if not media_data:
@@ -221,6 +238,13 @@ def _patch_reels_timeline_media() -> None:
                 parsed = extract_media_v1(media_data)
                 if parsed is not None:
                     total_items.append(parsed)
+                    parsed_count += 1
+
+            if items and parsed_count == 0:
+                log.warning(
+                    "explore_reels: page had %d items but 0 parsed — possible schema change",
+                    len(items),
+                )
 
             paging = result.get("paging_info", {})
             if not paging.get("more_available"):
