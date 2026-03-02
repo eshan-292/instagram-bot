@@ -352,8 +352,8 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 |---------|--------|-------------|
 | **Video text overlays** | +80-150% watch completion | Bold on-screen hook/body/CTA on every Reel |
 | **Snap zoom hook** | +40-60% 3-sec hold rate | Visual punch in first 0.5s |
-| **Post-publish burst** | +50-100% reach per post | Pin CTA comment + instant story + mini engagement burst |
-| **Viral auto-boost** | Snowball viral posts | Detects 2x+ avg engagement -> re-story + boost |
+| **Post-publish burst** | +50-100% reach per post | Pin CTA comment + instant story reshare (post image + link sticker) + mini engagement burst |
+| **Viral auto-boost** | Snowball viral posts | Detects 2x+ avg engagement -> reshare to story + boost |
 | ~~**Comment-to-DM**~~ | ~~5-10x follow-back rate~~ | **Disabled** -- AI DMs sound unnatural and cause unfollows |
 | **Power user targeting** | +20-30% follow-back rate | Prioritize micro-influencers (1K-50K) |
 | **Carousel montage** | +24% shares, +19% reach | 5-slide carousel -> 30s Reel with transitions |
@@ -612,7 +612,7 @@ instagram_influencer/
   engagement.py          # Instagram engagement (warm targeting/hashtags/explore/replies)
   satellite.py           # Satellite account engagement (boost main accounts)
   cross_promo.py         # Cross-promotion between main accounts
-  stories.py             # Story reposting + highlights + interactive stickers
+  stories.py             # Story reshare (post image + link sticker) + highlights
   report.py              # Daily report (Telegram + GitHub Actions + YT stats)
   rate_limiter.py        # Action rate limiting + warmup multiplier
   gemini_helper.py       # Gemini API with model rotation (5 models, 100+ RPM)
