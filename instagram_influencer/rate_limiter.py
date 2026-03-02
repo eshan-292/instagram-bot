@@ -77,12 +77,12 @@ def actions_today(data: dict[str, Any], action_type: str) -> int:
 
 
 def warmup_multiplier() -> float:
-    """Return a multiplier (0.6-1.0) based on account age.
+    """Return a multiplier (0.8-1.0) based on account age.
 
     Ramps limits gradually to avoid action blocks on new accounts:
-      Days 1-7:   0.6x
-      Days 8-14:  0.8x
-      Days 15+:   1.0x (full limits)
+      Days 1-3:   0.8x
+      Days 4-7:   0.9x
+      Days 8+:    1.0x (full limits)
     """
     created = os.getenv("ACCOUNT_CREATED_DATE", "").strip()
     if not created:
@@ -92,10 +92,10 @@ def warmup_multiplier() -> float:
     except ValueError:
         return 1.0
     age_days = (datetime.now(timezone.utc) - created_dt).days
-    if age_days < 7:
-        return 0.6
-    if age_days < 14:
+    if age_days < 3:
         return 0.8
+    if age_days < 7:
+        return 0.9
     return 1.0
 
 

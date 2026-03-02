@@ -245,29 +245,7 @@ def run_cross_promo_engagement(cl, cfg: Config, data: dict[str, Any]) -> dict[st
     except Exception:
         pass
 
-    # ── Repost partner's latest to own story (1/day) ──
-    story_reposts_today = sum(
-        1 for a in data.get("actions", [])
-        if a.get("type") == "xp_story_repost"
-        and str(a.get("at", "")).startswith(today)
-    )
-    if medias and story_reposts_today < 1:
-        latest = medias[0]
-        try:
-            media_info = cl.media_info(latest.pk)
-            thumb_url = str(media_info.thumbnail_url or "")
-            if thumb_url:
-                import urllib.request
-                tmp = tempfile.NamedTemporaryFile(suffix=".jpg", delete=False)
-                urllib.request.urlretrieve(thumb_url, tmp.name)
-                cl.photo_upload_to_story(tmp.name)
-                record_action(data, "xp_story_repost", str(latest.pk))
-                stats["story_reposts"] += 1
-                log.info("Reposted @%s's post to story", partner_handle)
-                Path(tmp.name).unlink(missing_ok=True)
-        except Exception as exc:
-            log.debug("Story repost of @%s failed: %s", partner_handle, exc)
-        random_delay(10, 30)
+    # ── Story reposts DISABLED — don't post partner content on own story ──
 
     # ── Share partner's post via DM (1/day) ──
     dm_shares_today = sum(

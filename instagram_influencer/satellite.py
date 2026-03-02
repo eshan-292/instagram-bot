@@ -395,30 +395,7 @@ def run_satellite_boost(cl, cfg: Config, data: dict[str, Any]) -> dict[str, int]
         except Exception:
             pass
 
-        # ── Repost latest post to satellite's story ──
-        if medias and can_act(data, "story_reposts", limits.get("story_reposts", 2)):
-            latest = medias[0]
-            try:
-                # Download the media thumbnail
-                media_info = cl.media_info(latest.pk)
-                thumb_url = str(media_info.thumbnail_url or "")
-                if not thumb_url and hasattr(media_info, 'image_versions2'):
-                    # Try to get from resources
-                    resources = getattr(media_info, 'resources', [])
-                    if resources:
-                        thumb_url = str(getattr(resources[0], 'thumbnail_url', ''))
-                if thumb_url:
-                    import urllib.request
-                    tmp = tempfile.NamedTemporaryFile(suffix=".jpg", delete=False)
-                    urllib.request.urlretrieve(thumb_url, tmp.name)
-                    cl.photo_upload_to_story(tmp.name)
-                    record_action(data, "story_reposts", str(latest.pk))
-                    stats["story_reposts"] += 1
-                    log.info("Reposted @%s's post to story", target_handle)
-                    Path(tmp.name).unlink(missing_ok=True)
-            except Exception as exc:
-                log.debug("Story repost failed for @%s: %s", target_handle, exc)
-            random_delay(10, 30)
+        # ── Story reposts DISABLED — satellites should not post stories ──
 
         # ── Share post via DM to other satellites ──
         if medias and other_sat_ids and can_act(data, "dm_shares", limits.get("dm_shares", 6)):

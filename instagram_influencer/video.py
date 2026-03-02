@@ -257,17 +257,23 @@ def image_to_video(
                 output_path,
             ]
         else:
-            log.warning("No audio available, creating silent video")
+            # Add a silent audio track (Instagram rejects video-only MP4
+            # for Reel uploads with music overlay)
             return [
                 ffmpeg, "-y",
                 "-loop", "1",
                 "-i", image_path,
+                "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
                 "-vf", filter_str,
                 "-c:v", "libx264",
                 "-preset", "fast",
                 "-crf", "23",
+                "-c:a", "aac",
+                "-b:a", "32k",
                 "-t", str(duration),
-                "-an",
+                "-map", "0:v",
+                "-map", "1:a",
+                "-shortest",
                 output_path,
             ]
 
