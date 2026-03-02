@@ -34,9 +34,9 @@ LOG_FILE = _LazyLogFile()
 # Maximum growth defaults — warmup multiplier keeps these safe for new accounts.
 # Override via Config fields.
 DAILY_LIMITS = {
-    "likes": 300,
-    "comments": 80,
-    "follows": 120,
+    "likes": 500,
+    "comments": 150,
+    "follows": 200,
 }
 
 
@@ -130,10 +130,10 @@ def random_delay(min_s: int = 30, max_s: int = 90) -> None:
     15% chance of a 'micro-break' (90-300s) — simulates getting distracted,
     checking another app, replying to a text, etc.
     """
-    # Micro-break: simulate getting distracted (checking texts, switching apps)
-    if random.random() < 0.10:
-        pause = random.uniform(60, 180)
-        log.debug("Micro-break: %.0fs (simulating distraction)", pause)
+    # Micro-break: simulate getting distracted (rare, short)
+    if random.random() < 0.05:
+        pause = random.uniform(30, 75)
+        log.debug("Micro-break: %.0fs", pause)
         time.sleep(pause)
         return
 

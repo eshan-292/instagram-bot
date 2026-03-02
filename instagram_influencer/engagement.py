@@ -456,7 +456,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
     Aggressive mode: larger session sizes, higher comment and follow rates.
     """
     stats: dict[str, int] = {"explore_likes": 0, "explore_comments": 0, "explore_follows": 0}
-    explore_limit = _randomize_session_size(45)  # max growth mode
+    explore_limit = _randomize_session_size(60)  # aggressive growth
 
     try:
         medias = cl.explore_reels(amount=explore_limit + 10)
@@ -520,7 +520,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(12, 35)  # faster scrolling pace (was 15-45)
+        random_delay(8, 22)  # aggressive pace
 
     if any(v > 0 for v in stats.values()):
         log.info("Explore engagement: %s", stats)
@@ -533,15 +533,15 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
 
 def _run_hashtag_engagement(
     cl: Any, cfg: Config, data: dict[str, Any], stats: dict[str, int],
-    max_posts: int = 30,
+    max_posts: int = 50,
 ) -> None:
     """Like/comment/follow from hashtag posts — highly aggressive growth.
 
     Aggressive growth mode:
-    - Browse 2-3 hashtags per session
+    - Browse 2-3 hashtags per session (50 posts per session)
     - Higher comment rate: 45%
     - Higher follow rate: 55% (was 45%)
-    - Faster pace between actions
+    - Faster pace between actions (8-25s delays)
     - View more stories
     """
     hashtags = _parse_hashtags(cfg.engagement_hashtags)
@@ -638,7 +638,7 @@ def _run_hashtag_engagement(
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(15, 45)  # faster pace (was 20-60)
+        random_delay(8, 25)  # aggressive pace (was 15-45)
 
         if (
             not can_act(data, "likes", like_limit)
@@ -708,10 +708,10 @@ def run_warm_audience_session(
     # Get recent followers of the target account
     # user_followers tries GraphQL first (often returns empty), fall back to v1
     try:
-        followers = cl.user_followers(target_id, amount=60)
+        followers = cl.user_followers(target_id, amount=80)
         if not followers:
             log.info("Warm targeting: GQL returned 0 followers for @%s, trying private API", account)
-            follower_list = cl.user_followers_v1(str(target_id), amount=60)
+            follower_list = cl.user_followers_v1(str(target_id), amount=80)
             followers = {u.pk: u for u in follower_list}
     except Exception as exc:
         _check_challenge(exc)
@@ -725,7 +725,7 @@ def run_warm_audience_session(
     follower_ids = list(followers.keys())
     random.shuffle(follower_ids)
 
-    session_size = _randomize_session_size(30)  # max growth — engage more warm targets
+    session_size = _randomize_session_size(45)  # max growth — engage more warm targets
     log.info("Warm audience: browsing %d followers of @%s", min(session_size, len(follower_ids)), account)
 
     for uid in follower_ids[:session_size]:
@@ -789,7 +789,7 @@ def run_warm_audience_session(
             stats["warm_story_views"] = stats.get("story_views", 0)
 
         save_log(LOG_FILE, data)
-        random_delay(20, 50)
+        random_delay(10, 30)  # aggressive pace (was 20-50)
 
         # Check daily limits
         if (not can_act(data, "likes", cfg.engagement_daily_likes)

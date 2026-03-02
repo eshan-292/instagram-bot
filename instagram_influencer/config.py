@@ -181,9 +181,9 @@ def load_config() -> Config:
         # Engagement — defaults from persona JSON
         engagement_enabled=_bool(os.getenv("ENGAGEMENT_ENABLED")),
         engagement_hashtags=_str(os.getenv("ENGAGEMENT_HASHTAGS"), default_hashtags),
-        engagement_daily_likes=_int(os.getenv("ENGAGEMENT_DAILY_LIKES"), 400, minimum=0),
-        engagement_daily_comments=_int(os.getenv("ENGAGEMENT_DAILY_COMMENTS"), 100, minimum=0),
-        engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 120, minimum=0),
+        engagement_daily_likes=_int(os.getenv("ENGAGEMENT_DAILY_LIKES"), 500, minimum=0),
+        engagement_daily_comments=_int(os.getenv("ENGAGEMENT_DAILY_COMMENTS"), 150, minimum=0),
+        engagement_daily_follows=_int(os.getenv("ENGAGEMENT_DAILY_FOLLOWS"), 200, minimum=0),
         engagement_comment_enabled=_bool(os.getenv("ENGAGEMENT_COMMENT_ENABLED")),
         engagement_follow_enabled=_bool(os.getenv("ENGAGEMENT_FOLLOW_ENABLED")),
         engagement_target_accounts=_str(os.getenv("ENGAGEMENT_TARGET_ACCOUNTS"), default_targets),
