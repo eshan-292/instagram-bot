@@ -81,11 +81,34 @@ def _delete_session() -> None:
         pass
 
 
+class ChallengeAbort(RuntimeError):
+    """Raised when Instagram requires a challenge (phone/email verification).
+
+    This is a fatal error — the bot MUST stop all API calls immediately.
+    Continuing to hit the API in a challenge state will escalate to a full
+    account block.
+    """
+    pass
+
+
+def _is_challenge_error(exc: Exception) -> bool:
+    """Check if an exception is a challenge/checkpoint error."""
+    exc_type = type(exc).__name__
+    if exc_type in ("ChallengeRequired", "ChallengeUnknownStep", "ChallengeError"):
+        return True
+    msg = str(exc).lower()
+    return ("challenge_required" in msg or "checkpoint_challenge" in msg
+            or "submit_phone" in msg or "challenge" in msg and "resolver" in msg)
+
+
 def _session_health_check(cl: Client) -> bool:
     """Quick API call to verify the session works for media endpoints.
 
     A stale/web-origin session can succeed at login but 403 on media
     endpoints.  We catch this early and force a fresh login.
+
+    Raises ChallengeAbort if Instagram demands verification — this is
+    FATAL and the bot must stop immediately to avoid account blocks.
     """
     try:
         info = cl.account_info()
@@ -93,10 +116,29 @@ def _session_health_check(cl: Client) -> bool:
             log.warning("Session health check: account_info returned empty")
             return False
         return True
+    except ChallengeRequired as exc:
+        log.error(
+            "CHALLENGE DETECTED during health check — account needs manual "
+            "verification. Aborting ALL API calls to prevent account block. "
+            "Error: %s", exc
+        )
+        raise ChallengeAbort(
+            "Instagram challenge required. Log into the Instagram app on your "
+            "phone to complete verification, then re-seed the session."
+        ) from exc
     except (ClientForbiddenError, LoginRequired) as exc:
         log.warning("Session health check failed (%s): %s", type(exc).__name__, exc)
         return False
     except Exception as exc:
+        # Check if this is a challenge error disguised as a generic exception
+        if _is_challenge_error(exc):
+            log.error(
+                "CHALLENGE DETECTED during health check — aborting. Error: %s", exc
+            )
+            raise ChallengeAbort(
+                "Instagram challenge required. Complete verification on "
+                "your phone, then re-seed the session."
+            ) from exc
         # Check .code attribute (instagrapi sets this on ClientError subclasses)
         code = getattr(exc, "code", None)
         msg = str(exc).lower()
@@ -148,7 +190,13 @@ def _get_client(cfg: Config) -> Client:
 
             log.warning("Saved session failed health check — will try fresh login")
             _delete_session()
+        except ChallengeAbort:
+            # FATAL: challenge detected — do NOT try fresh login, abort immediately
+            raise
         except Exception as exc:
+            if _is_challenge_error(exc):
+                log.error("Challenge detected during session restore: %s", exc)
+                raise ChallengeAbort(str(exc)) from exc
             log.warning("Saved session error: %s — will try fresh login", exc)
             _delete_session()
 
@@ -256,6 +304,8 @@ def _find_trending_track(cl: Client) -> Any | None:
                          getattr(track, "title", "unknown"), query)
                 return track
         except Exception as exc:
+            if _is_challenge_error(exc):
+                raise ChallengeAbort(str(exc)) from exc
             last_exc = exc
             err_str = str(exc).lower()
             if "429" in err_str or "500" in err_str or "too many" in err_str:
@@ -292,7 +342,11 @@ def publish(cfg: Config, caption: str, image_url: str,
         post_id = _do_upload(cl, caption, image_url, video_url, is_reel,
                              carousel_images=carousel_images, post_type=post_type,
                              alt_text=alt_text)
+    except ChallengeAbort:
+        raise  # Don't retry on challenge — abort immediately
     except Exception as exc:
+        if _is_challenge_error(exc):
+            raise ChallengeAbort(str(exc)) from exc
         if not _is_login_required_error(exc):
             raise
         # Session was accepted by login but rejected by upload endpoints.

@@ -16,7 +16,7 @@ from engagement import run_engagement, run_session
 from generator import generate_content
 from image import fill_image_urls
 from persona import get_persona
-from publisher import publish, _get_client
+from publisher import publish, _get_client, ChallengeAbort
 from video import convert_posts_to_video
 from post_queue import (
     find_eligible,
@@ -329,6 +329,8 @@ def main() -> int:
                         posts[idx]["platform_post_id"] = post_id
                         posts[idx]["publish_error"] = None
                         log.info("Published %s → %s", item.get("id"), post_id)
+                    except ChallengeAbort:
+                        raise  # Don't catch — abort immediately
                     except Exception as exc:
                         posts[idx]["status"] = "failed"
                         posts[idx]["publish_error"] = str(exc)
@@ -381,6 +383,8 @@ def main() -> int:
                     # Instagram session
                     session_stats = run_session(cfg, args.session)
                     log.info("Session '%s': %s", args.session, session_stats)
+            except ChallengeAbort:
+                raise  # Don't catch — abort immediately
             except Exception as exc:
                 session_error = str(exc)
                 log.error("Session '%s' failed: %s", args.session, exc)
@@ -399,6 +403,23 @@ def main() -> int:
             log.info("Engagement: %s", engagement_stats)
 
         return 0
+    except ChallengeAbort as exc:
+        log.error(
+            "CHALLENGE ABORT: Instagram requires verification — ALL API calls stopped. "
+            "Log into Instagram on your phone to resolve, then re-seed session. "
+            "Error: %s", exc
+        )
+        # Send alert for challenge abort
+        try:
+            from report import send_session_alert
+            persona_id = os.getenv("PERSONA", "unknown")
+            send_session_alert(
+                persona_id, args.session or "pipeline", {},
+                error=f"⚠️ CHALLENGE ABORT: {exc}",
+            )
+        except Exception:
+            pass
+        return 1
     except Exception as exc:
         log.error("Pipeline failed: %s", exc)
         # Send alert for pipeline crash

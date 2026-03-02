@@ -17,7 +17,7 @@ from typing import Any, Optional
 
 from config import Config, BASE_DIR
 import instagrapi_patch  # noqa: F401 — applies monkey-patches on import
-from publisher import _get_client
+from publisher import _get_client, _is_challenge_error, ChallengeAbort
 from rate_limiter import (
     LOG_FILE,
     can_act,
@@ -31,6 +31,19 @@ from rate_limiter import (
 from persona import get_persona
 
 log = logging.getLogger(__name__)
+
+
+def _check_challenge(exc: Exception) -> None:
+    """If *exc* is a challenge/checkpoint error, raise ChallengeAbort.
+
+    Call this inside every ``except Exception`` handler that wraps an
+    Instagram API call.  It converts silent challenge swallowing into
+    an immediate abort, preventing the bot from hammering a blocked
+    account and escalating to a full ban.
+    """
+    if _is_challenge_error(exc):
+        log.error("CHALLENGE DETECTED — aborting session: %s", exc)
+        raise ChallengeAbort(str(exc)) from exc
 
 # Persistent files
 POSTS_PER_HASHTAG = 40          # max growth — mine as many as possible per tag
@@ -184,6 +197,7 @@ def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG)
         log.info("Found %d posts from #%s", len(medias), tag)
         return medias
     except Exception as exc:
+        _check_challenge(exc)
         log.warning("Failed to fetch #%s: %s", tag, exc)
         try:
             medias = cl.hashtag_medias_top(tag, amount=amount)
@@ -191,6 +205,7 @@ def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG)
             log.info("Fallback: found %d top posts from #%s", len(medias), tag)
             return medias
         except Exception as exc2:
+            _check_challenge(exc2)
             log.warning("Fallback also failed for #%s: %s", tag, exc2)
         return []
 
@@ -221,6 +236,7 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
                 except Exception:
                     pass
     except Exception as exc:
+        _check_challenge(exc)
         log.debug("Story view failed for %s: %s", user_id, exc)
 
 
@@ -267,6 +283,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
             log.debug("Unfollowed user %s", user_id)
             random_delay(20, 60)  # faster unfollow pace (was 30-90)
         except Exception as exc:
+            _check_challenge(exc)
             log.warning("Unfollow failed for %s: %s", user_id, exc)
 
     if unfollowed:
@@ -303,6 +320,7 @@ def run_welcome_dms(cl: Any, cfg: Config) -> int:
         my_id = cl.user_id
         current = cl.user_followers(my_id, amount=200)
     except Exception as exc:
+        _check_challenge(exc)
         log.warning("Could not fetch followers: %s", exc)
         return 0
 
@@ -336,6 +354,7 @@ def run_welcome_dms(cl: Any, cfg: Config) -> int:
             log.info("Welcome DM sent to @%s", username)
             random_delay(45, 120)  # slightly faster DM pace (was 60-180)
         except Exception as exc:
+            _check_challenge(exc)
             log.warning("DM failed for @%s: %s", username, exc)
 
     # Update stored followers
@@ -363,6 +382,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
         # Get our recent media (last 8 posts — wider window than before)
         medias = cl.user_medias(my_id, amount=8)
     except Exception as exc:
+        _check_challenge(exc)
         log.warning("Could not fetch own media for replies: %s", exc)
         return 0
 
@@ -385,6 +405,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
         try:
             comments = cl.media_comments(media.pk, amount=30)  # fetch more (was 20)
         except Exception as exc:
+            _check_challenge(exc)
             log.debug("Could not fetch comments for %s: %s", media.pk, exc)
             continue
 
@@ -417,6 +438,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
                 log.debug("Replied to comment %s: %s", comment_id, reply[:40])
                 random_delay(20, 60)  # faster reply pace (was 30-90)
             except Exception as exc:
+                _check_challenge(exc)
                 log.warning("Reply failed for comment %s: %s", comment_id, exc)
 
     if replied:
@@ -440,6 +462,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
         medias = cl.explore_reels(amount=explore_limit + 10)
         log.info("Fetched %d reels from Explore", len(medias))
     except Exception as exc:
+        _check_challenge(exc)
         log.warning("Could not fetch Explore page: %s", exc)
         return stats
 
@@ -462,6 +485,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                 record_action(data, "likes", media_id)
                 stats["explore_likes"] += 1
             except Exception as exc:
+                _check_challenge(exc)
                 log.debug("Explore like failed: %s", exc)
 
         # Always comment on explore posts
@@ -475,6 +499,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                     record_action(data, "comments", media_id)
                     stats["explore_comments"] += 1
                 except Exception as exc:
+                    _check_challenge(exc)
                     log.debug("Explore comment failed: %s", exc)
 
         # Always follow from Explore
@@ -487,6 +512,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                 record_action(data, "follows", user_id)
                 stats["explore_follows"] += 1
             except Exception as exc:
+                _check_challenge(exc)
                 log.debug("Explore follow failed: %s", exc)
 
         # View stories from explore too
@@ -575,6 +601,7 @@ def _run_hashtag_engagement(
                 record_action(data, "likes", media_id)
                 stats["likes"] = stats.get("likes", 0) + 1
             except Exception as exc:
+                _check_challenge(exc)
                 log.warning("Like failed for %s: %s", media_id, exc)
 
         # Always comment on hashtag posts
@@ -588,6 +615,7 @@ def _run_hashtag_engagement(
                     record_action(data, "comments", media_id)
                     stats["comments"] = stats.get("comments", 0) + 1
                 except Exception as exc:
+                    _check_challenge(exc)
                     log.warning("Comment failed for %s: %s", media_id, exc)
 
         # Smart follow — prioritize micro-influencers (20-30% follow-back rate vs 5%)
@@ -602,6 +630,7 @@ def _run_hashtag_engagement(
                 stats["follows"] = stats.get("follows", 0) + 1
                 log.debug("Followed %s from hashtag", user_id)
             except Exception as exc:
+                _check_challenge(exc)
                 log.warning("Follow failed for %s: %s", user_id, exc)
 
         # View stories more aggressively
@@ -667,6 +696,7 @@ def run_warm_audience_session(
             log.info("Warm targeting: resolved @%s → %s", candidate, target_id)
             break
         except Exception as exc:
+            _check_challenge(exc)
             log.warning("Could not resolve @%s: %s — trying next target", candidate, exc)
             _random_delay(2, 5)
             continue
@@ -684,6 +714,7 @@ def run_warm_audience_session(
             follower_list = cl.user_followers_v1(str(target_id), amount=60)
             followers = {u.pk: u for u in follower_list}
     except Exception as exc:
+        _check_challenge(exc)
         log.warning("Could not fetch followers of @%s: %s", account, exc)
         return stats
 
@@ -711,7 +742,8 @@ def run_warm_audience_session(
         # Like 2-3 recent posts
         try:
             user_medias = cl.user_medias(int(user_id), amount=4)
-        except Exception:
+        except Exception as exc:
+            _check_challenge(exc)
             user_medias = []
 
         like_count = min(random.randint(2, 3), len(user_medias))
@@ -721,8 +753,8 @@ def run_warm_audience_session(
                     cl.media_like(media.pk)
                     record_action(data, "likes", str(media.pk))
                     stats["warm_likes"] += 1
-                except Exception:
-                    pass
+                except Exception as exc:
+                    _check_challenge(exc)
                 time.sleep(random.uniform(2, 5))
 
         # Always comment on warm targets
@@ -737,6 +769,7 @@ def run_warm_audience_session(
                     record_action(data, "comments", str(user_medias[0].pk))
                     stats["warm_comments"] += 1
                 except Exception as exc:
+                    _check_challenge(exc)
                     log.debug("Warm comment failed: %s", exc)
 
         # Always follow warm targets — maximum growth
@@ -747,6 +780,7 @@ def run_warm_audience_session(
                 record_action(data, "follows", user_id)
                 stats["warm_follows"] += 1
             except Exception as exc:
+                _check_challenge(exc)
                 log.debug("Warm follow failed: %s", exc)
 
         # View their stories (strong signal)

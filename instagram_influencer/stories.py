@@ -17,6 +17,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from config import BASE_DIR, Config
 from persona import get_persona, persona_data_dir
+from publisher import _is_challenge_error, ChallengeAbort
 
 log = logging.getLogger(__name__)
 
@@ -407,6 +408,8 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
         log.info("Reposted %s as story (pk=%s)", post.get("id"), story.pk)
         return str(story.pk)
     except Exception as exc:
+        if _is_challenge_error(exc):
+            raise ChallengeAbort(str(exc)) from exc
         log.error("Story upload failed for %s: %s", post.get("id"), exc)
         return None
     finally:
@@ -500,6 +503,8 @@ def reshare_post_to_story(cl: Any, media_pk: int, user_pk: int) -> str | None:
         return str(story.pk)
 
     except Exception as exc:
+        if _is_challenge_error(exc):
+            raise ChallengeAbort(str(exc)) from exc
         log.error("Native story reshare failed for post %s: %s", media_pk, exc)
         return None
     finally:
@@ -534,6 +539,8 @@ def _get_recent_posts_from_ig(cl: Any, amount: int = 20) -> list[dict[str, Any]]
         log.info("Fetched %d recent posts from Instagram for story reshare", len(posts))
         return posts
     except Exception as exc:
+        if _is_challenge_error(exc):
+            raise ChallengeAbort(str(exc)) from exc
         log.warning("Could not fetch recent posts from IG: %s", exc)
         return []
 
