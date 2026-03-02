@@ -112,56 +112,78 @@ def _get_client(cfg: Config) -> Client:
     """Login via saved session or username/password.
 
     Priority:
-      1. Saved session file (preserves device UUIDs, avoids new challenges)
-      2. Username/password (creates a proper mobile session)
+      1. Saved session file — restore WITHOUT calling login() to avoid
+         triggering Instagram challenges from datacenter IPs.  The session
+         was created locally by seed_session.py and contains valid cookies
+         + device fingerprint.
+      2. Username/password (only if no saved session exists).
 
-    Browser session IDs (login_by_sessionid) are NOT used because they
-    produce web-origin cookies that work for user_info but get 403 on
-    upload endpoints (rupload_igphoto, rupload_igvideo).
+    IMPORTANT: Calling login() on a saved session from a different IP
+    triggers ChallengeRequired (email/SMS verification) because Instagram
+    sees a new location.  We avoid this by restoring the session silently.
     """
     session_path = str(SESSION_FILE)
 
-    # 1. Try saved session file (skip browsing-API validation)
+    # ── 1. Try saved session — restore silently (NO login() call) ──────
     if os.path.exists(session_path):
         try:
-            cl = _new_client()
+            cl = Client()
             cl.load_settings(session_path)
-            cl.login(cfg.instagram_username, cfg.instagram_password)
-            log.debug("Logged in via saved session")
-            # Validate the session still works for media endpoints
-            if not _session_health_check(cl):
-                log.warning("Saved session gets 403 on API — forcing fresh login")
-                _delete_session()
-            else:
+
+            # Restore credentials for internal use (but don't call login())
+            if cfg.instagram_username:
+                cl.username = cfg.instagram_username
+            if cfg.instagram_password:
+                cl.password = cfg.instagram_password
+
+            # Non-interactive challenge handler in case any call triggers one
+            cl.challenge_code_handler = _challenge_handler
+
+            log.debug("Restored saved session (no re-login)")
+
+            # Validate the session still works
+            if _session_health_check(cl):
                 cl.dump_settings(session_path)
                 return cl
-        except (LoginRequired, ChallengeRequired) as exc:
-            log.warning("Saved session invalid (%s), deleting", exc)
+
+            log.warning("Saved session failed health check — will try fresh login")
             _delete_session()
         except Exception as exc:
-            log.warning("Saved session error: %s", exc)
+            log.warning("Saved session error: %s — will try fresh login", exc)
             _delete_session()
 
-    # 2. Fresh username/password login (new device UUIDs → proper mobile session)
+    # ── 2. Fresh login (only if no saved session) ──────────────────────
     if not cfg.instagram_username or not cfg.instagram_password:
         raise RuntimeError(
-            "Set INSTAGRAM_USERNAME + INSTAGRAM_PASSWORD in .env"
+            "No valid session file and no credentials set. "
+            "Run seed_session.py locally to create a session, "
+            "or set INSTAGRAM_USERNAME + INSTAGRAM_PASSWORD in .env"
         )
 
     _delete_session()
     cl = _new_client()
-    cl.login(cfg.instagram_username, cfg.instagram_password)
-    log.info("Logged in via username/password")
-
-    # Validate fresh session — if even a new login gets 403, account is action-blocked
-    if not _session_health_check(cl):
+    try:
+        cl.login(cfg.instagram_username, cfg.instagram_password)
+    except ChallengeRequired as exc:
         log.error(
-            "Fresh login also gets 403 — account is likely ACTION-BLOCKED by Instagram. "
-            "Log in manually from a phone to clear the block."
+            "Instagram challenge triggered during login — cannot complete in CI. "
+            "Run seed_session.py locally to create a valid session."
         )
         raise RuntimeError(
-            "Account action-blocked: fresh login gets 403 on all endpoints. "
-            "Clear the block by logging in manually from the Instagram app."
+            "ChallengeRequired: Instagram needs verification. "
+            "Run `python seed_session.py` on your laptop to create a session."
+        ) from exc
+    log.info("Logged in via username/password")
+
+    # Validate fresh session
+    if not _session_health_check(cl):
+        log.error(
+            "Fresh login gets 403 — account is likely ACTION-BLOCKED. "
+            "Log in from the Instagram app to clear the block, "
+            "then run seed_session.py to create a new session."
+        )
+        raise RuntimeError(
+            "Account action-blocked: fresh login gets 403 on all endpoints."
         )
 
     cl.dump_settings(session_path)

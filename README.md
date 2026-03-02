@@ -330,6 +330,9 @@ The bot mimics real human usage patterns to avoid detection:
 - **Satellite jitter** -- 30-90s startup jitter, low daily limits
 - **User PK caching** -- Satellite accounts cache Instagram user PKs to avoid rate-limited username lookups (429 errors)
 - **Session health check** -- Detects stale/web-origin sessions (403 errors) and forces fresh mobile login
+- **Silent session restore** -- Bot restores saved sessions WITHOUT calling login() — avoids triggering Instagram challenges from datacenter IPs
+- **Action-block detection** -- Detects Instagram action blocks (consecutive 403s) and aborts sessions early instead of wasting time
+- **Local session seeding** -- `seed_session.py` creates sessions from your laptop (your IP/device), avoiding datacenter red flags
 - **Retry with exponential backoff** -- API calls retry 3x with increasing wait (15s, 30s, 60s) on rate limits
 
 ## Engagement Strategy (2026 Algorithm)
@@ -414,7 +417,46 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 - Interactive stickers: 35% poll, 30% question box (AMA), 20% quiz, 15% clean
 - Auto-categorized into highlights (persona-specific categories)
 
-## Monitoring & Alerts
+## Session Management
+
+Instagram sessions are created locally on your laptop (where challenges can be completed interactively) and then used by the bot in GitHub Actions.
+
+### Why Local Seeding?
+
+The bot runs on GitHub Actions (US datacenter IPs). If it tries to `login()` from there, Instagram sees a new device from a suspicious location and triggers a **challenge** (email/SMS verification). Since the bot can't complete challenges, the session fails.
+
+**Solution:** Create sessions from your laptop (your real IP + network), export them, and let the bot use them silently — no re-login, no challenges.
+
+### Seeding Sessions
+
+```bash
+# Interactive — pick accounts
+python seed_session.py
+
+# Seed specific accounts
+python seed_session.py maya aryan
+
+# Seed all 5 + push to GitHub secrets
+python seed_session.py --all --push
+
+# Seed one + push
+python seed_session.py sat1 --push
+```
+
+The script:
+1. Logs in from YOUR device (your IP, your network)
+2. If Instagram asks for verification, you enter the code interactively
+3. Exports the session file
+4. Optionally pushes it to GitHub secrets (`--push`)
+
+### When to Re-Seed
+
+- After an account gets **action-blocked** (you'll see 🔴 alerts on Telegram)
+- After **changing a password**
+- If the bot reports **"ChallengeRequired"** errors
+- Sessions typically last **2-4 weeks** before needing refresh
+
+
 
 ### Per-Session Telegram Alerts
 
