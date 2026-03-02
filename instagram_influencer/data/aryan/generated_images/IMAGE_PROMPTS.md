@@ -1,0 +1,28 @@
+# Aryan Dhar — Image Prompts
+
+Generate these images in the Gemini app and place them at the paths shown.
+
+---
+
+## aryan-002 — CAROUSEL
+**Topic:** Full day of eating -- high protein under Rs 500
+**Caption:** Full day of eating. Rs 500. 150g protein.
+No supplements. No chicken breast every meal.
+What's your go-to cheap protein source?
+Save this -- your wallet and gains will thank you.
+
+**Place 6 images in:** `generated_images/pending/aryan-002/1.jpg`, `2.jpg`, ...
+
+**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan with plate of food, text 'Rs 500. 150g protein. No supplements.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Meal 1: Breakfast -- eggs + oats + banana, macro breakdown Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Meal 2: Lunch -- rajma chawal + curd, protein count Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Meal 3: Snack -- peanut butter sandwich + milk Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: Meal 4: Dinner -- paneer bhurji + roti, full macro count Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 6:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 6 of a carousel post.) Scene: Total macros summary card, save CTA Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
