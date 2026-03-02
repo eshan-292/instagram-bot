@@ -160,6 +160,85 @@ def _patch_extract_media_v1() -> None:
     log.debug("Patched extract_media_v1 with ValidationError safety net")
 
 
+def _patch_reels_timeline_media() -> None:
+    """Fix broken pagination in reels_timeline_media (explore_reels).
+
+    Bug: instagrapi sets next_max_id = paging_info["more_available"] which is
+    a boolean (True), causing every subsequent request to send ?max_id=True
+    instead of the real cursor. Instagram returns 200 but with no parseable
+    items, creating an infinite loop that burns through rate limits.
+
+    Fix: Use paging_info["max_id"] for the cursor, and break on empty pages.
+    """
+    try:
+        from instagrapi import Client
+        from instagrapi.extractors import extract_media_v1
+    except ImportError:
+        return
+
+    def _fixed_reels_timeline_media(self, collection_pk, amount=10, last_media_pk=0):
+        if collection_pk == "reels":
+            endpoint = "clips/connected/"
+        elif collection_pk == "explore_reels":
+            endpoint = "clips/discover/"
+        else:
+            endpoint = "clips/discover/"
+
+        last_media_pk = last_media_pk and int(last_media_pk)
+        total_items = []
+        next_max_id = ""
+        empty_pages = 0
+
+        while True:
+            if len(total_items) >= amount:
+                return total_items[:amount]
+
+            try:
+                result = self.private_request(
+                    endpoint,
+                    data=" ",
+                    params={"max_id": next_max_id},
+                )
+            except Exception as e:
+                self.logger.exception(e)
+                return total_items
+
+            items = result.get("items", [])
+            if not items:
+                empty_pages += 1
+                if empty_pages >= 3:
+                    log.info("explore_reels: %d consecutive empty pages — stopping", empty_pages)
+                    return total_items
+            else:
+                empty_pages = 0
+
+            for item in items:
+                media_data = item.get("media")
+                if not media_data:
+                    continue
+                if last_media_pk and last_media_pk == media_data.get("pk"):
+                    return total_items
+                parsed = extract_media_v1(media_data)
+                if parsed is not None:
+                    total_items.append(parsed)
+
+            paging = result.get("paging_info", {})
+            if not paging.get("more_available"):
+                return total_items
+
+            # FIX: use max_id cursor, not the boolean more_available
+            cursor = paging.get("max_id")
+            if not cursor or cursor == next_max_id:
+                log.info("explore_reels: no new cursor in paging_info — stopping")
+                return total_items
+            next_max_id = str(cursor)
+
+        return total_items
+
+    Client.reels_timeline_media = _fixed_reels_timeline_media
+    log.debug("Patched reels_timeline_media with fixed pagination")
+
+
 def apply_patches() -> None:
     """Apply all patches. Safe to call multiple times (idempotent)."""
     global _PATCHED
@@ -169,6 +248,7 @@ def apply_patches() -> None:
 
     _patch_models()
     _patch_extract_media_v1()
+    _patch_reels_timeline_media()
 
 
 # Auto-apply on import
