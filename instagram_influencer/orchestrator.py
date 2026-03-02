@@ -260,32 +260,34 @@ def main() -> int:
                 print("No eligible posts")
             return 0
 
-        # Steps 1-4: content generation pipeline (skipped with --no-generate)
+        # Step 1: content generation (skipped with --no-generate)
         if not args.no_generate:
-            # 1. Generate content if queue is low
             if _should_generate(posts, cfg):
                 generate_content(args.queue_file, cfg)
                 posts = read_queue(args.queue_file)
                 log.info("Post-generation: %s", status_counts(posts))
 
-            # 2. Fill image URLs
-            updated = fill_image_urls(posts, cfg)
-            if updated:
-                write_queue(args.queue_file, posts)
-                log.info("Filled %d image URLs", updated)
+        # Steps 2-4 always run — they process existing images/drafts
+        # even when content generation is skipped.
 
-            # 3. Convert images to video (IG Reels + YouTube Shorts)
-            video_count = convert_posts_to_video(posts, youtube=cfg.youtube_enabled)
-            if video_count:
-                write_queue(args.queue_file, posts)
-                log.info("Converted %d posts to video", video_count)
+        # 2. Fill image URLs (scans pending/ for user-placed images)
+        updated = fill_image_urls(posts, cfg)
+        if updated:
+            write_queue(args.queue_file, posts)
+            log.info("Filled %d image URLs", updated)
 
-            # 4. Promote drafts
-            if cfg.auto_promote_drafts:
-                promoted = _promote_drafts(posts, cfg)
-                if promoted:
-                    write_queue(args.queue_file, posts)
-                    log.info("Promoted %d drafts", promoted)
+        # 3. Convert images to video (IG Reels + YouTube Shorts)
+        video_count = convert_posts_to_video(posts, youtube=cfg.youtube_enabled)
+        if video_count:
+            write_queue(args.queue_file, posts)
+            log.info("Converted %d posts to video", video_count)
+
+        # 4. Promote drafts
+        if cfg.auto_promote_drafts:
+            promoted = _promote_drafts(posts, cfg)
+            if promoted:
+                write_queue(args.queue_file, posts)
+                log.info("Promoted %d drafts", promoted)
 
         # 5. Publish next eligible post (Instagram + YouTube)
         if not args.no_publish:
