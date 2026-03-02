@@ -676,10 +676,19 @@ def run_warm_audience_session(
         return stats
 
     # Get recent followers of the target account
+    # user_followers tries GraphQL first (often returns empty), fall back to v1
     try:
         followers = cl.user_followers(target_id, amount=60)
+        if not followers:
+            log.info("Warm targeting: GQL returned 0 followers for @%s, trying private API", account)
+            follower_list = cl.user_followers_v1(str(target_id), amount=60)
+            followers = {u.pk: u for u in follower_list}
     except Exception as exc:
         log.warning("Could not fetch followers of @%s: %s", account, exc)
+        return stats
+
+    if not followers:
+        log.info("Warm targeting: @%s returned 0 followers — skipping", account)
         return stats
 
     follower_ids = list(followers.keys())

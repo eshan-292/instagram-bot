@@ -203,30 +203,20 @@ def _patch_reels_timeline_media() -> None:
                 self.logger.exception(e)
                 return total_items
 
-            # Log top-level keys to diagnose response structure changes
-            top_keys = list(result.keys())
+            # Instagram moved reels from "items" to "items_with_ads" (2025+)
             items = result.get("items", [])
             if not items:
+                items = result.get("items_with_ads", [])
+                if items:
+                    log.info("explore_reels: using items_with_ads (%d items)", len(items))
+
+            if not items:
                 empty_pages += 1
-                log.info(
-                    "explore_reels: page %d empty (keys=%s, paging=%s)",
-                    empty_pages,
-                    top_keys,
-                    result.get("paging_info"),
-                )
                 if empty_pages >= 3:
                     log.info("explore_reels: %d consecutive empty pages — stopping", empty_pages)
                     return total_items
             else:
                 empty_pages = 0
-                # Log first item's keys to understand structure
-                sample = items[0]
-                sample_keys = list(sample.keys())
-                has_media = "media" in sample
-                log.info(
-                    "explore_reels: page has %d items (first item keys=%s, has_media=%s)",
-                    len(items), sample_keys[:10], has_media,
-                )
 
             parsed_count = 0
             for item in items:
@@ -240,11 +230,8 @@ def _patch_reels_timeline_media() -> None:
                     total_items.append(parsed)
                     parsed_count += 1
 
-            if items and parsed_count == 0:
-                log.warning(
-                    "explore_reels: page had %d items but 0 parsed — possible schema change",
-                    len(items),
-                )
+            if items:
+                log.info("explore_reels: page had %d items, parsed %d", len(items), parsed_count)
 
             paging = result.get("paging_info", {})
             if not paging.get("more_available"):
