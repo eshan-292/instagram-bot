@@ -3979,6 +3979,56 @@
       "type": "likes",
       "target": "3835882254170827284",
       "at": "2026-03-02T15:27:20Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "8BGeHxYXCD0",
+      "at": "2026-03-02T16:06:07Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "T8u6lBFmVbk",
+      "at": "2026-03-02T16:07:28Z"
+    },
+    {
+      "type": "yt_comments",
+      "target": "T8u6lBFmVbk",
+      "at": "2026-03-02T16:07:32Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "8ez7h9YLovI",
+      "at": "2026-03-02T16:08:09Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "qxx4yM_WQtI",
+      "at": "2026-03-02T16:08:57Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "bQ50s3cwPj4",
+      "at": "2026-03-02T16:13:27Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "d36mulE8mAc",
+      "at": "2026-03-02T16:13:55Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "7Yj8bKGo2NU",
+      "at": "2026-03-02T16:16:30Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "fEhnnaYI7kM",
+      "at": "2026-03-02T16:17:31Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "9ofIKhWRaBc",
+      "at": "2026-03-02T16:18:17Z"
     }
   ]
 }
