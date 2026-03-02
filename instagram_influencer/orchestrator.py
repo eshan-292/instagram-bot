@@ -15,6 +15,7 @@ from config import DEFAULT_QUEUE_FILE, Config, load_config, setup_logging
 from engagement import run_engagement, run_session
 from generator import generate_content
 from image import fill_image_urls
+from persona import get_persona
 from publisher import publish, _get_client
 from video import convert_posts_to_video
 from post_queue import (
@@ -78,12 +79,28 @@ def _utc_now_iso() -> str:
 # Instagram now treats captions as keyword search — front-loaded topic keywords
 # carry more reach weight than hashtag spraying.
 
-# Hashtag pyramid strategy (2026):
-# 1 brand + 1 broad + 1-2 medium + 1 niche = 4-5 total (categorization, not discovery)
-# All loaded from persona JSON at runtime.
+# Core hashtag pool — pick 3-5 per post for variety without spam signals
+def _hashtag_pool():
+    """Return broad + medium + niche hashtags as a combined pool."""
+    h = get_persona().get("hashtags", {})
+    return h.get("broad", []) + h.get("medium", []) + h.get("niche", [])
+
+
+# Carousel-specific tags (drives saves — the highest-weight signal)
+def _carousel_tags():
+    return get_persona().get("hashtags", {}).get("carousel", [])
+
+
+def _keyword_phrases():
+    return get_persona().get("hashtags", {}).get("keyword_phrases", [])
+
+
+# Cross-platform promotion CTAs — drives YouTube subscribers from IG
+def _cross_promo_ctas():
+    return get_persona().get("cross_promo", {}).get("youtube_ctas", [])
+
 
 def _get_hashtags():
-    from persona import get_persona
     h = get_persona().get("hashtags", {})
     return {
         "brand": h.get("brand", []),
@@ -125,9 +142,14 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
 
     result = f"{caption}\n.\n{keyword}\n.\n{hashtag_block}" if keyword else f"{caption}\n.\n{hashtag_block}"
 
+    # Cross-platform promo on ~40% of posts when YouTube is enabled
+    ctas = _cross_promo_ctas()
+    if youtube_enabled and ctas and random.random() < 0.40:
+        promo = random.choice(ctas)
+        result += f"\n.\n{promo}"
+
     # First comment: 15-20 extra hashtags for maximum reach
     # Mix from all pools, excluding the ones already in caption
-    extra_tags = []
     all_pools = broad + medium + niche + carousel
     remaining = [t for t in all_pools if t not in caption_tags]
     random.shuffle(remaining)
@@ -366,7 +388,6 @@ def main() -> int:
             # Send Telegram alert for every session (not just daily report)
             try:
                 from report import send_session_alert
-                from persona import get_persona
                 pid = get_persona().get("id", "unknown")
                 send_session_alert(pid, args.session, session_stats or {},
                                    error=session_error)
