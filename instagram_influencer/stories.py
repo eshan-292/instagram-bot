@@ -425,59 +425,233 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
 
 
 # ---------------------------------------------------------------------------
+# Native post-to-story reshare (Instagram's "Add post to your story")
+# ---------------------------------------------------------------------------
+
+def _create_blank_story_bg() -> str:
+    """Create a 1080x1920 gradient background for the story.
+
+    Instagram requires an image even when using StoryMedia sticker.
+    Uses a subtle gradient matching common story aesthetics.
+    """
+    w, h = 1080, 1920
+    img = Image.new("RGB", (w, h))
+    draw = ImageDraw.Draw(img)
+
+    # Random gradient from persona-appropriate colors
+    gradients = [
+        ((25, 25, 35), (45, 25, 60)),       # dark purple
+        ((15, 15, 25), (35, 45, 65)),        # dark blue
+        ((30, 20, 20), (50, 30, 40)),        # dark rose
+        ((20, 25, 20), (35, 50, 45)),        # dark teal
+        ((25, 20, 30), (55, 35, 50)),        # dark mauve
+    ]
+    top_color, bot_color = random.choice(gradients)
+
+    for y in range(h):
+        ratio = y / h
+        r = int(top_color[0] + (bot_color[0] - top_color[0]) * ratio)
+        g = int(top_color[1] + (bot_color[1] - top_color[1]) * ratio)
+        b = int(top_color[2] + (bot_color[2] - top_color[2]) * ratio)
+        draw.line([(0, y), (w, y)], fill=(r, g, b))
+
+    fd, tmp_path = tempfile.mkstemp(suffix=".jpg", prefix="story_bg_")
+    os.close(fd)
+    img.save(tmp_path, "JPEG", quality=85)
+    return tmp_path
+
+
+def reshare_post_to_story(cl: Any, media_pk: int, user_pk: int) -> str | None:
+    """Share a feed post to story using Instagram's native reshare.
+
+    Creates the clickable "See Post" card that drives traffic back to the
+    original post. This is how the Instagram app's "Add post to your story"
+    button works under the hood.
+
+    Returns the story PK or None on failure.
+    """
+    try:
+        from instagrapi.types import StoryMedia
+    except ImportError:
+        log.error("StoryMedia not available in this instagrapi version")
+        return None
+
+    bg_path = None
+    try:
+        bg_path = _create_blank_story_bg()
+
+        # StoryMedia creates the native post-card sticker
+        media_sticker = StoryMedia(
+            media_pk=int(media_pk),
+            user_id=int(user_pk),
+            x=0.5,
+            y=0.5,
+            width=0.8,
+            height=0.6,
+            rotation=0.0,
+        )
+
+        story = cl.photo_upload_to_story(
+            Path(bg_path),
+            caption="",
+            medias=[media_sticker],
+        )
+        log.info("Reshared post %s to story (story pk=%s)", media_pk, story.pk)
+        return str(story.pk)
+
+    except Exception as exc:
+        log.error("Native story reshare failed for post %s: %s", media_pk, exc)
+        return None
+    finally:
+        if bg_path and os.path.exists(bg_path):
+            try:
+                os.remove(bg_path)
+            except OSError:
+                pass
+
+
+# ---------------------------------------------------------------------------
 # Story session — called from engagement.py
 # ---------------------------------------------------------------------------
 
-def run_story_session(cl: Any, cfg: Config) -> dict[str, int]:
-    """Repost 2-3 past posts as stories with overlays + stickers + highlights."""
-    stats: dict[str, int] = {"stories_posted": 0, "highlights_added": 0}
+def _get_recent_posts_from_ig(cl: Any, amount: int = 20) -> list[dict[str, Any]]:
+    """Fetch recent posts directly from Instagram API.
 
-    # Load queue to find posted items
+    This is the primary source — works even without content_queue.json.
+    Returns list of dicts with media_pk and user_pk.
+    """
+    try:
+        user_id = cl.user_id
+        medias = cl.user_medias(user_id, amount=amount)
+        posts = []
+        for m in medias:
+            posts.append({
+                "media_pk": m.pk,
+                "user_pk": user_id,
+                "caption": getattr(m, "caption_text", "") or "",
+                "taken_at": getattr(m, "taken_at", None),
+            })
+        log.info("Fetched %d recent posts from Instagram for story reshare", len(posts))
+        return posts
+    except Exception as exc:
+        log.warning("Could not fetch recent posts from IG: %s", exc)
+        return []
+
+
+def _get_storied_pks(data_dir: Path) -> set[str]:
+    """Load PKs of posts already shared to story recently."""
+    storied_file = data_dir / "storied_posts.json"
+    if not storied_file.exists():
+        return set()
+    try:
+        with open(storied_file) as f:
+            records = json.load(f)
+        # Only count posts storied in the last 7 days
+        week_ago = datetime.now(timezone.utc) - timedelta(days=7)
+        recent = set()
+        for r in records:
+            try:
+                dt = datetime.fromisoformat(r["date"].replace("Z", "+00:00"))
+                if dt > week_ago:
+                    recent.add(str(r["media_pk"]))
+            except (KeyError, ValueError, TypeError):
+                pass
+        return recent
+    except (json.JSONDecodeError, OSError):
+        return set()
+
+
+def _save_storied_pk(data_dir: Path, media_pk: int) -> None:
+    """Record that a post was shared to story."""
+    storied_file = data_dir / "storied_posts.json"
+    records = []
+    if storied_file.exists():
+        try:
+            with open(storied_file) as f:
+                records = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            pass
+    records.append({
+        "media_pk": str(media_pk),
+        "date": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+    })
+    # Keep only last 60 days of records
+    cutoff = datetime.now(timezone.utc) - timedelta(days=60)
+    records = [r for r in records if _parse_date(r.get("date")) > cutoff]
+    storied_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(storied_file, "w") as f:
+        json.dump(records, f, indent=2)
+
+
+def _parse_date(s: str | None) -> datetime:
+    """Parse ISO date string, returning epoch on failure."""
+    if not s:
+        return datetime(2000, 1, 1, tzinfo=timezone.utc)
+    try:
+        return datetime.fromisoformat(s.replace("Z", "+00:00"))
+    except (ValueError, TypeError):
+        return datetime(2000, 1, 1, tzinfo=timezone.utc)
+
+
+def run_story_session(cl: Any, cfg: Config) -> dict[str, int]:
+    """Share 1-2 past posts to story using Instagram's native reshare.
+
+    Uses the native "Add post to your story" mechanism — creates a story
+    with the post embedded as a clickable card with "See Post" link.
+    This drives traffic back to the original post and boosts engagement.
+    """
+    stats: dict[str, int] = {"stories_posted": 0, "highlights_added": 0}
+    data_dir = persona_data_dir()
+
+    # 1. Try content_queue.json first (has post metadata)
+    candidates_from_queue = []
     try:
         with open(QUEUE_FILE) as f:
             queue = json.load(f)
+        for post in queue.get("posts", []):
+            if str(post.get("status", "")).lower() == "posted":
+                ppk = post.get("platform_post_id")
+                if ppk and str(ppk) != "unknown":
+                    candidates_from_queue.append({
+                        "media_pk": int(ppk),
+                        "user_pk": int(cl.user_id),
+                        "caption": str(post.get("caption", ""))[:50],
+                    })
     except (json.JSONDecodeError, OSError):
-        log.warning("Could not load content queue for story session")
+        pass
+
+    # 2. Fallback: fetch posts directly from Instagram API
+    if not candidates_from_queue:
+        candidates_from_queue = _get_recent_posts_from_ig(cl, amount=20)
+
+    if not candidates_from_queue:
+        log.warning("No posts available for story reshare (no queue, no IG posts)")
         return stats
 
-    posts = queue.get("posts", [])
-    now = datetime.now(timezone.utc)
-    week_ago = now - timedelta(days=7)
-
-    # Find candidates: posted items not storied in last 7 days
-    candidates = []
-    for post in posts:
-        if str(post.get("status", "")).lower() != "posted":
-            continue
-        # Check last_storied_at
-        last_storied = post.get("last_storied_at")
-        if last_storied:
-            try:
-                dt = datetime.fromisoformat(last_storied.replace("Z", "+00:00"))
-                if dt > week_ago:
-                    continue
-            except (ValueError, TypeError):
-                pass
-        candidates.append(post)
+    # 3. Filter out recently storied posts
+    storied = _get_storied_pks(data_dir)
+    candidates = [c for c in candidates_from_queue if str(c["media_pk"]) not in storied]
 
     if not candidates:
-        log.warning("No eligible posts for story reposting (total posted: %d, "
-                     "all either storied within 7 days or missing media)",
-                     sum(1 for p in posts if str(p.get("status", "")).lower() == "posted"))
+        log.info("All %d posts already storied in last 7 days", len(candidates_from_queue))
         return stats
 
-    # Pick 2-3 random posts
-    pick_count = min(random.randint(2, 3), len(candidates))
+    log.info("Story candidates: %d eligible out of %d total", len(candidates), len(candidates_from_queue))
+
+    # 4. Pick 1-2 posts (conservative — stories should feel organic)
+    pick_count = min(random.randint(1, 2), len(candidates))
     chosen = random.sample(candidates, pick_count)
 
     from rate_limiter import random_delay
 
     for post in chosen:
-        story_pk = repost_to_story(cl, post)
+        media_pk = post["media_pk"]
+        user_pk = post["user_pk"]
+
+        story_pk = reshare_post_to_story(cl, media_pk, user_pk)
         if story_pk:
             stats["stories_posted"] += 1
-            # Mark as storied
-            post["last_storied_at"] = now.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+            _save_storied_pk(data_dir, media_pk)
 
             # Add to highlight
             category = _categorize_post(post)
@@ -486,13 +660,6 @@ def run_story_session(cl: Any, cfg: Config) -> dict[str, int]:
 
             random_delay(30, 90)
 
-    # Save updated queue with last_storied_at timestamps
-    try:
-        with open(QUEUE_FILE, "w") as f:
-            json.dump(queue, f, indent=2, ensure_ascii=False)
-    except OSError as exc:
-        log.warning("Could not save queue after story session: %s", exc)
-
-    log.info("Story session done: %d/%d stories posted, %d highlights added (candidates: %d)",
+    log.info("Story session: %d/%d posted, %d highlights (candidates: %d)",
              stats["stories_posted"], pick_count, stats["highlights_added"], len(candidates))
     return stats
