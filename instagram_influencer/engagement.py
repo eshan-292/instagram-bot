@@ -654,15 +654,25 @@ def run_warm_audience_session(
         log.info("No target accounts configured for warm audience targeting")
         return stats
 
-    account = random.choice(targets)
-    log.info("Warm targeting: engaging followers of @%s", account)
+    # Shuffle targets so we try a random one first, but fall through to others
+    random.shuffle(targets)
+    target_id = None
+    account = None
+    for candidate in targets:
+        log.info("Warm targeting: trying @%s", candidate)
+        try:
+            target_user = cl.user_info_by_username(candidate)
+            target_id = target_user.pk
+            account = candidate
+            log.info("Warm targeting: resolved @%s → %s", candidate, target_id)
+            break
+        except Exception as exc:
+            log.warning("Could not resolve @%s: %s — trying next target", candidate, exc)
+            _random_delay(2, 5)
+            continue
 
-    # Resolve username to user_id
-    try:
-        target_user = cl.user_info_by_username(account)
-        target_id = target_user.pk
-    except Exception as exc:
-        log.warning("Could not resolve @%s: %s", account, exc)
+    if target_id is None:
+        log.warning("Warm targeting: could not resolve ANY target account — aborting")
         return stats
 
     # Get recent followers of the target account
