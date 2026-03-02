@@ -198,6 +198,7 @@ def image_to_video(
     #   4. fade=in AFTER zoompan (zoompan reads only frame 0)
     tw, th = width * 2, height * 2  # 2x target for zoompan headroom
     vf = (
+        f"format=rgb24,"  # Handle RGBA/palette PNG inputs
         f"split[bg][fg];"
         f"[bg]scale={tw}:{th}:force_original_aspect_ratio=increase,"
         f"crop={tw}:{th},gblur=sigma=40[bgblur];"
@@ -459,6 +460,11 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
         if status in {"posted", "failed"}:
             continue
 
+        # Single/photo posts publish as photos — no video needed
+        post_type = str(post.get("post_type", "reel")).strip().lower()
+        if post_type in ("single", "photo"):
+            continue
+
         # Need an existing image to convert
         image_url = str(post.get("image_url", "")).strip()
         if not image_url or not os.path.exists(image_url):
@@ -477,7 +483,6 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
             try:
                 # For carousel with 3+ images: create montage Reel (30s)
                 carousel_images = post.get("carousel_images") or []
-                post_type = str(post.get("post_type", "reel")).strip().lower()
                 valid_carousel = (
                     post_type == "carousel"
                     and isinstance(carousel_images, list)
