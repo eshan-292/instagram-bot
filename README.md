@@ -319,7 +319,7 @@ Satellites are staggered (SAT1 at :00, SAT2 at :20, SAT3 at :40) so they don't h
 The bot mimics real human usage patterns to avoid detection:
 
 - **Gaussian delays** -- Pauses cluster around a natural midpoint (not uniform random)
-- **Micro-breaks** (10% chance) -- 60-180s pauses simulating checking texts, switching apps
+- **Micro-breaks** (5% chance) -- 30-75s pauses simulating checking texts, switching apps
 - **Session startup jitter** -- 10s-4min random delay so nothing runs at exact times
 - ~~**Skip behavior**~~ -- **Disabled** — engage with everything for maximum growth
 - **Profile browsing** -- Views user profile before following
@@ -358,16 +358,16 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 | **Power user targeting** | +20-30% follow-back rate | Prioritize micro-influencers (1K-50K) |
 | **Carousel montage** | +24% shares, +19% reach | 5-slide carousel -> 30s Reel with transitions |
 | **Viral hook patterns** | Higher scroll-stop rate | POV:, numbers, curiosity gaps |
-| **Satellite boost** | +3x early engagement | 3 accounts: like+comment+save+comment-like+reply+story-like+repost+DM-share |
-| **Cross-promo** | +20-30% cross-audience reach | Partner: like+save+comment+comment-like+reply+story-like+repost+DM-share |
+| **Satellite boost** | +3x early engagement | 3 accounts: like+comment+save+comment-like+reply+story-like+DM-share |
+| **Cross-promo** | +20-30% cross-audience reach | Partner: like+save+comment+comment-like+reply+story-like+DM-share |
 
 ### Instagram Limits (per main account)
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 400 | Spread across all sessions |
-| Comments | 100 | AI-generated, context-aware |
-| Follows | 120 | Smart targeting: 80% micro-influencers, 35% others |
+| Likes | 500 | Spread across all sessions |
+| Comments | 150 | AI-generated, context-aware |
+| Follows | 200 | Smart targeting: 80% micro-influencers, 35% others |
 | Story views | 150 | 100% view, 100% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
 | Unfollows | 60/run | After 2+ days |
@@ -384,7 +384,7 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 | Story views | 80 | Main accounts + background browsing |
 | Comment likes | 60 | Like top comments on main accounts' posts |
 | Story likes | 40 | Like main accounts' stories |
-| Story reposts | 5 | Repost main accounts' posts to own story |
+| ~~Story reposts~~ | ~~5~~ | **Disabled** -- satellites should not post stories |
 | DM shares | 12 | Share main accounts' posts between satellites |
 
 ### YouTube Limits (per main account)
@@ -516,9 +516,9 @@ End-of-day summary at 23:15 IST with engagement stats, posts published, YouTube 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `ENGAGEMENT_ENABLED` | `false` | Enable Instagram engagement automation |
-| `ENGAGEMENT_DAILY_LIKES` | `400` | Max likes/day |
-| `ENGAGEMENT_DAILY_COMMENTS` | `100` | Max comments/day |
-| `ENGAGEMENT_DAILY_FOLLOWS` | `120` | Max follows/day |
+| `ENGAGEMENT_DAILY_LIKES` | `500` | Max likes/day |
+| `ENGAGEMENT_DAILY_COMMENTS` | `150` | Max comments/day |
+| `ENGAGEMENT_DAILY_FOLLOWS` | `200` | Max follows/day |
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `ENGAGEMENT_TARGET_ACCOUNTS` | (from persona JSON) | Comma-separated similar accounts for warm targeting |
