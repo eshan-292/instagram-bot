@@ -431,81 +431,125 @@ def repost_to_story(cl: Any, post: dict[str, Any]) -> str | None:
 # Native post-to-story reshare (Instagram's "Add post to your story")
 # ---------------------------------------------------------------------------
 
-def _create_story_bg_from_post(cl: Any, media_pk: int) -> str | None:
-    """Download the post image and create a story-sized background from it.
+def _download_post_image(cl: Any, media_pk: int) -> tuple[str | None, str | None]:
+    """Download the post thumbnail image and get the post URL.
 
-    Fetches the post thumbnail, center-crops to 9:16 (story aspect ratio),
-    applies a subtle blur + dim overlay so the StoryMedia card stands out.
-    This makes the story thumbnail show the actual post content instead of
-    a black screen.
+    Returns (image_path, post_shortcode) or (None, None) on failure.
     """
     try:
-        from PIL import ImageFilter
-
         media_info = cl.media_info(media_pk)
+        shortcode = str(getattr(media_info, "code", "") or "")
         thumb_url = str(getattr(media_info, "thumbnail_url", "") or "")
         if not thumb_url:
-            # Try first image resource
             resources = getattr(media_info, "resources", []) or []
             if resources:
                 thumb_url = str(getattr(resources[0], "thumbnail_url", "") or "")
         if not thumb_url:
             log.debug("No thumbnail URL for post %s", media_pk)
-            return None
+            return None, shortcode
 
         resp = http_requests.get(thumb_url, timeout=30)
-        if resp.status_code >= 400:
-            return None
+        if resp.status_code >= 400 or len(resp.content) < 5000:
+            return None, shortcode
 
-        # Save temp file and open as image
         fd, dl_path = tempfile.mkstemp(suffix=".jpg", prefix="story_dl_")
         os.close(fd)
         with open(dl_path, "wb") as f:
             f.write(resp.content)
 
-        img = Image.open(dl_path)
-        img = img.convert("RGB")
-
-        # Target: 1080x1920 (9:16 story ratio)
-        target_w, target_h = 1080, 1920
-        target_ratio = target_w / target_h  # 0.5625
-
-        # Center-crop to 9:16
-        src_w, src_h = img.size
-        src_ratio = src_w / src_h
-        if src_ratio > target_ratio:
-            # Source is wider — crop sides
-            new_w = int(src_h * target_ratio)
-            left = (src_w - new_w) // 2
-            img = img.crop((left, 0, left + new_w, src_h))
-        else:
-            # Source is taller — crop top/bottom
-            new_h = int(src_w / target_ratio)
-            top = (src_h - new_h) // 2
-            img = img.crop((0, top, src_w, top + new_h))
-
-        img = img.resize((target_w, target_h), Image.LANCZOS)
-
-        # Slight blur + dim so the StoryMedia card is readable
-        img = img.filter(ImageFilter.GaussianBlur(radius=8))
-        # Dim overlay (semi-transparent black)
-        overlay = Image.new("RGB", (target_w, target_h), (0, 0, 0))
-        img = Image.blend(img, overlay, alpha=0.35)
-
-        fd, out_path = tempfile.mkstemp(suffix=".jpg", prefix="story_bg_")
-        os.close(fd)
-        img.save(out_path, "JPEG", quality=85)
-
-        # Clean up download temp
-        try:
-            os.remove(dl_path)
-        except OSError:
-            pass
-
-        return out_path
+        return dl_path, shortcode
     except Exception as exc:
-        log.debug("Could not create story bg from post %s: %s", media_pk, exc)
-        return None
+        if _is_challenge_error(exc):
+            raise ChallengeAbort(str(exc)) from exc
+        log.debug("Could not download post image %s: %s", media_pk, exc)
+        return None, None
+
+
+def _create_story_image(image_path: str, caption_text: str = "") -> str:
+    """Create a story-sized image from the post thumbnail.
+
+    Fits the image into 9:16 story frame with blurred background fill
+    (preserves full image content — no cropping). Adds a subtle text
+    overlay at the bottom with a random CTA.
+
+    Returns path to the story image (caller must clean up).
+    """
+    from PIL import ImageFilter
+
+    target_w, target_h = 1080, 1920
+    img = Image.open(image_path).convert("RGB")
+
+    # Fit-with-blur: show FULL image with blurred fill for empty space
+    src_w, src_h = img.size
+    target_ratio = target_w / target_h
+
+    # Create blurred background (cover-scale + blur)
+    src_ratio = src_w / src_h
+    if src_ratio > target_ratio:
+        bg_h = target_h
+        bg_w = int(bg_h * src_ratio)
+    else:
+        bg_w = target_w
+        bg_h = int(bg_w / src_ratio)
+    bg = img.resize((bg_w, bg_h), Image.LANCZOS)
+    # Center-crop background to target
+    left = (bg_w - target_w) // 2
+    top = (bg_h - target_h) // 2
+    bg = bg.crop((left, top, left + target_w, top + target_h))
+    bg = bg.filter(ImageFilter.GaussianBlur(radius=25))
+    # Slight dim
+    dim = Image.new("RGB", (target_w, target_h), (0, 0, 0))
+    bg = Image.blend(bg, dim, alpha=0.20)
+
+    # Fit foreground (maintain aspect ratio, fit inside target)
+    if src_ratio > target_ratio:
+        fg_w = target_w
+        fg_h = int(fg_w / src_ratio)
+    else:
+        fg_h = target_h
+        fg_w = int(fg_h * src_ratio)
+    # Leave room for text at bottom (use 80% of height)
+    max_fg_h = int(target_h * 0.78)
+    if fg_h > max_fg_h:
+        fg_h = max_fg_h
+        fg_w = int(fg_h * src_ratio)
+    fg = img.resize((fg_w, fg_h), Image.LANCZOS)
+
+    # Paste foreground centered (shifted slightly up for text room)
+    x_offset = (target_w - fg_w) // 2
+    y_offset = (target_h - fg_h) // 2 - int(target_h * 0.05)
+    y_offset = max(0, y_offset)
+    bg.paste(fg, (x_offset, y_offset))
+
+    # Add text overlay at bottom
+    overlay_text = random.choice(_OVERLAY_TEXTS)
+    overlay = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    bar_h = int(target_h * 0.10)
+    bar_top = target_h - bar_h
+    draw.rectangle([(0, bar_top), (target_w, target_h)], fill=(0, 0, 0, 120))
+
+    font_size = int(bar_h * 0.40)
+    try:
+        font = ImageFont.truetype(
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+    except (OSError, IOError):
+        font = ImageFont.load_default()
+
+    bbox = draw.textbbox((0, 0), overlay_text, font=font)
+    text_w = bbox[2] - bbox[0]
+    text_h = bbox[3] - bbox[1]
+    text_x = (target_w - text_w) // 2
+    text_y = bar_top + (bar_h - text_h) // 2
+    draw.text((text_x, text_y), overlay_text, fill=(255, 255, 255, 230), font=font)
+
+    result = Image.alpha_composite(bg.convert("RGBA"), overlay).convert("RGB")
+
+    fd, out_path = tempfile.mkstemp(suffix=".jpg", prefix="story_img_")
+    os.close(fd)
+    result.save(out_path, "JPEG", quality=92)
+    log.info("Created story image from post thumbnail (%dx%d)", target_w, target_h)
+    return out_path
 
 
 def _create_blank_story_bg() -> str:
@@ -541,57 +585,79 @@ def _create_blank_story_bg() -> str:
 
 
 def reshare_post_to_story(cl: Any, media_pk: int, user_pk: int) -> str | None:
-    """Share a feed post to story using Instagram's native reshare.
+    """Share a feed post to story with the post image + link sticker.
 
-    Creates the clickable "See Post" card that drives traffic back to the
-    original post. This is how the Instagram app's "Add post to your story"
-    button works under the hood.
+    Downloads the post thumbnail and creates a visually appealing story
+    with the actual post image (fit-with-blur background) + text overlay.
+    Adds a StoryLink sticker so viewers can tap to see the original post.
+
+    This replaces the StoryMedia approach which caused black-screen
+    thumbnails (Instagram renders StoryMedia full-screen, hiding the bg).
 
     Returns the story PK or None on failure.
     """
+    story_path = None
+    img_path = None
     try:
-        from instagrapi.types import StoryMedia
-    except ImportError:
-        log.error("StoryMedia not available in this instagrapi version")
-        return None
+        # Download the post image and get shortcode for the link
+        img_path, shortcode = _download_post_image(cl, media_pk)
+        if not img_path:
+            log.warning("Could not download post image for story, skipping %s", media_pk)
+            return None
 
-    bg_path = None
-    try:
-        # Use the post image as background (blurred + dimmed)
-        bg_path = _create_story_bg_from_post(cl, media_pk)
-        if not bg_path:
-            bg_path = _create_blank_story_bg()  # fallback to gradient
+        # Create the story image (fit-with-blur + text overlay)
+        story_path = _create_story_image(img_path, "")
 
-        # StoryMedia creates the native post-card sticker
-        media_sticker = StoryMedia(
-            media_pk=int(media_pk),
-            user_id=int(user_pk),
-            x=0.5,
-            y=0.5,
-            width=0.8,
-            height=0.6,
-            rotation=0.0,
-        )
+        # Build stickers
+        sticker_args: dict[str, list] = {}
+
+        # StoryLink — clickable link to the original post
+        if shortcode:
+            try:
+                from instagrapi.types import StoryLink
+                post_url = f"https://www.instagram.com/p/{shortcode}/"
+                sticker_args["links"] = [StoryLink(
+                    webUri=post_url,
+                    x=0.5, y=0.88, width=0.6, height=0.06, rotation=0.0,
+                )]
+            except (ImportError, Exception) as exc:
+                log.debug("StoryLink not available: %s", exc)
+
+        # Hashtag sticker
+        try:
+            from instagrapi.types import Hashtag, StoryHashtag
+            persona = get_persona()
+            hashtag_name = persona.get("stories", {}).get(
+                "hashtag_sticker_name", persona.get("brand_tag", ""))
+            if hashtag_name:
+                sticker_args["hashtags"] = [StoryHashtag(
+                    hashtag=Hashtag(id="0", name=hashtag_name),
+                    x=0.5, y=0.12, width=0.3, height=0.05, rotation=0.0,
+                )]
+        except Exception:
+            pass
 
         story = cl.photo_upload_to_story(
-            Path(bg_path),
+            Path(story_path),
             caption="",
-            medias=[media_sticker],
+            **sticker_args,
         )
-        log.info("Reshared post %s to story (story pk=%s)", media_pk, story.pk)
+        log.info("Reshared post %s to story (story pk=%s, link=%s)",
+                 media_pk, story.pk, bool(sticker_args.get("links")))
         return str(story.pk)
 
     except Exception as exc:
         if _is_challenge_error(exc):
             raise ChallengeAbort(str(exc)) from exc
-        log.error("Native story reshare failed for post %s: %s", media_pk, exc)
+        log.error("Story reshare failed for post %s: %s", media_pk, exc)
         return None
     finally:
-        if bg_path and os.path.exists(bg_path):
-            try:
-                os.remove(bg_path)
-            except OSError:
-                pass
+        for p in (story_path, img_path):
+            if p and os.path.exists(p):
+                try:
+                    os.remove(p)
+                except OSError:
+                    pass
 
 
 # ---------------------------------------------------------------------------

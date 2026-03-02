@@ -866,14 +866,15 @@ def run_post_publish_burst(
 
     random_delay(5, 15)
 
-    # 2. Repost as story immediately (drive post views)
-    try:
-        from stories import repost_to_story
-        repost_to_story(cl, post)
-        stats["burst_story"] = 1
-        log.info("Post-publish story repost for %s", post.get("id"))
-    except Exception as exc:
-        log.debug("Post-publish story failed: %s", exc)
+    # 2. Reshare post to story (native post card with link sticker)
+    if post_id and post_id != "unknown":
+        try:
+            from stories import reshare_post_to_story
+            reshare_post_to_story(cl, int(post_id), int(cl.user_id))
+            stats["burst_story"] = 1
+            log.info("Post-publish story reshare for %s", post.get("id"))
+        except Exception as exc:
+            log.debug("Post-publish story failed: %s", exc)
 
     random_delay(10, 30)
 
@@ -970,16 +971,10 @@ def run_viral_detection(
                  media.pk, score, avg_score, score / avg_score)
         stats["viral_detected"] += 1
 
-        # Boost: re-story
+        # Boost: reshare to story (post image + link sticker)
         try:
-            from stories import repost_to_story
-            post_dict = {
-                "id": str(media.pk),
-                "platform_post_id": str(media.pk),
-                "topic": str(getattr(info, "caption_text", ""))[:50],
-                "image_url": str(getattr(info, "thumbnail_url", "")),
-            }
-            repost_to_story(cl, post_dict)
+            from stories import reshare_post_to_story
+            reshare_post_to_story(cl, int(media.pk), int(cl.user_id))
             stats["boost_stories"] += 1
         except Exception as exc:
             log.debug("Viral boost story failed: %s", exc)
