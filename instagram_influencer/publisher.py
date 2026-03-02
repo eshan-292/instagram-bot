@@ -11,7 +11,11 @@ from pathlib import Path
 
 import requests
 from instagrapi import Client
-from instagrapi.exceptions import ChallengeRequired, LoginRequired
+from instagrapi.exceptions import (
+    ChallengeRequired,
+    ClientForbiddenError,
+    LoginRequired,
+)
 from pydantic import ValidationError
 
 from config import SESSION_FILE, Config
@@ -84,14 +88,23 @@ def _session_health_check(cl: Client) -> bool:
     endpoints.  We catch this early and force a fresh login.
     """
     try:
-        cl.account_info()
+        info = cl.account_info()
+        if not info or not getattr(info, "pk", None):
+            log.warning("Session health check: account_info returned empty")
+            return False
         return True
+    except (ClientForbiddenError, LoginRequired) as exc:
+        log.warning("Session health check failed (%s): %s", type(exc).__name__, exc)
+        return False
     except Exception as exc:
+        # Check .code attribute (instagrapi sets this on ClientError subclasses)
+        code = getattr(exc, "code", None)
         msg = str(exc).lower()
-        if "403" in msg or "forbidden" in msg:
-            log.warning("Session health check failed (403) — needs fresh login")
+        if code == 403 or "403" in msg or "forbidden" in msg or "login_required" in msg:
+            log.warning("Session health check failed (code=%s): %s", code, exc)
             return False
         # Other errors (network, timeout) aren't session issues
+        log.debug("Health check non-fatal error: %s", exc)
         return True
 
 
@@ -139,6 +152,18 @@ def _get_client(cfg: Config) -> Client:
     cl = _new_client()
     cl.login(cfg.instagram_username, cfg.instagram_password)
     log.info("Logged in via username/password")
+
+    # Validate fresh session — if even a new login gets 403, account is action-blocked
+    if not _session_health_check(cl):
+        log.error(
+            "Fresh login also gets 403 — account is likely ACTION-BLOCKED by Instagram. "
+            "Log in manually from a phone to clear the block."
+        )
+        raise RuntimeError(
+            "Account action-blocked: fresh login gets 403 on all endpoints. "
+            "Clear the block by logging in manually from the Instagram app."
+        )
+
     cl.dump_settings(session_path)
     return cl
 

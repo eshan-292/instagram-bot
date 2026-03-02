@@ -31,6 +31,44 @@ from rate_limiter import (
 
 log = logging.getLogger(__name__)
 
+# Track consecutive 403 errors within a session to detect action blocks
+_consecutive_403s = 0
+_ACTION_BLOCK_THRESHOLD = 3  # Abort session after 3 consecutive 403s
+
+
+def _is_blocked_error(exc: Exception) -> bool:
+    """Check if an exception indicates an Instagram action block (403)."""
+    code = getattr(exc, "code", None)
+    msg = str(exc).lower()
+    return (
+        code == 403
+        or "forbidden" in msg
+        or "login_required" in msg
+        or "clientforbiddenerror" in type(exc).__name__.lower()
+    )
+
+
+def _track_403(exc: Exception) -> bool:
+    """Track 403 errors. Returns True if session should abort (action-blocked)."""
+    global _consecutive_403s
+    if _is_blocked_error(exc):
+        _consecutive_403s += 1
+        if _consecutive_403s >= _ACTION_BLOCK_THRESHOLD:
+            log.error(
+                "Account ACTION-BLOCKED: %d consecutive 403 errors — aborting session",
+                _consecutive_403s,
+            )
+            return True
+    else:
+        _consecutive_403s = 0  # Reset on non-403 error
+    return False
+
+
+def _reset_403_tracker():
+    """Reset the 403 tracker at session start."""
+    global _consecutive_403s
+    _consecutive_403s = 0
+
 # ── User PK cache — avoids repeated user_info_by_username API calls ────────
 # Instagram rate-limits username→PK lookups aggressively on fresh/satellite
 # accounts (429 errors).  PKs never change, so we cache them to disk after
@@ -242,6 +280,8 @@ def run_satellite_boost(cl, cfg: Config, data: dict[str, Any]) -> dict[str, int]
         try:
             medias = cl.user_medias_v1(int(user_id), amount=3)
         except Exception as exc:
+            if _track_403(exc):
+                return stats  # Abort — account is action-blocked
             log.warning("Cannot fetch posts for @%s: %s", target_handle, exc)
             continue
 
@@ -415,7 +455,10 @@ def run_satellite_background(cl, cfg: Config, data: dict[str, Any]) -> dict[str,
     stats = {"likes": 0, "story_views": 0, "comment_likes": 0}
 
     # Browse 2 random hashtags (more aggressive)
+    blocked = False
     for _ in range(2):
+        if blocked:
+            break
         tag = random.choice(bg_hashtags)
         try:
             medias = cl.hashtag_medias_recent_v1(tag, amount=8)
@@ -426,8 +469,10 @@ def run_satellite_background(cl, cfg: Config, data: dict[str, Any]) -> dict[str,
                         cl.media_like(str(media.pk))
                         record_action(data, "likes", str(media.pk))
                         stats["likes"] += 1
-                    except Exception:
-                        pass
+                    except Exception as exc:
+                        if _track_403(exc):
+                            blocked = True
+                            break
                     random_delay(10, 30)
 
                 # Always like a comment — maximum engagement
@@ -438,11 +483,19 @@ def run_satellite_background(cl, cfg: Config, data: dict[str, Any]) -> dict[str,
                             cl.comment_like(comments[0].pk)
                             record_action(data, "comment_likes", str(comments[0].pk))
                             stats["comment_likes"] += 1
-                    except Exception:
-                        pass
+                    except Exception as exc:
+                        if _track_403(exc):
+                            blocked = True
+                            break
                     random_delay(5, 15)
         except Exception as exc:
+            if _track_403(exc):
+                blocked = True
+                break
             log.debug("Background hashtag browse failed: %s", exc)
+
+    if blocked:
+        return stats
 
     # View timeline stories
     try:
@@ -458,11 +511,13 @@ def run_satellite_background(cl, cfg: Config, data: dict[str, Any]) -> dict[str,
                     cl.story_seen([reel.pk] if hasattr(reel, 'pk') else [])
                     record_action(data, "story_views", str(getattr(reel, 'pk', 'unknown')))
                     stats["story_views"] += 1
-                except Exception:
-                    pass
+                except Exception as exc:
+                    if _track_403(exc):
+                        break
                 random_delay(5, 12)
     except Exception as exc:
-        log.debug("Background story viewing failed: %s", exc)
+        if not _track_403(exc):
+            log.debug("Background story viewing failed: %s", exc)
 
     return stats
 
@@ -470,6 +525,7 @@ def run_satellite_background(cl, cfg: Config, data: dict[str, Any]) -> dict[str,
 def run_satellite_session(cfg: Config, session_type: str) -> dict[str, int]:
     """Main entry point for satellite account sessions."""
     persona = get_persona()
+    _reset_403_tracker()
 
     # Brief startup jitter (30-90s) so sessions don't start at exact cron time
     jitter = random.uniform(30, 90)
