@@ -18,7 +18,6 @@
     "cookies": {},
     "last_login": 1772531148.537827,
     "device_settings": {
-        "app_version": "357.0.0.25.101",
         "android_version": 34,
         "android_release": "14",
         "dpi": "480dpi",
@@ -27,6 +26,7 @@
         "device": "dm1q",
         "model": "SM-S911B",
         "cpu": "qcom",
+        "app_version": "357.0.0.25.101",
         "version_code": "608720130"
     },
     "user_agent": "Instagram 357.0.0.25.101 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 608720130)",

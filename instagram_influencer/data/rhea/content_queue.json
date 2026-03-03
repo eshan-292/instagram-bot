@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "rhea-001",
-      "status": "draft",
+      "status": "approved",
       "topic": "Full glute workout \u2014 5 exercises that actually grow your glutes",
       "caption": "5 exercises. Your glutes will thank you.\nSave this and try it tomorrow.\nWhich exercise is your favorite? Comment below.\nSend to your gym partner.",
       "alt_text": "Fit Indian woman demonstrating glute exercises in a modern gym",
@@ -12,11 +12,11 @@
         "Your glutes will thank you.",
         "Save and try tomorrow"
       ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/1.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/1_montage.mp4",
+      "is_reel": true,
       "post_type": "carousel",
-      "scheduled_at": "2026-03-03T13:51:11Z",
+      "scheduled_at": "2026-03-04T09:51:11Z",
       "notes": "gym setting, demonstrating each exercise with proper form | generated_by=template",
       "slides": [
         "Hook: Rhea in gym, confident stance, 'Glute Day. No excuses.'",
@@ -25,11 +25,19 @@
         "Exercise 3: Bulgarian split squats \u2014 each leg",
         "Exercise 4: Cable kickbacks \u2014 controlled movement",
         "Exercise 5: Glute bridges \u2014 3-second hold"
+      ],
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/1.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/2.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/3.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/4.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/5.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/6.jpg"
       ]
     },
     {
       "id": "rhea-002",
-      "status": "draft",
+      "status": "approved",
       "topic": "What I eat in a day \u2014 130g protein, all Indian food",
       "caption": "Full day of eating. 130g protein.\nAll Indian food. No expensive supplements.\nWhat's your go-to protein source? Comment below.\nSave this for meal prep Sunday.",
       "alt_text": "Indian woman showing high-protein Indian meals throughout the day",
@@ -39,9 +47,9 @@
         "All Indian food.",
         "Save for meal prep"
       ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/1.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/1_montage.mp4",
+      "is_reel": true,
       "post_type": "carousel",
       "scheduled_at": "2026-03-03T17:51:11Z",
       "notes": "food close-ups, kitchen setting, clean presentation | generated_by=template",
@@ -52,11 +60,19 @@
         "Meal 3: Paneer tikka + multigrain roti + salad",
         "Snack: Masala peanuts + banana + curd",
         "Total macros breakdown card"
+      ],
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/1.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/2.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/3.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/4.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/5.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/6.jpg"
       ]
     },
     {
       "id": "rhea-003",
-      "status": "draft",
+      "status": "approved",
       "topic": "6-month transformation \u2014 discipline over motivation",
       "caption": "6 months. Same girl. Different discipline.\nMotivation fades. Habits don't.\nCould you commit to 6 months?\nScreenshot this as your reminder.",
       "alt_text": "Before and after fitness transformation photo of Indian woman",
@@ -66,7 +82,7 @@
         "Same girl. Different discipline.",
         "Screenshot this"
       ],
-      "image_url": "",
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-003.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
@@ -75,7 +91,7 @@
     },
     {
       "id": "rhea-004",
-      "status": "draft",
+      "status": "approved",
       "topic": "Morning gym routine \u2014 5 AM club no excuses",
       "caption": "5 AM. Dark outside. Gym lights on.\nThis is where it starts.\nWhat time do you train? Comment below.\nSend to someone who keeps saying 'tomorrow'.",
       "alt_text": "Young Indian woman working out in early morning at a gym",
@@ -85,8 +101,8 @@
         "Dark outside. Gym lights on.",
         "This is where it starts."
       ],
-      "image_url": "",
-      "video_url": null,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-004.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-004.mp4",
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T01:51:11Z",
@@ -94,7 +110,7 @@
     },
     {
       "id": "rhea-005",
-      "status": "draft",
+      "status": "approved",
       "topic": "Upper body workout for toned arms \u2014 complete routine",
       "caption": "Upper body day.\nBecause strong arms never go out of style.\nSave this for your next arm day.\nTag someone who skips upper body.",
       "alt_text": "Athletic Indian woman performing upper body exercises in gym",
@@ -104,8 +120,8 @@
         "Strong arms. Always in style.",
         "Save this"
       ],
-      "image_url": "",
-      "video_url": null,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005.mp4",
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T05:51:11Z",
