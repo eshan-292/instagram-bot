@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "mt-001",
-      "status": "draft",
+      "status": "approved",
       "topic": "Man in a stylish cafe, looking confused after a date, wondering why she lost interest.",
       "caption": "Harsh truth: 3 reasons she lost interest. It wasn't your looks, your money, or even your 'niceness'. It was your lack of depth and presence. Did you make her feel truly seen, or just another conquest? Send this to the guy who keeps asking 'why did she ghost?'.",
       "alt_text": "A series of images showing a man's confusion and a woman's disinterest during and after a date, illustrating reasons for lost attraction.",
@@ -10,9 +10,9 @@
       "video_text": [
         "Harsh truth: 3 reasons she lost interest. It"
       ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/1.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/1_montage.mp4",
+      "is_reel": true,
       "post_type": "carousel",
       "scheduled_at": "2026-03-03T13:50:15Z",
       "notes": "Cinematic, moody lighting. Focus on body language and subtle expressions of detachment/confusion. Urban cafe setting. | generated_by=gemini:gemini-2.5-flash",
@@ -23,11 +23,19 @@
         "Woman walking away from man on a city street, looking detached and uninterested, phone in hand. Man in background looks bewildered and slighted.",
         "Man standing alone in a dimly lit bar, looking defeated, phone in hand, contemplating. The bar is mostly empty around him.",
         "Text slide: 'Stop trying to 'win' her. Start being genuinely present. That's the game changer.' Bold white text on a dark, blurred background."
+      ],
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/1.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/2.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/3.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/4.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/5.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/6.jpg"
       ]
     },
     {
       "id": "mt-002",
-      "status": "draft",
+      "status": "approved",
       "topic": "Woman sitting alone in a bustling cafe, waiting, looking at her phone expectantly, feeling like a backup option.",
       "caption": "5 brutal signs: You're not the main character in their story; you're just a filler episode. They keep you around for convenience, not commitment. Are you tired of being Plan B? Tag the friend who needs this brutal reality check before it's too late.",
       "alt_text": "A woman looking dejected, sitting alone in a bustling cafe, scrolling on her phone, illustrating the feeling of being a backup option.",
@@ -37,8 +45,8 @@
         "You're their backup.",
         "Share before it's too late."
       ],
-      "image_url": "",
-      "video_url": null,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-002.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-002.mp4",
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-03T17:50:15Z",
@@ -46,7 +54,7 @@
     },
     {
       "id": "mt-003",
-      "status": "draft",
+      "status": "approved",
       "topic": "Minimalist dark background with bold white text revealing a harsh truth about 'space'.",
       "caption": "This will hurt. 'I need space' is rarely about *space*. It's about disinterest, disengagement, or another option they're exploring. What are you clinging to? Screenshot this before you fall for it again.",
       "alt_text": "A stark image with white text on black background stating 'What 'I need space' means: They don't want you. They want options.'",
@@ -54,7 +62,7 @@
       "video_text": [
         "This will hurt. 'I need space' is rarely"
       ],
-      "image_url": "",
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-003.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
@@ -88,7 +96,7 @@
     },
     {
       "id": "mt-005",
-      "status": "draft",
+      "status": "approved",
       "topic": "Man persistently trying to get attention from a woman who is clearly disengaged at a lively bar or social gathering.",
       "caption": "She's not yours. Thinking 'hard to get' is a game you can win. It's not. It's disinterest, repackaged. Are you chasing a ghost, or facing reality? Send this to the friend who needs to stop pursuing lost causes.",
       "alt_text": "A man attempting to engage a woman who clearly shows signs of disinterest and avoidance at a social event, illustrating a one-sided chase.",
@@ -98,8 +106,8 @@
         "She's not interested.",
         "Send this."
       ],
-      "image_url": "",
-      "video_url": null,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-005.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-005.mp4",
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T05:50:15Z",
