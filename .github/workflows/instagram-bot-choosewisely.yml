@@ -1,0 +1,209 @@
+name: Instagram Bot (Choose Wisely)
+
+on:
+  schedule:
+    # All cron times in UTC. IST = UTC + 5:30
+    #
+    # OVERNIGHT — 3 sessions
+    - cron: '3 19 * * *'   # 00:33 IST — explore
+    - cron: '3 21 * * *'   # 02:33 IST — warm_audience
+    - cron: '3 23 * * *'   # 04:33 IST — hashtags
+    #
+    # DAYTIME — 19 sessions
+    - cron: '3 2 * * *'    # 07:33 IST — morning
+    - cron: '3 3 * * *'    # 08:33 IST — explore
+    - cron: '3 4 * * *'    # 09:33 IST — hashtags
+    - cron: '3 5 * * *'    # 10:33 IST — warm_audience
+    - cron: '3 7 * * *'    # 12:33 IST — explore
+    - cron: '3 8 * * *'    # 13:33 IST — hashtags
+    - cron: '3 9 * * *'    # 14:33 IST — warm_audience
+    - cron: '3 10 * * *'   # 15:33 IST — explore
+    - cron: '3 11 * * *'   # 16:33 IST — hashtags
+    - cron: '3 12 * * *'   # 17:33 IST — warm_audience
+    - cron: '3 13 * * *'   # 18:33 IST — stories
+    - cron: '3 14 * * *'   # 19:33 IST — PUBLISH + explore (publish=true)
+    - cron: '33 14 * * *'  # 20:03 IST — hashtags (post-publish)
+    - cron: '3 15 * * *'   # 20:33 IST — boost
+    - cron: '33 15 * * *'  # 21:03 IST — replies
+    - cron: '3 16 * * *'   # 21:33 IST — cross_promo
+    - cron: '33 16 * * *'  # 22:03 IST — maintenance
+    - cron: '3 17 * * *'   # 22:33 IST — maintenance
+    - cron: '33 17 * * *'  # 23:03 IST — report
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'Session type'
+        required: true
+        default: 'full'
+        type: choice
+        options: [morning, replies, hashtags, explore, warm_audience, boost, maintenance, stories, cross_promo, report, full, yt_engage, yt_replies, yt_full]
+      publish:
+        description: 'Also publish a post?'
+        type: boolean
+        default: false
+
+concurrency:
+  group: instagram-bot-choosewisely
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Restore Instagram session from cache (avoids re-login each run)
+      - name: Restore session cache
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: instagram_influencer/data/choosewisely/.ig_session.json
+          key: ig-session-choosewisely
+          restore-keys: ig-session-choosewisely
+
+      # Seed session from secret if no cache was restored
+      - name: Seed session from secret
+        run: |
+          if [ -f instagram_influencer/data/choosewisely/.ig_session.json ]; then
+            echo "Session restored from cache"
+          elif [ -n "$SESS_B64" ]; then
+            mkdir -p instagram_influencer/data/choosewisely
+            echo "$SESS_B64" | base64 -d > instagram_influencer/data/choosewisely/.ig_session.json
+            echo "Seeded session from secret"
+          else
+            echo "WARNING: No session available — bot will attempt fresh login"
+          fi
+        env:
+          SESS_B64: ${{ secrets.INSTAGRAM_SESSION_B64_CHOOSEWISELY }}
+
+      # Create .env from the DOTENV_CHOOSEWISELY secret
+      - name: Create .env
+        run: |
+          echo "${{ secrets.DOTENV_CHOOSEWISELY }}" > instagram_influencer/.env
+          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=choosewisely" >> instagram_influencer/.env
+          # Also export PERSONA to the environment for reliability
+          echo "PERSONA=choosewisely" >> $GITHUB_ENV
+
+      # Determine which session to run based on the trigger
+      # Uses github.event.schedule (exact cron expression) instead of wall-clock time
+      # to avoid misrouting due to GitHub Actions cron delays (can be 10-20+ min)
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+            if [ "${{ inputs.publish }}" = "true" ]; then
+              echo "publish=true" >> $GITHUB_OUTPUT
+            else
+              echo "publish=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            CRON="${{ github.event.schedule }}"
+            case "${CRON}" in
+              # Overnight
+              "3 19 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 21 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 23 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # Daytime
+              "3 2 * * *")    echo "type=morning"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 3 * * *")    echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 4 * * *")    echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 5 * * *")    echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 7 * * *")    echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 8 * * *")    echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 9 * * *")    echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 10 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 11 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 12 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 13 * * *")   echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 14 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              "33 14 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 15 * * *")   echo "type=boost"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "33 15 * * *")  echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 16 * * *")   echo "type=cross_promo"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "33 16 * * *")  echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 17 * * *")   echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "33 17 * * *")  echo "type=report"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              *)              echo "type=hashtags"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "Publish: ${{ steps.session.outputs.publish }}"
+          echo "Trigger: ${{ github.event_name }}"
+
+      # Run the bot (continue-on-error so state still gets committed)
+      # Videos are pre-rendered locally/manually — always pass --no-generate
+      - name: Run bot
+        id: bot
+        continue-on-error: true
+        run: |
+          cd instagram_influencer
+          FLAGS="--session ${{ steps.session.outputs.type }} --no-generate"
+          if [ "${{ steps.session.outputs.publish }}" = "false" ]; then
+            FLAGS="$FLAGS --no-publish"
+          fi
+          echo "Running: python orchestrator.py $FLAGS"
+          python orchestrator.py $FLAGS
+
+      - name: Check bot result
+        if: steps.bot.outcome == 'failure'
+        run: echo "::warning::Bot run failed — check logs above"
+
+      # Save updated session to cache
+      - name: Save session cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: instagram_influencer/data/choosewisely/.ig_session.json
+          key: ig-session-choosewisely-${{ github.run_id }}
+
+      # Commit updated state files + session back to the repo
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Add each file individually to avoid one missing file blocking all staging
+          for f in \
+            instagram_influencer/data/choosewisely/engagement_log.json \
+            instagram_influencer/data/choosewisely/followers.json \
+            instagram_influencer/data/choosewisely/content_queue.json \
+            instagram_influencer/data/choosewisely/highlights.json \
+            instagram_influencer/data/choosewisely/daily_report.md \
+            instagram_influencer/data/choosewisely/.ig_session.json; do
+            [ -f "$f" ] && git add -f "$f" 2>/dev/null || true
+          done
+          # Generated images (directory may not exist)
+          [ -f "instagram_influencer/data/choosewisely/generated_images/IMAGE_PROMPTS.md" ] && \
+            git add -f "instagram_influencer/data/choosewisely/generated_images/IMAGE_PROMPTS.md" 2>/dev/null || true
+          [ -d "instagram_influencer/data/choosewisely/generated_images/pending" ] && \
+            git add -f "instagram_influencer/data/choosewisely/generated_images/pending/" 2>/dev/null || true
+          echo "Staged files:"
+          git diff --staged --name-only || true
+          git diff --staged --quiet || (
+            git commit -m "bot: choosewisely state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            for attempt in 1 2 3; do
+              git pull --rebase origin main 2>/dev/null && git push && break
+              echo "Push attempt $attempt failed, retrying..."
+              sleep 2
+            done
+          )

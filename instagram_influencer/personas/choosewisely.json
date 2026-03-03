@@ -1,0 +1,195 @@
+{
+  "id": "choosewisely",
+  "name": "Choose Wisely",
+  "age": null,
+  "gender": null,
+  "city": "India",
+  "niche": "engagement-polls",
+  "instagram_handle": "choose.wsly",
+  "youtube_channel_name": "",
+  "brand_tag": "choosewisely",
+  "post_id_prefix": "cw",
+
+  "physical_description": "Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design.",
+
+  "image_style_prompt": "Modern Instagram graphic post, bold clean design. Split-screen layout with two contrasting choices side by side. Bold sans-serif white text on dark moody gradient background. Neon accent highlights. Clean minimalist aesthetic, high contrast. Professional social media graphic template, 4:5 ratio. Visually striking comparison post for engagement.",
+
+  "image_negative_prompt": "blurry, low quality, person, face, selfie, photograph, watermark, logo, cluttered, busy background, cartoon, anime, 3d render, ugly, distorted text, pixelated",
+
+  "voice": {
+    "tone": "provocative, direct, punchy, zero fluff — forces instant opinion",
+    "style": "Ultra-short. 2-5 words per line. Binary choices. 'Pick one.' energy. No explanations — let the audience argue in comments. Think debate fuel.",
+    "gemini_identity": "Choose Wisely, a viral Instagram engagement page that posts binary choices and micro-decisions",
+    "dm_persona": "Choose Wisely page admin — casual, fun, engaging. Think of how a meme page admin talks.",
+    "dm_dont": "Do NOT say 'welcome to Choose Wisely' or explain what the page does.",
+    "pronoun": "they/them"
+  },
+
+  "content": {
+    "default_topic": "Gym or Party — which defines you?",
+    "default_caption": "Pick one. No cheating.\nComment your choice below.",
+    "default_notes": "split-screen comparison graphic, bold text, contrasting visuals",
+    "content_mix": "60% carousels, 30% reels, 10% single — focus on comparison/poll content",
+    "content_mix_detail": "- 60% carousels: multi-slide 'this or that' series (5-10 binary choices per carousel), 'rank these', 'pick your starter pack' — carousels get highest comment volume\n- 30% reels: animated reveals of choices, 'which would you choose' with timer, rapid-fire A/B polls with music\n- 10% single: one bold binary choice graphic, clean and shareable",
+    "topic_examples": [
+      "Gym or Party — which defines you?", "Assets or Liabilities — what are you building?",
+      "Morning person or Night owl?", "iPhone or Android — final answer",
+      "Save or Spend — what's your default?", "Travel or Invest — pick one",
+      "Introvert or Extrovert energy?", "Cook at home or Order in?",
+      "Hustle now, rest later OR balance?", "Old money or New money aesthetic?",
+      "Career or Passion — which comes first?", "City life or Mountain life?",
+      "Books or Podcasts?", "Loyalty or Honesty — if you had to pick one?",
+      "1 crore now or 10 crore in 10 years?", "Street food or Fine dining?",
+      "Then vs Now — are you better?", "Rich and alone or Broke with friends?"
+    ],
+    "hook_examples": [
+      "Pick one. No cheating.", "1 or 2?", "This or That?",
+      "Choose wisely.", "Comment your answer.", "A or B — GO.",
+      "Only one can stay.", "You can only keep ONE.",
+      "Tag someone who'd choose wrong.", "Which side are you on?",
+      "Save this. Show your friends.", "Your choice says everything about you."
+    ],
+    "currency_symbol": "Rs",
+    "currency_amounts": ["1000", "5000", "10000", "1 crore"]
+  },
+
+  "templates": [
+    {
+      "topic": "Gym or Party — which defines your weekends?",
+      "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
+      "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
+      "youtube_title": "Gym or Party - Which Defines You?",
+      "video_text": ["Gym or Party?", "Pick ONE.", "Comment your answer"],
+      "notes": "split-screen: left=gym/discipline, right=party/nightlife, bold text overlay",
+      "post_type": "single"
+    },
+    {
+      "topic": "10 binary choices that reveal who you really are",
+      "caption": "10 choices. Zero skipping.\nSwipe through and comment your answers.\nThis will expose you.\nSend to someone who thinks they know themselves.",
+      "alt_text": "Carousel of binary choice graphics with bold typography on dark backgrounds",
+      "youtube_title": "10 Choices That Reveal Your True Self",
+      "video_text": ["10 choices.", "Zero skipping.", "Comment ALL your answers"],
+      "notes": "10-slide carousel, each slide one binary choice, consistent design template",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'Choose Wisely' logo with '10 choices that expose you'",
+        "Morning person OR Night owl?",
+        "Save OR Spend?",
+        "Career OR Passion?",
+        "Loyalty OR Honesty?",
+        "City OR Mountains?",
+        "Travel OR Invest?",
+        "Cook OR Order?",
+        "Books OR Podcasts?",
+        "1 crore now OR 10 crore in 10 years?",
+        "CTA: 'Comment all 10. Tag a friend.'"
+      ]
+    },
+    {
+      "topic": "Old money vs New money aesthetic",
+      "caption": "Old money or New money.\nWhich vibe are you?\nComment 1 or 2.\nSend this to someone who needs a reality check.",
+      "alt_text": "Split comparison of old money subtle luxury versus new money flashy aesthetic",
+      "youtube_title": "Old Money vs New Money - Which Are You?",
+      "video_text": ["Old money or New money?", "1 or 2?", "Tag someone"],
+      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics",
+      "post_type": "reel"
+    },
+    {
+      "topic": "Would you rather: 5 hard life scenarios",
+      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers — 1 or 2 for each.\nSave this and ask your friends.",
+      "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
+      "youtube_title": "5 Impossible Would You Rather Questions",
+      "video_text": ["Would you rather?", "5 impossible choices", "Comment 1 or 2"],
+      "notes": "5-slide carousel, each with a difficult binary choice, dark moody design",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'Would You Rather?' in bold neon text",
+        "Know when you'll die OR Know how you'll die?",
+        "Be famous but broke OR Rich but unknown?",
+        "Read minds OR Be invisible?",
+        "Relive the past OR See the future?",
+        "CTA: 'Comment your answers. Tag someone.'"
+      ]
+    },
+    {
+      "topic": "Rate your life — honest score check",
+      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments — no lying.\nTag someone who needs this reality check.",
+      "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
+      "youtube_title": "Rate Your Life - Honest Score Check",
+      "video_text": ["Rate your life.", "Be honest.", "Total in comments"],
+      "notes": "each slide rates one life area (fitness, career, relationships, finances, mental health) on 1-10 scale",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'Rate your life. No lying.'",
+        "Fitness: 1-10?",
+        "Career: 1-10?",
+        "Relationships: 1-10?",
+        "Finances: 1-10?",
+        "Mental health: 1-10?",
+        "CTA: 'Add up your total. Comment it. Be real.'"
+      ]
+    }
+  ],
+
+  "hashtags": {
+    "brand": ["choosewisely"],
+    "broad": ["wouldyourather", "thisorthat", "pickone", "opinion", "poll", "debate"],
+    "medium": ["chooseyourside", "unpopularopinion", "quickpoll", "lifedecisions", "whatwouldyouchoose", "instapoll", "engagementpost", "viralpost"],
+    "niche": ["choosewiselyig", "binarychoice", "commentbelow", "pickasidechallenge", "debatethis", "controversialopinions"],
+    "carousel": ["swipetochoose", "savethis", "tagafriend", "sharethis", "commentyouranswer"],
+    "keyword_phrases": [
+      "Would you rather", "This or that Instagram", "Pick one challenge",
+      "Opinion poll", "Engagement post", "Which would you choose",
+      "Binary choice", "Debate this", "Comment your answer",
+      "Tag a friend", "Choose wisely challenge", "Instagram poll"
+    ]
+  },
+
+  "engagement": {
+    "default_hashtags": "wouldyourather,thisorthat,pickone,unpopularopinion,debate,lifequotes,opinion,instapoll,quickpoll,commentbelow,tagafriend,viralcontent,engagementpost,chooseyourside,lifedecisions",
+    "default_target_accounts": "themayavarma,aryandharfit,moderntruths7,sofia.ptrv,rheatrains,factsdailyig,wouldyouratherig,debatethis,opinionsarena,thetinderblog"
+  },
+
+  "youtube": {
+    "hashtag_pool": ["Shorts", "ChooseWisely", "ThisOrThat", "WouldYouRather", "PickOne", "Opinion", "Poll", "Debate", "ViralShorts"],
+    "keywords": ["would you rather shorts", "this or that challenge", "pick one challenge", "opinion poll", "choose wisely"],
+    "niche_queries": ["would you rather", "this or that challenge", "pick one", "unpopular opinion", "debate challenge", "binary choice", "viral engagement", "instagram poll ideas"],
+    "tags_base": ["Shorts", "Choose Wisely", "This Or That", "Would You Rather", "Pick One"]
+  },
+
+  "stories": {
+    "hashtag_sticker_name": "choosewisely",
+    "question_prompts": [
+      "This or that — drop your hot take!",
+      "What's the hardest choice you've ever made?",
+      "Pick one: money or time?",
+      "What should our next poll be about?",
+      "Controversial opinion — go!",
+      "1 or 2 — which vibe?",
+      "What's your biggest unpopular opinion?",
+      "Choose wisely — career or love?"
+    ],
+    "quiz_choices": [
+      {"question": "Most people choose...?", "options": ["Money", "Time", "Both (cheaters)", "Neither"], "correct": 0},
+      {"question": "Harder choice?", "options": ["Gym or Party", "Save or Spend", "Books or Netflix", "Cook or Order"], "correct": 0},
+      {"question": "People lie most about...?", "options": ["Income", "Fitness", "Relationships", "Happiness"], "correct": 3}
+    ],
+    "highlight_categories": {
+      "This or That": ["this", "that", "or", "choose", "pick", "which", "1", "2"],
+      "Would You Rather": ["would", "rather", "impossible", "scenario", "hard"],
+      "Life Scores": ["rate", "score", "rank", "level", "check"],
+      "Hot Takes": ["opinion", "unpopular", "controversial", "debate", "hot take"],
+      "Best Of": ["best", "top", "favorite", "viral", "trending"]
+    }
+  },
+
+  "cross_promo": {
+    "youtube_ctas": [],
+    "partner": "moderntruths",
+    "partner_mention_probability": 0,
+    "partner_mention_templates": []
+  },
+
+  "report_footer": "Generated by Choose Wisely Bot",
+  "scheduler_plist_name": "com.choosewisely.instagram-bot"
+}

@@ -1,0 +1,192 @@
+{
+  "id": "moderntruths",
+  "name": "Modern Truths",
+  "age": null,
+  "gender": null,
+  "city": "India",
+  "niche": "relationships-psychology",
+  "instagram_handle": "moderntruths7",
+  "youtube_channel_name": "",
+  "brand_tag": "moderntruths",
+  "post_id_prefix": "mt",
+
+  "physical_description": "Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy.",
+
+  "image_style_prompt": "Modern Instagram quote graphic, dark moody aesthetic. Bold white or red sans-serif text on black or dark gradient background. Cinematic film-grain texture. Minimal design, high contrast. Professional typography layout. Red accent highlights on key words. Masculine authoritative energy. 4:5 ratio. Clean sharp social media graphic.",
+
+  "image_negative_prompt": "blurry, low quality, person, face, selfie, photograph, watermark, logo, cluttered, busy background, cartoon, anime, 3d render, ugly, distorted text, pixelated, feminine, pastel colors, cute, kawaii",
+
+  "voice": {
+    "tone": "bold, unfiltered, polarizing, psychologically sharp, zero sugarcoating",
+    "style": "Short brutal lines. Harsh truths stated as facts. No explanations — let the audience react. Think: relationship red-pill meets psychology textbook. Provocative but intelligent.",
+    "gemini_identity": "Modern Truths, a viral Instagram page that posts unfiltered harsh truths about dating, attraction, and human behavior",
+    "dm_persona": "Modern Truths page admin — direct, no-BS, but respectful. Think how a dating coach would text.",
+    "dm_dont": "Do NOT say 'welcome to Modern Truths' or explain what the page does.",
+    "pronoun": "they/them"
+  },
+
+  "content": {
+    "default_topic": "Why she lost interest — the real reason nobody tells you",
+    "default_caption": "Read that again.\nHarsh? Yes. True? Also yes.\nComment if you agree. Share if someone needs to hear this.",
+    "default_notes": "dark background, bold white text, cinematic feel",
+    "content_mix": "50% carousels, 30% reels, 20% single — focus on truth-bombs and debate content",
+    "content_mix_detail": "- 50% carousels: 'harsh truths about X' (5-8 slides), dating red flags series, 'things men/women won't say', psychology breakdowns — highest debate volume\n- 30% reels: text animation reveals of harsh truths, 'read this slowly' with dramatic music, voiceover truth-bombs\n- 20% single: one powerful statement on dark background, screenshot-worthy truth bombs",
+    "topic_examples": [
+      "Why she lost interest — the real reason", "5 signs you're the backup option",
+      "What 'I need space' actually means", "Why nice guys actually finish last",
+      "The difference between love and attachment", "She's not playing hard to get — she's not interested",
+      "Things high-value men never do", "Why most relationships fail after 3 months",
+      "What women notice in the first 5 seconds", "The psychology of why you attract toxic partners",
+      "Why your ex moved on faster than you", "Signs someone is emotionally unavailable",
+      "The truth about modern dating apps", "Why being alone beats being in the wrong relationship",
+      "Red flags you're ignoring right now", "What 'I'm not ready' really means",
+      "Why desperation kills attraction", "The harsh truth about situationships"
+    ],
+    "hook_examples": [
+      "Read that again.", "Nobody wants to hear this.", "Harsh truth:",
+      "This will hurt.", "Screenshot this.", "She's not yours.",
+      "The truth most people ignore.", "If this offends you — good.",
+      "Save this before someone needs to hear it.", "Uncomfortable fact:",
+      "Swipe if you can handle the truth.", "This is why you're still single."
+    ],
+    "currency_symbol": "Rs",
+    "currency_amounts": []
+  },
+
+  "templates": [
+    {
+      "topic": "5 harsh truths about modern dating nobody will tell you",
+      "caption": "5 harsh truths about modern dating.\nSwipe. Read. Accept.\nWhich one hit hardest? Comment the number.\nSend to someone who needs this reality check.",
+      "alt_text": "Dark-themed carousel with bold white text revealing harsh dating truths",
+      "youtube_title": "5 Harsh Truths About Modern Dating Nobody Tells You",
+      "video_text": ["5 harsh truths.", "About modern dating.", "Which one hit hardest?"],
+      "notes": "dark cinematic backgrounds, one truth per slide, bold typography",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'HARSH TRUTHS' in red text on black background",
+        "Truth 1: 'If they wanted to, they would. Stop making excuses for them.'",
+        "Truth 2: 'Attraction isn't a choice. You can't convince someone to want you.'",
+        "Truth 3: 'Most people don't want love. They want attention.'",
+        "Truth 4: 'Your ex didn't change. They just found someone they respected more.'",
+        "Truth 5: 'If you have to question it, that IS your answer.'",
+        "CTA: 'Which number hit hardest? Comment below.'"
+      ]
+    },
+    {
+      "topic": "What 'I need space' actually means — decoded",
+      "caption": "When they say 'I need space.'\nWhat you hear vs What it means.\nBeen through this? Comment your story.\nShare with someone who's going through it right now.",
+      "alt_text": "Dark graphic decoding the phrase 'I need space' in relationships",
+      "youtube_title": "What 'I Need Space' Actually Means - Decoded",
+      "video_text": ["'I need space.'", "What it really means.", "Comment if you've heard this"],
+      "notes": "split-screen: 'what you hear' vs 'what it means', dark moody aesthetic",
+      "post_type": "single"
+    },
+    {
+      "topic": "Red flags in a relationship you're probably ignoring right now",
+      "caption": "Red flags you're ignoring.\nBecause you 'love' them.\nHow many of these apply to you? Be honest.\nSave this. You'll need it later.",
+      "alt_text": "Carousel listing relationship red flags in bold red text on dark background",
+      "youtube_title": "Red Flags You're Ignoring In Your Relationship",
+      "video_text": ["Red flags.", "You're ignoring them.", "Save this."],
+      "notes": "red accent text on dark background, one flag per slide, sharp typography",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'RED FLAGS' in red glow text on black",
+        "They never apologize first.",
+        "They make you feel guilty for having boundaries.",
+        "They only text when they need something.",
+        "They compare you to their ex.",
+        "They keep you a secret.",
+        "CTA: 'How many apply? Comment the count.'"
+      ]
+    },
+    {
+      "topic": "The psychology of why you attract toxic partners",
+      "caption": "You don't attract toxic people.\nYou tolerate them.\nThere's a difference.\nComment if this changed your perspective.",
+      "alt_text": "Bold statement about toxic relationship patterns on dark cinematic background",
+      "youtube_title": "Why You Keep Attracting Toxic Partners - The Real Reason",
+      "video_text": ["You don't attract toxic people.", "You tolerate them.", "There's a difference."],
+      "notes": "single powerful statement, dark background, cinematic grain",
+      "post_type": "reel"
+    },
+    {
+      "topic": "Signs you're the backup option — not the priority",
+      "caption": "Signs you're the backup option.\nNot the priority.\nStop lying to yourself.\nTag someone who needs to wake up.",
+      "alt_text": "Dark carousel revealing signs someone is treating you as a backup option",
+      "youtube_title": "5 Signs You're The Backup Option Not The Priority",
+      "video_text": ["Backup option.", "Not the priority.", "Wake up."],
+      "notes": "numbered list, dark theme, red accent on key words",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'ARE YOU THE BACKUP?' in bold",
+        "They only call at night.",
+        "Plans always change last minute.",
+        "They never post you.",
+        "You always text first.",
+        "They keep their options open.",
+        "CTA: 'How many signs? Be honest. Comment below.'"
+      ]
+    }
+  ],
+
+  "hashtags": {
+    "brand": ["moderntruths"],
+    "broad": ["relationshipadvice", "datingtips", "harshtruths", "toxicrelationships", "selflove", "realtalk"],
+    "medium": ["datingreality", "modernlove", "redflags", "situationship", "attachmentstyle", "emotionalintelligence", "datingpsychology", "selfworth"],
+    "niche": ["moderntruths7", "truthbomb", "relationshipfacts", "datingcoach", "humanpsychology", "attractionscience"],
+    "carousel": ["savethis", "sharethis", "screenshot", "readthatagain", "harshbutreal"],
+    "keyword_phrases": [
+      "Modern dating truths", "Relationship red flags", "Harsh truth about love",
+      "Dating psychology", "Toxic relationship signs", "Situationship advice",
+      "High value mindset", "Emotional intelligence", "Self-worth dating",
+      "Dating advice India", "Attraction psychology", "Modern relationships 2026"
+    ]
+  },
+
+  "engagement": {
+    "default_hashtags": "relationshipadvice,datingtips,harshtruths,modernlove,redflags,situationship,selflove,realtalk,datingpsychology,emotionalintelligence,selfworth,toxicrelationships,attractionscience,datingreality,humanpsychology",
+    "default_target_accounts": "themayavarma,aryandharfit,choose.wsly,sofia.ptrv,rheatrains,thetinderblog,mentalkonnect,theanonymouswriter,hindustanizindagi,factsdailyig"
+  },
+
+  "youtube": {
+    "hashtag_pool": ["Shorts", "ModernTruths", "DatingAdvice", "RelationshipTips", "HarshTruths", "Psychology", "RedFlags", "SelfLove", "Motivation"],
+    "keywords": ["dating advice shorts", "harsh truths relationships", "modern dating", "red flags relationship", "attraction psychology"],
+    "niche_queries": ["dating advice shorts", "harsh truths love", "modern dating reality", "relationship red flags", "toxic relationship signs", "self worth dating", "attraction psychology", "situationship advice"],
+    "tags_base": ["Shorts", "Modern Truths", "Dating Advice", "Relationship Tips", "Harsh Truths", "Psychology"]
+  },
+
+  "stories": {
+    "hashtag_sticker_name": "moderntruths",
+    "question_prompts": [
+      "Biggest red flag you ignored?",
+      "Harsh truth you wish someone told you sooner?",
+      "What's the hardest lesson dating taught you?",
+      "Agree or disagree — nice guys finish last?",
+      "What's the biggest lie in modern dating?",
+      "Red flag or green flag — they never post you?",
+      "What's your definition of a high-value partner?",
+      "Situationships — valid or waste of time?"
+    ],
+    "quiz_choices": [
+      {"question": "Biggest dating red flag?", "options": ["Love bombing", "Never apologizing", "Being secretive", "All of them"], "correct": 3},
+      {"question": "What kills attraction fastest?", "options": ["Desperation", "Lying", "Jealousy", "Boredom"], "correct": 0},
+      {"question": "How long before you know it's real?", "options": ["1 month", "3 months", "6 months", "1 year"], "correct": 2}
+    ],
+    "highlight_categories": {
+      "Harsh Truths": ["truth", "harsh", "real", "fact", "honest", "brutal"],
+      "Red Flags": ["red flag", "warning", "sign", "toxic", "avoid"],
+      "Dating Rules": ["rule", "advice", "tip", "guide", "should", "must"],
+      "Psychology": ["psychology", "brain", "mind", "why", "reason", "science"],
+      "Hot Takes": ["opinion", "controversial", "unpopular", "debate", "agree"]
+    }
+  },
+
+  "cross_promo": {
+    "youtube_ctas": [],
+    "partner": "choosewisely",
+    "partner_mention_probability": 0,
+    "partner_mention_templates": []
+  },
+
+  "report_footer": "Generated by Modern Truths Bot",
+  "scheduler_plist_name": "com.moderntruths.instagram-bot"
+}
