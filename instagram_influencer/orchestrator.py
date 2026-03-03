@@ -328,7 +328,12 @@ def main() -> int:
 
     import os as _os
     _persona_val = _os.getenv("PERSONA", "(NOT SET)")
-    print(f"DEBUG: PERSONA={_persona_val}, .env exists={_os.path.exists('.env')}")
+    # GitHub masks secret values, so print length + first char to debug
+    print(f"DEBUG_PERSONA: len={len(_persona_val)}, first={_persona_val[0] if _persona_val else '?'}, .env={_os.path.exists('.env')}")
+    # Also print the data dir that will be used
+    from persona import persona_data_dir, get_persona
+    _p = get_persona()
+    print(f"DEBUG_DATADIR: {persona_data_dir(_p)}")
 
     parser = argparse.ArgumentParser(description="Instagram + YouTube bot pipeline")
     parser.add_argument("--queue-file", default=str(DEFAULT_QUEUE_FILE))
