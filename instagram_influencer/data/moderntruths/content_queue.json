@@ -71,7 +71,7 @@
     },
     {
       "id": "mt-004",
-      "status": "draft",
+      "status": "approved",
       "topic": "Woman looking contemplative, possibly at a crossroads, overwhelmed by a pattern of attracting toxic partners.",
       "caption": "Read that again. Your 3 patterns attract toxicity. You're not a magnet for bad luck; you're a pattern-matcher for unresolved wounds. Are you perpetuating your own suffering by avoiding the mirror? Save this if you're finally ready to break the cycle.",
       "alt_text": "A series of images depicting a woman reflecting on painful relationship patterns and the psychology behind attracting toxic partners, leading to self-realization.",
@@ -79,9 +79,9 @@
       "video_text": [
         "Read that again. Your 3 patterns attract toxicity."
       ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/1.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/1_montage.mp4",
+      "is_reel": true,
       "post_type": "carousel",
       "scheduled_at": "2026-03-04T01:50:15Z",
       "notes": "Introspective, slightly dark but with hopeful undertones. Focus on emotional depth and subtle shifts in expression. Natural, soft light. | generated_by=gemini:gemini-2.5-flash",
@@ -92,6 +92,14 @@
         "Text slide: 'The Comfort Zone: Familiar pain feels safer than unknown healing.' Stark text on a desaturated, introspective background.",
         "Woman looking thoughtfully at her reflection in a large, antique mirror, a slight grimace of realization forming on her face. She's wearing a simple, dark top.",
         "Text slide: 'The Cycle Breaker: Awareness is the first step. Action is liberation.' Powerful text on a brighter, more hopeful background."
+      ],
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/1.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/2.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/3.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/4.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/5.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/6.jpg"
       ]
     },
     {
