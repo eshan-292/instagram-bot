@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "sofia-001",
-      "status": "failed",
+      "status": "approved",
       "topic": "Mumbai penthouse golden hour luxury lookbook",
       "caption": "Golden hour. Mumbai skyline. Perfect outfit.\nNot planned. Just privileged.\nWhich look is your favorite? Comment the number.\nSave for your next luxury moment.",
       "alt_text": "Blonde Russian woman in luxury outfit on Mumbai penthouse terrace at golden hour",
@@ -34,11 +34,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/6.jpg"
       ],
-      "publish_error": "Session restore failed in CI \u2014 cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
     },
     {
       "id": "sofia-002",
-      "status": "failed",
+      "status": "approved",
       "topic": "GRWM for a luxury dinner at Taj Mumbai",
       "caption": "Getting ready for Taj.\nBecause first impressions are the only impressions.\nWhat would you wear to a 5-star dinner?\nSend this to someone who gets it.",
       "alt_text": "Russian woman getting ready for dinner at luxury hotel in Mumbai",
@@ -53,8 +52,7 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-03T10:00:00Z",
-      "notes": "vanity/bathroom setting, warm lighting, luxury products visible | generated_by=template",
-      "publish_error": "HTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
+      "notes": "vanity/bathroom setting, warm lighting, luxury products visible | generated_by=template"
     },
     {
       "id": "sofia-003",
