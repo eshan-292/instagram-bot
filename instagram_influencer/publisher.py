@@ -48,22 +48,24 @@ def _new_client() -> Client:
     # Non-interactive challenge handler (avoids input() blocking in CI)
     cl.challenge_code_handler = _challenge_handler
 
-    # Override outdated default app version (269.x) — Instagram blocks old versions
+    # Override outdated default app version — Instagram blocks old versions.
+    # Must stay roughly current (within 1-2 months of latest Play Store release).
+    # Latest as of March 2026: 418.x / 419.x — use a recent stable version.
     cl.set_device({
-        "app_version": "357.0.0.25.101",
+        "app_version": "418.0.0.51.77",
         "android_version": 34,
         "android_release": "14",
         "dpi": "480dpi",
         "resolution": "1080x2340",
         "manufacturer": "Samsung",
-        "device": "dm1q",
-        "model": "SM-S911B",
+        "device": "dm3q",
+        "model": "SM-S926B",
         "cpu": "qcom",
-        "version_code": "608720130",
+        "version_code": "659489002",
     })
     cl.set_user_agent(
-        "Instagram 357.0.0.25.101 Android (34/14; 480dpi; 1080x2340; "
-        "samsung; SM-S911B; dm1q; qcom; en_IN; 608720130)"
+        "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; "
+        "samsung; SM-S926B; dm3q; qcom; en_IN; 659489002)"
     )
     return cl
 

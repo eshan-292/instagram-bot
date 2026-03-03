@@ -135,22 +135,23 @@ def _create_client() -> Client:
     # Interactive challenge handler — lets user complete verification
     cl.challenge_code_handler = _interactive_challenge_handler
 
-    # Realistic device (Samsung Galaxy S23 — common in India)
+    # Realistic device (Samsung Galaxy S24 — common in India)
+    # App version must stay current — Instagram blocks old versions with 403.
     cl.set_device({
-        "app_version": "357.0.0.25.101",
+        "app_version": "418.0.0.51.77",
         "android_version": 34,
         "android_release": "14",
         "dpi": "480dpi",
         "resolution": "1080x2340",
         "manufacturer": "Samsung",
-        "device": "dm1q",
-        "model": "SM-S911B",
+        "device": "dm3q",
+        "model": "SM-S926B",
         "cpu": "qcom",
-        "version_code": "608720130",
+        "version_code": "659489002",
     })
     cl.set_user_agent(
-        "Instagram 357.0.0.25.101 Android (34/14; 480dpi; 1080x2340; "
-        "samsung; SM-S911B; dm1q; qcom; en_IN; 608720130)"
+        "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; "
+        "samsung; SM-S926B; dm3q; qcom; en_IN; 659489002)"
     )
     return cl
 
