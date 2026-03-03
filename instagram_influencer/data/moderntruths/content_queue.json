@@ -32,7 +32,7 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/6.jpg"
       ],
-      "publish_error": "Session restore failed in CI \u2014 cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
+      "publish_error": "Session restore failed in CI — cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
     },
     {
       "id": "mt-002",
@@ -50,7 +50,7 @@
       "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-002.mp4",
       "is_reel": true,
       "post_type": "reel",
-      "scheduled_at": "2026-03-03T17:50:15Z",
+      "scheduled_at": "2026-03-03T10:00:00Z",
       "notes": "Soft, slightly melancholic lighting. Focus on isolation and silent expectation amidst a busy environment. Her clothes are neat but unremarkable, conveying a sense of waiting. | generated_by=gemini:gemini-2.5-flash"
     },
     {
@@ -67,7 +67,7 @@
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
-      "scheduled_at": "2026-03-03T21:50:15Z",
+      "scheduled_at": "2026-03-03T14:00:00Z",
       "notes": "High contrast, sharp, sans-serif typography. The text should be the sole focus, commanding attention. No other elements. | generated_by=gemini:gemini-2.5-flash"
     },
     {

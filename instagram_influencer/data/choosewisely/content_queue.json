@@ -3,7 +3,7 @@
     {
       "id": "cw-001",
       "status": "approved",
-      "topic": "Gym or Party \u2014 which defines your weekends?",
+      "topic": "Gym or Party — which defines your weekends?",
       "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
       "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
       "youtube_title": "Gym or Party - Which Defines You?",
@@ -16,7 +16,7 @@
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
-      "scheduled_at": "2026-03-04T09:50:44Z",
+      "scheduled_at": "2026-03-03T10:00:00Z",
       "notes": "split-screen: left=gym/discipline, right=party/nightlife, bold text overlay | generated_by=template"
     },
     {
@@ -35,7 +35,7 @@
       "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-002/1_montage.mp4",
       "is_reel": true,
       "post_type": "carousel",
-      "scheduled_at": "2026-03-03T17:50:44Z",
+      "scheduled_at": "2026-03-03T14:00:00Z",
       "notes": "10-slide carousel, each slide one binary choice, consistent design template | generated_by=template",
       "slides": [
         "Hook: 'Choose Wisely' logo with '10 choices that expose you'",
@@ -77,7 +77,7 @@
       "id": "cw-004",
       "status": "approved",
       "topic": "Would you rather: 5 hard life scenarios",
-      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
+      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers — 1 or 2 for each.\nSave this and ask your friends.",
       "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
       "youtube_title": "5 Impossible Would You Rather Questions",
       "video_text": [
@@ -111,8 +111,8 @@
     {
       "id": "cw-005",
       "status": "approved",
-      "topic": "Rate your life \u2014 honest score check",
-      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
+      "topic": "Rate your life — honest score check",
+      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments — no lying.\nTag someone who needs this reality check.",
       "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
       "youtube_title": "Rate Your Life - Honest Score Check",
       "video_text": [

@@ -199,7 +199,9 @@ def _get_client(cfg: Config) -> Client:
             cl.challenge_code_handler = _challenge_handler
             log.info("Attempting relogin with saved device UUIDs")
             cl.login(cfg.instagram_username, cfg.instagram_password)
-            log.info("Relogin successful")
+            log.info("Relogin successful — verifying session health")
+            if not _session_health_check(cl):
+                log.warning("Relogin succeeded but health check failed — session may be action-blocked")
             cl.dump_settings(session_path)
             return cl
         except ChallengeAbort:
