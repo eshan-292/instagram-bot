@@ -189,6 +189,7 @@ jobs:
             instagram_influencer/data/sofia/followers.json \
             instagram_influencer/data/sofia/content_queue.json \
             instagram_influencer/data/sofia/highlights.json \
+            instagram_influencer/data/sofia/trending_hashtags_cache.json \
             instagram_influencer/data/sofia/daily_report.md \
             instagram_influencer/data/sofia/.ig_session.json; do
             [ -f "$f" ] && git add -f "$f" 2>/dev/null || true

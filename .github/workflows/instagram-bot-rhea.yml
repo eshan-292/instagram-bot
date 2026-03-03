@@ -189,6 +189,7 @@ jobs:
             instagram_influencer/data/rhea/followers.json \
             instagram_influencer/data/rhea/content_queue.json \
             instagram_influencer/data/rhea/highlights.json \
+            instagram_influencer/data/rhea/trending_hashtags_cache.json \
             instagram_influencer/data/rhea/daily_report.md \
             instagram_influencer/data/rhea/.ig_session.json; do
             [ -f "$f" ] && git add -f "$f" 2>/dev/null || true

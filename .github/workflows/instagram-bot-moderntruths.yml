@@ -188,6 +188,7 @@ jobs:
             instagram_influencer/data/moderntruths/followers.json \
             instagram_influencer/data/moderntruths/content_queue.json \
             instagram_influencer/data/moderntruths/highlights.json \
+            instagram_influencer/data/moderntruths/trending_hashtags_cache.json \
             instagram_influencer/data/moderntruths/daily_report.md \
             instagram_influencer/data/moderntruths/.ig_session.json; do
             [ -f "$f" ] && git add -f "$f" 2>/dev/null || true

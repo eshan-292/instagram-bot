@@ -221,6 +221,7 @@ jobs:
             instagram_influencer/data/maya/followers.json \
             instagram_influencer/data/maya/content_queue.json \
             instagram_influencer/data/maya/highlights.json \
+            instagram_influencer/data/maya/trending_hashtags_cache.json \
             instagram_influencer/data/maya/daily_report.md \
             instagram_influencer/data/maya/.ig_session.json; do
             [ -f "$f" ] && git add -f "$f" 2>/dev/null || true

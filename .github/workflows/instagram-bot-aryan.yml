@@ -216,6 +216,7 @@ jobs:
             instagram_influencer/data/aryan/followers.json \
             instagram_influencer/data/aryan/content_queue.json \
             instagram_influencer/data/aryan/highlights.json \
+            instagram_influencer/data/aryan/trending_hashtags_cache.json \
             instagram_influencer/data/aryan/daily_report.md \
             instagram_influencer/data/aryan/.ig_session.json; do
             [ -f "$f" ] && git add -f "$f" 2>/dev/null || true

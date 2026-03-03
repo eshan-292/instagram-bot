@@ -18,10 +18,9 @@ log = logging.getLogger(__name__)
 # Free tier limits vary by model. Rotating avoids hitting any single limit.
 _MODELS = [
     "gemini-2.5-flash",
-    "gemini-2.5-flash-lite",
     "gemini-2.0-flash",
     "gemini-2.0-flash-lite",
-    "gemini-1.5-flash",
+    "gemini-2.5-flash-lite",
 ]
 
 _client: Any = None
