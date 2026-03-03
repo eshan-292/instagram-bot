@@ -139,6 +139,24 @@ def _sort_by_reach(medias: list[Any]) -> list[Any]:
         return medias
 
 
+def _is_big_enough(media: Any, min_followers: int) -> bool:
+    """Check if a media's author has at least *min_followers*.
+
+    Returns True when the threshold is met or cannot be determined (fail-open
+    using like_count as proxy: 500 likes ≈ 10K+ followers).
+    """
+    if min_followers <= 0:
+        return True
+    user = getattr(media, "user", None)
+    if not user:
+        return False
+    fc = getattr(user, "follower_count", 0) or 0
+    if fc > 0:
+        return fc >= min_followers
+    # API sometimes omits follower_count — use like_count as proxy
+    return (getattr(media, "like_count", 0) or 0) >= max(500, min_followers // 20)
+
+
 def _generate_comment(cfg: Config, caption_text: str) -> str | None:
     """Use Gemini to generate a short, context-aware comment on a post."""
     if not cfg.gemini_api_key:
@@ -503,6 +521,14 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
     # Sort by reach: engage with big accounts first for maximum visibility
     medias = _sort_by_reach(raw_medias)
 
+    # Filter: ONLY engage with big pages (configurable threshold)
+    min_f = cfg.engagement_min_followers_hashtag
+    if min_f > 0:
+        before = len(medias)
+        medias = [m for m in medias if _is_big_enough(m, min_f)]
+        log.info("Explore big-page filter: %d/%d posts pass %d+ threshold",
+                 len(medias), before, min_f)
+
     for media in medias[:explore_limit]:
         # Skip some posts — humans scroll past most content
         if _should_skip_post():
@@ -619,6 +645,14 @@ def _run_hashtag_engagement(
 
     # Sort by reach: big accounts first — our comments get seen by more people
     medias = _sort_by_reach(unique_medias)
+
+    # Filter: ONLY engage with big pages (configurable threshold)
+    min_f = cfg.engagement_min_followers_hashtag
+    if min_f > 0:
+        before = len(medias)
+        medias = [m for m in medias if _is_big_enough(m, min_f)]
+        log.info("Hashtag big-page filter: %d/%d posts pass %d+ threshold",
+                 len(medias), before, min_f)
 
     # Randomize session size
     actual_max = _randomize_session_size(max_posts)
@@ -927,6 +961,10 @@ def run_post_publish_burst(
     data = load_log(LOG_FILE)
     hashtags = _parse_hashtags(cfg.engagement_hashtags)
     targets = _mine_targets(cl, hashtags, amount=12)
+    # Big page filter — only engage with large accounts during burst too
+    min_f = cfg.engagement_min_followers_hashtag
+    if min_f > 0:
+        targets = [m for m in targets if _is_big_enough(m, min_f)]
     burst_count = 0
     for media in targets[:10]:
         if burst_count >= 8:
@@ -1158,6 +1196,150 @@ def run_comment_followup_dms(
 
 
 # ---------------------------------------------------------------------------
+# DM Replies — read incoming threads and reply with AI-generated responses
+# ---------------------------------------------------------------------------
+
+def _generate_dm_reply(cfg: Config, conversation_context: str, their_latest: str, username: str) -> str | None:
+    """Generate a contextual reply to an incoming DM using conversation history."""
+    if not cfg.gemini_api_key:
+        return None
+    from gemini_helper import generate
+    persona = get_persona()
+    dm_persona = persona["voice"].get("dm_persona") or persona["voice"].get("gemini_identity", "a friendly person")
+    dm_dont = persona["voice"].get("dm_dont", "Do NOT introduce yourself.")
+    prompt = (
+        f"You are {dm_persona}. "
+        "Someone sent you a DM on Instagram. Reply casually like a real person texting back.\n\n"
+        "Rules:\n"
+        "- 1-2 short sentences MAX. Keep it natural.\n"
+        "- Sound like you're texting a friend — lowercase ok, abbreviations fine\n"
+        f"- {dm_dont}\n"
+        "- Be genuine and responsive to what they said\n"
+        "- If they ask a question, answer it naturally\n"
+        "- If they compliment you, be grateful but chill\n"
+        "- Keep the conversation going — ask something back or react\n"
+        "- Max 1 emoji, no hashtags\n"
+        "- Do NOT sound like a bot or a brand page\n"
+        "- Do NOT say anything about being busy or DMs\n\n"
+        f"Their username: @{username}\n"
+        f"Recent conversation:\n{conversation_context[-500:]}\n\n"
+        f"Their latest message: {their_latest[:200]}\n"
+        "Your reply (just the text, nothing else):"
+    )
+    reply = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
+    if reply and 2 < len(reply) < 300:
+        return reply
+    return None
+
+
+def run_dm_replies(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
+    """Read incoming DM threads and reply with AI-generated responses.
+
+    Strategy:
+      1. Fetch recent DM threads
+      2. For threads where the last message is FROM them (not us) and < 24h old
+      3. Generate a contextual reply using conversation history
+      4. Send the reply
+      5. Rate-limit to engagement_daily_dm_replies per day
+    """
+    if not cfg.engagement_dm_replies_enabled:
+        return 0
+
+    dm_limit = cfg.engagement_daily_dm_replies
+    replied = 0
+
+    # Track threads we already replied to today
+    today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    already_replied = {
+        str(a["target"]) for a in data.get("actions", [])
+        if a.get("type") == "dm_replies"
+        and str(a.get("at", "")).startswith(today_str)
+    }
+
+    try:
+        my_id = str(cl.user_id)
+        threads = cl.direct_threads(amount=20)
+    except Exception as exc:
+        _check_challenge(exc)
+        log.warning("Could not fetch DM threads: %s", exc)
+        return 0
+
+    for thread in threads:
+        if replied >= dm_limit or not can_act(data, "dm_replies", dm_limit):
+            break
+
+        thread_id = str(thread.id)
+        if thread_id in already_replied:
+            continue
+
+        # Get messages in this thread
+        try:
+            messages = thread.messages or []
+        except Exception:
+            continue
+        if not messages:
+            continue
+
+        # Latest message — must be FROM them (not us)
+        latest = messages[0]
+        sender_id = str(getattr(latest, "user_id", ""))
+        if sender_id == my_id:
+            continue  # We sent the last message — don't double-reply
+
+        # Skip old messages (>24h)
+        msg_timestamp = getattr(latest, "timestamp", None)
+        if msg_timestamp:
+            try:
+                if hasattr(msg_timestamp, "tzinfo") and msg_timestamp.tzinfo is None:
+                    msg_timestamp = msg_timestamp.replace(tzinfo=timezone.utc)
+                age = datetime.now(timezone.utc) - msg_timestamp
+                if age > timedelta(hours=24):
+                    continue
+            except Exception:
+                pass
+
+        # Get text of the latest message
+        their_text = str(getattr(latest, "text", "") or "").strip()
+        if not their_text or len(their_text) < 2:
+            continue  # Skip media-only messages, reactions, etc.
+
+        # Build conversation context (last 5 messages, newest→oldest reversed)
+        context_lines = []
+        for msg in messages[:5]:
+            msg_user_id = str(getattr(msg, "user_id", ""))
+            msg_text = str(getattr(msg, "text", "") or "").strip()
+            if msg_text:
+                sender = "You" if msg_user_id == my_id else "Them"
+                context_lines.append(f"{sender}: {msg_text}")
+        conversation_context = "\n".join(reversed(context_lines))
+
+        # Get the other user's username
+        other_users = [u for u in (thread.users or []) if str(u.pk) != my_id]
+        username = other_users[0].username if other_users else "friend"
+
+        # Generate reply
+        reply_text = _generate_dm_reply(cfg, conversation_context, their_text, username)
+        if not reply_text:
+            continue
+
+        # Send reply
+        try:
+            cl.direct_send(reply_text, thread_ids=[int(thread_id)])
+            record_action(data, "dm_replies", thread_id)
+            replied += 1
+            log.info("DM reply to @%s: %s", username, reply_text[:50])
+        except Exception as exc:
+            _check_challenge(exc)
+            log.warning("DM reply failed for thread %s: %s", thread_id, exc)
+
+        random_delay(30, 90)
+
+    if replied:
+        log.info("Replied to %d incoming DMs", replied)
+    return replied
+
+
+# ---------------------------------------------------------------------------
 # Session-based engagement (for scheduler — short focused bursts)
 # ---------------------------------------------------------------------------
 
@@ -1169,6 +1351,7 @@ SESSION_TYPES = [
     "explore",      # explore page engagement
     "warm_audience", # engage followers of similar niche accounts (3-5x better ROI)
     "boost",        # viral post detection + auto-boost
+    "dm_replies",   # reply to incoming DMs (AI-generated contextual replies)
     "maintenance",  # unfollow old follows + welcome DMs + comment DMs
     "stories",      # repost past posts as stories + add to highlights
     "report",       # end-of-day summary report
@@ -1218,10 +1401,16 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
         viral_stats = run_viral_detection(cl, cfg, data)
         stats.update(viral_stats)
 
+    elif session_type == "dm_replies":
+        stats["dm_replies"] = run_dm_replies(cl, cfg, data)
+        save_log(LOG_FILE, data)
+
     elif session_type == "maintenance":
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        # DMs disabled — they sound unnatural and cause unfollows
+        # Reply to incoming DMs (rate-limited)
+        stats["dm_replies"] = run_dm_replies(cl, cfg, data)
+        save_log(LOG_FILE, data)
 
     elif session_type == "stories":
         from stories import run_story_session
@@ -1236,7 +1425,10 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     else:  # "full" — all phases (used sparingly, 1x/day max)
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        random_delay(20, 90)  # faster transitions (was 30-120)
+        random_delay(20, 90)
+        stats["dm_replies"] = run_dm_replies(cl, cfg, data)
+        save_log(LOG_FILE, data)
+        random_delay(20, 90)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
         random_delay(20, 90)

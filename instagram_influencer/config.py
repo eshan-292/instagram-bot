@@ -129,6 +129,14 @@ class Config:
     engagement_follow_enabled: bool
     engagement_target_accounts: str  # comma-separated similar niche accounts for warm targeting
 
+    # Big page filtering — minimum followers for engagement targets
+    engagement_min_followers_hashtag: int  # skip accounts below this in hashtag/explore (default 10K)
+    engagement_min_followers_warm: int     # warm audience threshold (default 0 = unfiltered)
+
+    # DM reply automation
+    engagement_dm_replies_enabled: bool
+    engagement_daily_dm_replies: int
+
     # YouTube Shorts
     youtube_enabled: bool
     youtube_client_id: str
@@ -187,6 +195,12 @@ def load_config() -> Config:
         engagement_comment_enabled=_bool(os.getenv("ENGAGEMENT_COMMENT_ENABLED")),
         engagement_follow_enabled=_bool(os.getenv("ENGAGEMENT_FOLLOW_ENABLED")),
         engagement_target_accounts=_str(os.getenv("ENGAGEMENT_TARGET_ACCOUNTS"), default_targets),
+        # Big page filtering
+        engagement_min_followers_hashtag=_int(os.getenv("ENGAGEMENT_MIN_FOLLOWERS_HASHTAG"), 10000, minimum=0),
+        engagement_min_followers_warm=_int(os.getenv("ENGAGEMENT_MIN_FOLLOWERS_WARM"), 0, minimum=0),
+        # DM replies
+        engagement_dm_replies_enabled=_bool(os.getenv("ENGAGEMENT_DM_REPLIES_ENABLED"), True),
+        engagement_daily_dm_replies=_int(os.getenv("ENGAGEMENT_DAILY_DM_REPLIES"), 25, minimum=0),
         # YouTube
         youtube_enabled=_bool(os.getenv("YOUTUBE_ENABLED")),
         youtube_client_id=_str(os.getenv("YOUTUBE_CLIENT_ID")),

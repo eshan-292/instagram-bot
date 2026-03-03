@@ -37,6 +37,7 @@ DAILY_LIMITS = {
     "likes": 500,
     "comments": 150,
     "follows": 200,
+    "dm_replies": 25,
 }
 
 

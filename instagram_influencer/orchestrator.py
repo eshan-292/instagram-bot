@@ -111,13 +111,94 @@ def _get_hashtags():
         "keyword_phrases": h.get("keyword_phrases", []),
     }
 
+def _fetch_trending_hashtags(cfg: Config | None = None) -> list[str]:
+    """Return ~20 currently-trending Instagram hashtags via Gemini.
+
+    Results are cached per day in trending_hashtags_cache.json so we only
+    make one Gemini call per persona per day.  Falls back to a hardcoded
+    list if Gemini is unavailable or returns garbage.
+    """
+    FALLBACK = [
+        "trending", "viral", "explorepage", "foryou", "reels",
+        "instagood", "photooftheday", "fyp", "viralpost", "trendingnow",
+        "explore", "instagram", "reelsinstagram", "instadaily", "love",
+        "aesthetic", "mood", "ootd", "reelsofinstagram", "lifestyle",
+    ]
+
+    from persona import persona_data_dir
+    cache_path = persona_data_dir() / "trending_hashtags_cache.json"
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    # Check daily cache
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, "r") as f:
+                cached = json.load(f)
+            if cached.get("date") == today and isinstance(cached.get("tags"), list):
+                log.debug("Using cached trending hashtags (%d tags)", len(cached["tags"]))
+                return cached["tags"]
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    # Need Gemini to fetch fresh trending tags
+    if cfg is None or not cfg.gemini_api_key:
+        log.debug("No Gemini API key — using fallback trending hashtags")
+        return FALLBACK
+
+    from gemini_helper import generate
+
+    prompt = (
+        "List exactly 20 currently-trending Instagram hashtags for March 2026. "
+        "Include a mix of: viral/general hashtags, lifestyle/aesthetic hashtags, "
+        "engagement-bait hashtags (like 'fyp', 'viral'), and broad discovery hashtags. "
+        "Return ONLY the hashtags as a comma-separated list WITHOUT the # symbol. "
+        "Example format: trending, viral, explorepage, fyp, instagood\n"
+        "Do not include any other text, explanations, or numbering."
+    )
+
+    try:
+        raw = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
+        if not raw:
+            raise ValueError("Empty Gemini response")
+
+        # Parse comma-separated tags, strip whitespace and # symbols
+        tags = [
+            t.strip().lstrip("#").replace(" ", "").lower()
+            for t in raw.replace("\n", ",").split(",")
+            if t.strip()
+        ]
+        # Filter out garbage (too long, contains non-alphanum, empty)
+        tags = [t for t in tags if t and len(t) <= 30 and t.isalnum()]
+
+        if len(tags) < 5:
+            log.warning("Gemini returned too few trending tags (%d), using fallback", len(tags))
+            tags = FALLBACK
+        else:
+            tags = tags[:25]  # cap at 25 in case Gemini over-produces
+            log.info("Fetched %d trending hashtags via Gemini", len(tags))
+
+        # Cache for the day
+        try:
+            with open(cache_path, "w") as f:
+                json.dump({"date": today, "tags": tags}, f)
+        except OSError as exc:
+            log.warning("Failed to cache trending hashtags: %s", exc)
+
+        return tags
+
+    except Exception as exc:
+        log.warning("Trending hashtag fetch failed: %s — using fallback", exc)
+        return FALLBACK
+
+
 def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
-                    youtube_enabled: bool = False) -> tuple[str, str]:
+                    youtube_enabled: bool = False,
+                    cfg: Config | None = None) -> tuple[str, str]:
     """Append 3-5 hashtags to caption; return (caption, first_comment_hashtags).
 
     Caption gets 3-5 targeted hashtags (pyramid strategy).
-    First comment gets 15-20 extra hashtags for maximum discovery.
-    No YouTube mentions or partner @mentions in captions.
+    First comment fills up to 30 TOTAL hashtags (caption + comment) with a
+    mix of ~60% niche/persona tags + ~40% trending tags for max discovery.
     """
     h = _get_hashtags()
     # Caption hashtags: 1 brand + 1 broad + 1-2 medium + 1 niche = 3-5 total
@@ -134,6 +215,7 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
         if niche: caption_tags.append(random.choice(niche))
 
     caption_tags = caption_tags[:5]
+    caption_count = len(caption_tags)
 
     # One keyword phrase (drives search discovery)
     kw = h["keyword_phrases"]
@@ -148,16 +230,43 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
         promo = random.choice(ctas)
         result += f"\n.\n{promo}"
 
-    # First comment: 15-20 extra hashtags for maximum reach
-    # Mix from all pools, excluding the ones already in caption
-    all_pools = broad + medium + niche + carousel
-    remaining = [t for t in all_pools if t not in caption_tags]
-    random.shuffle(remaining)
-    extra_tags = remaining[:18]
+    # First comment: fill up to 30 TOTAL hashtags (Instagram limit)
+    # Mix ~60% niche/persona tags + ~40% trending for maximum exposure
+    MAX_TOTAL = 30
+    slots = MAX_TOTAL - caption_count  # how many we can fit in first comment
+
+    # Pool 1: persona niche/medium/broad/carousel tags (not already in caption)
+    niche_pool = [t for t in (broad + medium + niche + carousel) if t not in caption_tags]
+    random.shuffle(niche_pool)
+
+    # Pool 2: trending hashtags (even if irrelevant — max exposure)
+    trending = _fetch_trending_hashtags(cfg)
+    # Remove any overlap with caption or niche pool
+    used = set(caption_tags) | set(niche_pool)
+    trending_pool = [t for t in trending if t not in used]
+    random.shuffle(trending_pool)
+
+    # Fill: ~60% niche, ~40% trending
+    niche_slots = int(slots * 0.6)
+    trending_slots = slots - niche_slots
+
+    picked_niche = niche_pool[:niche_slots]
+    picked_trending = trending_pool[:trending_slots]
+
+    # If either pool is short, fill from the other
+    combined = picked_niche + picked_trending
+    if len(combined) < slots:
+        remaining_niche = [t for t in niche_pool if t not in combined]
+        remaining_trending = [t for t in trending_pool if t not in combined]
+        filler = remaining_niche + remaining_trending
+        combined.extend(filler[:slots - len(combined)])
+
+    # Shuffle so niche/trending are interleaved naturally
+    random.shuffle(combined)
 
     first_comment = ""
-    if extra_tags:
-        first_comment = ".\n" + " ".join(f"#{t}" for t in extra_tags)
+    if combined:
+        first_comment = ".\n" + " ".join(f"#{t}" for t in combined)
 
     return result, first_comment
 
@@ -315,6 +424,7 @@ def main() -> int:
                     full_caption, first_comment_hashtags = _build_hashtags(
                         caption, str(item.get("topic", "")), post_type,
                         youtube_enabled=cfg.youtube_enabled,
+                        cfg=cfg,
                     )
 
                     # Publish to Instagram (with alt_text for SEO + accessibility)
