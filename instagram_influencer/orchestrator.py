@@ -322,9 +322,13 @@ def main() -> int:
     # (argparse defaults trigger str(DEFAULT_QUEUE_FILE) which needs PERSONA)
     try:
         from dotenv import load_dotenv
-        load_dotenv()
+        load_dotenv(override=True)
     except ModuleNotFoundError:
         pass
+
+    import os as _os
+    _persona_val = _os.getenv("PERSONA", "(NOT SET)")
+    print(f"DEBUG: PERSONA={_persona_val}, .env exists={_os.path.exists('.env')}")
 
     parser = argparse.ArgumentParser(description="Instagram + YouTube bot pipeline")
     parser.add_argument("--queue-file", default=str(DEFAULT_QUEUE_FILE))
