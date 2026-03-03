@@ -7859,6 +7859,41 @@
       "type": "follows",
       "target": "5623922987",
       "at": "2026-03-03T05:27:01Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "Vwxrx4qnRrg",
+      "at": "2026-03-03T05:38:34Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "0H9TN_5iOUs",
+      "at": "2026-03-03T05:39:18Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "EVqMDtE-nKM",
+      "at": "2026-03-03T05:39:57Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "G4Vmt0POfO8",
+      "at": "2026-03-03T05:40:37Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "KNvuuGTTDLU",
+      "at": "2026-03-03T05:41:10Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "qpDKAWYj4RM",
+      "at": "2026-03-03T05:42:07Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "3wBn7vqAStw",
+      "at": "2026-03-03T05:43:08Z"
     }
   ]
 }
