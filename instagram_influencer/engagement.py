@@ -116,6 +116,29 @@ def _is_quality_follow_target(user_info: Any) -> bool:
         return False
 
 
+def _sort_by_reach(medias: list[Any]) -> list[Any]:
+    """Sort posts so bigger accounts come first — our comments get seen by more people.
+
+    Uses follower_count from the media.user object if available, otherwise
+    falls back to like_count as a proxy for reach.
+    Priority: accounts with 10K+ followers first, then by engagement.
+    """
+    def _reach_key(media: Any) -> int:
+        # Some media objects carry user follower_count
+        user = getattr(media, "user", None)
+        if user:
+            fc = getattr(user, "follower_count", 0) or 0
+            if fc > 0:
+                return fc
+        # Fallback: like_count as a proxy for post visibility
+        return getattr(media, "like_count", 0) or 0
+
+    try:
+        return sorted(medias, key=_reach_key, reverse=True)
+    except Exception:
+        return medias
+
+
 def _generate_comment(cfg: Config, caption_text: str) -> str | None:
     """Use Gemini to generate a short, context-aware comment on a post."""
     if not cfg.gemini_api_key:
@@ -185,29 +208,40 @@ def _generate_dm(cfg: Config, username: str) -> str | None:
 
 
 def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG) -> list[Any]:
-    """Fetch recent posts from a random hashtag."""
+    """Fetch top + recent posts from a random hashtag.
+
+    Top posts come from bigger accounts → our comments get more visibility.
+    We fetch BOTH top and recent, merging them with top posts first.
+    """
     if not hashtags:
         return []
     tag = random.choice(hashtags)
     log.info("Mining hashtag: #%s", tag)
+    all_medias: list[Any] = []
+
+    # Fetch top posts first — these are from bigger accounts
     try:
-        medias = cl.hashtag_medias_recent(tag, amount=amount)
-        # Filter out None items (from extract_media_v1 fallback) and items without .pk
-        medias = [m for m in medias if m is not None and getattr(m, "pk", None)]
-        log.info("Found %d posts from #%s", len(medias), tag)
-        return medias
+        top = cl.hashtag_medias_top(tag, amount=min(amount, 9))
+        top = [m for m in top if m is not None and getattr(m, "pk", None)]
+        all_medias.extend(top)
+        log.info("Found %d top posts from #%s", len(top), tag)
     except Exception as exc:
         _check_challenge(exc)
-        log.warning("Failed to fetch #%s: %s", tag, exc)
-        try:
-            medias = cl.hashtag_medias_top(tag, amount=amount)
-            medias = [m for m in medias if m is not None and getattr(m, "pk", None)]
-            log.info("Fallback: found %d top posts from #%s", len(medias), tag)
-            return medias
-        except Exception as exc2:
-            _check_challenge(exc2)
-            log.warning("Fallback also failed for #%s: %s", tag, exc2)
-        return []
+        log.debug("Top posts failed for #%s: %s", tag, exc)
+
+    # Then fill with recent posts
+    try:
+        recent = cl.hashtag_medias_recent(tag, amount=amount)
+        recent = [m for m in recent if m is not None and getattr(m, "pk", None)]
+        all_medias.extend(recent)
+        log.info("Found %d recent posts from #%s", len(recent), tag)
+    except Exception as exc:
+        _check_challenge(exc)
+        log.warning("Recent posts failed for #%s: %s", tag, exc)
+
+    if not all_medias:
+        log.warning("No posts found for #%s", tag)
+    return all_medias
 
 
 def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
@@ -459,12 +493,15 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
     explore_limit = _randomize_session_size(60)  # aggressive growth
 
     try:
-        medias = cl.explore_reels(amount=explore_limit + 10)
-        log.info("Fetched %d reels from Explore", len(medias))
+        raw_medias = cl.explore_reels(amount=explore_limit + 10)
+        log.info("Fetched %d reels from Explore", len(raw_medias))
     except Exception as exc:
         _check_challenge(exc)
         log.warning("Could not fetch Explore page: %s", exc)
         return stats
+
+    # Sort by reach: engage with big accounts first for maximum visibility
+    medias = _sort_by_reach(raw_medias)
 
     for media in medias[:explore_limit]:
         # Skip some posts — humans scroll past most content
@@ -478,7 +515,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
         # Pause like actually watching the reel
         time.sleep(random.uniform(3, 8))
 
-        # Like
+        # Like — big accounts first for visibility
         if can_act(data, "likes", cfg.engagement_daily_likes):
             try:
                 cl.media_like(media.pk)
@@ -488,7 +525,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                 _check_challenge(exc)
                 log.debug("Explore like failed: %s", exc)
 
-        # Always comment on explore posts
+        # Comment on big accounts — our comment visible to their audience
         if (cfg.engagement_comment_enabled
                 and can_act(data, "comments", cfg.engagement_daily_comments)):
             caption_text = str(getattr(media, "caption_text", "") or "")
@@ -502,18 +539,19 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                     _check_challenge(exc)
                     log.debug("Explore comment failed: %s", exc)
 
-        # Always follow from Explore
+        # Smart follow — only quality targets (1K-50K, active, public)
         if (cfg.engagement_follow_enabled
                 and user_id
                 and can_act(data, "follows", cfg.engagement_daily_follows)):
-            _browse_before_engage(cl, user_id)
-            try:
-                cl.user_follow(int(user_id))
-                record_action(data, "follows", user_id)
-                stats["explore_follows"] += 1
-            except Exception as exc:
-                _check_challenge(exc)
-                log.debug("Explore follow failed: %s", exc)
+            user_info = _browse_before_engage(cl, user_id)
+            if _is_quality_follow_target(user_info):
+                try:
+                    cl.user_follow(int(user_id))
+                    record_action(data, "follows", user_id)
+                    stats["explore_follows"] += 1
+                except Exception as exc:
+                    _check_challenge(exc)
+                    log.debug("Explore follow failed: %s", exc)
 
         # View stories from explore too
         if user_id and can_act(data, "story_views", 150):
@@ -570,14 +608,17 @@ def _run_hashtag_engagement(
         # Small pause between hashtag searches
         time.sleep(random.uniform(2, 5))
 
-    random.shuffle(all_medias)
+    # Deduplicate
     seen_pks: set[str] = set()
-    medias = []
+    unique_medias = []
     for m in all_medias:
         pk = str(m.pk)
         if pk not in seen_pks:
             seen_pks.add(pk)
-            medias.append(m)
+            unique_medias.append(m)
+
+    # Sort by reach: big accounts first — our comments get seen by more people
+    medias = _sort_by_reach(unique_medias)
 
     # Randomize session size
     actual_max = _randomize_session_size(max_posts)
@@ -594,7 +635,7 @@ def _run_hashtag_engagement(
         # Pause like actually looking at the post
         time.sleep(random.uniform(2, 5))
 
-        # Like (most common action)
+        # Like (most common action) — prioritize big accounts for visibility
         if can_act(data, "likes", like_limit):
             try:
                 cl.media_like(media.pk)
@@ -604,7 +645,7 @@ def _run_hashtag_engagement(
                 _check_challenge(exc)
                 log.warning("Like failed for %s: %s", media_id, exc)
 
-        # Always comment on hashtag posts
+        # Comment on big accounts' posts — our comment visible to their audience
         if (cfg.engagement_comment_enabled
                 and can_act(data, "comments", comment_limit)):
             caption_text = str(media.caption_text or "") if hasattr(media, "caption_text") else ""
@@ -618,20 +659,24 @@ def _run_hashtag_engagement(
                     _check_challenge(exc)
                     log.warning("Comment failed for %s: %s", media_id, exc)
 
-        # Smart follow — prioritize micro-influencers (20-30% follow-back rate vs 5%)
+        # Smart follow — only follow quality targets (1K-50K followers, active, public)
+        # We like/comment on big accounts for visibility, but only FOLLOW accounts
+        # likely to follow back (micro-influencers).
         if (cfg.engagement_follow_enabled
                 and user_id
                 and can_act(data, "follows", follow_limit)):
-            _browse_before_engage(cl, user_id)  # view profile first
-            # Always follow — maximum growth
-            try:
-                cl.user_follow(int(user_id))
-                record_action(data, "follows", user_id)
-                stats["follows"] = stats.get("follows", 0) + 1
-                log.debug("Followed %s from hashtag", user_id)
-            except Exception as exc:
-                _check_challenge(exc)
-                log.warning("Follow failed for %s: %s", user_id, exc)
+            user_info = _browse_before_engage(cl, user_id)  # view profile first
+            if _is_quality_follow_target(user_info):
+                try:
+                    cl.user_follow(int(user_id))
+                    record_action(data, "follows", user_id)
+                    stats["follows"] = stats.get("follows", 0) + 1
+                    log.debug("Followed %s from hashtag (quality target)", user_id)
+                except Exception as exc:
+                    _check_challenge(exc)
+                    log.warning("Follow failed for %s: %s", user_id, exc)
+            else:
+                log.debug("Skipped follow for %s — not a quality target", user_id)
 
         # View stories more aggressively
         if user_id and can_act(data, "story_views", story_limit):
