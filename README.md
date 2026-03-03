@@ -337,14 +337,23 @@ The bot mimics real human usage patterns to avoid detection:
 
 ## Engagement Strategy (2026 Algorithm)
 
+### Big Account Priority (maximum visibility)
+
+All engagement is sorted by account size — big accounts first. Commenting on a 50K+ account's post means our profile is seen by thousands of their followers.
+
+- **Hashtag mining**: Fetches BOTH top posts (bigger accounts) + recent posts, sorted by follower count
+- **Explore feed**: Sorted by reach — engage with biggest accounts first
+- **Like/comment on ALL** — but big accounts get priority since budget is spent top-down
+- **Smart follow**: Only follow micro-influencers (1K-50K followers, active, public) — 20-30% follow-back rate vs 5% for random
+
 ### Warm Audience Targeting (highest ROI)
 
-Instead of follow/unfollow churn, the bot engages followers of similar niche accounts. These users already consume similar content and are 3-5x more likely to follow back.
+Engages followers of similar niche accounts. These users already consume similar content and are 3-5x more likely to follow back.
 
 - **5 warm sessions/day** per main account
 - Target accounts: configurable per persona via `engagement.default_target_accounts` in persona JSON
-- Per user: like 2-3 posts + genuine comment + follow (100% — no probability gating)
-- Smart quality filtering still active (skip follow-farms, inactive accounts)
+- Per user: like 2-3 posts + genuine comment + follow (quality targets only)
+- Smart quality filtering: skip follow-farms, inactive accounts, private profiles
 
 ### Viral Growth Features (2026 Algorithm)
 
@@ -367,7 +376,7 @@ Instead of follow/unfollow churn, the bot engages followers of similar niche acc
 |--------|------------|-------|
 | Likes | 500 | Spread across all sessions |
 | Comments | 150 | AI-generated, context-aware |
-| Follows | 200 | Smart targeting: 80% micro-influencers, 35% others |
+| Follows | 200 | Smart targeting: only 1K-50K micro-influencers (20-30% follow-back) |
 | Story views | 150 | 100% view, 100% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
 | Unfollows | 60/run | After 2+ days |
