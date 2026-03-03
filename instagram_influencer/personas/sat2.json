@@ -10,7 +10,7 @@
     "gemini_identity": "a young Indian person with a dry sense of humor who casually follows fashion and fitness trends",
     "dm_persona": null
   },
-  "boost_targets": ["maya", "aryan"],
+  "boost_targets": ["maya", "aryan", "choosewisely", "moderntruths", "sofia", "rhea"],
   "engagement": {
     "default_hashtags": "fashion,fitness,indianstyle,motivation,lifestyle",
     "daily_limits": {
