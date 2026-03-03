@@ -34,11 +34,11 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/6.jpg"
       ],
-      "publish_error": "Session restore failed in CI — cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
+      "publish_error": "Session restore failed in CI \u2014 cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
     },
     {
       "id": "sofia-002",
-      "status": "approved",
+      "status": "failed",
       "topic": "GRWM for a luxury dinner at Taj Mumbai",
       "caption": "Getting ready for Taj.\nBecause first impressions are the only impressions.\nWhat would you wear to a 5-star dinner?\nSend this to someone who gets it.",
       "alt_text": "Russian woman getting ready for dinner at luxury hotel in Mumbai",
@@ -53,13 +53,14 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-03T10:00:00Z",
-      "notes": "vanity/bathroom setting, warm lighting, luxury products visible | generated_by=template"
+      "notes": "vanity/bathroom setting, warm lighting, luxury products visible | generated_by=template",
+      "publish_error": "HTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
     },
     {
       "id": "sofia-003",
       "status": "approved",
-      "topic": "Russian girl in Mumbai — 5 things that surprised me",
-      "caption": "5 things that surprised me about Mumbai.\nFrom Moscow to Maximum City.\nWhat would surprise YOU about Russia?\nComment — I want to know.",
+      "topic": "Russian girl in Mumbai \u2014 5 things that surprised me",
+      "caption": "5 things that surprised me about Mumbai.\nFrom Moscow to Maximum City.\nWhat would surprise YOU about Russia?\nComment \u2014 I want to know.",
       "alt_text": "Lifestyle carousel showing Russian woman experiencing Mumbai culture",
       "youtube_title": "Russian Girl in Mumbai - 5 Biggest Surprises",
       "video_text": [
@@ -77,7 +78,7 @@
         "Hook: Sofia looking amazed at Mumbai skyline, 'Moscow to Mumbai'",
         "1: The kindness of strangers (auto drivers, shopkeepers)",
         "2: Street food that beats any Moscow restaurant",
-        "3: Mumbai never sleeps — truly 24/7",
+        "3: Mumbai never sleeps \u2014 truly 24/7",
         "4: The fashion is incredibly bold and colorful",
         "5: How fast Mumbai becomes home"
       ],
@@ -93,8 +94,8 @@
     {
       "id": "sofia-004",
       "status": "approved",
-      "topic": "All-black luxury outfit — power dressing",
-      "caption": "All black. All power.\nSometimes the best outfit says nothing — but everyone notices.\nCould you pull this off?\nTag someone who only wears black.",
+      "topic": "All-black luxury outfit \u2014 power dressing",
+      "caption": "All black. All power.\nSometimes the best outfit says nothing \u2014 but everyone notices.\nCould you pull this off?\nTag someone who only wears black.",
       "alt_text": "Elegant blonde woman in all-black luxury outfit in a minimalist setting",
       "youtube_title": "All Black Power Outfit - Luxury Styling",
       "video_text": [
@@ -112,7 +113,7 @@
     {
       "id": "sofia-005",
       "status": "approved",
-      "topic": "Day in my life — luxury Mumbai edition",
+      "topic": "Day in my life \u2014 luxury Mumbai edition",
       "caption": "Mumbai mornings hit different from a penthouse.\nCoffee. Outfit. Skyline.\nWhat does your morning look like?\nShare this with someone who deserves this life.",
       "alt_text": "Day in the life vlog-style reel of Russian woman living luxury life in Mumbai",
       "youtube_title": "Day In My Life - Luxury Mumbai Edition",
