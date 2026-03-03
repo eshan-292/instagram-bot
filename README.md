@@ -1,6 +1,6 @@
 # Instagram + YouTube Influencer Bot
 
-Multi-account automated growth pipeline for AI influencers — currently running **Maya Varma** (fashion) and **Aryan Dhar** (fitness), with 3 satellite support accounts.
+Multi-account automated growth pipeline for AI influencers — currently running **6 main accounts** across fashion, fitness, lifestyle, relationships, and engagement niches, plus 3 satellite support accounts.
 
 Posts to **Instagram** (Reels, Carousels, Single) and **YouTube Shorts** simultaneously, with aggressive engagement automation on both platforms.
 
@@ -14,16 +14,24 @@ The bot uses a **persona-based architecture** where all account-specific data (i
 
 ```
 personas/
-  maya.json       # Maya Varma — fashion influencer (main)
-  aryan.json      # Aryan Dhar — fitness influencer (main)
-  sat1.json       # Satellite support account 1
-  sat2.json       # Satellite support account 2
-  sat3.json       # Satellite support account 3
+  maya.json          # Maya Varma — fashion influencer (main)
+  aryan.json         # Aryan Dhar — fitness influencer (main)
+  choosewisely.json  # Choose Wisely — engagement/polls page (main)
+  moderntruths.json  # Modern Truths — relationships/psychology page (main)
+  sofia.json         # Sofia Petrova — luxury fashion influencer (main)
+  rhea.json          # Rhea — fitness creator (main)
+  sat1.json          # Satellite support account 1
+  sat2.json          # Satellite support account 2
+  sat3.json          # Satellite support account 3
 
 data/
-  maya/           # Maya's state (queue, engagement log, images, session)
-  aryan/          # Aryan's state
-  sat1/           # Satellite 1 state (lightweight)
+  maya/              # Maya's state (queue, engagement log, images, session)
+  aryan/             # Aryan's state
+  choosewisely/      # Choose Wisely's state
+  moderntruths/      # Modern Truths' state
+  sofia/             # Sofia's state
+  rhea/              # Rhea's state
+  sat1/              # Satellite 1 state (lightweight)
   sat2/
   sat3/
 ```
@@ -31,10 +39,14 @@ data/
 **Persona selection** is via the `PERSONA` env var (e.g. `PERSONA=aryan`). Each GitHub Actions workflow sets this in its `.env` file.
 
 ### Main Accounts (Full Pipeline)
-- **Maya Varma** — 23yo fashion influencer from Mumbai. Bold, teasing, confident voice.
-- **Aryan Dhar** — 25yo fitness influencer from Delhi. Confident, disciplined, motivating, no-BS.
+- **Maya Varma** (`@themayavarma`) — 23yo fashion influencer from Mumbai. Bold, teasing, confident voice.
+- **Aryan Dhar** (`@aryandharfit`) — 25yo fitness influencer from Delhi. Confident, disciplined, motivating, no-BS.
+- **Choose Wisely** (`@choose.wsly`) — Engagement/polls page. Micro-decision content with bold graphics. Provocative, punchy voice.
+- **Modern Truths** (`@moderntruths7`) — Relationships/psychology page. Dark moody aesthetic, bold typography. Polarizing, unfiltered voice.
+- **Sofia Petrova** (`@sofia.ptrv`) — 24yo Russian luxury fashion influencer in Mumbai. Mysterious, teasing, high-value energy.
+- **Rhea** (`@rheatrains`) — 23yo Indian fitness creator from Gurgaon. Disciplined, calm, no-nonsense voice.
 
-Both get: content generation, image prompts, video creation, IG + YT publishing, full engagement (warm audience, hashtags, explore, replies, stories), cross-promotion with each other.
+All 6 get: content generation, image prompts, video creation, IG publishing, full engagement (warm audience, hashtags, explore, replies, stories). Maya + Aryan also have YouTube Shorts.
 
 ### Satellite Accounts (Engagement Support)
 3 lightweight accounts that boost engagement signals for both main accounts:
@@ -43,12 +55,13 @@ Both get: content generation, image prompts, video creation, IG + YT publishing,
 - Do light background engagement to appear human
 - Anti-detection: 20% random session skip, extended jitter, low daily limits
 
-### Cross-Promotion
-Main accounts subtly support each other without being overtly linked:
-- Daily cross-promo engagement sessions (like + comment + story views on partner's posts)
-- Timed ~2hrs after partner publishes for natural engagement signal
-- No @mentions in captions — accounts appear independent publicly
-- Satellite accounts engage both main accounts for additional signal boost
+### Cross-Promotion (Stealth Network)
+All 6 main accounts promote each other without being overtly linked:
+- All accounts are in each other's `default_target_accounts` — they engage with each other's content naturally via warm audience sessions
+- `partner_mention_probability: 0` for ALL accounts — zero @mentions in captions or stories
+- Accounts appear completely independent to outside observers
+- Cross-promo pairs: Maya↔Aryan, Choose Wisely↔Modern Truths, Sofia↔Rhea
+- Satellite accounts engage all main accounts for additional signal boost
 - Max 2 partner comments/day to stay subtle
 
 ## How It Works
@@ -237,7 +250,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 
 ### Workflow Architecture
 
-7 independent workflows run in parallel with separate concurrency groups:
+11 independent workflows run in parallel with separate concurrency groups:
 
 | Workflow | Sessions/Day | Concurrency Group | Purpose |
 |----------|-------------|-------------------|---------|
@@ -245,13 +258,21 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | `youtube-bot.yml` | 12 | `youtube-bot` | Maya YT |
 | `instagram-bot-aryan.yml` | 33 | `instagram-bot-aryan` | Aryan IG |
 | `youtube-bot-aryan.yml` | 12 | `youtube-bot-aryan` | Aryan YT |
+| `instagram-bot-choosewisely.yml` | 22 | `instagram-bot-choosewisely` | Choose Wisely IG |
+| `instagram-bot-moderntruths.yml` | 22 | `instagram-bot-moderntruths` | Modern Truths IG |
+| `instagram-bot-sofia.yml` | 22 | `instagram-bot-sofia` | Sofia IG |
+| `instagram-bot-rhea.yml` | 22 | `instagram-bot-rhea` | Rhea IG |
 | `satellite-1.yml` | 9 | `satellite-1` | Satellite 1 |
 | `satellite-2.yml` | 9 | `satellite-2` | Satellite 2 |
 | `satellite-3.yml` | 9 | `satellite-3` | Satellite 3 |
 
-**Total: ~117 sessions/day** across all accounts (including 5 overnight sessions per main account).
+**Total: ~205 sessions/day** across all accounts.
 
-**1 post/day per main account** at prime time (Maya 19:00 IST, Aryan 19:15 IST).
+**1 post/day per main account** at staggered prime times:
+- Maya 19:00 IST, Aryan 19:15 IST
+- Choose Wisely 19:33 IST, Modern Truths 19:39 IST, Sofia 19:47 IST, Rhea 19:53 IST
+
+**New accounts (Choose Wisely, Modern Truths, Sofia, Rhea):** Workflows are disabled until sessions are seeded locally via `seed_session.py`.
 
 **Reliability:** Session routing uses `github.event.schedule` (the exact cron expression) instead of wall-clock time, making it immune to GitHub Actions cron delays (which can be 10-20+ minutes). State commits add each file individually (avoiding failures from missing files), use `git pull --rebase` before push, and retry up to 3 times on push failure to handle parallel workflow race conditions.
 
@@ -406,7 +427,7 @@ Engages followers of similar niche accounts. These users already consume similar
 
 **API quota budget:** ~7,330 of 10,000 units/day (73% utilization -- safe margin).
 
-**Warmup multiplier** for new accounts: 0.6x (days 1-7), 0.8x (days 8-14), 1.0x (day 15+).
+**Warmup multiplier** for new accounts: 0.6x (days 1-3), 0.8x (days 4-7), 1.0x (day 8+).
 
 ## Video & Audio
 
@@ -443,9 +464,9 @@ The bot runs on GitHub Actions (US datacenter IPs). If it tries to `login()` fro
 python seed_session.py
 
 # Seed specific accounts
-python seed_session.py maya aryan
+python seed_session.py maya aryan choosewisely moderntruths sofia rhea
 
-# Seed all 5 + push to GitHub secrets
+# Seed all 9 + push to GitHub secrets
 python seed_session.py --all --push
 
 # Seed one + push
@@ -486,7 +507,7 @@ End-of-day summary at 23:15 IST with engagement stats, posts published, YouTube 
    TELEGRAM_BOT_TOKEN=7123456789:AAHxxxxx
    TELEGRAM_CHAT_ID=123456789
    ```
-4. **Important:** Ensure these tokens are in EVERY DOTENV secret (DOTENV, DOTENV_ARYAN, DOTENV_SAT1/2/3)
+4. **Important:** Ensure these tokens are in EVERY DOTENV secret (DOTENV, DOTENV_ARYAN, DOTENV_CHOOSEWISELY, DOTENV_MODERNTRUTHS, DOTENV_SOFIA, DOTENV_RHEA, DOTENV_SAT1/2/3)
 
 ## Make Commands
 
@@ -507,7 +528,7 @@ End-of-day summary at 23:15 IST with engagement stats, posts published, YouTube 
 **Required:**
 | Variable | Description |
 |----------|-------------|
-| `PERSONA` | Persona ID (`maya`, `aryan`, `sat1`, `sat2`, `sat3`) |
+| `PERSONA` | Persona ID (`maya`, `aryan`, `choosewisely`, `moderntruths`, `sofia`, `rhea`, `sat1`, `sat2`, `sat3`) |
 | `INSTAGRAM_USERNAME` | Instagram account username |
 | `INSTAGRAM_PASSWORD` | Instagram account password |
 | `GEMINI_API_KEY` | Google AI Studio API key ([free](https://aistudio.google.com/apikey)) |
@@ -559,6 +580,14 @@ Each account needs its own secrets:
 | `INSTAGRAM_SESSION_B64` | Maya's IG session (base64-encoded) |
 | `DOTENV_ARYAN` | Aryan's .env (includes `PERSONA=aryan`) |
 | `INSTAGRAM_SESSION_B64_ARYAN` | Aryan's IG session |
+| `DOTENV_CHOOSEWISELY` | Choose Wisely's .env (includes `PERSONA=choosewisely`) |
+| `INSTAGRAM_SESSION_B64_CHOOSEWISELY` | Choose Wisely's IG session |
+| `DOTENV_MODERNTRUTHS` | Modern Truths' .env (includes `PERSONA=moderntruths`) |
+| `INSTAGRAM_SESSION_B64_MODERNTRUTHS` | Modern Truths' IG session |
+| `DOTENV_SOFIA` | Sofia's .env (includes `PERSONA=sofia`) |
+| `INSTAGRAM_SESSION_B64_SOFIA` | Sofia's IG session |
+| `DOTENV_RHEA` | Rhea's .env (includes `PERSONA=rhea`) |
+| `INSTAGRAM_SESSION_B64_RHEA` | Rhea's IG session |
 | `DOTENV_SAT1` | Satellite 1's .env (includes `PERSONA=sat1`) |
 | `INSTAGRAM_SESSION_B64_SAT1` | Satellite 1's IG session |
 | `DOTENV_SAT2` | Satellite 2's .env |
@@ -632,6 +661,10 @@ instagram_influencer/
   personas/              # Persona JSON files
     maya.json            # Maya Varma (fashion, main)
     aryan.json           # Aryan Dhar (fitness, main)
+    choosewisely.json    # Choose Wisely (engagement/polls, main)
+    moderntruths.json    # Modern Truths (relationships, main)
+    sofia.json           # Sofia Petrova (luxury fashion, main)
+    rhea.json            # Rhea (fitness, main)
     sat1.json            # Satellite 1
     sat2.json            # Satellite 2
     sat3.json            # Satellite 3
@@ -654,7 +687,15 @@ instagram_influencer/
         music/           # Custom background music
         IMAGE_PROMPTS.md # Master prompt summary
     aryan/
-      (same structure)
+      (same structure as maya)
+    choosewisely/
+      (same structure as maya)
+    moderntruths/
+      (same structure as maya)
+    sofia/
+      (same structure as maya)
+    rhea/
+      (same structure as maya)
     sat1/
       engagement_log.json
       .ig_session.json
