@@ -32,11 +32,11 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/6.jpg"
       ],
-      "publish_error": "Session restore failed in CI — cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
+      "publish_error": "Session restore failed in CI \u2014 cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
     },
     {
       "id": "mt-002",
-      "status": "approved",
+      "status": "posted",
       "topic": "Woman sitting alone in a bustling cafe, waiting, looking at her phone expectantly, feeling like a backup option.",
       "caption": "5 brutal signs: You're not the main character in their story; you're just a filler episode. They keep you around for convenience, not commitment. Are you tired of being Plan B? Tag the friend who needs this brutal reality check before it's too late.",
       "alt_text": "A woman looking dejected, sitting alone in a bustling cafe, scrolling on her phone, illustrating the feeling of being a backup option.",
@@ -51,7 +51,10 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-03T10:00:00Z",
-      "notes": "Soft, slightly melancholic lighting. Focus on isolation and silent expectation amidst a busy environment. Her clothes are neat but unremarkable, conveying a sense of waiting. | generated_by=gemini:gemini-2.5-flash"
+      "notes": "Soft, slightly melancholic lighting. Focus on isolation and silent expectation amidst a busy environment. Her clothes are neat but unremarkable, conveying a sense of waiting. | generated_by=gemini:gemini-2.5-flash",
+      "posted_at": "2026-03-03T17:42:22Z",
+      "platform_post_id": "3844831660496132094",
+      "publish_error": null
     },
     {
       "id": "mt-003",
