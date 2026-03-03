@@ -78,9 +78,11 @@ def _browse_before_engage(cl: Any, user_id: str) -> Optional[Any]:
     """View a user's profile before engaging — humans check who they're interacting with.
 
     Returns the UserInfo object for downstream use (power user targeting).
+    Uses user_info_v1 (private API) to avoid public API 429 rate limits
+    that cause multi-minute retries and session timeouts.
     """
     try:
-        user_info = cl.user_info(int(user_id))
+        user_info = cl.user_info_v1(int(user_id))
         # Short pause like reading their bio
         time.sleep(random.uniform(1.5, 4))
         return user_info
