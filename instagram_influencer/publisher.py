@@ -153,69 +153,80 @@ def _session_health_check(cl: Client) -> bool:
 def _get_client(cfg: Config) -> Client:
     """Login via saved session or username/password.
 
-    Priority:
-      1. Saved session file — restore WITHOUT calling login() to avoid
-         triggering Instagram challenges from datacenter IPs.  The session
-         was created locally by seed_session.py and contains valid cookies
-         + device fingerprint.
-      2. Username/password (only if no saved session exists).
+    Strategy (in order):
+      1. Try silent restore (load_settings only, no login call)
+         → fastest, no IP-change risk, works if cookies still valid
+      2. If silent fails → try RELOGIN (load_settings + login)
+         → uses same device UUIDs so Instagram sees "same device, new IP"
+         → this is safe and refreshes the session cookies
+      3. If relogin fails → fresh login (ONLY locally, never in CI)
+         → creates new device UUIDs = "new device" = challenge risk
 
-    IMPORTANT: Calling login() on a saved session from a different IP
-    triggers ChallengeRequired (email/SMS verification) because Instagram
-    sees a new location.  We avoid this by restoring the session silently.
+    KEY DISTINCTION:
+    - Relogin (load_settings + login) = same device UUIDs → usually safe
+    - Fresh login (new Client + login) = new device UUIDs → triggers blocks
     """
     session_path = str(SESSION_FILE)
+    is_ci = bool(os.getenv("CI") or os.getenv("GITHUB_ACTIONS"))
 
-    # ── 1. Try saved session — restore silently (NO login() call) ──────
+    # ── 1. Try silent restore (no login() call) ──────────────────────
     if os.path.exists(session_path):
         try:
-            cl = Client()
+            cl = _new_client()
             cl.load_settings(session_path)
-
-            # Restore credentials for internal use (but don't call login())
-            if cfg.instagram_username:
-                cl.username = cfg.instagram_username
-            if cfg.instagram_password:
-                cl.password = cfg.instagram_password
-
-            # Non-interactive challenge handler in case any call triggers one
             cl.challenge_code_handler = _challenge_handler
+            log.debug("Restored saved session (silent)")
 
-            log.debug("Restored saved session (no re-login)")
-
-            # Validate the session still works
             if _session_health_check(cl):
                 cl.dump_settings(session_path)
                 return cl
 
-            log.warning("Saved session failed health check")
-            # In CI: NEVER fall through to fresh login — it triggers
-            # "new device" blocks from datacenter IPs.
-            if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
-                raise RuntimeError(
-                    "Session health check failed in CI. "
-                    "Run seed_session.py locally to create a fresh session."
-                )
-            _delete_session()
+            log.warning("Silent session restore failed health check — will try relogin")
         except ChallengeAbort:
-            # FATAL: challenge detected — do NOT try fresh login, abort immediately
             raise
         except Exception as exc:
             if _is_challenge_error(exc):
-                log.error("Challenge detected during session restore: %s", exc)
                 raise ChallengeAbort(str(exc)) from exc
-            log.warning("Saved session error: %s", exc)
-            if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
+            log.warning("Silent restore error: %s — will try relogin", exc)
+
+    # ── 2. Relogin with saved session (same device UUIDs) ────────────
+    #    This refreshes cookies while keeping the device fingerprint,
+    #    so Instagram sees "same device, different IP" = usually OK.
+    if os.path.exists(session_path) and cfg.instagram_username and cfg.instagram_password:
+        try:
+            cl = _new_client()
+            cl.load_settings(session_path)
+            cl.challenge_code_handler = _challenge_handler
+            log.info("Attempting relogin with saved device UUIDs")
+            cl.login(cfg.instagram_username, cfg.instagram_password)
+            log.info("Relogin successful")
+            cl.dump_settings(session_path)
+            return cl
+        except ChallengeAbort:
+            raise
+        except (ChallengeRequired,) as exc:
+            log.error("Challenge during relogin — account needs manual verification: %s", exc)
+            raise ChallengeAbort(
+                "Instagram challenge required during relogin. "
+                "Complete verification on phone, then re-seed session."
+            ) from exc
+        except Exception as exc:
+            if _is_challenge_error(exc):
+                log.error("Challenge detected during relogin: %s", exc)
+                raise ChallengeAbort(str(exc)) from exc
+            log.warning("Relogin failed: %s", exc)
+            if is_ci:
                 raise RuntimeError(
-                    "Session restore failed in CI — cannot attempt fresh login. "
+                    "Session relogin failed in CI. "
                     "Run seed_session.py locally to create a fresh session."
                 ) from exc
             _delete_session()
 
-    # ── 2. Fresh login (ONLY for local dev — never in CI) ─────────────
-    if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
+    # ── 3. Fresh login (ONLY for local dev — never in CI) ────────────
+    #    Creates new device UUIDs → Instagram sees "new device" → blocks
+    if is_ci:
         raise RuntimeError(
-            "No valid session file in CI. Fresh login from datacenter IPs "
+            "No valid session in CI. Fresh login from datacenter IPs "
             "triggers 'new device' blocks. Run seed_session.py locally."
         )
 

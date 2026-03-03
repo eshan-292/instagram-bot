@@ -97,9 +97,10 @@ jobs:
         env:
           SESS_B64: ${{ secrets.INSTAGRAM_SESSION_B64_RHEA }}
 
-      # Create .env from the DOTENV secret
+      # Create .env from the DOTENV_RHEA secret
       - name: Create .env
-        run: echo "${{ secrets.DOTENV_RHEA }}" > instagram_influencer/.env
+        run: |
+          echo "${{ secrets.DOTENV_RHEA }}" > instagram_influencer/.env
 
       # Determine which session to run based on the trigger
       - name: Determine session
