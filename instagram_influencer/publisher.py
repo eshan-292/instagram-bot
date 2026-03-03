@@ -188,7 +188,14 @@ def _get_client(cfg: Config) -> Client:
                 cl.dump_settings(session_path)
                 return cl
 
-            log.warning("Saved session failed health check — will try fresh login")
+            log.warning("Saved session failed health check")
+            # In CI: NEVER fall through to fresh login — it triggers
+            # "new device" blocks from datacenter IPs.
+            if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
+                raise RuntimeError(
+                    "Session health check failed in CI. "
+                    "Run seed_session.py locally to create a fresh session."
+                )
             _delete_session()
         except ChallengeAbort:
             # FATAL: challenge detected — do NOT try fresh login, abort immediately
@@ -197,10 +204,21 @@ def _get_client(cfg: Config) -> Client:
             if _is_challenge_error(exc):
                 log.error("Challenge detected during session restore: %s", exc)
                 raise ChallengeAbort(str(exc)) from exc
-            log.warning("Saved session error: %s — will try fresh login", exc)
+            log.warning("Saved session error: %s", exc)
+            if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
+                raise RuntimeError(
+                    "Session restore failed in CI — cannot attempt fresh login. "
+                    "Run seed_session.py locally to create a fresh session."
+                ) from exc
             _delete_session()
 
-    # ── 2. Fresh login (only if no saved session) ──────────────────────
+    # ── 2. Fresh login (ONLY for local dev — never in CI) ─────────────
+    if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
+        raise RuntimeError(
+            "No valid session file in CI. Fresh login from datacenter IPs "
+            "triggers 'new device' blocks. Run seed_session.py locally."
+        )
+
     if not cfg.instagram_username or not cfg.instagram_password:
         raise RuntimeError(
             "No valid session file and no credentials set. "
@@ -221,7 +239,7 @@ def _get_client(cfg: Config) -> Client:
             "ChallengeRequired: Instagram needs verification. "
             "Run `python seed_session.py` on your laptop to create a session."
         ) from exc
-    log.info("Logged in via username/password")
+    log.info("Logged in via username/password (local dev)")
 
     # Validate fresh session
     if not _session_health_check(cl):
