@@ -151,15 +151,15 @@ jobs:
           echo "Trigger: ${{ github.event_name }}"
           echo "Persona: rhea"
 
-      # Run the bot (continue-on-error so state still gets committed)
+      # Videos are pre-rendered locally/manually — always pass --no-generate
       - name: Run bot
         id: bot
         continue-on-error: true
         run: |
           cd instagram_influencer
-          FLAGS="--session ${{ steps.session.outputs.type }} --persona rhea"
+          FLAGS="--session ${{ steps.session.outputs.type }} --no-generate"
           if [ "${{ steps.session.outputs.publish }}" = "false" ]; then
-            FLAGS="$FLAGS --no-publish --no-generate"
+            FLAGS="$FLAGS --no-publish"
           fi
           echo "Running: python orchestrator.py $FLAGS"
           python orchestrator.py $FLAGS
@@ -182,16 +182,28 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase || true
-          git add -f instagram_influencer/data/rhea/engagement_log.json \
-                     instagram_influencer/data/rhea/followers.json \
-                     instagram_influencer/data/rhea/content_queue.json \
-                     instagram_influencer/data/rhea/highlights.json \
-                     instagram_influencer/data/rhea/daily_report.md \
-                     instagram_influencer/data/rhea/.ig_session.json \
-                     "instagram_influencer/data/rhea/generated_images/IMAGE_PROMPTS.md" \
-                     "instagram_influencer/data/rhea/generated_images/pending/" 2>/dev/null || true
+          # Add each file individually to avoid one missing file blocking all staging
+          for f in \
+            instagram_influencer/data/rhea/engagement_log.json \
+            instagram_influencer/data/rhea/followers.json \
+            instagram_influencer/data/rhea/content_queue.json \
+            instagram_influencer/data/rhea/highlights.json \
+            instagram_influencer/data/rhea/daily_report.md \
+            instagram_influencer/data/rhea/.ig_session.json; do
+            [ -f "$f" ] && git add -f "$f" 2>/dev/null || true
+          done
+          # Generated images (directory may not exist)
+          [ -f "instagram_influencer/data/rhea/generated_images/IMAGE_PROMPTS.md" ] && \
+            git add -f "instagram_influencer/data/rhea/generated_images/IMAGE_PROMPTS.md" 2>/dev/null || true
+          [ -d "instagram_influencer/data/rhea/generated_images/pending" ] && \
+            git add -f "instagram_influencer/data/rhea/generated_images/pending/" 2>/dev/null || true
+          echo "Staged files:"
+          git diff --staged --name-only || true
           git diff --staged --quiet || (
             git commit -m "bot: rhea state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
-            git push
+            for attempt in 1 2 3; do
+              git pull --rebase origin main 2>/dev/null && git push && break
+              echo "Push attempt $attempt failed, retrying..."
+              sleep 2
+            done
           )
