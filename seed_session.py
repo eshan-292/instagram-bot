@@ -205,6 +205,25 @@ def seed_account(account_key: str, push: bool = False) -> bool:
 
     cl = _create_client()
 
+    # Reuse existing UUIDs from old session to avoid "new device" challenges.
+    # Instagram fingerprints devices by UUID — reusing them makes this look
+    # like the same device upgrading its app, not a brand-new device.
+    if session_path.exists():
+        try:
+            old = json.loads(session_path.read_text())
+            old_uuids = old.get("uuids", {})
+            if old_uuids:
+                cl.phone_id = old_uuids.get("phone_id", cl.phone_id)
+                cl.uuid = old_uuids.get("uuid", cl.uuid)
+                cl.client_session_id = old_uuids.get("client_session_id", cl.client_session_id)
+                cl.advertising_id = old_uuids.get("advertising_id", cl.advertising_id)
+                cl.android_device_id = old_uuids.get("android_device_id", cl.android_device_id)
+                cl.request_id = old_uuids.get("request_id", cl.request_id)
+                cl.tray_session_id = old_uuids.get("tray_session_id", cl.tray_session_id)
+                print(f"  Reusing existing device UUIDs (phone_id={cl.phone_id[:8]}...)")
+        except Exception as exc:
+            print(f"  Could not load old UUIDs: {exc} — using fresh UUIDs")
+
     try:
         cl.login(username, password)
     except ChallengeRequired:
