@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "sofia-001",
-      "status": "draft",
+      "status": "approved",
       "topic": "Mumbai penthouse golden hour luxury lookbook",
       "caption": "Golden hour. Mumbai skyline. Perfect outfit.\nNot planned. Just privileged.\nWhich look is your favorite? Comment the number.\nSave for your next luxury moment.",
       "alt_text": "Blonde Russian woman in luxury outfit on Mumbai penthouse terrace at golden hour",
@@ -12,9 +12,9 @@
         "Mumbai skyline.",
         "Which look?"
       ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/1.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/1_montage.mp4",
+      "is_reel": true,
       "post_type": "carousel",
       "scheduled_at": "2026-03-03T13:50:57Z",
       "notes": "penthouse terrace, golden light, city skyline background, luxury outfit | generated_by=template",
@@ -25,11 +25,19 @@
         "Look 3: white linen coord, oversized sunglasses, tan accessories",
         "Detail shots: jewelry, fabric textures, shoe close-ups",
         "Final: all three looks side by side, 'Which one?'"
+      ],
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/1.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/2.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/3.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/4.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/5.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/6.jpg"
       ]
     },
     {
       "id": "sofia-002",
-      "status": "draft",
+      "status": "approved",
       "topic": "GRWM for a luxury dinner at Taj Mumbai",
       "caption": "Getting ready for Taj.\nBecause first impressions are the only impressions.\nWhat would you wear to a 5-star dinner?\nSend this to someone who gets it.",
       "alt_text": "Russian woman getting ready for dinner at luxury hotel in Mumbai",
@@ -39,8 +47,8 @@
         "First impressions only.",
         "What would you wear?"
       ],
-      "image_url": "",
-      "video_url": null,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-002.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-002.mp4",
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-03T17:50:57Z",
@@ -48,7 +56,7 @@
     },
     {
       "id": "sofia-003",
-      "status": "draft",
+      "status": "approved",
       "topic": "Russian girl in Mumbai \u2014 5 things that surprised me",
       "caption": "5 things that surprised me about Mumbai.\nFrom Moscow to Maximum City.\nWhat would surprise YOU about Russia?\nComment \u2014 I want to know.",
       "alt_text": "Lifestyle carousel showing Russian woman experiencing Mumbai culture",
@@ -58,9 +66,9 @@
         "5 surprises.",
         "What would surprise you?"
       ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/1.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/1_montage.mp4",
+      "is_reel": true,
       "post_type": "carousel",
       "scheduled_at": "2026-03-03T21:50:57Z",
       "notes": "mix of Mumbai landmarks, street scenes, cultural moments | generated_by=template",
@@ -71,11 +79,19 @@
         "3: Mumbai never sleeps \u2014 truly 24/7",
         "4: The fashion is incredibly bold and colorful",
         "5: How fast Mumbai becomes home"
+      ],
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/1.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/2.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/3.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/4.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/5.jpg",
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/6.jpg"
       ]
     },
     {
       "id": "sofia-004",
-      "status": "draft",
+      "status": "approved",
       "topic": "All-black luxury outfit \u2014 power dressing",
       "caption": "All black. All power.\nSometimes the best outfit says nothing \u2014 but everyone notices.\nCould you pull this off?\nTag someone who only wears black.",
       "alt_text": "Elegant blonde woman in all-black luxury outfit in a minimalist setting",
@@ -85,7 +101,7 @@
         "All power.",
         "Everyone noticed."
       ],
-      "image_url": "",
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-004.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
@@ -94,7 +110,7 @@
     },
     {
       "id": "sofia-005",
-      "status": "draft",
+      "status": "approved",
       "topic": "Day in my life \u2014 luxury Mumbai edition",
       "caption": "Mumbai mornings hit different from a penthouse.\nCoffee. Outfit. Skyline.\nWhat does your morning look like?\nShare this with someone who deserves this life.",
       "alt_text": "Day in the life vlog-style reel of Russian woman living luxury life in Mumbai",
@@ -104,8 +120,8 @@
         "Coffee. Outfit. Skyline.",
         "Your morning vs mine."
       ],
-      "image_url": "",
-      "video_url": null,
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-005.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-005.mp4",
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T05:50:57Z",
