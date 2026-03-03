@@ -216,7 +216,8 @@ def image_to_video(
                 base = base[:-len("format=yuv420p")] + drawtext + ",format=yuv420p"
         return base
 
-    vf = _build_vf(use_text=True)
+    # Text overlays are now baked into Gemini-generated images — skip drawtext
+    vf = _build_vf(use_text=False)
 
     # Try to get background audio
     audio_path = None
