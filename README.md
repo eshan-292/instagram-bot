@@ -91,7 +91,7 @@ Post lifecycle: `draft` -> `approved` -> `ready` -> `posted` (IG + YT simultaneo
 - Every caption ends with a send/share CTA: "Send this to someone who...", "Tag your bestie"
 - `alt_text` on every post (accessibility + Instagram SEO)
 - 3-5 hashtags in caption (pyramid: 1 brand + 1 broad + 2 medium + 1 niche)
-- 15-20 extra hashtags posted as **first comment** for maximum discovery
+- **30 total hashtags** (Instagram max) — caption tags + first comment fills remaining slots with ~60% niche/persona + ~40% trending hashtags (fetched daily via Gemini, even if irrelevant — maximum exposure)
 - Like counts hidden on all posts (reduces comparison anxiety, boosts engagement)
 - No cross-platform mentions in captions (IG and YT kept separate)
 
@@ -358,13 +358,16 @@ The bot mimics real human usage patterns to avoid detection:
 
 ## Engagement Strategy (2026 Algorithm)
 
-### Big Account Priority (maximum visibility)
+### Big Account Filter (10K+ followers only)
 
-All engagement is sorted by account size — big accounts first. Commenting on a 50K+ account's post means our profile is seen by thousands of their followers.
+All engagement is **filtered to big pages only** — accounts below 10K followers are skipped entirely. Commenting on big accounts (10K-1M+) means our profile is seen by thousands of their followers. This is the #1 growth driver.
 
-- **Hashtag mining**: Fetches BOTH top posts (bigger accounts) + recent posts, sorted by follower count
-- **Explore feed**: Sorted by reach — engage with biggest accounts first
-- **Like/comment on ALL** — but big accounts get priority since budget is spent top-down
+- **Hashtag mining**: Fetches BOTH top posts + recent posts → filtered to 10K+ follower accounts only
+- **Explore feed**: Filtered to 10K+ follower accounts only, sorted by reach
+- **Post-publish burst**: Only engages big accounts for maximum visibility
+- **Warm audience**: Unfiltered (pre-vetted niche followers, always high quality)
+- **Configurable thresholds**: `ENGAGEMENT_MIN_FOLLOWERS_HASHTAG` (default 10K), `ENGAGEMENT_MIN_FOLLOWERS_WARM` (default 0)
+- **Like count fallback**: When follower count isn't available, uses like count as proxy (500 likes ≈ 10K+ followers)
 - **Smart follow**: Only follow micro-influencers (1K-50K followers, active, public) — 20-30% follow-back rate vs 5% for random
 
 ### Warm Audience Targeting (highest ROI)
@@ -384,7 +387,9 @@ Engages followers of similar niche accounts. These users already consume similar
 | **Snap zoom hook** | +40-60% 3-sec hold rate | Visual punch in first 0.5s |
 | **Post-publish burst** | +50-100% reach per post | Pin CTA comment + instant story reshare (post image + link sticker) + mini engagement burst |
 | **Viral auto-boost** | Snowball viral posts | Detects 2x+ avg engagement -> reshare to story + boost |
+| **DM replies** | +15-25% retention | AI replies to incoming DMs — contextual, persona-voice, 25/day limit |
 | ~~**Comment-to-DM**~~ | ~~5-10x follow-back rate~~ | **Disabled** -- AI DMs sound unnatural and cause unfollows |
+| **Trending hashtags** | +30-50% discovery | Gemini fetches 20 trending hashtags daily, fills all 30 slots |
 | **Power user targeting** | +20-30% follow-back rate | Prioritize micro-influencers (1K-50K) |
 | **Carousel montage** | +24% shares, +19% reach | 5-slide carousel -> 30s Reel with transitions |
 | **Viral hook patterns** | Higher scroll-stop rate | POV:, numbers, curiosity gaps |
@@ -400,6 +405,7 @@ Engages followers of similar niche accounts. These users already consume similar
 | Follows | 200 | Smart targeting: only 1K-50K micro-influencers (20-30% follow-back) |
 | Story views | 150 | 100% view, 100% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
+| DM replies | 25 | AI-generated contextual replies to incoming DMs (Gemini) |
 | Unfollows | 60/run | After 2+ days |
 | ~~Welcome DMs~~ | ~~15/day~~ | **Disabled** -- caused unfollows |
 | ~~Comment DMs~~ | ~~8/day~~ | **Disabled** -- sounded unnatural |
@@ -552,6 +558,10 @@ End-of-day summary at 23:15 IST with engagement stats, posts published, YouTube 
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `ENGAGEMENT_TARGET_ACCOUNTS` | (from persona JSON) | Comma-separated similar accounts for warm targeting |
+| `ENGAGEMENT_MIN_FOLLOWERS_HASHTAG` | `10000` | Min followers for hashtag/explore engagement targets |
+| `ENGAGEMENT_MIN_FOLLOWERS_WARM` | `0` | Min followers for warm audience targets (0 = unfiltered) |
+| `ENGAGEMENT_DM_REPLIES_ENABLED` | `true` | Enable AI DM reply automation |
+| `ENGAGEMENT_DAILY_DM_REPLIES` | `25` | Max DM replies/day |
 
 **Audio:**
 | Variable | Default | Description |
