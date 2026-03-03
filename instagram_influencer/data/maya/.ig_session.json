@@ -1,24 +1,23 @@
 {
     "uuids": {
-        "phone_id": "0bf828f6-32b2-4ad8-8ea2-93faf181d075",
-        "uuid": "0828a95f-7d6d-4081-a1be-176120a0d8aa",
-        "client_session_id": "762f23a9-1c7b-4179-8f60-2f182b8d5572",
-        "advertising_id": "baf59c11-e6b4-4160-bec0-748108c9b82d",
-        "android_device_id": "android-3b09bc4435e9fc8f",
-        "request_id": "c779a45e-6b2f-4787-96ec-b8c66ce6c1a8",
-        "tray_session_id": "8775c4a6-8290-4485-af2a-8c04d181a984"
+        "phone_id": "3b6a966f-c9c5-4ad6-8070-d17de1252bc0",
+        "uuid": "468f891c-b0c2-45a1-901f-a55647e92160",
+        "client_session_id": "260ed86b-e728-4363-93b8-f062f6872940",
+        "advertising_id": "5ed0819a-f2e1-4cd4-b054-5224cf4fdadc",
+        "android_device_id": "android-17c92c92e9552ed0",
+        "request_id": "da49d778-1db4-468c-989f-1e2fb8ddd33a",
+        "tray_session_id": "6eed8030-4d66-4efc-8c69-58f66a2859a5"
     },
-    "mid": "aaVI_gABAAEYKfYpW8NMLEiRYaQw",
+    "mid": "aaVLyQABAAEcRBG8l-c_cmQsElj9",
     "ig_u_rur": null,
     "ig_www_claim": null,
     "authorization_data": {
         "ds_user_id": "78270708577",
-        "sessionid": "78270708577%3ANRwLd7dsOm3ZZ9%3A29%3AAYjYMCG-SY5QlruB6RNoN8h_dOnn-MdTMvZMMzmOJQ"
+        "sessionid": "78270708577%3ASvyvVvAF35uw7y%3A22%3AAYgB-349apenYYGlU-AYlyQ4ig0BzxBcI7wM7X_WcQ"
     },
     "cookies": {},
-    "last_login": 1772439830.582313,
+    "last_login": 1772440557.046299,
     "device_settings": {
-        "app_version": "357.0.0.25.101",
         "android_version": 34,
         "android_release": "14",
         "dpi": "480dpi",
@@ -27,6 +26,7 @@
         "device": "dm1q",
         "model": "SM-S911B",
         "cpu": "qcom",
+        "app_version": "357.0.0.25.101",
         "version_code": "608720130"
     },
     "user_agent": "Instagram 357.0.0.25.101 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 608720130)",
