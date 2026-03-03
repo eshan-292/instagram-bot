@@ -228,6 +228,10 @@ def _remove_watermark(image_path: str) -> None:
             return  # image too small to bother
 
         cropped = img.crop((0, 0, w, h - crop_px))
+        # JPEG doesn't support RGBA — convert to RGB first to avoid
+        # truncating the file to 0 bytes on save failure.
+        if cropped.mode in ("RGBA", "P", "LA"):
+            cropped = cropped.convert("RGB")
         cropped.save(image_path, quality=95)
         marker.touch()  # mark as processed so we don't re-crop on next run
         log.info("Removed watermark from %s (cropped %dpx off bottom)", Path(image_path).name, crop_px)
