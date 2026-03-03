@@ -11,7 +11,8 @@ import random
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from config import DEFAULT_QUEUE_FILE, Config, load_config, setup_logging
+from config import (DEFAULT_QUEUE_FILE, GENERATED_IMAGES_DIR, REFERENCE_DIR,
+                    SESSION_FILE, Config, load_config, setup_logging)
 from engagement import run_engagement, run_session
 from generator import generate_content
 from image import fill_image_urls
@@ -326,14 +327,17 @@ def main() -> int:
     except ModuleNotFoundError:
         pass
 
-    import os as _os
-    _persona_val = _os.getenv("PERSONA", "(NOT SET)")
-    # GitHub masks secret values, so print length + first char to debug
-    print(f"DEBUG_PERSONA: len={len(_persona_val)}, first={_persona_val[0] if _persona_val else '?'}, .env={_os.path.exists('.env')}")
-    # Also print the data dir that will be used
-    from persona import persona_data_dir, get_persona
-    _p = get_persona()
-    print(f"DEBUG_DATADIR: {persona_data_dir(_p)}")
+    # CRITICAL: Reset the persona singleton AND lazy paths so they re-read
+    # the PERSONA env var from .env.  Module imports may have triggered
+    # get_persona() BEFORE load_dotenv(), caching the wrong persona
+    # (defaulting to "maya").
+    from persona import reset_persona
+    reset_persona()
+    # Also reset lazy path caches that may have resolved to the wrong persona dir
+    DEFAULT_QUEUE_FILE.reset()
+    SESSION_FILE.reset()
+    REFERENCE_DIR.reset()
+    GENERATED_IMAGES_DIR.reset()
 
     parser = argparse.ArgumentParser(description="Instagram + YouTube bot pipeline")
     parser.add_argument("--queue-file", default=str(DEFAULT_QUEUE_FILE))

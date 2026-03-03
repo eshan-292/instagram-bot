@@ -32,6 +32,9 @@ class _LazyPath:
     def __init__(self, resolver):
         self._resolver = resolver
         self._path = None
+    def reset(self):
+        """Clear cached path so next access re-resolves (e.g. after persona change)."""
+        self._path = None
     def __fspath__(self):
         if self._path is None: self._path = self._resolver()
         return str(self._path)
