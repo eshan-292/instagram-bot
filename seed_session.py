@@ -8,8 +8,9 @@ the bot can use in GitHub Actions without triggering new challenges.
 Usage:
     python seed_session.py                  # Interactive — pick an account
     python seed_session.py maya             # Seed Maya's session
+    python seed_session.py choosewisely moderntruths sofia rhea  # Seed new accounts
     python seed_session.py sat1 sat2 sat3   # Seed multiple satellites
-    python seed_session.py --all            # Seed all 5 accounts
+    python seed_session.py --all            # Seed all 9 accounts
     python seed_session.py maya --push      # Seed + push to GitHub secret
 """
 
@@ -50,6 +51,30 @@ ACCOUNTS = {
         "data_dir": IG_DIR / "data" / "aryan",
         "env_file": SCRIPT_DIR / "env-templates" / "aryan.env",
         "secret_name": "INSTAGRAM_SESSION_B64_ARYAN",
+    },
+    "choosewisely": {
+        "persona_id": "choosewisely",
+        "data_dir": IG_DIR / "data" / "choosewisely",
+        "env_file": SCRIPT_DIR / "env-templates" / "choosewisely.env",
+        "secret_name": "INSTAGRAM_SESSION_B64_CHOOSEWISELY",
+    },
+    "moderntruths": {
+        "persona_id": "moderntruths",
+        "data_dir": IG_DIR / "data" / "moderntruths",
+        "env_file": SCRIPT_DIR / "env-templates" / "moderntruths.env",
+        "secret_name": "INSTAGRAM_SESSION_B64_MODERNTRUTHS",
+    },
+    "sofia": {
+        "persona_id": "sofia",
+        "data_dir": IG_DIR / "data" / "sofia",
+        "env_file": SCRIPT_DIR / "env-templates" / "sofia.env",
+        "secret_name": "INSTAGRAM_SESSION_B64_SOFIA",
+    },
+    "rhea": {
+        "persona_id": "rhea",
+        "data_dir": IG_DIR / "data" / "rhea",
+        "env_file": SCRIPT_DIR / "env-templates" / "rhea.env",
+        "secret_name": "INSTAGRAM_SESSION_B64_RHEA",
     },
     "sat1": {
         "persona_id": "sat1",
