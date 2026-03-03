@@ -9579,6 +9579,21 @@
       "type": "likes",
       "target": "3838001226643025409",
       "at": "2026-03-03T14:28:55Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "1w6WA7LaCOc",
+      "at": "2026-03-03T15:58:59Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "9lwbVkNn_28",
+      "at": "2026-03-03T15:59:33Z"
+    },
+    {
+      "type": "yt_likes",
+      "target": "yP-ZrEtMUik",
+      "at": "2026-03-03T16:00:12Z"
     }
   ]
 }
