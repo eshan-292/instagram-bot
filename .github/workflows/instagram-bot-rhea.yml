@@ -1,0 +1,197 @@
+name: Instagram Bot (Rhea)
+
+on:
+  schedule:
+    # All cron times in UTC. IST = UTC + 5:30
+    # Strategy: many small sessions = human phone-check pattern
+    # 1 post/day at prime time + engagement spread throughout
+    # Each session has 0-4min startup jitter built into the code
+    # Minute offsets: 23 and 53
+
+    # OVERNIGHT
+    - cron: '23 19 * * *'  # 00:53 IST — explore
+    - cron: '23 21 * * *'  # 02:53 IST — warm_audience
+    - cron: '23 23 * * *'  # 04:53 IST — hashtags
+
+    # DAYTIME
+    - cron: '23 2 * * *'   # 07:53 IST — morning
+    - cron: '23 3 * * *'   # 08:53 IST — explore
+    - cron: '23 4 * * *'   # 09:53 IST — hashtags
+    - cron: '23 5 * * *'   # 10:53 IST — warm_audience
+    - cron: '23 7 * * *'   # 12:53 IST — explore
+    - cron: '23 8 * * *'   # 13:53 IST — hashtags
+    - cron: '23 9 * * *'   # 14:53 IST — warm_audience
+    - cron: '23 10 * * *'  # 15:53 IST — explore
+    - cron: '23 11 * * *'  # 16:53 IST — hashtags
+    - cron: '23 12 * * *'  # 17:53 IST — warm_audience
+    - cron: '23 13 * * *'  # 18:53 IST — stories
+    - cron: '23 14 * * *'  # 19:53 IST — PUBLISH + explore (publish=true)
+    - cron: '53 14 * * *'  # 20:23 IST — hashtags
+    - cron: '23 15 * * *'  # 20:53 IST — boost
+    - cron: '53 15 * * *'  # 21:23 IST — replies
+    - cron: '23 16 * * *'  # 21:53 IST — cross_promo
+    - cron: '53 16 * * *'  # 22:23 IST — maintenance
+    - cron: '23 17 * * *'  # 22:53 IST — maintenance
+    - cron: '53 17 * * *'  # 23:23 IST — report
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'Session type'
+        required: true
+        default: 'full'
+        type: choice
+        options: [morning, replies, hashtags, explore, maintenance, stories, report, full, warm_audience, boost, cross_promo]
+      publish:
+        description: 'Also publish a post?'
+        type: boolean
+        default: false
+
+# Only one bot run at a time (queue others, don't cancel)
+concurrency:
+  group: instagram-bot-rhea
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Restore Instagram session from cache (avoids re-login each run)
+      - name: Restore session cache
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: instagram_influencer/data/rhea/.ig_session.json
+          key: ig-session-rhea
+          restore-keys: ig-session-rhea
+
+      # Seed session from secret if no cache was restored
+      - name: Seed session from secret
+        run: |
+          mkdir -p instagram_influencer/data/rhea
+          if [ -f instagram_influencer/data/rhea/.ig_session.json ]; then
+            echo "Session restored from cache"
+          elif [ -n "$SESS_B64" ]; then
+            echo "$SESS_B64" | base64 -d > instagram_influencer/data/rhea/.ig_session.json
+            echo "Seeded session from secret"
+          else
+            echo "WARNING: No session available — bot will attempt fresh login"
+          fi
+        env:
+          SESS_B64: ${{ secrets.INSTAGRAM_SESSION_B64_RHEA }}
+
+      # Create .env from the DOTENV secret
+      - name: Create .env
+        run: echo "${{ secrets.DOTENV_RHEA }}" > instagram_influencer/.env
+
+      # Determine which session to run based on the trigger
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+            if [ "${{ inputs.publish }}" = "true" ]; then
+              echo "publish=true" >> $GITHUB_OUTPUT
+            else
+              echo "publish=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            # Scheduled run — map UTC hour+minute to session type
+            # Uses HHMM format for precise mapping with multiple sessions per hour
+            # Only 19:53 IST (UTC 1423) publishes — 1 post/day like a normal person
+            HHMM=$(date -u +%H%M)
+            case "${HHMM}" in
+              192*) echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              212*) echo "type=warm_audience"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              232*) echo "type=hashtags"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              022*) echo "type=morning"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              032*) echo "type=explore"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              042*) echo "type=hashtags"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              052*) echo "type=warm_audience"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              072*) echo "type=explore"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              082*) echo "type=hashtags"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              092*) echo "type=warm_audience"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              102*) echo "type=explore"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              112*) echo "type=hashtags"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              122*) echo "type=warm_audience"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              132*) echo "type=stories"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              142*) echo "type=explore"         >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              145*) echo "type=hashtags"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              152*) echo "type=boost"           >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              155*) echo "type=replies"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              162*) echo "type=cross_promo"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              165*) echo "type=maintenance"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              172*) echo "type=maintenance"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              175*) echo "type=report"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              *)    echo "type=hashtags"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "Publish: ${{ steps.session.outputs.publish }}"
+          echo "Trigger: ${{ github.event_name }}"
+          echo "Persona: rhea"
+
+      # Run the bot (continue-on-error so state still gets committed)
+      - name: Run bot
+        id: bot
+        continue-on-error: true
+        run: |
+          cd instagram_influencer
+          FLAGS="--session ${{ steps.session.outputs.type }} --persona rhea"
+          if [ "${{ steps.session.outputs.publish }}" = "false" ]; then
+            FLAGS="$FLAGS --no-publish --no-generate"
+          fi
+          echo "Running: python orchestrator.py $FLAGS"
+          python orchestrator.py $FLAGS
+
+      - name: Check bot result
+        if: steps.bot.outcome == 'failure'
+        run: echo "::warning::Bot run failed — check logs above"
+
+      # Save updated session to cache
+      - name: Save session cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: instagram_influencer/data/rhea/.ig_session.json
+          key: ig-session-rhea-${{ github.run_id }}
+
+      # Commit updated state files + session back to the repo
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase || true
+          git add -f instagram_influencer/data/rhea/engagement_log.json \
+                     instagram_influencer/data/rhea/followers.json \
+                     instagram_influencer/data/rhea/content_queue.json \
+                     instagram_influencer/data/rhea/highlights.json \
+                     instagram_influencer/data/rhea/daily_report.md \
+                     instagram_influencer/data/rhea/.ig_session.json \
+                     "instagram_influencer/data/rhea/generated_images/IMAGE_PROMPTS.md" \
+                     "instagram_influencer/data/rhea/generated_images/pending/" 2>/dev/null || true
+          git diff --staged --quiet || (
+            git commit -m "bot: rhea state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            git push
+          )
