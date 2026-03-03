@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "mt-001",
-      "status": "approved",
+      "status": "failed",
       "topic": "Man in a stylish cafe, looking confused after a date, wondering why she lost interest.",
       "caption": "Harsh truth: 3 reasons she lost interest. It wasn't your looks, your money, or even your 'niceness'. It was your lack of depth and presence. Did you make her feel truly seen, or just another conquest? Send this to the guy who keeps asking 'why did she ghost?'.",
       "alt_text": "A series of images showing a man's confusion and a woman's disinterest during and after a date, illustrating reasons for lost attraction.",
@@ -31,7 +31,8 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/6.jpg"
-      ]
+      ],
+      "publish_error": "Session restore failed in CI \u2014 cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
     },
     {
       "id": "mt-002",
