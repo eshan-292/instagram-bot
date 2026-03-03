@@ -419,7 +419,10 @@ def _do_upload(cl: Client, caption: str, image_url: str,
             image_url = str(valid_paths[0])
 
     # Try Reel upload if we have a video
-    if is_reel and video_url:
+    # Use post_type as primary reel indicator (is_reel is legacy boolean)
+    want_reel = is_reel or post_type == "reel"
+
+    if want_reel and video_url:
         local_video, is_temp_video = _resolve_media(video_url)
         try:
             # Use original image as thumbnail
@@ -480,14 +483,24 @@ def _do_upload(cl: Client, caption: str, image_url: str,
         except Exception as exc:
             if _is_login_required_error(exc):
                 raise  # let the caller handle login_required
-            log.warning("Reel upload failed, falling back to photo: %s", exc)
+            # NEVER silently fall back to photo for reels — this causes
+            # reels to publish as photos which kills reach.
+            log.error("Reel upload FAILED (NOT falling back to photo): %s", exc)
+            raise
         finally:
             if is_temp_video:
                 _safe_remove(local_video)
             if thumbnail and is_temp_thumb:
                 _safe_remove(thumbnail)
 
-    # Fallback: photo upload
+    # If this was supposed to be a reel but no video_url exists, error out
+    # instead of silently publishing as a photo
+    if want_reel and not video_url:
+        log.error("Post is type=reel but has no video_url — cannot publish as reel. "
+                   "Run the pipeline again to generate the video first.")
+        raise RuntimeError("Reel post has no video_url — cannot publish as photo fallback")
+
+    # Photo upload (only for post_type="single" or "photo")
     if not image_url:
         raise RuntimeError("No media to publish (no image_url)")
 
