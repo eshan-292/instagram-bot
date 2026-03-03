@@ -1,0 +1,11 @@
+=== cw-001 | SINGLE ===
+Topic: Gym or Party — which defines your weekends?
+Caption: Gym or Party.
+Pick one. No 'both.'
+Comment below. Let's see who's real.
+Tag someone who always picks wrong.
+
+Place at: generated_images/pending/cw-001.jpg
+
+--- Prompt ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Gym or Party — which defines your weekends?. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: split-screen: left=gym/discipline, right=party/nightlife, bold text overlay.

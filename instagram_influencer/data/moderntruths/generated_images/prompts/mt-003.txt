@@ -1,0 +1,8 @@
+=== mt-003 | SINGLE ===
+Topic: Minimalist dark background with bold white text revealing a harsh truth about 'space'.
+Caption: This will hurt. 'I need space' is rarely about *space*. It's about disinterest, disengagement, or another option they're exploring. What are you clinging to? Screenshot this before you fall for it again.
+
+Place at: generated_images/pending/mt-003.jpg
+
+--- Prompt ---
+Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. Scene: Minimalist dark background with bold white text revealing a harsh truth about 'space'.. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: High contrast, sharp, sans-serif typography. The text should be the sole focus, commanding attention. No other elements..

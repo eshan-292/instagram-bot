@@ -1,1 +1,123 @@
-{"posts": []}
+{
+  "posts": [
+    {
+      "id": "cw-001",
+      "status": "draft",
+      "topic": "Gym or Party \u2014 which defines your weekends?",
+      "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
+      "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
+      "youtube_title": "Gym or Party - Which Defines You?",
+      "video_text": [
+        "Gym or Party?",
+        "Pick ONE.",
+        "Comment your answer"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-03T13:50:44Z",
+      "notes": "split-screen: left=gym/discipline, right=party/nightlife, bold text overlay | generated_by=template"
+    },
+    {
+      "id": "cw-002",
+      "status": "draft",
+      "topic": "10 binary choices that reveal who you really are",
+      "caption": "10 choices. Zero skipping.\nSwipe through and comment your answers.\nThis will expose you.\nSend to someone who thinks they know themselves.",
+      "alt_text": "Carousel of binary choice graphics with bold typography on dark backgrounds",
+      "youtube_title": "10 Choices That Reveal Your True Self",
+      "video_text": [
+        "10 choices.",
+        "Zero skipping.",
+        "Comment ALL your answers"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-03T17:50:44Z",
+      "notes": "10-slide carousel, each slide one binary choice, consistent design template | generated_by=template",
+      "slides": [
+        "Hook: 'Choose Wisely' logo with '10 choices that expose you'",
+        "Morning person OR Night owl?",
+        "Save OR Spend?",
+        "Career OR Passion?",
+        "Loyalty OR Honesty?",
+        "City OR Mountains?"
+      ]
+    },
+    {
+      "id": "cw-003",
+      "status": "draft",
+      "topic": "Old money vs New money aesthetic",
+      "caption": "Old money or New money.\nWhich vibe are you?\nComment 1 or 2.\nSend this to someone who needs a reality check.",
+      "alt_text": "Split comparison of old money subtle luxury versus new money flashy aesthetic",
+      "youtube_title": "Old Money vs New Money - Which Are You?",
+      "video_text": [
+        "Old money or New money?",
+        "1 or 2?",
+        "Tag someone"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-03T21:50:44Z",
+      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics | generated_by=template"
+    },
+    {
+      "id": "cw-004",
+      "status": "draft",
+      "topic": "Would you rather: 5 hard life scenarios",
+      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
+      "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
+      "youtube_title": "5 Impossible Would You Rather Questions",
+      "video_text": [
+        "Would you rather?",
+        "5 impossible choices",
+        "Comment 1 or 2"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-04T01:50:44Z",
+      "notes": "5-slide carousel, each with a difficult binary choice, dark moody design | generated_by=template",
+      "slides": [
+        "Hook: 'Would You Rather?' in bold neon text",
+        "Know when you'll die OR Know how you'll die?",
+        "Be famous but broke OR Rich but unknown?",
+        "Read minds OR Be invisible?",
+        "Relive the past OR See the future?",
+        "CTA: 'Comment your answers. Tag someone.'"
+      ]
+    },
+    {
+      "id": "cw-005",
+      "status": "draft",
+      "topic": "Rate your life \u2014 honest score check",
+      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
+      "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
+      "youtube_title": "Rate Your Life - Honest Score Check",
+      "video_text": [
+        "Rate your life.",
+        "Be honest.",
+        "Total in comments"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-04T05:50:44Z",
+      "notes": "each slide rates one life area (fitness, career, relationships, finances, mental health) on 1-10 scale | generated_by=template",
+      "slides": [
+        "Hook: 'Rate your life. No lying.'",
+        "Fitness: 1-10?",
+        "Career: 1-10?",
+        "Relationships: 1-10?",
+        "Finances: 1-10?",
+        "Mental health: 1-10?"
+      ]
+    }
+  ]
+}

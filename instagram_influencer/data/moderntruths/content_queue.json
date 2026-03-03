@@ -1,1 +1,109 @@
-{"posts": []}
+{
+  "posts": [
+    {
+      "id": "mt-001",
+      "status": "draft",
+      "topic": "Man in a stylish cafe, looking confused after a date, wondering why she lost interest.",
+      "caption": "Harsh truth: 3 reasons she lost interest. It wasn't your looks, your money, or even your 'niceness'. It was your lack of depth and presence. Did you make her feel truly seen, or just another conquest? Send this to the guy who keeps asking 'why did she ghost?'.",
+      "alt_text": "A series of images showing a man's confusion and a woman's disinterest during and after a date, illustrating reasons for lost attraction.",
+      "youtube_title": "3 Brutal Reasons She Lost Interest (It's Not What You Think)",
+      "video_text": [
+        "Harsh truth: 3 reasons she lost interest. It"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-03T13:50:15Z",
+      "notes": "Cinematic, moody lighting. Focus on body language and subtle expressions of detachment/confusion. Urban cafe setting. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Man alone in an upscale cafe, looking at his phone with a puzzled/frustrated expression. Empty coffee cup on the table. He's wearing a slightly rumpled but stylish shirt.",
+        "Woman looking subtly bored during a date at a restaurant, eyes subtly rolling, while man talks excessively and animatedly. She's wearing a chic dress.",
+        "Man fidgeting, checking his phone discreetly under the table, distracted while a woman across from him is speaking to him with a hopeful expression.",
+        "Woman walking away from man on a city street, looking detached and uninterested, phone in hand. Man in background looks bewildered and slighted.",
+        "Man standing alone in a dimly lit bar, looking defeated, phone in hand, contemplating. The bar is mostly empty around him.",
+        "Text slide: 'Stop trying to 'win' her. Start being genuinely present. That's the game changer.' Bold white text on a dark, blurred background."
+      ]
+    },
+    {
+      "id": "mt-002",
+      "status": "draft",
+      "topic": "Woman sitting alone in a bustling cafe, waiting, looking at her phone expectantly, feeling like a backup option.",
+      "caption": "5 brutal signs: You're not the main character in their story; you're just a filler episode. They keep you around for convenience, not commitment. Are you tired of being Plan B? Tag the friend who needs this brutal reality check before it's too late.",
+      "alt_text": "A woman looking dejected, sitting alone in a bustling cafe, scrolling on her phone, illustrating the feeling of being a backup option.",
+      "youtube_title": "5 Signs You're Just Their Backup Plan (Harsh Truth)",
+      "video_text": [
+        "5 brutal signs.",
+        "You're their backup.",
+        "Share before it's too late."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-03T17:50:15Z",
+      "notes": "Soft, slightly melancholic lighting. Focus on isolation and silent expectation amidst a busy environment. Her clothes are neat but unremarkable, conveying a sense of waiting. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-003",
+      "status": "draft",
+      "topic": "Minimalist dark background with bold white text revealing a harsh truth about 'space'.",
+      "caption": "This will hurt. 'I need space' is rarely about *space*. It's about disinterest, disengagement, or another option they're exploring. What are you clinging to? Screenshot this before you fall for it again.",
+      "alt_text": "A stark image with white text on black background stating 'What 'I need space' means: They don't want you. They want options.'",
+      "youtube_title": "\"I Need Space\" TRUTH (You Won't Like It)",
+      "video_text": [
+        "This will hurt. 'I need space' is rarely"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-03T21:50:15Z",
+      "notes": "High contrast, sharp, sans-serif typography. The text should be the sole focus, commanding attention. No other elements. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-004",
+      "status": "draft",
+      "topic": "Woman looking contemplative, possibly at a crossroads, overwhelmed by a pattern of attracting toxic partners.",
+      "caption": "Read that again. Your 3 patterns attract toxicity. You're not a magnet for bad luck; you're a pattern-matcher for unresolved wounds. Are you perpetuating your own suffering by avoiding the mirror? Save this if you're finally ready to break the cycle.",
+      "alt_text": "A series of images depicting a woman reflecting on painful relationship patterns and the psychology behind attracting toxic partners, leading to self-realization.",
+      "youtube_title": "Why You Attract Toxic Partners (3 Hidden Patterns)",
+      "video_text": [
+        "Read that again. Your 3 patterns attract toxicity."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-04T01:50:15Z",
+      "notes": "Introspective, slightly dark but with hopeful undertones. Focus on emotional depth and subtle shifts in expression. Natural, soft light. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Woman sitting alone in a dimly lit apartment, head in hands, looking distressed. Clothes are casual and worn, suggesting comfort and vulnerability.",
+        "Text slide: 'The Unresolved Wound: Your blueprint for attraction.' Bold text on a blurred, slightly melancholic background.",
+        "A blurred, distant image of two people arguing, with a woman in the foreground looking conflicted and exhausted, not engaging directly with the conflict.",
+        "Text slide: 'The Comfort Zone: Familiar pain feels safer than unknown healing.' Stark text on a desaturated, introspective background.",
+        "Woman looking thoughtfully at her reflection in a large, antique mirror, a slight grimace of realization forming on her face. She's wearing a simple, dark top.",
+        "Text slide: 'The Cycle Breaker: Awareness is the first step. Action is liberation.' Powerful text on a brighter, more hopeful background."
+      ]
+    },
+    {
+      "id": "mt-005",
+      "status": "draft",
+      "topic": "Man persistently trying to get attention from a woman who is clearly disengaged at a lively bar or social gathering.",
+      "caption": "She's not yours. Thinking 'hard to get' is a game you can win. It's not. It's disinterest, repackaged. Are you chasing a ghost, or facing reality? Send this to the friend who needs to stop pursuing lost causes.",
+      "alt_text": "A man attempting to engage a woman who clearly shows signs of disinterest and avoidance at a social event, illustrating a one-sided chase.",
+      "youtube_title": "She's Not Hard To Get. She's Not Interested.",
+      "video_text": [
+        "She's not yours.",
+        "She's not interested.",
+        "Send this."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-04T05:50:15Z",
+      "notes": "High-energy setting (bar/club), but contrast with the woman's aloofness and the man's oblivious persistence. Dynamic shots, focus on body language. The woman is dressed stylishly but her expression is blank. | generated_by=gemini:gemini-2.5-flash"
+    }
+  ]
+}

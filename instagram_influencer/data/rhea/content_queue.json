@@ -1,1 +1,115 @@
-{"posts": []}
+{
+  "posts": [
+    {
+      "id": "rhea-001",
+      "status": "draft",
+      "topic": "Full glute workout \u2014 5 exercises that actually grow your glutes",
+      "caption": "5 exercises. Your glutes will thank you.\nSave this and try it tomorrow.\nWhich exercise is your favorite? Comment below.\nSend to your gym partner.",
+      "alt_text": "Fit Indian woman demonstrating glute exercises in a modern gym",
+      "youtube_title": "5 Glute Exercises That Actually Work - Full Workout",
+      "video_text": [
+        "5 exercises.",
+        "Your glutes will thank you.",
+        "Save and try tomorrow"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-03T13:51:11Z",
+      "notes": "gym setting, demonstrating each exercise with proper form | generated_by=template",
+      "slides": [
+        "Hook: Rhea in gym, confident stance, 'Glute Day. No excuses.'",
+        "Exercise 1: Hip thrusts \u2014 proper form shown",
+        "Exercise 2: Romanian deadlifts \u2014 focus on stretch",
+        "Exercise 3: Bulgarian split squats \u2014 each leg",
+        "Exercise 4: Cable kickbacks \u2014 controlled movement",
+        "Exercise 5: Glute bridges \u2014 3-second hold"
+      ]
+    },
+    {
+      "id": "rhea-002",
+      "status": "draft",
+      "topic": "What I eat in a day \u2014 130g protein, all Indian food",
+      "caption": "Full day of eating. 130g protein.\nAll Indian food. No expensive supplements.\nWhat's your go-to protein source? Comment below.\nSave this for meal prep Sunday.",
+      "alt_text": "Indian woman showing high-protein Indian meals throughout the day",
+      "youtube_title": "What I Eat In A Day - 130g Protein All Indian Food",
+      "video_text": [
+        "130g protein.",
+        "All Indian food.",
+        "Save for meal prep"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-03T17:51:11Z",
+      "notes": "food close-ups, kitchen setting, clean presentation | generated_by=template",
+      "slides": [
+        "Hook: Rhea with meal prep containers, '130g protein. Indian food only.'",
+        "Meal 1: Moong dal cheela + egg whites + green chutney",
+        "Meal 2: Chicken curry + brown rice + raita",
+        "Meal 3: Paneer tikka + multigrain roti + salad",
+        "Snack: Masala peanuts + banana + curd",
+        "Total macros breakdown card"
+      ]
+    },
+    {
+      "id": "rhea-003",
+      "status": "draft",
+      "topic": "6-month transformation \u2014 discipline over motivation",
+      "caption": "6 months. Same girl. Different discipline.\nMotivation fades. Habits don't.\nCould you commit to 6 months?\nScreenshot this as your reminder.",
+      "alt_text": "Before and after fitness transformation photo of Indian woman",
+      "youtube_title": "My 6 Month Fitness Transformation - No Shortcuts",
+      "video_text": [
+        "6 months.",
+        "Same girl. Different discipline.",
+        "Screenshot this"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-03T21:51:11Z",
+      "notes": "before/after comparison, natural lighting, confident energy | generated_by=template"
+    },
+    {
+      "id": "rhea-004",
+      "status": "draft",
+      "topic": "Morning gym routine \u2014 5 AM club no excuses",
+      "caption": "5 AM. Dark outside. Gym lights on.\nThis is where it starts.\nWhat time do you train? Comment below.\nSend to someone who keeps saying 'tomorrow'.",
+      "alt_text": "Young Indian woman working out in early morning at a gym",
+      "youtube_title": "My 5AM Morning Gym Routine - No Excuses",
+      "video_text": [
+        "5 AM.",
+        "Dark outside. Gym lights on.",
+        "This is where it starts."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-04T01:51:11Z",
+      "notes": "early morning gym vibes, low lighting, focused energy | generated_by=template"
+    },
+    {
+      "id": "rhea-005",
+      "status": "draft",
+      "topic": "Upper body workout for toned arms \u2014 complete routine",
+      "caption": "Upper body day.\nBecause strong arms never go out of style.\nSave this for your next arm day.\nTag someone who skips upper body.",
+      "alt_text": "Athletic Indian woman performing upper body exercises in gym",
+      "youtube_title": "Upper Body Workout For Toned Arms - Complete Routine",
+      "video_text": [
+        "Upper body day.",
+        "Strong arms. Always in style.",
+        "Save this"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-04T05:51:11Z",
+      "notes": "gym setting, focus on arms and shoulders, pump visible | generated_by=template"
+    }
+  ]
+}
