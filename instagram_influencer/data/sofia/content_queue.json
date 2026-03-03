@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "sofia-001",
-      "status": "approved",
+      "status": "failed",
       "topic": "Mumbai penthouse golden hour luxury lookbook",
       "caption": "Golden hour. Mumbai skyline. Perfect outfit.\nNot planned. Just privileged.\nWhich look is your favorite? Comment the number.\nSave for your next luxury moment.",
       "alt_text": "Blonde Russian woman in luxury outfit on Mumbai penthouse terrace at golden hour",
@@ -33,7 +33,8 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/6.jpg"
-      ]
+      ],
+      "publish_error": "Session restore failed in CI \u2014 cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
     },
     {
       "id": "sofia-002",
