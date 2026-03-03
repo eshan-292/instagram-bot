@@ -1,0 +1,37 @@
+{
+    "uuids": {
+        "phone_id": "44aa7e79-7b1e-49dd-882a-d5f022b87bcd",
+        "uuid": "236bf29a-d1eb-46b7-8298-62c14aba136f",
+        "client_session_id": "db50d61b-586e-425d-864c-3fe373f24d5e",
+        "advertising_id": "8c9a1586-3142-46b0-a134-0f9c83b85191",
+        "android_device_id": "android-bf002a0519a49fab",
+        "request_id": "5937cb50-3159-42c6-a803-085890035f6c",
+        "tray_session_id": "00ac6e19-3706-47a9-863f-9b0e11038241"
+    },
+    "mid": "aaas7QABAAFwkFS4lSpbLgl_VBIX",
+    "ig_u_rur": null,
+    "ig_www_claim": null,
+    "authorization_data": {
+        "ds_user_id": "48448664732",
+        "sessionid": "48448664732%3AwpA7RivJvZtfJ0%3A11%3AAYirCyZK_1DbxWBrFg5i4xLwaWhgsxQenAT7JwYqzQ"
+    },
+    "cookies": {},
+    "last_login": 1772530947.441209,
+    "device_settings": {
+        "android_version": 34,
+        "android_release": "14",
+        "dpi": "480dpi",
+        "resolution": "1080x2340",
+        "manufacturer": "Samsung",
+        "device": "dm1q",
+        "model": "SM-S911B",
+        "cpu": "qcom",
+        "app_version": "357.0.0.25.101",
+        "version_code": "608720130"
+    },
+    "user_agent": "Instagram 357.0.0.25.101 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 608720130)",
+    "country": "IN",
+    "country_code": 91,
+    "locale": "en_IN",
+    "timezone_offset": 19800
+}
