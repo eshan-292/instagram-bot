@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import logging
+import random
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -13,6 +14,9 @@ from post_queue import format_utc, read_queue, write_queue
 from persona import get_persona, next_post_id
 
 log = logging.getLogger(__name__)
+
+# Day-of-week names (lowercase) for series matching
+_DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
 # ---------------------------------------------------------------------------
 # Draft helpers
@@ -100,20 +104,76 @@ def _template_drafts(existing: list[dict[str, Any]], count: int) -> list[dict[st
 # Gemini
 # ---------------------------------------------------------------------------
 
+def _get_todays_series() -> list[dict[str, Any]]:
+    """Return content series matching today's day of the week."""
+    persona = get_persona()
+    series_list = persona.get("content_series", [])
+    if not series_list:
+        return []
+    today = _DAYS[datetime.now(timezone.utc).weekday()]
+    return [s for s in series_list if s.get("day", "").lower() == today]
+
+
 def _build_gemini_prompt() -> str:
-    """Build the Gemini prompt from persona data."""
+    """Build the Gemini prompt from persona data with viral growth features."""
     persona = get_persona()
     voice = persona.get("voice", {})
     content = persona.get("content", {})
-    
+
     identity = voice.get("gemini_identity", "an influencer")
     tone = voice.get("tone", "confident and engaging")
     style = voice.get("style", "")
     content_mix = content.get("content_mix_detail", "- Mix of reels, carousels, and single posts")
     topics = ", ".join(content.get("topic_examples", ["trending content"]))
     hooks = content.get("hook_examples", [])
-    hook_examples = "\n".join(f"   - '{h}'" for h in hooks[:6]) if hooks else ""
-    
+    hook_examples = "\n".join(f"   - '{h}'" for h in hooks[:8]) if hooks else ""
+
+    # --- Viral feature: recurring series ---
+    series_block = ""
+    todays_series = _get_todays_series()
+    if todays_series:
+        series_items = []
+        for s in todays_series:
+            name = s.get("name", "")
+            injection = s.get("prompt_injection", "")
+            hook_tmpl = ", ".join(f"'{h}'" for h in s.get("hook_templates", [])[:3])
+            series_items.append(f"   SERIES: '{name}'\n   {injection}\n   Hook templates: {hook_tmpl}")
+        series_block = (
+            "\n\nRECURRING SERIES (IMPORTANT — at least 1 of {count} posts MUST be from today's series):\n"
+            + "\n".join(series_items)
+            + "\n   Mark the series post with the series name at the start of the 'notes' field "
+            "(e.g. 'series:Friday Fits | ...').\n"
+        )
+
+    # --- Viral feature: send engineering ---
+    send_triggers = content.get("send_triggers", [])
+    send_block = ""
+    if send_triggers:
+        triggers_str = "\n".join(f"   - {t}" for t in send_triggers)
+        send_block = (
+            "\n\nSEND ENGINEERING (critical — sends are 3-5x more valuable than likes):\n"
+            "For at least 1 of these {count} posts, use one of these send-trigger formats:\n"
+            f"{triggers_str}\n"
+            "The goal: make the viewer immediately think of ONE specific person to send this to.\n"
+        )
+
+    # --- Viral feature: controversy/hot-take ratio ---
+    controversy_ratio = content.get("controversy_ratio", 0)
+    controversy_block = ""
+    if controversy_ratio > 0 and random.random() < controversy_ratio:
+        c_topics = content.get("controversy_topics", [])
+        c_hooks = content.get("controversy_hooks", [])
+        topics_str = ", ".join(f"'{t}'" for t in random.sample(c_topics, min(3, len(c_topics)))) if c_topics else ""
+        hooks_str = ", ".join(f"'{h}'" for h in random.sample(c_hooks, min(3, len(c_hooks)))) if c_hooks else ""
+        controversy_block = (
+            "\n\nCONTROVERSY MODE (active for this batch):\n"
+            "At least 1 of these {count} posts MUST be a HOT TAKE or UNPOPULAR OPINION.\n"
+            f"   Controversy hooks to use: {hooks_str}\n"
+            f"   Topic ideas: {topics_str}\n"
+            "   The goal: split the audience 50/50 so they ARGUE in comments and SEND to friends to debate.\n"
+            "   Be genuinely polarizing — not fake controversy. Take a real stance.\n"
+        )
+
     return (
         f"You are generating Instagram + YouTube Shorts draft posts for {identity}.\n\n"
         f"VOICE: {tone}. {style}\n\n"
@@ -137,6 +197,9 @@ def _build_gemini_prompt() -> str:
         "   'tag your friend who needs this', 'save this for your next shopping trip',\n"
         "   'share this with the one who always asks what to wear'\n"
         "7. Max 1-2 emojis total. NO hashtags in caption.\n\n"
+        f"{series_block}"
+        f"{send_block}"
+        f"{controversy_block}"
         "CONTENT MIX (spread across {count} posts):\n"
         f"{content_mix}\n\n"
         "TRENDING TOPIC IDEAS (rotate — nothing generic, be SPECIFIC):\n"
@@ -200,6 +263,58 @@ def _gemini_generate(cfg: Config, existing: list[dict[str, Any]]) -> list[dict[s
 
     if len(drafts) < cfg.draft_count:
         raise ValueError(f"Gemini produced {len(drafts)}/{cfg.draft_count} valid drafts")
+
+    # --- Viral feature: dual-format companions ---
+    # Generate alternate-format versions of some posts (carousel↔reel)
+    # scheduled +24h so they publish on different days
+    dual_ratio = get_persona().get("content", {}).get("dual_format_ratio", 0)
+    if dual_ratio > 0:
+        companions: list[dict[str, Any]] = []
+        for draft in drafts:
+            if random.random() >= dual_ratio:
+                continue
+            src_type = draft.get("post_type", "reel")
+            if src_type == "single":
+                continue  # singles don't get companions
+            alt_type = "reel" if src_type == "carousel" else "carousel"
+
+            companion = dict(draft)  # shallow copy
+            companion_id = next_post_id(existing + drafts + companions)
+            companion["id"] = companion_id
+            companion["post_type"] = alt_type
+            companion["is_reel"] = alt_type == "reel"
+            companion["image_url"] = ""
+            companion["video_url"] = None
+
+            # Schedule +24h from original (different day)
+            src_slot = now + timedelta(hours=4 * (drafts.index(draft) + 1))
+            companion["scheduled_at"] = format_utc(src_slot + timedelta(hours=24))
+
+            # Tag as dual-format pair
+            src_topic = draft.get("topic", "")[:40]
+            companion["notes"] = f"dual_format:{src_type}->{alt_type} | {companion.get('notes', '')}"
+            draft["notes"] = f"dual_format:{src_type} | {draft.get('notes', '')}"
+
+            # Carousel companions need slide descriptions
+            if alt_type == "carousel" and not companion.get("slides"):
+                caption_lines = str(companion.get("caption", "")).split("\n")
+                companion["slides"] = [
+                    f"Hook slide: {caption_lines[0] if caption_lines else src_topic}",
+                    f"Key point: {src_topic}",
+                    "Detail or example",
+                    "Supporting visual",
+                    f"CTA slide: {caption_lines[-1] if caption_lines else 'Save this.'}",
+                ]
+            # Reel companions drop slides
+            if alt_type == "reel":
+                companion.pop("slides", None)
+
+            companions.append(companion)
+
+        if companions:
+            log.info("Created %d dual-format companions", len(companions))
+            drafts.extend(companions)
+
     return drafts
 
 

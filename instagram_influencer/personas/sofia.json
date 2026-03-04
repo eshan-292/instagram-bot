@@ -47,11 +47,70 @@
       "This is what luxury looks like.", "Mumbai penthouse energy.",
       "She walked in and everyone noticed.", "Elegance is not negotiable.",
       "From Russia with style.", "Main character. Always.",
-      "Save this for your next luxury moment.", "Would you pull this off?"
+      "Save this for your next luxury moment.", "Would you pull this off?",
+      "Send this to someone with expensive taste",
+      "Tag someone who deserves this lifestyle",
+      "Your friend needs this luxury guide",
+      "Send this to the one who always orders the most expensive thing"
     ],
     "currency_symbol": "Rs",
-    "currency_amounts": ["5000", "10000", "25000", "50000"]
+    "currency_amounts": ["5000", "10000", "25000", "50000"],
+    "send_triggers": [
+      "Create an aspirational luxury moment that makes the viewer think of someone with expensive taste",
+      "Make it a style debate — designer vs dupe, old money vs new money — forces DM arguments",
+      "Package as a luxury reference guide people forward (e.g. Mumbai's best 5-star restaurants)",
+      "Use luxury insider knowledge that signals exclusive taste",
+      "Take a polarizing luxury/fashion stance that compels people to share and discuss"
+    ],
+    "controversy_ratio": 0.3,
+    "controversy_topics": [
+      "Luxury on a budget is an oxymoron — stop pretending",
+      "Fast fashion is embarrassing — invest in 5 good pieces instead",
+      "Mumbai nightlife is overrated — Delhi does it better",
+      "Old money aesthetic is just being boring with money",
+      "Designer logos on everything is a red flag not a flex",
+      "Indian luxury brands are underrated compared to European ones",
+      "Quiet luxury is just rich people gatekeeping",
+      "You don't need a 5-star dinner to look expensive — it's about attitude"
+    ],
+    "controversy_hooks": [
+      "Unpopular opinion:", "This will offend people with fake taste.",
+      "Luxury truth:", "Nobody in fashion will admit this.",
+      "Hot take:", "I said what I said.",
+      "Rich people know this:", "Stop doing this. It looks cheap."
+    ],
+    "dual_format_ratio": 0.3
   },
+
+  "content_series": [
+    {
+      "name": "Luxury Lookbook Friday",
+      "day": "friday",
+      "post_type": "carousel",
+      "description": "3-5 luxury outfits with styling details — highest saves/shares format",
+      "prompt_injection": "This post is part of the recurring 'Luxury Lookbook Friday' series. Present 3-5 complete luxury outfits for a specific occasion or season. Include 'Luxury Lookbook' in the hook. Each slide = one complete look with outfit details. Focus on elegance, not logos.",
+      "hook_templates": ["Luxury Lookbook: {occasion} edition", "Friday Lookbook: {n} looks that command rooms", "Luxury Lookbook vol. {n}"],
+      "series_hashtag": "luxurylookbook"
+    },
+    {
+      "name": "Old Money Monday",
+      "day": "monday",
+      "post_type": "single",
+      "description": "Old money aesthetic power shot — the signature editorial single",
+      "prompt_injection": "This post is part of the recurring 'Old Money Monday' series. Create one powerful old-money aesthetic shot. Minimal, elegant, understated wealth energy. Include 'Old Money Monday' in the hook. Focus on quiet luxury — no logos, just quality.",
+      "hook_templates": ["Old Money Monday.", "OMM: {look description}", "Monday. Old money energy."],
+      "series_hashtag": "oldmoneymonday"
+    },
+    {
+      "name": "Mumbai Luxury Guide",
+      "day": "wednesday",
+      "post_type": "carousel",
+      "description": "Mumbai's best luxury spots — drives saves as a reference guide",
+      "prompt_injection": "This post is part of the recurring 'Mumbai Luxury Guide' series. Feature 5-6 luxury spots in Mumbai (restaurants, cafes, rooftops, hotels, shopping, or hidden gems). Include 'Mumbai Luxury Guide' in the hook. Each slide = one spot with a short description. A Russian girl's guide to luxury Mumbai.",
+      "hook_templates": ["Mumbai Luxury Guide: {category}", "My luxury Mumbai favorites: {category}", "{n} Mumbai spots that feel like Europe"],
+      "series_hashtag": "mumbailuxuryguide"
+    }
+  ],
 
   "templates": [
     {

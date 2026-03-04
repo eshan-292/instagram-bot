@@ -192,9 +192,24 @@ def _fetch_trending_hashtags(cfg: Config | None = None) -> list[str]:
         return FALLBACK
 
 
+def _get_series_hashtag(item: dict[str, Any]) -> str | None:
+    """Extract series hashtag from post notes if it's a series post."""
+    notes = str(item.get("notes", ""))
+    if not notes.startswith("series:"):
+        return None
+    # notes format: "series:Friday Fits | ..."
+    # Look up the series name in persona config to find the hashtag
+    series_name = notes.split("|")[0].replace("series:", "").strip()
+    for s in get_persona().get("content_series", []):
+        if s.get("name", "").lower() == series_name.lower():
+            return s.get("series_hashtag", "")
+    return None
+
+
 def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
                     youtube_enabled: bool = False,
-                    cfg: Config | None = None) -> tuple[str, str]:
+                    cfg: Config | None = None,
+                    item: dict[str, Any] | None = None) -> tuple[str, str]:
     """Append 3-5 hashtags to caption; return (caption, first_comment_hashtags).
 
     Caption gets 3-5 targeted hashtags (pyramid strategy).
@@ -204,6 +219,12 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
     h = _get_hashtags()
     # Caption hashtags: 1 brand + 1 broad + 1-2 medium + 1 niche = 3-5 total
     caption_tags = list(h["brand"])  # brand (always)
+
+    # Inject series-specific hashtag if this is a series post
+    if item:
+        series_tag = _get_series_hashtag(item)
+        if series_tag:
+            caption_tags.append(series_tag)
 
     broad, medium, niche = h["broad"], h["medium"], h["niche"]
     carousel = h["carousel"]
@@ -438,6 +459,7 @@ def main() -> int:
                         caption, str(item.get("topic", "")), post_type,
                         youtube_enabled=cfg.youtube_enabled,
                         cfg=cfg,
+                        item=item,
                     )
 
                     # Publish to Instagram (with alt_text for SEO + accessibility)

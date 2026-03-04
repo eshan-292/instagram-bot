@@ -40,18 +40,96 @@
       "Career or Passion — which comes first?", "City life or Mountain life?",
       "Books or Podcasts?", "Loyalty or Honesty — if you had to pick one?",
       "1 crore now or 10 crore in 10 years?", "Street food or Fine dining?",
-      "Then vs Now — are you better?", "Rich and alone or Broke with friends?"
+      "Then vs Now — are you better?", "Rich and alone or Broke with friends?",
+      "Rate your life — 10 categories, score yourself 1-10",
+      "Elimination bracket — 8 things enter, only 1 survives",
+      "Build your starter pack — pick 1 from each category",
+      "Rank these 1-5 — no ties allowed",
+      "Your top 3 — pick from these 10 options",
+      "Hot take scale — where do you fall on this spectrum (1 = strongly disagree, 10 = strongly agree)",
+      "Compatibility test — pick your answers, compare with your friend",
+      "Red flag or green flag — rate these 10 behaviors",
+      "Pick your perfect day — 8 choices that build your ideal 24 hours"
     ],
     "hook_examples": [
       "Pick one. No cheating.", "1 or 2?", "This or That?",
       "Choose wisely.", "Comment your answer.", "A or B — GO.",
       "Only one can stay.", "You can only keep ONE.",
       "Tag someone who'd choose wrong.", "Which side are you on?",
-      "Save this. Show your friends.", "Your choice says everything about you."
+      "Save this. Show your friends.", "Your choice says everything about you.",
+      "Rate your life. Be honest.", "Only 1 survives. Choose.",
+      "Build your perfect starter pack.", "Rank these. No ties.",
+      "Score yourself. Screenshot and share.",
+      "Send to a friend — see if they choose the same",
+      "You and your bestie will disagree on this",
+      "Red flag or green flag? Comment below."
     ],
     "currency_symbol": "Rs",
-    "currency_amounts": ["1000", "5000", "10000", "1 crore"]
+    "currency_amounts": ["1000", "5000", "10000", "1 crore"],
+    "send_triggers": [
+      "Create a choice that makes the viewer immediately think of a specific friend who'd disagree",
+      "Make it a debate where both sides are defensible — forces DM arguments",
+      "Package as an interactive quiz/scorecard people screenshot and compare with friends",
+      "Use 'send this to see if your friend picks the same' framing",
+      "Take a provocative 'only one can stay' format that compels people to tag and share"
+    ],
+    "controversy_ratio": 0.35,
+    "controversy_topics": [
+      "Only one can stay — your career or your passion",
+      "Would you rather: rich and alone or broke with friends",
+      "Loyalty or honesty — you can only have one",
+      "Is hustle culture toxic or necessary?",
+      "Would you take 1 crore now or guaranteed 10 crore in 10 years?",
+      "Should you stay friends with your ex? Pick a side.",
+      "Love marriage or arranged — which actually lasts?",
+      "Money or time — you can only maximize one"
+    ],
+    "controversy_hooks": [
+      "This will split the room.", "No right answer. Pick one.",
+      "90% of people get this wrong.", "This choice reveals everything about you.",
+      "Only 1 can stay. Choose wisely.", "The hardest choice you'll make today."
+    ],
+    "dual_format_ratio": 0.25
   },
+
+  "content_series": [
+    {
+      "name": "Would You Rather Wednesday",
+      "day": "wednesday",
+      "post_type": "carousel",
+      "description": "5-8 impossible would-you-rather scenarios — highest comment volume format",
+      "prompt_injection": "This post is part of the recurring 'Would You Rather Wednesday' series. Create 5-8 genuinely IMPOSSIBLE would-you-rather choices. Each choice must have two equally painful/appealing options. Include 'Would You Rather' in the hook. Each slide = one scenario.",
+      "hook_templates": ["Would You Rather Wednesday: {n} impossible choices", "WYR: Can you survive all {n}?", "Would You Rather? Zero skipping."],
+      "series_hashtag": "wouldyouratherwednesday"
+    },
+    {
+      "name": "Only One Can Stay",
+      "day": "monday",
+      "post_type": "carousel",
+      "description": "Elimination bracket — 8 things enter, 1 survives. Maximum engagement.",
+      "prompt_injection": "This post is part of the recurring 'Only One Can Stay' series. Start with 8 options in a category (foods, apps, movies, habits, cities, etc.) and force elimination round by round until only 1 remains. Each slide eliminates options. Make the final choice genuinely painful.",
+      "hook_templates": ["Only One Can Stay: {category} edition", "8 enter. 1 survives.", "Eliminate one each round. No cheating."],
+      "series_hashtag": "onlyonecanstay"
+    },
+    {
+      "name": "Rate Your Life",
+      "day": "friday",
+      "post_type": "carousel",
+      "description": "Rate 8-10 life categories 1-10 — the ultimate screenshot-and-send format",
+      "prompt_injection": "This post is part of the recurring 'Rate Your Life' series. Create 8-10 life categories for people to score themselves 1-10. Include varied categories (fitness, career, relationships, finances, mental health, social life, creativity, self-care, etc.). The hook should challenge honesty. End with 'add your total, comment it'. Make each slide one category with a visual 1-10 scale.",
+      "hook_templates": ["Rate Your Life. No lying.", "Score yourself. Be brutal.", "Your life score — can you handle it?"],
+      "series_hashtag": "rateyourlife"
+    },
+    {
+      "name": "Starter Pack Sunday",
+      "day": "sunday",
+      "post_type": "carousel",
+      "description": "Build your starter pack — pick one from each category. Drives screenshots and shares.",
+      "prompt_injection": "This post is part of the recurring 'Starter Pack Sunday' series. Create 6-8 categories where people must pick ONE option each (e.g. drink, music genre, hobby, travel destination, food, superpower, etc.). Each slide = one category with 4 options. The final slide says 'Screenshot your pack. Compare with friends.'",
+      "hook_templates": ["Build your starter pack.", "Pick one from each. No cheating.", "Your starter pack says everything about you."],
+      "series_hashtag": "starterpacksunday"
+    }
+  ],
 
   "templates": [
     {
@@ -127,6 +205,63 @@
         "Finances: 1-10?",
         "Mental health: 1-10?",
         "CTA: 'Add up your total. Comment it. Be real.'"
+      ]
+    },
+    {
+      "topic": "Elimination bracket — 8 foods, only 1 survives",
+      "caption": "8 foods. Only 1 survives.\nEliminate one each round. No cheating.\nComment your final answer.\nSend to a friend — see if they pick the same.",
+      "alt_text": "Carousel elimination bracket where 8 foods compete and only 1 survives",
+      "youtube_title": "8 Foods Only 1 Survives - Elimination Bracket",
+      "video_text": ["8 foods.", "Only 1 survives.", "Comment your winner"],
+      "notes": "elimination bracket design, bold text, contrasting food images per slide",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: '8 FOODS. 1 SURVIVES.' in bold neon text",
+        "Round 1: Pizza vs Biryani vs Butter Chicken vs Momos",
+        "Round 1: Sushi vs Tacos vs Pasta vs Dosa",
+        "Round 2: Winners face off",
+        "Semi-final: 2 remaining",
+        "CTA: 'Who won? Comment your champion. Tag a foodie.'"
+      ]
+    },
+    {
+      "topic": "Build your starter pack — 6 life categories",
+      "caption": "Build your starter pack.\nPick ONE from each category. No extras.\nScreenshot your pack.\nSend to your bestie — see how different you are.",
+      "alt_text": "Carousel where users pick one option from each life category to build their starter pack",
+      "youtube_title": "Build Your Starter Pack - 6 Life Categories",
+      "video_text": ["Build your pack.", "Pick ONE each.", "Screenshot and compare"],
+      "notes": "each slide = one category with 4 options, clean grid design, bold text",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'BUILD YOUR STARTER PACK' in bold",
+        "Drink: Coffee / Chai / Juice / Water",
+        "Music: Bollywood / Hip-hop / Lo-fi / Classical",
+        "Hobby: Gym / Reading / Gaming / Travel",
+        "Food: Street food / Home cooked / Fine dining / Fast food",
+        "Superpower: Time travel / Mind reading / Invisibility / Flying",
+        "CTA: 'Screenshot your pack. Send to a friend. Compare.'"
+      ]
+    },
+    {
+      "topic": "Compatibility test — 10 rapid-fire choices with your friend",
+      "caption": "Compatibility test.\n10 choices. Do them together.\nHow many did you match? Comment the number.\nTag someone and find out.",
+      "alt_text": "Carousel compatibility test with 10 rapid-fire binary choices to compare with friends",
+      "youtube_title": "Compatibility Test - 10 Rapid Fire Choices",
+      "video_text": ["Compatibility test.", "10 choices.", "How many matches?"],
+      "notes": "each slide = one A/B choice, split-screen design, neon accents",
+      "post_type": "carousel",
+      "slides": [
+        "Hook: 'COMPATIBILITY TEST' with two silhouettes",
+        "Morning person OR Night owl?",
+        "Text first OR Wait for them?",
+        "Plan everything OR Go with the flow?",
+        "Sweet OR Spicy?",
+        "Introvert OR Extrovert?",
+        "Save OR Spend?",
+        "Mountains OR Beach?",
+        "Call OR Text?",
+        "Early bird OR Night owl gym?",
+        "CTA: 'How many matches? Comment the number. Tag your person.'"
       ]
     }
   ],

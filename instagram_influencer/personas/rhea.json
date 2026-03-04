@@ -48,11 +48,79 @@
       "Save this for your next gym session.", "Stop doing crunches for abs.",
       "She's not lucky. She's consistent.", "Your body hears everything your mind says.",
       "The gym is therapy.", "Discipline is the real glow-up.",
-      "POV: you finally stopped making excuses.", "3 exercises. 15 minutes. Results."
+      "POV: you finally stopped making excuses.", "3 exercises. 15 minutes. Results.",
+      "Send this to your workout partner",
+      "Your friend needs this routine",
+      "Tag someone who keeps saying 'tomorrow'",
+      "Send to the girl who says she doesn't know what to do at the gym"
     ],
     "currency_symbol": "Rs",
-    "currency_amounts": ["200", "500", "1000", "2000"]
+    "currency_amounts": ["200", "500", "1000", "2000"],
+    "send_triggers": [
+      "Create a relatable gym moment where the viewer instantly thinks of their workout partner",
+      "Make it a fitness debate — cardio vs weights, morning vs evening gym — forces DM arguments",
+      "Package as a workout/meal prep checklist people forward as a reference",
+      "Use gym girl insider humor that signals 'we're in the same group'",
+      "Take a polarizing fitness stance that compels people to share and discuss"
+    ],
+    "controversy_ratio": 0.3,
+    "controversy_topics": [
+      "HIIT is overrated — lift heavy instead",
+      "Girls don't need separate workout plans — train like men",
+      "Supplements are mostly scams — save your money",
+      "Cardio machines are a waste of time — walk outside",
+      "You don't need a personal trainer — YouTube is free",
+      "Protein bars are candy bars with marketing",
+      "Booty bands don't build glutes — hip thrusts do",
+      "Rest days are for recovery, not laziness — take them"
+    ],
+    "controversy_hooks": [
+      "Unpopular opinion:", "This will offend your gym.",
+      "Nobody in fitness will admit this:", "Stop doing this immediately.",
+      "Hot take:", "I said what I said.",
+      "Your trainer won't tell you this:", "The gym lied to you."
+    ],
+    "dual_format_ratio": 0.3
   },
+
+  "content_series": [
+    {
+      "name": "Workout Wednesday",
+      "day": "wednesday",
+      "post_type": "reel",
+      "description": "Complete workout demonstration for a specific body part — drives saves and shares",
+      "prompt_injection": "This post is part of the recurring 'Workout Wednesday' series. Demonstrate a complete workout for one body part (glutes, arms, abs, legs, back, shoulders). Include 'Workout Wednesday' in the hook. Show exercises with reps/sets. High energy, gym setting.",
+      "hook_templates": ["Workout Wednesday: {body part}", "WW: {body part} day. No excuses.", "Wednesday = {body part} day."],
+      "series_hashtag": "workoutwednesday"
+    },
+    {
+      "name": "Meal Prep Monday",
+      "day": "monday",
+      "post_type": "carousel",
+      "description": "Full meal prep with macros and Indian foods — the most saved fitness format",
+      "prompt_injection": "This post is part of the recurring 'Meal Prep Monday' series. Show a complete day or week of meal prep with specific Indian foods, exact protein counts, and cooking tips. Include 'Meal Prep Monday' in the hook. Each slide = one meal with macros.",
+      "hook_templates": ["Meal Prep Monday: {protein}g protein", "MPM: Indian meals that hit different", "Meal Prep Monday — your week sorted."],
+      "series_hashtag": "mealprepmonday"
+    },
+    {
+      "name": "5 AM Club",
+      "day": "friday",
+      "post_type": "reel",
+      "description": "Early morning gym routine — drives motivation and accountability shares",
+      "prompt_injection": "This post is part of the recurring '5 AM Club' series. Show the early morning gym grind — alarm, pre-workout, drive, workout. Include '5 AM' or '5 AM Club' in the hook. Focus on discipline over motivation. Dark morning vibes.",
+      "hook_templates": ["5 AM. No alarm needed.", "5 AM Club: {workout type}", "Dark outside. Gym lights on."],
+      "series_hashtag": "5amclub"
+    },
+    {
+      "name": "Form Check Friday",
+      "day": "friday",
+      "post_type": "carousel",
+      "description": "Common exercise mistakes and corrections — drives saves and shares to gym friends",
+      "prompt_injection": "This post is part of the recurring 'Form Check Friday' series. Show 3-5 exercises women commonly do wrong with the correct form. Include 'Form Check' in the hook. Each slide = wrong vs right form. Be specific about the mistake.",
+      "hook_templates": ["Form Check Friday: {exercises}", "You're doing these wrong.", "FCF: Fix these before your next gym session."],
+      "series_hashtag": "formcheckfriday"
+    }
+  ],
 
   "templates": [
     {

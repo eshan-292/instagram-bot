@@ -48,11 +48,79 @@
       "Rs 200. Full day of protein. No supplements.",
       "Stop doing crunches for abs.", "This exercise changed my physique.",
       "Nobody talks about this mistake.", "Save this before you forget.",
-      "Your trainer won't tell you this.", "I gained 5kg doing THIS."
+      "Your trainer won't tell you this.", "I gained 5kg doing THIS.",
+      "Send this to your gym buddy who skips legs",
+      "Your friend needs to see this form check",
+      "Tag someone who needs this workout plan",
+      "Send to the friend who says 'I'll start Monday'"
     ],
     "currency_symbol": "Rs",
-    "currency_amounts": ["100", "200", "500", "1000"]
+    "currency_amounts": ["100", "200", "500", "1000"],
+    "send_triggers": [
+      "Create a relatable gym moment where the viewer instantly thinks of their gym buddy",
+      "Make it a fitness debate — two clear sides people will argue about in DMs (e.g. cardio vs weights)",
+      "Package as a workout checklist/resource people forward as a reference (e.g. complete push day)",
+      "Use gym insider humor that signals 'we're in the same group' (e.g. leg day struggles)",
+      "Take a polarizing fitness stance that compels people to share and discuss"
+    ],
+    "controversy_ratio": 0.3,
+    "controversy_topics": [
+      "Protein shakes are a waste of money — eat real food",
+      "You don't need a gym membership — bodyweight is enough",
+      "Cardio kills your gains — stop running",
+      "Most personal trainers don't know what they're doing",
+      "Creatine is the only supplement worth buying",
+      "Indian vegetarian diet can build more muscle than chicken breast",
+      "6-day splits are overtraining — 4 days is optimal",
+      "Morning workouts are overhyped — evening gains are better"
+    ],
+    "controversy_hooks": [
+      "Unpopular opinion:", "This will get me cancelled but...",
+      "Your trainer won't tell you this:", "Everyone's doing this wrong:",
+      "Stop doing this immediately.", "The fitness industry lied to you.",
+      "Hot take:", "I said what I said."
+    ],
+    "dual_format_ratio": 0.3
   },
+
+  "content_series": [
+    {
+      "name": "Monday Myth Buster",
+      "day": "monday",
+      "post_type": "carousel",
+      "description": "Bust a common fitness myth with facts — drives saves and debates",
+      "prompt_injection": "This post is part of the recurring 'Monday Myth Buster' series. BUST one specific common fitness myth with facts. Include 'Myth Buster' or 'MYTH:' in the hook. Present the myth, then destroy it with evidence. Make it carousel format with myth vs reality.",
+      "hook_templates": ["Monday Myth Buster: {myth}", "MYTH: {myth}. FACT: {reality}", "This fitness myth needs to die."],
+      "series_hashtag": "mondaymythbuster"
+    },
+    {
+      "name": "Full Day of Eating",
+      "day": "friday",
+      "post_type": "carousel",
+      "description": "Complete day of eating with macros and prices — the most saved format in fitness",
+      "prompt_injection": "This post is part of the recurring 'Full Day of Eating' series. Show every meal in a day with specific Indian foods, exact protein counts, and total cost in Rs. Include 'FDOE' or 'Full Day of Eating' in the hook. Each slide = one meal + macros.",
+      "hook_templates": ["FDOE: {protein}g protein. Rs {cost}. All Indian.", "Full Day of Eating: Budget edition", "Rs {cost}. {protein}g protein. No supplements."],
+      "series_hashtag": "fulldayofeating"
+    },
+    {
+      "name": "Form Check Friday",
+      "day": "friday",
+      "post_type": "reel",
+      "description": "Correct a common exercise form mistake — drives saves and shares to gym buddies",
+      "prompt_injection": "This post is part of the recurring 'Form Check Friday' series. Show the WRONG way vs the RIGHT way to do one specific exercise. Include 'Form Check' in the hook. Be specific about the mistake and the fix.",
+      "hook_templates": ["Form Check Friday: {exercise}", "You're doing {exercise} wrong.", "STOP. Your {exercise} form is broken."],
+      "series_hashtag": "formcheckfriday"
+    },
+    {
+      "name": "No Excuses Workout",
+      "day": "wednesday",
+      "post_type": "reel",
+      "description": "Quick intense workout anyone can do — drives motivation and shares",
+      "prompt_injection": "This post is part of the recurring 'No Excuses' series. Present a quick intense workout (15 min or less, minimal/no equipment) that eliminates every excuse. Include 'No Excuses' in the hook. High energy, accountability vibes.",
+      "hook_templates": ["No Excuses: {duration} min. {equipment}.", "No gym? No problem. {duration} minutes.", "Zero excuses. {n} exercises. Go."],
+      "series_hashtag": "noexcuses"
+    }
+  ],
 
   "templates": [
     {

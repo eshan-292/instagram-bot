@@ -47,11 +47,79 @@
       "This will hurt.", "Screenshot this.", "She's not yours.",
       "The truth most people ignore.", "If this offends you — good.",
       "Save this before someone needs to hear it.", "Uncomfortable fact:",
-      "Swipe if you can handle the truth.", "This is why you're still single."
+      "Swipe if you can handle the truth.", "This is why you're still single.",
+      "Send this to someone who needs to hear it",
+      "Your friend is ignoring this red flag",
+      "Someone you know needed this today",
+      "Tag someone who's going through this right now"
     ],
     "currency_symbol": "Rs",
-    "currency_amounts": []
+    "currency_amounts": [],
+    "send_triggers": [
+      "Create a harsh truth that makes the viewer instantly think of someone who needs to hear it",
+      "Make it a relationship debate — two clear sides people will argue about in DMs",
+      "Package as a psychology checklist people screenshot and forward as a wake-up call",
+      "Use dating insider knowledge that signals 'we've all been through this'",
+      "Take a polarizing relationship stance that compels people to share and debate"
+    ],
+    "controversy_ratio": 0.4,
+    "controversy_topics": [
+      "Nice guys don't finish last — boring guys do",
+      "If they wanted to, they would. Stop making excuses.",
+      "Most couples are settling — and they know it",
+      "Situationships exist because one person is scared to ask for more",
+      "Attraction isn't a choice — stop trying to convince someone to like you",
+      "Women know within 5 seconds — everything after is confirmation",
+      "Your ex didn't change — they just met someone they respect more",
+      "Being alone is a flex — most people date out of fear"
+    ],
+    "controversy_hooks": [
+      "This will hurt to read.", "Nobody wants to admit this.",
+      "Harsh truth:", "Read this slowly.",
+      "If this offends you — good.", "The truth nobody asks for:",
+      "Unpopular opinion:", "You're not ready for this one."
+    ],
+    "dual_format_ratio": 0.3
   },
+
+  "content_series": [
+    {
+      "name": "Red Flag Friday",
+      "day": "friday",
+      "post_type": "carousel",
+      "description": "5-7 relationship red flags on a specific topic — highest save/share format",
+      "prompt_injection": "This post is part of the recurring 'Red Flag Friday' series. List 5-7 specific red flags about ONE relationship topic (texting, first dates, situationships, long-term relationships, etc.). Include 'Red Flag Friday' in the hook. Each slide = one red flag. End with 'how many apply to your ex?'",
+      "hook_templates": ["Red Flag Friday: {topic}", "RED FLAGS: {topic} edition", "Red Flag Friday vol. {n} — save this."],
+      "series_hashtag": "redflagfriday"
+    },
+    {
+      "name": "Harsh Truth Tuesday",
+      "day": "tuesday",
+      "post_type": "single",
+      "description": "One powerful screenshot-worthy statement — maximum share/send potential",
+      "prompt_injection": "This post is part of the recurring 'Harsh Truth Tuesday' series. Create ONE powerful, screenshot-worthy statement about dating/relationships/attraction. It should be a single brutal truth that people will screenshot and send to friends. Maximum 2-3 lines. Include 'Harsh Truth Tuesday' or 'HTT' in the hook.",
+      "hook_templates": ["Harsh Truth Tuesday:", "HTT: {truth}", "Tuesday's harsh truth."],
+      "series_hashtag": "harshtruthtuesday"
+    },
+    {
+      "name": "What X Actually Means",
+      "day": "wednesday",
+      "post_type": "carousel",
+      "description": "Decode common phrases/behaviors in dating — drives saves and debates",
+      "prompt_injection": "This post is part of the recurring 'What X Actually Means' series. Take one common phrase or behavior in dating (e.g. 'I need space', 'we should talk', 'I'm not ready', breadcrumbing) and decode what it ACTUALLY means. Include 'What it actually means' in the hook. Show 'what they say' vs 'what they mean' on each slide.",
+      "hook_templates": ["What '{phrase}' actually means.", "Decoded: '{phrase}'", "When they say '{phrase}' — read this."],
+      "series_hashtag": "whatitactuallymeans"
+    },
+    {
+      "name": "Psychology Says",
+      "day": "sunday",
+      "post_type": "carousel",
+      "description": "Psychology facts about attraction/behavior — educational + shareable",
+      "prompt_injection": "This post is part of the recurring 'Psychology Says' series. Share 5-6 psychology facts about ONE specific topic (attraction, attachment, jealousy, breakups, first impressions, etc.). Include 'Psychology Says' in the hook. Each slide = one fact. Make them feel scientifically-backed but accessible.",
+      "hook_templates": ["Psychology Says: {topic}", "The psychology of {topic}", "Science explains why {behavior}"],
+      "series_hashtag": "psychologysays"
+    }
+  ],
 
   "templates": [
     {

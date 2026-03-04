@@ -423,6 +423,41 @@ Auto-boosts fresh partner posts at the **start of every engagement session**. In
 | **Cross-promo** | +20-30% cross-audience reach | Partner: like+save+comment+comment-like+reply+story-like+DM-share |
 | **Commenter targeting** | +80-120 followers/day | Follow people who comment on big niche pages (3-5x follow-back rate) |
 | **Instant pod boost** | +5-10 followers/day | Auto-boost fresh partner posts at every session start (< 3hr old → like+save+comment) |
+| **Recurring series** | +30-50% retention | Named series per persona posted on specific days (e.g. "Friday Fits", "Red Flag Friday") — trains audience to come back |
+| **Send engineering** | +40-60% DM shares | Content engineered to trigger "send to a specific friend" impulse — debate posts, checklists, relatable moments |
+| **Controversy/hot-take ratio** | +3-5x comments & sends | ~30% of content is polarizing hot takes — splits audience 50/50 for maximum engagement |
+| **Dual-format posting** | +2x reach per idea | ~30% of posts get a companion in alternate format (carousel↔reel) scheduled +24h — same topic, double reach |
+| **Interactive formats** | +50-100% shares | Rate Your Life, elimination brackets, starter packs, compatibility tests (Choose Wisely) |
+
+### Recurring Content Series
+
+Named series create audience anticipation and train followers to return on specific days. Generator detects day-of-week and injects the matching series into the Gemini prompt. Series posts get a dedicated hashtag in captions.
+
+| Persona | Series | Day | Format |
+|---------|--------|-----|--------|
+| **Maya** | Friday Fits | Fri | Carousel |
+| **Maya** | One Piece 5 Ways | Tue | Carousel |
+| **Maya** | Mumbai GRWM | Wed | Reel |
+| **Maya** | Style Debate | Sun | Reel |
+| **Aryan** | Monday Myth Buster | Mon | Carousel |
+| **Aryan** | Full Day of Eating | Fri | Carousel |
+| **Aryan** | Form Check Friday | Fri | Reel |
+| **Aryan** | No Excuses Workout | Wed | Reel |
+| **Choose Wisely** | Would You Rather Wednesday | Wed | Carousel |
+| **Choose Wisely** | Only One Can Stay | Mon | Carousel |
+| **Choose Wisely** | Rate Your Life | Fri | Carousel |
+| **Choose Wisely** | Starter Pack Sunday | Sun | Carousel |
+| **Modern Truths** | Red Flag Friday | Fri | Carousel |
+| **Modern Truths** | Harsh Truth Tuesday | Tue | Single |
+| **Modern Truths** | What X Actually Means | Wed | Carousel |
+| **Modern Truths** | Psychology Says | Sun | Carousel |
+| **Sofia** | Luxury Lookbook Friday | Fri | Carousel |
+| **Sofia** | Old Money Monday | Mon | Single |
+| **Sofia** | Mumbai Luxury Guide | Wed | Carousel |
+| **Rhea** | Workout Wednesday | Wed | Reel |
+| **Rhea** | Meal Prep Monday | Mon | Carousel |
+| **Rhea** | 5 AM Club | Fri | Reel |
+| **Rhea** | Form Check Friday | Fri | Carousel |
 
 ### Instagram Limits (per main account)
 

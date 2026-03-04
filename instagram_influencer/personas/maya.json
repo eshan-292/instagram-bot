@@ -46,11 +46,79 @@
       "3 outfits.", "5 ways to...", "Rs 2000. Zero compromises.",
       "This outfit costs Rs 800.", "Stop buying basics.",
       "Wait for the last one.", "Nobody talks about this.",
-      "Stop scrolling if you...", "Save this before it gets buried."
+      "Stop scrolling if you...", "Save this before it gets buried.",
+      "Send this to your friend who says 'I have nothing to wear'",
+      "Tag your bestie who needs this outfit",
+      "Your shopping buddy needs to see this",
+      "You and your bestie will disagree on this"
     ],
     "currency_symbol": "Rs",
-    "currency_amounts": ["800", "1500", "2000", "3000"]
+    "currency_amounts": ["800", "1500", "2000", "3000"],
+    "send_triggers": [
+      "Create a relatable fashion moment where the viewer instantly thinks of a specific friend who does this",
+      "Make it a style debate — two clear sides people will argue about in DMs (e.g. ethnic vs western)",
+      "Package as a style checklist/resource people forward as a reference (e.g. capsule wardrobe essentials)",
+      "Use fashion insider humor that signals 'we're in the same group' (e.g. Indian shopping struggles)",
+      "Take a polarizing fashion stance that compels people to share and discuss"
+    ],
+    "controversy_ratio": 0.3,
+    "controversy_topics": [
+      "Stop buying Zara basics — they fall apart in 2 washes",
+      "Expensive doesn't mean stylish — most designer outfits look terrible",
+      "Indian fashion influencers all dress the same — zero originality",
+      "Sarees are overrated for daily wear — fight me",
+      "Mumbai street shopping beats any mall in India",
+      "Thrift culture in India is performative — nobody actually shops thrift",
+      "Sneakers with ethnic wear is lazy styling, not fusion",
+      "Wedding shopping in India is a scam — you can look better for less"
+    ],
+    "controversy_hooks": [
+      "Unpopular opinion:", "This will get me cancelled but...",
+      "I don't care if this offends you:", "Everyone's doing this wrong:",
+      "Stop doing this immediately.", "Fashion influencers won't tell you this.",
+      "Hot take:", "I said what I said."
+    ],
+    "dual_format_ratio": 0.3
   },
+
+  "content_series": [
+    {
+      "name": "Friday Fits",
+      "day": "friday",
+      "post_type": "carousel",
+      "description": "3 styled outfits under a budget, carousel format — the signature recurring series",
+      "prompt_injection": "This post is part of the recurring 'Friday Fits' series. Include 'Friday Fits' or 'FF' in the hook. Show 3 complete outfits with a specific budget. Use slides to show each outfit separately.",
+      "hook_templates": ["Friday Fits: 3 looks under Rs {amount}", "Friday Fits vol. {n} — your weekend sorted", "FF: Budget edition. Rs 2000. 3 fits."],
+      "series_hashtag": "fridayfits"
+    },
+    {
+      "name": "One Piece 5 Ways",
+      "day": "tuesday",
+      "post_type": "carousel",
+      "description": "Style one clothing item 5 different ways — shows versatility and drives saves",
+      "prompt_injection": "This post is part of the recurring 'One Piece 5 Ways' series. Style ONE specific clothing item (kurta, blazer, saree, jeans, etc.) in 5 completely different ways. Each slide = one look. Include the piece name in the hook.",
+      "hook_templates": ["1 {piece}. 5 vibes.", "One piece. Five personalities.", "You only need this ONE {piece}."],
+      "series_hashtag": "onepiece5ways"
+    },
+    {
+      "name": "Mumbai GRWM",
+      "day": "wednesday",
+      "post_type": "reel",
+      "description": "Get Ready With Me for a specific Mumbai occasion — drives engagement through relatability",
+      "prompt_injection": "This post is part of the recurring 'Mumbai GRWM' series. Show the getting-ready process for a specific Mumbai occasion (house party, brunch, cafe date, night out, wedding function). Make it relatable and include the outfit reveal.",
+      "hook_templates": ["GRWM: {occasion} in Mumbai", "POV: getting ready for {occasion}", "What I actually wore to {occasion}"],
+      "series_hashtag": "mumbaigrwm"
+    },
+    {
+      "name": "Style Debate",
+      "day": "sunday",
+      "post_type": "reel",
+      "description": "Hot take or A vs B fashion debate — drives comments and sends",
+      "prompt_injection": "This post is part of the recurring 'Style Debate' series. Present a fashion hot take or A vs B comparison that splits opinion. Make it a genuine debate where both sides have a point. Ask viewers to pick a side in comments.",
+      "hook_templates": ["Style Debate: {A} or {B}?", "{A} vs {B} — which wins?", "Unpopular opinion: {hot take}"],
+      "series_hashtag": "styledebate"
+    }
+  ],
 
   "templates": [
     {
