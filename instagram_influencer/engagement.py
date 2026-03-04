@@ -779,7 +779,7 @@ def run_warm_audience_session(
         except Exception as exc:
             _check_challenge(exc)
             log.warning("Could not resolve @%s: %s — trying next target", candidate, exc)
-            _random_delay(2, 5)
+            random_delay(2, 5)
             continue
 
     if target_id is None:
