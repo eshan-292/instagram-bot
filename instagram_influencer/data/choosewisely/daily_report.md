@@ -1,32 +1,33 @@
-# 📊 Daily Report — March 03, 2026
+# 📊 Daily Report — March 04, 2026
 
-*Generated at 11:39 PM IST*
+*Generated at 11:36 PM IST*
 
 ## Engagement
 
 | Action | Count |
 |--------|-------|
-| ❤️ Likes | 158 |
-| 💬 Comments | 5 |
-| 👁️ Story Views | 75 |
-| **Total** | **238** |
+| ❤️ Likes | 301 |
+| 💬 Comments | 31 |
+| ➕ Follows | 1 |
+| 👁️ Story Views | 90 |
+| **Total** | **423** |
 
 ## Posts Published Today
 
-- **cw-001**: Gym or Party — which defines your weekends?
-  - IG: https://instagram.com/p/3844803897719138116/
+- **cw-002**: 10 binary choices that reveal who you really are
+  - IG: https://instagram.com/p/3845470312217727958/
 
 ## Content Pipeline
 
 - Draft: 0
-- Approved: 4
-- Posted: 1
+- Approved: 3
+- Posted: 2
 
 ## Growth Signals
 
-- Net follows sent today: **0**
-- Engagement actions: **238**
-- Account age: **0 days**
+- Net follows sent today: **1**
+- Engagement actions: **423**
+- Account age: **1 days**
 - Warmup multiplier: **0.6x**
 
 ---
