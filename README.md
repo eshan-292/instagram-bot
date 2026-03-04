@@ -407,11 +407,11 @@ Engages followers of similar niche accounts. These users already consume similar
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
 | Likes | 500 | Spread across all sessions |
-| Comments | 150 | AI-generated, context-aware |
+| Comments | 150 | AI-generated (Gemini) with fallback pool when rate-limited |
 | Follows | 200 | Smart targeting: only 1K-50K micro-influencers (20-30% follow-back) |
 | Story views | 150 | 100% view, 100% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
-| DM replies | 25 | AI-generated contextual replies to incoming DMs (Gemini) |
+| DM replies | 25 | AI-generated contextual replies to incoming DMs (with fallback pool) |
 | Unfollows | 60/run | After 2+ days |
 | ~~Welcome DMs~~ | ~~15/day~~ | **Disabled** -- caused unfollows |
 | ~~Comment DMs~~ | ~~8/day~~ | **Disabled** -- sounded unnatural |
@@ -669,7 +669,7 @@ instagram_influencer/
   stories.py             # Story reshare (post image + link sticker) + highlights
   report.py              # Daily report (Telegram + GitHub Actions + YT stats)
   rate_limiter.py        # Action rate limiting + warmup multiplier
-  gemini_helper.py       # Gemini API with model rotation (5 models, 100+ RPM)
+  gemini_helper.py       # Gemini API with model rotation (4 models) + 5-min cooldown on rate limits
   post_queue.py          # Queue I/O (content_queue.json)
   instagrapi_patch.py    # Monkey-patches for instagrapi resilience
   scheduler.py           # macOS launchd scheduler
