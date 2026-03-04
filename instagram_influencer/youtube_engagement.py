@@ -62,10 +62,35 @@ def _get_youtube_service():
     return build("youtube", "v3", credentials=creds)
 
 
+_YT_FALLBACK_COMMENTS = [
+    "okay this was actually fire 🔥",
+    "the way this just made my whole day",
+    "why doesn't this have more views yet",
+    "this deserves to blow up honestly",
+    "the energy in this one is unmatched",
+    "I keep rewatching this one ngl",
+    "this is the kind of content I'm here for",
+    "okay wait this actually hits different",
+    "saving this for later, too good",
+    "you never miss with these fr",
+]
+
+_YT_FALLBACK_REPLIES = [
+    "appreciate you watching!! means a lot 🙏",
+    "glad you vibed with it! more coming soon 🔥",
+    "yoo thank you!! that means everything",
+    "haha appreciate you noticing that!",
+    "thanks for the love! what should I make next?",
+]
+
+
 def _generate_yt_comment(cfg: Config, video_title: str) -> str | None:
-    """Generate a genuine, context-aware comment for a YouTube Short."""
+    """Generate a genuine, context-aware comment for a YouTube Short.
+
+    Falls back to pre-written pool when Gemini is rate-limited.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_YT_FALLBACK_COMMENTS)
     from gemini_helper import generate
 
     prompt = (
@@ -81,13 +106,16 @@ def _generate_yt_comment(cfg: Config, video_title: str) -> str | None:
     comment = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if comment and 5 < len(comment) < 200:
         return comment
-    return None
+    return random.choice(_YT_FALLBACK_COMMENTS)
 
 
 def _generate_yt_reply(cfg: Config, video_title: str, their_comment: str) -> str | None:
-    """Generate a reply to a comment on our own YouTube video."""
+    """Generate a reply to a comment on our own YouTube video.
+
+    Falls back to pre-written replies when Gemini is rate-limited.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_YT_FALLBACK_REPLIES)
     from gemini_helper import generate
 
     prompt = (
@@ -101,7 +129,7 @@ def _generate_yt_reply(cfg: Config, video_title: str, their_comment: str) -> str
     reply = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if reply and 3 < len(reply) < 150:
         return reply
-    return None
+    return random.choice(_YT_FALLBACK_REPLIES)
 
 
 def _should_skip() -> bool:

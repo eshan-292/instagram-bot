@@ -193,10 +193,60 @@ def _is_big_enough(media: Any, min_followers: int) -> bool:
     return (getattr(media, "like_count", 0) or 0) >= max(500, min_followers // 20)
 
 
+# Fallback comment pools — used when Gemini is rate-limited so we never skip engagement
+_FALLBACK_COMMENTS = [
+    "this is so good, saving this rn",
+    "the vibe of this whole thing 🔥",
+    "okay wait this actually hits different",
+    "needed to see this today honestly",
+    "why does this go so hard tho",
+    "the energy in this one >>",
+    "obsessed with this whole aesthetic",
+    "this deserves way more attention fr",
+    "screenshotting this immediately",
+    "how do you keep coming up with this stuff",
+    "can't stop coming back to this one",
+    "the details in this are insane",
+    "this is the content I'm here for",
+    "you never miss honestly",
+    "okay this one's going in the saved folder",
+    "the effort that went into this tho 👏",
+    "giving everything it needs to give",
+    "this just made my whole scroll worth it",
+    "I stg your content always hits",
+    "okay yeah you understood the assignment",
+]
+
+_FALLBACK_REPLIES = [
+    "ahh thank you so much!! means a lot 🙏",
+    "you're too kind honestly, appreciate it",
+    "glad you vibed with it! 🔥",
+    "that means everything, thank you",
+    "yoo appreciate you noticing that!",
+    "thank you!! what's your fav part?",
+    "means a lot coming from you 💯",
+    "ahhh this made my day fr",
+    "you always show love, appreciate you",
+    "glad someone feels the same way haha",
+]
+
+_FALLBACK_DMS = [
+    "heyy thanks for the follow! love your vibe ✨",
+    "ayy appreciate the follow! your page goes hard 🔥",
+    "thanks for connecting! love the energy on your page",
+    "heyy! noticed you followed, your content is fire",
+    "appreciate the follow! what made you find me?",
+]
+
+
 def _generate_comment(cfg: Config, caption_text: str) -> str | None:
-    """Use Gemini to generate a short, context-aware comment on a post."""
+    """Use Gemini to generate a short, context-aware comment on a post.
+
+    Falls back to a pre-written pool when Gemini is rate-limited,
+    so engagement never stops.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_FALLBACK_COMMENTS)
     from gemini_helper import generate
     prompt = (
         f"You are {get_persona()["voice"]["gemini_identity"]}. "
@@ -210,13 +260,17 @@ def _generate_comment(cfg: Config, caption_text: str) -> str | None:
     comment = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if comment and 3 < len(comment) < 150:
         return comment
-    return None
+    # Gemini failed/rate-limited — use fallback instead of skipping
+    return random.choice(_FALLBACK_COMMENTS)
 
 
 def _generate_reply(cfg: Config, original_caption: str, their_comment: str) -> str | None:
-    """Generate a reply to a comment on our own post."""
+    """Generate a reply to a comment on our own post.
+
+    Falls back to pre-written replies when Gemini is rate-limited.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_FALLBACK_REPLIES)
     from gemini_helper import generate
     prompt = (
         f"You are {get_persona()["voice"]["gemini_identity"]}. "
@@ -230,13 +284,16 @@ def _generate_reply(cfg: Config, original_caption: str, their_comment: str) -> s
     reply = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if reply and 2 < len(reply) < 100:
         return reply
-    return None
+    return random.choice(_FALLBACK_REPLIES)
 
 
 def _generate_dm(cfg: Config, username: str) -> str | None:
-    """Generate a welcome DM for a new follower."""
+    """Generate a welcome DM for a new follower.
+
+    Falls back to pre-written DMs when Gemini is rate-limited.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_FALLBACK_DMS)
     from gemini_helper import generate
     prompt = (
         f"You are {get_persona()["voice"]["dm_persona"]} "
@@ -258,7 +315,7 @@ def _generate_dm(cfg: Config, username: str) -> str | None:
     dm = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if dm and 10 < len(dm) < 500:
         return dm
-    return None
+    return random.choice(_FALLBACK_DMS)
 
 
 def _mine_targets(cl: Any, hashtags: list[str], amount: int = POSTS_PER_HASHTAG) -> list[Any]:
@@ -930,10 +987,25 @@ def run_warm_audience_session(
 # Feature: Post-publish engagement burst (first 30 min = algorithmic fate)
 # ---------------------------------------------------------------------------
 
+_FALLBACK_PIN_COMMENTS = [
+    "Which one are you picking? Be honest 👇",
+    "Drop a 🔥 if you agree with this one",
+    "Thoughts? I wanna hear your take",
+    "Save this for later, you'll thank me",
+    "Tag someone who needs to see this",
+    "1, 2, or 3? Drop your pick below 👇",
+    "Real ones know. Are you one of them?",
+    "Agree or disagree? Let's debate 💬",
+]
+
+
 def _generate_pin_comment(cfg: Config, caption: str, topic: str) -> str | None:
-    """Generate a comment-driving pin comment for own post."""
+    """Generate a comment-driving pin comment for own post.
+
+    Falls back to pre-written CTA comments when Gemini is rate-limited.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_FALLBACK_PIN_COMMENTS)
     from gemini_helper import generate
     prompt = (
         f"You are {get_persona()["voice"]["gemini_identity"]}. "
@@ -950,7 +1022,7 @@ def _generate_pin_comment(cfg: Config, caption: str, topic: str) -> str | None:
     comment = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if comment and 3 < len(comment) < 100:
         return comment.strip('"').strip("'")
-    return None
+    return random.choice(_FALLBACK_PIN_COMMENTS)
 
 
 def run_post_publish_burst(
@@ -1131,12 +1203,24 @@ def run_viral_detection(
 # Feature: Comment-to-DM follow-up (5-10x follow-back rate from commenters)
 # ---------------------------------------------------------------------------
 
+_FALLBACK_COMMENT_DMS = [
+    "heyy saw your comment! loved your take on it 🔥",
+    "your comment was so real, had to reach out! what's your vibe?",
+    "ayy appreciate the love on my post! your page is fire btw",
+    "saw what you said on my post and I'm curious — what got you into this?",
+    "your comment made my day fr, had to say hey ✨",
+]
+
+
 def _generate_comment_followup_dm(
     cfg: Config, username: str, their_comment: str, post_topic: str,
 ) -> str | None:
-    """Generate a personalized DM referencing their comment on our post."""
+    """Generate a personalized DM referencing their comment on our post.
+
+    Falls back to pre-written DMs when Gemini is rate-limited.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_FALLBACK_COMMENT_DMS)
     from gemini_helper import generate
     prompt = (
         f"You are {get_persona()['voice']['dm_persona']} "
@@ -1154,7 +1238,7 @@ def _generate_comment_followup_dm(
     dm = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if dm and 10 < len(dm) < 300:
         return dm
-    return None
+    return random.choice(_FALLBACK_COMMENT_DMS)
 
 
 def run_comment_followup_dms(
@@ -1245,10 +1329,25 @@ def run_comment_followup_dms(
 # DM Replies — read incoming threads and reply with AI-generated responses
 # ---------------------------------------------------------------------------
 
+_FALLBACK_DM_REPLIES = [
+    "haha love that! tell me more 😄",
+    "omg yesss exactly what I was thinking!",
+    "appreciate that so much!! 🔥",
+    "haha you get it! what else are you into?",
+    "no way that's so cool! love your energy",
+    "aww that's sweet of you to say ✨",
+    "haha facts! you're so right about that",
+    "that's such a vibe honestly 💯",
+]
+
+
 def _generate_dm_reply(cfg: Config, conversation_context: str, their_latest: str, username: str) -> str | None:
-    """Generate a contextual reply to an incoming DM using conversation history."""
+    """Generate a contextual reply to an incoming DM using conversation history.
+
+    Falls back to pre-written replies when Gemini is rate-limited.
+    """
     if not cfg.gemini_api_key:
-        return None
+        return random.choice(_FALLBACK_DM_REPLIES)
     from gemini_helper import generate
     persona = get_persona()
     dm_persona = persona["voice"].get("dm_persona") or persona["voice"].get("gemini_identity", "a friendly person")
@@ -1275,7 +1374,7 @@ def _generate_dm_reply(cfg: Config, conversation_context: str, their_latest: str
     reply = generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
     if reply and 2 < len(reply) < 300:
         return reply
-    return None
+    return random.choice(_FALLBACK_DM_REPLIES)
 
 
 def run_dm_replies(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
