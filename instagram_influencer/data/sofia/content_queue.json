@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "sofia-001",
-      "status": "approved",
+      "status": "posted",
       "topic": "Mumbai penthouse golden hour luxury lookbook",
       "caption": "Golden hour. Mumbai skyline. Perfect outfit.\nNot planned. Just privileged.\nWhich look is your favorite? Comment the number.\nSave for your next luxury moment.",
       "alt_text": "Blonde Russian woman in luxury outfit on Mumbai penthouse terrace at golden hour",
@@ -33,7 +33,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-001/6.jpg"
-      ]
+      ],
+      "posted_at": "2026-03-04T14:57:00Z",
+      "platform_post_id": "3845473606097302675",
+      "publish_error": null
     },
     {
       "id": "sofia-002",
