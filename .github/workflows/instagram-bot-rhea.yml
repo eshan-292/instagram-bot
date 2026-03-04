@@ -174,7 +174,7 @@ jobs:
 
       # Save updated session to cache
       - name: Save session cache
-        if: always()
+        if: steps.bot.outcome == 'success'
         uses: actions/cache/save@v4
         with:
           path: instagram_influencer/data/rhea/.ig_session.json
