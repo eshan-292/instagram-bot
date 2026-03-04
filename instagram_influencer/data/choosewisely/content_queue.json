@@ -24,7 +24,7 @@
     },
     {
       "id": "cw-002",
-      "status": "approved",
+      "status": "posted",
       "topic": "10 binary choices that reveal who you really are",
       "caption": "10 choices. Zero skipping.\nSwipe through and comment your answers.\nThis will expose you.\nSend to someone who thinks they know themselves.",
       "alt_text": "Carousel of binary choice graphics with bold typography on dark backgrounds",
@@ -55,7 +55,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-002/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-002/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-002/6.jpg"
-      ]
+      ],
+      "posted_at": "2026-03-04T14:50:44Z",
+      "platform_post_id": "3845470312217727958",
+      "publish_error": null
     },
     {
       "id": "cw-003",
