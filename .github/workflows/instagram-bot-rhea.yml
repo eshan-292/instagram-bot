@@ -21,7 +21,7 @@ on:
     - cron: '23 5 * * *'   # 10:53 IST — warm_audience
     - cron: '53 5 * * *'   # 11:23 IST — explore
     - cron: '23 6 * * *'   # 11:53 IST — hashtags
-    - cron: '23 7 * * *'   # 12:53 IST — explore
+    - cron: '23 7 * * *'   # 12:53 IST — BACKUP PUBLISH + explore (lunch fallback)
     - cron: '23 8 * * *'   # 13:53 IST — hashtags
     - cron: '23 9 * * *'   # 14:53 IST — warm_audience
     - cron: '53 9 * * *'   # 15:23 IST — commenter_target
@@ -110,6 +110,9 @@ jobs:
       - name: Create .env
         run: |
           echo "${{ secrets.DOTENV_RHEA }}" > instagram_influencer/.env
+          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=rhea" >> instagram_influencer/.env
+          # Also export PERSONA to the environment for reliability
+          echo "PERSONA=rhea" >> $GITHUB_ENV
 
       # Determine which session to run based on the trigger
       - name: Determine session
@@ -140,7 +143,7 @@ jobs:
               "23 5 * * *")   echo "type=warm_audience"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "53 5 * * *")   echo "type=explore"           >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "23 6 * * *")   echo "type=hashtags"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "23 7 * * *")   echo "type=explore"           >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "23 7 * * *")   echo "type=explore"           >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;  # backup publish
               "23 8 * * *")   echo "type=hashtags"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "23 9 * * *")   echo "type=warm_audience"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "53 9 * * *")   echo "type=commenter_target"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;

@@ -20,7 +20,7 @@ on:
     - cron: '3 5 * * *'    # 10:33 IST — warm_audience
     - cron: '33 5 * * *'   # 11:03 IST — explore
     - cron: '3 6 * * *'    # 11:33 IST — hashtags
-    - cron: '3 7 * * *'    # 12:33 IST — explore
+    - cron: '3 7 * * *'    # 12:33 IST — BACKUP PUBLISH + explore (lunch fallback)
     - cron: '3 8 * * *'    # 13:33 IST — hashtags
     - cron: '3 9 * * *'    # 14:33 IST — warm_audience
     - cron: '33 9 * * *'   # 15:03 IST — commenter_target
@@ -142,7 +142,7 @@ jobs:
               "3 5 * * *")    echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "33 5 * * *")   echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "3 6 * * *")    echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "3 7 * * *")    echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "3 7 * * *")    echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;  # backup publish
               "3 8 * * *")    echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "3 9 * * *")    echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "33 9 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;

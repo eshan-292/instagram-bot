@@ -269,9 +269,11 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 
 **Total: ~237 sessions/day** across all accounts.
 
-**1 post/day per main account** at staggered prime times:
-- Maya 19:00 IST, Aryan 19:15 IST
-- Choose Wisely 19:33 IST, Modern Truths 19:39 IST, Sofia 19:47 IST, Rhea 19:53 IST
+**1 post/day per main account** with 2 publish windows (backup at lunch if evening fails):
+- **Primary (7 PM IST):** Maya 19:00, Aryan 19:15, CW 19:33, MT 19:39, Sofia 19:47, Rhea 19:53
+- **Backup (12:30 PM IST):** Maya 12:30, Aryan 12:45, CW 12:33, MT 12:39, Sofia 12:47, Rhea 12:53
+
+The orchestrator publishes at most 1 post/day — if the lunch window publishes, the evening one finds nothing eligible and skips.
 
 **New accounts (Choose Wisely, Modern Truths, Sofia, Rhea):** Workflows are disabled until sessions are seeded locally via `seed_session.py`.
 
@@ -290,7 +292,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | 10:40 | Explore | |
 | 11:15 | Hashtags | |
 | 11:50 | Warm audience | Pre-lunch targeting |
-| 12:30 | Explore | Lunch scroll |
+| 12:30 | **BACKUP PUBLISH** + Explore | Lunch fallback if 7 PM fails |
 | 13:05 | Hashtags | |
 | 13:40 | Replies | |
 | 14:15 | Warm audience | Afternoon targeting |

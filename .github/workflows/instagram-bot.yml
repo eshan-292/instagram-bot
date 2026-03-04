@@ -27,7 +27,7 @@ on:
     - cron: '10 5 * * *'   # 10:40 IST — explore
     - cron: '45 5 * * *'   # 11:15 IST — hashtags
     - cron: '20 6 * * *'   # 11:50 IST — warm_audience (pre-lunch targeting)
-    - cron: '0 7 * * *'    # 12:30 IST — explore (lunch scroll)
+    - cron: '0 7 * * *'    # 12:30 IST — BACKUP PUBLISH + explore (lunch fallback)
     - cron: '35 7 * * *'   # 13:05 IST — hashtags
     - cron: '10 8 * * *'   # 13:40 IST — replies
     - cron: '45 8 * * *'   # 14:15 IST — warm_audience (afternoon targeting)
@@ -154,7 +154,7 @@ jobs:
               "10 5 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "45 5 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "20 6 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 7 * * *")    echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 7 * * *")    echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;  # backup publish
               "35 7 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "10 8 * * *")   echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "45 8 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
