@@ -52,6 +52,40 @@ def _followers_file():
     return persona_data_dir() / "followers.json"
 UNFOLLOW_DAYS = 2  # unfollow after 2 days (was 3) — faster churn = more room for new follows
 
+# Follow circuit breaker — stop trying after N consecutive failures
+_FOLLOW_MAX_CONSECUTIVE_FAILS = 3
+_follow_consecutive_fails: int = 0
+_follow_blocked: bool = False
+
+
+def _follow_ok() -> bool:
+    """Return False if follow circuit breaker has tripped (rate limited)."""
+    return not _follow_blocked
+
+
+def _follow_succeeded() -> None:
+    """Reset the follow circuit breaker on success."""
+    global _follow_consecutive_fails, _follow_blocked
+    _follow_consecutive_fails = 0
+    _follow_blocked = False
+
+
+def _follow_failed(exc: Exception) -> None:
+    """Record a follow failure; trip circuit breaker after N consecutive."""
+    global _follow_consecutive_fails, _follow_blocked
+    exc_str = str(exc).lower()
+    if "feedback_required" in exc_str or "please wait" in exc_str:
+        _follow_consecutive_fails += 1
+        if _follow_consecutive_fails >= _FOLLOW_MAX_CONSECUTIVE_FAILS:
+            _follow_blocked = True
+            log.warning(
+                "Follow circuit breaker TRIPPED after %d consecutive rate limits — skipping follows for this session",
+                _follow_consecutive_fails,
+            )
+    else:
+        # Non-rate-limit error — don't count toward breaker
+        pass
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -84,7 +118,7 @@ def _browse_before_engage(cl: Any, user_id: str) -> Optional[Any]:
     try:
         user_info = cl.user_info_v1(int(user_id))
         # Short pause like reading their bio
-        time.sleep(random.uniform(0.5, 2))
+        time.sleep(random.uniform(0.3, 1))
         return user_info
     except Exception:
         return None
@@ -281,7 +315,7 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
             stats["story_views"] = stats.get("story_views", 0) + 1
             log.debug("Viewed %d stories of user %s", view_count, user_id)
             # Brief pause like actually watching
-            time.sleep(random.uniform(1, 3) * view_count)
+            time.sleep(random.uniform(0.5, 1.5) * view_count)
             # Always like stories (strong signal for follow-back)
             if True:
                 try:
@@ -335,7 +369,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
             record_action(data, "unfollows", user_id)
             unfollowed += 1
             log.debug("Unfollowed user %s", user_id)
-            random_delay(8, 20)  # fast unfollow pace
+            random_delay(4, 12)  # fast unfollow pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("Unfollow failed for %s: %s", user_id, exc)
@@ -406,7 +440,7 @@ def run_welcome_dms(cl: Any, cfg: Config) -> int:
             cl.direct_send(dm_text, user_ids=[int(uid)])
             sent += 1
             log.info("Welcome DM sent to @%s", username)
-            random_delay(15, 40)  # fast DM pace
+            random_delay(8, 20)  # fast DM pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("DM failed for @%s: %s", username, exc)
@@ -490,7 +524,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to comment %s: %s", comment_id, reply[:40])
-                random_delay(8, 20)  # fast reply pace
+                random_delay(4, 12)  # fast reply pace
             except Exception as exc:
                 _check_challenge(exc)
                 log.warning("Reply failed for comment %s: %s", comment_id, exc)
@@ -534,14 +568,14 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
     for media in medias[:explore_limit]:
         # Skip some posts — humans scroll past most content
         if _should_skip_post():
-            time.sleep(random.uniform(1, 3))  # quick scroll past
+            time.sleep(random.uniform(0.5, 1.5))
             continue
 
         media_id = str(media.pk)
         user_id = str(media.user.pk) if media.user else None
 
         # Pause like actually watching the reel
-        time.sleep(random.uniform(1, 4))
+        time.sleep(random.uniform(0.5, 2))
 
         # Like — big accounts first for visibility
         if can_act(data, "likes", cfg.engagement_daily_likes):
@@ -569,6 +603,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
 
         # Smart follow — only quality targets (1K-50K, active, public)
         if (cfg.engagement_follow_enabled
+                and _follow_ok()
                 and user_id
                 and can_act(data, "follows", cfg.engagement_daily_follows)):
             user_info = _browse_before_engage(cl, user_id)
@@ -577,8 +612,10 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                     cl.user_follow(int(user_id))
                     record_action(data, "follows", user_id)
                     stats["explore_follows"] += 1
+                    _follow_succeeded()
                 except Exception as exc:
                     _check_challenge(exc)
+                    _follow_failed(exc)
                     log.debug("Explore follow failed: %s", exc)
 
         # View stories from explore too
@@ -586,7 +623,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(4, 12)  # fast pace (reduced from 8-22)
+        random_delay(2, 8)  # fast pace
 
     if any(v > 0 for v in stats.values()):
         log.info("Explore engagement: %s", stats)
@@ -634,7 +671,7 @@ def _run_hashtag_engagement(
         medias = _mine_targets(cl, [tag])
         all_medias.extend(medias)
         # Small pause between hashtag searches
-        time.sleep(random.uniform(2, 5))
+        time.sleep(random.uniform(1, 3))
 
     # Deduplicate
     seen_pks: set[str] = set()
@@ -662,14 +699,14 @@ def _run_hashtag_engagement(
     for media in medias[:actual_max]:
         # Skip some posts — humans scroll past content they don't vibe with
         if _should_skip_post():
-            time.sleep(random.uniform(1, 2))  # quick scroll
+            time.sleep(random.uniform(0.5, 1))
             continue
 
         media_id = str(media.pk)
         user_id = str(media.user.pk) if media.user else None
 
         # Pause like actually looking at the post
-        time.sleep(random.uniform(1, 3))
+        time.sleep(random.uniform(0.5, 2))
 
         # Like (most common action) — prioritize big accounts for visibility
         if can_act(data, "likes", like_limit):
@@ -699,6 +736,7 @@ def _run_hashtag_engagement(
         # We like/comment on big accounts for visibility, but only FOLLOW accounts
         # likely to follow back (micro-influencers).
         if (cfg.engagement_follow_enabled
+                and _follow_ok()
                 and user_id
                 and can_act(data, "follows", follow_limit)):
             user_info = _browse_before_engage(cl, user_id)  # view profile first
@@ -707,9 +745,11 @@ def _run_hashtag_engagement(
                     cl.user_follow(int(user_id))
                     record_action(data, "follows", user_id)
                     stats["follows"] = stats.get("follows", 0) + 1
+                    _follow_succeeded()
                     log.debug("Followed %s from hashtag (quality target)", user_id)
                 except Exception as exc:
                     _check_challenge(exc)
+                    _follow_failed(exc)
                     log.warning("Follow failed for %s: %s", user_id, exc)
             else:
                 log.debug("Skipped follow for %s — not a quality target", user_id)
@@ -719,7 +759,7 @@ def _run_hashtag_engagement(
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(4, 12)  # fast pace (reduced from 8-25)
+        random_delay(2, 8)  # fast pace
 
         if (
             not can_act(data, "likes", like_limit)
@@ -814,7 +854,7 @@ def run_warm_audience_session(
 
         # Skip some — human behavior
         if _should_skip_post():
-            time.sleep(random.uniform(1, 3))
+            time.sleep(random.uniform(0.5, 1.5))
             continue
 
         # Browse profile first (realistic)
@@ -836,7 +876,7 @@ def run_warm_audience_session(
                     stats["warm_likes"] += 1
                 except Exception as exc:
                     _check_challenge(exc)
-                time.sleep(random.uniform(1, 3))
+                time.sleep(random.uniform(0.5, 1.5))
 
         # Always comment on warm targets
         if (cfg.engagement_comment_enabled
@@ -855,13 +895,16 @@ def run_warm_audience_session(
 
         # Always follow warm targets — maximum growth
         if (cfg.engagement_follow_enabled
+                and _follow_ok()
                 and can_act(data, "follows", cfg.engagement_daily_follows)):
             try:
                 cl.user_follow(int(user_id))
                 record_action(data, "follows", user_id)
                 stats["warm_follows"] += 1
+                _follow_succeeded()
             except Exception as exc:
                 _check_challenge(exc)
+                _follow_failed(exc)
                 log.debug("Warm follow failed: %s", exc)
 
         # View their stories (strong signal)
@@ -870,7 +913,7 @@ def run_warm_audience_session(
             stats["warm_story_views"] = stats.get("story_views", 0)
 
         save_log(LOG_FILE, data)
-        random_delay(5, 15)  # fast pace (reduced from 10-30)
+        random_delay(3, 10)  # fast pace
 
         # Check daily limits
         if (not can_act(data, "likes", cfg.engagement_daily_likes)
@@ -945,7 +988,7 @@ def run_post_publish_burst(
         except Exception as exc:
             log.warning("Self-comment failed on %s: %s", post_id, exc)
 
-    random_delay(5, 15)
+    random_delay(3, 8)
 
     # 2. Reshare post to story (native post card with link sticker)
     if post_id and post_id != "unknown":
@@ -957,7 +1000,7 @@ def run_post_publish_burst(
         except Exception as exc:
             log.debug("Post-publish story failed: %s", exc)
 
-    random_delay(10, 30)
+    random_delay(3, 10)
 
     # 3. Mini engagement burst — 8-12 likes on hashtag content (natural activity)
     data = load_log(LOG_FILE)
@@ -981,7 +1024,7 @@ def run_post_publish_burst(
                 burst_count += 1
             except Exception:
                 pass
-            time.sleep(random.uniform(3, 8))
+            time.sleep(random.uniform(1, 4))
     stats["burst_likes"] = burst_count
     save_log(LOG_FILE, data)
 
@@ -1077,7 +1120,7 @@ def run_viral_detection(
             except Exception:
                 pass
 
-        random_delay(10, 30)
+        random_delay(5, 15)
 
     if stats["viral_detected"]:
         log.info("Viral detection results: %s", stats)
@@ -1183,14 +1226,15 @@ def run_comment_followup_dms(
                 log.debug("Comment DM to @%s failed: %s", username, exc)
 
             # Also follow if not already following
-            if cfg.engagement_follow_enabled and can_act(data, "follows", cfg.engagement_daily_follows):
+            if cfg.engagement_follow_enabled and _follow_ok() and can_act(data, "follows", cfg.engagement_daily_follows):
                 try:
                     cl.user_follow(int(user_id))
                     record_action(data, "follows", user_id)
-                except Exception:
-                    pass
+                    _follow_succeeded()
+                except Exception as exc:
+                    _follow_failed(exc)
 
-            random_delay(10, 30)  # DM pace
+            random_delay(5, 15)  # DM pace
 
     if dm_count:
         log.info("Comment follow-up DMs sent: %d", dm_count)
@@ -1334,7 +1378,7 @@ def run_dm_replies(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
             _check_challenge(exc)
             log.warning("DM reply failed for thread %s: %s", thread_id, exc)
 
-        random_delay(10, 30)
+        random_delay(5, 15)
 
     if replied:
         log.info("Replied to %d incoming DMs", replied)
@@ -1427,15 +1471,15 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     else:  # "full" — all phases (used sparingly, 1x/day max)
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        random_delay(8, 25)
+        random_delay(3, 10)
         stats["dm_replies"] = run_dm_replies(cl, cfg, data)
         save_log(LOG_FILE, data)
-        random_delay(8, 25)
+        random_delay(3, 10)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
-        random_delay(8, 25)
+        random_delay(3, 10)
         _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
-        random_delay(8, 25)
+        random_delay(3, 10)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
 

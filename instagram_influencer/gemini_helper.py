@@ -26,6 +26,9 @@ _MODELS = [
 _client: Any = None
 # Track which model to start with next (round-robin across calls)
 _model_idx: int = 0
+# Rate limit cooldown — when all models exhausted, skip calls for this many seconds
+_COOLDOWN_SECS = 300  # 5 minutes
+_cooldown_until: float = 0.0  # timestamp when cooldown expires
 
 
 def _get_client(api_key: str) -> Any:
@@ -41,9 +44,16 @@ def generate(api_key: str, prompt: str, preferred_model: str | None = None) -> s
 
     Tries the preferred model first, then rotates through alternatives.
     On rate limits (429), waits briefly and tries the next model.
+    When ALL models are exhausted, enters a 5-minute cooldown where
+    subsequent calls instantly return None (avoids wasting 10-30s per call).
     Returns the generated text, or None on failure.
     """
-    global _model_idx
+    global _model_idx, _cooldown_until
+
+    # Fast-path: if in cooldown, skip immediately (HUGE time savings)
+    if time.time() < _cooldown_until:
+        return None
+
     client = _get_client(api_key)
 
     # Build model list: preferred first, then round-robin through others
@@ -65,15 +75,17 @@ def generate(api_key: str, prompt: str, preferred_model: str | None = None) -> s
             if text:
                 # Advance round-robin for next call
                 _model_idx = (_model_idx + 1) % len(_MODELS)
+                # Clear cooldown on success
+                _cooldown_until = 0.0
                 return text
         except Exception as exc:
             exc_str = str(exc)
             if "429" in exc_str or "RESOURCE_EXHAUSTED" in exc_str or "quota" in exc_str.lower():
                 rate_limited_count += 1
                 log.debug("Rate limited on %s, trying next model", model)
-                # Brief wait before trying next model (prevents rapid-fire 429s)
+                # Brief wait before trying next model
                 if i < len(models) - 1:
-                    time.sleep(random.uniform(1, 3))
+                    time.sleep(random.uniform(0.5, 1.5))
                 continue
             if "not found" in exc_str.lower() or "404" in exc_str:
                 log.debug("Model %s not available, skipping", model)
@@ -82,17 +94,13 @@ def generate(api_key: str, prompt: str, preferred_model: str | None = None) -> s
             continue
 
     if rate_limited_count == len(models):
-        log.warning("All %d Gemini models rate limited, waiting 10s before giving up", len(models))
-        time.sleep(10)
-        # One last attempt with a random model
-        try:
-            fallback = random.choice(_MODELS)
-            response = client.models.generate_content(model=fallback, contents=prompt)
-            text = (response.text or "").strip().strip('"').strip("'")
-            if text:
-                return text
-        except Exception:
-            pass
+        # ALL models exhausted — enter cooldown to avoid wasting time on future calls
+        _cooldown_until = time.time() + _COOLDOWN_SECS
+        log.warning(
+            "All %d Gemini models rate limited — entering %ds cooldown (skipping AI generation)",
+            len(models), _COOLDOWN_SECS,
+        )
+        return None
 
     log.warning("All Gemini models exhausted (rate_limited=%d)", rate_limited_count)
     return None

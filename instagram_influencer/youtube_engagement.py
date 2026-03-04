@@ -165,7 +165,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
         except Exception as exc:
             log.debug("YouTube search '%s' failed: %s", query, exc)
 
-        time.sleep(random.uniform(2, 5))
+        time.sleep(random.uniform(1, 3))
 
     # Deduplicate and shuffle
     seen_ids: set[str] = set()
@@ -181,13 +181,13 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
 
     for video in videos[:session_size]:
         if _should_skip():
-            time.sleep(random.uniform(1, 3))
+            time.sleep(random.uniform(0.5, 1.5))
             continue
 
         video_id = video["video_id"]
 
         # Pause like watching the Short
-        time.sleep(random.uniform(1, 4))
+        time.sleep(random.uniform(0.5, 2))
 
         # Like
         if can_act(data, "yt_likes", YT_DAILY_LIKES):
@@ -225,7 +225,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                     log.debug("YT comment failed: %s", exc)
 
         save_log(LOG_FILE, data)
-        random_delay(5, 15)  # fast pace — YouTube has no action blocks
+        random_delay(2, 8)  # fast pace — YouTube has no action blocks
 
     if stats["yt_likes"] or stats["yt_comments"]:
         log.info("YouTube niche engagement: %s", stats)
@@ -326,7 +326,7 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to YT comment: %s → %s", comment_text[:30], reply[:30])
-                random_delay(8, 20)  # fast — YouTube has no action blocks
+                random_delay(3, 10)  # fast — YouTube has no action blocks
             except Exception as exc:
                 log.warning("YT reply failed for %s: %s", comment_id, exc)
 
@@ -364,7 +364,7 @@ def run_yt_session(cfg: Config, session_type: str = "yt_engage") -> dict[str, in
     elif session_type == "yt_full":
         engage_stats = run_yt_niche_engagement(cfg, data)
         stats.update(engage_stats)
-        random_delay(10, 25)
+        random_delay(3, 10)
         stats["yt_replies"] = run_yt_reply_to_comments(cfg, data)
 
     save_log(LOG_FILE, data)

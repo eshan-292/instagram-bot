@@ -131,9 +131,9 @@ def random_delay(min_s: int = 30, max_s: int = 90) -> None:
     15% chance of a 'micro-break' (90-300s) — simulates getting distracted,
     checking another app, replying to a text, etc.
     """
-    # Micro-break: simulate getting distracted (rare, short)
-    if random.random() < 0.02:
-        pause = random.uniform(15, 35)
+    # Micro-break: simulate getting distracted (very rare, short)
+    if random.random() < 0.01:
+        pause = random.uniform(10, 25)
         log.debug("Micro-break: %.0fs", pause)
         time.sleep(pause)
         return
@@ -157,7 +157,7 @@ def session_startup_jitter() -> None:
     Real people don't open Instagram at exactly :00 or :30. This adds
     0-4 minutes of jitter so sessions start at varied times.
     """
-    jitter = random.uniform(5, 60)  # 5s to 1 minute (reduced from 10-240s)
+    jitter = random.uniform(3, 30)  # 3-30s jitter
     log.info("Session startup jitter: %.0fs", jitter)
     time.sleep(jitter)
 

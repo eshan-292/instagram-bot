@@ -341,14 +341,17 @@ Satellites are staggered (SAT1 at :00, SAT2 at :20, SAT3 at :40) so they don't h
 The bot mimics real human usage patterns to avoid detection:
 
 - **Gaussian delays** -- Pauses cluster around a natural midpoint (not uniform random)
-- **Micro-breaks** (2% chance) -- 15-35s pauses simulating checking texts, switching apps
-- **Session startup jitter** -- 5-60s random delay so nothing runs at exact times
+- **Micro-breaks** (1% chance) -- 10-25s pauses simulating switching apps
+- **Session startup jitter** -- 3-30s random delay so nothing runs at exact times
 - ~~**Skip behavior**~~ -- **Disabled** — engage with everything for maximum growth
 - **Profile browsing** -- Views user profile before following
 - **Randomized session sizes** -- +/-30% variation per session
 - **Multi-story viewing** -- Views 1-3 stories per user (not always just 1)
 - **Maximum commenting** -- comment on EVERY post (no probability gating)
 - **Maximum following** -- follow EVERY user encountered (no probability gating)
+- **Follow circuit breaker** -- Stops follow attempts after 3 consecutive rate limits (avoids wasting time on blocked follows)
+- **Gemini cooldown** -- When all 4 AI models are rate-limited, enters 5-min cooldown (skips AI generation instantly instead of retrying)
+- **Minimal API delays** -- `delay_range=[1,3]` per API call, 2-8s between engagement actions
 - **Satellite jitter** -- 30-90s startup jitter, low daily limits
 - **User PK caching** -- Satellite accounts cache Instagram user PKs to avoid rate-limited username lookups (429 errors)
 - **Session health check** -- Detects stale/web-origin sessions (403 errors) and forces fresh mobile login
