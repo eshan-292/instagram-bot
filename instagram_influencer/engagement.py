@@ -393,7 +393,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
     """Unfollow users we followed more than UNFOLLOW_DAYS ago. Returns count."""
     cutoff = datetime.now(timezone.utc) - timedelta(days=UNFOLLOW_DAYS)
     unfollowed = 0
-    daily_limit = 60  # aggressive unfollow — clear room for new follows (was 40)
+    daily_limit = 120  # aggressive unfollow — match 400/day follow velocity
 
     # Find follow actions older than cutoff that haven't been unfollowed yet
     unfollowed_set: set[str] = {
@@ -984,6 +984,160 @@ def run_warm_audience_session(
 
 
 # ---------------------------------------------------------------------------
+# Feature: Commenter targeting (follow people who comment on big pages)
+# ---------------------------------------------------------------------------
+
+def run_commenter_targeting_session(
+    cl: Any, cfg: Config, data: dict[str, Any],
+) -> dict[str, int]:
+    """Engage with people who comment on big niche pages.
+
+    Commenters follow back 3-5x more than random users because:
+    - They're actively engaged, not passive scrollers
+    - They already consume similar content
+    - Our follow + like + comment triple-touch gets their attention
+
+    Strategy:
+      1. Pick 2-3 target accounts (same pool as warm audience)
+      2. Fetch 3 recent posts per target
+      3. Extract commenters, deduplicate, filter for quality
+      4. For each: like 1-2 posts + comment on latest + follow + view stories
+    """
+    stats: dict[str, int] = {
+        "ct_likes": 0, "ct_comments": 0, "ct_follows": 0, "ct_story_views": 0,
+    }
+
+    targets = _parse_target_accounts(cfg.engagement_target_accounts)
+    if not targets:
+        log.info("No target accounts configured for commenter targeting")
+        return stats
+
+    random.shuffle(targets)
+    targets = targets[:3]  # Max 3 target accounts per session
+
+    # Collect commenters from target accounts' recent posts
+    all_commenter_ids: list[str] = []
+    seen: set[str] = set()
+
+    for account in targets:
+        try:
+            target_user = cl.user_info_by_username_v1(account)
+            target_id = target_user.pk
+            log.info("Commenter targeting: mining @%s", account)
+        except Exception as exc:
+            _check_challenge(exc)
+            log.warning("Could not resolve @%s for commenter targeting: %s", account, exc)
+            continue
+
+        # Fetch 3 recent posts
+        try:
+            medias = cl.user_medias_v1(int(target_id), amount=3)
+        except Exception as exc:
+            _check_challenge(exc)
+            log.debug("Could not fetch posts of @%s: %s", account, exc)
+            continue
+
+        # Extract commenters from each post
+        for media in medias:
+            try:
+                comments = cl.media_comments(str(media.pk), amount=20)
+                for c in comments:
+                    if hasattr(c, "user") and c.user:
+                        uid = str(c.user.pk)
+                        if uid not in seen:
+                            seen.add(uid)
+                            all_commenter_ids.append(uid)
+            except Exception as exc:
+                _check_challenge(exc)
+                log.debug("Could not fetch comments: %s", exc)
+            random_delay(1, 3)
+
+    if not all_commenter_ids:
+        log.info("Commenter targeting: no commenters found")
+        return stats
+
+    random.shuffle(all_commenter_ids)
+    session_size = _randomize_session_size(25)
+    commenter_ids = all_commenter_ids[:session_size]
+    log.info("Commenter targeting: engaging %d commenters from %d accounts",
+             len(commenter_ids), len(targets))
+
+    for user_id in commenter_ids:
+        # Browse profile first (realistic behavior)
+        user_info = _browse_before_engage(cl, user_id)
+
+        # Quality filter — skip low-quality targets
+        if not _is_quality_follow_target(user_info):
+            time.sleep(random.uniform(0.3, 0.8))
+            continue
+
+        # Like 1-2 recent posts
+        try:
+            user_medias = cl.user_medias_v1(int(user_id), amount=3)
+        except Exception as exc:
+            _check_challenge(exc)
+            user_medias = []
+
+        like_count = min(random.randint(1, 2), len(user_medias))
+        for media in user_medias[:like_count]:
+            if can_act(data, "likes", cfg.engagement_daily_likes):
+                try:
+                    cl.media_like(media.pk)
+                    record_action(data, "likes", str(media.pk))
+                    stats["ct_likes"] += 1
+                except Exception as exc:
+                    _check_challenge(exc)
+                time.sleep(random.uniform(0.5, 1.5))
+
+        # Comment on their latest post
+        if (cfg.engagement_comment_enabled
+                and user_medias
+                and can_act(data, "comments", cfg.engagement_daily_comments)):
+            caption_text = str(getattr(user_medias[0], "caption_text", "") or "")
+            comment = _generate_comment(cfg, caption_text)
+            if comment:
+                try:
+                    cl.media_comment(user_medias[0].pk, comment)
+                    record_action(data, "comments", str(user_medias[0].pk))
+                    stats["ct_comments"] += 1
+                except Exception as exc:
+                    _check_challenge(exc)
+                    log.debug("Commenter targeting comment failed: %s", exc)
+
+        # Follow them (with circuit breaker)
+        if (cfg.engagement_follow_enabled
+                and _follow_ok()
+                and can_act(data, "follows", cfg.engagement_daily_follows)):
+            try:
+                cl.user_follow(int(user_id))
+                record_action(data, "follows", user_id)
+                stats["ct_follows"] += 1
+                _follow_succeeded()
+            except Exception as exc:
+                _check_challenge(exc)
+                _follow_failed(exc)
+                log.debug("Commenter targeting follow failed: %s", exc)
+
+        # View their stories
+        if can_act(data, "story_views", 150):
+            _view_user_stories(cl, user_id, data, stats)
+            stats["ct_story_views"] = stats.get("story_views", 0)
+
+        save_log(LOG_FILE, data)
+        random_delay(2, 8)
+
+        # Check daily limits
+        if (not can_act(data, "likes", cfg.engagement_daily_likes)
+                and not can_act(data, "comments", cfg.engagement_daily_comments)):
+            log.info("Daily limits reached during commenter targeting")
+            break
+
+    if any(v > 0 for v in stats.values()):
+        log.info("Commenter targeting: %s", stats)
+    return stats
+
+
+# ---------------------------------------------------------------------------
 # Feature: Post-publish engagement burst (first 30 min = algorithmic fate)
 # ---------------------------------------------------------------------------
 
@@ -1485,6 +1639,115 @@ def run_dm_replies(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
 
 
 # ---------------------------------------------------------------------------
+# Feature: Instant pod boost — auto-boost fresh partner posts
+# ---------------------------------------------------------------------------
+
+def _boost_fresh_partner_posts(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[str, int]:
+    """Like + save + comment on fresh partner posts (< 3 hours old).
+
+    Called at the START of every engagement session. The Instagram algorithm
+    heavily weights engagement velocity in the first 30 minutes — by boosting
+    partner posts from every session, we ensure fresh posts get engagement
+    from 4-5 accounts within minutes of publishing.
+
+    Tracks boosted posts via 'pod_boost' action to avoid re-boosting.
+    """
+    stats: dict[str, int] = {"pod_likes": 0, "pod_saves": 0, "pod_comments": 0}
+
+    persona = get_persona()
+    cross_promo = persona.get("cross_promo", {})
+    partner_ids = cross_promo.get("partners", [])
+    if not partner_ids:
+        single = cross_promo.get("partner")
+        if single:
+            partner_ids = [single]
+    if not partner_ids:
+        return stats
+
+    from persona import load_persona
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    boosted_today = {
+        a.get("target") for a in data.get("actions", [])
+        if a.get("type") == "pod_boost" and str(a.get("at", "")).startswith(today)
+    }
+
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=3)
+
+    for pid in partner_ids:
+        try:
+            partner_persona = load_persona(pid)
+            partner_handle = partner_persona.get("instagram_handle", "")
+            if not partner_handle:
+                continue
+
+            user_info = cl.user_info_by_username_v1(partner_handle)
+            user_id = str(user_info.pk)
+
+            medias = cl.user_medias_v1(int(user_id), amount=1)
+            if not medias:
+                continue
+
+            latest = medias[0]
+            media_id = str(latest.pk)
+            taken_at = getattr(latest, "taken_at", None)
+
+            # Skip if not fresh or already boosted
+            if not taken_at or taken_at < cutoff:
+                continue
+            if media_id in boosted_today:
+                continue
+
+            log.info("FRESH PARTNER POST: @%s posted %s ago — boosting!",
+                     partner_handle,
+                     str(datetime.now(timezone.utc) - taken_at).split(".")[0])
+
+            # Like it
+            try:
+                cl.media_like(media_id)
+                record_action(data, "likes", media_id)
+                stats["pod_likes"] += 1
+            except Exception:
+                pass
+            random_delay(1, 3)
+
+            # Save it (strongest algorithm signal)
+            try:
+                cl.media_save(media_id)
+                record_action(data, "saves", media_id)
+                stats["pod_saves"] += 1
+            except Exception:
+                pass
+            random_delay(1, 3)
+
+            # Comment on it
+            from cross_promo import _generate_partner_comment
+            partner_name = partner_persona.get("name", pid)
+            caption = str(getattr(latest, "caption_text", "") or "")
+            comment = _generate_partner_comment(cfg, caption, partner_name)
+            try:
+                cl.media_comment(media_id, comment)
+                record_action(data, "comments", media_id)
+                stats["pod_comments"] += 1
+                log.info("Pod boost comment on @%s: %s", partner_handle, comment[:50])
+            except Exception as exc:
+                log.debug("Pod boost comment failed: %s", exc)
+
+            # Record boost to avoid re-boosting
+            record_action(data, "pod_boost", media_id)
+            save_log(LOG_FILE, data)
+            random_delay(1, 3)
+
+        except Exception as exc:
+            _check_challenge(exc)
+            log.debug("Pod boost for %s failed: %s", pid, exc)
+            continue
+
+    if any(v > 0 for v in stats.values()):
+        log.info("Pod boost totals: %s", stats)
+    return stats
+
+
+# ---------------------------------------------------------------------------
 # Session-based engagement (for scheduler — short focused bursts)
 # ---------------------------------------------------------------------------
 
@@ -1495,6 +1758,7 @@ SESSION_TYPES = [
     "hashtags",     # full hashtag engagement (like/comment/follow/stories)
     "explore",      # explore page engagement
     "warm_audience", # engage followers of similar niche accounts (3-5x better ROI)
+    "commenter_target",  # follow people who comment on big pages (highest ROI)
     "boost",        # viral post detection + auto-boost
     "dm_replies",   # reply to incoming DMs (AI-generated contextual replies)
     "maintenance",  # unfollow old follows + welcome DMs + comment DMs
@@ -1522,6 +1786,16 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     cl = _get_client(cfg)
     log.info("Starting engagement session: %s", session_type)
 
+    # Pod boost: auto-boost fresh partner posts at the start of every session
+    # (skip for report, maintenance, stories — those aren't engagement sessions)
+    if session_type not in ("report", "maintenance", "stories", "dm_replies"):
+        try:
+            pod_stats = _boost_fresh_partner_posts(cl, cfg, data)
+            stats.update(pod_stats)
+        except Exception as exc:
+            _check_challenge(exc)
+            log.debug("Pod boost failed: %s", exc)
+
     if session_type == "morning":
         # Morning: max growth start — hashtags
         _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
@@ -1540,6 +1814,10 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     elif session_type == "warm_audience":
         warm_stats = run_warm_audience_session(cl, cfg, data)
         stats.update(warm_stats)
+
+    elif session_type == "commenter_target":
+        ct_stats = run_commenter_targeting_session(cl, cfg, data)
+        stats.update(ct_stats)
 
     elif session_type == "boost":
         # Viral post detection + auto-boost (run ~1hr after publish)

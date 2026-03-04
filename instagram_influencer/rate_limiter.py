@@ -35,8 +35,8 @@ LOG_FILE = _LazyLogFile()
 # Override via Config fields.
 DAILY_LIMITS = {
     "likes": 500,
-    "comments": 150,
-    "follows": 200,
+    "comments": 250,
+    "follows": 400,
     "dm_replies": 25,
 }
 

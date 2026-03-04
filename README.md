@@ -259,15 +259,15 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | `youtube-bot.yml` | 12 | `youtube-bot` | Maya YT |
 | `instagram-bot-aryan.yml` | 33 | `instagram-bot-aryan` | Aryan IG |
 | `youtube-bot-aryan.yml` | 12 | `youtube-bot-aryan` | Aryan YT |
-| `instagram-bot-choosewisely.yml` | 22 | `instagram-bot-choosewisely` | Choose Wisely IG |
-| `instagram-bot-moderntruths.yml` | 22 | `instagram-bot-moderntruths` | Modern Truths IG |
-| `instagram-bot-sofia.yml` | 22 | `instagram-bot-sofia` | Sofia IG |
-| `instagram-bot-rhea.yml` | 22 | `instagram-bot-rhea` | Rhea IG |
+| `instagram-bot-choosewisely.yml` | 30 | `instagram-bot-choosewisely` | Choose Wisely IG |
+| `instagram-bot-moderntruths.yml` | 30 | `instagram-bot-moderntruths` | Modern Truths IG |
+| `instagram-bot-sofia.yml` | 30 | `instagram-bot-sofia` | Sofia IG |
+| `instagram-bot-rhea.yml` | 30 | `instagram-bot-rhea` | Rhea IG |
 | `satellite-1.yml` | 9 | `satellite-1` | Satellite 1 |
 | `satellite-2.yml` | 9 | `satellite-2` | Satellite 2 |
 | `satellite-3.yml` | 9 | `satellite-3` | Satellite 3 |
 
-**Total: ~205 sessions/day** across all accounts.
+**Total: ~237 sessions/day** across all accounts.
 
 **1 post/day per main account** at staggered prime times:
 - Maya 19:00 IST, Aryan 19:15 IST
@@ -283,7 +283,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 |----------|---------|-------|
 | 07:00 | Morning engagement | Wake up, check overnight |
 | 07:40 | Explore | Morning scroll |
-| 08:15 | Warm audience | High-ROI targeting |
+| 08:15 | Commenter target | Highest-ROI targeting |
 | 08:50 | Hashtags | |
 | 09:30 | Replies | |
 | 10:05 | Stories | |
@@ -294,7 +294,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | 13:05 | Hashtags | |
 | 13:40 | Replies | |
 | 14:15 | Warm audience | Afternoon targeting |
-| 14:50 | Explore | |
+| 14:50 | Commenter target | Afternoon targeting |
 | 15:30 | Hashtags | |
 | 16:10 | Stories | |
 | 16:45 | Explore | |
@@ -376,14 +376,34 @@ All engagement is **filtered to big pages only** — accounts below 10K follower
 - **Like count fallback**: When follower count isn't available, uses like count as proxy (500 likes ≈ 10K+ followers)
 - **Smart follow**: Only follow micro-influencers (1K-50K followers, active, public) — 20-30% follow-back rate vs 5% for random
 
-### Warm Audience Targeting (highest ROI)
+### Warm Audience Targeting (high ROI)
 
 Engages followers of similar niche accounts. These users already consume similar content and are 3-5x more likely to follow back.
 
-- **5 warm sessions/day** per main account
+- **5+ warm sessions/day** per main account
 - Target accounts: configurable per persona via `engagement.default_target_accounts` in persona JSON
 - Per user: like 2-3 posts + genuine comment + follow (quality targets only)
 - Smart quality filtering: skip follow-farms, inactive accounts, private profiles
+
+### Commenter Targeting (highest ROI — NEW)
+
+Follows and engages people who **comment on big niche pages**. Commenters follow back 3-5x more than random followers because they're actively engaged, not passive scrollers.
+
+- **2 commenter_target sessions/day** per account (morning + afternoon)
+- Mines commenters from `engagement_target_accounts` posts (same pool as warm audience)
+- Triple-touch per commenter: like 1-2 posts + comment + follow + view stories
+- Quality-filtered: only 500-100K follower public accounts with 10+ posts
+- Expected 30-40% follow-back rate (vs 20% for warm, 5% for random)
+
+### Instant Pod Boost (cross-promo velocity)
+
+Auto-boosts fresh partner posts at the **start of every engagement session**. Instagram's algorithm heavily weights engagement velocity in the first 30 minutes.
+
+- Runs at the top of every session (except report/maintenance/stories)
+- Detects partner posts < 3 hours old via `cross_promo.partners` list
+- Per fresh post: like + save (strongest signal) + comment
+- Tracks via `pod_boost` action to avoid re-boosting
+- Result: fresh posts get engagement from 4-5 accounts within minutes of publishing
 
 ### Viral Growth Features (2026 Algorithm)
 
@@ -401,18 +421,20 @@ Engages followers of similar niche accounts. These users already consume similar
 | **Viral hook patterns** | Higher scroll-stop rate | POV:, numbers, curiosity gaps |
 | **Satellite boost** | +3x early engagement | 3 accounts: like+comment+save+comment-like+reply+story-like+DM-share |
 | **Cross-promo** | +20-30% cross-audience reach | Partner: like+save+comment+comment-like+reply+story-like+DM-share |
+| **Commenter targeting** | +80-120 followers/day | Follow people who comment on big niche pages (3-5x follow-back rate) |
+| **Instant pod boost** | +5-10 followers/day | Auto-boost fresh partner posts at every session start (< 3hr old → like+save+comment) |
 
 ### Instagram Limits (per main account)
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
 | Likes | 500 | Spread across all sessions |
-| Comments | 150 | AI-generated (Gemini) with fallback pool when rate-limited |
-| Follows | 200 | Smart targeting: only 1K-50K micro-influencers (20-30% follow-back) |
+| Comments | 250 | AI-generated (Gemini) with fallback pool when rate-limited |
+| Follows | 400 | Smart targeting: only 1K-50K micro-influencers (20-30% follow-back) |
 | Story views | 150 | 100% view, 100% like rate |
 | Replies | 50 | On own posts (last 48h) -- reply to ALL |
 | DM replies | 25 | AI-generated contextual replies to incoming DMs (with fallback pool) |
-| Unfollows | 60/run | After 2+ days |
+| Unfollows | 120/run | After 2+ days |
 | ~~Welcome DMs~~ | ~~15/day~~ | **Disabled** -- caused unfollows |
 | ~~Comment DMs~~ | ~~8/day~~ | **Disabled** -- sounded unnatural |
 
@@ -559,8 +581,8 @@ End-of-day summary at 23:15 IST with engagement stats, posts published, YouTube 
 |----------|---------|-------------|
 | `ENGAGEMENT_ENABLED` | `false` | Enable Instagram engagement automation |
 | `ENGAGEMENT_DAILY_LIKES` | `500` | Max likes/day |
-| `ENGAGEMENT_DAILY_COMMENTS` | `150` | Max comments/day |
-| `ENGAGEMENT_DAILY_FOLLOWS` | `200` | Max follows/day |
+| `ENGAGEMENT_DAILY_COMMENTS` | `250` | Max comments/day |
+| `ENGAGEMENT_DAILY_FOLLOWS` | `400` | Max follows/day |
 | `ENGAGEMENT_COMMENT_ENABLED` | `false` | Enable AI comments on other posts |
 | `ENGAGEMENT_FOLLOW_ENABLED` | `false` | Enable auto-follow |
 | `ENGAGEMENT_TARGET_ACCOUNTS` | (from persona JSON) | Comma-separated similar accounts for warm targeting |

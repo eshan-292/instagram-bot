@@ -3,23 +3,32 @@ name: Instagram Bot (Modern Truths)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
+    # 30 sessions/day — aggressive growth mode
     #
-    # OVERNIGHT
+    # OVERNIGHT — 5 sessions
     - cron: '9 19 * * *'   # 00:39 IST — explore
     - cron: '9 21 * * *'   # 02:39 IST — warm_audience
     - cron: '9 23 * * *'   # 04:39 IST — hashtags
+    - cron: '9 0 * * *'    # 05:39 IST — commenter_target
+    - cron: '9 1 * * *'    # 06:39 IST — warm_audience
     #
-    # DAYTIME — 22 IG sessions
+    # DAYTIME — 25 sessions
     - cron: '9 2 * * *'    # 07:39 IST — morning
     - cron: '9 3 * * *'    # 08:39 IST — explore
+    - cron: '39 3 * * *'   # 09:09 IST — replies
     - cron: '9 4 * * *'    # 09:39 IST — hashtags
     - cron: '9 5 * * *'    # 10:39 IST — warm_audience
+    - cron: '39 5 * * *'   # 11:09 IST — explore
+    - cron: '9 6 * * *'    # 11:39 IST — hashtags
     - cron: '9 7 * * *'    # 12:39 IST — explore
     - cron: '9 8 * * *'    # 13:39 IST — hashtags
     - cron: '9 9 * * *'    # 14:39 IST — warm_audience
+    - cron: '39 9 * * *'   # 15:09 IST — commenter_target
     - cron: '9 10 * * *'   # 15:39 IST — explore
+    - cron: '39 10 * * *'  # 16:09 IST — warm_audience
     - cron: '9 11 * * *'   # 16:39 IST — hashtags
     - cron: '9 12 * * *'   # 17:39 IST — warm_audience
+    - cron: '39 12 * * *'  # 18:09 IST — explore
     - cron: '9 13 * * *'   # 18:39 IST — stories
     - cron: '9 14 * * *'   # 19:39 IST — PUBLISH + explore (PRIME TIME)
     - cron: '39 14 * * *'  # 20:09 IST — hashtags
@@ -37,7 +46,7 @@ on:
         required: true
         default: 'full'
         type: choice
-        options: [morning, replies, hashtags, explore, warm_audience, boost, maintenance, stories, cross_promo, report, full]
+        options: [morning, replies, hashtags, explore, warm_audience, commenter_target, boost, maintenance, stories, cross_promo, report, full]
       publish:
         description: 'Also publish a post?'
         type: boolean
@@ -123,17 +132,25 @@ jobs:
               "9 19 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 21 * * *")   echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 23 * * *")   echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "9 0 * * *")    echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "9 1 * * *")    echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               # Daytime
               "9 2 * * *")    echo "type=morning"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 3 * * *")    echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "39 3 * * *")   echo "type=replies"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 4 * * *")    echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 5 * * *")    echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "39 5 * * *")   echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "9 6 * * *")    echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 7 * * *")    echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 8 * * *")    echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 9 * * *")    echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "39 9 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 10 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "39 10 * * *")  echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 11 * * *")   echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 12 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "39 12 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 13 * * *")   echo "type=stories"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "9 14 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
               "39 14 * * *")  echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;

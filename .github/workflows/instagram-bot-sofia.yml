@@ -3,24 +3,33 @@ name: Instagram Bot (Sofia)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
+    # 30 sessions/day — aggressive growth mode
     # Minute offsets: 17 and 47
     #
-    # OVERNIGHT
+    # OVERNIGHT — 5 sessions
     - cron: '17 19 * * *'  # 00:47 IST — explore
     - cron: '17 21 * * *'  # 02:47 IST — warm_audience
     - cron: '17 23 * * *'  # 04:47 IST — hashtags
+    - cron: '17 0 * * *'   # 05:47 IST — commenter_target
+    - cron: '17 1 * * *'   # 06:47 IST — warm_audience
     #
-    # DAYTIME — 22 IG sessions
+    # DAYTIME — 25 sessions
     - cron: '17 2 * * *'   # 07:47 IST — morning
     - cron: '17 3 * * *'   # 08:47 IST — explore
+    - cron: '47 3 * * *'   # 09:17 IST — replies
     - cron: '17 4 * * *'   # 09:47 IST — hashtags
     - cron: '17 5 * * *'   # 10:47 IST — warm_audience
+    - cron: '47 5 * * *'   # 11:17 IST — explore
+    - cron: '17 6 * * *'   # 11:47 IST — hashtags
     - cron: '17 7 * * *'   # 12:47 IST — explore
     - cron: '17 8 * * *'   # 13:47 IST — hashtags
     - cron: '17 9 * * *'   # 14:47 IST — warm_audience
+    - cron: '47 9 * * *'   # 15:17 IST — commenter_target
     - cron: '17 10 * * *'  # 15:47 IST — explore
+    - cron: '47 10 * * *'  # 16:17 IST — warm_audience
     - cron: '17 11 * * *'  # 16:47 IST — hashtags
     - cron: '17 12 * * *'  # 17:47 IST — warm_audience
+    - cron: '47 12 * * *'  # 18:17 IST — explore
     - cron: '17 13 * * *'  # 18:47 IST — stories
     - cron: '17 14 * * *'  # 19:47 IST — PUBLISH + explore (publish=true)
     - cron: '47 14 * * *'  # 20:17 IST — hashtags
@@ -38,7 +47,7 @@ on:
         required: true
         default: 'full'
         type: choice
-        options: [morning, replies, hashtags, explore, warm_audience, boost, maintenance, stories, cross_promo, report, full, yt_engage, yt_replies, yt_full]
+        options: [morning, replies, hashtags, explore, warm_audience, commenter_target, boost, maintenance, stories, cross_promo, report, full, yt_engage, yt_replies, yt_full]
       publish:
         description: 'Also publish a post?'
         type: boolean
@@ -124,17 +133,25 @@ jobs:
               "17 19 * * *")  echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 21 * * *")  echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 23 * * *")  echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "17 0 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "17 1 * * *")   echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               # Daytime
               "17 2 * * *")   echo "type=morning"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 3 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "47 3 * * *")   echo "type=replies"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 4 * * *")   echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 5 * * *")   echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "47 5 * * *")   echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "17 6 * * *")   echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 7 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 8 * * *")   echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 9 * * *")   echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "47 9 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 10 * * *")  echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "47 10 * * *")  echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 11 * * *")  echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 12 * * *")  echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "47 12 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 13 * * *")  echo "type=stories"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "17 14 * * *")  echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
               "47 14 * * *")  echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;

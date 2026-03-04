@@ -348,7 +348,7 @@ def main() -> int:
     parser.add_argument("--session", type=str, default=None,
                         help="Run a specific session type (morning/replies/hashtags/explore/"
                              "maintenance/stories/report/yt_engage/yt_replies/yt_full/"
-                             "cross_promo/sat_boost/sat_background)")
+                             "commenter_target/cross_promo/sat_boost/sat_background)")
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
     setup_logging(args.verbose)
