@@ -128,7 +128,7 @@
     },
     {
       "id": "maya-009",
-      "status": "approved",
+      "status": "posted",
       "topic": "Making a statement on the vibrant streets of Colaba.",
       "caption": "I don't fit in.\nI make the space fit me.",
       "image_url": "data/maya/generated_images/pending/maya-009.jpg",
@@ -136,7 +136,12 @@
       "is_reel": true,
       "scheduled_at": "2026-03-02T03:25:40Z",
       "notes": "Full body shot, Maya in an oversized blazer and statement accessories, walking confidently down a busy Colaba street with vibrant, slightly faded architectural details or street art, strong directional sunlight creating sharp shadows, dynamic pose, looking slightly off-camera with a smirk. Mood: Edgy, commanding, urban chic. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-009_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-009_yt.mp4",
+      "posted_at": "2026-03-04T14:10:20Z",
+      "platform_post_id": "3845449942295158369",
+      "publish_error": null,
+      "youtube_video_id": "2HxAu5Doiis",
+      "youtube_posted_at": "2026-03-04T14:10:22Z"
     },
     {
       "id": "maya-010",
