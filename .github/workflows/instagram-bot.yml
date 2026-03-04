@@ -20,7 +20,7 @@ on:
     # DAYTIME — ~28 IG sessions, 07:00 to 23:15 IST, every 30-45 min
     - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
     - cron: '10 2 * * *'   # 07:40 IST — explore (morning scroll)
-    - cron: '45 2 * * *'   # 08:15 IST — warm_audience (high-ROI targeting)
+    - cron: '45 2 * * *'   # 08:15 IST — commenter_target (high-ROI targeting)
     - cron: '20 3 * * *'   # 08:50 IST — hashtags
     - cron: '0 4 * * *'    # 09:30 IST — replies
     - cron: '35 4 * * *'   # 10:05 IST — stories
@@ -31,7 +31,7 @@ on:
     - cron: '35 7 * * *'   # 13:05 IST — hashtags
     - cron: '10 8 * * *'   # 13:40 IST — replies
     - cron: '45 8 * * *'   # 14:15 IST — warm_audience (afternoon targeting)
-    - cron: '20 9 * * *'   # 14:50 IST — explore
+    - cron: '20 9 * * *'   # 14:50 IST — commenter_target
     - cron: '0 10 * * *'   # 15:30 IST — hashtags
     - cron: '40 10 * * *'  # 16:10 IST — stories
     - cron: '15 11 * * *'  # 16:45 IST — explore
@@ -56,7 +56,7 @@ on:
         required: true
         default: 'full'
         type: choice
-        options: [morning, replies, hashtags, explore, warm_audience, boost, maintenance, stories, cross_promo, report, full, yt_engage, yt_replies, yt_full]
+        options: [morning, replies, hashtags, explore, warm_audience, commenter_target, boost, maintenance, stories, cross_promo, report, full, yt_engage, yt_replies, yt_full]
       publish:
         description: 'Also publish a post?'
         type: boolean
@@ -147,7 +147,7 @@ jobs:
               # Daytime sessions (07:00-23:15 IST)
               "30 1 * * *")   echo "type=morning"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "10 2 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 2 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 2 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "20 3 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "0 4 * * *")    echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "35 4 * * *")   echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
@@ -158,7 +158,7 @@ jobs:
               "35 7 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "10 8 * * *")   echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "45 8 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 9 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "20 9 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "0 10 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "40 10 * * *")  echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "15 11 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
