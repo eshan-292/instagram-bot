@@ -58,7 +58,7 @@
     },
     {
       "id": "mt-003",
-      "status": "approved",
+      "status": "posted",
       "topic": "Minimalist dark background with bold white text revealing a harsh truth about 'space'.",
       "caption": "This will hurt. 'I need space' is rarely about *space*. It's about disinterest, disengagement, or another option they're exploring. What are you clinging to? Screenshot this before you fall for it again.",
       "alt_text": "A stark image with white text on black background stating 'What 'I need space' means: They don't want you. They want options.'",
@@ -71,7 +71,10 @@
       "is_reel": false,
       "post_type": "single",
       "scheduled_at": "2026-03-03T14:00:00Z",
-      "notes": "High contrast, sharp, sans-serif typography. The text should be the sole focus, commanding attention. No other elements. | generated_by=gemini:gemini-2.5-flash"
+      "notes": "High contrast, sharp, sans-serif typography. The text should be the sole focus, commanding attention. No other elements. | generated_by=gemini:gemini-2.5-flash",
+      "posted_at": "2026-03-04T14:52:55Z",
+      "platform_post_id": "3845471536669375549",
+      "publish_error": null
     },
     {
       "id": "mt-004",
