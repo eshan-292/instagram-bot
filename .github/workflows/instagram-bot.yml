@@ -101,16 +101,19 @@ jobs:
       - name: Seed session from secret
         run: |
           mkdir -p instagram_influencer/data/maya
-          if [ -f instagram_influencer/data/maya/.ig_session.json ]; then
-            echo "Session restored from cache"
+          if [ -n "$CACHE_KEY" ]; then
+            echo "Session restored from cache ($CACHE_KEY)"
           elif [ -n "$SESS_B64" ]; then
             echo "$SESS_B64" | base64 -d > instagram_influencer/data/maya/.ig_session.json
-            echo "Seeded session from secret"
+            echo "Seeded session from secret (overwrote repo version)"
+          elif [ -f instagram_influencer/data/maya/.ig_session.json ]; then
+            echo "Using session from repo checkout (no cache, no secret)"
           else
             echo "WARNING: No session available — bot will attempt fresh login"
           fi
         env:
           SESS_B64: ${{ secrets.INSTAGRAM_SESSION_B64 }}
+          CACHE_KEY: ${{ steps.cache.outputs.cache-matched-key }}
 
       # Create .env from the DOTENV secret (includes PERSONA=maya)
       - name: Create .env
