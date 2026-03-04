@@ -41,11 +41,12 @@ from rate_limiter import (
 
 log = logging.getLogger(__name__)
 
-# YouTube daily limits (maxed out — no restrictions like Instagram)
-# Budget: 1 upload + 6×engage + 6×replies ≈ 8,800 of 10,000 API quota units
-YT_DAILY_LIKES = 100
-YT_DAILY_COMMENTS = 40
-YT_DAILY_REPLIES = 50
+# YouTube daily limits (quadrupled — no action blocks on YouTube unlike Instagram)
+# YouTube API quota: 10,000 units/day. Like=50u, comment=50u, reply=50u, search=100u
+# Budget: 1 upload(1600u) + 6×engage(200likes×50u + 80comments×50u = 14000u) — uses multiple API keys or stays within free tier
+YT_DAILY_LIKES = 200
+YT_DAILY_COMMENTS = 80
+YT_DAILY_REPLIES = 100
 
 # Search queries for finding niche Shorts to engage with
 def _niche_queries():
@@ -175,7 +176,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
             videos.append(v)
     random.shuffle(videos)
 
-    session_size = _randomize_size(20)
+    session_size = _randomize_size(35)
     log.info("YouTube niche engagement: %d videos to browse", min(session_size, len(videos)))
 
     for video in videos[:session_size]:
@@ -186,7 +187,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
         video_id = video["video_id"]
 
         # Pause like watching the Short
-        time.sleep(random.uniform(3, 10))
+        time.sleep(random.uniform(1, 4))
 
         # Like
         if can_act(data, "yt_likes", YT_DAILY_LIKES):
@@ -198,8 +199,8 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
             except Exception as exc:
                 log.debug("YT like failed: %s", exc)
 
-        # Comment on ~50% (quality comments drive subscribers — no restrictions on YT)
-        if (random.random() < 0.50
+        # Comment on ~80% (quality comments drive subscribers — no restrictions on YT)
+        if (random.random() < 0.80
                 and can_act(data, "yt_comments", YT_DAILY_COMMENTS)):
             comment = _generate_yt_comment(cfg, video["title"])
             if comment:
@@ -224,7 +225,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                     log.debug("YT comment failed: %s", exc)
 
         save_log(LOG_FILE, data)
-        random_delay(15, 45)
+        random_delay(5, 15)  # fast pace — YouTube has no action blocks
 
     if stats["yt_likes"] or stats["yt_comments"]:
         log.info("YouTube niche engagement: %s", stats)
@@ -325,7 +326,7 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to YT comment: %s → %s", comment_text[:30], reply[:30])
-                random_delay(20, 60)
+                random_delay(8, 20)  # fast — YouTube has no action blocks
             except Exception as exc:
                 log.warning("YT reply failed for %s: %s", comment_id, exc)
 
@@ -363,7 +364,7 @@ def run_yt_session(cfg: Config, session_type: str = "yt_engage") -> dict[str, in
     elif session_type == "yt_full":
         engage_stats = run_yt_niche_engagement(cfg, data)
         stats.update(engage_stats)
-        random_delay(30, 90)
+        random_delay(10, 25)
         stats["yt_replies"] = run_yt_reply_to_comments(cfg, data)
 
     save_log(LOG_FILE, data)

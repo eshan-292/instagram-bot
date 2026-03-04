@@ -335,7 +335,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
             record_action(data, "unfollows", user_id)
             unfollowed += 1
             log.debug("Unfollowed user %s", user_id)
-            random_delay(20, 60)  # faster unfollow pace (was 30-90)
+            random_delay(8, 20)  # fast unfollow pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("Unfollow failed for %s: %s", user_id, exc)
@@ -406,7 +406,7 @@ def run_welcome_dms(cl: Any, cfg: Config) -> int:
             cl.direct_send(dm_text, user_ids=[int(uid)])
             sent += 1
             log.info("Welcome DM sent to @%s", username)
-            random_delay(45, 120)  # slightly faster DM pace (was 60-180)
+            random_delay(15, 40)  # fast DM pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("DM failed for @%s: %s", username, exc)
@@ -490,7 +490,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to comment %s: %s", comment_id, reply[:40])
-                random_delay(20, 60)  # faster reply pace (was 30-90)
+                random_delay(8, 20)  # fast reply pace
             except Exception as exc:
                 _check_challenge(exc)
                 log.warning("Reply failed for comment %s: %s", comment_id, exc)
@@ -1190,7 +1190,7 @@ def run_comment_followup_dms(
                 except Exception:
                     pass
 
-            random_delay(30, 90)  # DMs need longer delays to avoid spam detection
+            random_delay(10, 30)  # DM pace
 
     if dm_count:
         log.info("Comment follow-up DMs sent: %d", dm_count)
@@ -1334,7 +1334,7 @@ def run_dm_replies(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
             _check_challenge(exc)
             log.warning("DM reply failed for thread %s: %s", thread_id, exc)
 
-        random_delay(30, 90)
+        random_delay(10, 30)
 
     if replied:
         log.info("Replied to %d incoming DMs", replied)
@@ -1427,15 +1427,15 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     else:  # "full" — all phases (used sparingly, 1x/day max)
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        random_delay(20, 90)
+        random_delay(8, 25)
         stats["dm_replies"] = run_dm_replies(cl, cfg, data)
         save_log(LOG_FILE, data)
-        random_delay(20, 90)
+        random_delay(8, 25)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
-        random_delay(20, 90)
+        random_delay(8, 25)
         _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
-        random_delay(20, 90)
+        random_delay(8, 25)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
 

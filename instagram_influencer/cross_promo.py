@@ -137,7 +137,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
                 stats["likes"] += 1
             except Exception:
                 pass
-            random_delay(10, 30)
+            random_delay(3, 10)
 
         # Save partner's posts (strong algorithm signal)
         if can_act(data, "saves"):
@@ -148,7 +148,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
                 log.debug("Saved %s by @%s", media_id, partner_handle)
             except Exception:
                 pass
-            random_delay(8, 20)
+            random_delay(3, 8)
 
         # ── Like comments on partner's posts ──
         try:
@@ -160,7 +160,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
                     stats["comment_likes"] += 1
                 except Exception:
                     pass
-                random_delay(3, 10)
+                random_delay(2, 5)
         except Exception:
             pass
 
@@ -183,7 +183,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
             log.info("Cross-promo comment on @%s: %s", partner_handle, comment[:50])
         except Exception as exc:
             log.warning("Cross-promo comment failed: %s", exc)
-        random_delay(15, 40)
+        random_delay(5, 15)
 
     # ── Reply to a comment on partner's latest post ──
     if medias and partner_comments_today < 4:
@@ -209,7 +209,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
                     log.info("Replied to comment on @%s: %s", partner_handle, reply_text[:50])
                 except Exception as exc:
                     log.warning("Cross-promo reply failed: %s", exc)
-                random_delay(15, 40)
+                random_delay(5, 15)
         except Exception:
             pass
 
@@ -222,7 +222,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
                 stats["story_views"] += 1
             except Exception:
                 pass
-            random_delay(3, 10)
+            random_delay(2, 5)
 
             # Like the story
             try:
@@ -231,7 +231,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
                 log.debug("Liked story by @%s", partner_handle)
             except Exception:
                 pass
-            random_delay(3, 8)
+            random_delay(2, 5)
     except Exception:
         pass
 
@@ -255,7 +255,7 @@ def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
                 log.info("Shared @%s's post via DM", partner_handle)
             except Exception as exc:
                 log.debug("DM share to @%s failed: %s", partner_handle, exc)
-            random_delay(10, 25)
+            random_delay(5, 12)
 
     return stats
 

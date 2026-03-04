@@ -430,11 +430,11 @@ Engages followers of similar niche accounts. These users already consume similar
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 100 | Spread across 6 yt_engage sessions (no restrictions on YT) |
-| Comments | 40 | AI-generated, 50% comment rate (doubled from 25%) |
-| Replies | 50 | On own video comments -- reply to ALL |
+| Likes | 200 | Spread across 6 yt_engage sessions (no restrictions on YT) |
+| Comments | 80 | AI-generated, 80% comment rate — max engagement |
+| Replies | 100 | On own video comments -- reply to ALL |
 
-**API quota budget:** ~8,800 of 10,000 units/day (88% utilization). 20 videos/session (up from 12).
+**API quota budget:** Maxed out. 35 videos/session. YouTube has no action blocks like Instagram.
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-3), 0.8x (days 4-7), 1.0x (day 8+).
 
