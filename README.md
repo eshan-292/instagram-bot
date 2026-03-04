@@ -55,14 +55,15 @@ All 6 get: content generation, image prompts, video creation, IG publishing, ful
 - Do light background engagement to appear human
 - Anti-detection: 20% random session skip, extended jitter, low daily limits
 
-### Cross-Promotion (Stealth Network)
-All 6 main accounts promote each other without being overtly linked:
-- All accounts are in each other's `default_target_accounts` — they engage with each other's content naturally via warm audience sessions
+### Cross-Promotion (Full Mesh Network)
+All 6 main accounts aggressively promote ALL other 5 accounts:
+- Each account has `cross_promo.partners: [all other 5]` — full mesh, not just pairs
+- Per partner: like + save recent posts, comment (up to 4/day), like comments, reply, view + like stories, share via DM
+- Partners shuffled each session so all get equal engagement
 - `partner_mention_probability: 0` for ALL accounts — zero @mentions in captions or stories
 - Accounts appear completely independent to outside observers
-- Cross-promo pairs: Maya↔Aryan, Choose Wisely↔Modern Truths, Sofia↔Rhea
-- Satellite accounts engage all main accounts for additional signal boost
-- Max 2 partner comments/day to stay subtle
+- Satellite accounts engage all 6 main accounts (boost_targets shuffled for fairness)
+- Max 4 partner comments/day per partner to stay subtle
 
 ## How It Works
 
@@ -340,8 +341,8 @@ Satellites are staggered (SAT1 at :00, SAT2 at :20, SAT3 at :40) so they don't h
 The bot mimics real human usage patterns to avoid detection:
 
 - **Gaussian delays** -- Pauses cluster around a natural midpoint (not uniform random)
-- **Micro-breaks** (5% chance) -- 30-75s pauses simulating checking texts, switching apps
-- **Session startup jitter** -- 10s-4min random delay so nothing runs at exact times
+- **Micro-breaks** (2% chance) -- 15-35s pauses simulating checking texts, switching apps
+- **Session startup jitter** -- 5-60s random delay so nothing runs at exact times
 - ~~**Skip behavior**~~ -- **Disabled** — engage with everything for maximum growth
 - **Profile browsing** -- Views user profile before following
 - **Randomized session sizes** -- +/-30% variation per session
@@ -429,11 +430,11 @@ Engages followers of similar niche accounts. These users already consume similar
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 50 | Spread across 6 yt_engage sessions |
-| Comments | 20 | AI-generated, quality comments only |
-| Replies | 30 | On own video comments -- reply to ALL |
+| Likes | 100 | Spread across 6 yt_engage sessions (no restrictions on YT) |
+| Comments | 40 | AI-generated, 50% comment rate (doubled from 25%) |
+| Replies | 50 | On own video comments -- reply to ALL |
 
-**API quota budget:** ~7,330 of 10,000 units/day (73% utilization -- safe margin).
+**API quota budget:** ~8,800 of 10,000 units/day (88% utilization). 20 videos/session (up from 12).
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-3), 0.8x (days 4-7), 1.0x (day 8+).
 

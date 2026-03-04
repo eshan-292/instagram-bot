@@ -176,6 +176,7 @@
   "cross_promo": {
     "youtube_ctas": [],
     "partner": "sofia",
+    "partners": ["sofia", "maya", "aryan", "choosewisely", "moderntruths"],
     "partner_mention_probability": 0,
     "partner_mention_templates": []
   },

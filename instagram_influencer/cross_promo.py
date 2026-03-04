@@ -89,39 +89,29 @@ def _generate_reply(cfg: Config, comment_text: str, partner_name: str) -> str:
     return random.choice(["So true 💯", "Exactly this", "Couldn't agree more", "This right here"])
 
 
-def run_cross_promo_engagement(cl, cfg: Config, data: dict[str, Any]) -> dict[str, int]:
-    """Engage with partner account's recent posts — aggressive cross-promotion.
-
-    Like, save, comment, like comments, reply, view + like stories,
-    repost to story, share via DM.
-    """
-    persona = get_persona()
-    cross_promo = persona.get("cross_promo", {})
-    partner_id = cross_promo.get("partner")
-
-    if not partner_id:
-        log.info("No cross-promo partner configured")
-        return {}
+def _engage_one_partner(cl, cfg: Config, data: dict[str, Any],
+                        persona: dict, partner_id: str) -> dict[str, int]:
+    """Engage with one partner account's recent posts."""
+    stats = {
+        "likes": 0, "comments": 0, "saves": 0, "story_views": 0,
+        "comment_likes": 0, "story_likes": 0, "story_reposts": 0,
+        "dm_shares": 0, "replies": 0,
+    }
 
     try:
         partner_persona = load_persona(partner_id)
     except FileNotFoundError:
         log.warning("Partner persona not found: %s", partner_id)
-        return {}
+        return stats
 
     partner_handle = partner_persona.get("instagram_handle", "")
     partner_name = partner_persona.get("name", partner_id)
 
     if not partner_handle:
         log.warning("No instagram_handle for partner %s", partner_id)
-        return {}
+        return stats
 
     log.info("Cross-promo engagement with @%s (%s)", partner_handle, partner_name)
-    stats = {
-        "likes": 0, "comments": 0, "saves": 0, "story_views": 0,
-        "comment_likes": 0, "story_likes": 0, "story_reposts": 0,
-        "dm_shares": 0, "replies": 0,
-    }
 
     try:
         user_info = cl.user_info_by_username_v1(partner_handle)
@@ -268,6 +258,47 @@ def run_cross_promo_engagement(cl, cfg: Config, data: dict[str, Any]) -> dict[st
             random_delay(10, 25)
 
     return stats
+
+
+def run_cross_promo_engagement(cl, cfg: Config, data: dict[str, Any]) -> dict[str, int]:
+    """Engage with ALL partner accounts' recent posts — aggressive cross-promotion.
+
+    Supports both legacy single-partner config and new multi-partner config:
+    - cross_promo.partners: ["maya", "aryan", "moderntruths"]  (NEW — preferred)
+    - cross_promo.partner: "aryan"  (OLD — still works as fallback)
+    """
+    persona = get_persona()
+    cross_promo = persona.get("cross_promo", {})
+
+    # Support both list (partners) and single string (partner)
+    partner_ids = cross_promo.get("partners", [])
+    if not partner_ids:
+        single = cross_promo.get("partner")
+        if single:
+            partner_ids = [single]
+
+    if not partner_ids:
+        log.info("No cross-promo partners configured")
+        return {}
+
+    # Shuffle so all partners get equal treatment (not always first-in-list)
+    import random as _rnd
+    _rnd.shuffle(partner_ids)
+
+    combined = {
+        "likes": 0, "comments": 0, "saves": 0, "story_views": 0,
+        "comment_likes": 0, "story_likes": 0, "story_reposts": 0,
+        "dm_shares": 0, "replies": 0,
+    }
+
+    for pid in partner_ids:
+        result = _engage_one_partner(cl, cfg, data, persona, pid)
+        for k, v in result.items():
+            combined[k] = combined.get(k, 0) + v
+
+    if any(v > 0 for v in combined.values()):
+        log.info("Cross-promo totals (%d partners): %s", len(partner_ids), combined)
+    return combined
 
 
 def maybe_add_partner_mention(caption: str) -> str:

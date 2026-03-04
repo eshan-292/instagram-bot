@@ -37,10 +37,40 @@ def _challenge_handler(username: str, choice) -> str:
     )
 
 
+_DEVICE_SETTINGS = {
+    "app_version": "418.0.0.51.77",
+    "android_version": 34,
+    "android_release": "14",
+    "dpi": "480dpi",
+    "resolution": "1080x2340",
+    "manufacturer": "Samsung",
+    "device": "dm1q",
+    "model": "SM-S911B",
+    "cpu": "qcom",
+    "version_code": "659489002",
+}
+
+_USER_AGENT = (
+    "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; "
+    "samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)"
+)
+
+
+def _apply_device_settings(cl: Client) -> None:
+    """Apply current device settings and user agent to a client.
+
+    Must be called AFTER load_settings() because load_settings() overwrites
+    device settings with whatever was saved in the session file (potentially
+    an old app version that Instagram 403s).
+    """
+    cl.set_device(_DEVICE_SETTINGS)
+    cl.set_user_agent(_USER_AGENT)
+
+
 def _new_client() -> Client:
     """Create a fresh Client with realistic, up-to-date device settings."""
     cl = Client()
-    cl.delay_range = [4, 12]  # human-like delay between API calls
+    cl.delay_range = [2, 6]  # human-like delay between API calls (reduced from [4,12])
     cl.set_locale("en_IN")
     cl.set_country_code(91)
     cl.set_timezone_offset(19800)  # IST = UTC+5:30
@@ -49,24 +79,7 @@ def _new_client() -> Client:
     cl.challenge_code_handler = _challenge_handler
 
     # Override outdated default app version — Instagram blocks old versions.
-    # Must stay roughly current (within 1-2 months of latest Play Store release).
-    # Latest as of March 2026: 418.x / 419.x — use a recent stable version.
-    cl.set_device({
-        "app_version": "418.0.0.51.77",
-        "android_version": 34,
-        "android_release": "14",
-        "dpi": "480dpi",
-        "resolution": "1080x2340",
-        "manufacturer": "Samsung",
-        "device": "dm1q",
-        "model": "SM-S911B",
-        "cpu": "qcom",
-        "version_code": "659489002",
-    })
-    cl.set_user_agent(
-        "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; "
-        "samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)"
-    )
+    _apply_device_settings(cl)
     return cl
 
 
@@ -176,6 +189,7 @@ def _get_client(cfg: Config) -> Client:
         try:
             cl = _new_client()
             cl.load_settings(session_path)
+            _apply_device_settings(cl)  # load_settings overwrites device; re-apply current version
             cl.challenge_code_handler = _challenge_handler
             log.debug("Restored saved session (silent)")
 
@@ -198,9 +212,10 @@ def _get_client(cfg: Config) -> Client:
         try:
             cl = _new_client()
             cl.load_settings(session_path)
+            _apply_device_settings(cl)  # load_settings overwrites device; re-apply current version
             cl.challenge_code_handler = _challenge_handler
             log.info("Attempting relogin with saved device UUIDs")
-            cl.login(cfg.instagram_username, cfg.instagram_password)
+            cl.login(cfg.instagram_username, cfg.instagram_password, relogin=True)
             log.info("Relogin successful — verifying session health")
             if _session_health_check(cl):
                 log.info("Post-relogin health check passed")

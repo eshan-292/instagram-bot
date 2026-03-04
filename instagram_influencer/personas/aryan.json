@@ -179,6 +179,7 @@
       "Extended version on YouTube \u2014 go check it out!"
     ],
     "partner": "maya",
+    "partners": ["maya", "choosewisely", "moderntruths", "sofia", "rhea"],
     "partner_mention_probability": 0,
     "partner_mention_templates": []
   },

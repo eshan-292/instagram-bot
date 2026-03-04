@@ -84,7 +84,7 @@ def _browse_before_engage(cl: Any, user_id: str) -> Optional[Any]:
     try:
         user_info = cl.user_info_v1(int(user_id))
         # Short pause like reading their bio
-        time.sleep(random.uniform(1.5, 4))
+        time.sleep(random.uniform(0.5, 2))
         return user_info
     except Exception:
         return None
@@ -281,7 +281,7 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
             stats["story_views"] = stats.get("story_views", 0) + 1
             log.debug("Viewed %d stories of user %s", view_count, user_id)
             # Brief pause like actually watching
-            time.sleep(random.uniform(2, 6) * view_count)
+            time.sleep(random.uniform(1, 3) * view_count)
             # Always like stories (strong signal for follow-back)
             if True:
                 try:
@@ -541,7 +541,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
         user_id = str(media.user.pk) if media.user else None
 
         # Pause like actually watching the reel
-        time.sleep(random.uniform(3, 8))
+        time.sleep(random.uniform(1, 4))
 
         # Like — big accounts first for visibility
         if can_act(data, "likes", cfg.engagement_daily_likes):
@@ -586,7 +586,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(8, 22)  # aggressive pace
+        random_delay(4, 12)  # fast pace (reduced from 8-22)
 
     if any(v > 0 for v in stats.values()):
         log.info("Explore engagement: %s", stats)
@@ -669,7 +669,7 @@ def _run_hashtag_engagement(
         user_id = str(media.user.pk) if media.user else None
 
         # Pause like actually looking at the post
-        time.sleep(random.uniform(2, 5))
+        time.sleep(random.uniform(1, 3))
 
         # Like (most common action) — prioritize big accounts for visibility
         if can_act(data, "likes", like_limit):
@@ -719,7 +719,7 @@ def _run_hashtag_engagement(
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(8, 25)  # aggressive pace (was 15-45)
+        random_delay(4, 12)  # fast pace (reduced from 8-25)
 
         if (
             not can_act(data, "likes", like_limit)
@@ -836,7 +836,7 @@ def run_warm_audience_session(
                     stats["warm_likes"] += 1
                 except Exception as exc:
                     _check_challenge(exc)
-                time.sleep(random.uniform(2, 5))
+                time.sleep(random.uniform(1, 3))
 
         # Always comment on warm targets
         if (cfg.engagement_comment_enabled
@@ -870,7 +870,7 @@ def run_warm_audience_session(
             stats["warm_story_views"] = stats.get("story_views", 0)
 
         save_log(LOG_FILE, data)
-        random_delay(10, 30)  # aggressive pace (was 20-50)
+        random_delay(5, 15)  # fast pace (reduced from 10-30)
 
         # Check daily limits
         if (not can_act(data, "likes", cfg.engagement_daily_likes)

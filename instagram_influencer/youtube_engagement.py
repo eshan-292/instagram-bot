@@ -41,11 +41,11 @@ from rate_limiter import (
 
 log = logging.getLogger(__name__)
 
-# YouTube daily limits (aggressive — 12 parallel sessions/day, spread over 15 hours)
-# Budget: 1 upload + 6×engage + 6×replies ≈ 7,330 of 10,000 API quota units
-YT_DAILY_LIKES = 50
-YT_DAILY_COMMENTS = 20
-YT_DAILY_REPLIES = 30
+# YouTube daily limits (maxed out — no restrictions like Instagram)
+# Budget: 1 upload + 6×engage + 6×replies ≈ 8,800 of 10,000 API quota units
+YT_DAILY_LIKES = 100
+YT_DAILY_COMMENTS = 40
+YT_DAILY_REPLIES = 50
 
 # Search queries for finding niche Shorts to engage with
 def _niche_queries():
@@ -175,7 +175,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
             videos.append(v)
     random.shuffle(videos)
 
-    session_size = _randomize_size(12)
+    session_size = _randomize_size(20)
     log.info("YouTube niche engagement: %d videos to browse", min(session_size, len(videos)))
 
     for video in videos[:session_size]:
@@ -198,8 +198,8 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
             except Exception as exc:
                 log.debug("YT like failed: %s", exc)
 
-        # Comment on ~25% (quality comments drive subscribers)
-        if (random.random() < 0.25
+        # Comment on ~50% (quality comments drive subscribers — no restrictions on YT)
+        if (random.random() < 0.50
                 and can_act(data, "yt_comments", YT_DAILY_COMMENTS)):
             comment = _generate_yt_comment(cfg, video["title"])
             if comment:

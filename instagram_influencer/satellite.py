@@ -239,7 +239,8 @@ def run_satellite_boost(cl, cfg: Config, data: dict[str, Any]) -> dict[str, int]
     view + like stories, repost to story, share via DM.
     """
     persona = get_persona()
-    targets = persona.get("boost_targets", [])
+    targets = list(persona.get("boost_targets", []))
+    random.shuffle(targets)  # shuffle so all accounts get equal treatment
     limits = persona.get("engagement", {}).get("daily_limits", {})
 
     stats = {
