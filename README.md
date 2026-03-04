@@ -353,6 +353,8 @@ The bot mimics real human usage patterns to avoid detection:
 - **Session health check** -- Detects stale/web-origin sessions (403 errors) and forces fresh mobile login
 - **Silent session restore** -- Bot restores saved sessions WITHOUT calling login() — avoids triggering Instagram challenges from datacenter IPs
 - **Action-block detection** -- Detects Instagram action blocks (consecutive 403s) and aborts sessions early instead of wasting time
+- **Private API profile browsing** -- Uses `user_info_v1()` (private API) instead of `user_info()` (public web API) to avoid 429 rate limits that cause multi-minute retries
+- **Session cache poisoning protection** -- Only caches sessions after successful bot runs; uses GitHub Actions `cache-matched-key` to distinguish restored cache from stale repo checkout files
 - **Local session seeding** -- `seed_session.py` creates sessions from your laptop (your IP/device), avoiding datacenter red flags
 - **Retry with exponential backoff** -- API calls retry 3x with increasing wait (15s, 30s, 60s) on rate limits
 
