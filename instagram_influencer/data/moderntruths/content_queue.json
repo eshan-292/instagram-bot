@@ -114,7 +114,7 @@
     },
     {
       "id": "mt-005",
-      "status": "approved",
+      "status": "posted",
       "topic": "Man persistently trying to get attention from a woman who is clearly disengaged at a lively bar or social gathering.",
       "caption": "She's not yours. Thinking 'hard to get' is a game you can win. It's not. It's disinterest, repackaged. Are you chasing a ghost, or facing reality? Send this to the friend who needs to stop pursuing lost causes.",
       "alt_text": "A man attempting to engage a woman who clearly shows signs of disinterest and avoidance at a social event, illustrating a one-sided chase.",
@@ -129,7 +129,10 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T05:50:15Z",
-      "notes": "High-energy setting (bar/club), but contrast with the woman's aloofness and the man's oblivious persistence. Dynamic shots, focus on body language. The woman is dressed stylishly but her expression is blank. | generated_by=gemini:gemini-2.5-flash"
+      "notes": "High-energy setting (bar/club), but contrast with the woman's aloofness and the man's oblivious persistence. Dynamic shots, focus on body language. The woman is dressed stylishly but her expression is blank. | generated_by=gemini:gemini-2.5-flash",
+      "posted_at": "2026-03-05T15:01:45Z",
+      "platform_post_id": "3846200578787827952",
+      "publish_error": null
     }
   ]
 }
