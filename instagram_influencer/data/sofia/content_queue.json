@@ -62,7 +62,7 @@
     },
     {
       "id": "sofia-003",
-      "status": "approved",
+      "status": "posted",
       "topic": "Russian girl in Mumbai \u2014 5 things that surprised me",
       "caption": "5 things that surprised me about Mumbai.\nFrom Moscow to Maximum City.\nWhat would surprise YOU about Russia?\nComment \u2014 I want to know.",
       "alt_text": "Lifestyle carousel showing Russian woman experiencing Mumbai culture",
@@ -93,7 +93,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/sofia/generated_images/pending/sofia-003/6.jpg"
-      ]
+      ],
+      "posted_at": "2026-03-05T15:04:36Z",
+      "platform_post_id": "3846202220346440564",
+      "publish_error": null
     },
     {
       "id": "sofia-004",
