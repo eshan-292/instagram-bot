@@ -84,7 +84,7 @@
     },
     {
       "id": "cw-004",
-      "status": "approved",
+      "status": "posted",
       "topic": "Would you rather: 5 hard life scenarios",
       "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
       "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
@@ -115,7 +115,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-004/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-004/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-004/6.jpg"
-      ]
+      ],
+      "posted_at": "2026-03-05T14:59:33Z",
+      "platform_post_id": "3846199646092416650",
+      "publish_error": null
     },
     {
       "id": "cw-005",
