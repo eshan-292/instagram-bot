@@ -62,7 +62,7 @@
     },
     {
       "id": "cw-003",
-      "status": "approved",
+      "status": "posted",
       "topic": "Old money vs New money aesthetic",
       "caption": "Old money or New money.\nWhich vibe are you?\nComment 1 or 2.\nSend this to someone who needs a reality check.",
       "alt_text": "Split comparison of old money subtle luxury versus new money flashy aesthetic",
@@ -77,7 +77,10 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-03T21:50:44Z",
-      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics | generated_by=template"
+      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics | generated_by=template",
+      "posted_at": "2026-03-05T07:51:45Z",
+      "platform_post_id": "3845984176902513818",
+      "publish_error": null
     },
     {
       "id": "cw-004",
