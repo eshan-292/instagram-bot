@@ -13,12 +13,11 @@
     "ig_www_claim": null,
     "authorization_data": {
         "ds_user_id": "78270708577",
-        "sessionid": "78270708577%3AV3t9YyPCVzbiqN%3A11%3AAYhkVMNbwrs7qyRvJ8OW8pY6cr19wFnr0d2nHYWWwg"
+        "sessionid": "78270708577%3AK0WweKq76glK1u%3A26%3AAYgmgn962tqqHG77-AJUYNhKolH5QwSkngv3dFViBw"
     },
     "cookies": {},
-    "last_login": 1772598419.440397,
+    "last_login": 1772618025.5821488,
     "device_settings": {
-        "app_version": "418.0.0.51.77",
         "android_version": 34,
         "android_release": "14",
         "dpi": "480dpi",
@@ -27,6 +26,7 @@
         "device": "dm1q",
         "model": "SM-S911B",
         "cpu": "qcom",
+        "app_version": "418.0.0.51.77",
         "version_code": "659489002"
     },
     "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)",
