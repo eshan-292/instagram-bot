@@ -256,9 +256,9 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | Workflow | Sessions/Day | Concurrency Group | Purpose |
 |----------|-------------|-------------------|---------|
 | `instagram-bot.yml` | 33 | `instagram-bot-maya` | Maya IG |
-| `youtube-bot.yml` | 12 | `youtube-bot` | Maya YT |
+| `youtube-bot.yml` | 24 | `youtube-bot` | Maya YT |
 | `instagram-bot-aryan.yml` | 33 | `instagram-bot-aryan` | Aryan IG |
-| `youtube-bot-aryan.yml` | 12 | `youtube-bot-aryan` | Aryan YT |
+| `youtube-bot-aryan.yml` | 24 | `youtube-bot-aryan` | Aryan YT |
 | `instagram-bot-choosewisely.yml` | 30 | `instagram-bot-choosewisely` | Choose Wisely IG |
 | `instagram-bot-moderntruths.yml` | 30 | `instagram-bot-moderntruths` | Modern Truths IG |
 | `instagram-bot-sofia.yml` | 30 | `instagram-bot-sofia` | Sofia IG |
@@ -267,7 +267,7 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | `satellite-2.yml` | 9 | `satellite-2` | Satellite 2 |
 | `satellite-3.yml` | 9 | `satellite-3` | Satellite 3 |
 
-**Total: ~237 sessions/day** across all accounts.
+**Total: ~261 sessions/day** across all accounts.
 
 **1 post/day per main account** with 2 publish windows (backup at lunch if evening fails):
 - **Primary (7 PM IST):** Maya 19:00, Aryan 19:15, CW 19:33, MT 19:39, Sofia 19:47, Rhea 19:53
@@ -318,9 +318,9 @@ The orchestrator publishes at most 1 post/day — if the lunch window publishes,
 
 Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**. Cross-promo at **20:45 IST** (1.75hrs after Maya publishes).
 
-### YouTube Schedules (12 sessions each)
+### YouTube Schedules (24 sessions each — MAXED OUT)
 
-Maya and Aryan each get 12 YT sessions/day (alternating engage/replies). Aryan's are staggered +15 min.
+Maya and Aryan each get 24 YT sessions/day (alternating engage/replies every 45 min, 6 AM to midnight IST). Aryan's are staggered +15 min. Daily limits: 500 likes, 200 comments, 250 replies. YouTube has no action blocks so engagement is fully maxed out.
 
 ### Satellite Schedules (9 sessions each)
 

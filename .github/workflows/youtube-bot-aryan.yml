@@ -4,20 +4,32 @@ on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
     # Staggered +15 min from Maya's YT schedule to avoid overlap
-    # ~12 YT sessions/day — 07:45 to 22:30 IST, every 1-1.5 hours
+    # ~24 YT sessions/day — 06:15 to 00:00 IST, every ~45 min
     # Alternates yt_engage (niche browsing) and yt_replies (respond to comments)
-    - cron: '15 2 * * *'   # 07:45 IST — yt_engage (morning niche browsing)
-    - cron: '45 3 * * *'   # 09:15 IST — yt_replies (reply to overnight comments)
-    - cron: '0 5 * * *'    # 10:30 IST — yt_engage
-    - cron: '15 6 * * *'   # 11:45 IST — yt_replies
-    - cron: '45 7 * * *'   # 13:15 IST — yt_engage (lunch break YouTube)
-    - cron: '15 9 * * *'   # 14:45 IST — yt_replies
-    - cron: '30 10 * * *'  # 16:00 IST — yt_engage
-    - cron: '45 11 * * *'  # 17:15 IST — yt_replies
-    - cron: '0 13 * * *'   # 18:30 IST — yt_engage (pre-prime)
-    - cron: '15 14 * * *'  # 19:45 IST — yt_replies (post-publish, new Short comments)
-    - cron: '30 15 * * *'  # 21:00 IST — yt_engage (evening YouTube binge)
-    - cron: '0 17 * * *'   # 22:30 IST — yt_replies (last reply pass)
+    - cron: '45 0 * * *'   # 06:15 IST — yt_engage (early morning)
+    - cron: '30 1 * * *'   # 07:00 IST — yt_replies
+    - cron: '15 2 * * *'   # 07:45 IST — yt_engage
+    - cron: '0 3 * * *'    # 08:30 IST — yt_replies
+    - cron: '45 3 * * *'   # 09:15 IST — yt_engage
+    - cron: '30 4 * * *'   # 10:00 IST — yt_replies
+    - cron: '15 5 * * *'   # 10:45 IST — yt_engage
+    - cron: '0 6 * * *'    # 11:30 IST — yt_replies
+    - cron: '45 6 * * *'   # 12:15 IST — yt_engage (lunch)
+    - cron: '30 7 * * *'   # 13:00 IST — yt_replies
+    - cron: '15 8 * * *'   # 13:45 IST — yt_engage
+    - cron: '0 9 * * *'    # 14:30 IST — yt_replies
+    - cron: '45 9 * * *'   # 15:15 IST — yt_engage
+    - cron: '30 10 * * *'  # 16:00 IST — yt_replies
+    - cron: '15 11 * * *'  # 16:45 IST — yt_engage
+    - cron: '0 12 * * *'   # 17:30 IST — yt_replies
+    - cron: '45 12 * * *'  # 18:15 IST — yt_engage (pre-prime)
+    - cron: '30 13 * * *'  # 19:00 IST — yt_replies
+    - cron: '15 14 * * *'  # 19:45 IST — yt_engage (post-publish)
+    - cron: '0 15 * * *'   # 20:30 IST — yt_replies
+    - cron: '45 15 * * *'  # 21:15 IST — yt_engage (evening binge)
+    - cron: '30 16 * * *'  # 22:00 IST — yt_replies
+    - cron: '15 17 * * *'  # 22:45 IST — yt_engage
+    - cron: '30 18 * * *'  # 00:00 IST — yt_replies (last pass)
 
   workflow_dispatch:
     inputs:
@@ -72,18 +84,30 @@ jobs:
           else
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
+              "45 0 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 1 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
               "15 2 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "45 3 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "0 5 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 6 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "45 7 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 9 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 10 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "45 11 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "0 13 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 14 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 15 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "0 17 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "0 3 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 3 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 4 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "15 5 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 6 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 6 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 7 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "15 8 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 9 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 9 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 10 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "15 11 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 12 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 12 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 13 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "15 14 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 15 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "45 15 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 16 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "15 17 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 18 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
               *)             echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
             esac
           fi

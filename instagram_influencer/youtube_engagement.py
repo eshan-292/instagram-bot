@@ -41,12 +41,12 @@ from rate_limiter import (
 
 log = logging.getLogger(__name__)
 
-# YouTube daily limits (quadrupled — no action blocks on YouTube unlike Instagram)
-# YouTube API quota: 10,000 units/day. Like=50u, comment=50u, reply=50u, search=100u
-# Budget: 1 upload(1600u) + 6×engage(200likes×50u + 80comments×50u = 14000u) — uses multiple API keys or stays within free tier
-YT_DAILY_LIKES = 200
-YT_DAILY_COMMENTS = 80
-YT_DAILY_REPLIES = 100
+# YouTube daily limits — MAXED OUT (no action blocks on YouTube unlike Instagram)
+# YouTube API quota: 10,000 units/day per key. Like=50u, comment=50u, reply=50u, search=100u
+# Will hit quota errors eventually — that's fine, they're non-fatal
+YT_DAILY_LIKES = 500
+YT_DAILY_COMMENTS = 200
+YT_DAILY_REPLIES = 250
 
 # Search queries for finding niche Shorts to engage with
 def _niche_queries():
@@ -134,7 +134,7 @@ def _generate_yt_reply(cfg: Config, video_title: str, their_comment: str) -> str
 
 def _should_skip() -> bool:
     """Randomly skip content — humans don't engage with everything."""
-    return random.random() < 0.20
+    return random.random() < 0.10  # 10% skip — engage with almost everything
 
 
 def _randomize_size(base: int) -> int:
@@ -162,9 +162,9 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
         log.warning("YouTube auth failed (skipping engagement): %s", exc)
         return stats
 
-    # Pick 1-2 search queries (humans search one topic at a time)
+    # Pick 3-4 search queries — cast a wide net
     nq = _niche_queries()
-    queries = random.sample(nq, min(2, len(nq)))
+    queries = random.sample(nq, min(4, len(nq)))
     all_videos: list[dict] = []
 
     for query in queries:
@@ -175,7 +175,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                 type="video",
                 videoDuration="short",  # Shorts only
                 order="date",  # recent first
-                maxResults=15,
+                maxResults=25,
                 relevanceLanguage="en",
                 regionCode="IN",
             ).execute()
@@ -204,7 +204,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
             videos.append(v)
     random.shuffle(videos)
 
-    session_size = _randomize_size(35)
+    session_size = _randomize_size(60)
     log.info("YouTube niche engagement: %d videos to browse", min(session_size, len(videos)))
 
     for video in videos[:session_size]:
@@ -215,7 +215,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
         video_id = video["video_id"]
 
         # Pause like watching the Short
-        time.sleep(random.uniform(0.5, 2))
+        time.sleep(random.uniform(0.3, 1))
 
         # Like
         if can_act(data, "yt_likes", YT_DAILY_LIKES):
@@ -253,7 +253,7 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                     log.debug("YT comment failed: %s", exc)
 
         save_log(LOG_FILE, data)
-        random_delay(2, 8)  # fast pace — YouTube has no action blocks
+        random_delay(1, 3)  # blitz pace — YouTube has no action blocks
 
     if stats["yt_likes"] or stats["yt_comments"]:
         log.info("YouTube niche engagement: %s", stats)
@@ -274,9 +274,9 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
         log.warning("YouTube auth failed (skipping replies): %s", exc)
         return 0
 
-    # Get recent videos
+    # Get recent videos — check more videos for comments
     from youtube_publisher import get_recent_videos
-    videos = get_recent_videos(max_results=5)
+    videos = get_recent_videos(max_results=10)
 
     if not videos:
         log.info("No recent YouTube videos to check for comments")
@@ -303,7 +303,7 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
             response = youtube.commentThreads().list(
                 part="snippet",
                 videoId=video_id,
-                maxResults=20,
+                maxResults=50,
                 order="time",  # newest first
             ).execute()
         except Exception as exc:
@@ -354,7 +354,7 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to YT comment: %s → %s", comment_text[:30], reply[:30])
-                random_delay(3, 10)  # fast — YouTube has no action blocks
+                random_delay(1, 4)  # blitz — YouTube has no action blocks
             except Exception as exc:
                 log.warning("YT reply failed for %s: %s", comment_id, exc)
 
