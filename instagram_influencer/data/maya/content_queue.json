@@ -222,7 +222,9 @@
       "is_reel": true,
       "scheduled_at": "2026-03-02T23:25:40Z",
       "notes": "Maya seated casually at an outdoor cafe table, sipping coffee. She's wearing an oversized pastel blazer, cropped top, high-waisted trousers, and designer sunglasses. Bright natural light, warm tones. Focus on her relaxed but impeccably styled posture. A subtle smirk. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-015_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-015_yt.mp4",
+      "youtube_video_id": "hxw3JzlvIms",
+      "youtube_posted_at": "2026-03-05T14:50:36Z"
     },
     {
       "id": "maya-016",
