@@ -1,32 +1,32 @@
-# 📊 Daily Report — March 04, 2026
+# 📊 Daily Report — March 06, 2026
 
-*Generated at 11:58 PM IST*
+*Generated at 12:32 AM IST*
 
 ## Engagement
 
 | Action | Count |
 |--------|-------|
-| ❤️ Likes | 281 |
-| 💬 Comments | 76 |
+| ❤️ Likes | 149 |
+| ➕ Follows | 1 |
 | 👁️ Story Views | 90 |
-| **Total** | **447** |
+| **Total** | **240** |
 
 ## Posts Published Today
 
-- **rhea-001**: Full glute workout — 5 exercises that actually grow your glu
-  - IG: https://instagram.com/p/3845476013602336771/
+- **rhea-002**: What I eat in a day — 130g protein, all Indian food
+  - IG: https://instagram.com/p/3845988274049830385/
 
 ## Content Pipeline
 
 - Draft: 0
-- Approved: 4
-- Posted: 1
+- Approved: 3
+- Posted: 2
 
 ## Growth Signals
 
-- Net follows sent today: **0**
-- Engagement actions: **447**
-- Account age: **1 days**
+- Net follows sent today: **1**
+- Engagement actions: **240**
+- Account age: **2 days**
 - Warmup multiplier: **0.6x**
 
 ---
