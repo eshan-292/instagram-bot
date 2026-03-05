@@ -175,7 +175,7 @@
     },
     {
       "id": "maya-012",
-      "status": "approved",
+      "status": "posted",
       "topic": "A stylish afternoon at a heritage cafe in South Mumbai.",
       "caption": "You assume this is effortless. I'm just living my truth.",
       "image_url": "data/maya/generated_images/pending/maya-012.jpg",
@@ -183,7 +183,10 @@
       "is_reel": true,
       "scheduled_at": "2026-03-02T11:25:40Z",
       "notes": "Medium close-up. Maya holding a vintage teacup at a sunlit cafe table. Soft, natural light filtering through a window, highlighting intricate details of a stylish, relaxed-fit ensemble (e.g., linen co-ord set, delicate jewelry). Background: softly blurred ornate cafe interior. Mood: Serene, sophisticated, candid. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-012_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-012_yt.mp4",
+      "posted_at": "2026-03-05T14:13:18Z",
+      "platform_post_id": "3846176200830275414",
+      "publish_error": null
     },
     {
       "id": "maya-013",
