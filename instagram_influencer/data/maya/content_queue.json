@@ -160,7 +160,7 @@
     },
     {
       "id": "maya-011",
-      "status": "approved",
+      "status": "posted",
       "topic": "Making an entrance at a high-fashion Mumbai gala.",
       "caption": "They said 'arrive when ready.' My ready took a while. Worth it.",
       "image_url": "data/maya/generated_images/pending/maya-011.jpg",
@@ -168,7 +168,10 @@
       "is_reel": true,
       "scheduled_at": "2026-03-02T07:25:40Z",
       "notes": "Full-length shot from a slight low angle. Maya in a striking, avant-garde gown, just stepping out of a luxury car or at the entrance of a grand venue. Dramatic, soft spotlighting, blurred background of paparazzi flashes. Mood: Regal, show-stopping. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-011_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-011_yt.mp4",
+      "posted_at": "2026-03-05T07:39:24Z",
+      "platform_post_id": "3845977965759097799",
+      "publish_error": null
     },
     {
       "id": "maya-012",
