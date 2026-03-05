@@ -78,7 +78,7 @@
     },
     {
       "id": "mt-004",
-      "status": "approved",
+      "status": "posted",
       "topic": "Woman looking contemplative, possibly at a crossroads, overwhelmed by a pattern of attracting toxic partners.",
       "caption": "Read that again. Your 3 patterns attract toxicity. You're not a magnet for bad luck; you're a pattern-matcher for unresolved wounds. Are you perpetuating your own suffering by avoiding the mirror? Save this if you're finally ready to break the cycle.",
       "alt_text": "A series of images depicting a woman reflecting on painful relationship patterns and the psychology behind attracting toxic partners, leading to self-realization.",
@@ -107,7 +107,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-004/6.jpg"
-      ]
+      ],
+      "posted_at": "2026-03-05T07:53:49Z",
+      "platform_post_id": "3845985410590042932",
+      "publish_error": null
     },
     {
       "id": "mt-005",
