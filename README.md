@@ -77,6 +77,70 @@ All 6 main accounts aggressively promote ALL other 5 accounts:
 
 Post lifecycle: `draft` -> `approved` -> `ready` -> `posted` (IG + YT simultaneously)
 
+## Viral Content Engine (Gemini Text API → Automatic)
+
+The viral content engine runs **automatically** — no extra setup needed beyond a `GEMINI_API_KEY`. Every time the bot generates new content, it produces algorithm-optimized viral posts.
+
+### How It Works (Zero Manual Effort for Captions)
+
+1. **Bot runs content generation** (via schedule or manually):
+   ```bash
+   cd instagram_influencer
+   python orchestrator.py --persona maya --queue-file data/maya/content_queue.json
+   ```
+
+2. **Gemini text API (free)** generates viral-optimized captions automatically:
+   - Checks **day of week** → injects today's **recurring series** (e.g., "Friday Fits" on Friday)
+   - Rolls for **controversy mode** (30% chance) → injects hot-take topics + controversy hooks
+   - Samples **3 random viral formats** from 8 options (before/after, ranking, wait-for-it, this-or-that, POV, curiosity gap, rate 1-10, myth buster)
+   - Injects **send engineering** triggers (make viewer think of ONE person to send it to)
+   - Applies **viral hook formulas** (contrarian claims, price shocks, FOMO, forbidden knowledge)
+   - Builds **curiosity gap architecture** (open loops, delayed payoffs)
+   - Generates **video text overlays** (3 lines for on-screen display — 85% watch on mute)
+
+3. **Dual-format companions** — after generating drafts, 30% get a companion post in the alternate format (carousel↔reel) scheduled +24h later. Same topic, double reach.
+
+4. **IMAGE_PROMPTS.md** is created at `data/{persona}/generated_images/IMAGE_PROMPTS.md` with ready-to-paste image prompts for each post.
+
+### Image Generation (Manual — Gemini App)
+
+The Gemini API free tier does NOT include image generation, so images are generated manually via the [Gemini app](https://gemini.google.com/) (which does support free image gen):
+
+1. **Open `IMAGE_PROMPTS.md`** — lists every post needing images with exact prompts
+2. **Paste each prompt** into the Gemini app → download the generated image
+3. **Place images** in the correct paths:
+
+   | Post Type | Where to Put It |
+   |-----------|----------------|
+   | **Reel / Single** | `data/{persona}/generated_images/pending/{post-id}.jpg` |
+   | **Carousel** | `data/{persona}/generated_images/pending/{post-id}/1.jpg`, `2.jpg`, `3.jpg`... |
+
+4. **Commit and push** the images:
+   ```bash
+   git add -f instagram_influencer/data/{persona}/generated_images/pending/
+   git commit -m "add images for {post-ids}"
+   git push
+   ```
+
+5. **Bot handles the rest automatically** on the next scheduled run:
+   - Scans `pending/` → finds images → links to drafts
+   - **Auto-crops "Made with Google AI" watermark** (bottom 5%)
+   - Converts to video (Ken Burns zoom, IG silent + YT with music)
+   - Promotes and publishes at the next scheduled slot
+
+### What Gets Generated Automatically vs Manually
+
+| Component | How | Cost |
+|-----------|-----|------|
+| **Captions** (viral hooks, CTAs, controversy) | Gemini text API | Free |
+| **Video text overlays** (3 on-screen lines) | Gemini text API | Free |
+| **YouTube titles** (curiosity gap) | Gemini text API | Free |
+| **Series detection** (day-of-week matching) | Code logic | Free |
+| **Dual-format companions** | Code logic | Free |
+| **Trending hashtags** (daily refresh) | Gemini text API | Free |
+| **AI comments** (IG + YT engagement) | Gemini text API | Free |
+| **Images** | Manual via Gemini app | Free |
+
 ## Content Strategy (2026 Algorithm)
 
 | Format | % of Content | Why |
@@ -191,55 +255,11 @@ gh secret set DOTENV --repo your-username/your-repo < instagram_influencer/.env
 
 That's it. The bot will now upload every post to YouTube Shorts alongside Instagram.
 
-## Image Generation (Manual via Gemini App)
-
-### Step-by-step workflow
-
-**1. Check what images are needed:**
-```bash
-# Option A: Look at the committed file on GitHub
-# -> data/{persona}/generated_images/IMAGE_PROMPTS.md
-
-# Option B: Generate prompts locally
-make generate
-```
-
-**2. Generate images in the Gemini app:**
-- Open the [Gemini app](https://gemini.google.com/)
-- Copy each prompt from `IMAGE_PROMPTS.md` and paste it into Gemini
-- Download the generated image
-
-**3. Place images in the right directory:**
-
-```
-data/{persona}/generated_images/pending/
-  maya-042.jpg                  <- single image or reel (match the post ID)
-  maya-043/                     <- carousel (create a folder named by post ID)
-    1.jpg                       <- slide 1
-    2.jpg                       <- slide 2
-    3.jpg                       <- slide 3
-    4.jpg                       <- slide 4
-    5.jpg                       <- slide 5 (up to 6)
-```
-
-**4. Commit and push the images:**
-```bash
-git add -f instagram_influencer/data/maya/generated_images/pending/
-git commit -m "add images for maya-042, maya-043"
-git push
-```
-
-**5. The bot handles the rest automatically:**
-- Next publish session picks up the images
-- Links them to the matching drafts
-- Converts to video (IG silent + YT with music)
-- Promotes drafts -> approved -> publishes at the next scheduled slot
-
 ### Custom Background Music
 
 Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/` and the bot will use them as background tracks for YouTube Shorts. If no custom music is provided, it fetches royalty-free tracks from Pixabay, or falls back to a generated ambient lo-fi pad.
 
-### Notes
+### Image Notes
 - Image filenames must match the post ID exactly (e.g., `maya-042.jpg` for post `maya-042`)
 - Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`
 - Minimum file size: 10 KB (smaller files are ignored)
