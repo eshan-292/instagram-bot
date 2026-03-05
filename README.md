@@ -322,7 +322,14 @@ Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**.
 
 Maya and Aryan each get 24 YT sessions/day (alternating engage/replies every 45 min, 6 AM to midnight IST). Aryan's are staggered +15 min. Daily limits: 500 likes, 200 comments, 250 replies. YouTube has no action blocks so engagement is fully maxed out.
 
-**YouTube publishing is fully independent of Instagram.** Each YT workflow has 2 publish windows (lunch + prime time) using `--yt-publish-only`. If Instagram is disabled or broken, YouTube Shorts still get published on schedule. The `_yt_only_publish()` function finds the next eligible post with a video and publishes to YT without touching IG status.
+**YouTube publishing is fully independent of Instagram.** Each YT workflow has **3 publish windows** (lunch + afternoon + prime time) using `--yt-publish-only`, each publishing up to 2 Shorts per window (research: 2-3 Shorts/day = 3.2x faster subscriber growth). If Instagram is disabled or broken, YouTube Shorts still get published on schedule.
+
+**YouTube growth optimizations (2026):**
+- **Auto-pin creator comment** — After every YT Short publish, a discussion-sparking comment is posted (Gemini-generated, e.g. "Which one was your favorite? Drop a number"). Creator comments show prominently with a badge, driving 30%+ more replies
+- **Multi-post per window** — Each publish window uploads up to 2 Shorts (total 4-6/day across 3 windows)
+- **Post-publish reply blitz** — Immediately after publishing, the bot checks for early comments and replies within the first 60 minutes (critical algorithm signal for distribution)
+- **Hyper-specific comments** — AI comments analyze video titles deeply and reference specific details (technique, product, number) to drive profile visits
+- **Hindi + seasonal niche queries** — 35+ queries per account including Hindi-language searches, festival-specific content (Holi, Diwali, Navratri), and seasonal trends
 
 ### Satellite Schedules (9 sessions each)
 
@@ -422,7 +429,14 @@ Auto-boosts fresh partner posts at the **start of every engagement session**. In
 | **Trending hashtags** | +30-50% discovery | Gemini fetches 20 trending hashtags daily, fills all 30 slots |
 | **Power user targeting** | +20-30% follow-back rate | Prioritize micro-influencers (1K-50K) |
 | **Carousel montage** | +24% shares, +19% reach | 5-slide carousel -> 30s Reel with transitions |
-| **Viral hook patterns** | Higher scroll-stop rate | POV:, numbers, curiosity gaps |
+| **Viral hook patterns** | Higher scroll-stop rate | Contrarian claims, price shocks, FOMO triggers, curiosity gaps, pattern interrupts |
+| **Viral content formats** | +2-3x completion rate | Before/after reveals, ranking/tier lists, "wait for it", this-or-that debates, POV stories |
+| **Curiosity gap architecture** | +4-7x impressions | Open loops in every caption — viewers MUST finish to resolve; delayed payoffs |
+| **YT auto-pin comment** | +30% replies | Gemini-generated discussion question posted as creator on every Short |
+| **YT post-publish blitz** | Critical algo signal | Reply to early comments within 60 minutes of publishing |
+| **YT multi-post publishing** | +3.2x sub growth | 2-3 Shorts/day via 3 publish windows |
+| **Hindi + seasonal queries** | +40% engagement pool | 35+ queries including Hindi, festivals (Holi/Diwali/Navratri), seasonal trends |
+| **Hyper-specific YT comments** | +2x profile visits | AI analyzes video titles deeply, references specific details, asks follow-up questions |
 | **Satellite boost** | +3x early engagement | 3 accounts: like+comment+save+comment-like+reply+story-like+DM-share |
 | **Cross-promo** | +20-30% cross-audience reach | Partner: like+save+comment+comment-like+reply+story-like+DM-share |
 | **Commenter targeting** | +80-120 followers/day | Follow people who comment on big niche pages (3-5x follow-back rate) |
@@ -494,11 +508,13 @@ Named series create audience anticipation and train followers to return on speci
 
 | Action | Daily Limit | Notes |
 |--------|------------|-------|
-| Likes | 200 | Spread across 6 yt_engage sessions (no restrictions on YT) |
-| Comments | 80 | AI-generated, 80% comment rate — max engagement |
-| Replies | 100 | On own video comments -- reply to ALL |
+| Likes | 500 | Spread across 24 yt_engage sessions (no restrictions on YT) |
+| Comments | 200 | AI-generated hyper-specific, 80% comment rate — max engagement |
+| Replies | 250 | On own video comments + post-publish blitz — reply to ALL |
+| Shorts published | 4-6 | 3 publish windows × up to 2 per window |
+| Creator comments | 4-6 | Auto-posted on every published Short |
 
-**API quota budget:** Maxed out. 35 videos/session. YouTube has no action blocks like Instagram.
+**API quota budget:** Maxed out. 60 videos/session, 4 queries/session, 25 results/query. YouTube has no action blocks like Instagram.
 
 **Warmup multiplier** for new accounts: 0.6x (days 1-3), 0.8x (days 4-7), 1.0x (day 8+).
 

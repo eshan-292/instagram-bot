@@ -257,6 +257,89 @@ def _set_thumbnail(youtube, video_id: str, thumbnail_path: str) -> None:
         log.debug("Thumbnail upload failed (non-fatal): %s", exc)
 
 
+def post_creator_comment(
+    video_id: str,
+    comment_text: str,
+) -> str | None:
+    """Post a discussion-sparking comment on our own YouTube Short.
+
+    The channel owner's comment appears with a 'creator' badge and is
+    prominently displayed — effectively acting like a pinned comment.
+    This drives 30%+ more replies and signals active engagement to the algo.
+
+    Returns the comment ID on success, None on failure.
+    """
+    try:
+        youtube = _get_youtube_service()
+        response = youtube.commentThreads().insert(
+            part="snippet",
+            body={
+                "snippet": {
+                    "videoId": video_id,
+                    "topLevelComment": {
+                        "snippet": {
+                            "textOriginal": comment_text,
+                        }
+                    },
+                }
+            },
+        ).execute()
+
+        comment_id = response.get("id", "")
+        log.info("Posted creator comment on %s: %s", video_id, comment_text[:50])
+        return comment_id
+    except Exception as exc:
+        log.warning("Creator comment failed for %s: %s", video_id, exc)
+        return None
+
+
+def generate_pin_comment(topic: str, caption: str) -> str:
+    """Generate a discussion-sparking comment for our own video.
+
+    Falls back to curated pool if Gemini is unavailable.
+    The comment should make viewers reply — driving engagement signals.
+    """
+    import os
+
+    _FALLBACK_COMMENTS = [
+        "Which one was your favorite? Drop a number 👇",
+        "Would you try this? Be honest 😂",
+        "Send this to someone who needs to see this 🔥",
+        "Tell me your version of this in the comments!",
+        "Rate this 1-10 — and no lying 👀",
+        "Save this for later — you'll need it 🙏",
+        "Agree or disagree? Let's debate 👇",
+        "POV: you saved this but never came back 😭",
+        "This or that? Drop your pick below!",
+        "Tag someone who does this EVERY time 😂",
+    ]
+
+    gemini_key = os.getenv("GEMINI_API_KEY", "").strip()
+    if not gemini_key:
+        return random.choice(_FALLBACK_COMMENTS)
+
+    try:
+        from gemini_helper import generate
+
+        prompt = (
+            "Write a SHORT (max 15 words) discussion-sparking YouTube comment "
+            "that the VIDEO CREATOR would pin on their own video. "
+            "The comment should make viewers REPLY — ask a question, "
+            "start a debate, or prompt a choice. "
+            "Use casual Gen-Z tone. Max 1 emoji. No hashtags. "
+            "Just the comment text, nothing else.\n\n"
+            f"Video topic: {topic[:150]}\n"
+            f"Caption context: {caption[:150]}"
+        )
+        result = generate(gemini_key, prompt)
+        if result and 5 < len(result) < 150:
+            return result
+    except Exception:
+        pass
+
+    return random.choice(_FALLBACK_COMMENTS)
+
+
 def get_channel_stats() -> dict[str, Any] | None:
     """Fetch basic channel statistics (subscribers, views, video count)."""
     try:

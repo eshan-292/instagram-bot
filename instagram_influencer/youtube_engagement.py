@@ -85,7 +85,11 @@ _YT_FALLBACK_REPLIES = [
 
 
 def _generate_yt_comment(cfg: Config, video_title: str) -> str | None:
-    """Generate a genuine, context-aware comment for a YouTube Short.
+    """Generate a hyper-specific, context-aware comment for a YouTube Short.
+
+    Analyzes the video title deeply to produce comments that reference
+    specific elements — making them feel genuinely human and driving
+    profile visits (curiosity about who left such a specific comment).
 
     Falls back to pre-written pool when Gemini is rate-limited.
     """
@@ -93,13 +97,20 @@ def _generate_yt_comment(cfg: Config, video_title: str) -> str | None:
         return random.choice(_YT_FALLBACK_COMMENTS)
     from gemini_helper import generate
 
+    persona = get_persona()
+    niche = persona.get("niche", "lifestyle")
+
     prompt = (
-        f"You are {get_persona()['voice']['gemini_identity']}. "
-        "Write a short, genuine YouTube comment (1-2 sentences, max 20 words) on a Short. "
-        "Be warm, specific to the content, and authentic — NOT generic spam. "
-        "No hashtags, max 1 emoji. Sound like a real viewer. "
-        "Avoid: 'nice video', 'great content', 'love it'. "
-        "Instead be specific about what you liked. "
+        f"You are {persona['voice']['gemini_identity']}. "
+        f"Your niche: {niche}. "
+        "Write a short, HYPER-SPECIFIC YouTube comment (1-2 sentences, max 20 words) on a Short.\n\n"
+        "RULES:\n"
+        "- Reference a SPECIFIC detail from the title (a technique, product, place, number, etc)\n"
+        "- Sound like someone who genuinely relates to the content, not a generic compliment\n"
+        "- Use casual Gen-Z/millennial tone — abbreviations, slang, lowercase OK\n"
+        "- Ask a follow-up question OR share a quick personal take (drives replies)\n"
+        "- Max 1 emoji. No hashtags. No 'nice video' / 'great content' / 'love it'\n"
+        "- Don't mention being an influencer or creator\n"
         "Just the comment text, nothing else.\n\n"
         f"Video title: {video_title[:200]}"
     )
@@ -366,6 +377,86 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
 # ---------------------------------------------------------------------------
 # Session dispatcher (called from orchestrator/engagement)
 # ---------------------------------------------------------------------------
+
+def run_yt_post_publish_replies(cfg: Config, video_ids: list[str]) -> int:
+    """Immediately reply to comments on just-published videos.
+
+    Called right after publishing to YouTube.  Replying within the first
+    60 minutes is a critical algorithm signal — it shows the creator is
+    active and sparks conversations that boost the video's distribution.
+
+    Args:
+        video_ids: List of YouTube video IDs that were just published.
+
+    Returns count of replies sent.
+    """
+    if not video_ids:
+        return 0
+
+    replied = 0
+    data = load_log(LOG_FILE)
+
+    try:
+        youtube = _get_youtube_service()
+    except Exception as exc:
+        log.warning("YouTube auth failed (skipping post-publish replies): %s", exc)
+        return 0
+
+    replied_set: set[str] = {
+        a["target"] for a in data.get("actions", []) if a.get("type") == "yt_replies"
+    }
+
+    for video_id in video_ids:
+        log.info("Post-publish reply blitz: checking comments on %s", video_id)
+
+        try:
+            response = youtube.commentThreads().list(
+                part="snippet",
+                videoId=video_id,
+                maxResults=50,
+                order="time",
+            ).execute()
+        except Exception as exc:
+            log.info("Could not fetch comments for %s: %s", video_id, exc)
+            continue
+
+        for item in response.get("items", []):
+            comment_id = item.get("id", "")
+            snippet = item.get("snippet", {}).get("topLevelComment", {}).get("snippet", {})
+            comment_text = snippet.get("textOriginal", "")
+
+            if not comment_id or not comment_text or len(comment_text) < 3:
+                continue
+            if comment_id in replied_set:
+                continue
+
+            reply = _generate_yt_reply(cfg, f"Just published Short ({video_id})", comment_text)
+            if not reply:
+                continue
+
+            try:
+                youtube.comments().insert(
+                    part="snippet",
+                    body={
+                        "snippet": {
+                            "parentId": comment_id,
+                            "textOriginal": reply,
+                        }
+                    },
+                ).execute()
+                record_action(data, "yt_replies", comment_id)
+                replied_set.add(comment_id)
+                replied += 1
+                log.debug("Post-publish reply: %s → %s", comment_text[:30], reply[:30])
+                random_delay(1, 3)
+            except Exception as exc:
+                log.warning("Post-publish reply failed: %s", exc)
+
+    save_log(LOG_FILE, data)
+    if replied:
+        log.info("Post-publish reply blitz: sent %d replies", replied)
+    return replied
+
 
 def run_yt_session(cfg: Config, session_type: str = "yt_engage") -> dict[str, int]:
     """Run a YouTube engagement session.

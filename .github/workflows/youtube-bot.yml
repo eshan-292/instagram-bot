@@ -12,7 +12,7 @@ on:
     #
     # ~26 YT sessions/day — 06:00 to 23:45 IST, every ~45 min
     # Alternates yt_engage (niche browsing) and yt_replies (respond to comments)
-    # 2 sessions also publish to YT Shorts (independent of IG)
+    # 3 publish windows for 2-3 Shorts/day (research: 3.2x faster sub growth)
     - cron: '30 0 * * *'   # 06:00 IST — yt_engage (early morning)
     - cron: '15 1 * * *'   # 06:45 IST — yt_replies
     - cron: '0 2 * * *'    # 07:30 IST — yt_engage
@@ -25,7 +25,7 @@ on:
     - cron: '15 7 * * *'   # 12:45 IST — YT PUBLISH + yt_replies (lunch publish)
     - cron: '0 8 * * *'    # 13:30 IST — yt_engage
     - cron: '45 8 * * *'   # 14:15 IST — yt_replies
-    - cron: '30 9 * * *'   # 15:00 IST — yt_engage
+    - cron: '30 9 * * *'   # 15:00 IST — YT PUBLISH + yt_engage (afternoon publish)
     - cron: '15 10 * * *'  # 15:45 IST — yt_replies
     - cron: '0 11 * * *'   # 16:30 IST — yt_engage
     - cron: '45 11 * * *'  # 17:15 IST — yt_replies
@@ -113,7 +113,7 @@ jobs:
               "15 7 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # lunch publish
               "0 8 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
               "45 8 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 9 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "30 9 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # afternoon publish
               "15 10 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
               "0 11 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
               "45 11 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;

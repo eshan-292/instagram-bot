@@ -208,7 +208,23 @@
   "youtube": {
     "hashtag_pool": ["Shorts", "FitnessShorts", "GymMotivation", "IndianFitness", "WorkoutRoutine", "BodyTransformation", "DesiGains", "HomeworkoutIndia", "ProteinMeals", "GymLife", "FitIndia", "MuscleBuilding", "FitnessJourney", "GymBro", "NaturalBodybuilding"],
     "keywords": ["indian fitness shorts", "gym workout india", "desi bodybuilding", "home workout india", "protein meals budget", "fitness transformation", "indian gym motivation", "delhi gym culture"],
-    "niche_queries": ["indian fitness shorts", "gym workout routine", "desi bodybuilding tips", "home workout no equipment", "protein indian food", "budget meal prep india", "gym motivation hindi", "natural transformation", "indian gym culture", "push pull legs routine", "chest workout tips", "shoulder workout", "delhi fitness influencer", "supplement review india", "cutting tips india"],
+    "niche_queries": [
+      "indian fitness shorts", "gym workout routine", "desi bodybuilding tips",
+      "home workout no equipment", "protein indian food", "budget meal prep india",
+      "gym motivation hindi", "natural transformation", "indian gym culture",
+      "push pull legs routine", "chest workout tips", "shoulder workout",
+      "delhi fitness influencer", "supplement review india", "cutting tips india",
+      "protein shake recipe india", "vegetarian bodybuilding india",
+      "gym diet plan india budget", "body transformation 6 months",
+      "morning workout routine india", "whey protein vs soya chunks",
+      "indian gym mistakes beginners", "abs workout at home india",
+      "वर्कआउट टिप्स हिंदी", "जिम डाइट प्लान", "बॉडी बनाने के तरीके",
+      "creatine review india 2026", "summer cutting diet india",
+      "bicep tricep workout", "back workout complete routine",
+      "fat loss tips india vegetarian", "gym wear india affordable",
+      "intermittent fasting india results", "student gym diet india",
+      "muscle building tips for skinny guys", "chest and back workout"
+    ],
     "tags_base": ["Shorts", "Aryan Dhar", "Indian Fitness", "Gym Motivation", "Workout", "Fitness Tips", "Desi Gains", "Bodybuilding"]
   },
 

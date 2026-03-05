@@ -307,7 +307,7 @@ def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
     if not cfg.youtube_enabled:
         return
 
-    from youtube_publisher import publish_short
+    from youtube_publisher import publish_short, post_creator_comment, generate_pin_comment
 
     # Prefer YouTube-format video, fall back to Instagram video
     yt_video = str(item.get("youtube_video_url") or "").strip()
@@ -333,6 +333,17 @@ def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
             write_queue(queue_file, posts)
             log.info("Published to YouTube: %s → https://youtube.com/shorts/%s",
                      item.get("id"), yt_id)
+
+            # Auto-pin a discussion-sparking creator comment (drives 30%+ more replies)
+            try:
+                pin_text = generate_pin_comment(topic, caption)
+                pin_id = post_creator_comment(yt_id, pin_text)
+                if pin_id:
+                    posts[idx]["youtube_pin_comment_id"] = pin_id
+                    write_queue(queue_file, posts)
+            except Exception as pin_exc:
+                log.debug("Pin comment failed (non-fatal): %s", pin_exc)
+
         else:
             log.warning("YouTube upload returned no ID for %s", item.get("id"))
     except Exception as exc:
@@ -340,19 +351,31 @@ def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
 
 
 def _yt_only_publish(cfg: Config, posts: list[dict[str, Any]],
-                     queue_file: str) -> None:
+                     queue_file: str, max_posts: int = 1) -> list[str]:
     """Publish to YouTube Shorts independently — no Instagram required.
 
-    Finds the next eligible post (ready/approved with a video) and publishes
-    it to YouTube only.  Does NOT change the post status (so the IG workflow
+    Finds the next eligible post(s) (ready/approved with a video) and publishes
+    them to YouTube only.  Does NOT change the post status (so the IG workflow
     can still publish it to Instagram later).
+
+    Args:
+        max_posts: How many posts to publish in this window (default 1).
+                   Research says 2-3 Shorts/day = 3.2x faster subscriber growth.
+
+    Returns list of published YouTube video IDs (for post-publish reply blitz).
     """
+    published_yt_ids: list[str] = []
+
     if not cfg.youtube_enabled:
         log.info("YouTube disabled, skipping yt-publish-only")
-        return
+        return published_yt_ids
 
-    # Find next post eligible for YouTube (has video, not yet on YT)
+    published = 0
+    # Find eligible posts for YouTube (has video, not yet on YT)
     for idx, item in enumerate(posts):
+        if published >= max_posts:
+            break
+
         status = str(item.get("status", ""))
         if status not in ("ready", "approved", "posted"):
             continue
@@ -367,9 +390,22 @@ def _yt_only_publish(cfg: Config, posts: list[dict[str, Any]],
 
         log.info("YT-only publish: found eligible post %s (status=%s)", item.get("id"), status)
         _publish_to_youtube(cfg, item, idx, posts, queue_file)
-        return
 
-    log.info("No eligible posts for YouTube-only publishing")
+        # Track published video IDs for post-publish reply blitz
+        yt_id = posts[idx].get("youtube_video_id")
+        if yt_id:
+            published_yt_ids.append(yt_id)
+            published += 1
+
+            # Brief pause between uploads (don't spam the API)
+            if published < max_posts:
+                import time
+                time.sleep(random.uniform(5, 15))
+
+    if not published:
+        log.info("No eligible posts for YouTube-only publishing")
+
+    return published_yt_ids
 
 
 def main() -> int:
@@ -471,7 +507,18 @@ def main() -> int:
         if not args.no_publish:
             if args.yt_publish_only:
                 # YouTube-only publishing — independent of Instagram
-                _yt_only_publish(cfg, posts, args.queue_file)
+                # Publish up to 2 Shorts per window (research: 2-3/day = 3.2x sub growth)
+                yt_published_ids = _yt_only_publish(cfg, posts, args.queue_file, max_posts=2)
+
+                # Post-publish reply blitz — reply to early comments within 60 min
+                # (critical algorithm signal for YT Shorts distribution)
+                if yt_published_ids and cfg.youtube_engagement_enabled:
+                    try:
+                        from youtube_engagement import run_yt_post_publish_replies
+                        blitz_count = run_yt_post_publish_replies(cfg, yt_published_ids)
+                        log.info("YT post-publish reply blitz: %d replies", blitz_count)
+                    except Exception as blitz_exc:
+                        log.debug("Post-publish reply blitz failed (non-fatal): %s", blitz_exc)
             else:
                 # Normal flow: Instagram + YouTube
                 chosen = find_eligible(posts)

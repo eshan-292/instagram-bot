@@ -206,7 +206,22 @@
   "youtube": {
     "hashtag_pool": ["Shorts", "FashionShorts", "OOTD", "IndianFashion", "MumbaiFashion", "StyleTips", "DesiFashion", "OutfitIdeas", "IndianStreetStyle", "FashionReels", "BrownGirlMagic", "EthnicWear", "FusionFashion", "DesiVibes", "StyleInspo"],
     "keywords": ["indian fashion shorts", "mumbai style tips", "outfit ideas india", "desi fashion 2026", "ethnic modern fusion", "budget fashion india", "street style mumbai", "indian girl style", "fashion influencer india"],
-    "niche_queries": ["indian fashion shorts", "mumbai style tips", "desi outfit ideas", "indian street style", "ethnic wear styling", "budget fashion india", "indian girl style", "bollywood fashion", "mumbai fashion influencer", "saree styling tips", "kurti styling ideas", "indian wedding outfit", "desi fashion 2026", "indo western outfit", "college outfit india"],
+    "niche_queries": [
+      "indian fashion shorts", "mumbai style tips", "desi outfit ideas",
+      "indian street style", "ethnic wear styling", "budget fashion india",
+      "indian girl style", "bollywood fashion", "mumbai fashion influencer",
+      "saree styling tips", "kurti styling ideas", "indian wedding outfit",
+      "desi fashion 2026", "indo western outfit", "college outfit india",
+      "fashion haul india under 2000", "thrift shopping mumbai",
+      "monsoon outfit ideas india", "holi outfit ideas", "diwali outfit 2026",
+      "navratri outfit ideas", "wedding guest outfit india budget",
+      "airport look indian celebrity", "zara haul india 2026",
+      "indian fashion तैयार हो जाओ", "देसी फैशन tips", "बजट शॉपिंग",
+      "kurta styling hacks", "one piece five ways", "capsule wardrobe india",
+      "summer outfit india 2026", "party outfit ideas mumbai",
+      "college fashion india", "street style mumbai 2026",
+      "affordable fashion finds india", "ethnic fusion outfit ideas"
+    ],
     "tags_base": ["Shorts", "Maya Varma", "Indian Fashion", "Mumbai Fashion", "OOTD", "Style Tips", "Desi Fashion", "Fashion Influencer"]
   },
 
