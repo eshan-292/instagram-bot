@@ -1,34 +1,36 @@
-# 📊 Daily Report — March 04, 2026
+# 📊 Daily Report — March 06, 2026
 
-*Generated at 11:37 PM IST*
+*Generated at 12:30 AM IST*
 
 ## Engagement
 
 | Action | Count |
 |--------|-------|
-| ❤️ Likes | 263 |
-| 💬 Comments | 91 |
-| ➕ Follows | 23 |
-| 👁️ Story Views | 80 |
-| ↩️ Comment Replies | 8 |
-| **Total** | **465** |
+| ❤️ Likes | 303 |
+| 💬 Comments | 4 |
+| ➕ Follows | 1 |
+| ➖ Unfollows | 2 |
+| 👁️ Story Views | 90 |
+| **Total** | **400** |
 
 ## Posts Published Today
 
-- **mt-003**: Minimalist dark background with bold white text revealing a 
-  - IG: https://instagram.com/p/3845471536669375549/
+- **mt-004**: Woman looking contemplative, possibly at a crossroads, overw
+  - IG: https://instagram.com/p/3845985410590042932/
+- **mt-005**: Man persistently trying to get attention from a woman who is
+  - IG: https://instagram.com/p/3846200578787827952/
 
 ## Content Pipeline
 
 - Draft: 0
-- Approved: 2
-- Posted: 2
+- Approved: 0
+- Posted: 4
 
 ## Growth Signals
 
-- Net follows sent today: **23**
-- Engagement actions: **465**
-- Account age: **1 days**
+- Net follows sent today: **-1**
+- Engagement actions: **400**
+- Account age: **2 days**
 - Warmup multiplier: **0.6x**
 
 ---
