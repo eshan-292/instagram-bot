@@ -339,6 +339,39 @@ def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
         log.error("YouTube publish failed for %s: %s", item.get("id"), exc)
 
 
+def _yt_only_publish(cfg: Config, posts: list[dict[str, Any]],
+                     queue_file: str) -> None:
+    """Publish to YouTube Shorts independently — no Instagram required.
+
+    Finds the next eligible post (ready/approved with a video) and publishes
+    it to YouTube only.  Does NOT change the post status (so the IG workflow
+    can still publish it to Instagram later).
+    """
+    if not cfg.youtube_enabled:
+        log.info("YouTube disabled, skipping yt-publish-only")
+        return
+
+    # Find next post eligible for YouTube (has video, not yet on YT)
+    for idx, item in enumerate(posts):
+        status = str(item.get("status", ""))
+        if status not in ("ready", "approved", "posted"):
+            continue
+        # Skip if already published to YouTube
+        if item.get("youtube_video_id"):
+            continue
+        # Need a video file
+        yt_video = str(item.get("youtube_video_url") or "").strip()
+        ig_video = str(item.get("video_url") or "").strip()
+        if not yt_video and not ig_video:
+            continue
+
+        log.info("YT-only publish: found eligible post %s (status=%s)", item.get("id"), status)
+        _publish_to_youtube(cfg, item, idx, posts, queue_file)
+        return
+
+    log.info("No eligible posts for YouTube-only publishing")
+
+
 def main() -> int:
     # Load .env FIRST so PERSONA is available before any lazy path resolution
     # (argparse defaults trigger str(DEFAULT_QUEUE_FILE) which needs PERSONA)
@@ -365,6 +398,8 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Preview only")
     parser.add_argument("--no-generate", action="store_true")
     parser.add_argument("--no-publish", action="store_true")
+    parser.add_argument("--yt-publish-only", action="store_true",
+                        help="Publish to YouTube only (skip Instagram)")
     parser.add_argument("--no-engage", action="store_true")
     parser.add_argument("--session", type=str, default=None,
                         help="Run a specific session type (morning/replies/hashtags/explore/"
@@ -432,77 +467,82 @@ def main() -> int:
                 write_queue(args.queue_file, posts)
                 log.info("Promoted %d drafts", promoted)
 
-        # 5. Publish next eligible post (Instagram + YouTube)
+        # 5. Publish next eligible post
         if not args.no_publish:
-            chosen = find_eligible(posts)
-            if chosen is None:
-                log.info("No eligible posts to publish")
+            if args.yt_publish_only:
+                # YouTube-only publishing — independent of Instagram
+                _yt_only_publish(cfg, posts, args.queue_file)
             else:
-                idx, item = chosen
-                caption = str(item.get("caption", ""))
-                image_url = str(item.get("image_url", ""))
-                video_url = str(item.get("video_url") or "").strip() or None
-                is_reel = bool(item.get("is_reel", False))
-                post_type = str(item.get("post_type", "reel")).strip().lower()
-                carousel_images = item.get("carousel_images") or None
-
-                has_media = (
-                    (post_type == "carousel" and carousel_images)
-                    or image_url
-                    or video_url
-                )
-                if not has_media:
-                    log.warning("Post %s has no media, skipping", item.get("id"))
+                # Normal flow: Instagram + YouTube
+                chosen = find_eligible(posts)
+                if chosen is None:
+                    log.info("No eligible posts to publish")
                 else:
-                    # Inject hashtags (caption + first comment for extra reach)
-                    full_caption, first_comment_hashtags = _build_hashtags(
-                        caption, str(item.get("topic", "")), post_type,
-                        youtube_enabled=cfg.youtube_enabled,
-                        cfg=cfg,
-                        item=item,
+                    idx, item = chosen
+                    caption = str(item.get("caption", ""))
+                    image_url = str(item.get("image_url", ""))
+                    video_url = str(item.get("video_url") or "").strip() or None
+                    is_reel = bool(item.get("is_reel", False))
+                    post_type = str(item.get("post_type", "reel")).strip().lower()
+                    carousel_images = item.get("carousel_images") or None
+
+                    has_media = (
+                        (post_type == "carousel" and carousel_images)
+                        or image_url
+                        or video_url
                     )
+                    if not has_media:
+                        log.warning("Post %s has no media, skipping", item.get("id"))
+                    else:
+                        # Inject hashtags (caption + first comment for extra reach)
+                        full_caption, first_comment_hashtags = _build_hashtags(
+                            caption, str(item.get("topic", "")), post_type,
+                            youtube_enabled=cfg.youtube_enabled,
+                            cfg=cfg,
+                            item=item,
+                        )
 
-                    # Publish to Instagram (with alt_text for SEO + accessibility)
-                    alt_text = str(item.get("alt_text", "")).strip() or None
-                    try:
-                        post_id = publish(cfg, full_caption, image_url,
-                                          video_url=video_url, is_reel=is_reel,
-                                          carousel_images=carousel_images,
-                                          post_type=post_type,
-                                          alt_text=alt_text,
-                                          first_comment=first_comment_hashtags)
-                        posts[idx]["status"] = "posted"
-                        posts[idx]["posted_at"] = _utc_now_iso()
-                        posts[idx]["platform_post_id"] = post_id
-                        posts[idx]["publish_error"] = None
-                        log.info("Published %s → %s", item.get("id"), post_id)
-                    except ChallengeAbort:
-                        raise  # Don't catch — abort immediately
-                    except Exception as exc:
-                        posts[idx]["status"] = "failed"
-                        posts[idx]["publish_error"] = str(exc)
-                        log.error("Publish failed for %s: %s", item.get("id"), exc)
+                        # Publish to Instagram (with alt_text for SEO + accessibility)
+                        alt_text = str(item.get("alt_text", "")).strip() or None
+                        try:
+                            post_id = publish(cfg, full_caption, image_url,
+                                              video_url=video_url, is_reel=is_reel,
+                                              carousel_images=carousel_images,
+                                              post_type=post_type,
+                                              alt_text=alt_text,
+                                              first_comment=first_comment_hashtags)
+                            posts[idx]["status"] = "posted"
+                            posts[idx]["posted_at"] = _utc_now_iso()
+                            posts[idx]["platform_post_id"] = post_id
+                            posts[idx]["publish_error"] = None
+                            log.info("Published %s → %s", item.get("id"), post_id)
+                        except ChallengeAbort:
+                            raise  # Don't catch — abort immediately
+                        except Exception as exc:
+                            posts[idx]["status"] = "failed"
+                            posts[idx]["publish_error"] = str(exc)
+                            log.error("Publish failed for %s: %s", item.get("id"), exc)
 
-                    write_queue(args.queue_file, posts)
+                        write_queue(args.queue_file, posts)
 
-                    # Publish to YouTube Shorts (non-blocking — IG publish is primary)
-                    if posts[idx].get("status") == "posted":
-                        _publish_to_youtube(cfg, posts[idx], idx, posts, args.queue_file)
+                        # Publish to YouTube Shorts (non-blocking — IG publish is primary)
+                        if posts[idx].get("status") == "posted":
+                            _publish_to_youtube(cfg, posts[idx], idx, posts, args.queue_file)
 
-                        # Post-publish engagement burst (first 30 min = algorithmic fate)
-                        # Pin CTA comment + story repost + mini engagement burst
-                        if cfg.engagement_enabled:
-                            try:
-                                from engagement import run_post_publish_burst
-                                pub_cl = _get_client(cfg)
-                                burst_stats = run_post_publish_burst(
-                                    pub_cl, cfg,
-                                    str(posts[idx].get("platform_post_id", "")),
-                                    posts[idx],
-                                )
-                                log.info("Post-publish burst: %s", burst_stats)
-                            except Exception as exc:
-                                log.warning("Post-publish burst failed: %s", exc)
+                            # Post-publish engagement burst (first 30 min = algorithmic fate)
+                            # Pin CTA comment + story repost + mini engagement burst
+                            if cfg.engagement_enabled:
+                                try:
+                                    from engagement import run_post_publish_burst
+                                    pub_cl = _get_client(cfg)
+                                    burst_stats = run_post_publish_burst(
+                                        pub_cl, cfg,
+                                        str(posts[idx].get("platform_post_id", "")),
+                                        posts[idx],
+                                    )
+                                    log.info("Post-publish burst: %s", burst_stats)
+                                except Exception as exc:
+                                    log.warning("Post-publish burst failed: %s", exc)
 
         # 6. Engagement (Instagram + YouTube sessions)
         if args.session:

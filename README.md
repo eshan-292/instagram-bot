@@ -318,9 +318,11 @@ The orchestrator publishes at most 1 post/day — if the lunch window publishes,
 
 Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**. Cross-promo at **20:45 IST** (1.75hrs after Maya publishes).
 
-### YouTube Schedules (24 sessions each — MAXED OUT)
+### YouTube Schedules (24 sessions each — MAXED OUT + INDEPENDENT PUBLISHING)
 
 Maya and Aryan each get 24 YT sessions/day (alternating engage/replies every 45 min, 6 AM to midnight IST). Aryan's are staggered +15 min. Daily limits: 500 likes, 200 comments, 250 replies. YouTube has no action blocks so engagement is fully maxed out.
+
+**YouTube publishing is fully independent of Instagram.** Each YT workflow has 2 publish windows (lunch + prime time) using `--yt-publish-only`. If Instagram is disabled or broken, YouTube Shorts still get published on schedule. The `_yt_only_publish()` function finds the next eligible post with a video and publishes to YT without touching IG status.
 
 ### Satellite Schedules (9 sessions each)
 

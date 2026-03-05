@@ -8,16 +8,17 @@
         "request_id": "db9c84a5-19ca-448d-9bf9-4127e4b4b600",
         "tray_session_id": "bf09818f-8ce5-4980-86a5-df2d6f4106fd"
     },
-    "mid": "aae0oAABAAEu4ZU7X8Y62z1-fk0L",
+    "mid": "aag9oQABAAH0CYgQhzh4Vve2usNL",
     "ig_u_rur": null,
     "ig_www_claim": null,
     "authorization_data": {
         "ds_user_id": "42981049770",
-        "sessionid": "42981049770%3AoOFLXiqnxYDTal%3A25%3AAYjeBrPS2AxrYjPE-XRJAE9q2ltCbXVDAw2PhCyBLg"
+        "sessionid": "42981049770%3ASRbPZHejI70eu0%3A5%3AAYgKIQXb3ZmwwYZ3eDo4KLUPApORsKS9vXtls9hgDw"
     },
     "cookies": {},
-    "last_login": 1772621985.0459743,
+    "last_login": 1772633526.056681,
     "device_settings": {
+        "app_version": "418.0.0.51.77",
         "android_version": 34,
         "android_release": "14",
         "dpi": "480dpi",
@@ -26,7 +27,6 @@
         "device": "dm1q",
         "model": "SM-S911B",
         "cpu": "qcom",
-        "app_version": "418.0.0.51.77",
         "version_code": "659489002"
     },
     "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)",
