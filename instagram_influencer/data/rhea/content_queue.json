@@ -40,7 +40,7 @@
     },
     {
       "id": "rhea-002",
-      "status": "approved",
+      "status": "posted",
       "topic": "What I eat in a day \u2014 130g protein, all Indian food",
       "caption": "Full day of eating. 130g protein.\nAll Indian food. No expensive supplements.\nWhat's your go-to protein source? Comment below.\nSave this for meal prep Sunday.",
       "alt_text": "Indian woman showing high-protein Indian meals throughout the day",
@@ -71,7 +71,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/6.jpg"
-      ]
+      ],
+      "posted_at": "2026-03-05T07:59:32Z",
+      "platform_post_id": "3845988274049830385",
+      "publish_error": null
     },
     {
       "id": "rhea-003",
