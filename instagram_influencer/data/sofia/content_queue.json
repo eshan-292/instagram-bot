@@ -40,7 +40,7 @@
     },
     {
       "id": "sofia-002",
-      "status": "approved",
+      "status": "posted",
       "topic": "GRWM for a luxury dinner at Taj Mumbai",
       "caption": "Getting ready for Taj.\nBecause first impressions are the only impressions.\nWhat would you wear to a 5-star dinner?\nSend this to someone who gets it.",
       "alt_text": "Russian woman getting ready for dinner at luxury hotel in Mumbai",
@@ -55,7 +55,10 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-03T10:00:00Z",
-      "notes": "vanity/bathroom setting, warm lighting, luxury products visible | generated_by=template"
+      "notes": "vanity/bathroom setting, warm lighting, luxury products visible | generated_by=template",
+      "posted_at": "2026-03-05T08:00:00Z",
+      "platform_post_id": "3845988360863355728",
+      "publish_error": null
     },
     {
       "id": "sofia-003",
