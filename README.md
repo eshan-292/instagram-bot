@@ -145,8 +145,9 @@ The Gemini API free tier does NOT include image generation, so images are genera
 
 | Format | % of Content | Why |
 |--------|-------------|-----|
-| **Reels/Shorts** (7-10 sec) | 40% | 55% of views from non-followers. THE discovery tool. |
-| **Carousels** (5-6 slides) | 40% | 3x higher engagement, most saved+shared format. |
+| **Reels/Shorts** (7-10 sec) | 35% | 55% of views from non-followers. THE discovery tool. |
+| **Hook-Photo Reels** (10-14 sec) | 10% | Text hooks interleaved with photos. Highest watch-through format. |
+| **Carousels** (5-6 slides) | 35% | 3x higher engagement, most saved+shared format. |
 | **Single images** | 20% | Aesthetic/editorial brand posts. |
 
 **Caption strategy (optimized for "sends" -- the #1 algorithm signal in 2026):**
@@ -159,6 +160,30 @@ The Gemini API free tier does NOT include image generation, so images are genera
 - **30 total hashtags** (Instagram max) — caption tags + first comment fills remaining slots with ~60% niche/persona + ~40% trending hashtags (fetched daily via Gemini, even if irrelevant — maximum exposure)
 - Like counts hidden on all posts (reduces comparison anxiety, boosts engagement)
 - No cross-platform mentions in captions (IG and YT kept separate)
+
+### Hook-Photo Reels (2026 Viral Format)
+
+The most viral reel format — text hook slides interleaved with 2-3 photos:
+
+```
+[HOOK TEXT] → [Photo 1] → [BRIDGE TEXT] → [Photo 2] → [CTA TEXT]
+```
+
+- **Dark background + bold white text** for hook/bridge slides (auto-generated via PIL)
+- **2 seconds per frame** — fast-paced, punchy, keeps viewers watching
+- **Snap-zoom effect** on every frame (including text) for visual punch
+- **Gold CTA text** on final frame drives saves and sends
+- 2 photos = 10s reel, 3 photos = 14s reel (algorithm sweet spot)
+
+To create hook-photo reels: set `post_type: "reel"` + `reel_format: "hook_photo"` in content queue. Include `slides` (2-3 photo descriptions) and `video_text` (hook/bridge/CTA text). Place photos in `pending/{post-id}/1.jpg, 2.jpg, ...` (same as carousels).
+
+### Smart Unfollow (Non-Followers Only)
+
+The unfollow system now checks the followers API before unfollowing:
+- **Only unfollows non-followers** — people who didn't follow back after 2 days
+- **Keeps mutual followers** — preserves relationships with people who followed back
+- **150/day limit** — aggressive pace to make room for new growth follows
+- Refreshes followers list from API + cached file for accuracy
 
 ## Audio Strategy (2026)
 
