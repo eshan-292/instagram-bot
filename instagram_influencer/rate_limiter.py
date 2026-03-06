@@ -78,12 +78,15 @@ def actions_today(data: dict[str, Any], action_type: str) -> int:
 
 
 def warmup_multiplier() -> float:
-    """Return a multiplier (0.6-1.0) based on account age.
+    """Return a multiplier (0.15-1.0) based on account age.
 
-    Ramps limits gradually for new accounts:
-      Days 1-3:   0.6x
-      Days 4-7:   0.8x
-      Days 8+:    1.0x (full limits)
+    Smooth 14-day ramp to avoid triggering Instagram's new-account monitoring:
+      Days 1-2:   0.15x  (just browsing — ~75 likes, ~37 comments, ~60 follows)
+      Days 3-4:   0.25x
+      Days 5-7:   0.40x
+      Days 8-10:  0.60x
+      Days 11-14: 0.80x
+      Day 15+:    1.00x  (full limits)
     """
     created = os.getenv("ACCOUNT_CREATED_DATE", "").strip()
     if not created:
@@ -93,10 +96,16 @@ def warmup_multiplier() -> float:
     except ValueError:
         return 1.0
     age_days = (datetime.now(timezone.utc) - created_dt).days
-    if age_days < 3:
-        return 0.6
+    if age_days < 2:
+        return 0.15
+    if age_days < 4:
+        return 0.25
     if age_days < 7:
-        return 0.8
+        return 0.40
+    if age_days < 10:
+        return 0.60
+    if age_days < 14:
+        return 0.80
     return 1.0
 
 
@@ -131,9 +140,9 @@ def random_delay(min_s: int = 30, max_s: int = 90) -> None:
     15% chance of a 'micro-break' (90-300s) — simulates getting distracted,
     checking another app, replying to a text, etc.
     """
-    # Micro-break: simulate getting distracted (very rare, short)
-    if random.random() < 0.01:
-        pause = random.uniform(10, 25)
+    # Micro-break: simulate getting distracted (checking another app, replying to a text)
+    if random.random() < 0.05:
+        pause = random.uniform(30, 120)
         log.debug("Micro-break: %.0fs", pause)
         time.sleep(pause)
         return
@@ -155,10 +164,10 @@ def session_startup_jitter() -> None:
     """Random delay at session start to avoid running at exact cron times.
 
     Real people don't open Instagram at exactly :00 or :30. This adds
-    0-4 minutes of jitter so sessions start at varied times.
+    1-5 minutes of jitter so sessions start at varied, human-like times.
     """
-    jitter = random.uniform(3, 30)  # 3-30s jitter
-    log.info("Session startup jitter: %.0fs", jitter)
+    jitter = random.uniform(60, 300)  # 1-5 minutes
+    log.info("Session startup jitter: %.0fs (%.1f min)", jitter, jitter / 60)
     time.sleep(jitter)
 
 

@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
 import os
 import tempfile
@@ -37,40 +39,92 @@ def _challenge_handler(username: str, choice) -> str:
     )
 
 
-_DEVICE_SETTINGS = {
-    "app_version": "418.0.0.51.77",
-    "android_version": 34,
-    "android_release": "14",
-    "dpi": "480dpi",
-    "resolution": "1080x2340",
-    "manufacturer": "Samsung",
-    "device": "dm1q",
-    "model": "SM-S911B",
-    "cpu": "qcom",
-    "version_code": "659489002",
-}
+# Pool of realistic device profiles — each account gets one deterministically
+_DEVICE_POOL = [
+    {"manufacturer": "Samsung", "device": "dm1q",    "model": "SM-S911B",   "cpu": "qcom",  "resolution": "1080x2340", "dpi": "480dpi", "android_version": 34, "android_release": "14"},
+    {"manufacturer": "Samsung", "device": "b0q",     "model": "SM-S908B",   "cpu": "qcom",  "resolution": "1440x3088", "dpi": "640dpi", "android_version": 34, "android_release": "14"},
+    {"manufacturer": "Xiaomi",  "device": "marble",  "model": "23049PCD8G", "cpu": "qcom",  "resolution": "1080x2400", "dpi": "440dpi", "android_version": 33, "android_release": "13"},
+    {"manufacturer": "OnePlus", "device": "CPH2449", "model": "CPH2449",    "cpu": "qcom",  "resolution": "1240x2772", "dpi": "560dpi", "android_version": 34, "android_release": "14"},
+    {"manufacturer": "Google",  "device": "husky",   "model": "Pixel 8 Pro","cpu": "google", "resolution": "1344x2992", "dpi": "560dpi", "android_version": 35, "android_release": "15"},
+    {"manufacturer": "Google",  "device": "shiba",   "model": "Pixel 8",    "cpu": "google", "resolution": "1080x2400", "dpi": "420dpi", "android_version": 35, "android_release": "15"},
+    {"manufacturer": "Samsung", "device": "e1q",     "model": "SM-S926B",   "cpu": "qcom",  "resolution": "1080x2340", "dpi": "480dpi", "android_version": 34, "android_release": "14"},
+    {"manufacturer": "Xiaomi",  "device": "tapas",   "model": "24031PN0DC", "cpu": "mt6877","resolution": "1080x2400", "dpi": "440dpi", "android_version": 34, "android_release": "14"},
+    {"manufacturer": "realme",  "device": "RE58B2",  "model": "RMX3771",    "cpu": "mt6877","resolution": "1080x2400", "dpi": "480dpi", "android_version": 33, "android_release": "13"},
+]
 
-_USER_AGENT = (
-    "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; "
-    "samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)"
-)
+_APP_VERSION = "418.0.0.51.77"
+_VERSION_CODE = "659489002"
+
+
+def _get_device_for_persona() -> tuple[dict, str]:
+    """Return a deterministic device profile + user agent for the current persona.
+
+    Uses a hash of the persona ID to pick a device from the pool, so each
+    account always gets the same device but different accounts get different
+    devices. Falls back to first device if persona can't be loaded.
+    """
+    from persona import persona_data_dir
+    fp_file = persona_data_dir() / "device_fingerprint.json"
+
+    # If we already generated one, reuse it (stable across sessions)
+    if fp_file.exists():
+        try:
+            with open(fp_file) as f:
+                saved = json.load(f)
+            device = saved["device"]
+            ua = saved["user_agent"]
+            log.debug("Loaded device fingerprint: %s %s", device["manufacturer"], device["model"])
+            return device, ua
+        except Exception:
+            pass
+
+    # Generate deterministically from persona ID
+    try:
+        persona_id = os.getenv("PERSONA", "maya")
+    except Exception:
+        persona_id = "maya"
+
+    idx = int(hashlib.sha256(persona_id.encode()).hexdigest(), 16) % len(_DEVICE_POOL)
+    device = dict(_DEVICE_POOL[idx])
+    device["app_version"] = _APP_VERSION
+    device["version_code"] = _VERSION_CODE
+
+    ua = (
+        f"Instagram {_APP_VERSION} Android "
+        f"({device['android_version']}/{device['android_release']}; "
+        f"{device['dpi']}; {device['resolution']}; "
+        f"{device['manufacturer'].lower()}; {device['model']}; "
+        f"{device['device']}; {device['cpu']}; en_IN; {_VERSION_CODE})"
+    )
+
+    # Persist so it never changes
+    try:
+        fp_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(fp_file, "w") as f:
+            json.dump({"device": device, "user_agent": ua}, f, indent=2)
+        log.info("Generated device fingerprint for %s: %s %s", persona_id, device["manufacturer"], device["model"])
+    except Exception as exc:
+        log.debug("Could not save device fingerprint: %s", exc)
+
+    return device, ua
 
 
 def _apply_device_settings(cl: Client) -> None:
-    """Apply current device settings and user agent to a client.
+    """Apply per-persona device settings and user agent to a client.
 
     Must be called AFTER load_settings() because load_settings() overwrites
     device settings with whatever was saved in the session file (potentially
     an old app version that Instagram 403s).
     """
-    cl.set_device(_DEVICE_SETTINGS)
-    cl.set_user_agent(_USER_AGENT)
+    device, ua = _get_device_for_persona()
+    cl.set_device(device)
+    cl.set_user_agent(ua)
 
 
 def _new_client() -> Client:
     """Create a fresh Client with realistic, up-to-date device settings."""
     cl = Client()
-    cl.delay_range = [1, 3]  # minimal delay between API calls
+    cl.delay_range = [2, 5]  # delay between API calls
     cl.set_locale("en_IN")
     cl.set_country_code(91)
     cl.set_timezone_offset(19800)  # IST = UTC+5:30

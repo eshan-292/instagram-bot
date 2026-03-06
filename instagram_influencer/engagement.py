@@ -88,6 +88,49 @@ def _follow_failed(exc: Exception) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Global session cooldown — backs off ALL actions when rate-limited
+# ---------------------------------------------------------------------------
+_global_error_count: int = 0
+_session_cooldown_active: bool = False
+_SESSION_COOLDOWN_THRESHOLD = 3  # consecutive errors before cooldown
+
+
+def _is_rate_limit_error(exc: Exception) -> bool:
+    """Check if an exception indicates rate limiting."""
+    msg = str(exc).lower()
+    return any(s in msg for s in ("feedback_required", "please wait", "429", "throttled"))
+
+
+def _record_action_error(exc: Exception) -> None:
+    """Track errors globally; trigger cooldown after threshold."""
+    global _global_error_count, _session_cooldown_active
+    if _is_rate_limit_error(exc):
+        _global_error_count += 1
+        if _global_error_count >= _SESSION_COOLDOWN_THRESHOLD:
+            _session_cooldown_active = True
+            cooldown = random.uniform(300, 600)  # 5-10 minutes
+            log.warning(
+                "SESSION COOLDOWN — %d consecutive rate limits detected. "
+                "Sleeping %.0fs before continuing with reduced activity.",
+                _global_error_count, cooldown
+            )
+            time.sleep(cooldown)
+            # After cooldown, reset counter but keep reduced mode
+            _global_error_count = 0
+
+
+def _record_action_success() -> None:
+    """Reset global error counter on success."""
+    global _global_error_count
+    _global_error_count = 0
+
+
+def _session_size_multiplier() -> float:
+    """Return reduced session size when in cooldown mode."""
+    return 0.5 if _session_cooldown_active else 1.0
+
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
@@ -96,9 +139,14 @@ def _parse_hashtags(raw: str) -> list[str]:
     return [t.strip().lstrip("#").lower() for t in raw.split(",") if t.strip()]
 
 
-def _should_skip_post() -> bool:
-    """Skip disabled — engage with everything to maximize growth."""
-    return False
+def _should_skip_post(skip_rate: float = 0.55) -> bool:
+    """Randomly skip posts like a real human scrolling past content.
+
+    Real users scroll past 50-70% of posts. Skipping makes the engagement
+    pattern look human without reducing total actions — we just fetch more
+    posts per session to compensate.
+    """
+    return random.random() < skip_rate
 
 
 def _randomize_session_size(base: int) -> int:
@@ -426,7 +474,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
             record_action(data, "unfollows", user_id)
             unfollowed += 1
             log.debug("Unfollowed user %s", user_id)
-            random_delay(4, 12)  # fast unfollow pace
+            random_delay(6, 18)  # unfollow pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("Unfollow failed for %s: %s", user_id, exc)
@@ -581,7 +629,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to comment %s: %s", comment_id, reply[:40])
-                random_delay(4, 12)  # fast reply pace
+                random_delay(8, 20)  # reply pace
             except Exception as exc:
                 _check_challenge(exc)
                 log.warning("Reply failed for comment %s: %s", comment_id, exc)
@@ -601,7 +649,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
     Aggressive mode: larger session sizes, higher comment and follow rates.
     """
     stats: dict[str, int] = {"explore_likes": 0, "explore_comments": 0, "explore_follows": 0}
-    explore_limit = _randomize_session_size(60)  # aggressive growth
+    explore_limit = int(_randomize_session_size(90) * _session_size_multiplier())
 
     try:
         raw_medias = cl.explore_reels(amount=explore_limit + 10)
@@ -623,8 +671,8 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                  len(medias), before, min_f)
 
     for media in medias[:explore_limit]:
-        # Skip some posts — humans scroll past most content
-        if _should_skip_post():
+        # Skip some posts — humans scroll past most content on explore
+        if _should_skip_post(0.60):
             time.sleep(random.uniform(0.5, 1.5))
             continue
 
@@ -640,8 +688,10 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                 cl.media_like(media.pk)
                 record_action(data, "likes", media_id)
                 stats["explore_likes"] += 1
+                _record_action_success()
             except Exception as exc:
                 _check_challenge(exc)
+                _record_action_error(exc)
                 log.debug("Explore like failed: %s", exc)
 
         # Comment on big accounts — our comment visible to their audience
@@ -680,7 +730,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(2, 8)  # fast pace
+        random_delay(5, 18)  # explore pace
 
     if any(v > 0 for v in stats.values()):
         log.info("Explore engagement: %s", stats)
@@ -750,12 +800,12 @@ def _run_hashtag_engagement(
         log.info("Hashtag big-page filter: %d/%d posts pass %d+ threshold",
                  len(medias), before, min_f)
 
-    # Randomize session size
-    actual_max = _randomize_session_size(max_posts)
+    # Randomize session size (reduced during cooldown)
+    actual_max = int(_randomize_session_size(max_posts) * _session_size_multiplier())
 
     for media in medias[:actual_max]:
         # Skip some posts — humans scroll past content they don't vibe with
-        if _should_skip_post():
+        if _should_skip_post(0.45):
             time.sleep(random.uniform(0.5, 1))
             continue
 
@@ -771,8 +821,10 @@ def _run_hashtag_engagement(
                 cl.media_like(media.pk)
                 record_action(data, "likes", media_id)
                 stats["likes"] = stats.get("likes", 0) + 1
+                _record_action_success()
             except Exception as exc:
                 _check_challenge(exc)
+                _record_action_error(exc)
                 log.warning("Like failed for %s: %s", media_id, exc)
 
         # Comment on big accounts' posts — our comment visible to their audience
@@ -816,7 +868,7 @@ def _run_hashtag_engagement(
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(2, 8)  # fast pace
+        random_delay(5, 18)  # hashtag pace
 
         if (
             not can_act(data, "likes", like_limit)
@@ -909,8 +961,8 @@ def run_warm_audience_session(
     for uid in follower_ids[:session_size]:
         user_id = str(uid)
 
-        # Skip some — human behavior
-        if _should_skip_post():
+        # Skip some — human behavior (lower rate for warm targets, they're higher quality)
+        if _should_skip_post(0.25):
             time.sleep(random.uniform(0.5, 1.5))
             continue
 
@@ -970,7 +1022,7 @@ def run_warm_audience_session(
             stats["warm_story_views"] = stats.get("story_views", 0)
 
         save_log(LOG_FILE, data)
-        random_delay(3, 10)  # fast pace
+        random_delay(8, 22)  # warm audience pace (slower — we're visiting profiles)
 
         # Check daily limits
         if (not can_act(data, "likes", cfg.engagement_daily_likes)
@@ -1124,7 +1176,7 @@ def run_commenter_targeting_session(
             stats["ct_story_views"] = stats.get("story_views", 0)
 
         save_log(LOG_FILE, data)
-        random_delay(2, 8)
+        random_delay(8, 22)  # commenter targeting pace
 
         # Check daily limits
         if (not can_act(data, "likes", cfg.engagement_daily_likes)
@@ -1240,7 +1292,7 @@ def run_post_publish_burst(
     for media in targets[:10]:
         if burst_count >= 8:
             break
-        if _should_skip_post():
+        if _should_skip_post(0.20):
             continue
         media_id = str(media.pk)
         if can_act(data, "likes", cfg.engagement_daily_likes):
@@ -1768,6 +1820,30 @@ SESSION_TYPES = [
 ]
 
 
+def _passive_browse(cl: Any) -> None:
+    """Simulate passive browsing that real users do when opening Instagram.
+
+    Checks notifications, DMs, own profile — the stuff humans do before
+    intentional engagement. These API calls make the session pattern look
+    natural and don't count toward engagement limits.
+    """
+    actions = [
+        ("account_info", lambda: cl.account_info()),
+        ("direct_threads", lambda: cl.direct_threads(amount=5)),
+        ("user_medias", lambda: cl.user_medias(cl.user_id, amount=3)),
+    ]
+    # Do 1-3 random passive actions (not always the same ones)
+    random.shuffle(actions)
+    count = random.randint(1, min(3, len(actions)))
+    for name, action in actions[:count]:
+        try:
+            action()
+            log.debug("Passive browse: %s", name)
+        except Exception:
+            pass
+        time.sleep(random.uniform(2, 8))
+
+
 def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     """Run a focused engagement session — designed to mimic human phone checks.
 
@@ -1785,6 +1861,10 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
 
     cl = _get_client(cfg)
     log.info("Starting engagement session: %s", session_type)
+
+    # Passive browse at session start — mimic opening the app and checking stuff
+    if session_type not in ("report", "maintenance"):
+        _passive_browse(cl)
 
     # Pod boost: auto-boost fresh partner posts at the start of every session
     # (skip for report, maintenance, stories — those aren't engagement sessions)
