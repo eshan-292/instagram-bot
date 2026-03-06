@@ -122,7 +122,7 @@
     },
     {
       "id": "cw-005",
-      "status": "approved",
+      "status": "posted",
       "topic": "Rate your life \u2014 honest score check",
       "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
       "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
@@ -153,7 +153,10 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-005/4.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-005/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-005/6.jpg"
-      ]
+      ],
+      "posted_at": "2026-03-06T07:47:06Z",
+      "platform_post_id": "3846706778684030350",
+      "publish_error": null
     }
   ]
 }
