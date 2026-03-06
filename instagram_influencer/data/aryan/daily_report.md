@@ -1,41 +1,46 @@
-# 📊 Daily Report — March 03, 2026
+# 📊 Daily Report — March 06, 2026
 
-*Generated at 12:03 AM IST*
+*Generated at 11:58 PM IST*
 
 ## Engagement
 
 | Action | Count |
 |--------|-------|
-| ❤️ Likes | 240 |
-| 💬 Comments | 60 |
-| ➕ Follows | 72 |
-| 👁️ Story Views | 90 |
-| ▶️ YT Likes | 9 |
-| ▶️ YT Comments | 1 |
-| **Total** | **472** |
+| ❤️ Likes | 326 |
+| 💬 Comments | 85 |
+| ➕ Follows | 96 |
+| 👁️ Story Views | 120 |
+| ↩️ Comment Replies | 4 |
+| ▶️ YT Likes | 77 |
+| ▶️ YT Comments | 69 |
+| ▶️ YT Replies | 4 |
+| **Total** | **781** |
 
 ## Posts Published Today
 
-- **aryan-004**: Physique check -- 6 month transformation
-  - IG: https://instagram.com/p/3844052695003696638/
+- **aryan-003**: Push day complete routine -- chest and shoulders
+  - IG: https://instagram.com/p/3846711089329666280/
+- **aryan-005**: Morning routine for maximum gains
+  - IG: https://instagram.com/p/3846907720901624512/
+  - YT: https://youtube.com/shorts/qzMmyU7sJkE
 
 ## YouTube Channel
 
-- Subscribers: **0**
+- Subscribers: **5**
 - Total views: **0**
-- Videos: **0**
+- Videos: **2**
 
 ## Content Pipeline
 
 - Draft: 1
-- Approved: 13
-- Posted: 1
+- Approved: 11
+- Posted: 3
 
 ## Growth Signals
 
-- Net follows sent today: **72**
-- Engagement actions: **472**
-- Account age: **2 days**
+- Net follows sent today: **96**
+- Engagement actions: **781**
+- Account age: **6 days**
 - Warmup multiplier: **0.8x**
 
 ---
