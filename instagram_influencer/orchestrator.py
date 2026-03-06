@@ -507,8 +507,8 @@ def main() -> int:
         if not args.no_publish:
             if args.yt_publish_only:
                 # YouTube-only publishing — independent of Instagram
-                # Publish up to 2 Shorts per window (research: 2-3/day = 3.2x sub growth)
-                yt_published_ids = _yt_only_publish(cfg, posts, args.queue_file, max_posts=2)
+                # Publish 1 Short per window (conservative — shared quota across personas)
+                yt_published_ids = _yt_only_publish(cfg, posts, args.queue_file, max_posts=1)
 
                 # Post-publish reply blitz — reply to early comments within 60 min
                 # (critical algorithm signal for YT Shorts distribution)

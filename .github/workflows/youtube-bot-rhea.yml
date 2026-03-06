@@ -1,0 +1,169 @@
+name: YouTube Bot - Rhea
+
+on:
+  schedule:
+    # All cron times in UTC. IST = UTC + 5:30
+    # Staggered from Aryan's YT schedule (different minute offsets) to avoid overlap
+    # ~22 YT sessions/day — 06:40 to 22:25 IST, every ~45 min
+    # Alternates yt_engage (niche browsing) and yt_replies (respond to comments)
+    # 2 publish windows for 1-2 Shorts/day (shared quota with Aryan)
+    #
+    # IMPORTANT: Aryan + Rhea share the same Google Cloud project (10k units/day)
+    # Each upload = 1,650 units. Budget: ~4 uploads + engagement per day total.
+    - cron: '10 1 * * *'   # 06:40 IST — yt_engage (early morning)
+    - cron: '55 1 * * *'   # 07:25 IST — yt_replies
+    - cron: '40 2 * * *'   # 08:10 IST — yt_engage
+    - cron: '25 3 * * *'   # 08:55 IST — yt_replies
+    - cron: '10 4 * * *'   # 09:40 IST — yt_engage
+    - cron: '55 4 * * *'   # 10:25 IST — yt_replies
+    - cron: '40 5 * * *'   # 11:10 IST — yt_engage
+    - cron: '25 6 * * *'   # 11:55 IST — yt_replies
+    - cron: '10 7 * * *'   # 12:40 IST — yt_engage (lunch)
+    - cron: '55 7 * * *'   # 13:25 IST — YT PUBLISH + yt_replies (lunch publish)
+    - cron: '40 8 * * *'   # 14:10 IST — yt_engage
+    - cron: '25 9 * * *'   # 14:55 IST — yt_replies
+    - cron: '10 10 * * *'  # 15:40 IST — yt_engage
+    - cron: '55 10 * * *'  # 16:25 IST — yt_replies
+    - cron: '40 11 * * *'  # 17:10 IST — yt_engage
+    - cron: '25 12 * * *'  # 17:55 IST — yt_replies
+    - cron: '10 13 * * *'  # 18:40 IST — yt_engage (pre-prime)
+    - cron: '55 13 * * *'  # 19:25 IST — yt_replies
+    - cron: '40 14 * * *'  # 20:10 IST — YT PUBLISH + yt_engage (prime time publish)
+    - cron: '25 15 * * *'  # 20:55 IST — yt_replies
+    - cron: '10 16 * * *'  # 21:40 IST — yt_engage (evening)
+    - cron: '55 16 * * *'  # 22:25 IST — yt_replies (last pass)
+
+  workflow_dispatch:
+    inputs:
+      session:
+        description: 'YouTube session type'
+        required: true
+        default: 'yt_engage'
+        type: choice
+        options: [yt_engage, yt_replies, yt_full]
+      publish:
+        description: 'Also publish a YouTube Short?'
+        type: boolean
+        default: false
+
+# YT sessions queue behind each other — INDEPENDENT from Instagram workflow
+concurrency:
+  group: youtube-bot-rhea
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Create .env from the DOTENV_RHEA secret (needed for YouTube API keys)
+      - name: Create .env
+        run: |
+          echo "${{ secrets.DOTENV_RHEA }}" > instagram_influencer/.env
+          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=rhea" >> instagram_influencer/.env
+          echo "PERSONA=rhea" >> $GITHUB_ENV
+
+      # Determine which YT session to run based on the trigger
+      # Uses github.event.schedule (exact cron expression) instead of wall-clock time
+      # to avoid misrouting due to GitHub Actions cron delays (can be 10-20+ min)
+      - name: Determine session
+        id: session
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.session }}" >> $GITHUB_OUTPUT
+            if [ "${{ inputs.publish }}" = "true" ]; then
+              echo "yt_publish=true" >> $GITHUB_OUTPUT
+            else
+              echo "yt_publish=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            CRON="${{ github.event.schedule }}"
+            YT_PUB="false"
+            case "${CRON}" in
+              "10 1 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "55 1 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "40 2 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "25 3 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "10 4 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "55 4 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "40 5 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "25 6 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "10 7 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "55 7 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # lunch publish
+              "40 8 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "25 9 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "10 10 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "55 10 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "40 11 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "25 12 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "10 13 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "55 13 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "40 14 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # prime time publish
+              "25 15 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "10 16 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "55 16 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              *)             echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+            esac
+            echo "yt_publish=${YT_PUB}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Show session info
+        run: |
+          echo "Session: ${{ steps.session.outputs.type }}"
+          echo "YT Publish: ${{ steps.session.outputs.yt_publish }}"
+          echo "Trigger: ${{ github.event_name }}"
+
+      # Run YouTube engagement + optional YT-only publish
+      - name: Run YouTube bot
+        id: bot
+        continue-on-error: true
+        run: |
+          cd instagram_influencer
+          FLAGS="--session ${{ steps.session.outputs.type }} --no-generate"
+          if [ "${{ steps.session.outputs.yt_publish }}" = "true" ]; then
+            FLAGS="$FLAGS --yt-publish-only"
+          else
+            FLAGS="$FLAGS --no-publish"
+          fi
+          echo "Running: python orchestrator.py $FLAGS"
+          python orchestrator.py $FLAGS
+
+      - name: Check bot result
+        if: steps.bot.outcome == 'failure'
+        run: echo "::warning::YouTube bot run failed — check logs above"
+
+      # Commit updated state files back to the repo
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for f in \
+            instagram_influencer/data/rhea/engagement_log.json \
+            instagram_influencer/data/rhea/content_queue.json; do
+            [ -f "$f" ] && git add -f "$f" 2>/dev/null || true
+          done
+          git diff --staged --quiet || (
+            git commit -m "bot: rhea yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+            for attempt in 1 2 3; do
+              git pull --rebase origin main 2>/dev/null && git push && break
+              echo "Push attempt $attempt failed, retrying..."
+              sleep 2
+            done
+          )
