@@ -145,10 +145,10 @@ The Gemini API free tier does NOT include image generation, so images are genera
 
 | Format | % of Content | Why |
 |--------|-------------|-----|
-| **Reels/Shorts** (7-10 sec) | 35% | 55% of views from non-followers. THE discovery tool. |
-| **Hook-Photo Reels** (10-14 sec) | 10% | Text hooks interleaved with photos. Highest watch-through format. |
-| **Carousels** (5-6 slides) | 35% | 3x higher engagement, most saved+shared format. |
-| **Single images** | 20% | Aesthetic/editorial brand posts. |
+| **Hook-Photo Reels** (8-10 sec) | 60% | THE dominant format. Bold text hooks + 1-2 photos. Highest watch-through, easiest to produce. |
+| **Carousels** (5-6 slides) | 20% | High saves — used only when 5+ slides are genuinely needed. |
+| **Reels/Shorts** (7-10 sec) | 10% | Single-image Ken Burns reels for simple reveals. |
+| **Single images** | 10% | Aesthetic/editorial brand posts. |
 
 **Caption strategy (optimized for "sends" -- the #1 algorithm signal in 2026):**
 - Scroll-stopping hook in first 3 words (number, question, or bold statement)
@@ -161,21 +161,31 @@ The Gemini API free tier does NOT include image generation, so images are genera
 - Like counts hidden on all posts (reduces comparison anxiety, boosts engagement)
 - No cross-platform mentions in captions (IG and YT kept separate)
 
-### Hook-Photo Reels (2026 Viral Format)
+### Hook-Photo Reels (2026 Viral Format — 60% of All Content)
 
-The most viral reel format — text hook slides interleaved with 2-3 photos:
+The dominant content format — bold text hooks interleaved with 1-2 photos. Maximum impact, minimum production effort:
 
 ```
-[HOOK TEXT] → [Photo 1] → [BRIDGE TEXT] → [Photo 2] → [CTA TEXT]
+1-photo reel (PREFERRED): [HOOK TEXT] → [Photo] → [BRIDGE TEXT] → [CTA TEXT] = 8s
+2-photo reel:              [HOOK TEXT] → [Photo 1] → [BRIDGE] → [Photo 2] → [CTA] = 10s
 ```
 
 - **Dark background + bold white text** for hook/bridge slides (auto-generated via PIL)
-- **2 seconds per frame** — fast-paced, punchy, keeps viewers watching
-- **Snap-zoom effect** on every frame (including text) for visual punch
+- **2 seconds per frame** — fast-paced, punchy, matches 8-second attention span
+- **Snap-zoom effect** on every frame for visual punch
 - **Gold CTA text** on final frame drives saves and sends
-- 2 photos = 10s reel, 3 photos = 14s reel (algorithm sweet spot)
+- Only needs **1-2 photos** per post (vs 5-6 for carousels = much less production work)
 
-To create hook-photo reels: set `post_type: "reel"` + `reel_format: "hook_photo"` in content queue. Include `slides` (2-3 photo descriptions) and `video_text` (hook/bridge/CTA text). Place photos in `pending/{post-id}/1.jpg, 2.jpg, ...` (same as carousels).
+**Proven viral hook formulas (2026):**
+- Curiosity gap: "This feels illegal to know." / "I probably shouldn't share this, but..."
+- Contrarian claim: "Everyone's doing this wrong." / "Stop doing [X]. Do this instead."
+- Price shock: "This costs Rs [low number]. No, seriously."
+- POV: "POV: you walk in wearing this" / "If you've ever [relatable thing]..."
+- Forbidden knowledge: "Your [expert] won't tell you this."
+- Bold statement: "This will get me cancelled but..." / "I said what I said."
+- Specificity: "3 things. 15 seconds." / "Rs 800. 3 outfits."
+
+To create hook-photo reels: set `post_type: "reel"` + `reel_format: "hook_photo"` in content queue. Include `slides` (1-2 photo descriptions) and `video_text` (hook/bridge/CTA text). Place photos in `pending/{post-id}/1.jpg` (single) or `pending/{post-id}/1.jpg, 2.jpg` (double).
 
 ### Smart Unfollow (Non-Followers Only)
 

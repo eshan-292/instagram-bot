@@ -29,8 +29,8 @@
     "default_topic": "Why she lost interest — the real reason nobody tells you",
     "default_caption": "Read that again.\nHarsh? Yes. True? Also yes.\nComment if you agree. Share if someone needs to hear this.",
     "default_notes": "dark background, bold white text, cinematic feel",
-    "content_mix": "50% carousels, 30% reels, 20% single — focus on truth-bombs and debate content",
-    "content_mix_detail": "- 50% carousels: 'harsh truths about X' (5-8 slides), dating red flags series, 'things men/women won't say', psychology breakdowns — highest debate volume\n- 30% reels: text animation reveals of harsh truths, 'read this slowly' with dramatic music, voiceover truth-bombs\n- 20% single: one powerful statement on dark background, screenshot-worthy truth bombs",
+    "content_mix": "60% hook-photo reels, 15% carousels, 15% reels, 10% single — hook-photo reels are the PRIMARY format",
+    "content_mix_detail": "- 60% hook-photo reels (reel_format='hook_photo'): bold text hook slides interleaved with 2-3 cinematic photos. Best formats: 'She lost interest. Here's why.' + truth reveal photos, 'Red flag you're ignoring' + psychology photos, 'Read this slowly' + harsh truth photos, 'If they wanted to, they would' + reality check photos, 'What he actually means' + decode photos. ONLY needs 1-2 photos = easy to produce, gets maximum algorithm boost for text-heavy content\n- 15% carousels: 'harsh truths about X' (5-8 slides), dating red flags series, psychology breakdowns — use only when 5+ truth slides are needed\n- 15% reels: single-photo Ken Burns reels for dramatic truth reveals with music\n- 10% single: one powerful statement on dark background, screenshot-worthy truth bombs",
     "topic_examples": [
       "Why she lost interest — the real reason", "5 signs you're the backup option",
       "What 'I need space' actually means", "Why nice guys actually finish last",

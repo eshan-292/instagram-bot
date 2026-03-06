@@ -4,34 +4,27 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## mt-006 — CAROUSEL
+## mt-006 — REEL (HOOK-PHOTO)
 **Topic:** Red Flag Friday: Situationships
 **Caption:** Red Flag Friday: 7 signs you're stuck in a situationship. This will hurt, but he's not confused. Does avoiding labels benefit anyone but the commitment-phobe? Send this to someone who needs to escape the situationship limbo.
 
-**Place 6 images in:** `generated_images/pending/mt-006/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/mt-006/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ["Red Flag Friday: 7 signs you're stuck in", 'Think about it.', 'Send this.']
 
-**Slide 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: He only texts you late at night. Woman looking at phone with a single notification from a specific contact, dark room. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: He only texts you late at night. Woman looking at phone with a single notification from a specific contact, dark room. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You've never met his friends or family. Woman looking confused while seeing a group photo on social media where he's present without her. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: He avoids making future plans. Calendar showing a tentative event, then crossed out with a 'maybe' text. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: He calls you 'friend' or 'buddy' in front of others. Woman looking visibly uncomfortable as a man puts his arm around her like a friend. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: He gets jealous, but won't commit. Man with a stern face, looking suspiciously at her phone, but refusing to label their relationship. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 6 of a carousel post.) Scene: Slide 6: Your conversations lack depth beyond surface level. Couple sitting on a couch, both scrolling on their phones, no eye contact. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You've never met his friends or family. Woman looking confused while seeing a group photo on social media where he's present without her. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## mt-007 — REEL
+## mt-007 — REEL (HOOK-PHOTO)
 **Topic:** What 'I need space' actually means
 **Caption:** I probably shouldn't share this, but 'I need space' means 3 things. It's never about the actual space. Is it ever about 'space' or always about 'you'? Screenshot this before this gets buried.
 
-**Place image at:** `generated_images/pending/mt-007.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/mt-007/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['"I need space" means...', "It's rarely about actual space.", 'Swipe to reveal the 3 truths.']
 
-**Prompt:**
-> Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. Scene: What 'I need space' actually means. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: dual_format:reel | Man with a knowing, slightly cynical smirk, looking directly into camera. Dark background, sharp focus. Mood: authoritative, revealing..
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: What 'I need space' actually means - dual_format:reel | Man with a knowing, slightly cynical smirk, looking directly into camera. Dark background, sharp focus. Mood: authoritative, revealing. | genera Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -64,50 +57,40 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## mt-010 — CAROUSEL
+## mt-010 — REEL (HOOK-PHOTO)
 **Topic:** 5 signs you're the backup option
 **Caption:** This will hurt: 5 undeniable signs you're just their backup option. They keep you on the hook for emergencies. Are you hoping for more, or are you actively settling for less? Send this to someone who needs to stop being a second choice.
 
-**Place 5 images in:** `generated_images/pending/mt-010/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/mt-010/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ["This will hurt: 5 undeniable signs you're just", 'Think about it.', 'Send this.']
 
-**Slide 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: They only contact you when lonely or bored. Close-up of a text message screen showing an apology for a last-minute cancellation, but suggesting meeting later tonight. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: They only contact you when lonely or bored. Close-up of a text message screen showing an apology for a last-minute cancellation, but suggesting meeting later tonight. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You're never their priority for important events. A person sitting alone at a restaurant table, looking at their phone, while couples dine happily in the background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: They avoid defining the relationship. Two hands clasped, but one hand looks reluctant or less engaged than the other, pulling away slightly. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: Their effort is inconsistent and minimal. A calendar with one specific day circled, then crossed out with 'maybe' written over it, indicating flakiness. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: You feel constantly anxious about their interest. A lone figure walking away from a group of friends laughing together, looking isolated and worried. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You're never their priority for important events. A person sitting alone at a restaurant table, looking at their phone, while couples dine happily in the background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## mt-011 — REEL
+## mt-011 — REEL (HOOK-PHOTO)
 **Topic:** The psychology of why you attract toxic partners
 **Caption:** The truth most people ignore: You attract toxic partners for 3 psychological reasons. It's not bad luck; it's a pattern. Are you drawn to what's familiar, even if it's destructive? Tag the friend who needs this hard truth.
 
-**Place image at:** `generated_images/pending/mt-011.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/mt-011/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Why toxic partners find you.', "It's not bad luck.", 'Tag the one who needs to know.']
 
-**Prompt:**
-> Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. Scene: The psychology of why you attract toxic partners. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Figure standing in front of a fractured mirror, reflecting distorted images. Mood: introspective, slightly unsettling..
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: The psychology of why you attract toxic partners - Figure standing in front of a fractured mirror, reflecting distorted images. Mood: introspective, slightly unsettling. | generated_by=gemini:gemini-2 Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## mt-012 — CAROUSEL
+## mt-012 — REEL (HOOK-PHOTO)
 **Topic:** Why she lost interest — the real reason
 **Caption:** Read that again: She didn't lose interest 'randomly.' Here are 5 real reasons. It wasn't a mystery; you just weren't paying attention. Did she change, or did you stop paying attention? Share this with the guy who's confused why she ghosted.
 
-**Place 5 images in:** `generated_images/pending/mt-012/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/mt-012/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ["Read that again: She didn't lose interest 'randomly.'", 'Think about it.', 'Send this.']
 
-**Slide 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: Lack of emotional effort. A man looking distracted by his phone while a woman tries to talk to him over dinner. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: Lack of emotional effort. A man looking distracted by his phone while a woman tries to talk to him over dinner. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You stopped challenging her. A woman looking visibly bored during a conversation, her eyes glazed over, wanting intellectual stimulation. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: Insecurity became unattractive. A man making a self-deprecating joke, while the woman looks uncomfortable and loses respect. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: You became too predictable. A person checking their watch impatiently during a date, looking around the room, signaling boredom. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: Disrespect or complacency. A couple arguing in a public place, faces stressed and unhappy, showing a breakdown in respect. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You stopped challenging her. A woman looking visibly bored during a conversation, her eyes glazed over, wanting intellectual stimulation. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -122,32 +105,27 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## mt-014 — CAROUSEL
+## mt-014 — REEL (HOOK-PHOTO)
 **Topic:** Things high-value men never do
 **Caption:** 5 things a high-value man would NEVER do. Are you making these 5 mistakes? Stop sabotaging your own appeal. Are you building respect, or just seeking attention? Tag the friend who needs to level up his dating game.
 
-**Place 5 images in:** `generated_images/pending/mt-014/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/mt-014/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['5 things a high-value man would NEVER do.', 'Think about it.', 'Send this.']
 
-**Slide 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: Complain about his ex. A man complaining about his ex to a new date, looking bitter and defensive. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: Complain about his ex. A man complaining about his ex to a new date, looking bitter and defensive. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: Seek constant external validation. A man boasting excessively about his possessions or achievements, seeking external validation from a bored audience. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: Avoid difficult conversations. A man avoiding eye contact, looking shifty or uncomfortable during a serious relationship talk. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: Neglect his personal growth. A man slumped on a couch, surrounded by junk food and video games, ignoring personal responsibilities. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: Play games or manipulate. A man with a sly smirk, looking at his phone, plotting a manipulative text message strategy. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: Seek constant external validation. A man boasting excessively about his possessions or achievements, seeking external validation from a bored audience. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## mt-015 — REEL
+## mt-015 — REEL (HOOK-PHOTO)
 **Topic:** What 'I'm not ready' really means
 **Caption:** Everything you know about 'I'm not ready' is wrong. It means 1 thing. It's not about timing; it's about priority. Is it an explanation, or just a polite rejection? Your bestie needs to see this.
 
-**Place image at:** `generated_images/pending/mt-015.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/mt-015/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['"I\'m not ready" means...', "It's never about timing.", 'Your bestie needs this.']
 
-**Prompt:**
-> Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. Scene: What 'I'm not ready' really means. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: dual_format:reel | Woman looking directly at the camera with a clear, assertive expression. Background slightly blurred, emphasizing her clarity. Mood: direct, unapologetic..
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: What 'I'm not ready' really means - dual_format:reel | Woman looking directly at the camera with a clear, assertive expression. Background slightly blurred, emphasizing her clarity. Mood: direct, unap Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -182,50 +160,40 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## mt-018 — REEL
+## mt-018 — REEL (HOOK-PHOTO)
 **Topic:** Why being alone beats being in the wrong relationship
 **Caption:** If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.
 
-**Place image at:** `generated_images/pending/mt-018.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/mt-018/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Alone > Wrong Partner.', '5 compromises you tolerate.', 'Send to the friend who knows.']
 
-**Prompt:**
-> Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. Scene: Why being alone beats being in the wrong relationship. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: dual_format:reel | Person standing confidently alone on a mountain peak, looking out at a vast landscape. Mood: empowered, serene..
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Why being alone beats being in the wrong relationship - dual_format:reel | Person standing confidently alone on a mountain peak, looking out at a vast landscape. Mood: empowered, serene. | generated_b Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## mt-019 — CAROUSEL
+## mt-019 — REEL (HOOK-PHOTO)
 **Topic:** The truth about modern dating apps
 **Caption:** Harsh truth: Modern dating apps are engineered for 3 painful outcomes you ignore. They thrive on endless scrolling, not connection. Are you using the app, or is the app using you? Tag the friend who's still swiping for love.
 
-**Place 5 images in:** `generated_images/pending/mt-019/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/mt-019/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Harsh truth: Modern dating apps are engineered for', 'Think about it.', 'Send this.']
 
-**Slide 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: Endless shallow connections. A person looking overwhelmed by an endless stream of profiles on a dating app. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: Endless shallow connections. A person looking overwhelmed by an endless stream of profiles on a dating app. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: Designed for addiction, not commitment. A phone screen showing a chat with no replies, or very generic, unengaging messages, fostering a cycle of disappointment. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: Commodification of people. A person swiping left and right rapidly, treating profiles like products in an online store. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: Exaggerated self-presentation. Close-up of a person taking multiple selfies, heavily filtered, attempting to create an 'ideal' online persona. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: Superficial matching based on appearance. A split screen, one side showing a user's highly edited profile photo, the other showing a bewildered face after meeting in person. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: Designed for addiction, not commitment. A phone screen showing a chat with no replies, or very generic, unengaging messages, fostering a cycle of disappointment. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## mt-020 — CAROUSEL
+## mt-020 — REEL (HOOK-PHOTO)
 **Topic:** Why your ex moved on faster than you
 **Caption:** Nobody wants to hear this, but your ex moved on faster for 4 brutal reasons. It wasn't about finding someone 'better' instantly. Are you holding onto the past, or learning from it? Send this to someone who's still wondering why.
 
-**Place 5 images in:** `generated_images/pending/mt-020/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/mt-020/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Nobody wants to hear this, but your ex', 'Think about it.', 'Send this.']
 
-**Slide 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: They grieved during the relationship. A person looking inward, deep in thought, processing emotions slowly while still in a relationship. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: They grieved during the relationship. A person looking inward, deep in thought, processing emotions slowly while still in a relationship. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: Their attachment style allows for quicker detachment. Two paths diverging, one person already far down a new path while the other is still at the split. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: They had a backup plan. A person secretly texting someone new while their current partner is distracted. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: You were never their priority. A person looking shocked and hurt while seeing a photo of their ex with a new partner on social media, realizing their ex had moved on effortlessly. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: They were emotionally checked out long ago. A couple sitting together, but one person is completely disengaged, eyes elsewhere, for months leading up to the breakup. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: Their attachment style allows for quicker detachment. Two paths diverging, one person already far down a new path while the other is still at the split. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -247,14 +215,14 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## mt-022 — REEL
+## mt-022 — REEL (HOOK-PHOTO)
 **Topic:** Why nice guys actually finish last
 **Caption:** Nobody wants to hear this: 'Nice Guys' finish last for 5 reasons. It's not about being kind, it's about being effective. Is 'niceness' truly attractive, or just a lack of boundaries? Tag the friend who still thinks being 'nice' is enough.
 
-**Place image at:** `generated_images/pending/mt-022.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/mt-022/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ["Nobody wants to hear this: 'Nice Guys' finish", 'Think about it.', 'Send this.']
 
-**Prompt:**
-> Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. Scene: Why nice guys actually finish last. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: dual_format:carousel->reel | Man in a slightly rumpled suit, looking dejected, sitting alone on a park bench while others pass by in pairs. Mood: somber, reflective..
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Why nice guys actually finish last - dual_format:carousel->reel | Man in a slightly rumpled suit, looking dejected, sitting alone on a park bench while others pass by in pairs. Mood: somber, reflectiv Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -276,20 +244,15 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## mt-024 — CAROUSEL
+## mt-024 — REEL (HOOK-PHOTO)
 **Topic:** Why being alone beats being in the wrong relationship
 **Caption:** If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.
 
-**Place 5 images in:** `generated_images/pending/mt-024/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/mt-024/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Alone > Wrong Partner.', '5 compromises you tolerate.', 'Send to the friend who knows.']
 
-**Slide 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Hook slide: If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Hook slide: If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Key point: Why being alone beats being in the wrong Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Detail or example Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Supporting visual Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: CTA slide: If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Key point: Why being alone beats being in the wrong Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---

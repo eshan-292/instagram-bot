@@ -29,8 +29,8 @@
     "default_topic": "Mumbai street-luxe confidence fit",
     "default_caption": "My standards are not seasonal.",
     "default_notes": "full-body editorial frame",
-    "content_mix": "40% carousels, 40% reels, 20% single -- focus on fashion/styling",
-    "content_mix_detail": "- 40% carousels: '3 looks', 'one piece 5 ways', styling tips, before/after, budget fits, 'what I ordered vs what I got', wardrobe hacks -- carousels get highest saves+sends\n- 40% reels: outfit transitions, GRWM for Indian occasions (haldi, sangeet, party), before/after thrift transformations, 'style this with me', POV fashion moments\n- 20% single: aesthetic/editorial, minimal-caption power shots, quote overlays",
+    "content_mix": "60% hook-photo reels, 20% carousels, 10% reels, 10% single — hook-photo reels are the PRIMARY format",
+    "content_mix_detail": "- 60% hook-photo reels (reel_format='hook_photo'): bold text hook slides interleaved with 2-3 outfit photos. Best formats: 'This outfit costs Rs X' + outfit reveal, 'POV: your bestie styled you' + looks, 'Stop buying basics' + what to buy instead, 'Mumbai street style' + 3 looks, 'One piece 5 ways' + styled photos. ONLY needs 1-2 photos = easy to produce, gets maximum algorithm boost\n- 20% carousels: '3 looks', 'one piece 5 ways', styling tips, before/after — use only when 5+ slides are genuinely needed\n- 10% reels: single-photo Ken Burns reels for simple outfit reveals, transitions\n- 10% single: aesthetic/editorial power shots, quote overlays",
     "topic_examples": [
       "Budget styling (Rs 1500-2000 Indian rupees)", "GRWM for Indian events",
       "one piece N ways", "ethnic+modern fusion",

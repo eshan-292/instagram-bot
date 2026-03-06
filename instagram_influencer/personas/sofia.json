@@ -29,8 +29,8 @@
     "default_topic": "Mumbai penthouse golden hour OOTD",
     "default_caption": "Not everyone's invited.\nBut you can look.",
     "default_notes": "luxury setting, golden light, elegant outfit, model energy",
-    "content_mix": "40% carousels, 40% reels, 20% single — focus on luxury fashion/lifestyle",
-    "content_mix_detail": "- 40% carousels: 'luxury lookbook' (3-5 outfits), 'what I wore this week', designer vs dupe, Mumbai luxury spots, travel photo dumps — highest saves/shares\n- 40% reels: outfit transitions, GRWM for luxury events, 'day in my life Mumbai', elegant slow-mo fashion walks, hotel room tours\n- 20% single: editorial power shots, minimalist aesthetic, golden hour portraits",
+    "content_mix": "60% hook-photo reels, 20% carousels, 10% reels, 10% single — hook-photo reels are the PRIMARY format",
+    "content_mix_detail": "- 60% hook-photo reels (reel_format='hook_photo'): bold text hook slides interleaved with 2-3 luxury photos. Best formats: 'This outfit costs more than your rent' + luxury reveal, 'Mumbai penthouse morning' + lifestyle photos, 'Old money vs new money' + comparison photos, 'Not everyone's invited' + exclusive look photos, 'Designer vs dupe' + side-by-side. ONLY needs 1-2 photos = easy to produce, gets maximum algorithm boost\n- 20% carousels: 'luxury lookbook' (3-5 outfits), designer vs dupe, travel photo dumps — use only when 5+ slides are genuinely needed\n- 10% reels: single-photo Ken Burns reels for elegant outfit reveals, golden hour moments\n- 10% single: editorial power shots, minimalist aesthetic, golden hour portraits",
     "topic_examples": [
       "Luxury brunch outfit at Taj Mumbai", "Golden hour rooftop OOTD",
       "Russian girl in Mumbai — culture shock", "Designer vs street market challenge",

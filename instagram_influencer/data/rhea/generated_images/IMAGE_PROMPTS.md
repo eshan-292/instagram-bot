@@ -4,54 +4,47 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## rhea-004 — REEL
+## rhea-004 — REEL (HOOK-PHOTO)
 **Topic:** Morning gym routine — 5 AM club no excuses
 **Caption:** 5 AM. Dark outside. Gym lights on.
 This is where it starts.
 What time do you train? Comment below.
 Send to someone who keeps saying 'tomorrow'.
 
-**Place image at:** `generated_images/pending/rhea-004.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/rhea-004/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['5 AM. Dark outside.', 'This is where it starts.', 'Send to someone who needs this.']
 
-**Prompt:**
-> Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. Scene: Morning gym routine — 5 AM club no excuses. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: early morning gym vibes, low lighting, focused energy.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea walking into a dimly lit gym at 5 AM, gym lights glowing, early morning focused energy — '5 AM. Dark outside. Gym lights on.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-005 — REEL
+## rhea-005 — REEL (HOOK-PHOTO)
 **Topic:** Upper body workout for toned arms — complete routine
 **Caption:** Upper body day.
 Because strong arms never go out of style.
 Save this for your next arm day.
 Tag someone who skips upper body.
 
-**Place image at:** `generated_images/pending/rhea-005.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/rhea-005/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Upper body day.', 'Strong arms never go out of style.', 'Save this for arm day.']
 
-**Prompt:**
-> Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. Scene: Upper body workout for toned arms — complete routine. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: gym setting, focus on arms and shoulders, pump visible.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea doing dumbbell shoulder press in gym, arms and shoulders pumped, focused expression — 'Upper body day. Strong arms never go out of style.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-006 — CAROUSEL
+## rhea-006 — REEL (HOOK-PHOTO)
 **Topic:** Workout Wednesday: Complete ab workout — no crunches
 **Caption:** Crunches are lazy. Your abs deserve better.
 6 movements. Zero crunches. Fire in 12 minutes.
 Drop a 🔥 if you survived this.
 Send to your workout partner who still does 100 crunches.
 
-**Place 6 images in:** `generated_images/pending/rhea-006/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/rhea-006/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Zero crunches.', '6 movements. 12 minutes.', 'Your abs will hate you.']
 
-**Slide 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Hook: Rhea on gym mat, arms crossed, 'Ab Day. No crunches allowed.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea on gym mat, arms crossed, confident stance — 'Ab Day. No crunches allowed.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Exercise 1: Dead bugs — slow and controlled, 12 reps Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 3 of a carousel post.) Scene: Exercise 2: Hollow body hold — 30 seconds Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 4 of a carousel post.) Scene: Exercise 3: Cable woodchops — 10 each side Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 5 of a carousel post.) Scene: Exercise 4: Ab wheel rollouts — 8 reps Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 6 of a carousel post.) Scene: Exercise 5: Hanging leg raises — 10 reps Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Photo 2: Rhea demonstrating dead bugs with slow controlled form on gym mat — '6 movements. Zero crunches. Fire in 12 minutes.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -78,151 +71,125 @@ Send to your vegetarian friend who says 'protein nahi milta'.
 
 ---
 
-## rhea-008 — CAROUSEL
+## rhea-008 — REEL (HOOK-PHOTO)
 **Topic:** Form Check Friday: Squats — 4 mistakes every girl makes
 **Caption:** Your squat is broken. Here's why.
 4 mistakes I see every single day. Fix them now.
 Which mistake are you guilty of? Be honest.
 Tag the girl who needs this form check.
 
-**Place 6 images in:** `generated_images/pending/rhea-008/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/rhea-008/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Your squat is broken.', '4 mistakes. Fix them now.', 'Tag someone who needs this.']
 
-**Slide 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Hook: Rhea side-on at squat rack, 'Your squat is lying to you.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea side-on at squat rack, questioning expression — 'Your squat is lying to you.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Mistake 1: Knees caving in — wrong vs right comparison Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 3 of a carousel post.) Scene: Mistake 2: Rising on toes — heel drive correction Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 4 of a carousel post.) Scene: Mistake 3: Not hitting depth — hip crease below knee Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 5 of a carousel post.) Scene: Mistake 4: Butt wink at bottom — mobility fix Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 6 of a carousel post.) Scene: Summary: Quick checklist for the perfect squat Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Photo 2: Side-by-side comparison showing knees caving in (wrong, red X) vs proper knee tracking (right, green check) — 'Fix these 4 mistakes now.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-009 — REEL
+## rhea-009 — REEL (HOOK-PHOTO)
 **Topic:** 5 AM Club: Dark morning chest and back routine
 **Caption:** 4:50 AM alarm. Nobody is watching. That's the point.
 Chest and back. 45 minutes. No phone between sets.
 Could you wake up at 5 for 30 days straight?
 Send to someone who needs this push.
 
-**Place image at:** `generated_images/pending/rhea-009.jpg`
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/rhea-009/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['4:50 AM.', 'Chest and back. Nobody watching.', 'Send to someone who needs this.']
 
-**Prompt:**
-> Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. Scene: 5 AM Club: Dark morning chest and back routine. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: 5 AM Club series, dim gym lighting, moody atmosphere, focused training shots.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Dark gym, single overhead light, Rhea walking in at 4:50 AM — '4:50 AM. Nobody is watching.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Photo 2: Rhea doing barbell bench press in dim gym lighting, focused intensity — 'Chest and back. 45 minutes. No phone.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-010 — REEL
+## rhea-010 — REEL (HOOK-PHOTO)
 **Topic:** Hot take: HIIT is overrated — lift heavy instead
 **Caption:** Unpopular opinion: HIIT is overrated and you know it.
 Strength training burns more fat long-term. Science says so.
 Agree or disagree? Fight me in the comments.
 Send to your friend who only does HIIT.
 
-**Place image at:** `generated_images/pending/rhea-010.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/rhea-010/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['HIIT is overrated.', 'Lift heavy instead.', 'Fight me.']
 
-**Prompt:**
-> Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. Scene: Hot take: HIIT is overrated — lift heavy instead. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Controversy post, bold text overlays, Rhea deadlifting heavy, confident energy.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea deadlifting heavy with confident energy, bold expression, gym setting — 'HIIT is overrated. Lift heavy instead.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-011 — CAROUSEL
+## rhea-011 — REEL (HOOK-PHOTO)
 **Topic:** 30-day challenge that actually changed my body
 **Caption:** 30 days. One rule: show up every single day.
 No skipping. No negotiating. No 'I'll start Monday.'
 Who's in? Comment 'IN' and I'll check on you.
 Save this and start tomorrow.
 
-**Place 6 images in:** `generated_images/pending/rhea-011/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/rhea-011/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['30 days. One rule.', 'Show up every single day.', "Who's in?"]
 
-**Slide 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Hook: Rhea standing in front of a 30-day calendar, 'One rule. Show up.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea standing in front of a 30-day calendar on whiteboard — 'One rule. Show up.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Week 1: Foundation — 3 full body workouts, 10K steps daily Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 3 of a carousel post.) Scene: Week 2: Push harder — 4 workouts, add progressive overload Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 4 of a carousel post.) Scene: Week 3: Mental test — 5 AM sessions, no excuses Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 5 of a carousel post.) Scene: Week 4: Final push — intensity week, personal records Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 6 of a carousel post.) Scene: Results: What changed in 30 days — strength, habit, mindset Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Photo 2: Week-by-week progression breakdown, foundation to final push — '30 days. No skipping. No negotiating.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-012 — CAROUSEL
+## rhea-012 — REEL (HOOK-PHOTO)
 **Topic:** Leg day that builds real strength — not just aesthetics
 **Caption:** Pretty legs are useless if they can't carry you.
 This leg day builds power. Not just shape.
 What's your squat PR? Drop it below.
 Send to the girl who only does leg press.
 
-**Place 6 images in:** `generated_images/pending/rhea-012/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/rhea-012/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Pretty legs are useless.', 'Build power. Not just shape.', "What's your squat PR?"]
 
-**Slide 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Hook: Rhea under barbell, chalk on hands, 'Leg day. The real kind.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea under barbell, chalk on hands, intense focus — 'Leg day. The real kind.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Exercise 1: Back squats — 5x5 heavy Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 3 of a carousel post.) Scene: Exercise 2: Walking lunges — 4x12 each leg, dumbbells Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 4 of a carousel post.) Scene: Exercise 3: Romanian deadlifts — 4x8 Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 5 of a carousel post.) Scene: Exercise 4: Leg press — 3x15 slow negatives Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 6 of a carousel post.) Scene: Exercise 5: Nordic hamstring curls — 3x6 Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Photo 2: Rhea doing heavy back squats at power rack, perfect depth — 'Build power. Not just shape.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-013 — REEL
+## rhea-013 — REEL (HOOK-PHOTO)
 **Topic:** Hot take: Booty bands don't build glutes
 **Caption:** Stop relying on booty bands. They're a warm-up, not a workout.
 Hip thrusts, squats, RDLs. That's what builds glutes.
 Am I wrong? Tell me why.
 Send to your friend with 5 booty bands and no squat rack.
 
-**Place image at:** `generated_images/pending/rhea-013.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/rhea-013/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Booty bands are a warm-up.', 'Not a workout.', 'Squat rack > resistance band.']
 
-**Prompt:**
-> Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. Scene: Hot take: Booty bands don't build glutes. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Controversy post, comparison shots band vs barbell, bold opinion energy.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea comparing booty band exercise to heavy barbell hip thrusts side by side, bold confident expression — 'Booty bands are a warm-up. Not a workout.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-014 — CAROUSEL
+## rhea-014 — REEL (HOOK-PHOTO)
 **Topic:** How I eat 130g protein as a vegetarian — full breakdown
 **Caption:** Vegetarian. 130g protein. Every single day.
 No chicken required. Just smart food choices.
 What's your biggest struggle with protein? Comment.
 Save this for your next grocery run.
 
-**Place 6 images in:** `generated_images/pending/rhea-014/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/rhea-014/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Vegetarian. 130g protein.', 'Every single day.', 'Save for your grocery run.']
 
-**Slide 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Hook: Rhea in kitchen, 'Vegetarian. 130g protein. No excuses.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea in kitchen surrounded by vegetarian protein sources with labels — 'Vegetarian. 130g protein. No excuses.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Source 1: Paneer — 200g = 36g protein, versatile in any meal Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 3 of a carousel post.) Scene: Source 2: Soya chunks — 50g dry = 26g protein, cheapest source Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 4 of a carousel post.) Scene: Source 3: Greek yogurt — 200g = 20g protein, snack or dessert Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 5 of a carousel post.) Scene: Source 4: Dal + rice combo — 1 bowl = 18g protein, complete amino acids Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 6 of a carousel post.) Scene: Source 5: Chana, rajma, moong sprouts — protein stacking guide Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Photo 2: Close-up of paneer, soya chunks, and Greek yogurt with protein per serving labels — 'No chicken required. Just smart food choices.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-015 — REEL
+## rhea-015 — REEL (HOOK-PHOTO)
 **Topic:** Home workout — zero equipment, 20 minutes, no excuses
 **Caption:** No gym? No equipment? No excuse.
 20 minutes. Your body weight. Sweat guaranteed.
 Tag someone who always says 'I don't have a gym membership'.
 Save this for travel days.
 
-**Place image at:** `generated_images/pending/rhea-015.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/rhea-015/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['No gym. No equipment.', '20 minutes. Your body.', 'No excuses.']
 
-**Prompt:**
-> Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. Scene: Home workout — zero equipment, 20 minutes, no excuses. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Home workout, living room setting, bodyweight only, minimal space needed.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea in living room doing bodyweight exercises, no equipment in sight, minimal space — 'No gym? No equipment? No excuse. 20 minutes.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -240,40 +207,33 @@ Send to your friend who buys gym clothes but never goes to the gym.
 
 ---
 
-## rhea-017 — CAROUSEL
+## rhea-017 — REEL (HOOK-PHOTO)
 **Topic:** Recovery routine most people skip — complete stretching guide
 **Caption:** You train hard but never stretch. It shows.
 15 minutes post-workout. Your joints will thank you in 10 years.
 How many of you actually stretch? Be honest.
 Save this and do it after your next session.
 
-**Place 6 images in:** `generated_images/pending/rhea-017/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/rhea-017/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['You never stretch.', 'It shows.', '15 minutes. Save your joints.']
 
-**Slide 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Hook: Rhea foam rolling, 'You skip this. Don't.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea foam rolling in calm gym setting, stretch band nearby — 'You skip this. Don't.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Stretch 1: Hip flexor stretch — 90/90 position, 60 seconds each Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 3 of a carousel post.) Scene: Stretch 2: Pigeon pose — opens hips, 45 seconds each Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 4 of a carousel post.) Scene: Stretch 3: Thoracic spine rotation — 10 each side Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 5 of a carousel post.) Scene: Stretch 4: Foam roll quads and IT band — 2 minutes Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 6 of a carousel post.) Scene: Stretch 5: Child's pose + cat-cow flow — 2 minutes Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 2 of a carousel post.) Scene: Photo 2: Rhea in hip flexor stretch, 90/90 position, focused recovery — '15 minutes post-workout. Your joints will thank you.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## rhea-018 — REEL
+## rhea-018 — REEL (HOOK-PHOTO)
 **Topic:** Hot take: You don't need a personal trainer
 **Caption:** Unpopular opinion: Most of you don't need a trainer.
 You need discipline, YouTube, and 6 months of consistency.
 Agree or disagree? Trainers, come fight me.
 Send to someone paying 5K/month for a trainer they don't listen to.
 
-**Place image at:** `generated_images/pending/rhea-018.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/rhea-018/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ["You don't need a trainer.", 'You need discipline.', '6 months. Consistency. Done.']
 
-**Prompt:**
-> Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. Scene: Hot take: You don't need a personal trainer. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Controversy post, solo training shots, bold text overlays, debate-starter.
+**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea training alone in gym with focused expression, no trainer in sight, confident solo energy — 'You don't need a trainer. You need discipline.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 

@@ -29,8 +29,8 @@
     "default_topic": "Full body workout that builds the body you dream about",
     "default_caption": "They asked what changed.\nI said discipline did.\nNo shortcuts. No excuses.",
     "default_notes": "gym setting, athletic wear, strong confident energy, natural lighting",
-    "content_mix": "40% carousels, 45% reels, 15% single — focus on workout/transformation content",
-    "content_mix_detail": "- 40% carousels: workout routines (5-8 exercises), meal prep guides, 'my weekly split', transformation timelines, gym bag essentials, 'exercises you're doing wrong' — highest saves\n- 45% reels: workout demonstrations, form checks, gym POV, day-in-the-life, transformation reveals, motivational moments with music\n- 15% single: physique check, motivational quotes over gym shots, aesthetic minimal fitness shots",
+    "content_mix": "60% hook-photo reels, 20% carousels, 10% reels, 10% single — hook-photo reels are the PRIMARY format",
+    "content_mix_detail": "- 60% hook-photo reels (reel_format='hook_photo'): bold text hook slides interleaved with 2-3 fitness photos. Best formats: 'HIIT is overrated' + what to do instead photos, '5 AM. No alarm needed.' + early morning gym photos, 'This workout changed my body' + exercise demo photos, 'Meal Prep Monday' + food photos with macros, 'Girls don't need separate plans' + training photos. ONLY needs 1-2 photos = easy to produce, gets maximum algorithm boost\n- 20% carousels: workout routines (5-8 exercises), meal prep guides, 'exercises you're doing wrong' — use only when 5+ slides are genuinely needed\n- 10% reels: single-photo Ken Burns reels for workout demos, motivational moments\n- 10% single: physique check, motivational quotes over gym shots",
     "topic_examples": [
       "Full body workout — no equipment needed", "Glute workout that actually works",
       "My weekly gym split explained", "High protein Indian meals for women",

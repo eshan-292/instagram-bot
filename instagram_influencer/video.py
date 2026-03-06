@@ -556,7 +556,7 @@ def create_hook_photo_reel(
 
     Returns path to the generated MP4 file.
     """
-    if not text_lines or len(text_lines) < 2 or len(photo_paths) < 2:
+    if not text_lines or len(text_lines) < 2 or len(photo_paths) < 1:
         # Fall back to regular montage if not enough content
         return images_to_montage(
             photo_paths, output_path, width, height,
@@ -662,7 +662,7 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
             carousel_images = post.get("carousel_images") or []
             valid_hook = (
                 isinstance(carousel_images, list)
-                and len(carousel_images) >= 2
+                and len(carousel_images) >= 1
                 and all(os.path.exists(str(p)) for p in carousel_images)
             )
             if valid_hook and text_lines:

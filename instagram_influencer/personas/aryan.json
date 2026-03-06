@@ -29,8 +29,8 @@
     "default_topic": "No-equipment home workout transformation",
     "default_caption": "Your excuses don't burn calories.",
     "default_notes": "gym or outdoor setting, athletic wear, good lighting on physique",
-    "content_mix": "40% carousels, 40% reels, 20% single -- focus on fitness/transformation",
-    "content_mix_detail": "- 40% carousels: 'Top 5 exercises for X', meal prep guides, transformation timelines, workout splits, 'gym bag essentials', before/after, supplement guides -- carousels get highest saves+sends\n- 40% reels: workout demonstrations, form checks, gym POV, day-in-the-life, meal prep speed runs, transformation reveals, motivational moments\n- 20% single: physique check, motivational quotes over gym shots, aesthetic gym shots",
+    "content_mix": "60% hook-photo reels, 20% carousels, 10% reels, 10% single — hook-photo reels are the PRIMARY format",
+    "content_mix_detail": "- 60% hook-photo reels (reel_format='hook_photo'): bold text hook slides interleaved with 2-3 fitness photos. Best formats: 'Stop doing crunches for abs' + correct exercise photos, '3 exercises. 15 minutes.' + workout demo photos, 'Your gym bro is lying to you' + truth reveal, 'This transformation took 6 months' + before/after, 'Protein-rich Indian meals' + food photos. ONLY needs 1-2 photos = easy to produce, gets maximum algorithm boost\n- 20% carousels: 'Top 5 exercises for X', meal prep guides, transformation timelines — use only when 5+ slides are genuinely needed\n- 10% reels: single-photo Ken Burns reels for physique reveals, motivational moments\n- 10% single: physique check, motivational quotes over gym shots",
     "topic_examples": [
       "Home workout with no equipment (bodyweight only)", "Full day of eating on a budget",
       "5 exercises you're doing WRONG", "Beginner gym mistakes to avoid",

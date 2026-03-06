@@ -25,348 +25,329 @@ Send this to your friend. Compare scores.
 
 ---
 
-## cw-007 — REEL
+## cw-007 — REEL (HOOK-PHOTO)
 **Topic:** Life choice: Rich vs. Friends
 **Caption:** 1 crucial decision.
 Your true priority?
 What defines a good life?
 Send this to see if your friend picks the same.
 
-**Place image at:** `generated_images/pending/cw-007.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/cw-007/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Rich and alone?', 'Or broke with friends?', 'Send to your real ones.']
 
-**Prompt:**
-> Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Life choice: Rich vs. Friends. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vibrant group of diverse friends laughing, eating street food or at a casual gathering (dynamic, close-up shots). Quick cuts between the two contrasting scenes for the reel..
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Life choice: Rich vs. Friends - Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vib Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## cw-008 — CAROUSEL
+## cw-008 — REEL (HOOK-PHOTO)
 **Topic:** Lifestyle choice: City vs. Mountains
 **Caption:** Pick 1 life.
 Where would you thrive?
 Concrete jungle or serene peaks?
 Tag a friend who lives there.
 
-**Place 6 images in:** `generated_images/pending/cw-008/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/cw-008/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['City life?', 'Or mountain calm?', 'Choose your vibe.']
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Slide 1: 'City Nights.' (Visual: Dynamic shot of a bustling city street at night, neon signs, taxis, energetic crowd motion blur) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Slide 1: 'City Nights.' (Visual: Dynamic shot of a bustling city street at night, neon signs, taxis, energetic crowd motion blur) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Slide 2: 'Mountain Stars.' (Visual: A wide shot of a clear night sky over a rugged mountain landscape, thousands of stars visible, maybe a distant campfire glow) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Slide 3: 'Rush Hour Transit.' (Visual: A crowded subway car interior or a traffic-jammed urban highway, close-up of faces showing slight stress) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Slide 4: 'Forest Walk Commute.' (Visual: A tranquil person walking alone on a sun-dappled forest path, dappled light, sense of peace) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Slide 5: 'Corner Cafe Vibes.' (Visual: A stylish, busy city cafe interior, diverse people, laptop users, close-up of a latte with art) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Slide 6: 'Cabin Coffee View.' (Visual: Hands holding a rustic mug of coffee, looking out from a cozy cabin porch over a misty mountain valley at sunrise) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Slide 2: 'Mountain Stars.' (Visual: A wide shot of a clear night sky over a rugged mountain landscape, thousands of stars visible, maybe a distant campfire glow) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## cw-009 — SINGLE
-**Topic:** Gym or Party — which defines your weekends?
-**Caption:** Gym or Party.
-Pick one. No 'both.'
-Comment below. Let's see who's real.
-Tag someone who always picks wrong.
+## cw-009 — CAROUSEL
+**Topic:** Red flag or green flag — rate these 10 dating behaviors
+**Caption:** 10 dating behaviors.
+Red flag or green flag?
+You WILL disagree on number 7.
+Send to your situationship. Watch them panic.
 
-**Place image at:** `generated_images/pending/cw-009.jpg`
+**Place 6 images in:** `generated_images/pending/cw-009/1.jpg`, `2.jpg`, ...
+
+**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Red Flag or Green Flag? 10 dating behaviors. You WILL disagree.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: 1. Double texting when left on read. | 2. Still best friends with their ex. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: 3. Plans dates without being asked. | 4. Checks your phone 'as a joke.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: 5. Remembers small details you mentioned once. | 6. Takes 6 hours to reply but is always online. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: 7. Says 'I love you' within 2 weeks. | 8. Never posts you on social media. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Comment your answers. Send to your situationship.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## cw-010 — REEL (HOOK-PHOTO)
+**Topic:** Your phone is at 1%. Who do you call?
+**Caption:** 1% battery. One call.
+Who are you calling?
+That person IS your person.
+Send this to them right now.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/cw-010/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['1% battery left.', 'One call. Who?', 'Send this to them.']
+
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Your phone is at 1%. Who do you call? - Dramatic battery icon draining to 1%, countdown timer feel, dark moody lighting with red battery glow. Quick zoom into phone screen. Text reveal: 'One call. Who Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## cw-011 — CAROUSEL
+**Topic:** 8 apps enter. Only 1 survives on your phone.
+**Caption:** 8 apps. 1 survivor.
+Swipe through the bracket. Pick your winner.
+Comment the app you'd keep forever.
+Send to someone addicted to the wrong app.
+
+**Place 6 images in:** `generated_images/pending/cw-011/1.jpg`, `2.jpg`, ...
+
+**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: '8 Apps Enter. Only 1 Survives.' (Visual: all 8 app icons in bracket formation) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Round 1: Instagram vs Snapchat | WhatsApp vs YouTube Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Round 1: Spotify vs Netflix | Google Maps vs Zomato Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Semis: Winner vs Winner | Winner vs Winner Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Final: Last 2 apps head-to-head. Pick your GOAT. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Comment your winner. Tag someone who picks wrong.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## cw-012 — SINGLE
+**Topic:** Hustle culture is just glorified anxiety. Change my mind.
+**Caption:** Hustle culture is glorified anxiety.
+Working 80 hours isn't a flex. It's a cry for help.
+Agree or disagree? Comment below.
+Send to the friend who 'doesn't have time.'
+
+**Place image at:** `generated_images/pending/cw-012.jpg`
 
 **Prompt:**
-> Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Gym or Party — which defines your weekends?. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: split-screen: left=gym/discipline, right=party/nightlife, bold text overlay.
+> Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Hustle culture is just glorified anxiety. Change my mind.. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Bold white text on matte black background. Statement centered. Minimal design, maximum impact. Subtle burnt-out desk setup in background, dimly lit. Controversy-optimized to split audience 50/50 between hustlers and anti-grind crowd..
 
 ---
 
-## cw-010 — CAROUSEL
-**Topic:** 10 binary choices that reveal who you really are
-**Caption:** 10 choices. Zero skipping.
-Swipe through and comment your answers.
-This will expose you.
-Send to someone who thinks they know themselves.
+## cw-013 — REEL (HOOK-PHOTO)
+**Topic:** Build your perfect date — 6 impossible choices
+**Caption:** Build your perfect date.
+6 categories. 2 options each. No skipping.
+Screenshot your picks and compare.
+Send to your partner. See if you even match.
 
-**Place 6 images in:** `generated_images/pending/cw-010/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/cw-013/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Build your dream date.', '6 choices. Pick 1 each.', 'Screenshot and compare.']
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Choose Wisely' logo with '10 choices that expose you' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Build Your Perfect Date. 6 picks. No compromise.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Morning person OR Night owl? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Save OR Spend? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Career OR Passion? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Loyalty OR Honesty? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: City OR Mountains? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Cuisine: Street food OR Fine dining? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## cw-011 — REEL
-**Topic:** Old money vs New money aesthetic
-**Caption:** Old money or New money.
-Which vibe are you?
-Comment 1 or 2.
-Send this to someone who needs a reality check.
+## cw-014 — REEL (HOOK-PHOTO)
+**Topic:** You can only keep 3 people in your life. Everyone else gone.
+**Caption:** Keep only 3 people.
+Everyone else disappears tomorrow.
+Who made your list?
+Send this to all 3. If they send it back, you're real.
 
-**Place image at:** `generated_images/pending/cw-011.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/cw-014/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['3 people stay.', 'Everyone else gone.', 'Send this to your 3.']
 
-**Prompt:**
-> Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Old money vs New money aesthetic. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics.
-
----
-
-## cw-012 — CAROUSEL
-**Topic:** Would you rather: 5 hard life scenarios
-**Caption:** Would you rather?
-5 impossible choices. No skipping.
-Comment your answers — 1 or 2 for each.
-Save this and ask your friends.
-
-**Place 6 images in:** `generated_images/pending/cw-012/1.jpg`, `2.jpg`, ...
-
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Would You Rather?' in bold neon text Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Know when you'll die OR Know how you'll die? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Be famous but broke OR Rich but unknown? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Read minds OR Be invisible? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Relive the past OR See the future? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Comment your answers. Tag someone.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
-## cw-013 — CAROUSEL
-**Topic:** Rate your life — honest score check
-**Caption:** Rate your life. Be honest.
-Swipe and give yourself a score.
-Total in comments — no lying.
-Tag someone who needs this reality check.
-
-**Place 6 images in:** `generated_images/pending/cw-013/1.jpg`, `2.jpg`, ...
-
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Rate your life. No lying.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Fitness: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Career: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Relationships: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Finances: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Mental health: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
-## cw-014 — CAROUSEL
-**Topic:** Elimination bracket — 8 foods, only 1 survives
-**Caption:** 8 foods. Only 1 survives.
-Eliminate one each round. No cheating.
-Comment your final answer.
-Send to a friend — see if they pick the same.
-
-**Place 6 images in:** `generated_images/pending/cw-014/1.jpg`, `2.jpg`, ...
-
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: '8 FOODS. 1 SURVIVES.' in bold neon text Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Round 1: Pizza vs Biryani vs Butter Chicken vs Momos Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Round 1: Sushi vs Tacos vs Pasta vs Dosa Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Round 2: Winners face off Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Semi-final: 2 remaining Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Who won? Comment your champion. Tag a foodie.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: You can only keep 3 people in your life. Everyone else gone. - Cinematic feel. Start with a crowd of silhouettes, then they fade one by one until only 3 remain, lit by warm spotlight. Emotional piano  Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
 ## cw-015 — CAROUSEL
-**Topic:** Build your starter pack — 6 life categories
-**Caption:** Build your starter pack.
-Pick ONE from each category. No extras.
-Screenshot your pack.
-Send to your bestie — see how different you are.
+**Topic:** Rate your discipline — 8 categories, no lying
+**Caption:** Rate your discipline. Be brutal.
+Swipe and score yourself 1-10.
+Total in comments. Under 50? You're lying to yourself.
+Send to someone who needs a wake-up call.
 
 **Place 6 images in:** `generated_images/pending/cw-015/1.jpg`, `2.jpg`, ...
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'BUILD YOUR STARTER PACK' in bold Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Rate Your Discipline. No lying. Total in comments.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Drink: Coffee / Chai / Juice / Water Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Wake-up time consistency: 1-10? | Gym consistency: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Music: Bollywood / Hip-hop / Lo-fi / Classical Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Screen time control: 1-10? | Savings discipline: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Hobby: Gym / Reading / Gaming / Travel Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Diet consistency: 1-10? | Reading habit: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Food: Street food / Home cooked / Fine dining / Fast food Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Sleep schedule: 1-10? | Daily productivity: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Superpower: Time travel / Mind reading / Invisibility / Flying Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Add it up. Comment your total. Under 50 = reality check needed.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
 ## cw-016 — CAROUSEL
-**Topic:** Compatibility test — 10 rapid-fire choices with your friend
-**Caption:** Compatibility test.
-10 choices. Do them together.
-How many did you match? Comment the number.
-Tag someone and find out.
+**Topic:** This or That: India Edition — 10 rapid-fire choices
+**Caption:** This or That: India Edition.
+10 rapid-fire picks. No overthinking.
+Comment all 10 answers. Let's settle this.
+Send to every desi friend you have.
 
 **Place 6 images in:** `generated_images/pending/cw-016/1.jpg`, `2.jpg`, ...
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'COMPATIBILITY TEST' with two silhouettes Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'This or That: India Edition. 10 picks. No skipping.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Morning person OR Night owl? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Mumbai OR Delhi? | Chai OR Coffee? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Text first OR Wait for them? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Bollywood OR Hollywood? | Biryani OR Butter Chicken? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Plan everything OR Go with the flow? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Mountains OR Beaches? | Cricket OR Football? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Sweet OR Spicy? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Maggi OR Dosa? | Ola OR Uber? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Introvert OR Extrovert? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
-## cw-017 — SINGLE
-**Topic:** Gym or Party — which defines your weekends?
-**Caption:** Gym or Party.
-Pick one. No 'both.'
-Comment below. Let's see who's real.
-Tag someone who always picks wrong.
-
-**Place image at:** `generated_images/pending/cw-017.jpg`
-
-**Prompt:**
-> Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Gym or Party — which defines your weekends?. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: split-screen: left=gym/discipline, right=party/nightlife, bold text overlay.
+**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Comment all 10. Tag a friend who picks wrong on every one.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## cw-018 — CAROUSEL
-**Topic:** 10 binary choices that reveal who you really are
-**Caption:** 10 choices. Zero skipping.
-Swipe through and comment your answers.
-This will expose you.
-Send to someone who thinks they know themselves.
+## cw-017 — REEL (HOOK-PHOTO)
+**Topic:** Love marriage or arranged — which actually lasts?
+**Caption:** Love marriage or arranged marriage.
+Which one actually lasts?
+90% of you won't answer honestly.
+Send to your parents. Then send to your best friend.
 
-**Place 6 images in:** `generated_images/pending/cw-018/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/cw-017/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Love or arranged?', 'Which actually lasts?', 'Send to your parents.']
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Choose Wisely' logo with '10 choices that expose you' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Morning person OR Night owl? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Save OR Spend? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Career OR Passion? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Loyalty OR Honesty? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: City OR Mountains? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Love marriage or arranged — which actually lasts? - India's most polarizing dating debate. Split screen: left=couple in love (candid, passionate), right=traditional wedding setup (family, rituals). Qu Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## cw-019 — REEL
-**Topic:** Old money vs New money aesthetic
-**Caption:** Old money or New money.
-Which vibe are you?
-Comment 1 or 2.
-Send this to someone who needs a reality check.
+## cw-018 — REEL (HOOK-PHOTO)
+**Topic:** 8 Bollywood movies enter. Only 1 survives.
+**Caption:** 8 Bollywood legends. 1 survivor.
+Swipe through the bracket. Pick your champion.
+If you skip 3 Idiots, we can't be friends.
+Send to your Bollywood-obsessed friend.
 
-**Place image at:** `generated_images/pending/cw-019.jpg`
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/cw-018/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['8 Bollywood classics.', 'Only 1 survives.', 'Pick your champion.']
 
-**Prompt:**
-> Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Old money vs New money aesthetic. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: '8 Bollywood Legends Enter. Only 1 Survives.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Round 1: 3 Idiots vs DDLJ | Sholay vs Dangal Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## cw-020 — CAROUSEL
-**Topic:** Would you rather: 5 hard life scenarios
-**Caption:** Would you rather?
-5 impossible choices. No skipping.
-Comment your answers — 1 or 2 for each.
-Save this and ask your friends.
+## cw-019 — REEL (HOOK-PHOTO)
+**Topic:** Money or time? 90% of people answer this wrong.
+**Caption:** Money or time.
+90% say time. Then spend 10 hours doom-scrolling.
+Be honest. Which do you actually chase?
+Send to someone who needs to hear this.
 
-**Place 6 images in:** `generated_images/pending/cw-020/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/cw-019/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Money or time?', 'You say time.', 'But you chase money.']
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Would You Rather?' in bold neon text Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Money or time? 90% of people answer this wrong. - Contrarian hook format. Split screen: left=stacks of money/luxury lifestyle, right=hourglass/sunset/family moments. Twist: show people saying 'time' t Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Know when you'll die OR Know how you'll die? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+---
 
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Be famous but broke OR Rich but unknown? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+## cw-020 — REEL (HOOK-PHOTO)
+**Topic:** Build your dream life — pick 1 from each category
+**Caption:** Build your dream life in 6 picks.
+Screenshot your choices. No changing answers.
+Does your dream life match your real life?
+Send to a friend. Compare builds.
 
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Read minds OR Be invisible? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/cw-020/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Build your dream life.', '6 picks. No redos.', 'Screenshot and compare.']
 
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Relive the past OR See the future? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Build Your Dream Life. 6 categories. 1 pick each.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Comment your answers. Tag someone.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: City: London OR Tokyo? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
 ## cw-021 — CAROUSEL
-**Topic:** Rate your life — honest score check
-**Caption:** Rate your life. Be honest.
-Swipe and give yourself a score.
-Total in comments — no lying.
-Tag someone who needs this reality check.
+**Topic:** Top 3 non-negotiables in a partner — rank these 10
+**Caption:** 10 traits. Pick only 3 non-negotiables.
+This will start arguments.
+Comment your top 3. Defend your choices.
+Send to your couple friends. Watch them fight.
 
 **Place 6 images in:** `generated_images/pending/cw-021/1.jpg`, `2.jpg`, ...
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Rate your life. No lying.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: '10 Partner Traits. You can only keep 3. Choose wisely.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Fitness: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: 1. Loyalty | 2. Looks | 3. Humor | 4. Ambition | 5. Money Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Career: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: 6. Communication | 7. Family values | 8. Independence | 9. Intelligence | 10. Emotional maturity Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Relationships: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: The rules: Pick EXACTLY 3. No 'all of them.' No 'it depends.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Finances: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Your top 3 say everything about you. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Mental health: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
-## cw-022 — CAROUSEL
-**Topic:** Elimination bracket — 8 foods, only 1 survives
-**Caption:** 8 foods. Only 1 survives.
-Eliminate one each round. No cheating.
-Comment your final answer.
-Send to a friend — see if they pick the same.
-
-**Place 6 images in:** `generated_images/pending/cw-022/1.jpg`, `2.jpg`, ...
-
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: '8 FOODS. 1 SURVIVES.' in bold neon text Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Round 1: Pizza vs Biryani vs Butter Chicken vs Momos Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Round 1: Sushi vs Tacos vs Pasta vs Dosa Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Round 2: Winners face off Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Semi-final: 2 remaining Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Who won? Comment your champion. Tag a foodie.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Comment your 3. Send to your partner. See if you match.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## cw-023 — CAROUSEL
-**Topic:** Build your starter pack — 6 life categories
-**Caption:** Build your starter pack.
-Pick ONE from each category. No extras.
-Screenshot your pack.
-Send to your bestie — see how different you are.
+## cw-022 — REEL (HOOK-PHOTO)
+**Topic:** 1 crore now or guaranteed 10 crore in 10 years?
+**Caption:** 1 crore right now. Or 10 crore in 10 years. Guaranteed.
+Most people pick wrong.
+Comment your choice. No changing your mind.
+Send to someone who would definitely pick wrong.
 
-**Place 6 images in:** `generated_images/pending/cw-023/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/cw-022/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['1 crore now?', 'Or 10 crore later?', 'Most people pick wrong.']
 
-**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'BUILD YOUR STARTER PACK' in bold Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: 1 crore now or guaranteed 10 crore in 10 years? - Quick cuts: left=luxury lifestyle NOW (cars, travel, apartment), right=patient wealth building (investments, compound growth, massive payoff). Show th Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Drink: Coffee / Chai / Juice / Water Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+---
 
-**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Music: Bollywood / Hip-hop / Lo-fi / Classical Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+## cw-023 — REEL (HOOK-PHOTO)
+**Topic:** Friendship compatibility test — 10 questions that expose you
+**Caption:** Friendship compatibility test.
+10 rapid-fire A or B questions.
+How many did you and your bestie match?
+Screenshot. Send to your best friend. Compare answers.
 
-**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Hobby: Gym / Reading / Gaming / Travel Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/cw-023/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Friendship test.', '10 questions. A or B.', 'Screenshot. Send. Compare.']
 
-**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Food: Street food / Home cooked / Fine dining / Fast food Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Friendship Test. 10 questions. How many do you match?' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Superpower: Time travel / Mind reading / Invisibility / Flying Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: 1. Call OR Text? | 2. Early bird OR Night owl? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## cw-024 — REEL (HOOK-PHOTO)
+**Topic:** Luxury life vs Simple life — one photo each, you decide
+**Caption:** Two lives. One choice.
+Penthouse or cottage. Ferrari or bicycle.
+Which life is actually winning?
+Send this to a friend. See if they pick the same.
+
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/cw-024/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Two lives. One choice.', 'Which one is winning?', 'Send to see if they agree.']
+
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Ultra-luxury penthouse interior — floor-to-ceiling windows, panoramic night city skyline, modern minimalist furniture, champagne on glass table, warm ambient lighting Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Cozy countryside cottage — stone fireplace crackling, overflowing bookshelves, knitted blankets, golden morning light streaming through lace curtains, steaming tea on wooden table Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## cw-025 — REEL (HOOK-PHOTO)
+**Topic:** Rs 500 date vs Rs 50,000 date — which one is better?
+**Caption:** Rs 500 date. Rs 50,000 date.
+Same couple. Different budget.
+Which date is actually better?
+Tag someone and debate this.
+
+**HOOK-PHOTO REEL — Place 3 photos in:** `generated_images/pending/cw-025/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Rs 500 vs Rs 50,000.', 'Same date. Different budget.', 'Tag someone. Debate this.']
+
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Vibrant Mumbai street food date — two people sharing pani puri at a colorful street stall, fairy string lights above, laughing together, warm chaotic energy, evening Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Luxury fine dining restaurant — candlelit table for two, ocean view through floor-to-ceiling windows, wine glasses, white tablecloth, elegant but slightly formal atmosphere Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Couple walking hand-in-hand through a bustling Mumbai night market — fairy lights, street vendors, genuine joy and connection, the Rs 500 date vibes Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---

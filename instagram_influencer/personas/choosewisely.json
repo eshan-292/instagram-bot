@@ -29,8 +29,8 @@
     "default_topic": "Gym or Party — which defines you?",
     "default_caption": "Pick one. No cheating.\nComment your choice below.",
     "default_notes": "split-screen comparison graphic, bold text, contrasting visuals",
-    "content_mix": "60% carousels, 30% reels, 10% single — focus on comparison/poll content",
-    "content_mix_detail": "- 60% carousels: multi-slide 'this or that' series (5-10 binary choices per carousel), 'rank these', 'pick your starter pack' — carousels get highest comment volume\n- 30% reels: animated reveals of choices, 'which would you choose' with timer, rapid-fire A/B polls with music\n- 10% single: one bold binary choice graphic, clean and shareable",
+    "content_mix": "50% hook-photo reels, 30% carousels, 10% reels, 10% single — hook-photo reels are the PRIMARY format",
+    "content_mix_detail": "- 50% hook-photo reels (reel_format='hook_photo'): bold text hook slides interleaved with 2-3 comparison photos. Best formats: 'Only one can stay. Choose.' + option photos, 'This or that?' + A/B reveal photos, 'Rate your life' + category photos, 'Would you rather...' + scenario photos, 'Pick your starter pack' + option photos. ONLY needs 1-2 photos = easy to produce, gets maximum algorithm boost\n- 30% carousels: multi-slide 'this or that' series (5-10 binary choices), 'rank these', 'rate your life 10 categories' — use when 5+ comparison slides are needed\n- 10% reels: single-photo Ken Burns reels for bold choice reveals with timer energy\n- 10% single: one bold binary choice graphic, clean and shareable",
     "topic_examples": [
       "Gym or Party — which defines you?", "Assets or Liabilities — what are you building?",
       "Morning person or Night owl?", "iPhone or Android — final answer",

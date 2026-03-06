@@ -4,96 +4,123 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## aryan-002 — CAROUSEL
+## aryan-001 — REEL (HOOK-PHOTO)
+**Topic:** 5 exercises you're doing wrong in the gym
+**Caption:** 5 exercises. You're doing ALL of them wrong.
+I wasted 2 years before someone told me.
+Which one surprised you most?
+Send this to your gym partner before they hurt themselves.
+
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-001/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['5 exercises. All wrong.', 'I wasted 2 years.', 'Send to your gym partner']
+
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan shaking head at bad form in gym, text overlay '5 exercises. You're doing ALL wrong.' Dramatic disappointed expression, well-lit gym background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Side-by-side comparison of wrong vs right exercise form -- bicep curls and squats highlighted with red X and green check marks. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-002 — REEL (HOOK-PHOTO)
 **Topic:** Full day of eating -- high protein under Rs 500
 **Caption:** Full day of eating. Rs 500. 150g protein.
 No supplements. No chicken breast every meal.
 What's your go-to cheap protein source?
 Save this -- your wallet and gains will thank you.
 
-**Place 6 images in:** `generated_images/pending/aryan-002/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-002/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Rs 500. 150g protein.', 'No supplements needed.', 'Save for your next meal prep']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan with plate of food, text 'Rs 500. 150g protein. No supplements.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan with plate of food in kitchen, text overlay 'Rs 500. 150g protein. No supplements.' Clean meal prep setting with colourful Indian food. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Meal 1: Breakfast -- eggs + oats + banana, macro breakdown Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Meal 2: Lunch -- rajma chawal + curd, protein count Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Meal 3: Snack -- peanut butter sandwich + milk Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: Meal 4: Dinner -- paneer bhurji + roti, full macro count Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 6 of a carousel post.) Scene: Total macros summary card, save CTA Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Flat lay of all four meals -- eggs+oats breakfast, rajma chawal lunch, PB sandwich snack, paneer bhurji dinner -- with macro breakdown labels on each. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-006 — CAROUSEL
+## aryan-006 — REEL (HOOK-PHOTO)
 **Topic:** Desi protein sources ranked -- best bang for your buck
 **Caption:** Every Indian gym bro asks the same question.
 "Bhai protein kahan se laaun?"
 Here's your answer. Ranked by Rs per gram of protein.
 Save this. Screenshot this. Send this.
 
-**Place 5 images in:** `generated_images/pending/aryan-006/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-006/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Bhai protein kahan se laaun?', 'Ranked by Rs per gram.', 'Save this NOW']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan holding eggs vs soya chunks with questioning expression Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan holding eggs vs soya chunks with questioning expression in grocery/kitchen setting. Text overlay 'Bhai protein kahan se laaun?' Clean lighting. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Flat lay of all Indian protein sources ranked Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Winner #1: Soya chunks -- Rs per gram breakdown Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Winner #2: Eggs -- Rs per gram breakdown Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: CTA: Aryan flexing with plate of food, save reminder Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Flat lay of all Indian protein sources ranked by Rs per gram -- soya chunks, eggs, paneer, dal, chana -- with price labels and protein counts on each. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-010 — CAROUSEL
+## aryan-007 — REEL (HOOK-PHOTO)
+**Topic:** Shoulder workout for a broader look -- 4 exercises
+**Caption:** Shoulders make or break your physique.
+4 exercises. 30 minutes. Wider by next month.
+Which exercise hits hardest for you?
+Save this for your next shoulder day.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-007/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Shoulders make or break it.', '4 exercises. 30 min.', 'Save for shoulder day']
+
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan mid-rep lateral raise in gym, shoulder definition visible, intense focus. Text overlay 'Shoulders make or break it.' Good gym lighting. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-008 — REEL (HOOK-PHOTO)
+**Topic:** Leg day you can't skip -- complete routine
+**Caption:** "I train legs." No you don't.
+This is what a real leg day looks like.
+Why do 90% of guys skip this?
+Send to the friend with the chicken legs.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-008/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ["You don't train legs.", 'This is real leg day.', 'Send to chicken legs guy']
+
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan at squat rack with heavy barbell loaded, intense expression, gym setting. Text overlay 'You don't train legs.' Dramatic lighting on the weights. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-010 — REEL (HOOK-PHOTO)
 **Topic:** Beginner gym mistakes to avoid -- what I wish I knew
 **Caption:** 3 years in the gym. Year 1 was almost wasted.
 These 5 mistakes cost me gains and caused injuries.
 Don't be that guy.
 Save this before your next session.
 
-**Place 5 images in:** `generated_images/pending/aryan-010/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-010/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Year 1 was wasted.', 'These 5 mistakes cost me.', 'Save this NOW']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan face-palming in gym, text 'Year 1 was almost wasted' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan face-palming in gym with text overlay 'Year 1 was almost wasted.' Humorous disappointed expression, gym equipment in background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Mistake 1: Ego lifting with bad form Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Mistake 2: Resting too long between sets (phone scrolling) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Mistake 3: Supplement obsession over food basics Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: CTA: Aryan giving thumbs up, save reminder Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Aryan demonstrating ego lifting with bad form vs proper form -- split screen comparison with red X on wrong side and green check on right side. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-011 — REEL
+## aryan-011 — REEL (HOOK-PHOTO)
 **Topic:** Delhi gym culture -- what outsiders don't understand
 **Caption:** Delhi gym culture hits different.
 The stares. The unsolicited advice. The 45-minute wait for the bench.
 But we wouldn't have it any other way.
 Tag your Delhi gym buddy.
 
-**Place image at:** `generated_images/pending/aryan-011.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-011/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Delhi gym culture.', 'The stares. The advice.', 'Tag your gym buddy']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Delhi gym culture -- what outsiders don't understand. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: local Delhi gym exterior, authentic neighbourhood vibe.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan standing outside a local Delhi neighbourhood gym, authentic vibe, arms crossed with knowing smirk. Text overlay 'Delhi gym culture hits different.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-012 — REEL
+## aryan-012 — REEL (HOOK-PHOTO)
 **Topic:** Post-workout recovery routine that actually works
 **Caption:** The workout is only half the battle.
 Recovery is where gains actually happen.
 What's your post-workout ritual?
 Save this -- your muscles will thank you.
 
-**Place image at:** `generated_images/pending/aryan-012.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-012/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Workout is half the battle.', 'Recovery = real gains.', 'Save this']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Post-workout recovery routine that actually works. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: post-workout, toweling off, shaker bottle visible.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan post-workout toweling off in gym, shaker bottle in hand, exhausted but satisfied expression. Text overlay 'Workout is half the battle.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -111,163 +138,137 @@ Just show up.
 
 ---
 
-## aryan-014 — CAROUSEL
+## aryan-014 — REEL (HOOK-PHOTO)
 **Topic:** Gym bag essentials -- everything you need
 **Caption:** I've had the same gym bag setup for 2 years.
 Nothing extra. Nothing missing.
 What's in YOUR gym bag?
 Save this for your next Amazon order.
 
-**Place 5 images in:** `generated_images/pending/aryan-014/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-014/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Same setup 2 years.', 'Nothing extra. Nothing missing.', 'Save for your Amazon order']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan opening gym bag on bench, revealing essentials Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan opening gym bag on bench, revealing essentials -- shaker, straps, earbuds, towel visible. Text overlay 'Same setup 2 years.' Clean product photography style. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Essentials 1: Shaker, straps, band, earbuds, towel Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Essentials 2: Protein, bars, banana, dry fruits Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Essentials 3: Tank top, shorts, socks, gloves, cap Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: CTA: Aryan with packed bag, ready to go Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Flat lay of all gym bag essentials neatly arranged -- shaker, lifting straps, resistance band, protein bars, tank top, gloves. Product photography aesthetic. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-015 — REEL
+## aryan-015 — REEL (HOOK-PHOTO)
 **Topic:** Intermittent fasting for beginners -- honest review
 **Caption:** I tried intermittent fasting for 90 days.
 Here's what nobody tells you.
 The hunger is real. But so are the results.
 Would you try it? Honest answers only.
 
-**Place image at:** `generated_images/pending/aryan-015.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-015/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['90 days of fasting.', 'The hunger is real.', 'But so are the results.']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Intermittent fasting for beginners -- honest review. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: kitchen, empty plate, coffee, waiting expression.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan at kitchen table with empty plate and black coffee, waiting expression, clock showing fasting window. Text overlay '90 days of fasting.' Natural kitchen lighting. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-016 — CAROUSEL
+## aryan-016 — REEL (HOOK-PHOTO)
 **Topic:** Skinny to muscular -- what nobody tells you
 **Caption:** I was 52 kg. Arms thinner than my girlfriend's. Nobody warned me about the ugly middle phase.
 The first 6 months you won't look fit. You'll look weird. Clothes won't fit right. People will think you're on something. That's the tax.
 What was your starting weight? Drop it below.
 Send this to the skinny bro who's scared to start.
 
-**Place 6 images in:** `generated_images/pending/aryan-016/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-016/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['52 kg. Arms like sticks.', 'The ugly middle phase is real.', 'Send to your skinny bro']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan looking at old skinny photo on phone, text '52 kg. Nobody warned me.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan looking at old skinny photo on phone, text overlay '52 kg. Nobody warned me.' Emotional expression, gym background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: The ugly middle phase -- clothes don't fit, face looks puffy, arms still small Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Month 3 reality: strength going up but mirror lying to you Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Month 6 turning point: first compliment, first visible vein Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: Month 12: the payoff -- side by side comparison Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 6 of a carousel post.) Scene: CTA: 'Send this to your skinny bro' with Aryan flexing Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Side-by-side Month 1 vs Month 12 transformation -- skinny frame on left, muscular build on right, same mirror same gym. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-017 — CAROUSEL
+## aryan-017 — REEL (HOOK-PHOTO)
 **Topic:** Rs 150 full day protein -- student budget edition
 **Caption:** Rs 150. Full day. 120g protein. Zero excuses.
 Hostel mess + street food hacks that actually work. Your broke phase is not an excuse to skip protein.
 Which meal are you trying first?
 Save this bro -- your hostel roommate needs it too.
 
-**Place 6 images in:** `generated_images/pending/aryan-017/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-017/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Rs 150. 120g protein.', 'Hostel mess hacks.', 'Save this for your roommate']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan holding Rs 150 note next to plate of food, text 'Rs 150. 120g protein. No cap.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan holding Rs 150 note next to plate of food, text overlay 'Rs 150. 120g protein. No cap.' Student hostel/kitchen setting. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Breakfast: 4 boiled eggs + 2 bread slices = Rs 30, 24g protein Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Lunch: Soya chunk rice plate from mess = Rs 40, 35g protein Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Snack: Sattu shake + roasted chana = Rs 30, 28g protein Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: Dinner: Dal fry + 3 roti from dhaba = Rs 50, 25g protein Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 6 of a carousel post.) Scene: Total summary card: Rs 150 / 112g protein / macro breakdown Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: All four meals laid out -- boiled eggs+bread, soya chunk rice plate, sattu shake+chana, dal fry+roti -- with price and protein labels on each. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-018 — REEL
+## aryan-018 — REEL (HOOK-PHOTO)
 **Topic:** Why your chest isn't growing -- 3 fixes
 **Caption:** Your chest isn't growing. And it's not because you're not benching enough.
 3 fixes that took my chest from flat to full in 8 weeks. Most guys mess up all three.
 Be honest -- which mistake are you making?
 Send this to your gym buddy with the flat chest.
 
-**Place image at:** `generated_images/pending/aryan-018.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-018/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Flat chest? Not the bench.', '3 fixes. 8 weeks.', 'Send to flat chest bro']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Why your chest isn't growing -- 3 fixes. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: gym chest workout, close-up on form corrections, educational reel.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan demonstrating chest press with close-up on form correction, gym setting. Text overlay 'Flat chest? Not the bench.' Educational pose showing proper chest activation. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-019 — REEL
+## aryan-019 — REEL (HOOK-PHOTO)
 **Topic:** Monday Myth Buster: You need 8 meals a day
 **Caption:** Monday Myth Buster: "Bhai 8 meals khao nahi toh muscle nahi banega."
 Bro, your muscles don't have a meal counter. Total protein matters. Timing barely does. Science says 3-4 meals is plenty.
 Still eating 8 meals? Tell me why below.
 Send this to the guy carrying 6 tiffins to office.
 
-**Place image at:** `generated_images/pending/aryan-019.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-019/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['8 meals a day? Myth.', 'Total protein > meal timing.', 'Send to 6-tiffin guy']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Monday Myth Buster: You need 8 meals a day. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Monday Myth Buster series, controversial nutrition take, split screen myth vs fact.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan with split screen -- left side shows 8 tiny tiffin boxes stacked, right side shows 3 proper meals. Text overlay '8 meals a day? Myth.' Bold myth vs fact graphic. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-020 — REEL
+## aryan-020 — REEL (HOOK-PHOTO)
 **Topic:** No Excuses: 15-minute hotel room workout
 **Caption:** No gym. No equipment. No excuses.
 15 minutes. Hotel room. Full body destroyed. I do this every time I travel. Your holiday is not a break from discipline.
 Travelling soon? Save this.
 Send to the bro who skips workout on trips.
 
-**Place image at:** `generated_images/pending/aryan-020.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-020/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['No gym? No excuse.', '15 min. Hotel room. Full body.', 'Send to trip-skipper bro']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: No Excuses: 15-minute hotel room workout. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: No Excuses series, hotel room bodyweight workout, travel fitness.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan doing push-ups in a hotel room, no equipment, travel bag visible in background. Text overlay 'No gym? No excuse.' Motivational hotel room fitness setting. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-021 — CAROUSEL
+## aryan-021 — REEL (HOOK-PHOTO)
 **Topic:** Back workout that V-tapers your physique
 **Caption:** Wide back = instant physique upgrade. This is the exact routine that gave me a V-taper in 4 months.
 5 exercises. 40 minutes. Your back will hate you tomorrow but love you forever.
 Which back exercise is your favourite?
 Save this for your next pull day.
 
-**Place 6 images in:** `generated_images/pending/aryan-021/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-021/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['V-taper in 4 months.', '5 exercises. 40 minutes.', 'Save for pull day']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan hitting rear lat spread, text 'The V-taper routine. 4 months.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan hitting rear lat spread pose in gym, showing V-taper back definition. Text overlay 'The V-taper routine. 4 months.' Dramatic gym lighting. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Exercise 1: Wide grip lat pulldown -- 4x12, form cues Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Exercise 2: Barbell rows -- 4x10, overhand grip detail Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Exercise 3: Single arm dumbbell row -- 3x12 each side Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: Exercise 4: Face pulls -- 3x15, rear delt focus Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 6 of a carousel post.) Scene: Exercise 5: Straight arm pulldown -- 3x12, mind-muscle connection Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Aryan mid-rep on wide grip lat pulldown, back muscles engaged, form detail visible from behind. Clean gym background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-022 — REEL
+## aryan-022 — REEL (HOOK-PHOTO)
 **Topic:** Hot take: Creatine is the only supplement worth buying
 **Caption:** Hot take: Creatine is the ONLY supplement worth your money.
 BCAs? Waste. Fat burners? Scam. Pre-workout? Just drink coffee. Creatine has 1000+ studies. Everything else has marketing.
 Disagree? Fight me in the comments.
 Send this to the bro spending 5K on supplements every month.
 
-**Place image at:** `generated_images/pending/aryan-022.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-022/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Only 1 supplement works.', 'Rest is marketing scam.', 'Send to supplement bro']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Hot take: Creatine is the only supplement worth buying. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: controversy post, supplement industry hot take, strong opinions.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan holding one tub of creatine while tossing other supplement bottles into a bin. Text overlay 'Only 1 supplement works.' Confident controversial expression, clean background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -294,17 +295,17 @@ Tag your gym buddy -- they're definitely one of these.
 
 ---
 
-## aryan-024 — REEL
+## aryan-024 — REEL (HOOK-PHOTO)
 **Topic:** Form Check Friday: Deadlift -- the exercise most people butcher
 **Caption:** Form Check Friday: Deadlifts. The exercise 80% of gym bros butcher.
 Rounded back. Jerking the bar. Hips shooting up. I've seen it all. One bad rep can end your gym career.
 Post your deadlift video -- I'll form check it free.
 Send this to someone before they slip a disc.
 
-**Place image at:** `generated_images/pending/aryan-024.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-024/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['80% do deadlifts wrong.', 'One bad rep = injury.', 'Send before they slip a disc']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Form Check Friday: Deadlift -- the exercise most people butcher. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Form Check Friday series, deadlift tutorial, wrong vs right form.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan demonstrating proper deadlift setup position -- flat back, chest up, bar close to shins. Wrong form shown with red X overlay on rounded back. Gym setting with plates visible. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -322,40 +323,33 @@ Send this to the guy who runs but never lifts.
 
 ---
 
-## aryan-026 — REEL
+## aryan-026 — REEL (HOOK-PHOTO)
 **Topic:** What 1 year of consistency actually looks like
 **Caption:** 1 year. 365 days. Not a single week skipped.
 Month 1 you feel nothing. Month 3 you see nothing. Month 6 people notice. Month 12 you're unrecognizable. The secret was never the workout. It was showing up.
 Could you go 365 days straight? Real talk.
 Screenshot this. Set it as your wallpaper. Send it to someone who needs it.
 
-**Place image at:** `generated_images/pending/aryan-026.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-026/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['365 days. Zero weeks off.', 'Month 12: unrecognizable.', 'Screenshot this. Send it.']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: What 1 year of consistency actually looks like. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: motivational transformation reel, month-by-month progress, emotional.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan month-by-month progress grid -- Month 1, 3, 6, 12 physique shots side by side. Text overlay '365 days. Zero weeks off.' Emotional transformation journey, raw and real. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-027 — CAROUSEL
+## aryan-027 — REEL (HOOK-PHOTO)
 **Topic:** Rs 300 post-workout meals ranked
 **Caption:** I ranked every post-workout meal under Rs 300. From worst to best.
 Spoiler: your protein shake isn't #1. Real food wins every time. Stop overcomplicating this bro.
 What's your go-to post-workout meal?
 Save this -- you'll need it after tomorrow's session.
 
-**Place 6 images in:** `generated_images/pending/aryan-027/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-027/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Post-workout meals ranked.', "Your shake isn't #1.", 'Save for after your session']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan with multiple plates ranked, text 'Post-workout meals ranked. Under Rs 300.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan with multiple plates arranged in tier list ranking -- S-tier to D-tier labels. Text overlay 'Post-workout meals ranked. Under Rs 300.' Clean food photography. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: D-Tier: Just a protein shake -- Rs 150, incomplete nutrition Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: C-Tier: Banana + peanut butter toast -- Rs 80, decent but low protein Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: B-Tier: Egg bhurji + paratha from dhaba -- Rs 120, solid combo Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: A-Tier: Chicken tikka + rice plate -- Rs 250, perfect macros Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 6 of a carousel post.) Scene: S-Tier: Paneer bhurji + 3 roti + curd -- Rs 200, best bang for buck Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Close-up of S-tier meal -- paneer bhurji + 3 roti + curd on a steel plate, macro breakdown showing protein and cost. Dhaba-style presentation. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
@@ -382,40 +376,33 @@ Send this to every vegetarian lifter you know.
 
 ---
 
-## aryan-029 — REEL
+## aryan-029 — REEL (HOOK-PHOTO)
 **Topic:** Pull day complete routine -- back and biceps
 **Caption:** Pull day. The day that separates boys from men.
 6 exercises. 50 minutes. Your lats and biceps will be screaming. This is the exact split I used to build width.
 What's your favourite pull day exercise?
 Save this. Screenshot this. Do this tomorrow.
 
-**Place image at:** `generated_images/pending/aryan-029.jpg`
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-029/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Pull day. Boys vs men.', '6 exercises. 50 minutes.', 'Save and do this tomorrow']
 
-**Prompt:**
-> Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. Scene: Pull day complete routine -- back and biceps. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: complete pull day routine, back and biceps workout, gym setting.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan at the top of a pull-up, back muscles fully engaged, gym setting. Text overlay 'Pull day. Boys vs men.' Intense gym lighting showing lat width. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 
-## aryan-030 — CAROUSEL
+## aryan-030 — REEL (HOOK-PHOTO)
 **Topic:** Gym etiquette nobody follows -- hot take
 **Caption:** Gym etiquette that nobody follows. And it drives me insane.
 Rerack your weights. Wipe the bench. Stop curling in the squat rack. Stop giving unsolicited advice. Basic stuff that 90% of Indian gym bros ignore.
 Which one triggers you the most?
 Send this to the guy who never reracks.
 
-**Place 6 images in:** `generated_images/pending/aryan-030/1.jpg`, `2.jpg`, ...
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-030/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ["Gym etiquette? What's that?", '90% of bros ignore this.', 'Send to no-rerack guy']
 
-**Slide 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: Aryan staring at unreacked dumbbells, text 'Gym etiquette? Never heard of it.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan staring at unreacked dumbbells scattered on the gym floor, frustrated expression. Text overlay 'Gym etiquette? Never heard of it.' Messy weight rack in background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
-**Slide 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Rule 1: Rerack your weights -- it's not the staff's job Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 3:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Rule 2: Wipe the bench after use -- nobody wants your sweat Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 4:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Rule 3: Stop curling in the squat rack -- there are other places Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 5:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: Rule 4: Don't give advice nobody asked for Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Slide 6:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 6 of a carousel post.) Scene: Rule 5: Stop hogging equipment while scrolling Instagram -- CTA slide Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+**Photo 2:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Photo 2: Aryan doing the right thing -- wiping bench, reracking weights, proper gym etiquette demonstrated. Text overlay 'Be this guy instead.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
 

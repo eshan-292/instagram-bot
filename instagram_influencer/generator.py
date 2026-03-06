@@ -75,11 +75,11 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
     }
     if post_type == "carousel" and slides:
         draft["slides"] = [str(s).strip() for s in slides[:6] if str(s).strip()]
-    # Hook-photo reels: reel with multiple photos + text hook slides
+    # Hook-photo reels: reel with 1-2 photos + text hook slides
     if reel_format == "hook_photo":
         draft["reel_format"] = "hook_photo"
         if slides:
-            draft["slides"] = [str(s).strip() for s in slides[:6] if str(s).strip()]
+            draft["slides"] = [str(s).strip() for s in slides[:2] if str(s).strip()]
     return draft
 
 
@@ -240,17 +240,31 @@ def _build_gemini_prompt() -> str:
         f"{topics}\n\n"
         "For carousel posts, include 'slides': array of 5-6 short scene descriptions "
         "(what each slide should visually show — be specific about clothing, pose, setting).\n\n"
-        "HOOK-PHOTO REEL FORMAT (use for at least 1 of {count} posts):\n"
-        "A reel made from 2-3 PHOTOS with bold text hook slides in between.\n"
+        "HOOK-PHOTO REEL FORMAT (THE PRIMARY FORMAT — use for 60%+ of {count} posts):\n"
+        "This is the #1 viral format in 2026. Bold text hooks interleaved with 1-2 photos.\n"
         "Set post_type='reel' AND reel_format='hook_photo'.\n"
-        "Include 'slides': array of 2-3 photo descriptions (what each photo should show).\n"
-        "The video_text becomes the hook text between photos:\n"
-        "  Line 1 = bold hook text shown BEFORE first photo (the scroll-stopper)\n"
-        "  Line 2 = bridge text shown BETWEEN photos (builds curiosity)\n"
-        "  Line 3 = CTA text shown AFTER last photo (drives sends/saves, shown in gold)\n"
+        "Include 'slides': array of 1-2 photo descriptions (what each photo should show).\n"
+        "The video_text becomes the hook text shown between/around photos:\n"
+        "  Line 1 = SCROLL-STOPPING hook text (shown BEFORE first photo on dark screen)\n"
+        "  Line 2 = curiosity/bridge text (shown AFTER photo — keeps them watching)\n"
+        "  Line 3 = CTA text (shown at the end in gold — drives sends/saves)\n\n"
+        "VIRAL HOOK FORMULAS (use these — proven to stop scrolling in 1.7 seconds):\n"
+        "  - CURIOSITY GAP: 'This feels illegal to know.' / 'I probably shouldn't share this, but...'\n"
+        "  - CONTRARIAN CLAIM: 'Everyone's doing this wrong.' / 'Stop doing [X]. Do this instead.'\n"
+        "  - PRICE SHOCK: 'This costs Rs [low number]. No, seriously.'\n"
+        "  - TRANSFORMATION: 'Watch what happened after 30 days.' / '3 years in 30 seconds.'\n"
+        "  - RELATABLE POV: 'POV: you walk in wearing this' / 'If you've ever [relatable thing]...'\n"
+        "  - QUESTION HOOK: 'Stop scrolling if this sounds like you...' / 'Did you know...'\n"
+        "  - FORBIDDEN KNOWLEDGE: 'Your [expert] won't tell you this.' / 'Nobody talks about this.'\n"
+        "  - BOLD STATEMENT: 'This will get me cancelled but...' / 'I said what I said.'\n"
+        "  - SPECIFICITY: '3 things. 15 seconds.' / 'Rs 800. 3 outfits. Wait for #3.'\n"
+        "  - FOMO: 'Everyone knows this except you.' / 'This changes everything.'\n\n"
+        "1-photo hook reel (PREFERRED — fastest, punchiest): [Hook text] → [Photo] → [Bridge text] → [CTA] = 8s\n"
+        "2-photo hook reel: [Hook text] → [Photo 1] → [Bridge] → [Photo 2] → [CTA] = 10s\n"
+        "Keep it SHORT. Modern attention span = 8 seconds. 1-2 photos MAX.\n\n"
         "Example: post_type='reel', reel_format='hook_photo', slides=['Full outfit shot in luxury "
-        "hotel lobby', 'Close-up detail of accessories and fabric'], video_text=['This costs Rs 5,000.', "
-        "'Can you tell?', 'Send to your fashion friend.']\n\n"
+        "hotel lobby'], video_text=['This costs Rs 5,000. No, seriously.', "
+        "'Can you tell the difference?', 'Send to your fashion friend.']\n\n"
         "Return ONLY a JSON array of {count} objects with these fields:\n"
         "- topic: specific scene (not generic, include location/occasion/PRICE if relevant)\n"
         "- caption: 3-5 lines — scroll-stopping hook first, question in middle, send/share CTA last, "
