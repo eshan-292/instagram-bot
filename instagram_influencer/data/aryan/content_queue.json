@@ -34,7 +34,7 @@
         "I wasted 2 years.",
         "Send to your gym partner"
       ],
-      "youtube_video_url": null,
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
       "youtube_video_id": null,
       "youtube_posted_at": null,
       "youtube_pin_comment_id": null
@@ -86,7 +86,7 @@
         "+2 inches in 3 months.",
         "Send to your gym buddy"
       ],
-      "youtube_video_url": null,
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4",
       "posted_at": "2026-03-06T07:56:03Z",
       "platform_post_id": "3846711089329666280",
       "publish_error": null,
@@ -119,7 +119,7 @@
     },
     {
       "id": "aryan-005",
-      "status": "approved",
+      "status": "posted",
       "topic": "Morning routine for maximum gains",
       "caption": "5 AM. No alarm snooze. This is how gains start.\nMost guys lose their workout before they wake up.\nWhat time do you hit the gym?\nSend to the friend who always says 'I'll start Monday'.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005.jpg",
@@ -139,7 +139,10 @@
       "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005_yt.mp4",
       "youtube_video_id": "qzMmyU7sJkE",
       "youtube_posted_at": "2026-03-06T10:06:40Z",
-      "youtube_pin_comment_id": "Ugz7OQITY68NFkhd9pJ4AaABAg"
+      "youtube_pin_comment_id": "Ugz7OQITY68NFkhd9pJ4AaABAg",
+      "posted_at": "2026-03-06T14:26:40Z",
+      "platform_post_id": "3846907720901624512",
+      "publish_error": null
     },
     {
       "id": "aryan-006",
