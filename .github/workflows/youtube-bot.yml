@@ -3,16 +3,14 @@ name: YouTube Bot (Maya)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # Strategy: MAXED OUT YT engagement + INDEPENDENT YT Shorts publishing
-    # YouTube publishing is decoupled from Instagram — works even if IG is disabled
-    # Each session has 0-4min startup jitter built into the code
-    #
-    # PARALLEL: Instagram engagement runs on a SEPARATE workflow (instagram-bot.yml)
-    # so YT and IG never block each other.
-    #
-    # ~26 YT sessions/day — 06:00 to 23:45 IST, every ~45 min
+    # ~22 YT sessions/day — 06:00 to 22:30 IST, every ~45 min
     # Alternates yt_engage (niche browsing) and yt_replies (respond to comments)
-    # 3 publish windows for 2-3 Shorts/day (research: 3.2x faster sub growth)
+    # 2 publish windows (lunch + prime time) — fits within 10k quota/day
+    #
+    # Quota budget (10k units/day):
+    #   2 uploads × 1,650 = 3,300 units
+    #   20 engagement sessions × ~200 = 4,000 units
+    #   Total: ~7,300 units ✓
     - cron: '30 0 * * *'   # 06:00 IST — yt_engage (early morning)
     - cron: '15 1 * * *'   # 06:45 IST — yt_replies
     - cron: '0 2 * * *'    # 07:30 IST — yt_engage
@@ -25,7 +23,7 @@ on:
     - cron: '15 7 * * *'   # 12:45 IST — YT PUBLISH + yt_replies (lunch publish)
     - cron: '0 8 * * *'    # 13:30 IST — yt_engage
     - cron: '45 8 * * *'   # 14:15 IST — yt_replies
-    - cron: '30 9 * * *'   # 15:00 IST — YT PUBLISH + yt_engage (afternoon publish)
+    - cron: '30 9 * * *'   # 15:00 IST — yt_engage
     - cron: '15 10 * * *'  # 15:45 IST — yt_replies
     - cron: '0 11 * * *'   # 16:30 IST — yt_engage
     - cron: '45 11 * * *'  # 17:15 IST — yt_replies
@@ -33,10 +31,8 @@ on:
     - cron: '15 13 * * *'  # 18:45 IST — yt_replies
     - cron: '0 14 * * *'   # 19:30 IST — YT PUBLISH + yt_engage (prime time publish)
     - cron: '45 14 * * *'  # 20:15 IST — yt_replies
-    - cron: '30 15 * * *'  # 21:00 IST — yt_engage (evening binge)
-    - cron: '15 16 * * *'  # 21:45 IST — yt_replies
-    - cron: '0 17 * * *'   # 22:30 IST — yt_engage
-    - cron: '15 18 * * *'  # 23:45 IST — yt_replies (last pass)
+    - cron: '30 15 * * *'  # 21:00 IST — yt_engage (evening)
+    - cron: '15 16 * * *'  # 21:45 IST — yt_replies (last pass)
 
   workflow_dispatch:
     inputs:
@@ -113,7 +109,7 @@ jobs:
               "15 7 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # lunch publish
               "0 8 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
               "45 8 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 9 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # afternoon publish
+              "30 9 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
               "15 10 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
               "0 11 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
               "45 11 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
@@ -123,8 +119,6 @@ jobs:
               "45 14 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
               "30 15 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
               "15 16 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "0 17 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 18 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
               *)             echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
             esac
             echo "yt_publish=${YT_PUB}" >> $GITHUB_OUTPUT

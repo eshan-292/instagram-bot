@@ -472,8 +472,14 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
     converted = 0
     for post in posts:
         status = str(post.get("status", "")).strip().lower()
-        if status in {"posted", "failed"}:
+        if status == "failed":
             continue
+        # "posted" posts already published to IG — only process for YT videos
+        is_posted = (status == "posted")
+        if is_posted:
+            # Skip if YouTube is off or post already has a YT video
+            if not youtube or post.get("youtube_video_id"):
+                continue
 
         # Single/photo posts publish as photos — no video needed
         post_type = str(post.get("post_type", "reel")).strip().lower()
@@ -495,8 +501,9 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
         # Instagram video (4:5) — SILENT: trending audio added at publish time
         # Carousels publish as swipeable albums on IG — no video needed.
         # The montage video is created below for YouTube Shorts only.
-        if post_type == "carousel":
-            pass  # Skip IG video for carousels — they publish as albums
+        # Skip IG video for already-posted posts (already published to IG).
+        if is_posted or post_type == "carousel":
+            pass  # Skip IG video — either already posted or carousel (album)
         else:
             video_url = str(post.get("video_url") or "").strip()
             if not video_url or not os.path.exists(video_url):
