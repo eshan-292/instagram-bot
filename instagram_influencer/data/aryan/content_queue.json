@@ -5,17 +5,17 @@
       "status": "approved",
       "topic": "5 exercises you're doing wrong in the gym",
       "caption": "5 exercises. You're doing ALL of them wrong.\nI wasted 2 years before someone told me.\nWhich one surprised you most?\nSend this to your gym partner before they hurt themselves.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
+      "image_url": "data/aryan/generated_images/pending/aryan-001/1.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
       "carousel_images": [
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/2.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/3.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/4.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/5.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/6.jpg"
+        "data/aryan/generated_images/pending/aryan-001/1.jpg",
+        "data/aryan/generated_images/pending/aryan-001/2.jpg",
+        "data/aryan/generated_images/pending/aryan-001/3.jpg",
+        "data/aryan/generated_images/pending/aryan-001/4.jpg",
+        "data/aryan/generated_images/pending/aryan-001/5.jpg",
+        "data/aryan/generated_images/pending/aryan-001/6.jpg"
       ],
       "scheduled_at": "2026-03-09T11:30:00Z",
       "notes": "gym setting, demonstrating form, good lighting",
@@ -34,7 +34,7 @@
         "I wasted 2 years.",
         "Send to your gym partner"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
       "youtube_video_id": null,
       "youtube_posted_at": null,
       "youtube_pin_comment_id": null
@@ -72,8 +72,8 @@
       "status": "posted",
       "topic": "Push day complete routine -- chest and shoulders",
       "caption": "Push day. 45 minutes. No fluff.\nThis routine added 2 inches to my chest in 3 months.\nWhat's your push day split?\nSend to someone who needs a real push day routine.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003.jpg",
-      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003.mp4",
+      "image_url": "data/aryan/generated_images/pending/aryan-003.jpg",
+      "video_url": "data/aryan/generated_images/pending/aryan-003.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -86,7 +86,7 @@
         "+2 inches in 3 months.",
         "Send to your gym buddy"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4",
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-003_yt.mp4",
       "posted_at": "2026-03-06T07:56:03Z",
       "platform_post_id": "3846711089329666280",
       "publish_error": null,
@@ -99,7 +99,7 @@
       "status": "posted",
       "topic": "Physique check -- 6 month transformation",
       "caption": "6 months. Same guy. Different discipline.\nNo shortcuts. No steroids. Just consistency.\nCould you commit to 6 months?\nScreenshot this as your motivation.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-004.jpg",
+      "image_url": "data/aryan/generated_images/pending/aryan-004.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
@@ -122,8 +122,8 @@
       "status": "posted",
       "topic": "Morning routine for maximum gains",
       "caption": "5 AM. No alarm snooze. This is how gains start.\nMost guys lose their workout before they wake up.\nWhat time do you hit the gym?\nSend to the friend who always says 'I'll start Monday'.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005.jpg",
-      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005.mp4",
+      "image_url": "data/aryan/generated_images/pending/aryan-005.jpg",
+      "video_url": "data/aryan/generated_images/pending/aryan-005.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -136,29 +136,28 @@
         "Gains start before sunrise.",
         "Send to your 'Monday' friend"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-005_yt.mp4",
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-005_yt.mp4",
       "youtube_video_id": "qzMmyU7sJkE",
       "youtube_posted_at": "2026-03-06T10:06:40Z",
       "youtube_pin_comment_id": "Ugz7OQITY68NFkhd9pJ4AaABAg",
       "posted_at": "2026-03-06T14:26:40Z",
-      "platform_post_id": "3846907720901624512",
-      "publish_error": null
+      "platform_post_id": "3846907720901624512"
     },
     {
       "id": "aryan-006",
       "status": "approved",
       "topic": "Desi protein sources ranked -- best bang for your buck",
       "caption": "Every Indian gym bro asks the same question.\n\"Bhai protein kahan se laaun?\"\nHere's your answer. Ranked by Rs per gram of protein.\nSave this. Screenshot this. Send this.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/1.jpg",
+      "image_url": "data/aryan/generated_images/pending/aryan-006/1.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
       "carousel_images": [
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/1.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/2.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/3.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/4.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/5.jpg"
+        "data/aryan/generated_images/pending/aryan-006/1.jpg",
+        "data/aryan/generated_images/pending/aryan-006/2.jpg",
+        "data/aryan/generated_images/pending/aryan-006/3.jpg",
+        "data/aryan/generated_images/pending/aryan-006/4.jpg",
+        "data/aryan/generated_images/pending/aryan-006/5.jpg"
       ],
       "scheduled_at": "2026-03-04T13:30:00Z",
       "notes": "grocery/kitchen setting, clean food photography",
@@ -176,7 +175,7 @@
         "Ranked by Rs per gram.",
         "Save this NOW"
       ],
-      "youtube_video_url": null,
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-006/1_yt.mp4",
       "youtube_video_id": null,
       "youtube_posted_at": null,
       "youtube_pin_comment_id": null
@@ -186,8 +185,8 @@
       "status": "approved",
       "topic": "Shoulder workout for a broader look -- 4 exercises",
       "caption": "Shoulders make or break your physique.\n4 exercises. 30 minutes. Wider by next month.\nWhich exercise hits hardest for you?\nSave this for your next shoulder day.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-007.jpg",
-      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-007.mp4",
+      "image_url": "data/aryan/generated_images/pending/aryan-007.jpg",
+      "video_url": "data/aryan/generated_images/pending/aryan-007.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -200,15 +199,15 @@
         "4 exercises. 30 min.",
         "Save for shoulder day"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-007_yt.mp4"
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-007_yt.mp4"
     },
     {
       "id": "aryan-008",
       "status": "approved",
       "topic": "Leg day you can't skip -- complete routine",
       "caption": "\"I train legs.\" No you don't.\nThis is what a real leg day looks like.\nWhy do 90% of guys skip this?\nSend to the friend with the chicken legs.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-008.jpg",
-      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-008.mp4",
+      "image_url": "data/aryan/generated_images/pending/aryan-008.jpg",
+      "video_url": "data/aryan/generated_images/pending/aryan-008.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -221,14 +220,14 @@
         "This is real leg day.",
         "Send to chicken legs guy"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-008_yt.mp4"
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-008_yt.mp4"
     },
     {
       "id": "aryan-009",
       "status": "approved",
       "topic": "Gym selfie -- consistency check",
-      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a \ud83d\udcaa if you showed up today.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-009.jpg",
+      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a 💪 if you showed up today.",
+      "image_url": "data/aryan/generated_images/pending/aryan-009.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
@@ -240,7 +239,7 @@
       "video_text": [
         "No filter. No edit.",
         "365 days. No quitting.",
-        "Drop a \ud83d\udcaa"
+        "Drop a 💪"
       ]
     },
     {
@@ -248,16 +247,16 @@
       "status": "approved",
       "topic": "Beginner gym mistakes to avoid -- what I wish I knew",
       "caption": "3 years in the gym. Year 1 was almost wasted.\nThese 5 mistakes cost me gains and caused injuries.\nDon't be that guy.\nSave this before your next session.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-010/1.jpg",
+      "image_url": "data/aryan/generated_images/pending/aryan-010/1.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
       "carousel_images": [
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-010/1.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-010/2.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-010/3.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-010/4.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-010/5.jpg"
+        "data/aryan/generated_images/pending/aryan-010/1.jpg",
+        "data/aryan/generated_images/pending/aryan-010/2.jpg",
+        "data/aryan/generated_images/pending/aryan-010/3.jpg",
+        "data/aryan/generated_images/pending/aryan-010/4.jpg",
+        "data/aryan/generated_images/pending/aryan-010/5.jpg"
       ],
       "scheduled_at": "2026-03-06T13:30:00Z",
       "notes": "gym, mix of humorous and educational shots",
@@ -274,15 +273,16 @@
         "Year 1 was wasted.",
         "These 5 mistakes cost me.",
         "Save this NOW"
-      ]
+      ],
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-010/1_yt.mp4"
     },
     {
       "id": "aryan-011",
       "status": "approved",
       "topic": "Delhi gym culture -- what outsiders don't understand",
       "caption": "Delhi gym culture hits different.\nThe stares. The unsolicited advice. The 45-minute wait for the bench.\nBut we wouldn't have it any other way.\nTag your Delhi gym buddy.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-011.jpg",
-      "video_url": null,
+      "image_url": "data/aryan/generated_images/pending/aryan-011.jpg",
+      "video_url": "data/aryan/generated_images/pending/aryan-011.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -294,15 +294,16 @@
         "Delhi gym culture.",
         "The stares. The advice.",
         "Tag your gym buddy"
-      ]
+      ],
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-011_yt.mp4"
     },
     {
       "id": "aryan-012",
       "status": "approved",
       "topic": "Post-workout recovery routine that actually works",
       "caption": "The workout is only half the battle.\nRecovery is where gains actually happen.\nWhat's your post-workout ritual?\nSave this -- your muscles will thank you.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-012.jpg",
-      "video_url": null,
+      "image_url": "data/aryan/generated_images/pending/aryan-012.jpg",
+      "video_url": "data/aryan/generated_images/pending/aryan-012.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -314,14 +315,15 @@
         "Workout is half the battle.",
         "Recovery = real gains.",
         "Save this"
-      ]
+      ],
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-012_yt.mp4"
     },
     {
       "id": "aryan-013",
       "status": "approved",
       "topic": "Motivational -- discipline over motivation",
       "caption": "Motivation got me to the gym.\nDiscipline made sure I never left.\nStop waiting to feel like it.\nJust show up.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-013.jpg",
+      "image_url": "data/aryan/generated_images/pending/aryan-013.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "single",
@@ -341,16 +343,16 @@
       "status": "approved",
       "topic": "Gym bag essentials -- everything you need",
       "caption": "I've had the same gym bag setup for 2 years.\nNothing extra. Nothing missing.\nWhat's in YOUR gym bag?\nSave this for your next Amazon order.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-014/1.jpg",
+      "image_url": "data/aryan/generated_images/pending/aryan-014/1.jpg",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
       "carousel_images": [
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-014/1.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-014/2.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-014/3.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-014/4.jpg",
-        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-014/5.jpg"
+        "data/aryan/generated_images/pending/aryan-014/1.jpg",
+        "data/aryan/generated_images/pending/aryan-014/2.jpg",
+        "data/aryan/generated_images/pending/aryan-014/3.jpg",
+        "data/aryan/generated_images/pending/aryan-014/4.jpg",
+        "data/aryan/generated_images/pending/aryan-014/5.jpg"
       ],
       "scheduled_at": "2026-03-08T13:30:00Z",
       "notes": "gym bag flat lays, clean product photography style",
@@ -367,15 +369,16 @@
         "Same setup 2 years.",
         "Nothing extra. Nothing missing.",
         "Save for your Amazon order"
-      ]
+      ],
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-014/1_yt.mp4"
     },
     {
       "id": "aryan-015",
       "status": "approved",
       "topic": "Intermittent fasting for beginners -- honest review",
       "caption": "I tried intermittent fasting for 90 days.\nHere's what nobody tells you.\nThe hunger is real. But so are the results.\nWould you try it? Honest answers only.",
-      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-015.jpg",
-      "video_url": null,
+      "image_url": "data/aryan/generated_images/pending/aryan-015.jpg",
+      "video_url": "data/aryan/generated_images/pending/aryan-015.mp4",
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": null,
@@ -387,7 +390,8 @@
         "90 days of fasting.",
         "The hunger is real.",
         "But so are the results."
-      ]
+      ],
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-015_yt.mp4"
     }
   ]
 }

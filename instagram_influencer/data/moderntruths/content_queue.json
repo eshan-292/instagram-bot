@@ -133,6 +133,422 @@
       "posted_at": "2026-03-05T15:01:45Z",
       "platform_post_id": "3846200578787827952",
       "publish_error": null
+    },
+    {
+      "id": "mt-006",
+      "status": "draft",
+      "topic": "Red Flag Friday: Situationships",
+      "caption": "Red Flag Friday: 7 signs you're stuck in a situationship. This will hurt, but he's not confused. Does avoiding labels benefit anyone but the commitment-phobe? Send this to someone who needs to escape the situationship limbo.",
+      "alt_text": "A woman looks thoughtfully at her phone in a dimly lit bar, then at an empty chair, feeling the frustration of a situationship.",
+      "youtube_title": "7 Situationship Red Flags You're Ignoring",
+      "video_text": [
+        "Red Flag Friday: 7 signs you're stuck in"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-06T21:39:20Z",
+      "notes": "series:Red Flag Friday | Dimly lit bar, woman looking thoughtfully at her phone, then to an empty chair beside her. Mood: contemplative, slightly frustrated. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: He only texts you late at night. Woman looking at phone with a single notification from a specific contact, dark room.",
+        "Slide 2: You've never met his friends or family. Woman looking confused while seeing a group photo on social media where he's present without her.",
+        "Slide 3: He avoids making future plans. Calendar showing a tentative event, then crossed out with a 'maybe' text.",
+        "Slide 4: He calls you 'friend' or 'buddy' in front of others. Woman looking visibly uncomfortable as a man puts his arm around her like a friend.",
+        "Slide 5: He gets jealous, but won't commit. Man with a stern face, looking suspiciously at her phone, but refusing to label their relationship.",
+        "Slide 6: Your conversations lack depth beyond surface level. Couple sitting on a couch, both scrolling on their phones, no eye contact."
+      ]
+    },
+    {
+      "id": "mt-007",
+      "status": "draft",
+      "topic": "What 'I need space' actually means",
+      "caption": "I probably shouldn't share this, but 'I need space' means 3 things. It's never about the actual space. Is it ever about 'space' or always about 'you'? Screenshot this before this gets buried.",
+      "alt_text": "A man with a knowing, cynical smirk looks directly into the camera, hinting at hidden truths behind a common breakup phrase.",
+      "youtube_title": "3 Real Meanings of 'I Need Space'",
+      "video_text": [
+        "\"I need space\" means...",
+        "It's rarely about actual space.",
+        "Swipe to reveal the 3 truths."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-07T01:39:20Z",
+      "notes": "dual_format:reel | Man with a knowing, slightly cynical smirk, looking directly into camera. Dark background, sharp focus. Mood: authoritative, revealing. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-008",
+      "status": "draft",
+      "topic": "Why nice guys actually finish last",
+      "caption": "Nobody wants to hear this: 'Nice Guys' finish last for 5 reasons. It's not about being kind, it's about being effective. Is 'niceness' truly attractive, or just a lack of boundaries? Tag the friend who still thinks being 'nice' is enough.",
+      "alt_text": "A dejected man in a rumpled suit sits alone on a park bench, while couples pass by, illustrating why 'nice guys' often struggle.",
+      "youtube_title": "5 Reasons 'Nice Guys' Finish Last (Truth)",
+      "video_text": [
+        "Nobody wants to hear this: 'Nice Guys' finish"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T05:39:20Z",
+      "notes": "dual_format:carousel | Man in a slightly rumpled suit, looking dejected, sitting alone on a park bench while others pass by in pairs. Mood: somber, reflective. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: Lack of boundaries. Man with a subservient posture, letting others walk over him.",
+        "Slide 2: Seeking validation, not connection. Man constantly checking his phone for likes/messages, looking anxious.",
+        "Slide 3: Passive aggression instead of directness. Man giving a forced smile while clenching his fists behind his back.",
+        "Slide 4: Mistaking 'friendship' for 'attraction'. Man offering unsolicited help, hoping for romantic return, while woman looks annoyed.",
+        "Slide 5: Fearing rejection over true desire. Man holding back from expressing his true feelings, looking timid and hesitant."
+      ]
+    },
+    {
+      "id": "mt-009",
+      "status": "draft",
+      "topic": "She's not playing hard to get \u2014 she's not interested",
+      "caption": "Harsh truth: She's not playing 'hard to get.' She's just not interested. Stop chasing ghosts. Are you chasing a challenge, or ignoring a clear signal? Screenshot this for a reality check.",
+      "alt_text": "Text on a dark background reads: 'She's not playing hard to get. She's just not interested.' A woman with a bored expression looks away from an unseen person.",
+      "youtube_title": "She's Not Hard To Get, She's Just Not Into You",
+      "video_text": [
+        "Harsh truth: She's not playing 'hard to get.'"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-07T09:39:20Z",
+      "notes": "Close-up of a woman's face, slightly bored, looking away from an unseen suitor. Soft, indifferent expression. Prominently overlay the text 'She's not playing hard to get. She's just not interested.' on a dark background. Mood: aloof, realistic. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-010",
+      "status": "draft",
+      "topic": "5 signs you're the backup option",
+      "caption": "This will hurt: 5 undeniable signs you're just their backup option. They keep you on the hook for emergencies. Are you hoping for more, or are you actively settling for less? Send this to someone who needs to stop being a second choice.",
+      "alt_text": "A person looks at their phone with a frown, illuminated by the screen, realizing they might be a backup option.",
+      "youtube_title": "5 Signs You're Just Their Backup Option",
+      "video_text": [
+        "This will hurt: 5 undeniable signs you're just"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T13:39:20Z",
+      "notes": "A person looking at their phone, with a slight frown, illuminated by the screen. Mood: concerned, realization. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: They only contact you when lonely or bored. Close-up of a text message screen showing an apology for a last-minute cancellation, but suggesting meeting later tonight.",
+        "Slide 2: You're never their priority for important events. A person sitting alone at a restaurant table, looking at their phone, while couples dine happily in the background.",
+        "Slide 3: They avoid defining the relationship. Two hands clasped, but one hand looks reluctant or less engaged than the other, pulling away slightly.",
+        "Slide 4: Their effort is inconsistent and minimal. A calendar with one specific day circled, then crossed out with 'maybe' written over it, indicating flakiness.",
+        "Slide 5: You feel constantly anxious about their interest. A lone figure walking away from a group of friends laughing together, looking isolated and worried."
+      ]
+    },
+    {
+      "id": "mt-011",
+      "status": "draft",
+      "topic": "The psychology of why you attract toxic partners",
+      "caption": "The truth most people ignore: You attract toxic partners for 3 psychological reasons. It's not bad luck; it's a pattern. Are you drawn to what's familiar, even if it's destructive? Tag the friend who needs this hard truth.",
+      "alt_text": "A figure stands in front of a fractured mirror, reflecting distorted images, symbolizing internal reasons for attracting toxic relationships.",
+      "youtube_title": "3 Reasons You Attract Toxic Partners",
+      "video_text": [
+        "Why toxic partners find you.",
+        "It's not bad luck.",
+        "Tag the one who needs to know."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-07T17:39:20Z",
+      "notes": "Figure standing in front of a fractured mirror, reflecting distorted images. Mood: introspective, slightly unsettling. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-012",
+      "status": "draft",
+      "topic": "Why she lost interest \u2014 the real reason",
+      "caption": "Read that again: She didn't lose interest 'randomly.' Here are 5 real reasons. It wasn't a mystery; you just weren't paying attention. Did she change, or did you stop paying attention? Share this with the guy who's confused why she ghosted.",
+      "alt_text": "A couple sits opposite each other at a cafe table, looking in different directions, illustrating a growing distance.",
+      "youtube_title": "5 Brutal Reasons She Lost Interest",
+      "video_text": [
+        "Read that again: She didn't lose interest 'randomly.'"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T21:39:20Z",
+      "notes": "Couple sitting opposite each other at a cafe table, but looking in different directions, distant. Mood: disconnected, revealing. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: Lack of emotional effort. A man looking distracted by his phone while a woman tries to talk to him over dinner.",
+        "Slide 2: You stopped challenging her. A woman looking visibly bored during a conversation, her eyes glazed over, wanting intellectual stimulation.",
+        "Slide 3: Insecurity became unattractive. A man making a self-deprecating joke, while the woman looks uncomfortable and loses respect.",
+        "Slide 4: You became too predictable. A person checking their watch impatiently during a date, looking around the room, signaling boredom.",
+        "Slide 5: Disrespect or complacency. A couple arguing in a public place, faces stressed and unhappy, showing a breakdown in respect."
+      ]
+    },
+    {
+      "id": "mt-013",
+      "status": "draft",
+      "topic": "Why desperation kills attraction",
+      "caption": "Desperation isn't a strategy. It's the 1 thing that guarantees attraction dies. You can't beg someone to want you. Are you seeking connection, or just validation? Screenshot this as a reminder.",
+      "alt_text": "Text on a dark background reads: 'Desperation kills attraction.' A close-up of a hand tightly gripping a wilting rose, petals falling off.",
+      "youtube_title": "Desperation Kills 1 Thing: Attraction",
+      "video_text": [
+        "Desperation isn't a strategy. It's the 1 thing"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-08T01:39:20Z",
+      "notes": "Close-up of a hand tightly gripping a rose, petals falling off. Focus on the desperate grip. Prominently overlay the text 'Desperation kills attraction.' on a dark background. Mood: stark, cautionary. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-014",
+      "status": "draft",
+      "topic": "Things high-value men never do",
+      "caption": "5 things a high-value man would NEVER do. Are you making these 5 mistakes? Stop sabotaging your own appeal. Are you building respect, or just seeking attention? Tag the friend who needs to level up his dating game.",
+      "alt_text": "A sharp-dressed man with confident posture, looking away from a trivial phone interaction, embodying discerning behavior.",
+      "youtube_title": "5 Things High-Value Men NEVER Do",
+      "video_text": [
+        "5 things a high-value man would NEVER do."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T05:39:20Z",
+      "notes": "Sharp-dressed man, confident posture, looking away from a trivial phone interaction. Mood: discerning, powerful. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: Complain about his ex. A man complaining about his ex to a new date, looking bitter and defensive.",
+        "Slide 2: Seek constant external validation. A man boasting excessively about his possessions or achievements, seeking external validation from a bored audience.",
+        "Slide 3: Avoid difficult conversations. A man avoiding eye contact, looking shifty or uncomfortable during a serious relationship talk.",
+        "Slide 4: Neglect his personal growth. A man slumped on a couch, surrounded by junk food and video games, ignoring personal responsibilities.",
+        "Slide 5: Play games or manipulate. A man with a sly smirk, looking at his phone, plotting a manipulative text message strategy."
+      ]
+    },
+    {
+      "id": "mt-015",
+      "status": "draft",
+      "topic": "What 'I'm not ready' really means",
+      "caption": "Everything you know about 'I'm not ready' is wrong. It means 1 thing. It's not about timing; it's about priority. Is it an explanation, or just a polite rejection? Your bestie needs to see this.",
+      "alt_text": "A woman looks directly at the camera with a clear, assertive expression, conveying a direct truth about the phrase 'I'm not ready'.",
+      "youtube_title": "The REAL Meaning of 'I'm Not Ready'",
+      "video_text": [
+        "\"I'm not ready\" means...",
+        "It's never about timing.",
+        "Your bestie needs this."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-08T09:39:20Z",
+      "notes": "dual_format:reel | Woman looking directly at the camera with a clear, assertive expression. Background slightly blurred, emphasizing her clarity. Mood: direct, unapologetic. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-016",
+      "status": "draft",
+      "topic": "The difference between love and attachment",
+      "caption": "Love vs. Attachment: 6 brutal differences you MUST understand. One liberates; the other traps. Are you truly in love, or just afraid to be alone? Send this to someone who confuses obsession with love.",
+      "alt_text": "Two figures, one reaching out gently, the other clutching tightly, visually representing the contrast between healthy love and unhealthy attachment.",
+      "youtube_title": "Love vs. Attachment: 6 Brutal Truths",
+      "video_text": [
+        "Love vs. Attachment: 6 brutal differences you MUST"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T13:39:20Z",
+      "notes": "Two figures, one reaching out gently, the other clutching tightly. Visual metaphor for healthy vs. unhealthy connection. Mood: analytical, revealing. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: Love gives freedom. A couple holding hands loosely, looking content and individual, walking in a park.",
+        "Slide 2: Attachment creates dependence. A person clinging tightly to another, who looks uncomfortable and constrained, symbolizing suffocation.",
+        "Slide 3: Love grows independently. Two separate puzzle pieces fitting together perfectly, but able to stand alone.",
+        "Slide 4: Attachment fears loss. Two people bound together by ropes, looking strained and dependent on each other, unable to move freely.",
+        "Slide 5: Love is selfless. A person smiling genuinely while their partner achieves something, showing support and pride.",
+        "Slide 6: Attachment is insecure. A person looking jealous and insecure as their partner talks to someone else at a party."
+      ]
+    },
+    {
+      "id": "mt-017",
+      "status": "draft",
+      "topic": "Why most relationships fail after 3 months",
+      "caption": "The truth most people ignore: 70% of relationships fail within 3 months. Here's why. The honeymoon phase ends; reality sets in. Are you building a foundation, or just a fantasy? Screenshot this and re-evaluate your approach.",
+      "alt_text": "Text on a dark background reads: '70% of relationships fail within 3 months.' A calendar page with the third month highlighted, crossed out with a red 'X'.",
+      "youtube_title": "70% Relationships Fail in 3 Months. Why?",
+      "video_text": [
+        "The truth most people ignore: 70% of relationships"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-08T17:39:20Z",
+      "notes": "Calendar page with the third month highlighted, crossed out with a red 'X'. Prominently overlay the text '70% of relationships fail within 3 months.' on a dark background. Mood: stark, factual. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-018",
+      "status": "draft",
+      "topic": "Why being alone beats being in the wrong relationship",
+      "caption": "If this offends you \u2014 good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
+      "alt_text": "A person stands confidently alone on a mountain peak, looking out at a vast, beautiful landscape, symbolizing freedom and self-worth.",
+      "youtube_title": "Alone is Better: 5 Truths",
+      "video_text": [
+        "Alone > Wrong Partner.",
+        "5 compromises you tolerate.",
+        "Send to the friend who knows."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-08T21:39:20Z",
+      "notes": "dual_format:reel | Person standing confidently alone on a mountain peak, looking out at a vast landscape. Mood: empowered, serene. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-019",
+      "status": "draft",
+      "topic": "The truth about modern dating apps",
+      "caption": "Harsh truth: Modern dating apps are engineered for 3 painful outcomes you ignore. They thrive on endless scrolling, not connection. Are you using the app, or is the app using you? Tag the friend who's still swiping for love.",
+      "alt_text": "A person stares blankly at a dating app on their phone, surrounded by a subtle, digital haze, depicting dating app fatigue.",
+      "youtube_title": "3 Painful Truths About Dating Apps",
+      "video_text": [
+        "Harsh truth: Modern dating apps are engineered for"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T01:39:20Z",
+      "notes": "Person staring blankly at a dating app on their phone, surrounded by a subtle, digital haze. Mood: jaded, critical. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: Endless shallow connections. A person looking overwhelmed by an endless stream of profiles on a dating app.",
+        "Slide 2: Designed for addiction, not commitment. A phone screen showing a chat with no replies, or very generic, unengaging messages, fostering a cycle of disappointment.",
+        "Slide 3: Commodification of people. A person swiping left and right rapidly, treating profiles like products in an online store.",
+        "Slide 4: Exaggerated self-presentation. Close-up of a person taking multiple selfies, heavily filtered, attempting to create an 'ideal' online persona.",
+        "Slide 5: Superficial matching based on appearance. A split screen, one side showing a user's highly edited profile photo, the other showing a bewildered face after meeting in person."
+      ]
+    },
+    {
+      "id": "mt-020",
+      "status": "draft",
+      "topic": "Why your ex moved on faster than you",
+      "caption": "Nobody wants to hear this, but your ex moved on faster for 4 brutal reasons. It wasn't about finding someone 'better' instantly. Are you holding onto the past, or learning from it? Send this to someone who's still wondering why.",
+      "alt_text": "A person looks at a distant couple (presumably an ex with a new partner) with a pained, reflective expression.",
+      "youtube_title": "4 Brutal Reasons Exes Move On Fast",
+      "video_text": [
+        "Nobody wants to hear this, but your ex"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T05:39:20Z",
+      "notes": "Person looking at a distant couple (presumably ex + new partner) with a pained, reflective expression. Mood: melancholic, insightful. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: They grieved during the relationship. A person looking inward, deep in thought, processing emotions slowly while still in a relationship.",
+        "Slide 2: Their attachment style allows for quicker detachment. Two paths diverging, one person already far down a new path while the other is still at the split.",
+        "Slide 3: They had a backup plan. A person secretly texting someone new while their current partner is distracted.",
+        "Slide 4: You were never their priority. A person looking shocked and hurt while seeing a photo of their ex with a new partner on social media, realizing their ex had moved on effortlessly.",
+        "Slide 5: They were emotionally checked out long ago. A couple sitting together, but one person is completely disengaged, eyes elsewhere, for months leading up to the breakup."
+      ]
+    },
+    {
+      "id": "mt-021",
+      "status": "draft",
+      "topic": "What 'I need space' actually means",
+      "caption": "I probably shouldn't share this, but 'I need space' means 3 things. It's never about the actual space. Is it ever about 'space' or always about 'you'? Screenshot this before this gets buried.",
+      "alt_text": "A man with a knowing, cynical smirk looks directly into the camera, hinting at hidden truths behind a common breakup phrase.",
+      "youtube_title": "3 Real Meanings of 'I Need Space'",
+      "video_text": [
+        "\"I need space\" means...",
+        "It's rarely about actual space.",
+        "Swipe to reveal the 3 truths."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T01:39:20Z",
+      "notes": "dual_format:reel->carousel | Man with a knowing, slightly cynical smirk, looking directly into camera. Dark background, sharp focus. Mood: authoritative, revealing. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Hook slide: I probably shouldn't share this, but 'I need space' means 3 things. It's never about the actual space. Is it ever about 'space' or always about 'you'? Screenshot this before this gets buried.",
+        "Key point: What 'I need space' actually means",
+        "Detail or example",
+        "Supporting visual",
+        "CTA slide: I probably shouldn't share this, but 'I need space' means 3 things. It's never about the actual space. Is it ever about 'space' or always about 'you'? Screenshot this before this gets buried."
+      ]
+    },
+    {
+      "id": "mt-022",
+      "status": "draft",
+      "topic": "Why nice guys actually finish last",
+      "caption": "Nobody wants to hear this: 'Nice Guys' finish last for 5 reasons. It's not about being kind, it's about being effective. Is 'niceness' truly attractive, or just a lack of boundaries? Tag the friend who still thinks being 'nice' is enough.",
+      "alt_text": "A dejected man in a rumpled suit sits alone on a park bench, while couples pass by, illustrating why 'nice guys' often struggle.",
+      "youtube_title": "5 Reasons 'Nice Guys' Finish Last (Truth)",
+      "video_text": [
+        "Nobody wants to hear this: 'Nice Guys' finish"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-08T05:39:20Z",
+      "notes": "dual_format:carousel->reel | Man in a slightly rumpled suit, looking dejected, sitting alone on a park bench while others pass by in pairs. Mood: somber, reflective. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "mt-023",
+      "status": "draft",
+      "topic": "What 'I'm not ready' really means",
+      "caption": "Everything you know about 'I'm not ready' is wrong. It means 1 thing. It's not about timing; it's about priority. Is it an explanation, or just a polite rejection? Your bestie needs to see this.",
+      "alt_text": "A woman looks directly at the camera with a clear, assertive expression, conveying a direct truth about the phrase 'I'm not ready'.",
+      "youtube_title": "The REAL Meaning of 'I'm Not Ready'",
+      "video_text": [
+        "\"I'm not ready\" means...",
+        "It's never about timing.",
+        "Your bestie needs this."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T09:39:20Z",
+      "notes": "dual_format:reel->carousel | Woman looking directly at the camera with a clear, assertive expression. Background slightly blurred, emphasizing her clarity. Mood: direct, unapologetic. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Hook slide: Everything you know about 'I'm not ready' is wrong. It means 1 thing. It's not about timing; it's about priority. Is it an explanation, or just a polite rejection? Your bestie needs to see this.",
+        "Key point: What 'I'm not ready' really means",
+        "Detail or example",
+        "Supporting visual",
+        "CTA slide: Everything you know about 'I'm not ready' is wrong. It means 1 thing. It's not about timing; it's about priority. Is it an explanation, or just a polite rejection? Your bestie needs to see this."
+      ]
+    },
+    {
+      "id": "mt-024",
+      "status": "draft",
+      "topic": "Why being alone beats being in the wrong relationship",
+      "caption": "If this offends you \u2014 good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
+      "alt_text": "A person stands confidently alone on a mountain peak, looking out at a vast, beautiful landscape, symbolizing freedom and self-worth.",
+      "youtube_title": "Alone is Better: 5 Truths",
+      "video_text": [
+        "Alone > Wrong Partner.",
+        "5 compromises you tolerate.",
+        "Send to the friend who knows."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T21:39:20Z",
+      "notes": "dual_format:reel->carousel | Person standing confidently alone on a mountain peak, looking out at a vast landscape. Mood: empowered, serene. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Hook slide: If this offends you \u2014 good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
+        "Key point: Why being alone beats being in the wrong",
+        "Detail or example",
+        "Supporting visual",
+        "CTA slide: If this offends you \u2014 good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away."
+      ]
     }
   ]
 }

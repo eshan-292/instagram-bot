@@ -1,0 +1,27 @@
+=== cw-023 | CAROUSEL ===
+Topic: Build your starter pack — 6 life categories
+Caption: Build your starter pack.
+Pick ONE from each category. No extras.
+Screenshot your pack.
+Send to your bestie — see how different you are.
+
+CAROUSEL — 6 slides
+Place in: generated_images/pending/cw-023/1.jpg, 2.jpg, ...
+
+--- Slide 1 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'BUILD YOUR STARTER PACK' in bold Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 2 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Drink: Coffee / Chai / Juice / Water Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 3 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Music: Bollywood / Hip-hop / Lo-fi / Classical Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 4 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Hobby: Gym / Reading / Gaming / Travel Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 5 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Food: Street food / Home cooked / Fine dining / Fast food Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 6 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Superpower: Time travel / Mind reading / Invisibility / Flying Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

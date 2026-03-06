@@ -157,6 +157,451 @@
       "posted_at": "2026-03-06T07:47:06Z",
       "platform_post_id": "3846706778684030350",
       "publish_error": null
+    },
+    {
+      "id": "cw-006",
+      "status": "draft",
+      "topic": "Life categories self-assessment",
+      "caption": "Rate Your Life. No lying.\nAre you truly honest?\nWhat's your total score?\nSend this to your friend. Compare scores.",
+      "alt_text": "A vibrant graphic with the text 'Rate Your Life' and a 1-10 scale, challenging viewers to be honest.",
+      "youtube_title": "Your TRUE Life Score? Rate Yourself 1-10!",
+      "video_text": [
+        "Your life score?",
+        "Be brutal.",
+        "Send to compare results."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-06T21:37:55Z",
+      "notes": "series:Rate Your Life | Bright, clean graphics. Each slide features a bold category name, a clear 1-10 numerical scale, and a relevant icon/minimalistic background. Maintain a consistent 'Choose Wisely' branding. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: '1. Career Growth.' (Visual: Person climbing a stylized ladder, 1-10 scale bar below)",
+        "Slide 2: '2. Financial Health.' (Visual: Stack of coins and bills with a growing arrow, 1-10 scale bar below)",
+        "Slide 3: '3. Mental Clarity.' (Visual: Silhouette of a calm person meditating, abstract clear mind, 1-10 scale bar below)",
+        "Slide 4: '4. Social Connections.' (Visual: Minimalist icons of diverse people linked together, 1-10 scale bar below)",
+        "Slide 5: '5. Physical Fitness.' (Visual: Person in dynamic pose (running/jumping), athletic build, 1-10 scale bar below)"
+      ]
+    },
+    {
+      "id": "cw-007",
+      "status": "draft",
+      "topic": "Life choice: Rich vs. Friends",
+      "caption": "1 crucial decision.\nYour true priority?\nWhat defines a good life?\nSend this to see if your friend picks the same.",
+      "alt_text": "Split screen showing a luxurious, empty mansion on one side and a group of happy friends laughing together on the other, representing the choice.",
+      "youtube_title": "Rich & Alone or Broke with Friends? Only 1 Pick!",
+      "video_text": [
+        "Rich and alone?",
+        "Or broke with friends?",
+        "Send to your real ones."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-07T01:37:55Z",
+      "notes": "Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vibrant group of diverse friends laughing, eating street food or at a casual gathering (dynamic, close-up shots). Quick cuts between the two contrasting scenes for the reel. | generated_by=gemini:gemini-2.5-flash"
+    },
+    {
+      "id": "cw-008",
+      "status": "draft",
+      "topic": "Lifestyle choice: City vs. Mountains",
+      "caption": "Pick 1 life.\nWhere would you thrive?\nConcrete jungle or serene peaks?\nTag a friend who lives there.",
+      "alt_text": "Carousel header image showing a split view: vibrant city skyline with skyscrapers and neon lights versus serene mountain range with clear lake and pine trees.",
+      "youtube_title": "City vs. Mountains: Which Home Is Yours? 1 Pick.",
+      "video_text": [
+        "City life?",
+        "Or mountain calm?",
+        "Choose your vibe."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T05:37:55Z",
+      "notes": "Clean, crisp photography for each slide. Each slide should visually represent a distinct aspect of either city or mountain life, with a clear contrast. Bright, engaging colors for city; natural, calming tones for mountains. | generated_by=gemini:gemini-2.5-flash",
+      "slides": [
+        "Slide 1: 'City Nights.' (Visual: Dynamic shot of a bustling city street at night, neon signs, taxis, energetic crowd motion blur)",
+        "Slide 2: 'Mountain Stars.' (Visual: A wide shot of a clear night sky over a rugged mountain landscape, thousands of stars visible, maybe a distant campfire glow)",
+        "Slide 3: 'Rush Hour Transit.' (Visual: A crowded subway car interior or a traffic-jammed urban highway, close-up of faces showing slight stress)",
+        "Slide 4: 'Forest Walk Commute.' (Visual: A tranquil person walking alone on a sun-dappled forest path, dappled light, sense of peace)",
+        "Slide 5: 'Corner Cafe Vibes.' (Visual: A stylish, busy city cafe interior, diverse people, laptop users, close-up of a latte with art)",
+        "Slide 6: 'Cabin Coffee View.' (Visual: Hands holding a rustic mug of coffee, looking out from a cozy cabin porch over a misty mountain valley at sunrise)"
+      ]
+    },
+    {
+      "id": "cw-009",
+      "status": "draft",
+      "topic": "Gym or Party \u2014 which defines your weekends?",
+      "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
+      "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
+      "youtube_title": "Gym or Party - Which Defines You?",
+      "video_text": [
+        "Gym or Party?",
+        "Pick ONE.",
+        "Comment your answer"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-06T21:38:11Z",
+      "notes": "split-screen: left=gym/discipline, right=party/nightlife, bold text overlay | generated_by=template"
+    },
+    {
+      "id": "cw-010",
+      "status": "draft",
+      "topic": "10 binary choices that reveal who you really are",
+      "caption": "10 choices. Zero skipping.\nSwipe through and comment your answers.\nThis will expose you.\nSend to someone who thinks they know themselves.",
+      "alt_text": "Carousel of binary choice graphics with bold typography on dark backgrounds",
+      "youtube_title": "10 Choices That Reveal Your True Self",
+      "video_text": [
+        "10 choices.",
+        "Zero skipping.",
+        "Comment ALL your answers"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T01:38:11Z",
+      "notes": "10-slide carousel, each slide one binary choice, consistent design template | generated_by=template",
+      "slides": [
+        "Hook: 'Choose Wisely' logo with '10 choices that expose you'",
+        "Morning person OR Night owl?",
+        "Save OR Spend?",
+        "Career OR Passion?",
+        "Loyalty OR Honesty?",
+        "City OR Mountains?"
+      ]
+    },
+    {
+      "id": "cw-011",
+      "status": "draft",
+      "topic": "Old money vs New money aesthetic",
+      "caption": "Old money or New money.\nWhich vibe are you?\nComment 1 or 2.\nSend this to someone who needs a reality check.",
+      "alt_text": "Split comparison of old money subtle luxury versus new money flashy aesthetic",
+      "youtube_title": "Old Money vs New Money - Which Are You?",
+      "video_text": [
+        "Old money or New money?",
+        "1 or 2?",
+        "Tag someone"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-07T05:38:11Z",
+      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics | generated_by=template"
+    },
+    {
+      "id": "cw-012",
+      "status": "draft",
+      "topic": "Would you rather: 5 hard life scenarios",
+      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
+      "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
+      "youtube_title": "5 Impossible Would You Rather Questions",
+      "video_text": [
+        "Would you rather?",
+        "5 impossible choices",
+        "Comment 1 or 2"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T09:38:11Z",
+      "notes": "5-slide carousel, each with a difficult binary choice, dark moody design | generated_by=template",
+      "slides": [
+        "Hook: 'Would You Rather?' in bold neon text",
+        "Know when you'll die OR Know how you'll die?",
+        "Be famous but broke OR Rich but unknown?",
+        "Read minds OR Be invisible?",
+        "Relive the past OR See the future?",
+        "CTA: 'Comment your answers. Tag someone.'"
+      ]
+    },
+    {
+      "id": "cw-013",
+      "status": "draft",
+      "topic": "Rate your life \u2014 honest score check",
+      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
+      "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
+      "youtube_title": "Rate Your Life - Honest Score Check",
+      "video_text": [
+        "Rate your life.",
+        "Be honest.",
+        "Total in comments"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T13:38:11Z",
+      "notes": "each slide rates one life area (fitness, career, relationships, finances, mental health) on 1-10 scale | generated_by=template",
+      "slides": [
+        "Hook: 'Rate your life. No lying.'",
+        "Fitness: 1-10?",
+        "Career: 1-10?",
+        "Relationships: 1-10?",
+        "Finances: 1-10?",
+        "Mental health: 1-10?"
+      ]
+    },
+    {
+      "id": "cw-014",
+      "status": "draft",
+      "topic": "Elimination bracket \u2014 8 foods, only 1 survives",
+      "caption": "8 foods. Only 1 survives.\nEliminate one each round. No cheating.\nComment your final answer.\nSend to a friend \u2014 see if they pick the same.",
+      "alt_text": "Carousel elimination bracket where 8 foods compete and only 1 survives",
+      "youtube_title": "8 Foods Only 1 Survives - Elimination Bracket",
+      "video_text": [
+        "8 foods.",
+        "Only 1 survives.",
+        "Comment your winner"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T17:38:11Z",
+      "notes": "elimination bracket design, bold text, contrasting food images per slide | generated_by=template",
+      "slides": [
+        "Hook: '8 FOODS. 1 SURVIVES.' in bold neon text",
+        "Round 1: Pizza vs Biryani vs Butter Chicken vs Momos",
+        "Round 1: Sushi vs Tacos vs Pasta vs Dosa",
+        "Round 2: Winners face off",
+        "Semi-final: 2 remaining",
+        "CTA: 'Who won? Comment your champion. Tag a foodie.'"
+      ]
+    },
+    {
+      "id": "cw-015",
+      "status": "draft",
+      "topic": "Build your starter pack \u2014 6 life categories",
+      "caption": "Build your starter pack.\nPick ONE from each category. No extras.\nScreenshot your pack.\nSend to your bestie \u2014 see how different you are.",
+      "alt_text": "Carousel where users pick one option from each life category to build their starter pack",
+      "youtube_title": "Build Your Starter Pack - 6 Life Categories",
+      "video_text": [
+        "Build your pack.",
+        "Pick ONE each.",
+        "Screenshot and compare"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T21:38:11Z",
+      "notes": "each slide = one category with 4 options, clean grid design, bold text | generated_by=template",
+      "slides": [
+        "Hook: 'BUILD YOUR STARTER PACK' in bold",
+        "Drink: Coffee / Chai / Juice / Water",
+        "Music: Bollywood / Hip-hop / Lo-fi / Classical",
+        "Hobby: Gym / Reading / Gaming / Travel",
+        "Food: Street food / Home cooked / Fine dining / Fast food",
+        "Superpower: Time travel / Mind reading / Invisibility / Flying"
+      ]
+    },
+    {
+      "id": "cw-016",
+      "status": "draft",
+      "topic": "Compatibility test \u2014 10 rapid-fire choices with your friend",
+      "caption": "Compatibility test.\n10 choices. Do them together.\nHow many did you match? Comment the number.\nTag someone and find out.",
+      "alt_text": "Carousel compatibility test with 10 rapid-fire binary choices to compare with friends",
+      "youtube_title": "Compatibility Test - 10 Rapid Fire Choices",
+      "video_text": [
+        "Compatibility test.",
+        "10 choices.",
+        "How many matches?"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T01:38:11Z",
+      "notes": "each slide = one A/B choice, split-screen design, neon accents | generated_by=template",
+      "slides": [
+        "Hook: 'COMPATIBILITY TEST' with two silhouettes",
+        "Morning person OR Night owl?",
+        "Text first OR Wait for them?",
+        "Plan everything OR Go with the flow?",
+        "Sweet OR Spicy?",
+        "Introvert OR Extrovert?"
+      ]
+    },
+    {
+      "id": "cw-017",
+      "status": "draft",
+      "topic": "Gym or Party \u2014 which defines your weekends?",
+      "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
+      "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
+      "youtube_title": "Gym or Party - Which Defines You?",
+      "video_text": [
+        "Gym or Party?",
+        "Pick ONE.",
+        "Comment your answer"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-08T05:38:11Z",
+      "notes": "split-screen: left=gym/discipline, right=party/nightlife, bold text overlay | generated_by=template"
+    },
+    {
+      "id": "cw-018",
+      "status": "draft",
+      "topic": "10 binary choices that reveal who you really are",
+      "caption": "10 choices. Zero skipping.\nSwipe through and comment your answers.\nThis will expose you.\nSend to someone who thinks they know themselves.",
+      "alt_text": "Carousel of binary choice graphics with bold typography on dark backgrounds",
+      "youtube_title": "10 Choices That Reveal Your True Self",
+      "video_text": [
+        "10 choices.",
+        "Zero skipping.",
+        "Comment ALL your answers"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T09:38:11Z",
+      "notes": "10-slide carousel, each slide one binary choice, consistent design template | generated_by=template",
+      "slides": [
+        "Hook: 'Choose Wisely' logo with '10 choices that expose you'",
+        "Morning person OR Night owl?",
+        "Save OR Spend?",
+        "Career OR Passion?",
+        "Loyalty OR Honesty?",
+        "City OR Mountains?"
+      ]
+    },
+    {
+      "id": "cw-019",
+      "status": "draft",
+      "topic": "Old money vs New money aesthetic",
+      "caption": "Old money or New money.\nWhich vibe are you?\nComment 1 or 2.\nSend this to someone who needs a reality check.",
+      "alt_text": "Split comparison of old money subtle luxury versus new money flashy aesthetic",
+      "youtube_title": "Old Money vs New Money - Which Are You?",
+      "video_text": [
+        "Old money or New money?",
+        "1 or 2?",
+        "Tag someone"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-08T13:38:11Z",
+      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics | generated_by=template"
+    },
+    {
+      "id": "cw-020",
+      "status": "draft",
+      "topic": "Would you rather: 5 hard life scenarios",
+      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
+      "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
+      "youtube_title": "5 Impossible Would You Rather Questions",
+      "video_text": [
+        "Would you rather?",
+        "5 impossible choices",
+        "Comment 1 or 2"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T17:38:11Z",
+      "notes": "5-slide carousel, each with a difficult binary choice, dark moody design | generated_by=template",
+      "slides": [
+        "Hook: 'Would You Rather?' in bold neon text",
+        "Know when you'll die OR Know how you'll die?",
+        "Be famous but broke OR Rich but unknown?",
+        "Read minds OR Be invisible?",
+        "Relive the past OR See the future?",
+        "CTA: 'Comment your answers. Tag someone.'"
+      ]
+    },
+    {
+      "id": "cw-021",
+      "status": "draft",
+      "topic": "Rate your life \u2014 honest score check",
+      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
+      "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
+      "youtube_title": "Rate Your Life - Honest Score Check",
+      "video_text": [
+        "Rate your life.",
+        "Be honest.",
+        "Total in comments"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T21:38:11Z",
+      "notes": "each slide rates one life area (fitness, career, relationships, finances, mental health) on 1-10 scale | generated_by=template",
+      "slides": [
+        "Hook: 'Rate your life. No lying.'",
+        "Fitness: 1-10?",
+        "Career: 1-10?",
+        "Relationships: 1-10?",
+        "Finances: 1-10?",
+        "Mental health: 1-10?"
+      ]
+    },
+    {
+      "id": "cw-022",
+      "status": "draft",
+      "topic": "Elimination bracket \u2014 8 foods, only 1 survives",
+      "caption": "8 foods. Only 1 survives.\nEliminate one each round. No cheating.\nComment your final answer.\nSend to a friend \u2014 see if they pick the same.",
+      "alt_text": "Carousel elimination bracket where 8 foods compete and only 1 survives",
+      "youtube_title": "8 Foods Only 1 Survives - Elimination Bracket",
+      "video_text": [
+        "8 foods.",
+        "Only 1 survives.",
+        "Comment your winner"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T01:38:11Z",
+      "notes": "elimination bracket design, bold text, contrasting food images per slide | generated_by=template",
+      "slides": [
+        "Hook: '8 FOODS. 1 SURVIVES.' in bold neon text",
+        "Round 1: Pizza vs Biryani vs Butter Chicken vs Momos",
+        "Round 1: Sushi vs Tacos vs Pasta vs Dosa",
+        "Round 2: Winners face off",
+        "Semi-final: 2 remaining",
+        "CTA: 'Who won? Comment your champion. Tag a foodie.'"
+      ]
+    },
+    {
+      "id": "cw-023",
+      "status": "draft",
+      "topic": "Build your starter pack \u2014 6 life categories",
+      "caption": "Build your starter pack.\nPick ONE from each category. No extras.\nScreenshot your pack.\nSend to your bestie \u2014 see how different you are.",
+      "alt_text": "Carousel where users pick one option from each life category to build their starter pack",
+      "youtube_title": "Build Your Starter Pack - 6 Life Categories",
+      "video_text": [
+        "Build your pack.",
+        "Pick ONE each.",
+        "Screenshot and compare"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T05:38:11Z",
+      "notes": "each slide = one category with 4 options, clean grid design, bold text | generated_by=template",
+      "slides": [
+        "Hook: 'BUILD YOUR STARTER PACK' in bold",
+        "Drink: Coffee / Chai / Juice / Water",
+        "Music: Bollywood / Hip-hop / Lo-fi / Classical",
+        "Hobby: Gym / Reading / Gaming / Travel",
+        "Food: Street food / Home cooked / Fine dining / Fast food",
+        "Superpower: Time travel / Mind reading / Invisibility / Flying"
+      ]
     }
   ]
 }
