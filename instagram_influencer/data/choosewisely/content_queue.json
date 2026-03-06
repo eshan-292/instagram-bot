@@ -201,7 +201,11 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-07T01:37:55Z",
-      "notes": "Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vibrant group of diverse friends laughing, eating street food or at a casual gathering (dynamic, close-up shots). Quick cuts between the two contrasting scenes for the reel. | generated_by=gemini:gemini-2.5-flash"
+      "notes": "Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vibrant group of diverse friends laughing, eating street food or at a casual gathering (dynamic, close-up shots). Quick cuts between the two contrasting scenes for the reel. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Life choice: Rich vs. Friends - Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vib"
+      ]
     },
     {
       "id": "cw-008",
@@ -217,18 +221,15 @@
       ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "scheduled_at": "2026-03-07T05:37:55Z",
       "notes": "Clean, crisp photography for each slide. Each slide should visually represent a distinct aspect of either city or mountain life, with a clear contrast. Bright, engaging colors for city; natural, calming tones for mountains. | generated_by=gemini:gemini-2.5-flash",
       "slides": [
         "Slide 1: 'City Nights.' (Visual: Dynamic shot of a bustling city street at night, neon signs, taxis, energetic crowd motion blur)",
-        "Slide 2: 'Mountain Stars.' (Visual: A wide shot of a clear night sky over a rugged mountain landscape, thousands of stars visible, maybe a distant campfire glow)",
-        "Slide 3: 'Rush Hour Transit.' (Visual: A crowded subway car interior or a traffic-jammed urban highway, close-up of faces showing slight stress)",
-        "Slide 4: 'Forest Walk Commute.' (Visual: A tranquil person walking alone on a sun-dappled forest path, dappled light, sense of peace)",
-        "Slide 5: 'Corner Cafe Vibes.' (Visual: A stylish, busy city cafe interior, diverse people, laptop users, close-up of a latte with art)",
-        "Slide 6: 'Cabin Coffee View.' (Visual: Hands holding a rustic mug of coffee, looking out from a cozy cabin porch over a misty mountain valley at sunrise)"
-      ]
+        "Slide 2: 'Mountain Stars.' (Visual: A wide shot of a clear night sky over a rugged mountain landscape, thousands of stars visible, maybe a distant campfire glow)"
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "cw-009",
@@ -274,7 +275,11 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-07T12:00:00Z",
-      "notes": "Dramatic battery icon draining to 1%, countdown timer feel, dark moody lighting with red battery glow. Quick zoom into phone screen. Text reveal: 'One call. Who?' Pause for tension. End with 'Send this to them.' High send-rate format. | generated_by=viral-claude"
+      "notes": "Dramatic battery icon draining to 1%, countdown timer feel, dark moody lighting with red battery glow. Quick zoom into phone screen. Text reveal: 'One call. Who?' Pause for tension. End with 'Send this to them.' High send-rate format. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Your phone is at 1%. Who do you call? - Dramatic battery icon draining to 1%, countdown timer feel, dark moody lighting with red battery glow. Quick zoom into phone screen. Text reveal: 'One call. Who"
+      ]
     },
     {
       "id": "cw-011",
@@ -336,18 +341,15 @@
       ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "scheduled_at": "2026-03-08T00:00:00Z",
       "notes": "Each slide: one category with two options side by side. Clean pastel split-screen design with lifestyle photography. Screenshot-bait format drives saves and shares. | generated_by=viral-claude",
       "slides": [
         "Hook: 'Build Your Perfect Date. 6 picks. No compromise.'",
-        "Cuisine: Street food OR Fine dining?",
-        "Setting: Rooftop under stars OR Cozy rainy cafe?",
-        "Activity: Long drive OR Cook together?",
-        "Music: Lo-fi chill OR Bollywood classics?",
-        "Who pays: Split OR Surprise treat?"
-      ]
+        "Cuisine: Street food OR Fine dining?"
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "cw-014",
@@ -366,7 +368,11 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-08T04:00:00Z",
-      "notes": "Cinematic feel. Start with a crowd of silhouettes, then they fade one by one until only 3 remain, lit by warm spotlight. Emotional piano undertone. Text reveal builds tension. High send-rate post — viewers immediately think of 3 specific people. | generated_by=viral-claude"
+      "notes": "Cinematic feel. Start with a crowd of silhouettes, then they fade one by one until only 3 remain, lit by warm spotlight. Emotional piano undertone. Text reveal builds tension. High send-rate post — viewers immediately think of 3 specific people. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "You can only keep 3 people in your life. Everyone else gone. - Cinematic feel. Start with a crowd of silhouettes, then they fade one by one until only 3 remain, lit by warm spotlight. Emotional piano "
+      ]
     },
     {
       "id": "cw-015",
@@ -439,7 +445,11 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-08T16:00:00Z",
-      "notes": "India's most polarizing dating debate. Split screen: left=couple in love (candid, passionate), right=traditional wedding setup (family, rituals). Quick cuts between happy/struggling moments from both sides. End on question mark. Maximum controversy, maximum comments. | generated_by=viral-claude"
+      "notes": "India's most polarizing dating debate. Split screen: left=couple in love (candid, passionate), right=traditional wedding setup (family, rituals). Quick cuts between happy/struggling moments from both sides. End on question mark. Maximum controversy, maximum comments. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Love marriage or arranged — which actually lasts? - India's most polarizing dating debate. Split screen: left=couple in love (candid, passionate), right=traditional wedding setup (family, rituals). Qu"
+      ]
     },
     {
       "id": "cw-018",
@@ -455,18 +465,15 @@
       ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "scheduled_at": "2026-03-08T20:00:00Z",
       "notes": "Tournament bracket with iconic Bollywood film posters. Matchups: 3 Idiots vs DDLJ, Sholay vs Dangal, PK vs Gangs of Wasseypur, ZNMD vs Dil Chahta Hai. Bold elimination X graphics. Movie-poster-style design with dramatic lighting. | generated_by=viral-claude",
       "slides": [
         "Hook: '8 Bollywood Legends Enter. Only 1 Survives.'",
-        "Round 1: 3 Idiots vs DDLJ | Sholay vs Dangal",
-        "Round 1: PK vs Gangs of Wasseypur | ZNMD vs Dil Chahta Hai",
-        "Semis: Winner vs Winner | Winner vs Winner",
-        "Final: The last 2 standing. Pick your GOAT.",
-        "CTA: 'Comment your winner. Tag someone with terrible taste.'"
-      ]
+        "Round 1: 3 Idiots vs DDLJ | Sholay vs Dangal"
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "cw-019",
@@ -485,7 +492,11 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-09T00:00:00Z",
-      "notes": "Contrarian hook format. Split screen: left=stacks of money/luxury lifestyle, right=hourglass/sunset/family moments. Twist: show people saying 'time' then cut to them grinding at desks, scrolling phones, stuck in traffic. Forces self-reflection. Debate-starter that splits audience. | generated_by=viral-claude"
+      "notes": "Contrarian hook format. Split screen: left=stacks of money/luxury lifestyle, right=hourglass/sunset/family moments. Twist: show people saying 'time' then cut to them grinding at desks, scrolling phones, stuck in traffic. Forces self-reflection. Debate-starter that splits audience. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Money or time? 90% of people answer this wrong. - Contrarian hook format. Split screen: left=stacks of money/luxury lifestyle, right=hourglass/sunset/family moments. Twist: show people saying 'time' t"
+      ]
     },
     {
       "id": "cw-020",
@@ -501,18 +512,15 @@
       ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "scheduled_at": "2026-03-09T04:00:00Z",
       "notes": "Aspirational lifestyle photography for each option. Clean, modern split-screen design. Each slide two options with high-quality visuals. Screenshot-bait format for stories and DM shares. | generated_by=viral-claude",
       "slides": [
         "Hook: 'Build Your Dream Life. 6 categories. 1 pick each.'",
-        "City: London OR Tokyo?",
-        "Career: Founder OR Creative director?",
-        "Home: Penthouse OR Beach house?",
-        "Vacation: Bali OR Switzerland?",
-        "Partner trait: Makes you laugh OR Makes you think?"
-      ]
+        "City: London OR Tokyo?"
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "cw-021",
@@ -558,7 +566,11 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-09T12:00:00Z",
-      "notes": "Quick cuts: left=luxury lifestyle NOW (cars, travel, apartment), right=patient wealth building (investments, compound growth, massive payoff). Show the math briefly. End on question. India-specific amounts (crore) for maximum relatability. Financial debate that splits audience 50/50. | generated_by=viral-claude"
+      "notes": "Quick cuts: left=luxury lifestyle NOW (cars, travel, apartment), right=patient wealth building (investments, compound growth, massive payoff). Show the math briefly. End on question. India-specific amounts (crore) for maximum relatability. Financial debate that splits audience 50/50. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "1 crore now or guaranteed 10 crore in 10 years? - Quick cuts: left=luxury lifestyle NOW (cars, travel, apartment), right=patient wealth building (investments, compound growth, massive payoff). Show th"
+      ]
     },
     {
       "id": "cw-023",
@@ -574,18 +586,15 @@
       ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "scheduled_at": "2026-03-09T16:00:00Z",
       "notes": "Bold, playful design. Each slide 2 questions with A/B options. Bright contrasting colors. Screenshot-bait format designed for DM shares and stories. Friendship test format = guaranteed sends. | generated_by=viral-claude",
       "slides": [
         "Hook: 'Friendship Test. 10 questions. How many do you match?'",
-        "1. Call OR Text? | 2. Early bird OR Night owl?",
-        "3. Plan everything OR Spontaneous? | 4. Brutally honest OR White lies?",
-        "5. Road trip OR Flight? | 6. Introvert OR Extrovert?",
-        "7. Forgive fast OR Hold grudges? | 8. Pay back instantly OR 'I'll get you next time'?",
-        "CTA: 'Screenshot your answers. Send to your best friend. 8+ matches = soulmates.'"
-      ]
+        "1. Call OR Text? | 2. Early bird OR Night owl?"
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "cw-024",
