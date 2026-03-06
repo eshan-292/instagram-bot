@@ -139,6 +139,430 @@
       "scheduled_at": "2026-03-04T05:51:11Z",
       "notes": "gym setting, focus on arms and shoulders, pump visible | generated_by=template",
       "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005_yt.mp4"
+    },
+    {
+      "id": "rhea-006",
+      "status": "draft",
+      "topic": "Workout Wednesday: Complete ab workout \u2014 no crunches",
+      "caption": "Crunches are lazy. Your abs deserve better.\n6 movements. Zero crunches. Fire in 12 minutes.\nDrop a \ud83d\udd25 if you survived this.\nSend to your workout partner who still does 100 crunches.",
+      "alt_text": "Fit Indian woman performing advanced ab exercises on a gym mat without crunches",
+      "youtube_title": "Workout Wednesday: Ab Workout NO CRUNCHES - 12 Min",
+      "video_text": [
+        "Zero crunches.",
+        "6 movements. 12 minutes.",
+        "Your abs will hate you."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-08T07:30:00Z",
+      "notes": "Workout Wednesday series, gym mat setting, each exercise demonstrated with form cues | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea on gym mat, arms crossed, 'Ab Day. No crunches allowed.'",
+        "Exercise 1: Dead bugs \u2014 slow and controlled, 12 reps",
+        "Exercise 2: Hollow body hold \u2014 30 seconds",
+        "Exercise 3: Cable woodchops \u2014 10 each side",
+        "Exercise 4: Ab wheel rollouts \u2014 8 reps",
+        "Exercise 5: Hanging leg raises \u2014 10 reps",
+        "Exercise 6: Pallof press \u2014 12 each side"
+      ]
+    },
+    {
+      "id": "rhea-007",
+      "status": "draft",
+      "topic": "Meal Prep Monday: 140g protein \u2014 all vegetarian Indian",
+      "caption": "140g protein. Zero chicken. Zero supplements.\nEvery meal is vegetarian Indian food your mom would approve of.\nScreenshot your fav meal. I'll share more.\nSend to your vegetarian friend who says 'protein nahi milta'.",
+      "alt_text": "Colorful vegetarian Indian high-protein meals in meal prep containers on a kitchen counter",
+      "youtube_title": "Meal Prep Monday: 140g Protein ALL Vegetarian Indian",
+      "video_text": [
+        "140g protein.",
+        "All vegetarian. All Indian.",
+        "No supplements needed."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-08T13:00:00Z",
+      "notes": "Meal Prep Monday series, kitchen setting, clean containers, desi food close-ups | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea in kitchen with 5 containers, '140g protein. No meat. No whey.'",
+        "Meal 1: Paneer bhurji + 2 multigrain rotis + mint chutney (38g protein)",
+        "Meal 2: Chana masala + quinoa pulao + raita (32g protein)",
+        "Meal 3: Soya chunk biryani + dal tadka (36g protein)",
+        "Snack: Greek yogurt + roasted makhana + peanut butter toast (22g protein)",
+        "Meal 4: Moong dal cheela + sprout salad + curd (16g protein)",
+        "Full day macros breakdown: 140g protein / 1800 cal"
+      ]
+    },
+    {
+      "id": "rhea-008",
+      "status": "draft",
+      "topic": "Form Check Friday: Squats \u2014 4 mistakes every girl makes",
+      "caption": "Your squat is broken. Here's why.\n4 mistakes I see every single day. Fix them now.\nWhich mistake are you guilty of? Be honest.\nTag the girl who needs this form check.",
+      "alt_text": "Indian fitness woman demonstrating correct vs incorrect squat form in a gym",
+      "youtube_title": "Form Check Friday: 4 Squat Mistakes Every Girl Makes",
+      "video_text": [
+        "Your squat is broken.",
+        "4 mistakes. Fix them now.",
+        "Tag someone who needs this."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-08T18:30:00Z",
+      "notes": "Form Check Friday series, side-angle shots showing correct vs wrong form, red/green indicators | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea side-on at squat rack, 'Your squat is lying to you.'",
+        "Mistake 1: Knees caving in \u2014 wrong vs right comparison",
+        "Mistake 2: Rising on toes \u2014 heel drive correction",
+        "Mistake 3: Not hitting depth \u2014 hip crease below knee",
+        "Mistake 4: Butt wink at bottom \u2014 mobility fix",
+        "Summary: Quick checklist for the perfect squat"
+      ]
+    },
+    {
+      "id": "rhea-009",
+      "status": "draft",
+      "topic": "5 AM Club: Dark morning chest and back routine",
+      "caption": "4:50 AM alarm. Nobody is watching. That's the point.\nChest and back. 45 minutes. No phone between sets.\nCould you wake up at 5 for 30 days straight?\nSend to someone who needs this push.",
+      "alt_text": "Young Indian woman training chest and back in a dimly lit gym at early morning",
+      "youtube_title": "5 AM Club: Chest & Back Routine - Dark Morning Workout",
+      "video_text": [
+        "4:50 AM.",
+        "Chest and back.",
+        "Nobody is watching."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-09T02:00:00Z",
+      "notes": "5 AM Club series, dim gym lighting, moody atmosphere, focused training shots | generated_by=viral-claude",
+      "slides": [
+        "Hook: Dark gym, single overhead light, Rhea walking in",
+        "Exercise 1: Barbell bench press \u2014 4x8",
+        "Exercise 2: Bent-over rows \u2014 4x10",
+        "Exercise 3: Incline dumbbell press \u2014 3x12",
+        "Exercise 4: Lat pulldowns \u2014 3x12",
+        "Exercise 5: Cable flyes + face pulls superset"
+      ]
+    },
+    {
+      "id": "rhea-010",
+      "status": "draft",
+      "topic": "Hot take: HIIT is overrated \u2014 lift heavy instead",
+      "caption": "Unpopular opinion: HIIT is overrated and you know it.\nStrength training burns more fat long-term. Science says so.\nAgree or disagree? Fight me in the comments.\nSend to your friend who only does HIIT.",
+      "alt_text": "Confident Indian woman lifting heavy barbell in gym with bold text overlay",
+      "youtube_title": "HIIT Is OVERRATED - Why Heavy Lifting Burns More Fat",
+      "video_text": [
+        "HIIT is overrated.",
+        "Lift heavy instead.",
+        "Fight me."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-09T07:30:00Z",
+      "notes": "Controversy post, bold text overlays, Rhea deadlifting heavy, confident energy | generated_by=viral-claude"
+    },
+    {
+      "id": "rhea-011",
+      "status": "draft",
+      "topic": "30-day challenge that actually changed my body",
+      "caption": "30 days. One rule: show up every single day.\nNo skipping. No negotiating. No 'I'll start Monday.'\nWho's in? Comment 'IN' and I'll check on you.\nSave this and start tomorrow.",
+      "alt_text": "Indian fitness woman showing 30-day workout challenge plan on a whiteboard",
+      "youtube_title": "30 Day Challenge That ACTUALLY Changed My Body",
+      "video_text": [
+        "30 days.",
+        "One rule: show up.",
+        "Who's in?"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-09T13:00:00Z",
+      "notes": "Challenge post, calendar visual, week-by-week progression breakdown | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea standing in front of a 30-day calendar, 'One rule. Show up.'",
+        "Week 1: Foundation \u2014 3 full body workouts, 10K steps daily",
+        "Week 2: Push harder \u2014 4 workouts, add progressive overload",
+        "Week 3: Mental test \u2014 5 AM sessions, no excuses",
+        "Week 4: Final push \u2014 intensity week, personal records",
+        "Results: What changed in 30 days \u2014 strength, habit, mindset"
+      ]
+    },
+    {
+      "id": "rhea-012",
+      "status": "draft",
+      "topic": "Leg day that builds real strength \u2014 not just aesthetics",
+      "caption": "Pretty legs are useless if they can't carry you.\nThis leg day builds power. Not just shape.\nWhat's your squat PR? Drop it below.\nSend to the girl who only does leg press.",
+      "alt_text": "Athletic Indian woman performing heavy squats and lunges in a gym",
+      "youtube_title": "Leg Day For REAL Strength - Not Just Aesthetics",
+      "video_text": [
+        "Pretty legs are useless.",
+        "Build power. Not just shape.",
+        "What's your squat PR?"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-09T18:30:00Z",
+      "notes": "Heavy leg day, power rack setting, focus on compound lifts | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea under barbell, chalk on hands, 'Leg day. The real kind.'",
+        "Exercise 1: Back squats \u2014 5x5 heavy",
+        "Exercise 2: Walking lunges \u2014 4x12 each leg, dumbbells",
+        "Exercise 3: Romanian deadlifts \u2014 4x8",
+        "Exercise 4: Leg press \u2014 3x15 slow negatives",
+        "Exercise 5: Nordic hamstring curls \u2014 3x6"
+      ]
+    },
+    {
+      "id": "rhea-013",
+      "status": "draft",
+      "topic": "Hot take: Booty bands don't build glutes",
+      "caption": "Stop relying on booty bands. They're a warm-up, not a workout.\nHip thrusts, squats, RDLs. That's what builds glutes.\nAm I wrong? Tell me why.\nSend to your friend with 5 booty bands and no squat rack.",
+      "alt_text": "Indian fitness woman comparing booty band exercises to heavy barbell hip thrusts",
+      "youtube_title": "Booty Bands DON'T Build Glutes - Here's What Does",
+      "video_text": [
+        "Booty bands are a warm-up.",
+        "Not a workout.",
+        "Squat rack > resistance band."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-10T02:00:00Z",
+      "notes": "Controversy post, comparison shots band vs barbell, bold opinion energy | generated_by=viral-claude"
+    },
+    {
+      "id": "rhea-014",
+      "status": "draft",
+      "topic": "How I eat 130g protein as a vegetarian \u2014 full breakdown",
+      "caption": "Vegetarian. 130g protein. Every single day.\nNo chicken required. Just smart food choices.\nWhat's your biggest struggle with protein? Comment.\nSave this for your next grocery run.",
+      "alt_text": "Indian vegetarian high-protein foods arranged on a kitchen counter with macros labels",
+      "youtube_title": "How I Eat 130g Protein As A Vegetarian - Full Breakdown",
+      "video_text": [
+        "Vegetarian. 130g protein.",
+        "Every single day.",
+        "Save for your grocery run."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-10T07:30:00Z",
+      "notes": "Protein source breakdown, close-up food shots with protein per serving labels | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea in kitchen, 'Vegetarian. 130g protein. No excuses.'",
+        "Source 1: Paneer \u2014 200g = 36g protein, versatile in any meal",
+        "Source 2: Soya chunks \u2014 50g dry = 26g protein, cheapest source",
+        "Source 3: Greek yogurt \u2014 200g = 20g protein, snack or dessert",
+        "Source 4: Dal + rice combo \u2014 1 bowl = 18g protein, complete amino acids",
+        "Source 5: Chana, rajma, moong sprouts \u2014 protein stacking guide"
+      ]
+    },
+    {
+      "id": "rhea-015",
+      "status": "draft",
+      "topic": "Home workout \u2014 zero equipment, 20 minutes, no excuses",
+      "caption": "No gym? No equipment? No excuse.\n20 minutes. Your body weight. Sweat guaranteed.\nTag someone who always says 'I don't have a gym membership'.\nSave this for travel days.",
+      "alt_text": "Indian woman doing bodyweight exercises in a living room with no equipment",
+      "youtube_title": "Home Workout: Zero Equipment, 20 Min, No Excuses",
+      "video_text": [
+        "No gym. No equipment.",
+        "20 minutes. Your body.",
+        "No excuses."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-10T13:00:00Z",
+      "notes": "Home workout, living room setting, bodyweight only, minimal space needed | generated_by=viral-claude"
+    },
+    {
+      "id": "rhea-016",
+      "status": "draft",
+      "topic": "What I ACTUALLY wear to the gym \u2014 not what influencers show",
+      "caption": "No matching sets. No new drops every week. Just clothes that let me train.\nReal gym fits. Not a photoshoot.\nWhat do YOU actually wear? Comment.\nSend to your friend who buys gym clothes but never goes to the gym.",
+      "alt_text": "Indian woman in simple practical gym clothes at a gym, no-nonsense style",
+      "youtube_title": "What I ACTUALLY Wear To The Gym - Real vs Influencer",
+      "video_text": [
+        "Real gym fits.",
+        "Not a photoshoot.",
+        "Clothes that let me train."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-10T18:30:00Z",
+      "notes": "Relatable post, simple gym outfit, no brand flex, authenticity angle | generated_by=viral-claude"
+    },
+    {
+      "id": "rhea-017",
+      "status": "draft",
+      "topic": "Recovery routine most people skip \u2014 complete stretching guide",
+      "caption": "You train hard but never stretch. It shows.\n15 minutes post-workout. Your joints will thank you in 10 years.\nHow many of you actually stretch? Be honest.\nSave this and do it after your next session.",
+      "alt_text": "Indian fitness woman doing post-workout stretches and foam rolling in a gym",
+      "youtube_title": "Recovery Routine You're Skipping - Complete Stretch Guide",
+      "video_text": [
+        "You never stretch.",
+        "It shows.",
+        "15 minutes. Save your joints."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-11T02:00:00Z",
+      "notes": "Recovery/stretching guide, calm gym setting, foam roller and stretch band visible | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea foam rolling, 'You skip this. Don't.'",
+        "Stretch 1: Hip flexor stretch \u2014 90/90 position, 60 seconds each",
+        "Stretch 2: Pigeon pose \u2014 opens hips, 45 seconds each",
+        "Stretch 3: Thoracic spine rotation \u2014 10 each side",
+        "Stretch 4: Foam roll quads and IT band \u2014 2 minutes",
+        "Stretch 5: Child's pose + cat-cow flow \u2014 2 minutes"
+      ]
+    },
+    {
+      "id": "rhea-018",
+      "status": "draft",
+      "topic": "Hot take: You don't need a personal trainer",
+      "caption": "Unpopular opinion: Most of you don't need a trainer.\nYou need discipline, YouTube, and 6 months of consistency.\nAgree or disagree? Trainers, come fight me.\nSend to someone paying 5K/month for a trainer they don't listen to.",
+      "alt_text": "Confident Indian woman training alone in a gym with focused expression",
+      "youtube_title": "You DON'T Need A Personal Trainer - Controversial Take",
+      "video_text": [
+        "You don't need a trainer.",
+        "You need discipline.",
+        "6 months. Consistency. Done."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-11T07:30:00Z",
+      "notes": "Controversy post, solo training shots, bold text overlays, debate-starter | generated_by=viral-claude"
+    },
+    {
+      "id": "rhea-019",
+      "status": "draft",
+      "topic": "Full week gym split for women \u2014 complete guide",
+      "caption": "Your entire week. Planned. No thinking required.\n6 days of training. 1 rest day. Progressive overload built in.\nWhich day is your favorite? Comment.\nSave this and follow it for 8 weeks.",
+      "alt_text": "Weekly gym workout split plan displayed as a clean infographic for women",
+      "youtube_title": "Full Week Gym Split For Women - Complete Guide",
+      "video_text": [
+        "Your full week. Planned.",
+        "6 days. 1 rest.",
+        "Save and follow for 8 weeks."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "carousel",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-11T13:00:00Z",
+      "notes": "Complete weekly split, clean infographic style, each day color-coded | generated_by=viral-claude",
+      "slides": [
+        "Hook: Rhea at whiteboard, 'Your entire week. Planned.'",
+        "Monday: Glutes & hamstrings \u2014 5 exercises listed",
+        "Tuesday: Upper body push (chest, shoulders, triceps)",
+        "Wednesday: Active recovery \u2014 yoga flow + 30 min walk",
+        "Thursday: Back & biceps \u2014 5 exercises listed",
+        "Friday: Quads & calves \u2014 5 exercises listed",
+        "Saturday: Full body conditioning + abs"
+      ]
+    },
+    {
+      "id": "rhea-020",
+      "status": "draft",
+      "topic": "Gym bag essentials \u2014 what I carry every day",
+      "caption": "Everything in my gym bag. Nothing more. Nothing less.\nNo gimmicks. Just things that actually help me train better.\nWhat's one thing you can't gym without? Comment.\nSend to someone who shows up with nothing.",
+      "alt_text": "Flat lay of gym bag essentials including lifting belt, straps, water bottle, and chalk",
+      "youtube_title": "Gym Bag Essentials - What I Carry Every Day",
+      "video_text": [
+        "My gym bag.",
+        "No gimmicks.",
+        "Just what works."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "single",
+      "scheduled_at": "2026-03-11T18:30:00Z",
+      "notes": "Flat lay style, clean background, practical items only, relatable | generated_by=viral-claude"
+    },
+    {
+      "id": "rhea-021",
+      "status": "draft",
+      "topic": "What I eat vs what fitness influencers show \u2014 real Indian meals vs aesthetic bowls",
+      "caption": "Left: what they post. Right: what I actually eat.\nDal chawal beats your acai bowl. 40g protein. Rs 30.\nAre you eating real food or performing for Instagram?\nSend to someone who needs to hear this.",
+      "alt_text": "Split comparison of aesthetic influencer food bowls vs real Indian home-cooked meals",
+      "youtube_title": "What I Eat vs What Fitness Influencers Show - Reality",
+      "video_text": [
+        "What they show you.",
+        "What I actually eat.",
+        "Dal chawal > acai bowl.",
+        "40g protein. Rs 30.",
+        "Real food wins."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-12T02:00:00Z",
+      "notes": "Hook-photo reel, comparison format, real vs Instagram food, relatable Indian angle | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aesthetic smoothie bowl with berries and granola, perfectly styled on marble counter \u2014 'What fitness influencers eat'",
+        "Photo 2: Real Indian thali with dal, chawal, sabzi, curd, and roti on a steel plate \u2014 'What I actually eat. 40g protein. Rs 30.'",
+        "Photo 3: Side-by-side macros comparison showing Indian meals winning on protein per rupee"
+      ]
+    },
+    {
+      "id": "rhea-022",
+      "status": "draft",
+      "topic": "Month 1 vs Month 6 at the gym \u2014 beginner awkward vs confident gym girl",
+      "caption": "Month 1: Scared of the free weights section. Month 6: Own it.\nThe only difference is showing up 180 times.\nWhere are you on this journey? Comment your month.\nSend to someone in their Month 1. They need this.",
+      "alt_text": "Before and after comparison of a woman's confidence progression at the gym over 6 months",
+      "youtube_title": "Month 1 vs Month 6 At The Gym - Confidence Transformation",
+      "video_text": [
+        "Month 1.",
+        "Scared. Confused. Hiding on the treadmill.",
+        "Month 6.",
+        "Owns the squat rack.",
+        "The only difference? She showed up."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": [],
+      "scheduled_at": "2026-03-12T07:30:00Z",
+      "notes": "Hook-photo reel, transformation narrative, relatable gym confidence journey | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Nervous young Indian woman in oversized t-shirt standing awkwardly near treadmills, avoiding free weights area \u2014 'Month 1. Scared of the squat rack.'",
+        "Photo 2: Same woman, confident posture, lifting heavy at the squat rack with proper form, gym-appropriate outfit \u2014 'Month 6. Owns the room.'",
+        "Photo 3: Close-up of her hands gripping a barbell with chalk, gym lights behind \u2014 '180 days. That's all it took.'"
+      ]
     }
   ]
 }
