@@ -122,7 +122,7 @@
     },
     {
       "id": "sofia-005",
-      "status": "approved",
+      "status": "failed",
       "topic": "Day in my life \u2014 luxury Mumbai edition",
       "caption": "Mumbai mornings hit different from a penthouse.\nCoffee. Outfit. Skyline.\nWhat does your morning look like?\nShare this with someone who deserves this life.",
       "alt_text": "Day in the life vlog-style reel of Russian woman living luxury life in Mumbai",
@@ -137,7 +137,8 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T05:50:57Z",
-      "notes": "morning routine vibes, penthouse, luxury breakfast, getting ready | generated_by=template"
+      "notes": "morning routine vibes, penthouse, luxury breakfast, getting ready | generated_by=template",
+      "publish_error": "HTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
     }
   ]
 }
