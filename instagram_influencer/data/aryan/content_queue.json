@@ -7,25 +7,15 @@
       "caption": "5 exercises. You're doing ALL of them wrong.\nI wasted 2 years before someone told me.\nWhich one surprised you most?\nSend this to your gym partner before they hurt themselves.",
       "image_url": "data/aryan/generated_images/pending/aryan-001/1.jpg",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [
-        "data/aryan/generated_images/pending/aryan-001/1.jpg",
-        "data/aryan/generated_images/pending/aryan-001/2.jpg",
-        "data/aryan/generated_images/pending/aryan-001/3.jpg",
-        "data/aryan/generated_images/pending/aryan-001/4.jpg",
-        "data/aryan/generated_images/pending/aryan-001/5.jpg",
-        "data/aryan/generated_images/pending/aryan-001/6.jpg"
-      ],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-09T11:30:00Z",
       "notes": "gym setting, demonstrating form, good lighting",
       "slides": [
-        "Hook slide: Aryan shaking head at bad form, text '5 exercises. You're doing ALL wrong.'",
-        "Exercise 1: Bicep curls -- wrong vs right form side by side",
-        "Exercise 2: Lat pulldowns -- common mistake highlighted",
-        "Exercise 3: Squats -- knee tracking error shown",
-        "Exercise 4: Bench press -- arch and grip correction",
-        "Final: All 5 exercises summarized, CTA energy"
+        "Photo 1: Aryan shaking head at bad form in gym, text overlay '5 exercises. You're doing ALL wrong.' Dramatic disappointed expression, well-lit gym background.",
+        "Photo 2: Side-by-side comparison of wrong vs right exercise form -- bicep curls and squats highlighted with red X and green check marks."
       ],
       "alt_text": "Muscular Indian man demonstrating correct exercise form in a gym",
       "youtube_title": "5 Exercises You're Doing Wrong - Fix Your Form Today",
@@ -46,25 +36,22 @@
       "caption": "Full day of eating. Rs 500. 150g protein.\nNo supplements. No chicken breast every meal.\nWhat's your go-to cheap protein source?\nSave this -- your wallet and gains will thank you.",
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-02T13:30:00Z",
       "notes": "kitchen/meal prep setting, food close-ups, clean layout",
       "slides": [
-        "Hook: Aryan with plate of food, text 'Rs 500. 150g protein. No supplements.'",
-        "Meal 1: Breakfast -- eggs + oats + banana, macro breakdown",
-        "Meal 2: Lunch -- rajma chawal + curd, protein count",
-        "Meal 3: Snack -- peanut butter sandwich + milk",
-        "Meal 4: Dinner -- paneer bhurji + roti, full macro count",
-        "Total macros summary card, save CTA"
+        "Photo 1: Aryan with plate of food in kitchen, text overlay 'Rs 500. 150g protein. No supplements.' Clean meal prep setting with colourful Indian food.",
+        "Photo 2: Flat lay of all four meals -- eggs+oats breakfast, rajma chawal lunch, PB sandwich snack, paneer bhurji dinner -- with macro breakdown labels on each."
       ],
       "alt_text": "Indian man showing budget-friendly high-protein Indian meals",
       "youtube_title": "Full Day of Eating - 150g Protein Under Rs 500",
       "video_text": [
-        "Rs 500. 150g protein. Zero supplements.",
-        "What's your go-to source?",
-        "Save this for your next meal prep"
+        "Rs 500. 150g protein.",
+        "No supplements needed.",
+        "Save for your next meal prep"
       ]
     },
     {
@@ -150,23 +137,15 @@
       "caption": "Every Indian gym bro asks the same question.\n\"Bhai protein kahan se laaun?\"\nHere's your answer. Ranked by Rs per gram of protein.\nSave this. Screenshot this. Send this.",
       "image_url": "data/aryan/generated_images/pending/aryan-006/1.jpg",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [
-        "data/aryan/generated_images/pending/aryan-006/1.jpg",
-        "data/aryan/generated_images/pending/aryan-006/2.jpg",
-        "data/aryan/generated_images/pending/aryan-006/3.jpg",
-        "data/aryan/generated_images/pending/aryan-006/4.jpg",
-        "data/aryan/generated_images/pending/aryan-006/5.jpg"
-      ],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-04T13:30:00Z",
       "notes": "grocery/kitchen setting, clean food photography",
       "slides": [
-        "Hook: Aryan holding eggs vs soya chunks with questioning expression",
-        "Flat lay of all Indian protein sources ranked",
-        "Winner #1: Soya chunks -- Rs per gram breakdown",
-        "Winner #2: Eggs -- Rs per gram breakdown",
-        "CTA: Aryan flexing with plate of food, save reminder"
+        "Photo 1: Aryan holding eggs vs soya chunks with questioning expression in grocery/kitchen setting. Text overlay 'Bhai protein kahan se laaun?' Clean lighting.",
+        "Photo 2: Flat lay of all Indian protein sources ranked by Rs per gram -- soya chunks, eggs, paneer, dal, chana -- with price labels and protein counts on each."
       ],
       "alt_text": "Indian man comparing affordable protein sources at a grocery store",
       "youtube_title": "Best Indian Protein Sources Ranked by Price",
@@ -189,9 +168,13 @@
       "video_url": "data/aryan/generated_images/pending/aryan-007.mp4",
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-05T07:30:00Z",
       "notes": "gym, mid-rep lateral raise, shoulder definition visible",
+      "slides": [
+        "Photo 1: Aryan mid-rep lateral raise in gym, shoulder definition visible, intense focus. Text overlay 'Shoulders make or break it.' Good gym lighting."
+      ],
       "alt_text": "Indian man performing lateral raises showing shoulder definition",
       "youtube_title": "4 Shoulder Exercises for a Broader Look",
       "video_text": [
@@ -210,9 +193,13 @@
       "video_url": "data/aryan/generated_images/pending/aryan-008.mp4",
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-05T13:30:00Z",
       "notes": "gym, squat rack, heavy weight, intense expression",
+      "slides": [
+        "Photo 1: Aryan at squat rack with heavy barbell loaded, intense expression, gym setting. Text overlay 'You don't train legs.' Dramatic lighting on the weights."
+      ],
       "alt_text": "Indian man performing a heavy barbell squat with proper form",
       "youtube_title": "Complete Leg Day Routine You Can't Skip",
       "video_text": [
@@ -226,7 +213,7 @@
       "id": "aryan-009",
       "status": "approved",
       "topic": "Gym selfie -- consistency check",
-      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a 💪 if you showed up today.",
+      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a \ud83d\udcaa if you showed up today.",
       "image_url": "data/aryan/generated_images/pending/aryan-009.jpg",
       "video_url": null,
       "is_reel": false,
@@ -239,7 +226,7 @@
       "video_text": [
         "No filter. No edit.",
         "365 days. No quitting.",
-        "Drop a 💪"
+        "Drop a \ud83d\udcaa"
       ]
     },
     {
@@ -249,23 +236,15 @@
       "caption": "3 years in the gym. Year 1 was almost wasted.\nThese 5 mistakes cost me gains and caused injuries.\nDon't be that guy.\nSave this before your next session.",
       "image_url": "data/aryan/generated_images/pending/aryan-010/1.jpg",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [
-        "data/aryan/generated_images/pending/aryan-010/1.jpg",
-        "data/aryan/generated_images/pending/aryan-010/2.jpg",
-        "data/aryan/generated_images/pending/aryan-010/3.jpg",
-        "data/aryan/generated_images/pending/aryan-010/4.jpg",
-        "data/aryan/generated_images/pending/aryan-010/5.jpg"
-      ],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-06T13:30:00Z",
       "notes": "gym, mix of humorous and educational shots",
       "slides": [
-        "Hook: Aryan face-palming in gym, text 'Year 1 was almost wasted'",
-        "Mistake 1: Ego lifting with bad form",
-        "Mistake 2: Resting too long between sets (phone scrolling)",
-        "Mistake 3: Supplement obsession over food basics",
-        "CTA: Aryan giving thumbs up, save reminder"
+        "Photo 1: Aryan face-palming in gym with text overlay 'Year 1 was almost wasted.' Humorous disappointed expression, gym equipment in background.",
+        "Photo 2: Aryan demonstrating ego lifting with bad form vs proper form -- split screen comparison with red X on wrong side and green check on right side."
       ],
       "alt_text": "Indian fitness influencer showing common gym mistakes",
       "youtube_title": "5 Beginner Gym Mistakes I Wish I Avoided",
@@ -285,9 +264,13 @@
       "video_url": "data/aryan/generated_images/pending/aryan-011.mp4",
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-07T07:30:00Z",
       "notes": "local Delhi gym exterior, authentic neighbourhood vibe",
+      "slides": [
+        "Photo 1: Aryan standing outside a local Delhi neighbourhood gym, authentic vibe, arms crossed with knowing smirk. Text overlay 'Delhi gym culture hits different.'"
+      ],
       "alt_text": "Indian man standing outside a local Delhi neighbourhood gym",
       "youtube_title": "Delhi Gym Culture Hits Different",
       "video_text": [
@@ -306,9 +289,13 @@
       "video_url": "data/aryan/generated_images/pending/aryan-012.mp4",
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-07T13:30:00Z",
       "notes": "post-workout, toweling off, shaker bottle visible",
+      "slides": [
+        "Photo 1: Aryan post-workout toweling off in gym, shaker bottle in hand, exhausted but satisfied expression. Text overlay 'Workout is half the battle.'"
+      ],
       "alt_text": "Indian man post-workout recovering in a gym with protein shake",
       "youtube_title": "Post-Workout Recovery Routine That Actually Works",
       "video_text": [
@@ -345,23 +332,15 @@
       "caption": "I've had the same gym bag setup for 2 years.\nNothing extra. Nothing missing.\nWhat's in YOUR gym bag?\nSave this for your next Amazon order.",
       "image_url": "data/aryan/generated_images/pending/aryan-014/1.jpg",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [
-        "data/aryan/generated_images/pending/aryan-014/1.jpg",
-        "data/aryan/generated_images/pending/aryan-014/2.jpg",
-        "data/aryan/generated_images/pending/aryan-014/3.jpg",
-        "data/aryan/generated_images/pending/aryan-014/4.jpg",
-        "data/aryan/generated_images/pending/aryan-014/5.jpg"
-      ],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-08T13:30:00Z",
       "notes": "gym bag flat lays, clean product photography style",
       "slides": [
-        "Hook: Aryan opening gym bag on bench, revealing essentials",
-        "Essentials 1: Shaker, straps, band, earbuds, towel",
-        "Essentials 2: Protein, bars, banana, dry fruits",
-        "Essentials 3: Tank top, shorts, socks, gloves, cap",
-        "CTA: Aryan with packed bag, ready to go"
+        "Photo 1: Aryan opening gym bag on bench, revealing essentials -- shaker, straps, earbuds, towel visible. Text overlay 'Same setup 2 years.' Clean product photography style.",
+        "Photo 2: Flat lay of all gym bag essentials neatly arranged -- shaker, lifting straps, resistance band, protein bars, tank top, gloves. Product photography aesthetic."
       ],
       "alt_text": "Flat lay of gym bag essentials including shaker, lifting straps, and snacks",
       "youtube_title": "My Gym Bag Essentials - 2 Years Same Setup",
@@ -381,9 +360,13 @@
       "video_url": "data/aryan/generated_images/pending/aryan-015.mp4",
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-09T07:30:00Z",
       "notes": "kitchen, empty plate, coffee, waiting expression",
+      "slides": [
+        "Photo 1: Aryan at kitchen table with empty plate and black coffee, waiting expression, clock showing fasting window. Text overlay '90 days of fasting.' Natural kitchen lighting."
+      ],
       "alt_text": "Indian man at kitchen table with empty plate and black coffee during intermittent fasting",
       "youtube_title": "90 Days of Intermittent Fasting - Honest Review",
       "video_text": [
@@ -400,18 +383,15 @@
       "caption": "I was 52 kg. Arms thinner than my girlfriend's. Nobody warned me about the ugly middle phase.\nThe first 6 months you won't look fit. You'll look weird. Clothes won't fit right. People will think you're on something. That's the tax.\nWhat was your starting weight? Drop it below.\nSend this to the skinny bro who's scared to start.",
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-10T07:30:00Z",
       "notes": "skinny to muscular transformation journey, relatable hardgainer content | generated_by=viral-claude",
       "slides": [
-        "Hook: Aryan looking at old skinny photo on phone, text '52 kg. Nobody warned me.'",
-        "The ugly middle phase -- clothes don't fit, face looks puffy, arms still small",
-        "Month 3 reality: strength going up but mirror lying to you",
-        "Month 6 turning point: first compliment, first visible vein",
-        "Month 12: the payoff -- side by side comparison",
-        "CTA: 'Send this to your skinny bro' with Aryan flexing"
+        "Photo 1: Aryan looking at old skinny photo on phone, text overlay '52 kg. Nobody warned me.' Emotional expression, gym background.",
+        "Photo 2: Side-by-side Month 1 vs Month 12 transformation -- skinny frame on left, muscular build on right, same mirror same gym."
       ],
       "alt_text": "Indian man showing skinny to muscular transformation journey with timeline photos",
       "youtube_title": "Skinny to Muscular - What Nobody Tells You About the Ugly Phase",
@@ -428,18 +408,15 @@
       "caption": "Rs 150. Full day. 120g protein. Zero excuses.\nHostel mess + street food hacks that actually work. Your broke phase is not an excuse to skip protein.\nWhich meal are you trying first?\nSave this bro -- your hostel roommate needs it too.",
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-10T13:30:00Z",
       "notes": "student budget meal plan, hostel-friendly, desi food photography | generated_by=viral-claude",
       "slides": [
-        "Hook: Aryan holding Rs 150 note next to plate of food, text 'Rs 150. 120g protein. No cap.'",
-        "Breakfast: 4 boiled eggs + 2 bread slices = Rs 30, 24g protein",
-        "Lunch: Soya chunk rice plate from mess = Rs 40, 35g protein",
-        "Snack: Sattu shake + roasted chana = Rs 30, 28g protein",
-        "Dinner: Dal fry + 3 roti from dhaba = Rs 50, 25g protein",
-        "Total summary card: Rs 150 / 112g protein / macro breakdown"
+        "Photo 1: Aryan holding Rs 150 note next to plate of food, text overlay 'Rs 150. 120g protein. No cap.' Student hostel/kitchen setting.",
+        "Photo 2: All four meals laid out -- boiled eggs+bread, soya chunk rice plate, sattu shake+chana, dal fry+roti -- with price and protein labels on each."
       ],
       "alt_text": "Budget Indian meals showing Rs 150 full day protein plan for students",
       "youtube_title": "Rs 150 Full Day Protein Plan - Student Budget Edition",
@@ -458,9 +435,13 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-11T07:30:00Z",
       "notes": "gym chest workout, close-up on form corrections, educational reel | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aryan demonstrating chest press with close-up on form correction, gym setting. Text overlay 'Flat chest? Not the bench.' Educational pose showing proper chest activation."
+      ],
       "alt_text": "Indian fitness influencer demonstrating chest exercise corrections in gym",
       "youtube_title": "Why Your Chest Won't Grow - 3 Fixes That Actually Work",
       "video_text": [
@@ -478,9 +459,13 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-11T18:00:00Z",
       "notes": "Monday Myth Buster series, controversial nutrition take, split screen myth vs fact | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aryan with split screen -- left side shows 8 tiny tiffin boxes stacked, right side shows 3 proper meals. Text overlay '8 meals a day? Myth.' Bold myth vs fact graphic."
+      ],
       "alt_text": "Indian man debunking meal frequency myth with scientific facts overlay",
       "youtube_title": "Monday Myth Buster - Do You Really Need 8 Meals a Day?",
       "video_text": [
@@ -498,9 +483,13 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-12T07:30:00Z",
       "notes": "No Excuses series, hotel room bodyweight workout, travel fitness | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aryan doing push-ups in a hotel room, no equipment, travel bag visible in background. Text overlay 'No gym? No excuse.' Motivational hotel room fitness setting."
+      ],
       "alt_text": "Indian man performing bodyweight exercises in a hotel room",
       "youtube_title": "No Excuses - 15 Minute Hotel Room Workout (No Equipment)",
       "video_text": [
@@ -516,18 +505,15 @@
       "caption": "Wide back = instant physique upgrade. This is the exact routine that gave me a V-taper in 4 months.\n5 exercises. 40 minutes. Your back will hate you tomorrow but love you forever.\nWhich back exercise is your favourite?\nSave this for your next pull day.",
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-12T18:00:00Z",
       "notes": "back workout routine, V-taper focus, lat spread poses, gym setting | generated_by=viral-claude",
       "slides": [
-        "Hook: Aryan hitting rear lat spread, text 'The V-taper routine. 4 months.'",
-        "Exercise 1: Wide grip lat pulldown -- 4x12, form cues",
-        "Exercise 2: Barbell rows -- 4x10, overhand grip detail",
-        "Exercise 3: Single arm dumbbell row -- 3x12 each side",
-        "Exercise 4: Face pulls -- 3x15, rear delt focus",
-        "Exercise 5: Straight arm pulldown -- 3x12, mind-muscle connection"
+        "Photo 1: Aryan hitting rear lat spread pose in gym, showing V-taper back definition. Text overlay 'The V-taper routine. 4 months.' Dramatic gym lighting.",
+        "Photo 2: Aryan mid-rep on wide grip lat pulldown, back muscles engaged, form detail visible from behind. Clean gym background."
       ],
       "alt_text": "Indian man performing back exercises showing V-taper lat spread in gym",
       "youtube_title": "Back Workout for V-Taper - 5 Exercises in 40 Minutes",
@@ -546,9 +532,13 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-13T07:30:00Z",
       "notes": "controversy post, supplement industry hot take, strong opinions | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aryan holding one tub of creatine while tossing other supplement bottles into a bin. Text overlay 'Only 1 supplement works.' Confident controversial expression, clean background."
+      ],
       "alt_text": "Indian fitness influencer throwing away supplement bottles keeping only creatine",
       "youtube_title": "The Only Supplement Worth Buying (Controversial Take)",
       "video_text": [
@@ -594,9 +584,13 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-14T07:30:00Z",
       "notes": "Form Check Friday series, deadlift tutorial, wrong vs right form | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aryan demonstrating proper deadlift setup position -- flat back, chest up, bar close to shins. Wrong form shown with red X overlay on rounded back. Gym setting with plates visible."
+      ],
       "alt_text": "Indian man demonstrating proper deadlift form vs common mistakes in gym",
       "youtube_title": "Form Check Friday - Deadlift Mistakes That Will Hurt You",
       "video_text": [
@@ -634,9 +628,13 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-15T07:30:00Z",
       "notes": "motivational transformation reel, month-by-month progress, emotional | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aryan month-by-month progress grid -- Month 1, 3, 6, 12 physique shots side by side. Text overlay '365 days. Zero weeks off.' Emotional transformation journey, raw and real."
+      ],
       "alt_text": "Indian man showing month by month fitness transformation over one year",
       "youtube_title": "What 1 Year of Gym Consistency Actually Looks Like",
       "video_text": [
@@ -652,18 +650,15 @@
       "caption": "I ranked every post-workout meal under Rs 300. From worst to best.\nSpoiler: your protein shake isn't #1. Real food wins every time. Stop overcomplicating this bro.\nWhat's your go-to post-workout meal?\nSave this -- you'll need it after tomorrow's session.",
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-15T18:00:00Z",
       "notes": "post-workout meal ranking, food photography, tier list style | generated_by=viral-claude",
       "slides": [
-        "Hook: Aryan with multiple plates ranked, text 'Post-workout meals ranked. Under Rs 300.'",
-        "D-Tier: Just a protein shake -- Rs 150, incomplete nutrition",
-        "C-Tier: Banana + peanut butter toast -- Rs 80, decent but low protein",
-        "B-Tier: Egg bhurji + paratha from dhaba -- Rs 120, solid combo",
-        "A-Tier: Chicken tikka + rice plate -- Rs 250, perfect macros",
-        "S-Tier: Paneer bhurji + 3 roti + curd -- Rs 200, best bang for buck"
+        "Photo 1: Aryan with multiple plates arranged in tier list ranking -- S-tier to D-tier labels. Text overlay 'Post-workout meals ranked. Under Rs 300.' Clean food photography.",
+        "Photo 2: Close-up of S-tier meal -- paneer bhurji + 3 roti + curd on a steel plate, macro breakdown showing protein and cost. Dhaba-style presentation."
       ],
       "alt_text": "Indian post-workout meals ranked from worst to best in tier list format",
       "youtube_title": "Post-Workout Meals Under Rs 300 - Ranked Worst to Best",
@@ -710,9 +705,13 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "carousel_images": null,
       "scheduled_at": "2026-03-16T18:00:00Z",
       "notes": "complete pull day routine, back and biceps workout, gym setting | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Aryan at the top of a pull-up, back muscles fully engaged, gym setting. Text overlay 'Pull day. Boys vs men.' Intense gym lighting showing lat width."
+      ],
       "alt_text": "Indian man performing pull-ups and barbell rows during back and bicep workout",
       "youtube_title": "Complete Pull Day Routine - Back & Biceps in 50 Minutes",
       "video_text": [
@@ -728,18 +727,15 @@
       "caption": "Gym etiquette that nobody follows. And it drives me insane.\nRerack your weights. Wipe the bench. Stop curling in the squat rack. Stop giving unsolicited advice. Basic stuff that 90% of Indian gym bros ignore.\nWhich one triggers you the most?\nSend this to the guy who never reracks.",
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "carousel_images": null,
       "scheduled_at": "2026-03-17T07:30:00Z",
       "notes": "gym etiquette hot take, relatable rant, controversy post | generated_by=viral-claude",
       "slides": [
-        "Hook: Aryan staring at unreacked dumbbells, text 'Gym etiquette? Never heard of it.'",
-        "Rule 1: Rerack your weights -- it's not the staff's job",
-        "Rule 2: Wipe the bench after use -- nobody wants your sweat",
-        "Rule 3: Stop curling in the squat rack -- there are other places",
-        "Rule 4: Don't give advice nobody asked for",
-        "Rule 5: Stop hogging equipment while scrolling Instagram -- CTA slide"
+        "Photo 1: Aryan staring at unreacked dumbbells scattered on the gym floor, frustrated expression. Text overlay 'Gym etiquette? Never heard of it.' Messy weight rack in background.",
+        "Photo 2: Aryan doing the right thing -- wiping bench, reracking weights, proper gym etiquette demonstrated. Text overlay 'Be this guy instead.'"
       ],
       "alt_text": "Indian man frustrated at poor gym etiquette with messy weight rack behind him",
       "youtube_title": "Gym Etiquette Nobody Follows - This Needs to Stop",
