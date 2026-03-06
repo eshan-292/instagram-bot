@@ -100,7 +100,7 @@
     },
     {
       "id": "sofia-004",
-      "status": "approved",
+      "status": "posted",
       "topic": "All-black luxury outfit \u2014 power dressing",
       "caption": "All black. All power.\nSometimes the best outfit says nothing \u2014 but everyone notices.\nCould you pull this off?\nTag someone who only wears black.",
       "alt_text": "Elegant blonde woman in all-black luxury outfit in a minimalist setting",
@@ -115,7 +115,10 @@
       "is_reel": false,
       "post_type": "single",
       "scheduled_at": "2026-03-04T01:50:57Z",
-      "notes": "minimalist backdrop, all-black outfit, confident powerful energy | generated_by=template"
+      "notes": "minimalist backdrop, all-black outfit, confident powerful energy | generated_by=template",
+      "posted_at": "2026-03-06T07:54:09Z",
+      "platform_post_id": "3846710348523318365",
+      "publish_error": null
     },
     {
       "id": "sofia-005",
