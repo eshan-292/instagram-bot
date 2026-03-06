@@ -46,7 +46,7 @@ data/
 - **Sofia Petrova** (`@sofia.ptrv`) — 24yo Russian luxury fashion influencer in Mumbai. Mysterious, teasing, high-value energy.
 - **Rhea** (`@rheatrains`) — 23yo Indian fitness creator from Gurgaon. Disciplined, calm, no-nonsense voice.
 
-All 6 get: content generation, image prompts, video creation, IG publishing, full engagement (warm audience, hashtags, explore, replies, stories). Maya + Aryan also have YouTube Shorts.
+All 6 get: content generation, image prompts, video creation, IG publishing, full engagement (warm audience, hashtags, explore, replies, stories). Maya, Aryan, and Rhea also have YouTube Shorts.
 
 ### Satellite Accounts (Engagement Support)
 3 lightweight accounts that boost engagement signals for both main accounts:
@@ -276,18 +276,19 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 | Workflow | Sessions/Day | Concurrency Group | Purpose |
 |----------|-------------|-------------------|---------|
 | `instagram-bot.yml` | 33 | `instagram-bot-maya` | Maya IG |
-| `youtube-bot.yml` | 24 | `youtube-bot` | Maya YT |
+| `youtube-bot.yml` | 22 | `youtube-bot` | Maya YT |
 | `instagram-bot-aryan.yml` | 33 | `instagram-bot-aryan` | Aryan IG |
-| `youtube-bot-aryan.yml` | 24 | `youtube-bot-aryan` | Aryan YT |
+| `youtube-bot-aryan.yml` | 22 | `youtube-bot-aryan` | Aryan YT |
 | `instagram-bot-choosewisely.yml` | 30 | `instagram-bot-choosewisely` | Choose Wisely IG |
 | `instagram-bot-moderntruths.yml` | 30 | `instagram-bot-moderntruths` | Modern Truths IG |
 | `instagram-bot-sofia.yml` | 30 | `instagram-bot-sofia` | Sofia IG |
 | `instagram-bot-rhea.yml` | 30 | `instagram-bot-rhea` | Rhea IG |
+| `youtube-bot-rhea.yml` | 22 | `youtube-bot-rhea` | Rhea YT |
 | `satellite-1.yml` | 9 | `satellite-1` | Satellite 1 |
 | `satellite-2.yml` | 9 | `satellite-2` | Satellite 2 |
 | `satellite-3.yml` | 9 | `satellite-3` | Satellite 3 |
 
-**Total: ~261 sessions/day** across all accounts.
+**Total: ~283 sessions/day** across all accounts (12 workflows).
 
 **1 post/day per main account** with 2 publish windows (backup at lunch if evening fails):
 - **Primary (7 PM IST):** Maya 19:00, Aryan 19:15, CW 19:33, MT 19:39, Sofia 19:47, Rhea 19:53
@@ -338,11 +339,13 @@ The orchestrator publishes at most 1 post/day — if the lunch window publishes,
 
 Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**. Cross-promo at **20:45 IST** (1.75hrs after Maya publishes).
 
-### YouTube Schedules (24 sessions each — MAXED OUT + INDEPENDENT PUBLISHING)
+### YouTube Schedules (22 sessions each — INDEPENDENT PUBLISHING)
 
-Maya and Aryan each get 24 YT sessions/day (alternating engage/replies every 45 min, 6 AM to midnight IST). Aryan's are staggered +15 min. Daily limits: 500 likes, 200 comments, 250 replies. YouTube has no action blocks so engagement is fully maxed out.
+Maya, Aryan, and Rhea each get 22 YT sessions/day (alternating engage/replies every 45 min, 6 AM to 10 PM IST). Aryan's are staggered +15 min, Rhea's offset by +10 min. Daily limits: 500 likes, 200 comments, 250 replies. YouTube has no action blocks so engagement is fully maxed out.
 
-**YouTube publishing is fully independent of Instagram.** Each YT workflow has **3 publish windows** (lunch + afternoon + prime time) using `--yt-publish-only`, each publishing up to 2 Shorts per window (research: 2-3 Shorts/day = 3.2x faster subscriber growth). If Instagram is disabled or broken, YouTube Shorts still get published on schedule.
+**Aryan + Rhea share the same Google Cloud project** (shared 10K quota/day). Maya has her own project. Each persona publishes max 1 Short per publish window.
+
+**YouTube publishing is fully independent of Instagram.** Each YT workflow has **2 publish windows** (lunch + prime time) using `--yt-publish-only`, each publishing 1 Short per window. If Instagram is disabled or broken, YouTube Shorts still get published on schedule.
 
 **YouTube growth optimizations (2026):**
 - **Auto-pin creator comment** — After every YT Short publish, a discussion-sparking comment is posted (Gemini-generated, e.g. "Which one was your favorite? Drop a number"). Creator comments show prominently with a badge, driving 30%+ more replies
@@ -454,7 +457,7 @@ Auto-boosts fresh partner posts at the **start of every engagement session**. In
 | **Curiosity gap architecture** | +4-7x impressions | Open loops in every caption — viewers MUST finish to resolve; delayed payoffs |
 | **YT auto-pin comment** | +30% replies | Gemini-generated discussion question posted as creator on every Short |
 | **YT post-publish blitz** | Critical algo signal | Reply to early comments within 60 minutes of publishing |
-| **YT multi-post publishing** | +3.2x sub growth | 2-3 Shorts/day via 3 publish windows |
+| **YT multi-post publishing** | +3.2x sub growth | 1 Short per window × 2 publish windows/day |
 | **Hindi + seasonal queries** | +40% engagement pool | 35+ queries including Hindi, festivals (Holi/Diwali/Navratri), seasonal trends |
 | **Hyper-specific YT comments** | +2x profile visits | AI analyzes video titles deeply, references specific details, asks follow-up questions |
 | **Satellite boost** | +3x early engagement | 3 accounts: like+comment+save+comment-like+reply+story-like+DM-share |
@@ -531,8 +534,8 @@ Named series create audience anticipation and train followers to return on speci
 | Likes | 500 | Spread across 24 yt_engage sessions (no restrictions on YT) |
 | Comments | 200 | AI-generated hyper-specific, 80% comment rate — max engagement |
 | Replies | 250 | On own video comments + post-publish blitz — reply to ALL |
-| Shorts published | 4-6 | 3 publish windows × up to 2 per window |
-| Creator comments | 4-6 | Auto-posted on every published Short |
+| Shorts published | 2 | 2 publish windows × 1 per window (quota-conservative) |
+| Creator comments | 2 | Auto-posted on every published Short |
 
 **API quota budget:** Maxed out. 60 videos/session, 4 queries/session, 25 results/query. YouTube has no action blocks like Instagram.
 
