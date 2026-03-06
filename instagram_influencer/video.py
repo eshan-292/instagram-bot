@@ -527,13 +527,34 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
                 log.warning("IG video conversion failed for %s: %s", post.get("id"), exc)
 
         # YouTube Shorts video (9:16) — WITH audio: royalty-free music baked in
+        # For carousels: montage all slides into one Short (not just 1st image)
         if youtube:
             yt_video = str(post.get("youtube_video_url") or "").strip()
             if not yt_video or not os.path.exists(yt_video):
                 try:
-                    yt_path = image_to_youtube_short(
-                        image_url, text_lines=text_lines,
+                    # Carousel → montage all slides into one YT Short
+                    carousel_images = post.get("carousel_images") or []
+                    valid_carousel = (
+                        post_type == "carousel"
+                        and isinstance(carousel_images, list)
+                        and len(carousel_images) >= 3
+                        and all(os.path.exists(str(p)) for p in carousel_images)
                     )
+
+                    if valid_carousel:
+                        yt_montage_path = str(Path(image_url).with_name(
+                            Path(image_url).stem + "_yt.mp4"
+                        ))
+                        yt_path = images_to_montage(
+                            [str(p) for p in carousel_images],
+                            yt_montage_path,
+                            YT_WIDTH, YT_HEIGHT, YT_MONTAGE_PER_IMAGE,
+                            add_audio=True, text_lines=text_lines,
+                        )
+                    else:
+                        yt_path = image_to_youtube_short(
+                            image_url, text_lines=text_lines,
+                        )
                     post["youtube_video_url"] = yt_path
                 except Exception as exc:
                     log.warning("YT video conversion failed for %s: %s", post.get("id"), exc)
