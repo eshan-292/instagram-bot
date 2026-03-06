@@ -1,44 +1,37 @@
 # 📊 Daily Report — March 06, 2026
 
-*Generated at 12:51 AM IST*
+*Generated at 11:54 PM IST*
 
 ## Engagement
 
 | Action | Count |
 |--------|-------|
-| ❤️ Likes | 88 |
-| 💬 Comments | 156 |
-| ➕ Follows | 55 |
+| ❤️ Likes | 47 |
+| 💬 Comments | 152 |
+| ➕ Follows | 19 |
+| ➖ Unfollows | 152 |
 | 👁️ Story Views | 150 |
-| ↩️ Comment Replies | 22 |
-| ▶️ YT Likes | 67 |
-| ▶️ YT Comments | 56 |
-| **Total** | **594** |
+| ▶️ YT Likes | 53 |
+| **Total** | **573** |
 
 ## Posts Published Today
 
-- **maya-011**: Making an entrance at a high-fashion Mumbai gala.
-  - IG: https://instagram.com/p/3845977965759097799/
-- **maya-012**: A stylish afternoon at a heritage cafe in South Mumbai.
-  - IG: https://instagram.com/p/3846176200830275414/
-
-## YouTube Channel
-
-- Subscribers: **6**
-- Total views: **3211**
-- Videos: **7**
+- **maya-013**: Owning the night at a luxury Mumbai rooftop bar.
+  - IG: https://instagram.com/p/3846700998194915377/
+- **maya-014**: A glamorous Mumbai fashion event
+  - IG: https://instagram.com/p/3846898150791752920/
 
 ## Content Pipeline
 
 - Draft: 7
-- Approved: 12
-- Posted: 11
+- Approved: 10
+- Posted: 13
 
 ## Growth Signals
 
-- Net follows sent today: **55**
-- Engagement actions: **594**
-- Account age: **10 days**
+- Net follows sent today: **-133**
+- Engagement actions: **573**
+- Account age: **11 days**
 - Warmup multiplier: **1.0x**
 
 ---
