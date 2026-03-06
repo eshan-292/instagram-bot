@@ -36,7 +36,8 @@
       ],
       "posted_at": "2026-03-04T15:01:48Z",
       "platform_post_id": "3845476013602336771",
-      "publish_error": null
+      "publish_error": null,
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-001/1_yt.mp4"
     },
     {
       "id": "rhea-002",
@@ -74,11 +75,12 @@
       ],
       "posted_at": "2026-03-05T07:59:32Z",
       "platform_post_id": "3845988274049830385",
-      "publish_error": null
+      "publish_error": null,
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-002/1_yt.mp4"
     },
     {
       "id": "rhea-003",
-      "status": "approved",
+      "status": "posted",
       "topic": "6-month transformation \u2014 discipline over motivation",
       "caption": "6 months. Same girl. Different discipline.\nMotivation fades. Habits don't.\nCould you commit to 6 months?\nScreenshot this as your reminder.",
       "alt_text": "Before and after fitness transformation photo of Indian woman",
@@ -93,7 +95,10 @@
       "is_reel": false,
       "post_type": "single",
       "scheduled_at": "2026-03-03T21:51:11Z",
-      "notes": "before/after comparison, natural lighting, confident energy | generated_by=template"
+      "notes": "before/after comparison, natural lighting, confident energy | generated_by=template",
+      "posted_at": "2026-03-06T15:03:16Z",
+      "platform_post_id": "3846926326389609532",
+      "publish_error": null
     },
     {
       "id": "rhea-004",
@@ -112,7 +117,8 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T01:51:11Z",
-      "notes": "early morning gym vibes, low lighting, focused energy | generated_by=template"
+      "notes": "early morning gym vibes, low lighting, focused energy | generated_by=template",
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-004_yt.mp4"
     },
     {
       "id": "rhea-005",
@@ -131,7 +137,8 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-03-04T05:51:11Z",
-      "notes": "gym setting, focus on arms and shoulders, pump visible | generated_by=template"
+      "notes": "gym setting, focus on arms and shoulders, pump visible | generated_by=template",
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005_yt.mp4"
     }
   ]
 }
