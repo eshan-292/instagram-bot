@@ -34,7 +34,10 @@
         "I wasted 2 years.",
         "Send to your gym partner"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4"
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
+      "youtube_video_id": "pf2gQK-tTvI",
+      "youtube_posted_at": "2026-03-06T09:43:37Z",
+      "youtube_pin_comment_id": "UgzAXm9v0ApzOufbJM94AaABAg"
     },
     {
       "id": "aryan-002",
@@ -86,7 +89,10 @@
       "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4",
       "posted_at": "2026-03-06T07:56:03Z",
       "platform_post_id": "3846711089329666280",
-      "publish_error": null
+      "publish_error": null,
+      "youtube_video_id": "P6lNQWtejJ8",
+      "youtube_posted_at": "2026-03-06T09:43:58Z",
+      "youtube_pin_comment_id": "Ugy-CG5PgBz5Ph2iKFB4AaABAg"
     },
     {
       "id": "aryan-004",
