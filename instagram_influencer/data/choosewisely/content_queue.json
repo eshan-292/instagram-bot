@@ -3,7 +3,7 @@
     {
       "id": "cw-001",
       "status": "posted",
-      "topic": "Gym or Party \u2014 which defines your weekends?",
+      "topic": "Gym or Party — which defines your weekends?",
       "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
       "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
       "youtube_title": "Gym or Party - Which Defines You?",
@@ -86,7 +86,7 @@
       "id": "cw-004",
       "status": "posted",
       "topic": "Would you rather: 5 hard life scenarios",
-      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
+      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers — 1 or 2 for each.\nSave this and ask your friends.",
       "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
       "youtube_title": "5 Impossible Would You Rather Questions",
       "video_text": [
@@ -123,8 +123,8 @@
     {
       "id": "cw-005",
       "status": "posted",
-      "topic": "Rate your life \u2014 honest score check",
-      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
+      "topic": "Rate your life — honest score check",
+      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments — no lying.\nTag someone who needs this reality check.",
       "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
       "youtube_title": "Rate Your Life - Honest Score Check",
       "video_text": [
@@ -233,374 +233,407 @@
     {
       "id": "cw-009",
       "status": "draft",
-      "topic": "Gym or Party \u2014 which defines your weekends?",
-      "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
-      "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
-      "youtube_title": "Gym or Party - Which Defines You?",
+      "topic": "Red flag or green flag — rate these 10 dating behaviors",
+      "caption": "10 dating behaviors.\nRed flag or green flag?\nYou WILL disagree on number 7.\nSend to your situationship. Watch them panic.",
+      "alt_text": "Carousel with bold red and green split-screen graphics rating common dating behaviors as red or green flags",
+      "youtube_title": "Red Flag or Green Flag? Rate These 10 Dating Behaviors",
       "video_text": [
-        "Gym or Party?",
-        "Pick ONE.",
-        "Comment your answer"
-      ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "single",
-      "scheduled_at": "2026-03-06T21:38:11Z",
-      "notes": "split-screen: left=gym/discipline, right=party/nightlife, bold text overlay | generated_by=template"
-    },
-    {
-      "id": "cw-010",
-      "status": "draft",
-      "topic": "10 binary choices that reveal who you really are",
-      "caption": "10 choices. Zero skipping.\nSwipe through and comment your answers.\nThis will expose you.\nSend to someone who thinks they know themselves.",
-      "alt_text": "Carousel of binary choice graphics with bold typography on dark backgrounds",
-      "youtube_title": "10 Choices That Reveal Your True Self",
-      "video_text": [
-        "10 choices.",
-        "Zero skipping.",
-        "Comment ALL your answers"
+        "Red flag or green flag?",
+        "10 dating behaviors.",
+        "Send to your crush."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
-      "scheduled_at": "2026-03-07T01:38:11Z",
-      "notes": "10-slide carousel, each slide one binary choice, consistent design template | generated_by=template",
+      "scheduled_at": "2026-03-07T08:00:00Z",
+      "notes": "Each slide: bold behavior text centered, red glow left side, green glow right side. Dark background, high contrast typography. Behaviors should be genuinely debatable to split audience. | generated_by=viral-claude",
       "slides": [
-        "Hook: 'Choose Wisely' logo with '10 choices that expose you'",
-        "Morning person OR Night owl?",
-        "Save OR Spend?",
-        "Career OR Passion?",
-        "Loyalty OR Honesty?",
-        "City OR Mountains?"
+        "Hook: 'Red Flag or Green Flag? 10 dating behaviors. You WILL disagree.'",
+        "1. Double texting when left on read. | 2. Still best friends with their ex.",
+        "3. Plans dates without being asked. | 4. Checks your phone 'as a joke.'",
+        "5. Remembers small details you mentioned once. | 6. Takes 6 hours to reply but is always online.",
+        "7. Says 'I love you' within 2 weeks. | 8. Never posts you on social media.",
+        "CTA: 'Comment your answers. Send to your situationship.'"
       ]
     },
     {
-      "id": "cw-011",
+      "id": "cw-010",
       "status": "draft",
-      "topic": "Old money vs New money aesthetic",
-      "caption": "Old money or New money.\nWhich vibe are you?\nComment 1 or 2.\nSend this to someone who needs a reality check.",
-      "alt_text": "Split comparison of old money subtle luxury versus new money flashy aesthetic",
-      "youtube_title": "Old Money vs New Money - Which Are You?",
+      "topic": "Your phone is at 1%. Who do you call?",
+      "caption": "1% battery. One call.\nWho are you calling?\nThat person IS your person.\nSend this to them right now.",
+      "alt_text": "Dramatic phone screen showing 1 percent battery with bold text asking who you would call",
+      "youtube_title": "1% Battery. One Call. Who Do You Pick?",
       "video_text": [
-        "Old money or New money?",
-        "1 or 2?",
-        "Tag someone"
+        "1% battery left.",
+        "One call. Who?",
+        "Send this to them."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
-      "scheduled_at": "2026-03-07T05:38:11Z",
-      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics | generated_by=template"
+      "scheduled_at": "2026-03-07T12:00:00Z",
+      "notes": "Dramatic battery icon draining to 1%, countdown timer feel, dark moody lighting with red battery glow. Quick zoom into phone screen. Text reveal: 'One call. Who?' Pause for tension. End with 'Send this to them.' High send-rate format. | generated_by=viral-claude"
+    },
+    {
+      "id": "cw-011",
+      "status": "draft",
+      "topic": "8 apps enter. Only 1 survives on your phone.",
+      "caption": "8 apps. 1 survivor.\nSwipe through the bracket. Pick your winner.\nComment the app you'd keep forever.\nSend to someone addicted to the wrong app.",
+      "alt_text": "Elimination bracket graphic showing 8 popular apps competing in tournament-style rounds",
+      "youtube_title": "8 Apps Enter, 1 Survives. Which Do You Keep Forever?",
+      "video_text": [
+        "8 apps enter.",
+        "Only 1 survives.",
+        "Which app wins?"
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-07T16:00:00Z",
+      "notes": "Tournament bracket format. Round 1 matchups: Instagram vs Snapchat, WhatsApp vs YouTube, Spotify vs Netflix, Google Maps vs Zomato. Each slide shows one bracket round with app icons. Bold elimination X over losers. Final slide asks for winner. | generated_by=viral-claude",
+      "slides": [
+        "Hook: '8 Apps Enter. Only 1 Survives.' (Visual: all 8 app icons in bracket formation)",
+        "Round 1: Instagram vs Snapchat | WhatsApp vs YouTube",
+        "Round 1: Spotify vs Netflix | Google Maps vs Zomato",
+        "Semis: Winner vs Winner | Winner vs Winner",
+        "Final: Last 2 apps head-to-head. Pick your GOAT.",
+        "CTA: 'Comment your winner. Tag someone who picks wrong.'"
+      ]
     },
     {
       "id": "cw-012",
       "status": "draft",
-      "topic": "Would you rather: 5 hard life scenarios",
-      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
-      "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
-      "youtube_title": "5 Impossible Would You Rather Questions",
+      "topic": "Hustle culture is just glorified anxiety. Change my mind.",
+      "caption": "Hustle culture is glorified anxiety.\nWorking 80 hours isn't a flex. It's a cry for help.\nAgree or disagree? Comment below.\nSend to the friend who 'doesn't have time.'",
+      "alt_text": "Bold controversial statement text on dark background challenging hustle culture mentality",
+      "youtube_title": "Hustle Culture = Glorified Anxiety? Change My Mind.",
       "video_text": [
-        "Would you rather?",
-        "5 impossible choices",
-        "Comment 1 or 2"
+        "Hustle culture?",
+        "Glorified anxiety.",
+        "Change my mind."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-07T09:38:11Z",
-      "notes": "5-slide carousel, each with a difficult binary choice, dark moody design | generated_by=template",
-      "slides": [
-        "Hook: 'Would You Rather?' in bold neon text",
-        "Know when you'll die OR Know how you'll die?",
-        "Be famous but broke OR Rich but unknown?",
-        "Read minds OR Be invisible?",
-        "Relive the past OR See the future?",
-        "CTA: 'Comment your answers. Tag someone.'"
-      ]
+      "post_type": "single",
+      "scheduled_at": "2026-03-07T20:00:00Z",
+      "notes": "Bold white text on matte black background. Statement centered. Minimal design, maximum impact. Subtle burnt-out desk setup in background, dimly lit. Controversy-optimized to split audience 50/50 between hustlers and anti-grind crowd. | generated_by=viral-claude"
     },
     {
       "id": "cw-013",
       "status": "draft",
-      "topic": "Rate your life \u2014 honest score check",
-      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
-      "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
-      "youtube_title": "Rate Your Life - Honest Score Check",
+      "topic": "Build your perfect date — 6 impossible choices",
+      "caption": "Build your perfect date.\n6 categories. 2 options each. No skipping.\nScreenshot your picks and compare.\nSend to your partner. See if you even match.",
+      "alt_text": "Carousel of date-building choices with two options per category in a clean split-screen format",
+      "youtube_title": "Build Your Perfect Date - 6 Impossible Picks",
       "video_text": [
-        "Rate your life.",
-        "Be honest.",
-        "Total in comments"
+        "Build your dream date.",
+        "6 choices. Pick 1 each.",
+        "Screenshot and compare."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
-      "scheduled_at": "2026-03-07T13:38:11Z",
-      "notes": "each slide rates one life area (fitness, career, relationships, finances, mental health) on 1-10 scale | generated_by=template",
+      "scheduled_at": "2026-03-08T00:00:00Z",
+      "notes": "Each slide: one category with two options side by side. Clean pastel split-screen design with lifestyle photography. Screenshot-bait format drives saves and shares. | generated_by=viral-claude",
       "slides": [
-        "Hook: 'Rate your life. No lying.'",
-        "Fitness: 1-10?",
-        "Career: 1-10?",
-        "Relationships: 1-10?",
-        "Finances: 1-10?",
-        "Mental health: 1-10?"
+        "Hook: 'Build Your Perfect Date. 6 picks. No compromise.'",
+        "Cuisine: Street food OR Fine dining?",
+        "Setting: Rooftop under stars OR Cozy rainy cafe?",
+        "Activity: Long drive OR Cook together?",
+        "Music: Lo-fi chill OR Bollywood classics?",
+        "Who pays: Split OR Surprise treat?"
       ]
     },
     {
       "id": "cw-014",
       "status": "draft",
-      "topic": "Elimination bracket \u2014 8 foods, only 1 survives",
-      "caption": "8 foods. Only 1 survives.\nEliminate one each round. No cheating.\nComment your final answer.\nSend to a friend \u2014 see if they pick the same.",
-      "alt_text": "Carousel elimination bracket where 8 foods compete and only 1 survives",
-      "youtube_title": "8 Foods Only 1 Survives - Elimination Bracket",
+      "topic": "You can only keep 3 people in your life. Everyone else gone.",
+      "caption": "Keep only 3 people.\nEveryone else disappears tomorrow.\nWho made your list?\nSend this to all 3. If they send it back, you're real.",
+      "alt_text": "Dark dramatic graphic with the number 3 glowing and silhouettes fading into darkness",
+      "youtube_title": "Only 3 People Stay. Everyone Else Gone. Who?",
       "video_text": [
-        "8 foods.",
-        "Only 1 survives.",
-        "Comment your winner"
-      ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-07T17:38:11Z",
-      "notes": "elimination bracket design, bold text, contrasting food images per slide | generated_by=template",
-      "slides": [
-        "Hook: '8 FOODS. 1 SURVIVES.' in bold neon text",
-        "Round 1: Pizza vs Biryani vs Butter Chicken vs Momos",
-        "Round 1: Sushi vs Tacos vs Pasta vs Dosa",
-        "Round 2: Winners face off",
-        "Semi-final: 2 remaining",
-        "CTA: 'Who won? Comment your champion. Tag a foodie.'"
-      ]
-    },
-    {
-      "id": "cw-015",
-      "status": "draft",
-      "topic": "Build your starter pack \u2014 6 life categories",
-      "caption": "Build your starter pack.\nPick ONE from each category. No extras.\nScreenshot your pack.\nSend to your bestie \u2014 see how different you are.",
-      "alt_text": "Carousel where users pick one option from each life category to build their starter pack",
-      "youtube_title": "Build Your Starter Pack - 6 Life Categories",
-      "video_text": [
-        "Build your pack.",
-        "Pick ONE each.",
-        "Screenshot and compare"
-      ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-07T21:38:11Z",
-      "notes": "each slide = one category with 4 options, clean grid design, bold text | generated_by=template",
-      "slides": [
-        "Hook: 'BUILD YOUR STARTER PACK' in bold",
-        "Drink: Coffee / Chai / Juice / Water",
-        "Music: Bollywood / Hip-hop / Lo-fi / Classical",
-        "Hobby: Gym / Reading / Gaming / Travel",
-        "Food: Street food / Home cooked / Fine dining / Fast food",
-        "Superpower: Time travel / Mind reading / Invisibility / Flying"
-      ]
-    },
-    {
-      "id": "cw-016",
-      "status": "draft",
-      "topic": "Compatibility test \u2014 10 rapid-fire choices with your friend",
-      "caption": "Compatibility test.\n10 choices. Do them together.\nHow many did you match? Comment the number.\nTag someone and find out.",
-      "alt_text": "Carousel compatibility test with 10 rapid-fire binary choices to compare with friends",
-      "youtube_title": "Compatibility Test - 10 Rapid Fire Choices",
-      "video_text": [
-        "Compatibility test.",
-        "10 choices.",
-        "How many matches?"
-      ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-08T01:38:11Z",
-      "notes": "each slide = one A/B choice, split-screen design, neon accents | generated_by=template",
-      "slides": [
-        "Hook: 'COMPATIBILITY TEST' with two silhouettes",
-        "Morning person OR Night owl?",
-        "Text first OR Wait for them?",
-        "Plan everything OR Go with the flow?",
-        "Sweet OR Spicy?",
-        "Introvert OR Extrovert?"
-      ]
-    },
-    {
-      "id": "cw-017",
-      "status": "draft",
-      "topic": "Gym or Party \u2014 which defines your weekends?",
-      "caption": "Gym or Party.\nPick one. No 'both.'\nComment below. Let's see who's real.\nTag someone who always picks wrong.",
-      "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
-      "youtube_title": "Gym or Party - Which Defines You?",
-      "video_text": [
-        "Gym or Party?",
-        "Pick ONE.",
-        "Comment your answer"
-      ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "single",
-      "scheduled_at": "2026-03-08T05:38:11Z",
-      "notes": "split-screen: left=gym/discipline, right=party/nightlife, bold text overlay | generated_by=template"
-    },
-    {
-      "id": "cw-018",
-      "status": "draft",
-      "topic": "10 binary choices that reveal who you really are",
-      "caption": "10 choices. Zero skipping.\nSwipe through and comment your answers.\nThis will expose you.\nSend to someone who thinks they know themselves.",
-      "alt_text": "Carousel of binary choice graphics with bold typography on dark backgrounds",
-      "youtube_title": "10 Choices That Reveal Your True Self",
-      "video_text": [
-        "10 choices.",
-        "Zero skipping.",
-        "Comment ALL your answers"
-      ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-08T09:38:11Z",
-      "notes": "10-slide carousel, each slide one binary choice, consistent design template | generated_by=template",
-      "slides": [
-        "Hook: 'Choose Wisely' logo with '10 choices that expose you'",
-        "Morning person OR Night owl?",
-        "Save OR Spend?",
-        "Career OR Passion?",
-        "Loyalty OR Honesty?",
-        "City OR Mountains?"
-      ]
-    },
-    {
-      "id": "cw-019",
-      "status": "draft",
-      "topic": "Old money vs New money aesthetic",
-      "caption": "Old money or New money.\nWhich vibe are you?\nComment 1 or 2.\nSend this to someone who needs a reality check.",
-      "alt_text": "Split comparison of old money subtle luxury versus new money flashy aesthetic",
-      "youtube_title": "Old Money vs New Money - Which Are You?",
-      "video_text": [
-        "Old money or New money?",
-        "1 or 2?",
-        "Tag someone"
+        "3 people stay.",
+        "Everyone else gone.",
+        "Send this to your 3."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
-      "scheduled_at": "2026-03-08T13:38:11Z",
-      "notes": "left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics | generated_by=template"
+      "scheduled_at": "2026-03-08T04:00:00Z",
+      "notes": "Cinematic feel. Start with a crowd of silhouettes, then they fade one by one until only 3 remain, lit by warm spotlight. Emotional piano undertone. Text reveal builds tension. High send-rate post — viewers immediately think of 3 specific people. | generated_by=viral-claude"
     },
     {
-      "id": "cw-020",
+      "id": "cw-015",
       "status": "draft",
-      "topic": "Would you rather: 5 hard life scenarios",
-      "caption": "Would you rather?\n5 impossible choices. No skipping.\nComment your answers \u2014 1 or 2 for each.\nSave this and ask your friends.",
-      "alt_text": "Carousel of would-you-rather scenarios with bold split-screen graphics",
-      "youtube_title": "5 Impossible Would You Rather Questions",
+      "topic": "Rate your discipline — 8 categories, no lying",
+      "caption": "Rate your discipline. Be brutal.\nSwipe and score yourself 1-10.\nTotal in comments. Under 50? You're lying to yourself.\nSend to someone who needs a wake-up call.",
+      "alt_text": "Carousel of discipline rating categories with bold 1-10 scales on dark motivational backgrounds",
+      "youtube_title": "Rate Your Discipline 1-10. No Lying Allowed.",
       "video_text": [
-        "Would you rather?",
-        "5 impossible choices",
-        "Comment 1 or 2"
+        "Rate your discipline.",
+        "8 categories. Be brutal.",
+        "Total in comments."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
-      "scheduled_at": "2026-03-08T17:38:11Z",
-      "notes": "5-slide carousel, each with a difficult binary choice, dark moody design | generated_by=template",
+      "scheduled_at": "2026-03-08T08:00:00Z",
+      "notes": "Dark, gritty design with bold neon accent numbers. Each slide: category name + 1-10 scale bar + minimalist icon. Consistent 'Choose Wisely' branding. Self-assessment format drives saves and comments with scores. | generated_by=viral-claude",
       "slides": [
-        "Hook: 'Would You Rather?' in bold neon text",
-        "Know when you'll die OR Know how you'll die?",
-        "Be famous but broke OR Rich but unknown?",
-        "Read minds OR Be invisible?",
-        "Relive the past OR See the future?",
-        "CTA: 'Comment your answers. Tag someone.'"
+        "Hook: 'Rate Your Discipline. No lying. Total in comments.'",
+        "Wake-up time consistency: 1-10? | Gym consistency: 1-10?",
+        "Screen time control: 1-10? | Savings discipline: 1-10?",
+        "Diet consistency: 1-10? | Reading habit: 1-10?",
+        "Sleep schedule: 1-10? | Daily productivity: 1-10?",
+        "CTA: 'Add it up. Comment your total. Under 50 = reality check needed.'"
+      ]
+    },
+    {
+      "id": "cw-016",
+      "status": "draft",
+      "topic": "This or That: India Edition — 10 rapid-fire choices",
+      "caption": "This or That: India Edition.\n10 rapid-fire picks. No overthinking.\nComment all 10 answers. Let's settle this.\nSend to every desi friend you have.",
+      "alt_text": "Carousel of India-specific binary choices with vibrant desi-themed graphics and bold text",
+      "youtube_title": "This or That: India Edition - 10 Rapid Picks!",
+      "video_text": [
+        "This or That.",
+        "India Edition.",
+        "Comment all 10."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T12:00:00Z",
+      "notes": "Vibrant desi color palette (saffron, green accents). Each slide: split-screen with photography of both options. India-specific choices that every Indian has an opinion on. High comment volume guaranteed. | generated_by=viral-claude",
+      "slides": [
+        "Hook: 'This or That: India Edition. 10 picks. No skipping.'",
+        "Mumbai OR Delhi? | Chai OR Coffee?",
+        "Bollywood OR Hollywood? | Biryani OR Butter Chicken?",
+        "Mountains OR Beaches? | Cricket OR Football?",
+        "Maggi OR Dosa? | Ola OR Uber?",
+        "CTA: 'Comment all 10. Tag a friend who picks wrong on every one.'"
+      ]
+    },
+    {
+      "id": "cw-017",
+      "status": "draft",
+      "topic": "Love marriage or arranged — which actually lasts?",
+      "caption": "Love marriage or arranged marriage.\nWhich one actually lasts?\n90% of you won't answer honestly.\nSend to your parents. Then send to your best friend.",
+      "alt_text": "Bold split-screen contrasting love marriage couple and arranged marriage ceremony with provocative text",
+      "youtube_title": "Love Marriage vs Arranged - Which Actually Lasts?",
+      "video_text": [
+        "Love or arranged?",
+        "Which actually lasts?",
+        "Send to your parents."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-08T16:00:00Z",
+      "notes": "India's most polarizing dating debate. Split screen: left=couple in love (candid, passionate), right=traditional wedding setup (family, rituals). Quick cuts between happy/struggling moments from both sides. End on question mark. Maximum controversy, maximum comments. | generated_by=viral-claude"
+    },
+    {
+      "id": "cw-018",
+      "status": "draft",
+      "topic": "8 Bollywood movies enter. Only 1 survives.",
+      "caption": "8 Bollywood legends. 1 survivor.\nSwipe through the bracket. Pick your champion.\nIf you skip 3 Idiots, we can't be friends.\nSend to your Bollywood-obsessed friend.",
+      "alt_text": "Elimination bracket graphic featuring 8 iconic Bollywood movie posters in tournament format",
+      "youtube_title": "8 Bollywood Movies Enter. Only 1 Survives. Pick Yours!",
+      "video_text": [
+        "8 Bollywood classics.",
+        "Only 1 survives.",
+        "Pick your champion."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T20:00:00Z",
+      "notes": "Tournament bracket with iconic Bollywood film posters. Matchups: 3 Idiots vs DDLJ, Sholay vs Dangal, PK vs Gangs of Wasseypur, ZNMD vs Dil Chahta Hai. Bold elimination X graphics. Movie-poster-style design with dramatic lighting. | generated_by=viral-claude",
+      "slides": [
+        "Hook: '8 Bollywood Legends Enter. Only 1 Survives.'",
+        "Round 1: 3 Idiots vs DDLJ | Sholay vs Dangal",
+        "Round 1: PK vs Gangs of Wasseypur | ZNMD vs Dil Chahta Hai",
+        "Semis: Winner vs Winner | Winner vs Winner",
+        "Final: The last 2 standing. Pick your GOAT.",
+        "CTA: 'Comment your winner. Tag someone with terrible taste.'"
+      ]
+    },
+    {
+      "id": "cw-019",
+      "status": "draft",
+      "topic": "Money or time? 90% of people answer this wrong.",
+      "caption": "Money or time.\n90% say time. Then spend 10 hours doom-scrolling.\nBe honest. Which do you actually chase?\nSend to someone who needs to hear this.",
+      "alt_text": "Bold contrasting graphic showing a clock and currency symbol with provocative text about life priorities",
+      "youtube_title": "Money or Time? 90% Answer This Wrong.",
+      "video_text": [
+        "Money or time?",
+        "You say time.",
+        "But you chase money."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-09T00:00:00Z",
+      "notes": "Contrarian hook format. Split screen: left=stacks of money/luxury lifestyle, right=hourglass/sunset/family moments. Twist: show people saying 'time' then cut to them grinding at desks, scrolling phones, stuck in traffic. Forces self-reflection. Debate-starter that splits audience. | generated_by=viral-claude"
+    },
+    {
+      "id": "cw-020",
+      "status": "draft",
+      "topic": "Build your dream life — pick 1 from each category",
+      "caption": "Build your dream life in 6 picks.\nScreenshot your choices. No changing answers.\nDoes your dream life match your real life?\nSend to a friend. Compare builds.",
+      "alt_text": "Carousel of dream life categories with two aspirational options each in clean modern design",
+      "youtube_title": "Build Your Dream Life - 6 Picks Only!",
+      "video_text": [
+        "Build your dream life.",
+        "6 picks. No redos.",
+        "Screenshot and compare."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T04:00:00Z",
+      "notes": "Aspirational lifestyle photography for each option. Clean, modern split-screen design. Each slide two options with high-quality visuals. Screenshot-bait format for stories and DM shares. | generated_by=viral-claude",
+      "slides": [
+        "Hook: 'Build Your Dream Life. 6 categories. 1 pick each.'",
+        "City: London OR Tokyo?",
+        "Career: Founder OR Creative director?",
+        "Home: Penthouse OR Beach house?",
+        "Vacation: Bali OR Switzerland?",
+        "Partner trait: Makes you laugh OR Makes you think?"
       ]
     },
     {
       "id": "cw-021",
       "status": "draft",
-      "topic": "Rate your life \u2014 honest score check",
-      "caption": "Rate your life. Be honest.\nSwipe and give yourself a score.\nTotal in comments \u2014 no lying.\nTag someone who needs this reality check.",
-      "alt_text": "Carousel graphic asking users to rate different areas of their life 1-10",
-      "youtube_title": "Rate Your Life - Honest Score Check",
+      "topic": "Top 3 non-negotiables in a partner — rank these 10",
+      "caption": "10 traits. Pick only 3 non-negotiables.\nThis will start arguments.\nComment your top 3. Defend your choices.\nSend to your couple friends. Watch them fight.",
+      "alt_text": "Carousel listing 10 partner traits to rank with bold typography forcing viewers to pick only 3",
+      "youtube_title": "10 Partner Traits. Pick Only 3. No Cheating.",
       "video_text": [
-        "Rate your life.",
-        "Be honest.",
-        "Total in comments"
+        "10 traits. Pick 3.",
+        "Only 3. No cheating.",
+        "Comment your picks."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
-      "scheduled_at": "2026-03-08T21:38:11Z",
-      "notes": "each slide rates one life area (fitness, career, relationships, finances, mental health) on 1-10 scale | generated_by=template",
+      "scheduled_at": "2026-03-09T08:00:00Z",
+      "notes": "Minimalist design, each trait in bold type with a number. Dark background, gold accent text. Force ranking creates disagreement and high comment volume. Couples will compare answers and argue. | generated_by=viral-claude",
       "slides": [
-        "Hook: 'Rate your life. No lying.'",
-        "Fitness: 1-10?",
-        "Career: 1-10?",
-        "Relationships: 1-10?",
-        "Finances: 1-10?",
-        "Mental health: 1-10?"
+        "Hook: '10 Partner Traits. You can only keep 3. Choose wisely.'",
+        "1. Loyalty | 2. Looks | 3. Humor | 4. Ambition | 5. Money",
+        "6. Communication | 7. Family values | 8. Independence | 9. Intelligence | 10. Emotional maturity",
+        "The rules: Pick EXACTLY 3. No 'all of them.' No 'it depends.'",
+        "Your top 3 say everything about you.",
+        "CTA: 'Comment your 3. Send to your partner. See if you match.'"
       ]
     },
     {
       "id": "cw-022",
       "status": "draft",
-      "topic": "Elimination bracket \u2014 8 foods, only 1 survives",
-      "caption": "8 foods. Only 1 survives.\nEliminate one each round. No cheating.\nComment your final answer.\nSend to a friend \u2014 see if they pick the same.",
-      "alt_text": "Carousel elimination bracket where 8 foods compete and only 1 survives",
-      "youtube_title": "8 Foods Only 1 Survives - Elimination Bracket",
+      "topic": "1 crore now or guaranteed 10 crore in 10 years?",
+      "caption": "1 crore right now. Or 10 crore in 10 years. Guaranteed.\nMost people pick wrong.\nComment your choice. No changing your mind.\nSend to someone who would definitely pick wrong.",
+      "alt_text": "Bold financial dilemma graphic showing 1 crore cash now versus 10 crore in 10 years with dramatic visuals",
+      "youtube_title": "1 Crore Now or 10 Crore in 10 Years? Most Pick Wrong.",
       "video_text": [
-        "8 foods.",
-        "Only 1 survives.",
-        "Comment your winner"
+        "1 crore now?",
+        "Or 10 crore later?",
+        "Most people pick wrong."
       ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-09T01:38:11Z",
-      "notes": "elimination bracket design, bold text, contrasting food images per slide | generated_by=template",
-      "slides": [
-        "Hook: '8 FOODS. 1 SURVIVES.' in bold neon text",
-        "Round 1: Pizza vs Biryani vs Butter Chicken vs Momos",
-        "Round 1: Sushi vs Tacos vs Pasta vs Dosa",
-        "Round 2: Winners face off",
-        "Semi-final: 2 remaining",
-        "CTA: 'Who won? Comment your champion. Tag a foodie.'"
-      ]
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-09T12:00:00Z",
+      "notes": "Quick cuts: left=luxury lifestyle NOW (cars, travel, apartment), right=patient wealth building (investments, compound growth, massive payoff). Show the math briefly. End on question. India-specific amounts (crore) for maximum relatability. Financial debate that splits audience 50/50. | generated_by=viral-claude"
     },
     {
       "id": "cw-023",
       "status": "draft",
-      "topic": "Build your starter pack \u2014 6 life categories",
-      "caption": "Build your starter pack.\nPick ONE from each category. No extras.\nScreenshot your pack.\nSend to your bestie \u2014 see how different you are.",
-      "alt_text": "Carousel where users pick one option from each life category to build their starter pack",
-      "youtube_title": "Build Your Starter Pack - 6 Life Categories",
+      "topic": "Friendship compatibility test — 10 questions that expose you",
+      "caption": "Friendship compatibility test.\n10 rapid-fire A or B questions.\nHow many did you and your bestie match?\nScreenshot. Send to your best friend. Compare answers.",
+      "alt_text": "Carousel of 10 rapid-fire A/B friendship compatibility questions with bold colorful design",
+      "youtube_title": "Friendship Test: 10 Questions That Expose You Both",
       "video_text": [
-        "Build your pack.",
-        "Pick ONE each.",
-        "Screenshot and compare"
+        "Friendship test.",
+        "10 questions. A or B.",
+        "Screenshot. Send. Compare."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": false,
       "post_type": "carousel",
-      "scheduled_at": "2026-03-09T05:38:11Z",
-      "notes": "each slide = one category with 4 options, clean grid design, bold text | generated_by=template",
+      "scheduled_at": "2026-03-09T16:00:00Z",
+      "notes": "Bold, playful design. Each slide 2 questions with A/B options. Bright contrasting colors. Screenshot-bait format designed for DM shares and stories. Friendship test format = guaranteed sends. | generated_by=viral-claude",
       "slides": [
-        "Hook: 'BUILD YOUR STARTER PACK' in bold",
-        "Drink: Coffee / Chai / Juice / Water",
-        "Music: Bollywood / Hip-hop / Lo-fi / Classical",
-        "Hobby: Gym / Reading / Gaming / Travel",
-        "Food: Street food / Home cooked / Fine dining / Fast food",
-        "Superpower: Time travel / Mind reading / Invisibility / Flying"
+        "Hook: 'Friendship Test. 10 questions. How many do you match?'",
+        "1. Call OR Text? | 2. Early bird OR Night owl?",
+        "3. Plan everything OR Spontaneous? | 4. Brutally honest OR White lies?",
+        "5. Road trip OR Flight? | 6. Introvert OR Extrovert?",
+        "7. Forgive fast OR Hold grudges? | 8. Pay back instantly OR 'I'll get you next time'?",
+        "CTA: 'Screenshot your answers. Send to your best friend. 8+ matches = soulmates.'"
+      ]
+    },
+    {
+      "id": "cw-024",
+      "status": "draft",
+      "topic": "Luxury life vs Simple life — one photo each, you decide",
+      "caption": "Two lives. One choice.\nPenthouse or cottage. Ferrari or bicycle.\nWhich life is actually winning?\nSend this to a friend. See if they pick the same.",
+      "alt_text": "Split comparison of luxury penthouse lifestyle versus simple countryside cottage life",
+      "youtube_title": "Luxury vs Simple Life - Which Would You Choose?",
+      "video_text": [
+        "Two lives. One choice.",
+        "Which one is winning?",
+        "Send to see if they agree."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "scheduled_at": "2026-03-09T20:00:00Z",
+      "notes": "Photo 1: Ultra-luxury penthouse interior, panoramic city view, modern minimalist design, warm evening lighting. Photo 2: Cozy countryside cottage, fireplace, bookshelves, golden morning light through windows, peace and warmth. | generated_by=viral-claude",
+      "slides": [
+        "Ultra-luxury penthouse interior — floor-to-ceiling windows, panoramic night city skyline, modern minimalist furniture, champagne on glass table, warm ambient lighting",
+        "Cozy countryside cottage — stone fireplace crackling, overflowing bookshelves, knitted blankets, golden morning light streaming through lace curtains, steaming tea on wooden table"
+      ]
+    },
+    {
+      "id": "cw-025",
+      "status": "draft",
+      "topic": "Rs 500 date vs Rs 50,000 date — which one is better?",
+      "caption": "Rs 500 date. Rs 50,000 date.\nSame couple. Different budget.\nWhich date is actually better?\nTag someone and debate this.",
+      "alt_text": "Comparison of budget street food date versus luxury fine dining date",
+      "youtube_title": "Rs 500 vs Rs 50,000 Date - Which Is Better?",
+      "video_text": [
+        "Rs 500 vs Rs 50,000.",
+        "Same date. Different budget.",
+        "Tag someone. Debate this."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "scheduled_at": "2026-03-10T00:00:00Z",
+      "notes": "Photo 1: Vibrant Indian street food date scene — couple sharing chaat and chai at a colorful street stall, fairy lights, laughing, authentic energy. Photo 2: Upscale fine dining — candlelit table, ocean view, wine glasses, elegant but slightly stiff atmosphere. Photo 3: Back to the street scene — couple walking hand in hand through market, genuine joy. | generated_by=viral-claude",
+      "slides": [
+        "Vibrant Mumbai street food date — two people sharing pani puri at a colorful street stall, fairy string lights above, laughing together, warm chaotic energy, evening",
+        "Luxury fine dining restaurant — candlelit table for two, ocean view through floor-to-ceiling windows, wine glasses, white tablecloth, elegant but slightly formal atmosphere",
+        "Couple walking hand-in-hand through a bustling Mumbai night market — fairy lights, street vendors, genuine joy and connection, the Rs 500 date vibes"
       ]
     }
   ]

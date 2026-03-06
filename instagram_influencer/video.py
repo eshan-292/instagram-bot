@@ -17,6 +17,8 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from PIL import Image, ImageDraw, ImageFont
+
 from audio import get_background_track, trim_audio, _safe_remove as _audio_safe_remove
 
 log = logging.getLogger(__name__)
@@ -36,6 +38,9 @@ IG_MONTAGE_PER_IMAGE = 6  # 5 images × 6s = 30s Reel (sweet spot for shares)
 YT_MONTAGE_PER_IMAGE = 5  # 5 images × 5s = 25s Short
 
 FPS = 30
+
+# Hook-photo reel: per-frame durations (2s = punchy, fast-paced, keeps viewers)
+HOOK_REEL_PER_FRAME = 2  # seconds per frame (text and photo)
 
 # Font for text overlays — DejaVu is available on Ubuntu (GitHub Actions)
 # Falls back to "Sans" if not found (ffmpeg default)
@@ -457,6 +462,158 @@ def images_to_montage(
             _audio_safe_remove(audio_path)
 
 
+# ---------------------------------------------------------------------------
+# Hook-photo reel: interleaved text hooks + photos (2026 viral format)
+# ---------------------------------------------------------------------------
+
+def _create_text_frame(
+    text: str,
+    width: int = 1080,
+    height: int = 1920,
+    bg_color: tuple = (13, 13, 13),
+    text_color: tuple = (255, 255, 255),
+) -> str:
+    """Create a text-only frame image for hook-photo reels.
+
+    Dark background with bold centered text — the viral hook slide format.
+    Returns path to a temporary JPEG file.
+    """
+    img = Image.new("RGB", (width, height), bg_color)
+    draw = ImageDraw.Draw(img)
+
+    # Find usable bold font
+    font_size = width // 10  # ~108px at 1080w — large, bold, scroll-stopping
+    font = None
+    for path in _FONT_PATHS:
+        if os.path.exists(path):
+            try:
+                font = ImageFont.truetype(path, font_size)
+                break
+            except Exception:
+                continue
+    if font is None:
+        font = ImageFont.load_default()
+
+    # Word-wrap: keep text within 80% of frame width
+    max_w = int(width * 0.80)
+    words = text.split()
+    lines: list[str] = []
+    current = ""
+    for word in words:
+        test = f"{current} {word}".strip()
+        bbox = draw.textbbox((0, 0), test, font=font)
+        if bbox[2] - bbox[0] > max_w and current:
+            lines.append(current)
+            current = word
+        else:
+            current = test
+    if current:
+        lines.append(current)
+
+    full_text = "\n".join(lines)
+
+    # Center text vertically and horizontally
+    bbox = draw.multiline_textbbox((0, 0), full_text, font=font, align="center")
+    text_w = bbox[2] - bbox[0]
+    text_h = bbox[3] - bbox[1]
+    x = (width - text_w) / 2
+    y = (height - text_h) / 2
+
+    # Draw with black stroke outline for readability
+    try:
+        draw.multiline_text(
+            (x, y), full_text, font=font, fill=text_color,
+            align="center", stroke_width=4, stroke_fill=(0, 0, 0),
+        )
+    except TypeError:
+        # Older Pillow without stroke support — draw without outline
+        draw.multiline_text(
+            (x, y), full_text, font=font, fill=text_color, align="center",
+        )
+
+    temp_path = os.path.join(
+        tempfile.gettempdir(), f"hooktext_{abs(hash(text))}_{os.getpid()}.jpg"
+    )
+    img.save(temp_path, quality=95)
+    return temp_path
+
+
+def create_hook_photo_reel(
+    photo_paths: list[str],
+    output_path: str,
+    width: int = IG_WIDTH,
+    height: int = YT_HEIGHT,
+    text_lines: list[str] | None = None,
+    add_audio: bool = False,
+) -> str:
+    """Create a hook-photo reel: bold text slides interleaved with photos.
+
+    The most viral reel format in 2026 — text hooks between photos:
+      [Hook text] -> [Photo 1] -> [Bridge text] -> [Photo 2] -> [CTA text]
+
+    Each frame is ~2 seconds with snap-zoom for visual punch.
+    2 photos = 10s reel, 3 photos = 14s reel (sweet spot for algorithm).
+
+    Returns path to the generated MP4 file.
+    """
+    if not text_lines or len(text_lines) < 2 or len(photo_paths) < 2:
+        # Fall back to regular montage if not enough content
+        return images_to_montage(
+            photo_paths, output_path, width, height,
+            HOOK_REEL_PER_FRAME, add_audio, text_lines,
+        )
+
+    text_frames: list[str] = []
+    try:
+        # Build interleaved frame sequence
+        all_frames: list[str] = []
+
+        # 1. Hook text frame (the scroll-stopper)
+        hook = _create_text_frame(text_lines[0], width, height)
+        text_frames.append(hook)
+        all_frames.append(hook)
+
+        for i, photo in enumerate(photo_paths):
+            # 2. Photo frame
+            all_frames.append(photo)
+
+            # 3. Bridge text between photos (not after last photo)
+            if i < len(photo_paths) - 1 and len(text_lines) > 1:
+                bridge = _create_text_frame(text_lines[1], width, height)
+                text_frames.append(bridge)
+                all_frames.append(bridge)
+
+        # 4. CTA text frame at the end (gold color for action)
+        if len(text_lines) >= 3:
+            cta = _create_text_frame(
+                text_lines[2], width, height,
+                text_color=(255, 215, 0),  # gold — stands out, drives saves/sends
+            )
+            text_frames.append(cta)
+            all_frames.append(cta)
+
+        log.info(
+            "Hook-photo reel: %d photos + %d text frames = %d total (%ds)",
+            len(photo_paths), len(text_frames), len(all_frames),
+            len(all_frames) * HOOK_REEL_PER_FRAME,
+        )
+
+        return images_to_montage(
+            all_frames, output_path, width, height,
+            duration_per_image=HOOK_REEL_PER_FRAME,
+            add_audio=add_audio,
+            text_lines=None,  # text is baked into text frames already
+        )
+
+    finally:
+        # Clean up temp text frame images
+        for tf in text_frames:
+            try:
+                os.remove(tf)
+            except OSError:
+                pass
+
+
 def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -> int:
     """Convert images to videos for posts that need it. Returns count converted.
 
@@ -497,6 +654,59 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
             text_lines = [str(t).strip() for t in video_text if str(t).strip()][:3]
         else:
             text_lines = None
+
+        # Hook-photo reel format: text hooks interleaved with photos
+        # Detect: reel_format == "hook_photo" with 2+ carousel_images
+        reel_format = str(post.get("reel_format", "")).strip().lower()
+        if reel_format == "hook_photo" and not is_posted:
+            carousel_images = post.get("carousel_images") or []
+            valid_hook = (
+                isinstance(carousel_images, list)
+                and len(carousel_images) >= 2
+                and all(os.path.exists(str(p)) for p in carousel_images)
+            )
+            if valid_hook and text_lines:
+                video_url = str(post.get("video_url") or "").strip()
+                if not video_url or not os.path.exists(video_url):
+                    try:
+                        hook_path = str(Path(image_url).with_name(
+                            Path(image_url).stem + ".mp4"
+                        ))
+                        video_path = create_hook_photo_reel(
+                            [str(p) for p in carousel_images],
+                            hook_path,
+                            width=IG_WIDTH,
+                            height=YT_HEIGHT,  # 9:16 for reels
+                            text_lines=text_lines,
+                            add_audio=False,  # trending audio at publish
+                        )
+                        post["video_url"] = video_path
+                        post["is_reel"] = True
+                        converted += 1
+                        log.info("Hook-photo reel created for %s", post.get("id"))
+                    except Exception as exc:
+                        log.warning("Hook-photo reel failed for %s: %s", post.get("id"), exc)
+
+                # Also create YT version if youtube enabled
+                if youtube:
+                    yt_video = str(post.get("youtube_video_url") or "").strip()
+                    if not yt_video or not os.path.exists(yt_video):
+                        try:
+                            yt_path = str(Path(image_url).with_name(
+                                Path(image_url).stem + "_yt.mp4"
+                            ))
+                            create_hook_photo_reel(
+                                [str(p) for p in carousel_images],
+                                yt_path,
+                                width=YT_WIDTH,
+                                height=YT_HEIGHT,
+                                text_lines=text_lines,
+                                add_audio=True,  # baked audio for YT
+                            )
+                            post["youtube_video_url"] = yt_path
+                        except Exception as exc:
+                            log.warning("Hook-photo YT reel failed for %s: %s", post.get("id"), exc)
+                continue  # hook-photo reel done — skip normal processing
 
         # Instagram video (4:5) — SILENT: trending audio added at publish time
         # Carousels publish as swipeable albums on IG — no video needed.

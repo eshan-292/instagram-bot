@@ -390,10 +390,37 @@ def _view_user_stories(cl: Any, user_id: str, data: dict, stats: dict) -> None:
 # ---------------------------------------------------------------------------
 
 def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
-    """Unfollow users we followed more than UNFOLLOW_DAYS ago. Returns count."""
+    """Unfollow users who didn't follow back after UNFOLLOW_DAYS. Returns count.
+
+    Smart unfollow strategy:
+      1. Only unfollow users who DIDN'T follow us back (non-followers)
+      2. Keep following users who followed back (they're valuable mutuals)
+      3. Refresh followers list from API to check follow-back status
+      4. Aggressive pace to make room for new follows
+    """
     cutoff = datetime.now(timezone.utc) - timedelta(days=UNFOLLOW_DAYS)
     unfollowed = 0
-    daily_limit = 120  # aggressive unfollow — match 400/day follow velocity
+    daily_limit = 150  # aggressive unfollow — make room for new growth follows
+
+    # Load current followers to check who followed back
+    our_followers: set[str] = set()
+    try:
+        my_id = cl.user_id
+        followers_raw = cl.user_followers(my_id, amount=500)
+        our_followers = {str(uid) for uid in followers_raw.keys()}
+        # Also merge with cached followers file
+        cached = _load_followers()
+        our_followers.update(cached)
+        # Save refreshed set
+        _save_followers(our_followers)
+        log.info("Loaded %d followers for unfollow check", len(our_followers))
+    except Exception as exc:
+        _check_challenge(exc)
+        log.warning("Could not refresh followers for unfollow check: %s", exc)
+        # Fall back to cached followers
+        our_followers = _load_followers()
+        if our_followers:
+            log.info("Using cached followers (%d) for unfollow check", len(our_followers))
 
     # Find follow actions older than cutoff that haven't been unfollowed yet
     unfollowed_set: set[str] = {
@@ -401,6 +428,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
     }
 
     candidates = []
+    skipped_mutuals = 0
     for action in data.get("actions", []):
         if action.get("type") != "follows":
             continue
@@ -414,6 +442,10 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
         except (KeyError, ValueError):
             continue
         if followed_at < cutoff:
+            # SMART CHECK: skip if they followed us back (mutual follower)
+            if target in our_followers:
+                skipped_mutuals += 1
+                continue
             candidates.append(target)
 
     # Deduplicate
@@ -425,14 +457,17 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
             cl.user_unfollow(int(user_id))
             record_action(data, "unfollows", user_id)
             unfollowed += 1
-            log.debug("Unfollowed user %s", user_id)
-            random_delay(4, 12)  # fast unfollow pace
+            log.debug("Unfollowed non-follower %s", user_id)
+            random_delay(3, 8)  # aggressive unfollow pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("Unfollow failed for %s: %s", user_id, exc)
 
-    if unfollowed:
-        log.info("Auto-unfollowed %d users (>%d days old)", unfollowed, UNFOLLOW_DAYS)
+    if unfollowed or skipped_mutuals:
+        log.info(
+            "Auto-unfollow: removed %d non-followers, kept %d mutuals (>%dd old)",
+            unfollowed, skipped_mutuals, UNFOLLOW_DAYS,
+        )
     return unfollowed
 
 

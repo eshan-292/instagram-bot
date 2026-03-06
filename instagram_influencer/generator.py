@@ -55,6 +55,9 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
                 # CTA: last line
                 video_text.append(" ".join(lines[-1].split()[:8]))
 
+    # Hook-photo reel format (text hooks interleaved with photos)
+    reel_format = str(item.get("reel_format", "")).strip().lower()
+
     draft: dict[str, Any] = {
         "id": post_id,
         "status": "draft",
@@ -72,6 +75,11 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
     }
     if post_type == "carousel" and slides:
         draft["slides"] = [str(s).strip() for s in slides[:6] if str(s).strip()]
+    # Hook-photo reels: reel with multiple photos + text hook slides
+    if reel_format == "hook_photo":
+        draft["reel_format"] = "hook_photo"
+        if slides:
+            draft["slides"] = [str(s).strip() for s in slides[:6] if str(s).strip()]
     return draft
 
 
@@ -232,6 +240,17 @@ def _build_gemini_prompt() -> str:
         f"{topics}\n\n"
         "For carousel posts, include 'slides': array of 5-6 short scene descriptions "
         "(what each slide should visually show — be specific about clothing, pose, setting).\n\n"
+        "HOOK-PHOTO REEL FORMAT (use for at least 1 of {count} posts):\n"
+        "A reel made from 2-3 PHOTOS with bold text hook slides in between.\n"
+        "Set post_type='reel' AND reel_format='hook_photo'.\n"
+        "Include 'slides': array of 2-3 photo descriptions (what each photo should show).\n"
+        "The video_text becomes the hook text between photos:\n"
+        "  Line 1 = bold hook text shown BEFORE first photo (the scroll-stopper)\n"
+        "  Line 2 = bridge text shown BETWEEN photos (builds curiosity)\n"
+        "  Line 3 = CTA text shown AFTER last photo (drives sends/saves, shown in gold)\n"
+        "Example: post_type='reel', reel_format='hook_photo', slides=['Full outfit shot in luxury "
+        "hotel lobby', 'Close-up detail of accessories and fabric'], video_text=['This costs Rs 5,000.', "
+        "'Can you tell?', 'Send to your fashion friend.']\n\n"
         "Return ONLY a JSON array of {count} objects with these fields:\n"
         "- topic: specific scene (not generic, include location/occasion/PRICE if relevant)\n"
         "- caption: 3-5 lines — scroll-stopping hook first, question in middle, send/share CTA last, "
@@ -246,7 +265,9 @@ def _build_gemini_prompt() -> str:
         "- youtube_title: catchy YouTube Shorts title under 70 chars — use curiosity gap or number hook\n"
         "- notes: photography direction for image generation (framing, lighting, mood)\n"
         "- post_type: 'reel' | 'carousel' | 'single'\n"
-        "- slides: array of 5-6 scene descriptions (only for carousel, omit for reel/single)\n\n"
+        "- reel_format: 'hook_photo' (ONLY for hook-photo reels, omit for others)\n"
+        "- slides: array of 2-3 photo descriptions for hook_photo reels, "
+        "or 5-6 scene descriptions for carousels (omit for standard reel/single)\n\n"
         "No markdown, no explanation, just the JSON array."
     )
 
@@ -263,18 +284,14 @@ def _extract_json(text: str) -> str:
 
 
 def _gemini_generate(cfg: Config, existing: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Generate drafts via Gemini API."""
-    from google import genai
+    """Generate drafts via Gemini API with model rotation."""
+    from gemini_helper import generate as gemini_generate
 
-    client = genai.Client(api_key=cfg.gemini_api_key)
     prompt = _build_gemini_prompt().replace("{count}", str(cfg.draft_count))
 
-    response = client.models.generate_content(
-        model=cfg.gemini_model,
-        contents=prompt,
-    )
-
-    raw_text = response.text or ""
+    raw_text = gemini_generate(cfg.gemini_api_key, prompt, preferred_model=cfg.gemini_model)
+    if not raw_text:
+        raise ValueError("All Gemini models rate-limited — cannot generate content")
     parsed = json.loads(_extract_json(raw_text))
     if not isinstance(parsed, list):
         raise ValueError("Gemini did not return a JSON array")

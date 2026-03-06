@@ -115,15 +115,26 @@ def _save_post_prompts(post: dict[str, Any]) -> None:
     prompts_dir.mkdir(parents=True, exist_ok=True)
     post_id = str(post.get("id", "unknown"))
     post_type = str(post.get("post_type", "reel")).lower()
+    reel_format = str(post.get("reel_format", "")).strip().lower()
 
     lines = [
-        f"=== {post_id} | {post_type.upper()} ===",
+        f"=== {post_id} | {post_type.upper()}{' (HOOK-PHOTO)' if reel_format == 'hook_photo' else ''} ===",
         f"Topic: {post.get('topic', '')}",
         f"Caption: {post.get('caption', '')}",
         "",
     ]
 
-    if post_type == "carousel":
+    if reel_format == "hook_photo":
+        prompts = _build_carousel_prompts(post)
+        lines.append(f"HOOK-PHOTO REEL — {len(prompts)} photos (text hooks auto-generated)")
+        lines.append(f"Place in: generated_images/pending/{post_id}/1.jpg, 2.jpg, ...")
+        lines.append(f"On-screen hooks: {post.get('video_text', [])}")
+        lines.append("")
+        for i, prompt in enumerate(prompts, 1):
+            lines.append(f"--- Photo {i} ---")
+            lines.append(prompt)
+            lines.append("")
+    elif post_type == "carousel":
         prompts = _build_carousel_prompts(post)
         lines.append(f"CAROUSEL — {len(prompts)} slides")
         lines.append(f"Place in: generated_images/pending/{post_id}/1.jpg, 2.jpg, ...")
@@ -172,16 +183,29 @@ def write_prompts_summary(posts: list[dict[str, Any]]) -> None:
     for post in pending:
         post_id = str(post.get("id", "unknown"))
         post_type = str(post.get("post_type", "reel")).lower()
+        reel_format = str(post.get("reel_format", "")).strip().lower()
         topic = str(post.get("topic", ""))
 
+        fmt_label = f"{post_type.upper()} (HOOK-PHOTO)" if reel_format == "hook_photo" else post_type.upper()
         lines += [
-            f"## {post_id} — {post_type.upper()}",
+            f"## {post_id} — {fmt_label}",
             f"**Topic:** {topic}",
             f"**Caption:** {post.get('caption', '')}",
             "",
         ]
 
-        if post_type == "carousel":
+        if reel_format == "hook_photo":
+            prompts = _build_carousel_prompts(post)
+            lines.append(
+                f"**HOOK-PHOTO REEL — Place {len(prompts)} photos in:** "
+                f"`generated_images/pending/{post_id}/1.jpg`, `2.jpg`, ..."
+            )
+            lines.append(f"**On-screen hooks (auto-generated):** {post.get('video_text', [])}")
+            lines.append("")
+            for i, prompt in enumerate(prompts, 1):
+                lines.append(f"**Photo {i}:** {prompt}")
+                lines.append("")
+        elif post_type == "carousel":
             prompts = _build_carousel_prompts(post)
             lines.append(
                 f"**Place {len(prompts)} images in:** "
@@ -252,7 +276,9 @@ def _remove_watermarks_batch(image_paths: list[str]) -> None:
 def _has_images(post: dict[str, Any]) -> bool:
     """Check if a post already has valid images linked."""
     post_type = str(post.get("post_type", "reel")).lower()
-    if post_type == "carousel":
+    reel_format = str(post.get("reel_format", "")).strip().lower()
+    # Hook-photo reels need multiple images (like carousels)
+    if reel_format == "hook_photo" or post_type == "carousel":
         images = post.get("carousel_images", [])
         return bool(images) and all(os.path.exists(p) for p in images)
     image = str(post.get("image_url", "")).strip()
@@ -319,7 +345,21 @@ def fill_image_urls(posts: list[dict[str, Any]], cfg: Config) -> int:
         if not _has_images(post):
             _save_post_prompts(post)
 
-        if post_type == "carousel":
+        # Hook-photo reels: reel with multiple photos (stored like carousels)
+        reel_format = str(post.get("reel_format", "")).strip().lower()
+
+        if reel_format == "hook_photo":
+            if _has_images(post):
+                continue
+            images = _find_pending_carousel(post_id)
+            if images and len(images) >= 2:
+                _remove_watermarks_batch(images)
+                post["carousel_images"] = images
+                post["image_url"] = images[0]  # thumbnail fallback
+                post["is_reel"] = True  # stays as reel (not carousel)
+                updated += 1
+                log.info("Linked hook-photo reel for %s: %d photos", post_id, len(images))
+        elif post_type == "carousel":
             if _has_images(post):
                 continue
             images = _find_pending_carousel(post_id)
