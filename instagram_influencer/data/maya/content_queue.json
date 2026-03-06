@@ -195,7 +195,7 @@
       "id": "maya-013",
       "status": "posted",
       "topic": "Owning the night at a luxury Mumbai rooftop bar.",
-      "caption": "The city lights are pretty. I think I know why they\u2019re looking this way.",
+      "caption": "The city lights are pretty. I think I know why they’re looking this way.",
       "image_url": "data/maya/generated_images/pending/maya-013.jpg",
       "video_url": "data/maya/generated_images/pending/maya-013.mp4",
       "is_reel": true,
@@ -233,7 +233,17 @@
       "notes": "Maya seated casually at an outdoor cafe table, sipping coffee. She's wearing an oversized pastel blazer, cropped top, high-waisted trousers, and designer sunglasses. Bright natural light, warm tones. Focus on her relaxed but impeccably styled posture. A subtle smirk. | generated_by=gemini:gemini-2.5-flash",
       "youtube_video_url": "data/maya/generated_images/pending/maya-015_yt.mp4",
       "youtube_video_id": "hxw3JzlvIms",
-      "youtube_posted_at": "2026-03-05T14:50:36Z"
+      "youtube_posted_at": "2026-03-05T14:50:36Z",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Maya seated casually at an outdoor cafe table, sipping coffee. She's wearing an oversized pastel blazer, cropped top, high-waisted trousers, and designer sunglasses. Bright natural light, warm tones. Focus on her relaxed but impeccably styled posture. A subtle smirk."
+      ],
+      "video_text": [
+        "This is my 'I barely tried' look",
+        "What's your excuse?",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-016",
@@ -245,7 +255,17 @@
       "is_reel": true,
       "scheduled_at": "2026-03-03T03:25:40Z",
       "notes": "Maya standing confidently in a grand, empty hallway of an old colonial-era Mumbai building with intricate architectural details. She's wearing a structured, avant-garde Indian fusion outfit (e.g., modern saree gown or tailored kurta-set with bold jewelry). Strong, directional light casting interesting shadows. A slight low-angle shot to emphasize height and power. Her expression is calm but intense. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-016_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-016_yt.mp4",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Maya standing confidently in a grand, empty hallway of an old colonial-era Mumbai building with intricate architectural details. She's wearing a structured, avant-garde Indian fusion outfit (e.g., modern saree gown or tailored kurta-set with bold jewelry). Strong, directional light casting interesting shadows. A slight low-angle shot to emphasize height and power. Her expression is calm but intense."
+      ],
+      "video_text": [
+        "Some spaces just know how to appreciate a",
+        "Watch till the end.",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-017",
@@ -257,19 +277,39 @@
       "is_reel": true,
       "scheduled_at": "2026-03-03T07:25:40Z",
       "notes": "Full-body shot. Maya in a sharp, tailored power suit (e.g., emerald green, deep navy). Walking purposefully on a busy street (Colaba or Fort area, subtle vintage architecture in background). Golden hour sunlight hitting her face and suit, casting long shadows. Slightly low angle to emphasize height and power. Confident, direct gaze. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-017_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-017_yt.mp4",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Full-body shot. Maya in a sharp, tailored power suit (e.g., emerald green, deep navy). Walking purposefully on a busy street (Colaba or Fort area, subtle vintage architecture in background). Golden hour sunlight hitting her face and suit, casting long shadows. Slightly low angle to emphasize height and power. Confident, direct gaze."
+      ],
+      "video_text": [
+        "Mumbai moves with my rhythm",
+        "You just watch",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-018",
       "status": "approved",
       "topic": "Lounging elegantly in a luxurious apartment with a city skyline view.",
-      "caption": "It\u2019s called effortless. Maybe you\u2019ve heard of it.",
+      "caption": "It’s called effortless. Maybe you’ve heard of it.",
       "image_url": "data/maya/generated_images/pending/maya-018.jpg",
       "video_url": "data/maya/generated_images/pending/maya-018.mp4",
       "is_reel": true,
       "scheduled_at": "2026-03-03T11:25:40Z",
       "notes": "Mid-shot. Maya in a luxurious yet relaxed silk coord set or a chic loungewear dress. Reclining elegantly on a plush sofa or by a large window overlooking the Mumbai skyline (sea view if possible). Soft, natural light filtering in. Calm, serene, slightly playful expression. Elegant, understated jewelry. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-018_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-018_yt.mp4",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Mid-shot. Maya in a luxurious yet relaxed silk coord set or a chic loungewear dress. Reclining elegantly on a plush sofa or by a large window overlooking the Mumbai skyline (sea view if possible). Soft, natural light filtering in. Calm, serene, slightly playful expression. Elegant, understated jewelry."
+      ],
+      "video_text": [
+        "It’s called effortless",
+        "Maybe you’ve heard of it",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-019",
@@ -281,7 +321,17 @@
       "is_reel": true,
       "scheduled_at": "2026-03-03T15:25:40Z",
       "notes": "Dynamic shot. Maya pausing dramatically at the entrance of a high-end club or bar. Dressed in a striking evening gown or a chic, edgy party outfit (e.g., sequined mini dress, sharp cut-out details). Low, ambient lighting with neon accents or a spotlight on her. Her back is slightly turned, looking over her shoulder with a captivating, almost mischievous smirk. Focus on the silhouette and sparkle. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-019_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-019_yt.mp4",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Dynamic shot. Maya pausing dramatically at the entrance of a high-end club or bar. Dressed in a striking evening gown or a chic, edgy party outfit (e.g., sequined mini dress, sharp cut-out details). Low, ambient lighting with neon accents or a spotlight on her. Her back is slightly turned, looking over her shoulder with a captivating, almost mischievous smirk. Focus on the silhouette and sparkle."
+      ],
+      "video_text": [
+        "My presence is the only invitation needed",
+        "Watch till the end.",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-020",
@@ -293,7 +343,17 @@
       "is_reel": true,
       "scheduled_at": "2026-03-03T19:25:40Z",
       "notes": "Medium shot. Maya confidently walking through a lightly rain-slicked Mumbai street, a vibrant designer raincoat (e.g., in a bold print or neon) over a sleek outfit. Reflective puddles, diffused natural light, dramatic but not dark mood. Focus on her stride and the pop of the raincoat. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-020_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-020_yt.mp4",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Medium shot. Maya confidently walking through a lightly rain-slicked Mumbai street, a vibrant designer raincoat (e.g., in a bold print or neon) over a sleek outfit. Reflective puddles, diffused natural light, dramatic but not dark mood. Focus on her stride and the pop of the raincoat."
+      ],
+      "video_text": [
+        "They said rain ruins everything",
+        "Clearly, they haven't seen me in it",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-021",
@@ -305,7 +365,17 @@
       "is_reel": true,
       "scheduled_at": "2026-03-03T23:25:40Z",
       "notes": "Full body shot. Maya standing at a chic rooftop bar overlooking the Mumbai skyline at dusk. Wearing a fitted, architectural-design cocktail dress (e.g., sharp shoulders, unique cut). Warm, ambient bar lighting mixed with city lights. Confident, poised, slightly aloof expression. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-021_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-021_yt.mp4",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Full body shot. Maya standing at a chic rooftop bar overlooking the Mumbai skyline at dusk. Wearing a fitted, architectural-design cocktail dress (e.g., sharp shoulders, unique cut). Warm, ambient bar lighting mixed with city lights. Confident, poised, slightly aloof expression."
+      ],
+      "video_text": [
+        "Views are nice, but let's be honest, you're",
+        "Watch till the end.",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-022",
@@ -317,13 +387,23 @@
       "is_reel": true,
       "scheduled_at": "2026-03-04T03:25:40Z",
       "notes": "Close-up to mid-shot. Maya casually leaning against an exposed brick wall inside a stylish, minimalist coffee shop. Wearing an oversized but structured linen blazer over a silk cami, delicate layered gold jewelry. Soft, natural light coming from a large window. Relaxed, knowing smile, focus on textural details and her serene confidence. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-022_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-022_yt.mp4",
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Close-up to mid-shot. Maya casually leaning against an exposed brick wall inside a stylish, minimalist coffee shop. Wearing an oversized but structured linen blazer over a silk cami, delicate layered gold jewelry. Soft, natural light coming from a large window. Relaxed, knowing smile, focus on textural details and her serene confidence."
+      ],
+      "video_text": [
+        "Some people try too hard",
+        "I just exist",
+        "Save this for later."
+      ]
     },
     {
       "id": "maya-023",
       "status": "draft",
-      "topic": "3 budget looks under \u20b92000 \u2014 Mumbai street style",
-      "caption": "Mumbai street style under \u20b92000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
+      "topic": "3 budget looks under ₹2000 — Mumbai street style",
+      "caption": "Mumbai street style under ₹2000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -331,11 +411,11 @@
       "scheduled_at": "2026-02-27T10:31:30Z",
       "notes": "full-body frame, bright Mumbai street background | generated_by=template",
       "slides": [
-        "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '\u20b92000. 3 outfits. No compromises.'",
-        "Look 1: casual chic \u2014 white linen coord set, gold hoops, kolhapuri chappals",
-        "Look 2: street glam \u2014 floral co-ord in rust tones, minimal jewelry, white sneakers",
-        "Look 3: indo-western fusion \u2014 cropped kurta with wide-leg jeans, block print dupatta",
-        "Outfit detail close-up \u2014 accessories and fabric texture",
+        "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '₹2000. 3 outfits. No compromises.'",
+        "Look 1: casual chic — white linen coord set, gold hoops, kolhapuri chappals",
+        "Look 2: street glam — floral co-ord in rust tones, minimal jewelry, white sneakers",
+        "Look 3: indo-western fusion — cropped kurta with wide-leg jeans, block print dupatta",
+        "Outfit detail close-up — accessories and fabric texture",
         "Final pose: all three outfits side by side, confidence energy"
       ]
     },
@@ -350,13 +430,22 @@
       "post_type": "reel",
       "scheduled_at": "2026-03-04T07:25:40Z",
       "notes": "mid shot, blazer silhouette, clean city background | generated_by=template",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-024_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-024_yt.mp4",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: mid shot, blazer silhouette, clean city background"
+      ],
+      "video_text": [
+        "Mumbai streets hit different in a blazer",
+        "Polite is not my default setting",
+        "Presence is"
+      ]
     },
     {
       "id": "maya-025",
       "status": "draft",
-      "topic": "One kurta, 5 ways \u2014 ethnic modern fusion",
-      "caption": "One kurta. Five personalities. Which one are you?\nSave this \u2014 you'll need it.",
+      "topic": "One kurta, 5 ways — ethnic modern fusion",
+      "caption": "One kurta. Five personalities. Which one are you?\nSave this — you'll need it.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -365,31 +454,33 @@
       "notes": "clean studio-style background, full-body each look | generated_by=template",
       "slides": [
         "Hook: Maya with kurta on hanger, caption '1 piece. 5 vibes.'",
-        "Style 1: classic \u2014 kurta with palazzo and kolhapuris",
-        "Style 2: fusion \u2014 kurta belted with straight jeans and boots",
-        "Style 3: street \u2014 kurta knotted, denim shorts, sneakers",
-        "Style 4: evening \u2014 kurta with statement earrings, heels, minimal clutch",
-        "Style 5: lounge \u2014 oversized kurta as a dress, slides"
+        "Style 1: classic — kurta with palazzo and kolhapuris",
+        "Style 2: fusion — kurta belted with straight jeans and boots",
+        "Style 3: street — kurta knotted, denim shorts, sneakers",
+        "Style 4: evening — kurta with statement earrings, heels, minimal clutch",
+        "Style 5: lounge — oversized kurta as a dress, slides"
       ]
     },
     {
       "id": "maya-026",
       "status": "draft",
-      "topic": "Bandra Budget Brunch Looks Under \u20b92000",
+      "topic": "Bandra Budget Brunch Looks Under ₹2000",
       "caption": "Bandra brunch on a budget? No problem. These 3 looks prove style isn't about the price tag, darling. You're welcome. Save this for your next Sunday outing.",
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "scheduled_at": "2026-02-27T17:39:42Z",
       "notes": "Bright natural light, candid feel, vibrant Bandra backdrops. Poses should be self-assured and elegant, showcasing the comfort and chicness of each outfit. Focus on aspirational yet achievable style. | generated_by=gemini:gemini-2.5-flash",
       "slides": [
         "Maya confidently stands outside a minimalist cafe in Bandra, wearing a pastel floral co-ord set (crop top + flowy midi skirt), white chunky sneakers, and a small beige crossbody bag. Subtle smile.",
-        "Maya poses elegantly at an outdoor cafe table, sipping iced coffee. She's wearing high-waisted light denim culottes, a fitted white ribbed tank, an unbuttoned oversized printed shirt (e.g., abstract floral), and gold hoop earrings. Relaxed yet chic.",
-        "Maya walks down a vibrant Bandra street near Ranwar Village murals, wearing a vibrant orange linen midi dress, a denim jacket tied around her waist, tan slip-on sandals, and oversized black sunglasses. Powerful stride.",
-        "Close-up of accessories: Stacked rings on Maya's fingers, layered delicate gold necklaces peeking from her top, a textured vegan leather bag.",
-        "Flat lay on a simple background: The three main outfit pieces (co-ord, culottes, dress) arranged with a small label indicating 'Under \u20b92000' subtly.",
-        "Maya laughing candidly while adjusting her sunglasses, showcasing genuine happiness and ease."
+        "Maya poses elegantly at an outdoor cafe table, sipping iced coffee. She's wearing high-waisted light denim culottes, a fitted white ribbed tank, an unbuttoned oversized printed shirt (e.g., abstract floral), and gold hoop earrings. Relaxed yet chic."
+      ],
+      "reel_format": "hook_photo",
+      "video_text": [
+        "Bandra brunch on a budget? No problem",
+        "These 3 looks prove style isn't about the price tag,",
+        "Save this for your next Sunday outing"
       ]
     },
     {
@@ -402,7 +493,16 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-02-27T21:39:42Z",
-      "notes": "Dynamic, fast-paced transitions. Opens with Maya in casual wear, quick cuts to makeup application, hair styling, then a grand reveal of an Indo-western fusion outfit (e.g., a modern crop top with a heavily embellished skirt, or a chic saree drape over pants). Confident poses, playful expressions. Warm, festive lighting with some dramatic shadows. | generated_by=gemini:gemini-2.5-flash"
+      "notes": "Dynamic, fast-paced transitions. Opens with Maya in casual wear, quick cuts to makeup application, hair styling, then a grand reveal of an Indo-western fusion outfit (e.g., a modern crop top with a heavily embellished skirt, or a chic saree drape over pants). Confident poses, playful expressions. Warm, festive lighting with some dramatic shadows. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Dynamic, fast-paced transitions. Opens with Maya in casual wear, quick cuts to makeup application, hair styling, then a grand reveal of an Indo-western fusion outfit (e.g., a modern crop top with a heavily embellished skirt, or a chic saree drape over pants). Confident poses, playful expressions. Warm, festive lighting with some dramatic shadows."
+      ],
+      "video_text": [
+        "My sangeet mantra: ditch the basic, embrace the",
+        "Getting ready for a night of dance and dazzle, with",
+        "Who says traditional can't be edgy? Send this to your"
+      ]
     },
     {
       "id": "maya-028",
@@ -434,7 +534,11 @@
       "is_reel": true,
       "post_type": "reel",
       "scheduled_at": "2026-02-28T19:25:40Z",
-      "notes": "Fast-paced outfit transition Reel, quick cuts. Maya confident, posing with different elements of a budget Sangeet outfit (e.g., a patterned crop top, plain skirt, statement earrings). Good lighting, festive vibe. | generated_by=gemini:gemini-2.5-flash"
+      "notes": "Fast-paced outfit transition Reel, quick cuts. Maya confident, posing with different elements of a budget Sangeet outfit (e.g., a patterned crop top, plain skirt, statement earrings). Good lighting, festive vibe. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Fast-paced outfit transition Reel, quick cuts. Maya confident, posing with different elements of a budget Sangeet outfit (e.g., a patterned crop top, plain skirt, statement earrings). Good lighting, festive vibe."
+      ]
     },
     {
       "id": "maya-030",
@@ -444,21 +548,21 @@
       "alt_text": "Maya Varma showcasing 5 distinct Indo-western outfits styled around a white kurta, shot across various Mumbai locations like Bandra and Colaba.",
       "youtube_title": "White Kurta 5 Ways: Mumbai Street Style & Indo-Western Fusion Looks",
       "video_text": [
-        "One white kurta. 5 Mumbai vibes that scream"
+        "One white kurta",
+        "5 Mumbai vibes that scream main character energy",
+        "Which Bandra-ready look are you copying first? Save this for"
       ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "scheduled_at": "2026-02-28T23:25:40Z",
       "notes": "Dynamic, varied shots. Different Mumbai backdrops (Bandra graffiti, Colaba cafes, Kala Ghoda art district). Confident, playful poses highlighting versatility. | generated_by=gemini:gemini-2.5-flash",
       "slides": [
         "Look 1: White kurta as a dress, cinched with a broad belt, chunky sneakers. Posing against vibrant graffiti in Bandra.",
-        "Look 2: White kurta open over a bralette and distressed jeans, layered necklaces. Posing casually at an outdoor cafe in Colaba.",
-        "Look 3: White kurta tucked into wide-leg trousers, statement jhumkas, kolhapuri chappals. Posing elegantly near historic architecture in Kala Ghoda.",
-        "Look 4: White kurta tied at waist over a printed maxi skirt, headscarf, sunglasses. Posing with a relaxed, bohemian feel at a bustling market.",
-        "Look 5: White kurta with tailored shorts and an oversized blazer, block heels. Posing powerfully for an office-to-party look in an urban setting."
-      ]
+        "Look 2: White kurta open over a bralette and distressed jeans, layered necklaces. Posing casually at an outdoor cafe in Colaba."
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-031",
@@ -484,22 +588,23 @@
       "caption": "College girls spending 5K on outfits is NOT the flex you think it is.\nHere's 3 looks under Rs 1500 that will have your entire campus asking 'where'd you get that?'\nWhich one are you wearing Monday?\nSend this to your broke-but-stylish bestie.",
       "alt_text": "Maya Varma showcasing three affordable college outfit looks under Rs 1500, styled with confidence on a vibrant Mumbai street.",
       "youtube_title": "Friday Fits: 3 College Outfits Under Rs 1500 That Look Expensive",
-      "video_text": ["Rs 1500. Three looks.", "Your campus isn't ready.", "Send to your college bestie."],
+      "video_text": [
+        "Rs 1500. Three looks.",
+        "Your campus isn't ready.",
+        "Send to your college bestie."
+      ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-10T07:30:00Z",
       "notes": "Friday Fits series. Full-body shots, bright natural lighting, college campus or street vibe. Each outfit clearly shows price breakdown. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya holding a Rs 1500 note, smirking, text overlay 'Rs 1500. 3 Outfits. Campus can't handle it.'",
-        "Look 1: Oversized white tee tucked into high-waisted cargo pants, chunky white sneakers, layered silver chains. Total: Rs 1200.",
-        "Look 2: Cropped ribbed tank in olive green, wide-leg blue denim, kolhapuri chappals, round sunglasses. Total: Rs 1400.",
-        "Look 3: Striped button-down knotted at waist, black biker shorts, canvas tote, gold hoops. Total: Rs 1100.",
-        "Price breakdown slide: All three looks with individual costs listed, Maya pointing at camera.",
-        "Final slide: All three looks side by side, text 'Save this. Thank me later.'"
-      ]
+        "Look 1: Oversized white tee tucked into high-waisted cargo pants, chunky white sneakers, layered silver chains. Total: Rs 1200."
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-033",
@@ -508,14 +613,22 @@
       "caption": "Your friend's wedding invite just dropped and your bank account is crying.\nRelax. Rs 3000 and you'll outshine half the guest list. I said what I said.\nWho else needs a budget wedding outfit rescue?\nSave this before shaadi season hits.",
       "alt_text": "Maya Varma in an elegant wedding guest outfit under Rs 3000, featuring a modern lehenga-style skirt and embroidered blouse in warm festive tones.",
       "youtube_title": "Wedding Guest Outfit Under Rs 3000! Budget Shaadi Style That Slays",
-      "video_text": ["Rs 3000 wedding look.", "Outshine the guest list.", "Save for shaadi season."],
+      "video_text": [
+        "Rs 3000 wedding look.",
+        "Outshine the guest list.",
+        "Save for shaadi season."
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-10T13:00:00Z",
-      "notes": "Fast transitions. GRWM style — plain clothes to full glam reveal. Warm festive lighting, mirror shots, jewelry close-ups. | generated_by=viral-claude"
+      "notes": "Fast transitions. GRWM style — plain clothes to full glam reveal. Warm festive lighting, mirror shots, jewelry close-ups. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Fast transitions. GRWM style — plain clothes to full glam reveal. Warm festive lighting, mirror shots, jewelry close-ups."
+      ]
     },
     {
       "id": "maya-034",
@@ -524,22 +637,23 @@
       "caption": "A white shirt is the most powerful weapon in your closet.\nFive ways to wear it. Five completely different girls. Five reasons your wardrobe needs exactly one.\nWhich version is your personality?\nSend this to the girl who owns 47 tops but 'has nothing to wear.'",
       "alt_text": "Maya Varma styling one white button-down shirt in five different ways, from casual street to elegant evening looks.",
       "youtube_title": "One White Shirt, 5 Outfits: The Only Styling Guide You Need",
-      "video_text": ["One white shirt.", "Five personalities.", "Which one is you?"],
+      "video_text": [
+        "One white shirt.",
+        "Five personalities.",
+        "Which one is you?"
+      ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-10T19:00:00Z",
       "notes": "One Piece 5 Ways series. Clean neutral backgrounds, full-body shots, same shirt clearly recognizable in each styling. Focus on versatility. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya holding white shirt on hanger, confident look, text 'One shirt. Five personalities. Zero excuses.'",
-        "Style 1 — Casual: White shirt unbuttoned over a black bralette, high-waisted blue jeans, white sneakers. Street style vibes.",
-        "Style 2 — Corporate: White shirt tucked into tailored black trousers, thin belt, pointed heels, sleek bun. Boss energy.",
-        "Style 3 — Desi Fusion: White shirt knotted over a printed palazzo, jhumkas, kolhapuri chappals. Indo-western queen.",
-        "Style 4 — Date Night: White shirt half-tucked into a leather mini skirt, red heels, bold lip, loose waves. Dangerous energy.",
-        "Style 5 — Beach: White shirt open as a cover-up over a swimsuit, straw hat, gold chain. Vacation mode unlocked."
-      ]
+        "Style 1 — Casual: White shirt unbuttoned over a black bralette, high-waisted blue jeans, white sneakers. Street style vibes."
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-035",
@@ -548,14 +662,22 @@
       "caption": "Every Indian fashion influencer right now: beige co-ord, minimal jewelry, 'clean girl aesthetic.' Copy paste. Repeat.\nWhere's the personality? Where's the risk? Where's the YOU?\nAm I wrong or am I wrong? Fight me in the comments.\nSend this to someone who needs to hear it.",
       "alt_text": "Maya Varma in a bold, unconventional outfit standing apart from a collage of generic beige co-ord fashion influencer looks.",
       "youtube_title": "Hot Take: Why All Indian Fashion Influencers Look The Same Now",
-      "video_text": ["Same outfit. Different girl.", "Where's the personality?", "Fight me below."],
+      "video_text": [
+        "Same outfit. Different girl.",
+        "Where's the personality?",
+        "Fight me below."
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-11T07:30:00Z",
-      "notes": "CONTROVERSY POST. Quick cuts showing 'generic influencer looks' vs Maya's bold styling. Talking head format, eye contact, sharp delivery. Slightly confrontational energy. | generated_by=viral-claude"
+      "notes": "CONTROVERSY POST. Quick cuts showing 'generic influencer looks' vs Maya's bold styling. Talking head format, eye contact, sharp delivery. Slightly confrontational energy. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: CONTROVERSY POST. Quick cuts showing 'generic influencer looks' vs Maya's bold styling. Talking head format, eye contact, sharp delivery. Slightly confrontational energy."
+      ]
     },
     {
       "id": "maya-036",
@@ -564,14 +686,22 @@
       "caption": "Getting ready for a Colaba cafe date and no, I'm not dressing down.\nIf he can't handle the outfit, he can't handle me. Simple math.\nWhat's your go-to date outfit energy — overdressed or effortless?\nTag your date-night bestie who takes 3 hours to get ready.",
       "alt_text": "Maya Varma getting ready for a cafe date in Colaba, showing skincare, makeup, and final outfit reveal in a warm-lit Mumbai apartment.",
       "youtube_title": "Mumbai GRWM: Colaba Cafe Date Outfit That Makes Him Nervous",
-      "video_text": ["Colaba date. Getting ready.", "If he can't handle it...", "Tag your GRWM bestie."],
+      "video_text": [
+        "Colaba date. Getting ready.",
+        "If he can't handle it...",
+        "Tag your GRWM bestie."
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-11T13:00:00Z",
-      "notes": "Mumbai GRWM series. Mirror shots, golden hour apartment lighting, intimate getting-ready feel. Quick transitions from bare face to glam. Final reveal walking out the door. | generated_by=viral-claude"
+      "notes": "Mumbai GRWM series. Mirror shots, golden hour apartment lighting, intimate getting-ready feel. Quick transitions from bare face to glam. Final reveal walking out the door. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Mumbai GRWM series. Mirror shots, golden hour apartment lighting, intimate getting-ready feel. Quick transitions from bare face to glam. Final reveal walking out the door."
+      ]
     },
     {
       "id": "maya-037",
@@ -580,22 +710,23 @@
       "caption": "Heels on a date = effort. Sneakers on a date = confidence.\nBut here's the thing — the right sneakers with the right outfit hit HARDER than any heel ever could.\nHeels gang or sneakers gang? Pick your side.\nSend this to your heels-obsessed friend.",
       "alt_text": "Maya Varma in a split-screen comparison wearing the same date outfit with heels on one side and styled sneakers on the other.",
       "youtube_title": "Style Debate: Heels vs Sneakers for Dates — Which Wins?",
-      "video_text": ["Heels or sneakers?", "Same outfit. Two vibes.", "Pick your side below."],
+      "video_text": [
+        "Heels or sneakers?",
+        "Same outfit. Two vibes.",
+        "Pick your side below."
+      ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-11T19:00:00Z",
       "notes": "Style Debate series. Split-screen format, same outfit with both shoe options. Clean background, full-body shots emphasizing footwear styling. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya holding one heel and one sneaker, raised eyebrows, text 'Heels vs Sneakers. Let's settle this.'",
-        "Outfit with heels — front view: Fitted midi dress, strappy black heels, delicate chain. Elegant, polished energy.",
-        "Outfit with heels — detail shot: Close-up of heels, anklet, dress hemline against Colaba cafe backdrop.",
-        "Outfit with sneakers — front view: Same fitted midi dress, clean white chunky sneakers, crossbody bag. Cool, effortless energy.",
-        "Outfit with sneakers — detail shot: Close-up of sneakers with gold chain layering, casual hair toss.",
-        "Final slide: Both looks side by side, text 'Comment your pick. No fence-sitting allowed.'"
-      ]
+        "Outfit with heels — front view: Fitted midi dress, strappy black heels, delicate chain. Elegant, polished energy."
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-038",
@@ -604,22 +735,23 @@
       "caption": "You have 50 outfits and nothing to wear because you skipped the basics.\nThese 5 pieces will fix 80% of your wardrobe problems. Permanently.\nWhich one is missing from YOUR closet?\nSave this — your future self will be grateful.",
       "alt_text": "Maya Varma presenting five essential wardrobe basics laid out neatly — white shirt, black jeans, kurta, blazer, and gold hoops.",
       "youtube_title": "5 Wardrobe Basics Every Indian Girl Is Missing (Fix Your Closet)",
-      "video_text": ["5 basics you're missing.", "Fix 80% of your wardrobe.", "Save this forever."],
+      "video_text": [
+        "5 basics you're missing.",
+        "Fix 80% of your wardrobe.",
+        "Save this forever."
+      ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-12T07:30:00Z",
       "notes": "Educational carousel. Clean flat-lay style mixed with Maya wearing each piece. Minimal background, focus on quality and versatility. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya standing in front of a messy closet, arms crossed, text '50 outfits. Nothing to wear. Sound familiar?'",
-        "Basic 1: Perfect white button-down — Maya wearing it tucked into jeans. Text: 'Works with literally everything.'",
-        "Basic 2: High-waisted black jeans — styled with a kurta. Text: 'Your jeans should do the heavy lifting.'",
-        "Basic 3: Neutral cotton kurta — styled casually with denim. Text: 'Desi girl starter pack.'",
-        "Basic 4: Structured blazer in black or beige — over a dress. Text: 'Instant 'I have my life together' energy.'",
-        "Basic 5: Gold hoops + layered chains — close-up detail. Text: 'Accessories aren't optional. They're the outfit.'"
-      ]
+        "Basic 1: Perfect white button-down — Maya wearing it tucked into jeans. Text: 'Works with literally everything.'"
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-039",
@@ -628,14 +760,22 @@
       "caption": "Rs 2000. Five pieces. All from Mumbai thrift stores.\nThe fashion industry doesn't want you to know that the best style costs almost nothing.\nGuess the total for each piece — answers in comments.\nSend to the friend who thinks thrifting is 'not for them.'",
       "alt_text": "Maya Varma excitedly showing off five thrifted clothing pieces from Mumbai markets, bright colorful backdrop with price tags visible.",
       "youtube_title": "Mumbai Thrift Haul: Rs 2000 for 5 Pieces That Look Designer",
-      "video_text": ["Rs 2000. Five pieces.", "Mumbai thrift magic.", "Guess each price below."],
+      "video_text": [
+        "Rs 2000. Five pieces.",
+        "Mumbai thrift magic.",
+        "Guess each price below."
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-12T13:00:00Z",
-      "notes": "Thrift haul reel. Energetic, fast-paced try-on format. Each piece revealed with dramatic price reveal text. Mumbai market backdrop for establishing shots. | generated_by=viral-claude"
+      "notes": "Thrift haul reel. Energetic, fast-paced try-on format. Each piece revealed with dramatic price reveal text. Mumbai market backdrop for establishing shots. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Thrift haul reel. Energetic, fast-paced try-on format. Each piece revealed with dramatic price reveal text. Mumbai market backdrop for establishing shots."
+      ]
     },
     {
       "id": "maya-040",
@@ -644,22 +784,23 @@
       "caption": "Mumbai monsoon destroyed your outfit? That's a you problem.\nHere's 5 rain-proof looks that actually look good when everything's wet and chaotic.\nDrop your worst monsoon outfit disaster below.\nSave this before July hits and you're crying in ruined white sneakers.",
       "alt_text": "Maya Varma in five different monsoon-ready outfits styled for Mumbai rains, featuring waterproof fabrics and smart layering.",
       "youtube_title": "Mumbai Monsoon Outfit Guide: 5 Looks That Survive The Rain",
-      "video_text": ["Monsoon vs your outfit.", "5 rain-proof looks.", "Save before July."],
+      "video_text": [
+        "Monsoon vs your outfit.",
+        "5 rain-proof looks.",
+        "Save before July."
+      ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-12T19:00:00Z",
       "notes": "Seasonal series. Rain-themed styling, dramatic moody lighting, wet reflective surfaces. Each look shows practical yet stylish monsoon outfits. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya dramatically opening an umbrella, text 'Mumbai monsoon vs your outfit. Who wins?'",
-        "Look 1: Quick-dry linen culottes + fitted tank + transparent rain jacket, rubber sandals. Practical and cute.",
-        "Look 2: Dark-wash denim shorts + oversized rain poncho in neon yellow + waterproof ankle boots. Bold monsoon queen.",
-        "Look 3: Black bodycon midi dress + denim jacket + kolhapuri chappals (they handle rain). Minimalist monsoon.",
-        "Look 4: Printed cotton kurta + dark leggings + gumboots styled with a belt bag. Desi rain chic.",
-        "Look 5: Cargo joggers + cropped hoodie + chunky waterproof sneakers. Streetwear monsoon edition."
-      ]
+        "Look 1: Quick-dry linen culottes + fitted tank + transparent rain jacket, rubber sandals. Practical and cute."
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-041",
@@ -668,14 +809,22 @@
       "caption": "Alia Bhatt's airport look probably costs more than my rent.\nRecreated it for Rs 1500 and honestly? I might have done it better.\nWho wore it better — be honest.\nTag someone who needs this budget dupe energy.",
       "alt_text": "Maya Varma recreating Alia Bhatt's famous airport outfit using affordable Rs 1500 alternatives, side-by-side comparison style.",
       "youtube_title": "Recreating Alia Bhatt's Airport Look for Just Rs 1500!",
-      "video_text": ["Alia's look: probably 50K.", "My version: Rs 1500.", "Who wore it better?"],
+      "video_text": [
+        "Alia's look: probably 50K.",
+        "My version: Rs 1500.",
+        "Who wore it better?"
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-13T07:30:00Z",
-      "notes": "Celebrity dupe reel. Side-by-side comparison format. Fast transitions between 'original' and 'dupe' shots. Price reveal at end. Cheeky, confident tone. | generated_by=viral-claude"
+      "notes": "Celebrity dupe reel. Side-by-side comparison format. Fast transitions between 'original' and 'dupe' shots. Price reveal at end. Cheeky, confident tone. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Celebrity dupe reel. Side-by-side comparison format. Fast transitions between 'original' and 'dupe' shots. Price reveal at end. Cheeky, confident tone."
+      ]
     },
     {
       "id": "maya-042",
@@ -684,14 +833,22 @@
       "caption": "Indian wedding shopping is the biggest scam nobody talks about.\nThe same lehenga is Rs 8000 in a market and Rs 80000 in a boutique. Same fabric. Same work. Different price tag because of the AC.\nAm I wrong? Tell me I'm wrong.\nSend this to every girl you know who's wedding shopping right now.",
       "alt_text": "Maya Varma in a bold talking-head shot, gesturing passionately about wedding shopping prices with market vs boutique imagery.",
       "youtube_title": "Hot Take: Wedding Shopping in India Is a SCAM (Here's Proof)",
-      "video_text": ["Same lehenga. 10x the price.", "The AC tax is real.", "Share with every bride-to-be."],
+      "video_text": [
+        "Same lehenga. 10x the price.",
+        "The AC tax is real.",
+        "Share with every bride-to-be."
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-13T13:00:00Z",
-      "notes": "CONTROVERSY POST. Talking head format with dramatic B-roll of market vs boutique shopping. Strong opinions, fast cuts, engaging eye contact. Should trigger saves and shares. | generated_by=viral-claude"
+      "notes": "CONTROVERSY POST. Talking head format with dramatic B-roll of market vs boutique shopping. Strong opinions, fast cuts, engaging eye contact. Should trigger saves and shares. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: CONTROVERSY POST. Talking head format with dramatic B-roll of market vs boutique shopping. Strong opinions, fast cuts, engaging eye contact. Should trigger saves and shares."
+      ]
     },
     {
       "id": "maya-043",
@@ -700,22 +857,23 @@
       "caption": "Zara charges you Rs 3000 for a basic crop top that a Mumbai street market sells for Rs 300.\nI bought both. Compared both. The results will make Zara fans uncomfortable.\nZara loyalty or street market hustle — where do you stand?\nSend to your Zara-obsessed friend. They need to see this.",
       "alt_text": "Maya Varma comparing identical-looking Zara and Mumbai street market clothing pieces side by side with price tags visible.",
       "youtube_title": "Zara vs Mumbai Street Market: Same Look, 10x Price Difference?",
-      "video_text": ["Zara: Rs 3000.", "Street market: Rs 300.", "Same vibe. You decide."],
+      "video_text": [
+        "Zara: Rs 3000.",
+        "Street market: Rs 300.",
+        "Same vibe. You decide."
+      ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-13T19:00:00Z",
       "notes": "CONTROVERSY POST. Side-by-side comparison carousel. Clean photography, both items shot identically. Price reveals on each slide. Should trigger debate and shares. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya holding up two identical-looking crop tops, text 'One is Rs 3000. One is Rs 300. Can you tell?'",
-        "Round 1 — Crop tops: Zara ribbed crop top Rs 2499 vs market ribbed crop top Rs 250. Close-up texture comparison.",
-        "Round 2 — Wide-leg pants: Zara linen trousers Rs 3990 vs market linen trousers Rs 500. Maya wearing both, back to back.",
-        "Round 3 — Gold earrings: Zara statement earrings Rs 1290 vs Hill Road earrings Rs 150. Detail shots, nearly identical.",
-        "Round 4 — Tote bag: Zara canvas tote Rs 1990 vs Linking Road canvas tote Rs 200. Side-by-side flat lay.",
-        "Final slide: Full outfit comparison — Zara total Rs 9769 vs Market total Rs 1100. Text: 'Your move, Zara girls.'"
-      ]
+        "Round 1 — Crop tops: Zara ribbed crop top Rs 2499 vs market ribbed crop top Rs 250. Close-up texture comparison."
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-044",
@@ -724,14 +882,22 @@
       "caption": "9 AM: corporate. 9 PM: dangerous.\nSame outfit. Different energy. Different accessories. That's the cheat code nobody teaches you.\nAre you an office girlie or a party girlie? Wrong answer: both.\nSend this to your work bestie who changes outfits in the office bathroom.",
       "alt_text": "Maya Varma showing the same black blazer dress styled two ways — corporate with pumps for day, edgy with boots and bold jewelry for night.",
       "youtube_title": "Office to Party: 1 Outfit, 2 Completely Different Vibes",
-      "video_text": ["9 AM: Corporate.", "9 PM: Dangerous.", "Same outfit. Different you."],
+      "video_text": [
+        "9 AM: Corporate.",
+        "9 PM: Dangerous.",
+        "Same outfit. Different you."
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-14T07:30:00Z",
-      "notes": "Transition reel. Split-screen or dramatic outfit switch. Day lighting vs moody night lighting. Accessories swap is the key visual moment. | generated_by=viral-claude"
+      "notes": "Transition reel. Split-screen or dramatic outfit switch. Day lighting vs moody night lighting. Accessories swap is the key visual moment. | generated_by=viral-claude",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Photo 1: Transition reel. Split-screen or dramatic outfit switch. Day lighting vs moody night lighting. Accessories swap is the key visual moment."
+      ]
     },
     {
       "id": "maya-045",
@@ -740,22 +906,23 @@
       "caption": "10 pieces. 30 outfits. Zero repeats.\nYour hostel closet is tiny. Your budget is tinier. But your style doesn't have to be.\nHow many outfits can YOU make from 10 pieces? Count and comment.\nSave this if you're heading to college this year.",
       "alt_text": "Maya Varma surrounded by 10 clothing pieces laid out flat, with multiple styled outfit combinations shown in a grid format.",
       "youtube_title": "College Capsule Wardrobe: 10 Pieces = 30 Outfits (Budget Friendly)",
-      "video_text": ["10 pieces. 30 outfits.", "Hostel closet approved.", "Save for college prep."],
+      "video_text": [
+        "10 pieces. 30 outfits.",
+        "Hostel closet approved.",
+        "Save for college prep."
+      ],
       "image_url": "",
       "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
+      "is_reel": true,
+      "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-14T13:00:00Z",
       "notes": "Educational carousel. Flat-lay of all 10 pieces, then outfit combinations. Clean white/neutral background. Numbered outfits for easy reference. High save potential. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya next to a tiny hostel closet, text '10 pieces. 30 outfits. Your hostel closet is enough.'",
-        "The 10 Pieces: Flat lay — white tee, black jeans, blue denim, white shirt, cotton kurta, black blazer, floral skirt, neutral co-ord top, co-ord bottom, denim jacket.",
-        "Outfits 1-6: Grid of 6 combinations. Casual college looks — jeans + tee, kurta + denim, blazer + skirt, etc.",
-        "Outfits 7-12: Grid of 6 combinations. Going-out looks — blazer + skirt, co-ord set, shirt dress style.",
-        "Outfits 13-18: Grid of 6 combinations. Mix-and-match Indo-western looks — kurta + jeans, dupatta styling.",
-        "Final slide: All 30 combinations in a mini grid, text 'No more 'I have nothing to wear.' You're welcome.'"
-      ]
+        "The 10 Pieces: Flat lay — white tee, black jeans, blue denim, white shirt, cotton kurta, black blazer, floral skirt, neutral co-ord top, co-ord bottom, denim jacket."
+      ],
+      "reel_format": "hook_photo"
     },
     {
       "id": "maya-046",
@@ -764,7 +931,11 @@
       "caption": "You'll spend Rs 5000 on Diwali gifts but cry about spending Rs 2000 on your outfit. Make it make sense.\nThis Diwali look costs less than your mithai box and hits harder than every lehenga at the party.\nWhat's your Diwali outfit budget? Be honest.\nTag the friend whose Diwali outfit is always an afterthought.",
       "alt_text": "Maya Varma in a stunning affordable Diwali outfit under Rs 2000 featuring a modern draped kurta with gold accessories and warm festive lighting.",
       "youtube_title": "Diwali Outfit Under Rs 2000 That Outshines Every Lehenga",
-      "video_text": ["Diwali outfit under Rs 2000.", "Outshine every lehenga.", "Tag the Diwali procrastinator."],
+      "video_text": [
+        "Diwali outfit under Rs 2000.",
+        "Outshine every lehenga.",
+        "Tag the Diwali procrastinator."
+      ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
@@ -781,10 +952,8 @@
       "alt_text": "Maya Varma in a side-by-side comparison wearing a Rs 500 budget outfit and a Rs 5000 splurge outfit, both looking equally styled and confident.",
       "youtube_title": "Rs 500 vs Rs 5000 Outfit: Can You Tell The Difference?",
       "video_text": [
-        "Rs 500 outfit.",
-        "Now watch this.",
-        "Rs 5000 outfit.",
-        "Which one looks better?",
+        "Rs 500 vs Rs 5000 outfit.",
+        "Which one looks more expensive?",
         "Send to your shopping bestie."
       ],
       "image_url": "",
@@ -809,11 +978,9 @@
       "alt_text": "Maya Varma showing a Pinterest inspiration image next to her thrifted Mumbai version of the same outfit, looking equally stylish.",
       "youtube_title": "What I Ordered vs What I Got: Mumbai Thrift Edition (Honest Review)",
       "video_text": [
-        "The Pinterest inspo.",
-        "What I actually found.",
-        "Mumbai thrift for the win.",
-        "Plot twist: it's better.",
-        "Send to the thrift-scared friend."
+        "Pinterest inspo vs Mumbai thrift.",
+        "Plot twist: the thrift version ate.",
+        "Send to your thrift-scared friend."
       ],
       "image_url": "",
       "video_url": null,
