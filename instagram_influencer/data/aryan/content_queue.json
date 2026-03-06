@@ -66,7 +66,7 @@
     },
     {
       "id": "aryan-003",
-      "status": "approved",
+      "status": "posted",
       "topic": "Push day complete routine -- chest and shoulders",
       "caption": "Push day. 45 minutes. No fluff.\nThis routine added 2 inches to my chest in 3 months.\nWhat's your push day split?\nSend to someone who needs a real push day routine.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003.jpg",
@@ -83,7 +83,10 @@
         "+2 inches in 3 months.",
         "Send to your gym buddy"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4"
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4",
+      "posted_at": "2026-03-06T07:56:03Z",
+      "platform_post_id": "3846711089329666280",
+      "publish_error": null
     },
     {
       "id": "aryan-004",
