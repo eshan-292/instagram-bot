@@ -340,6 +340,26 @@ def generate_pin_comment(topic: str, caption: str) -> str:
     return random.choice(_FALLBACK_COMMENTS)
 
 
+def delete_video(video_id: str) -> bool:
+    """Delete a YouTube video by ID.
+
+    Returns True on success, False on failure.
+    """
+    from googleapiclient.errors import HttpError
+
+    try:
+        youtube = _get_youtube_service()
+        youtube.videos().delete(id=video_id).execute()
+        log.info("Deleted YouTube video: %s", video_id)
+        return True
+    except HttpError as exc:
+        log.error("Failed to delete video %s: %s", video_id, exc)
+        return False
+    except Exception as exc:
+        log.error("Error deleting video %s: %s", video_id, exc)
+        return False
+
+
 def get_channel_stats() -> dict[str, Any] | None:
     """Fetch basic channel statistics (subscribers, views, video count)."""
     try:
@@ -462,14 +482,21 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--auth", action="store_true", help="Run interactive OAuth2 flow")
+    parser.add_argument("--delete", type=str, help="Delete a YouTube video by ID")
     args = parser.parse_args()
 
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
+
     if args.auth:
-        try:
-            from dotenv import load_dotenv
-            load_dotenv()
-        except ImportError:
-            pass
         _interactive_auth()
+    elif args.delete:
+        logging.basicConfig(level=logging.INFO)
+        os.environ.setdefault("PERSONA", "aryan")
+        success = delete_video(args.delete)
+        print(f"Delete {'succeeded' if success else 'FAILED'} for {args.delete}")
     else:
-        print("Usage: python youtube_publisher.py --auth")
+        print("Usage: python youtube_publisher.py --auth | --delete VIDEO_ID")

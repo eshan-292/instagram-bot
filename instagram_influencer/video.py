@@ -493,38 +493,22 @@ def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -
             text_lines = None
 
         # Instagram video (4:5) — SILENT: trending audio added at publish time
-        video_url = str(post.get("video_url") or "").strip()
-        if not video_url or not os.path.exists(video_url):
-            try:
-                # For carousel with 3+ images: create montage Reel (30s)
-                carousel_images = post.get("carousel_images") or []
-                valid_carousel = (
-                    post_type == "carousel"
-                    and isinstance(carousel_images, list)
-                    and len(carousel_images) >= 3
-                    and all(os.path.exists(str(p)) for p in carousel_images)
-                )
-
-                if valid_carousel:
-                    montage_path = str(Path(image_url).with_name(
-                        Path(image_url).stem + "_montage.mp4"
-                    ))
-                    video_path = images_to_montage(
-                        [str(p) for p in carousel_images],
-                        montage_path,
-                        IG_WIDTH, IG_HEIGHT, IG_MONTAGE_PER_IMAGE,
-                        add_audio=False, text_lines=text_lines,
-                    )
-                else:
+        # Carousels publish as swipeable albums on IG — no video needed.
+        # The montage video is created below for YouTube Shorts only.
+        if post_type == "carousel":
+            pass  # Skip IG video for carousels — they publish as albums
+        else:
+            video_url = str(post.get("video_url") or "").strip()
+            if not video_url or not os.path.exists(video_url):
+                try:
                     video_path = image_to_video(
                         image_url, add_audio=False, text_lines=text_lines,
                     )
-
-                post["video_url"] = video_path
-                post["is_reel"] = True
-                converted += 1
-            except Exception as exc:
-                log.warning("IG video conversion failed for %s: %s", post.get("id"), exc)
+                    post["video_url"] = video_path
+                    post["is_reel"] = True
+                    converted += 1
+                except Exception as exc:
+                    log.warning("IG video conversion failed for %s: %s", post.get("id"), exc)
 
         # YouTube Shorts video (9:16) — WITH audio: royalty-free music baked in
         # For carousels: montage all slides into one Short (not just 1st image)

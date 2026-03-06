@@ -6,8 +6,8 @@
       "topic": "5 exercises you're doing wrong in the gym",
       "caption": "5 exercises. You're doing ALL of them wrong.\nI wasted 2 years before someone told me.\nWhich one surprised you most?\nSend this to your gym partner before they hurt themselves.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
-      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_montage.mp4",
-      "is_reel": true,
+      "video_url": null,
+      "is_reel": false,
       "post_type": "carousel",
       "carousel_images": [
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
@@ -34,10 +34,10 @@
         "I wasted 2 years.",
         "Send to your gym partner"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
-      "youtube_video_id": "pf2gQK-tTvI",
-      "youtube_posted_at": "2026-03-06T09:43:37Z",
-      "youtube_pin_comment_id": "UgzAXm9v0ApzOufbJM94AaABAg"
+      "youtube_video_url": null,
+      "youtube_video_id": null,
+      "youtube_posted_at": null,
+      "youtube_pin_comment_id": null
     },
     {
       "id": "aryan-002",
@@ -86,13 +86,13 @@
         "+2 inches in 3 months.",
         "Send to your gym buddy"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4",
+      "youtube_video_url": null,
       "posted_at": "2026-03-06T07:56:03Z",
       "platform_post_id": "3846711089329666280",
       "publish_error": null,
-      "youtube_video_id": "P6lNQWtejJ8",
-      "youtube_posted_at": "2026-03-06T09:43:58Z",
-      "youtube_pin_comment_id": "Ugy-CG5PgBz5Ph2iKFB4AaABAg"
+      "youtube_video_id": null,
+      "youtube_posted_at": null,
+      "youtube_pin_comment_id": null
     },
     {
       "id": "aryan-004",
@@ -173,10 +173,10 @@
         "Ranked by Rs per gram.",
         "Save this NOW"
       ],
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-006/1_yt.mp4",
-      "youtube_video_id": "XOJ0EgkYycI",
-      "youtube_posted_at": "2026-03-06T10:06:54Z",
-      "youtube_pin_comment_id": "Ugx3rFI7ufKSjLvqvKt4AaABAg"
+      "youtube_video_url": null,
+      "youtube_video_id": null,
+      "youtube_posted_at": null,
+      "youtube_pin_comment_id": null
     },
     {
       "id": "aryan-007",
