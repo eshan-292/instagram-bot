@@ -30,7 +30,8 @@
       "publish_error": null,
       "posted_at": "2026-02-25T16:20:28Z",
       "platform_post_id": "3840442103013086666",
-      "last_storied_at": "2026-02-25T19:25:20Z"
+      "last_storied_at": "2026-02-25T19:25:20Z",
+      "youtube_video_url": "data/maya/generated_images/pending/maya-002_yt.mp4"
     },
     {
       "id": "maya-003",
@@ -77,7 +78,8 @@
       "publish_error": null,
       "posted_at": "2026-02-27T06:32:52Z",
       "platform_post_id": "3841595937647250536",
-      "last_storied_at": "2026-02-28T12:35:38Z"
+      "last_storied_at": "2026-02-28T12:35:38Z",
+      "youtube_video_url": "data/maya/generated_images/pending/maya-005_yt.mp4"
     },
     {
       "id": "maya-006",
@@ -156,7 +158,8 @@
       "publish_error": null,
       "posted_at": "2026-02-24T17:37:14Z",
       "platform_post_id": "unknown",
-      "last_storied_at": "2026-02-25T19:25:20Z"
+      "last_storied_at": "2026-02-25T19:25:20Z",
+      "youtube_video_url": "data/maya/generated_images/pending/maya-010_yt.mp4"
     },
     {
       "id": "maya-011",
@@ -205,7 +208,7 @@
     },
     {
       "id": "maya-014",
-      "status": "approved",
+      "status": "posted",
       "topic": "A glamorous Mumbai fashion event",
       "caption": "They dressed to impress. I just showed up.",
       "image_url": "data/maya/generated_images/pending/maya-014.jpg",
@@ -213,7 +216,10 @@
       "is_reel": true,
       "scheduled_at": "2026-03-02T19:25:40Z",
       "notes": "Full body shot of Maya in a sleek, shimmering cocktail dress at a dimly lit, high-end event space. She's mid-stride, confident gaze over her shoulder. Soft, dramatic spotlights highlight her. Background bokeh of blurred luxury decor and people. | generated_by=gemini:gemini-2.5-flash",
-      "youtube_video_url": "data/maya/generated_images/pending/maya-014_yt.mp4"
+      "youtube_video_url": "data/maya/generated_images/pending/maya-014_yt.mp4",
+      "posted_at": "2026-03-06T14:07:41Z",
+      "platform_post_id": "3846898150791752920",
+      "publish_error": null
     },
     {
       "id": "maya-015",
