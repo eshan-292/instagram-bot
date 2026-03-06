@@ -108,17 +108,21 @@
       "alt_text": "Young Indian woman working out in early morning at a gym",
       "youtube_title": "My 5AM Morning Gym Routine - No Excuses",
       "video_text": [
-        "5 AM.",
-        "Dark outside. Gym lights on.",
-        "This is where it starts."
+        "5 AM. Dark outside.",
+        "This is where it starts.",
+        "Send to someone who needs this."
       ],
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-004.jpg",
       "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-004.mp4",
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-04T01:51:11Z",
       "notes": "early morning gym vibes, low lighting, focused energy | generated_by=template",
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-004_yt.mp4"
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-004_yt.mp4",
+      "slides": [
+        "Photo 1: Rhea walking into a dimly lit gym at 5 AM, gym lights glowing, early morning focused energy \u2014 '5 AM. Dark outside. Gym lights on.'"
+      ]
     },
     {
       "id": "rhea-005",
@@ -129,16 +133,20 @@
       "youtube_title": "Upper Body Workout For Toned Arms - Complete Routine",
       "video_text": [
         "Upper body day.",
-        "Strong arms. Always in style.",
-        "Save this"
+        "Strong arms never go out of style.",
+        "Save this for arm day."
       ],
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005.jpg",
       "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005.mp4",
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-04T05:51:11Z",
       "notes": "gym setting, focus on arms and shoulders, pump visible | generated_by=template",
-      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005_yt.mp4"
+      "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005_yt.mp4",
+      "slides": [
+        "Photo 1: Rhea doing dumbbell shoulder press in gym, arms and shoulders pumped, focused expression \u2014 'Upper body day. Strong arms never go out of style.'"
+      ]
     },
     {
       "id": "rhea-006",
@@ -155,18 +163,13 @@
       "image_url": "",
       "video_url": null,
       "is_reel": true,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-08T07:30:00Z",
       "notes": "Workout Wednesday series, gym mat setting, each exercise demonstrated with form cues | generated_by=viral-claude",
       "slides": [
-        "Hook: Rhea on gym mat, arms crossed, 'Ab Day. No crunches allowed.'",
-        "Exercise 1: Dead bugs \u2014 slow and controlled, 12 reps",
-        "Exercise 2: Hollow body hold \u2014 30 seconds",
-        "Exercise 3: Cable woodchops \u2014 10 each side",
-        "Exercise 4: Ab wheel rollouts \u2014 8 reps",
-        "Exercise 5: Hanging leg raises \u2014 10 reps",
-        "Exercise 6: Pallof press \u2014 12 each side"
+        "Photo 1: Rhea on gym mat, arms crossed, confident stance \u2014 'Ab Day. No crunches allowed.'",
+        "Photo 2: Rhea demonstrating dead bugs with slow controlled form on gym mat \u2014 '6 movements. Zero crunches. Fire in 12 minutes.'"
       ]
     },
     {
@@ -213,17 +216,13 @@
       "image_url": "",
       "video_url": null,
       "is_reel": true,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-08T18:30:00Z",
       "notes": "Form Check Friday series, side-angle shots showing correct vs wrong form, red/green indicators | generated_by=viral-claude",
       "slides": [
-        "Hook: Rhea side-on at squat rack, 'Your squat is lying to you.'",
-        "Mistake 1: Knees caving in \u2014 wrong vs right comparison",
-        "Mistake 2: Rising on toes \u2014 heel drive correction",
-        "Mistake 3: Not hitting depth \u2014 hip crease below knee",
-        "Mistake 4: Butt wink at bottom \u2014 mobility fix",
-        "Summary: Quick checklist for the perfect squat"
+        "Photo 1: Rhea side-on at squat rack, questioning expression \u2014 'Your squat is lying to you.'",
+        "Photo 2: Side-by-side comparison showing knees caving in (wrong, red X) vs proper knee tracking (right, green check) \u2014 'Fix these 4 mistakes now.'"
       ]
     },
     {
@@ -235,22 +234,19 @@
       "youtube_title": "5 AM Club: Chest & Back Routine - Dark Morning Workout",
       "video_text": [
         "4:50 AM.",
-        "Chest and back.",
-        "Nobody is watching."
+        "Chest and back. Nobody watching.",
+        "Send to someone who needs this."
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-09T02:00:00Z",
       "notes": "5 AM Club series, dim gym lighting, moody atmosphere, focused training shots | generated_by=viral-claude",
       "slides": [
-        "Hook: Dark gym, single overhead light, Rhea walking in",
-        "Exercise 1: Barbell bench press \u2014 4x8",
-        "Exercise 2: Bent-over rows \u2014 4x10",
-        "Exercise 3: Incline dumbbell press \u2014 3x12",
-        "Exercise 4: Lat pulldowns \u2014 3x12",
-        "Exercise 5: Cable flyes + face pulls superset"
+        "Photo 1: Dark gym, single overhead light, Rhea walking in at 4:50 AM \u2014 '4:50 AM. Nobody is watching.'",
+        "Photo 2: Rhea doing barbell bench press in dim gym lighting, focused intensity \u2014 'Chest and back. 45 minutes. No phone.'"
       ]
     },
     {
@@ -269,8 +265,12 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-09T07:30:00Z",
-      "notes": "Controversy post, bold text overlays, Rhea deadlifting heavy, confident energy | generated_by=viral-claude"
+      "notes": "Controversy post, bold text overlays, Rhea deadlifting heavy, confident energy | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Rhea deadlifting heavy with confident energy, bold expression, gym setting \u2014 'HIIT is overrated. Lift heavy instead.'"
+      ]
     },
     {
       "id": "rhea-011",
@@ -280,24 +280,20 @@
       "alt_text": "Indian fitness woman showing 30-day workout challenge plan on a whiteboard",
       "youtube_title": "30 Day Challenge That ACTUALLY Changed My Body",
       "video_text": [
-        "30 days.",
-        "One rule: show up.",
+        "30 days. One rule.",
+        "Show up every single day.",
         "Who's in?"
       ],
       "image_url": "",
       "video_url": null,
       "is_reel": true,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-09T13:00:00Z",
       "notes": "Challenge post, calendar visual, week-by-week progression breakdown | generated_by=viral-claude",
       "slides": [
-        "Hook: Rhea standing in front of a 30-day calendar, 'One rule. Show up.'",
-        "Week 1: Foundation \u2014 3 full body workouts, 10K steps daily",
-        "Week 2: Push harder \u2014 4 workouts, add progressive overload",
-        "Week 3: Mental test \u2014 5 AM sessions, no excuses",
-        "Week 4: Final push \u2014 intensity week, personal records",
-        "Results: What changed in 30 days \u2014 strength, habit, mindset"
+        "Photo 1: Rhea standing in front of a 30-day calendar on whiteboard \u2014 'One rule. Show up.'",
+        "Photo 2: Week-by-week progression breakdown, foundation to final push \u2014 '30 days. No skipping. No negotiating.'"
       ]
     },
     {
@@ -315,17 +311,13 @@
       "image_url": "",
       "video_url": null,
       "is_reel": true,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-09T18:30:00Z",
       "notes": "Heavy leg day, power rack setting, focus on compound lifts | generated_by=viral-claude",
       "slides": [
-        "Hook: Rhea under barbell, chalk on hands, 'Leg day. The real kind.'",
-        "Exercise 1: Back squats \u2014 5x5 heavy",
-        "Exercise 2: Walking lunges \u2014 4x12 each leg, dumbbells",
-        "Exercise 3: Romanian deadlifts \u2014 4x8",
-        "Exercise 4: Leg press \u2014 3x15 slow negatives",
-        "Exercise 5: Nordic hamstring curls \u2014 3x6"
+        "Photo 1: Rhea under barbell, chalk on hands, intense focus \u2014 'Leg day. The real kind.'",
+        "Photo 2: Rhea doing heavy back squats at power rack, perfect depth \u2014 'Build power. Not just shape.'"
       ]
     },
     {
@@ -344,8 +336,12 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-10T02:00:00Z",
-      "notes": "Controversy post, comparison shots band vs barbell, bold opinion energy | generated_by=viral-claude"
+      "notes": "Controversy post, comparison shots band vs barbell, bold opinion energy | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Rhea comparing booty band exercise to heavy barbell hip thrusts side by side, bold confident expression \u2014 'Booty bands are a warm-up. Not a workout.'"
+      ]
     },
     {
       "id": "rhea-014",
@@ -362,17 +358,13 @@
       "image_url": "",
       "video_url": null,
       "is_reel": true,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-10T07:30:00Z",
       "notes": "Protein source breakdown, close-up food shots with protein per serving labels | generated_by=viral-claude",
       "slides": [
-        "Hook: Rhea in kitchen, 'Vegetarian. 130g protein. No excuses.'",
-        "Source 1: Paneer \u2014 200g = 36g protein, versatile in any meal",
-        "Source 2: Soya chunks \u2014 50g dry = 26g protein, cheapest source",
-        "Source 3: Greek yogurt \u2014 200g = 20g protein, snack or dessert",
-        "Source 4: Dal + rice combo \u2014 1 bowl = 18g protein, complete amino acids",
-        "Source 5: Chana, rajma, moong sprouts \u2014 protein stacking guide"
+        "Photo 1: Rhea in kitchen surrounded by vegetarian protein sources with labels \u2014 'Vegetarian. 130g protein. No excuses.'",
+        "Photo 2: Close-up of paneer, soya chunks, and Greek yogurt with protein per serving labels \u2014 'No chicken required. Just smart food choices.'"
       ]
     },
     {
@@ -391,8 +383,12 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-10T13:00:00Z",
-      "notes": "Home workout, living room setting, bodyweight only, minimal space needed | generated_by=viral-claude"
+      "notes": "Home workout, living room setting, bodyweight only, minimal space needed | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Rhea in living room doing bodyweight exercises, no equipment in sight, minimal space \u2014 'No gym? No equipment? No excuse. 20 minutes.'"
+      ]
     },
     {
       "id": "rhea-016",
@@ -428,17 +424,13 @@
       "image_url": "",
       "video_url": null,
       "is_reel": true,
-      "post_type": "carousel",
-      "carousel_images": [],
+      "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-11T02:00:00Z",
       "notes": "Recovery/stretching guide, calm gym setting, foam roller and stretch band visible | generated_by=viral-claude",
       "slides": [
-        "Hook: Rhea foam rolling, 'You skip this. Don't.'",
-        "Stretch 1: Hip flexor stretch \u2014 90/90 position, 60 seconds each",
-        "Stretch 2: Pigeon pose \u2014 opens hips, 45 seconds each",
-        "Stretch 3: Thoracic spine rotation \u2014 10 each side",
-        "Stretch 4: Foam roll quads and IT band \u2014 2 minutes",
-        "Stretch 5: Child's pose + cat-cow flow \u2014 2 minutes"
+        "Photo 1: Rhea foam rolling in calm gym setting, stretch band nearby \u2014 'You skip this. Don't.'",
+        "Photo 2: Rhea in hip flexor stretch, 90/90 position, focused recovery \u2014 '15 minutes post-workout. Your joints will thank you.'"
       ]
     },
     {
@@ -457,8 +449,12 @@
       "video_url": null,
       "is_reel": true,
       "post_type": "reel",
+      "reel_format": "hook_photo",
       "scheduled_at": "2026-03-11T07:30:00Z",
-      "notes": "Controversy post, solo training shots, bold text overlays, debate-starter | generated_by=viral-claude"
+      "notes": "Controversy post, solo training shots, bold text overlays, debate-starter | generated_by=viral-claude",
+      "slides": [
+        "Photo 1: Rhea training alone in gym with focused expression, no trainer in sight, confident solo energy \u2014 'You don't need a trainer. You need discipline.'"
+      ]
     },
     {
       "id": "rhea-019",
