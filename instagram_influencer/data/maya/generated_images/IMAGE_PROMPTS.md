@@ -4,17 +4,6 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## maya-015 — REEL (HOOK-PHOTO)
-**Topic:** Brunch at a chic Mumbai cafe
-**Caption:** This is my 'I barely tried' look. What's your excuse?
-
-**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/maya-015/1.jpg`, `2.jpg`, ...
-**On-screen hooks (auto-generated):** ["This is my 'I barely tried' look", "What's your excuse?", 'Save this for later.']
-
-**Photo 1:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 1 of a carousel post.) Scene: Photo 1: Maya seated casually at an outdoor cafe table, sipping coffee. She's wearing an oversized pastel blazer, cropped top, high-waisted trousers, and designer sunglasses. Bright natural light, warm tones. Focus on her relaxed but impeccably styled posture. A subtle smirk. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
 ## maya-016 — REEL (HOOK-PHOTO)
 **Topic:** An opulent heritage building photoshoot
 **Caption:** Some spaces just know how to appreciate a masterpiece.
