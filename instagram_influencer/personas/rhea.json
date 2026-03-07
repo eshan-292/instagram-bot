@@ -6,7 +6,7 @@
   "city": "Gurgaon",
   "niche": "fitness",
   "instagram_handle": "rheatrains",
-  "youtube_channel_name": "",
+  "youtube_channel_name": "Rhea",
   "brand_tag": "rheatrains",
   "post_id_prefix": "rhea",
 
@@ -242,7 +242,12 @@
   },
 
   "cross_promo": {
-    "youtube_ctas": [],
+    "youtube_ctas": [
+      "More on my YouTube \u2192 Rhea",
+      "Full workout video on YouTube! Link in bio",
+      "Watch the complete routine on my YT channel",
+      "Extended version on YouTube \u2014 go check it out!"
+    ],
     "partner": "sofia",
     "partners": ["sofia", "maya", "aryan", "choosewisely", "moderntruths"],
     "partner_mention_probability": 0,
