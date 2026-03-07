@@ -43,16 +43,27 @@
       "Home workout for busy days", "Cardio vs weights — the truth for women"
     ],
     "hook_examples": [
-      "They asked what changed. Discipline did.", "No shortcuts. No excuses.",
-      "5 AM. No alarm needed anymore.", "This workout changed my body.",
-      "Save this for your next gym session.", "Stop doing crunches for abs.",
-      "She's not lucky. She's consistent.", "Your body hears everything your mind says.",
-      "The gym is therapy.", "Discipline is the real glow-up.",
-      "POV: you finally stopped making excuses.", "3 exercises. 15 minutes. Results.",
+      "4 AM. No alarm needed.", "Your glute workout is useless.",
+      "I eat 2500 cal. Still lean.", "Stop doing 100 squats.",
+      "This one exercise changed everything.", "Discipline > motivation. Every time.",
+      "She's not lucky. She's consistent.", "Your workout is wrong.",
+      "3 moves. 15 min. Transformed.", "The glow-up nobody talks about.",
+      "Girls don't need separate plans.", "Stop making excuses. Start.",
+      "POV: you stopped making excuses.", "This is what consistency looks like.",
       "Send this to your workout partner",
       "Your friend needs this routine",
       "Tag someone who keeps saying 'tomorrow'",
       "Send to the girl who says she doesn't know what to do at the gym"
+    ],
+    "video_text_hooks": [
+      "4 AM. No alarm.", "Your workout is useless.",
+      "2500 cal. Still lean.", "Stop doing 100 squats.",
+      "This changed everything.", "Discipline > motivation.",
+      "She's consistent. Not lucky.", "Your form is wrong.",
+      "3 moves. 15 min.", "The real glow-up.",
+      "Girls: train like this.", "No excuses. Start.",
+      "This is consistency.", "Your glutes need this.",
+      "Stop wasting gym time.", "Abs aren't made there."
     ],
     "currency_symbol": "Rs",
     "currency_amounts": ["200", "500", "1000", "2000"],

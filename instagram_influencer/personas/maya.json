@@ -42,15 +42,27 @@
       "wedding season prep on a budget", "styling my mom's old clothes"
     ],
     "hook_examples": [
-      "POV: your bestie styled you", "POV: Mumbai streets at 7am",
-      "3 outfits.", "5 ways to...", "Rs 2000. Zero compromises.",
-      "This outfit costs Rs 800.", "Stop buying basics.",
-      "Wait for the last one.", "Nobody talks about this.",
-      "Stop scrolling if you...", "Save this before it gets buried.",
+      "Rs 800. Full outfit. Judge me.", "This outfit is illegal.",
+      "3 outfits. Rs 2000. No cap.", "Your wardrobe is lying to you.",
+      "I wore this. Rs 1200.", "Everyone copies this wrong.",
+      "Delete half your wardrobe.", "Stop buying Zara basics.",
+      "Mumbai street style under Rs 2000.", "Fashion rule I just broke.",
+      "Wait for outfit #3.", "Nobody dresses like this in Mumbai.",
+      "POV: your bestie styled you", "This thrift find costs Rs 300.",
       "Send this to your friend who says 'I have nothing to wear'",
       "Tag your bestie who needs this outfit",
       "Your shopping buddy needs to see this",
       "You and your bestie will disagree on this"
+    ],
+    "video_text_hooks": [
+      "Rs 800. Full outfit.", "This outfit is illegal.",
+      "Stop buying basics.", "Your wardrobe is broken.",
+      "3 looks. Zero budget.", "Delete half your closet.",
+      "Rs 1500. Judge me.", "Everyone copies this wrong.",
+      "Fashion rule I broke.", "Wait for #3.",
+      "Mumbai streets. Rs 2000.", "Thrift find. Rs 300.",
+      "You're styling this wrong.", "One piece. Five looks.",
+      "This changes everything.", "Stop scrolling. Look."
     ],
     "currency_symbol": "Rs",
     "currency_amounts": ["800", "1500", "2000", "3000"],

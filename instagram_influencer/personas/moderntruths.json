@@ -43,15 +43,27 @@
       "Why desperation kills attraction", "The harsh truth about situationships"
     ],
     "hook_examples": [
-      "Read that again.", "Nobody wants to hear this.", "Harsh truth:",
-      "This will hurt.", "Screenshot this.", "She's not yours.",
-      "The truth most people ignore.", "If this offends you — good.",
-      "Save this before someone needs to hear it.", "Uncomfortable fact:",
-      "Swipe if you can handle the truth.", "This is why you're still single.",
+      "Read this. Then read it again.", "Nobody tells you this.",
+      "This will hurt but it's true.", "She's not coming back.",
+      "The red flag you keep ignoring.", "You're not healing. You're hiding.",
+      "If they wanted to, they would.", "Stop texting them. Here's why.",
+      "This is why they left.", "Uncomfortable truth about love.",
+      "You're the toxic one.", "He already told you. You ignored it.",
+      "Screenshot this before you forget.", "Harsh? Yes. True? Also yes.",
       "Send this to someone who needs to hear it",
       "Your friend is ignoring this red flag",
       "Someone you know needed this today",
       "Tag someone who's going through this right now"
+    ],
+    "video_text_hooks": [
+      "Read that again.", "This will hurt.",
+      "Nobody tells you this.", "She's not yours.",
+      "They already moved on.", "You're not healing.",
+      "The red flag you ignore.", "Stop texting them.",
+      "If they wanted to...", "Harsh truth:",
+      "You're the toxic one.", "This is why they left.",
+      "He told you already.", "Screenshot this.",
+      "Uncomfortable fact:", "You already know."
     ],
     "currency_symbol": "Rs",
     "currency_amounts": [],

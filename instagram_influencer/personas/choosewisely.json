@@ -52,17 +52,27 @@
       "Pick your perfect day — 8 choices that build your ideal 24 hours"
     ],
     "hook_examples": [
-      "Pick one. No cheating.", "1 or 2?", "This or That?",
-      "Choose wisely.", "Comment your answer.", "A or B — GO.",
-      "Only one can stay.", "You can only keep ONE.",
-      "Tag someone who'd choose wrong.", "Which side are you on?",
-      "Save this. Show your friends.", "Your choice says everything about you.",
-      "Rate your life. Be honest.", "Only 1 survives. Choose.",
-      "Build your perfect starter pack.", "Rank these. No ties.",
-      "Score yourself. Screenshot and share.",
+      "Pick one. Lose one forever.", "Only one survives.",
+      "Choose. No going back.", "Your answer reveals everything.",
+      "90% pick wrong. You too?", "You can't keep both.",
+      "One stays. One goes. Choose.", "A or B. No middle ground.",
+      "This choice splits everyone.", "Red flag or green flag?",
+      "Rate yourself. Be honest.", "Which side are you on?",
+      "Score yourself. Screenshot it.", "Rank these. No ties allowed.",
+      "Build your starter pack.", "Your choice says everything.",
       "Send to a friend — see if they choose the same",
       "You and your bestie will disagree on this",
-      "Red flag or green flag? Comment below."
+      "Tag someone who'd choose wrong"
+    ],
+    "video_text_hooks": [
+      "Pick one. Lose one.", "Only one survives.",
+      "Choose. No cheating.", "90% pick wrong.",
+      "You can't keep both.", "One stays. One goes.",
+      "A or B?", "Red flag or green flag?",
+      "Rate yourself honestly.", "Your choice reveals you.",
+      "This splits everyone.", "No middle ground.",
+      "Choose wisely.", "Only 1 can stay.",
+      "Score yourself.", "Would you rather..."
     ],
     "currency_symbol": "Rs",
     "currency_amounts": ["1000", "5000", "10000", "1 crore"],

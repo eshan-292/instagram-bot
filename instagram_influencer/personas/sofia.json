@@ -43,15 +43,27 @@
       "Minimalist jewelry that looks expensive", "Date night at The Table Mumbai"
     ],
     "hook_examples": [
-      "Not everyone's invited.", "You can look. You can't touch.",
-      "This is what luxury looks like.", "Mumbai penthouse energy.",
-      "She walked in and everyone noticed.", "Elegance is not negotiable.",
-      "From Russia with style.", "Main character. Always.",
-      "Save this for your next luxury moment.", "Would you pull this off?",
+      "This costs more than your rent.", "Not everyone's invited.",
+      "Old money doesn't dress like that.", "Rs 50,000 outfit. Worth every rupee.",
+      "Rich vs looking rich.", "She walked in. Everyone stared.",
+      "Luxury has no budget version.", "You can't afford this vibe.",
+      "This is real wealth.", "Mumbai penthouse. Golden hour.",
+      "From Russia with style.", "Elegance is not negotiable.",
+      "Main character energy. Always.", "Would you pull this off?",
       "Send this to someone with expensive taste",
       "Tag someone who deserves this lifestyle",
       "Your friend needs this luxury guide",
       "Send this to the one who always orders the most expensive thing"
+    ],
+    "video_text_hooks": [
+      "This costs more than rent.", "Not everyone's invited.",
+      "Old money secret.", "Rs 50,000. Worth it.",
+      "Rich vs looking rich.", "She walked in. Silence.",
+      "You can't afford this.", "Luxury has no dupe.",
+      "This is real wealth.", "Elegance. Non-negotiable.",
+      "Penthouse energy.", "From Russia with style.",
+      "Main character. Always.", "Old money doesn't flex.",
+      "Mumbai luxury guide.", "Not for everyone."
     ],
     "currency_symbol": "Rs",
     "currency_amounts": ["5000", "10000", "25000", "50000"],

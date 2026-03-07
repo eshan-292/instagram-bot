@@ -39,8 +39,16 @@ YT_MONTAGE_PER_IMAGE = 5  # 5 images × 5s = 25s Short
 
 FPS = 30
 
-# Hook-photo reel: per-frame durations (2s = punchy, fast-paced, keeps viewers)
-HOOK_REEL_PER_FRAME = 2  # seconds per frame (text and photo)
+# Hook-photo reel: variable frame durations for viral pacing
+# Hook = fast snap (grabs attention), photo = hold (let them absorb),
+# bridge = quick (curiosity), CTA = linger (drives action)
+HOOK_DUR = 1.0       # Hook text: FAST pattern interrupt (was 2s — too slow)
+PHOTO_DUR = 2.0      # Photo frames: let the visual land
+BRIDGE_DUR = 1.2     # Bridge/curiosity text: quick, keep momentum
+CTA_DUR = 2.5        # CTA: longer so viewer registers the action
+
+# Legacy constant for montage calls (used by non-hook reels)
+HOOK_REEL_PER_FRAME = 2  # seconds per frame (fallback)
 
 # Font for text overlays — DejaVu is available on Ubuntu (GitHub Actions)
 # Falls back to "Sans" if not found (ffmpeg default)
@@ -472,17 +480,49 @@ def _create_text_frame(
     height: int = 1920,
     bg_color: tuple = (13, 13, 13),
     text_color: tuple = (255, 255, 255),
+    frame_type: str = "hook",
 ) -> str:
-    """Create a text-only frame image for hook-photo reels.
+    """Create a visually striking text frame for hook-photo reels.
 
-    Dark background with bold centered text — the viral hook slide format.
+    2026 viral optimization:
+      - Dark gradient background (not flat) with vignette edges
+      - Large bold text with glow effect (stands out on mute)
+      - Color-coded: hook=white, bridge=white, CTA=gold
+      - Accent line above text for visual polish
+
+    Args:
+        frame_type: "hook", "bridge", or "cta" — affects font size and styling
+
     Returns path to a temporary JPEG file.
     """
+    import random as _rnd
+
     img = Image.new("RGB", (width, height), bg_color)
     draw = ImageDraw.Draw(img)
 
-    # Find usable bold font
-    font_size = width // 10  # ~108px at 1080w — large, bold, scroll-stopping
+    # --- Gradient background with vignette ---
+    # Radial gradient: lighter center → darker edges (depth effect)
+    cx, cy = width // 2, height // 2
+    max_dist = (cx ** 2 + cy ** 2) ** 0.5
+    # Draw vertical gradient strips (faster than pixel-by-pixel)
+    for y_pos in range(0, height, 4):
+        # Vertical gradient: slightly lighter center band
+        dist_y = abs(y_pos - cy) / cy  # 0 at center, 1 at edges
+        # Darken edges: center=bg_color, edges=darker
+        factor = 1.0 - 0.4 * (dist_y ** 1.5)
+        r = max(0, min(255, int(bg_color[0] * factor)))
+        g = max(0, min(255, int(bg_color[1] * factor)))
+        b = max(0, min(255, int(bg_color[2] * factor)))
+        draw.rectangle([(0, y_pos), (width, y_pos + 4)], fill=(r, g, b))
+
+    # --- Font sizing by frame type ---
+    if frame_type == "hook":
+        font_size = width // 8  # ~135px — HUGE hook text
+    elif frame_type == "cta":
+        font_size = width // 9  # ~120px — large but slightly smaller
+    else:
+        font_size = width // 10  # ~108px — bridge text
+
     font = None
     for path in _FONT_PATHS:
         if os.path.exists(path):
@@ -494,8 +534,8 @@ def _create_text_frame(
     if font is None:
         font = ImageFont.load_default()
 
-    # Word-wrap: keep text within 80% of frame width
-    max_w = int(width * 0.80)
+    # Word-wrap: keep text within 78% of frame width
+    max_w = int(width * 0.78)
     words = text.split()
     lines: list[str] = []
     current = ""
@@ -519,16 +559,38 @@ def _create_text_frame(
     x = (width - text_w) / 2
     y = (height - text_h) / 2
 
-    # Draw with black stroke outline for readability
+    # --- Glow effect: draw text multiple times with decreasing opacity ---
+    # Outer glow (subtle color halo)
+    glow_color = (80, 80, 120) if frame_type != "cta" else (120, 100, 30)
+    for offset in [6, 4]:
+        try:
+            draw.multiline_text(
+                (x, y), full_text, font=font, fill=glow_color,
+                align="center", stroke_width=offset + 4, stroke_fill=glow_color,
+            )
+        except TypeError:
+            pass
+
+    # Main text with thick black outline
     try:
         draw.multiline_text(
             (x, y), full_text, font=font, fill=text_color,
-            align="center", stroke_width=4, stroke_fill=(0, 0, 0),
+            align="center", stroke_width=5, stroke_fill=(0, 0, 0),
         )
     except TypeError:
-        # Older Pillow without stroke support — draw without outline
         draw.multiline_text(
             (x, y), full_text, font=font, fill=text_color, align="center",
+        )
+
+    # --- Accent line above text (visual polish) ---
+    accent_color = text_color if frame_type != "cta" else (255, 215, 0)
+    line_w = min(text_w, int(width * 0.3))
+    line_x = (width - line_w) // 2
+    line_y = int(y - font_size * 0.5)
+    if line_y > 50:
+        draw.rectangle(
+            [(line_x, line_y), (line_x + line_w, line_y + 3)],
+            fill=accent_color,
         )
 
     temp_path = os.path.join(
@@ -536,6 +598,77 @@ def _create_text_frame(
     )
     img.save(temp_path, quality=95)
     return temp_path
+
+
+def _text_frame_to_clip(
+    image_path: str,
+    output_path: str,
+    width: int,
+    height: int,
+    duration: float,
+    frame_type: str = "hook",
+) -> str:
+    """Convert a text frame image to a short MP4 clip with zoom + fade.
+
+    Specialized for text frames — simpler and faster than full image_to_video():
+      - Gentle zoom-in (1.0x → 1.06x) gives subtle "approaching" motion
+      - Quick fade-in (0.15s) for smooth entry
+      - No Ken Burns or snap zoom — those fight with text readability
+
+    Args:
+        frame_type: "hook" gets slightly faster zoom, "cta" gets gentle pulse feel
+
+    Returns path to the generated MP4 clip.
+    """
+    ffmpeg = _get_ffmpeg()
+    dur_int = max(1, int(duration + 0.5))
+    total_frames = int(dur_int * FPS)
+
+    # Zoom: gentle push-in — text feels like it's coming at you
+    if frame_type == "hook":
+        # Hook: slightly faster zoom for urgency (1.0 → 1.08)
+        zoom_expr = f"1+0.08*on/{total_frames}"
+    elif frame_type == "cta":
+        # CTA: gentle zoom-in (1.0 → 1.04) — calm, authoritative
+        zoom_expr = f"1+0.04*on/{total_frames}"
+    else:
+        # Bridge: medium zoom (1.0 → 1.06)
+        zoom_expr = f"1+0.06*on/{total_frames}"
+
+    pan_x = "iw/2-(iw/zoom/2)"
+    pan_y = "ih/2-(ih/zoom/2)"
+
+    # Simple pipeline: scale → zoompan → fade → format
+    vf = (
+        f"scale={width}:{height}:force_original_aspect_ratio=decrease,"
+        f"pad={width}:{height}:(ow-iw)/2:(oh-ih)/2:color=black,"
+        f"zoompan=z='{zoom_expr}':x='{pan_x}':y='{pan_y}':"
+        f"d={total_frames}:s={width}x{height}:fps={FPS},"
+        f"fade=in:0:4,"  # 4 frames = ~0.13s fade-in
+        f"format=yuv420p"
+    )
+
+    cmd = [
+        ffmpeg, "-y",
+        "-loop", "1",
+        "-i", image_path,
+        "-vf", vf,
+        "-c:v", "libx264",
+        "-preset", "fast",
+        "-crf", "23",
+        "-t", f"{duration:.2f}",
+        "-an",
+        output_path,
+    ]
+
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+    if result.returncode != 0:
+        log.warning("Text frame clip failed, falling back to image_to_video: %s",
+                     (result.stderr or "")[-200:])
+        # Fallback: use full pipeline
+        image_to_video(image_path, output_path, width, height,
+                       duration=dur_int, add_audio=False)
+    return output_path
 
 
 def create_hook_photo_reel(
@@ -548,11 +681,11 @@ def create_hook_photo_reel(
 ) -> str:
     """Create a hook-photo reel: bold text slides interleaved with photos.
 
-    The most viral reel format in 2026 — text hooks between photos:
-      [Hook text] -> [Photo 1] -> [Bridge text] -> [Photo 2] -> [CTA text]
+    The #1 viral reel format in 2026 — variable-paced text hooks between photos:
+      [Hook 1.0s] → [Photo 2.0s] → [Bridge 1.2s] → [Photo 2.0s] → [CTA 2.5s]
 
-    Each frame is ~2 seconds with snap-zoom for visual punch.
-    2 photos = 10s reel, 3 photos = 14s reel (sweet spot for algorithm).
+    2026 viral pacing: hook is FAST (pattern interrupt), photos HOLD (visual),
+    bridge QUICK (curiosity), CTA LINGERS (drives action).
 
     Returns path to the generated MP4 file.
     """
@@ -563,55 +696,171 @@ def create_hook_photo_reel(
             HOOK_REEL_PER_FRAME, add_audio, text_lines,
         )
 
+    ffmpeg = _get_ffmpeg()
     text_frames: list[str] = []
-    try:
-        # Build interleaved frame sequence
-        all_frames: list[str] = []
+    temp_clips: list[str] = []
+    audio_path = None
+    audio_is_temp = False
 
-        # 1. Hook text frame (the scroll-stopper)
-        hook = _create_text_frame(text_lines[0], width, height)
+    try:
+        # Build interleaved frame sequence with per-frame durations
+        frame_specs: list[tuple[str, float]] = []  # (image_path, duration_seconds)
+
+        # 1. Hook text frame — FAST snap (pattern interrupt)
+        hook = _create_text_frame(text_lines[0], width, height, frame_type="hook")
         text_frames.append(hook)
-        all_frames.append(hook)
+        frame_specs.append((hook, HOOK_DUR))
 
         for i, photo in enumerate(photo_paths):
-            # 2. Photo frame
-            all_frames.append(photo)
+            # 2. Photo frame — HOLD (let visual land)
+            frame_specs.append((photo, PHOTO_DUR))
 
             # 3. Bridge text between photos (not after last photo)
             if i < len(photo_paths) - 1 and len(text_lines) > 1:
-                bridge = _create_text_frame(text_lines[1], width, height)
+                bridge = _create_text_frame(text_lines[1], width, height, frame_type="bridge")
                 text_frames.append(bridge)
-                all_frames.append(bridge)
+                frame_specs.append((bridge, BRIDGE_DUR))
 
-        # 4. CTA text frame at the end (gold color for action)
+        # 4. Bridge text after last photo (if no CTA, or as setup for CTA)
+        if len(text_lines) > 1 and len(photo_paths) == 1:
+            bridge = _create_text_frame(text_lines[1], width, height, frame_type="bridge")
+            text_frames.append(bridge)
+            frame_specs.append((bridge, BRIDGE_DUR))
+
+        # 5. CTA text frame — LINGER (drives saves/sends)
         if len(text_lines) >= 3:
             cta = _create_text_frame(
                 text_lines[2], width, height,
-                text_color=(255, 215, 0),  # gold — stands out, drives saves/sends
+                text_color=(255, 215, 0),  # gold — stands out
+                frame_type="cta",
             )
             text_frames.append(cta)
-            all_frames.append(cta)
+            frame_specs.append((cta, CTA_DUR))
 
+        total_dur = sum(d for _, d in frame_specs)
         log.info(
-            "Hook-photo reel: %d photos + %d text frames = %d total (%ds)",
-            len(photo_paths), len(text_frames), len(all_frames),
-            len(all_frames) * HOOK_REEL_PER_FRAME,
+            "Hook-photo reel: %d photos + %d text frames = %d total (%.1fs) "
+            "[hook=%.1fs photo=%.1fs bridge=%.1fs cta=%.1fs]",
+            len(photo_paths), len(text_frames), len(frame_specs), total_dur,
+            HOOK_DUR, PHOTO_DUR, BRIDGE_DUR, CTA_DUR,
         )
 
-        return images_to_montage(
-            all_frames, output_path, width, height,
-            duration_per_image=HOOK_REEL_PER_FRAME,
-            add_audio=add_audio,
-            text_lines=None,  # text is baked into text frames already
+        # Generate individual clips with per-frame durations
+        # Text frames → _text_frame_to_clip (zoom + fade, fast)
+        # Photo frames → image_to_video (Ken Burns + snap zoom, full pipeline)
+        for i, (img_path, dur) in enumerate(frame_specs):
+            clip_path = os.path.join(
+                tempfile.gettempdir(), f"hook_clip_{i}_{os.getpid()}.mp4"
+            )
+
+            is_text_frame = img_path in text_frames
+            if is_text_frame:
+                # Determine frame type from position
+                if i == 0:
+                    ft = "hook"
+                elif i == len(frame_specs) - 1:
+                    ft = "cta"
+                else:
+                    ft = "bridge"
+                _text_frame_to_clip(img_path, clip_path, width, height, dur, ft)
+                temp_clips.append(clip_path)
+            else:
+                # Photo frame: full Ken Burns pipeline, then trim
+                image_to_video(
+                    img_path, clip_path, width, height,
+                    duration=max(1, int(dur + 0.5)),
+                    add_audio=False,
+                )
+                # Trim to exact float duration
+                trimmed_path = os.path.join(
+                    tempfile.gettempdir(), f"hook_trim_{i}_{os.getpid()}.mp4"
+                )
+                trim_cmd = [
+                    ffmpeg, "-y", "-i", clip_path,
+                    "-t", f"{dur:.2f}",
+                    "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+                    "-an", trimmed_path,
+                ]
+                result = subprocess.run(trim_cmd, capture_output=True, text=True, timeout=60)
+                if result.returncode == 0:
+                    temp_clips.append(trimmed_path)
+                    _audio_safe_remove(clip_path)
+                else:
+                    temp_clips.append(clip_path)
+
+        # Concatenate all clips
+        list_path = os.path.join(
+            tempfile.gettempdir(), f"hook_list_{os.getpid()}.txt"
         )
+        with open(list_path, "w") as f:
+            for clip in temp_clips:
+                f.write(f"file '{clip}'\n")
+
+        # Get audio if needed (YouTube)
+        if add_audio:
+            raw_audio = get_background_track(total_dur)
+            if raw_audio:
+                if not raw_audio.startswith(tempfile.gettempdir()):
+                    trimmed = trim_audio(raw_audio, total_dur)
+                    if trimmed:
+                        audio_path = trimmed
+                        audio_is_temp = True
+                    else:
+                        audio_path = raw_audio
+                else:
+                    audio_path = raw_audio
+                    audio_is_temp = True
+
+        if audio_path:
+            cmd = [
+                ffmpeg, "-y",
+                "-f", "concat", "-safe", "0", "-i", list_path,
+                "-i", audio_path,
+                "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+                "-c:a", "aac", "-b:a", "128k",
+                "-t", f"{total_dur:.2f}",
+                "-map", "0:v", "-map", "1:a",
+                output_path,
+            ]
+        else:
+            # Silent audio track (Instagram needs audio stream for music overlay)
+            cmd = [
+                ffmpeg, "-y",
+                "-f", "concat", "-safe", "0", "-i", list_path,
+                "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+                "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+                "-c:a", "aac", "-b:a", "32k",
+                "-t", f"{total_dur:.2f}",
+                "-map", "0:v", "-map", "1:a",
+                "-shortest",
+                output_path,
+            ]
+
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        if result.returncode != 0:
+            log.error("Hook reel ffmpeg stderr: %s", (result.stderr or "")[-500:])
+            raise RuntimeError(f"Hook reel ffmpeg failed (exit {result.returncode})")
+
+        file_size = os.path.getsize(output_path)
+        log.info("Hook-photo reel: %s (%d bytes, %.1fs, %s audio)",
+                 output_path, file_size, total_dur,
+                 "with" if audio_path else "silent")
+        return output_path
 
     finally:
-        # Clean up temp text frame images
+        # Clean up temp files
         for tf in text_frames:
             try:
                 os.remove(tf)
             except OSError:
                 pass
+        for tc in temp_clips:
+            _audio_safe_remove(tc)
+        _audio_safe_remove(os.path.join(
+            tempfile.gettempdir(), f"hook_list_{os.getpid()}.txt"
+        ))
+        if audio_is_temp and audio_path:
+            _audio_safe_remove(audio_path)
 
 
 def convert_posts_to_video(posts: list[dict[str, Any]], youtube: bool = False) -> int:

@@ -45,15 +45,15 @@ def _coerce_draft(item: dict[str, Any], post_id: str, slot: datetime) -> dict[st
             lines = [l.strip() for l in caption.split("\n") if l.strip()]
             video_text = []
             if len(lines) >= 1:
-                # Hook: first line, truncated to ~8 words
-                hook = " ".join(lines[0].split()[:8])
+                # Hook: first line, truncated to ~6 words (must fit in 1s on screen)
+                hook = " ".join(lines[0].split()[:6])
                 video_text.append(hook)
             if len(lines) >= 3:
-                # Body: middle question line
-                video_text.append(" ".join(lines[len(lines) // 2].split()[:8]))
+                # Bridge: middle question line
+                video_text.append(" ".join(lines[len(lines) // 2].split()[:6]))
             if len(lines) >= 2:
                 # CTA: last line
-                video_text.append(" ".join(lines[-1].split()[:8]))
+                video_text.append(" ".join(lines[-1].split()[:6]))
 
     # Hook-photo reel format (text hooks interleaved with photos)
     reel_format = str(item.get("reel_format", "")).strip().lower()
@@ -134,7 +134,14 @@ def _build_gemini_prompt() -> str:
     content_mix = content.get("content_mix_detail", "- Mix of reels, carousels, and single posts")
     topics = ", ".join(content.get("topic_examples", ["trending content"]))
     hooks = content.get("hook_examples", [])
-    hook_examples = "\n".join(f"   - '{h}'" for h in hooks[:8]) if hooks else ""
+    hook_examples = "\n".join(f"   - '{h}'" for h in hooks[:10]) if hooks else ""
+
+    # Video text hooks — ultra-short (3-6 word) hooks for the 1-second on-screen display
+    vt_hooks = content.get("video_text_hooks", [])
+    vt_hook_examples = ""
+    if vt_hooks:
+        sampled = random.sample(vt_hooks, min(8, len(vt_hooks)))
+        vt_hook_examples = "\n".join(f"      '{h}'" for h in sampled)
 
     # --- Viral feature: recurring series ---
     series_block = ""
@@ -195,6 +202,14 @@ def _build_gemini_prompt() -> str:
     ], min(3, 8))
     viral_format_str = "\n".join(f"   - {v}" for v in viral_formats)
 
+    # --- Video text hook examples block ---
+    vt_hook_block = ""
+    if vt_hook_examples:
+        vt_hook_block = (
+            "\n   ON-SCREEN HOOK EXAMPLES (use these as inspiration for video_text Line 1):\n"
+            f"{vt_hook_examples}\n"
+        )
+
     return (
         f"You are generating Instagram + YouTube Shorts draft posts for {identity}.\n\n"
         f"VOICE: {tone}. {style}\n\n"
@@ -206,7 +221,7 @@ def _build_gemini_prompt() -> str:
         "   - 'Your bestie needs to see this' / 'POV: showing this to your friends'\n"
         "   - Relatable content people share in DMs (budget finds, outfit debates, hot takes)\n"
         "   - Numbered lists and 'save for later' formats\n"
-        "2. HOOK — FIRST 3 WORDS DECIDE EVERYTHING. Viewers decide in 1.7 seconds.\n"
+        "2. HOOK — FIRST 3 WORDS DECIDE EVERYTHING. Viewers decide in 0.8 seconds.\n"
         "   Use these PROVEN viral hook formulas:\n"
         f"{hook_examples}\n"
         "   VIRAL HOOK FORMULAS (use these):\n"
@@ -240,47 +255,56 @@ def _build_gemini_prompt() -> str:
         f"{topics}\n\n"
         "For carousel posts, include 'slides': array of 5-6 short scene descriptions "
         "(what each slide should visually show — be specific about clothing, pose, setting).\n\n"
-        "HOOK-PHOTO REEL FORMAT (THE PRIMARY FORMAT — use for 60%+ of {count} posts):\n"
-        "This is the #1 viral format in 2026. Bold text hooks interleaved with 1-2 photos.\n"
+        "HOOK-PHOTO REEL FORMAT (THE #1 VIRAL FORMAT — use for 60%+ of {count} posts):\n"
+        "This is the dominant format in 2026. Bold text hooks interleaved with 1-2 photos.\n"
         "Set post_type='reel' AND reel_format='hook_photo'.\n"
-        "Include 'slides': array of 1-2 photo descriptions (what each photo should show).\n"
-        "The video_text becomes the hook text shown between/around photos:\n"
-        "  Line 1 = SCROLL-STOPPING hook text (shown BEFORE first photo on dark screen)\n"
-        "  Line 2 = curiosity/bridge text (shown AFTER photo — keeps them watching)\n"
-        "  Line 3 = CTA text (shown at the end in gold — drives sends/saves)\n\n"
-        "VIRAL HOOK FORMULAS (use these — proven to stop scrolling in 1.7 seconds):\n"
-        "  - CURIOSITY GAP: 'This feels illegal to know.' / 'I probably shouldn't share this, but...'\n"
-        "  - CONTRARIAN CLAIM: 'Everyone's doing this wrong.' / 'Stop doing [X]. Do this instead.'\n"
-        "  - PRICE SHOCK: 'This costs Rs [low number]. No, seriously.'\n"
-        "  - TRANSFORMATION: 'Watch what happened after 30 days.' / '3 years in 30 seconds.'\n"
-        "  - RELATABLE POV: 'POV: you walk in wearing this' / 'If you've ever [relatable thing]...'\n"
-        "  - QUESTION HOOK: 'Stop scrolling if this sounds like you...' / 'Did you know...'\n"
-        "  - FORBIDDEN KNOWLEDGE: 'Your [expert] won't tell you this.' / 'Nobody talks about this.'\n"
-        "  - BOLD STATEMENT: 'This will get me cancelled but...' / 'I said what I said.'\n"
-        "  - SPECIFICITY: '3 things. 15 seconds.' / 'Rs 800. 3 outfits. Wait for #3.'\n"
-        "  - FOMO: 'Everyone knows this except you.' / 'This changes everything.'\n\n"
-        "1-photo hook reel (PREFERRED — fastest, punchiest): [Hook text] → [Photo] → [Bridge text] → [CTA] = 8s\n"
-        "2-photo hook reel: [Hook text] → [Photo 1] → [Bridge] → [Photo 2] → [CTA] = 10s\n"
-        "Keep it SHORT. Modern attention span = 8 seconds. 1-2 photos MAX.\n\n"
-        "Example: post_type='reel', reel_format='hook_photo', slides=['Full outfit shot in luxury "
-        "hotel lobby'], video_text=['This costs Rs 5,000. No, seriously.', "
-        "'Can you tell the difference?', 'Send to your fashion friend.']\n\n"
+        "Include 'slides': array of 1-2 photo descriptions (what each photo should show).\n\n"
+        "REEL STRUCTURE (how the video plays — understand this):\n"
+        "  [HOOK TEXT 1.0s] → [PHOTO 2.0s] → [BRIDGE TEXT 1.2s] → [CTA TEXT 2.5s]\n"
+        "  The hook text is shown on a DARK screen for only 1 SECOND.\n"
+        "  It MUST be punchy enough to stop the scroll in under 1 second.\n"
+        "  Then the photo reveals. Then bridge text builds curiosity. Then CTA drives action.\n\n"
+        "video_text = the 3 on-screen text lines (this is THE most important part):\n"
+        "  Line 1 = HOOK (shown 1 second on dark screen BEFORE photo). MAX 6 WORDS.\n"
+        "            Must be a PATTERN INTERRUPT — provocative, shocking, or curious.\n"
+        "            Think: what would make YOU stop scrolling at 2 AM?\n"
+        "            Short. Punchy. Incomplete. Creates NEED to see next frame.\n"
+        f"{vt_hook_block}"
+        "  Line 2 = BRIDGE (shown 1.2s AFTER photo). MAX 6 WORDS.\n"
+        "            Curiosity gap or question. Make them NEED to keep watching.\n"
+        "            Examples: 'Can you guess the price?', 'Which one would you steal?',\n"
+        "            'Wait. It gets better.', 'The secret nobody shares.'\n"
+        "  Line 3 = CTA (shown 2.5s at end IN GOLD). MAX 6 WORDS.\n"
+        "            Drives sends/saves. The ONLY purpose is to make them share/save.\n"
+        "            Examples: 'Send to your bestie.', 'Save this. Trust me.',\n"
+        "            'Tag who needs this.', 'Screenshot before it's gone.'\n\n"
+        "CRITICAL RULES FOR video_text:\n"
+        "  - EXACTLY 3 lines. No more, no less.\n"
+        "  - MAX 6 WORDS PER LINE. Shorter = better. 3-5 words ideal.\n"
+        "  - Line 1 must work as a STANDALONE scroll-stopper (no context needed).\n"
+        "  - Line 1 must create an OPEN LOOP that the photo closes.\n"
+        "  - Line 3 must include 'send', 'save', 'tag', or 'share'.\n"
+        "  - Use NUMBERS in Line 1 whenever possible (Rs 800, 3 outfits, 5kg, etc.)\n"
+        "  - NEVER use generic hooks like 'Check this out' or 'You won't believe this'\n\n"
+        "1-photo hook reel (PREFERRED — fastest, punchiest): ~6.7 seconds total\n"
+        "2-photo hook reel: ~8.4 seconds total\n"
+        "Keep it SHORT. Modern attention span = 3 seconds. 1 photo is BEST.\n\n"
+        "Example: post_type='reel', reel_format='hook_photo',\n"
+        "  slides=['Full outfit shot on Mumbai street, bold colors, confident pose'],\n"
+        "  video_text=['Rs 800. Full outfit.', 'Would you wear this?', 'Send to your bestie.']\n\n"
         "Return ONLY a JSON array of {count} objects with these fields:\n"
         "- topic: specific scene (not generic, include location/occasion/PRICE if relevant)\n"
         "- caption: 3-5 lines — scroll-stopping hook first, question in middle, send/share CTA last, "
         "NO hashtags\n"
-        "- video_text: array of EXACTLY 3 short text lines (max 8 words each) for ON-SCREEN overlay "
-        "in the Reel video. These appear as bold text on the video for viewers watching on mute (85%%). "
-        "Line 1 = PATTERN INTERRUPT hook (same energy as caption hook but shorter), "
-        "Line 2 = curiosity gap or question (make them NEED to know), "
-        "Line 3 = CTA that drives SEND/SAVE action. "
-        "Examples: ['Rs 800. 3 outfits. Wait for #3.', 'Which one would you steal?', 'Send to your shopping bestie']\n"
+        "- video_text: array of EXACTLY 3 short text lines (MAX 6 WORDS EACH) for ON-SCREEN "
+        "overlay in the Reel video. 85%% watch on mute — this text IS the content. "
+        "Line 1 = HOOK (scroll-stopper), Line 2 = BRIDGE (curiosity), Line 3 = CTA (send/save)\n"
         "- alt_text: descriptive accessibility text for the image (60-120 chars)\n"
         "- youtube_title: catchy YouTube Shorts title under 70 chars — use curiosity gap or number hook\n"
         "- notes: photography direction for image generation (framing, lighting, mood)\n"
         "- post_type: 'reel' | 'carousel' | 'single'\n"
         "- reel_format: 'hook_photo' (ONLY for hook-photo reels, omit for others)\n"
-        "- slides: array of 2-3 photo descriptions for hook_photo reels, "
+        "- slides: array of 1-2 photo descriptions for hook_photo reels, "
         "or 5-6 scene descriptions for carousels (omit for standard reel/single)\n\n"
         "No markdown, no explanation, just the JSON array."
     )
