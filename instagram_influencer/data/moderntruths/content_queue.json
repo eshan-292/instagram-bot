@@ -32,7 +32,7 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/5.jpg",
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-001/6.jpg"
       ],
-      "publish_error": "Session restore failed in CI — cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
+      "publish_error": "Session restore failed in CI \u2014 cannot attempt fresh login. Run seed_session.py locally to create a fresh session."
     },
     {
       "id": "mt-002",
@@ -208,7 +208,7 @@
     {
       "id": "mt-009",
       "status": "draft",
-      "topic": "She's not playing hard to get — she's not interested",
+      "topic": "She's not playing hard to get \u2014 she's not interested",
       "caption": "Harsh truth: She's not playing 'hard to get.' She's just not interested. Stop chasing ghosts. Are you chasing a challenge, or ignoring a clear signal? Screenshot this for a reality check.",
       "alt_text": "Text on a dark background reads: 'She's not playing hard to get. She's just not interested.' A woman with a bored expression looks away from an unseen person.",
       "youtube_title": "She's Not Hard To Get, She's Just Not Into You",
@@ -272,7 +272,7 @@
     {
       "id": "mt-012",
       "status": "draft",
-      "topic": "Why she lost interest — the real reason",
+      "topic": "Why she lost interest \u2014 the real reason",
       "caption": "Read that again: She didn't lose interest 'randomly.' Here are 5 real reasons. It wasn't a mystery; you just weren't paying attention. Did she change, or did you stop paying attention? Share this with the guy who's confused why she ghosted.",
       "alt_text": "A couple sits opposite each other at a cafe table, looking in different directions, illustrating a growing distance.",
       "youtube_title": "5 Brutal Reasons She Lost Interest",
@@ -403,7 +403,7 @@
       "id": "mt-018",
       "status": "draft",
       "topic": "Why being alone beats being in the wrong relationship",
-      "caption": "If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
+      "caption": "If this offends you \u2014 good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
       "alt_text": "A person stands confidently alone on a mountain peak, looking out at a vast, beautiful landscape, symbolizing freedom and self-worth.",
       "youtube_title": "Alone is Better: 5 Truths",
       "video_text": [
@@ -549,7 +549,7 @@
       "id": "mt-024",
       "status": "draft",
       "topic": "Why being alone beats being in the wrong relationship",
-      "caption": "If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
+      "caption": "If this offends you \u2014 good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
       "alt_text": "A person stands confidently alone on a mountain peak, looking out at a vast, beautiful landscape, symbolizing freedom and self-worth.",
       "youtube_title": "Alone is Better: 5 Truths",
       "video_text": [
@@ -564,10 +564,134 @@
       "scheduled_at": "2026-03-09T21:39:20Z",
       "notes": "dual_format:reel->carousel | Person standing confidently alone on a mountain peak, looking out at a vast landscape. Mood: empowered, serene. | generated_by=gemini:gemini-2.5-flash",
       "slides": [
-        "Hook slide: If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
+        "Hook slide: If this offends you \u2014 good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.",
         "Key point: Why being alone beats being in the wrong"
       ],
       "reel_format": "hook_photo"
+    },
+    {
+      "id": "aryan-001",
+      "status": "approved",
+      "topic": "Full day of eating under Rs 300 in Delhi",
+      "caption": "Stop eating junk. Seriously. This is your full day of protein-rich Indian meals for under Rs 300.  How many calories do you think this is? Your budget-friendly fitness guide is here. Send this to someone who needs to eat clean on a budget.",
+      "alt_text": "Aryan Dhar showcasing a spread of Indian meals including dal, rice, chicken curry, and roti.",
+      "youtube_title": "Full Day Indian Meals Under Rs 300 (Delhi Edition)",
+      "video_text": [
+        "Rs 300. Full day. Protein.",
+        "Can you guess the calories?",
+        "Send this to your gym bro."
+      ],
+      "image_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
+      "video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.mp4",
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-07T16:05:43Z",
+      "notes": "Aryan in a Delhi street food stall setting, holding up a plate of vibrant Indian food. Medium shot, natural lighting. Focus on the deliciousness and affordability. Should look like real, attainable meals. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Close-up shot of a hearty bowl of dal and rice, steam rising."
+      ],
+      "carousel_images": [
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/2.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/3.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/4.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/5.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/6.jpg"
+      ],
+      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4"
+    },
+    {
+      "id": "aryan-002",
+      "status": "draft",
+      "topic": "5 exercises you're doing WRONG (and how to fix them)",
+      "caption": "Your form is wrong. Here's proof. Are you making these common mistakes in the gym?  This is why you're not seeing results. Fix these and watch your gains explode. Screenshot this before you hit the gym next.",
+      "alt_text": "Aryan Dhar demonstrating correct bicep curl form with focus and intensity.",
+      "youtube_title": "5 Common Gym Form Mistakes (Stop Doing These!)",
+      "video_text": [
+        "Your form is wrong. Proof.",
+        "Are you making this mistake?",
+        "Save this. Trust me."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-07T20:05:43Z",
+      "notes": "dual_format:reel | Aryan in a well-lit gym, demonstrating a common exercise with incorrect form, then immediately showing the correct form. Intense, focused expression. Clean gym background. Focus on clarity of movement. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Medium shot of Aryan doing a flawed bench press, chest slumped."
+      ]
+    },
+    {
+      "id": "aryan-003",
+      "status": "draft",
+      "topic": "Delhi Gym Culture: What no one tells you",
+      "caption": "Biggest gym mistake I see daily. You're not alone if you've felt this way.  Delhi's fitness scene is wild, but are you playing it right?  Tag your gym buddy who always complains about this.",
+      "alt_text": "Aryan Dhar looking directly at the camera with a confident smirk in a Delhi gym.",
+      "youtube_title": "Delhi Gym Culture: The REAL Truth",
+      "video_text": [
+        "Biggest gym mistake I see.",
+        "Can you relate to this?",
+        "Tag your gym buddy."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": true,
+      "post_type": "reel",
+      "scheduled_at": "2026-03-08T00:05:43Z",
+      "notes": "dual_format:reel | Aryan in a popular Delhi gym, looking cool and confident, maybe leaning against a machine. A hint of the bustling gym environment in the background. Slightly provocative but approachable expression. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Shot of a crowded gym floor with people working out, blurry in the background."
+      ]
+    },
+    {
+      "id": "aryan-004",
+      "status": "draft",
+      "topic": "5 exercises you're doing WRONG (and how to fix them)",
+      "caption": "Your form is wrong. Here's proof. Are you making these common mistakes in the gym?  This is why you're not seeing results. Fix these and watch your gains explode. Screenshot this before you hit the gym next.",
+      "alt_text": "Aryan Dhar demonstrating correct bicep curl form with focus and intensity.",
+      "youtube_title": "5 Common Gym Form Mistakes (Stop Doing These!)",
+      "video_text": [
+        "Your form is wrong. Proof.",
+        "Are you making this mistake?",
+        "Save this. Trust me."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-08T20:05:43Z",
+      "notes": "dual_format:reel->carousel | Aryan in a well-lit gym, demonstrating a common exercise with incorrect form, then immediately showing the correct form. Intense, focused expression. Clean gym background. Focus on clarity of movement. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Medium shot of Aryan doing a flawed bench press, chest slumped."
+      ]
+    },
+    {
+      "id": "aryan-005",
+      "status": "draft",
+      "topic": "Delhi Gym Culture: What no one tells you",
+      "caption": "Biggest gym mistake I see daily. You're not alone if you've felt this way.  Delhi's fitness scene is wild, but are you playing it right?  Tag your gym buddy who always complains about this.",
+      "alt_text": "Aryan Dhar looking directly at the camera with a confident smirk in a Delhi gym.",
+      "youtube_title": "Delhi Gym Culture: The REAL Truth",
+      "video_text": [
+        "Biggest gym mistake I see.",
+        "Can you relate to this?",
+        "Tag your gym buddy."
+      ],
+      "image_url": "",
+      "video_url": null,
+      "is_reel": false,
+      "post_type": "carousel",
+      "scheduled_at": "2026-03-09T00:05:43Z",
+      "notes": "dual_format:reel->carousel | Aryan in a popular Delhi gym, looking cool and confident, maybe leaning against a machine. A hint of the bustling gym environment in the background. Slightly provocative but approachable expression. | generated_by=gemini:gemini-2.5-flash",
+      "reel_format": "hook_photo",
+      "slides": [
+        "Shot of a crowded gym floor with people working out, blurry in the background."
+      ]
     }
   ]
 }

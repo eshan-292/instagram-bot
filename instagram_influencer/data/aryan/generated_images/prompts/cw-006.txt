@@ -1,0 +1,24 @@
+=== cw-006 | CAROUSEL ===
+Topic: Life categories self-assessment
+Caption: Rate Your Life. No lying.
+Are you truly honest?
+What's your total score?
+Send this to your friend. Compare scores.
+
+CAROUSEL — 5 slides
+Place in: generated_images/pending/cw-006/1.jpg, 2.jpg, ...
+
+--- Slide 1 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Slide 1: '1. Career Growth.' (Visual: Person climbing a stylized ladder, 1-10 scale bar below) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 2 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Slide 2: '2. Financial Health.' (Visual: Stack of coins and bills with a growing arrow, 1-10 scale bar below) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 3 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Slide 3: '3. Mental Clarity.' (Visual: Silhouette of a calm person meditating, abstract clear mind, 1-10 scale bar below) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 4 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 4 of a carousel post.) Scene: Slide 4: '4. Social Connections.' (Visual: Minimalist icons of diverse people linked together, 1-10 scale bar below) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Slide 5 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 5 of a carousel post.) Scene: Slide 5: '5. Physical Fitness.' (Visual: Person in dynamic pose (running/jumping), athletic build, 1-10 scale bar below) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

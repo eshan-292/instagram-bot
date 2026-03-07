@@ -1,0 +1,16 @@
+=== sofia-014 | REEL (HOOK-PHOTO) ===
+Topic: Designer vs street market — can you tell the difference?
+Caption: One is designer. One is from a Mumbai street market.
+Can you tell which is which? Most people cannot.
+Guess in the comments. Reveal on the last slide.
+Send to your fashion friend and test them.
+
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
+Place in: generated_images/pending/sofia-014/1.jpg, 2.jpg, ...
+On-screen hooks: ['Designer or street market?', 'Can you tell?', 'Most people cannot.']
+
+--- Photo 1 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Hook: two similar bags side by side, 'One costs 50x more. Can you tell?' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Photo 2 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: 1: Two structured leather tote bags — A vs B, guess which is designer Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

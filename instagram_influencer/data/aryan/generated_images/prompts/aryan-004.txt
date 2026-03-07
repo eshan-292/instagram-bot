@@ -1,0 +1,10 @@
+=== aryan-004 | CAROUSEL (HOOK-PHOTO) ===
+Topic: 5 exercises you're doing WRONG (and how to fix them)
+Caption: Your form is wrong. Here's proof. Are you making these common mistakes in the gym?  This is why you're not seeing results. Fix these and watch your gains explode. Screenshot this before you hit the gym next.
+
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
+Place in: generated_images/pending/aryan-004/1.jpg, 2.jpg, ...
+On-screen hooks: ['Your form is wrong. Proof.', 'Are you making this mistake?', 'Save this. Trust me.']
+
+--- Photo 1 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Medium shot of Aryan doing a flawed bench press, chest slumped. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

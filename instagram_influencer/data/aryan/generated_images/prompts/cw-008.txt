@@ -1,0 +1,16 @@
+=== cw-008 | REEL (HOOK-PHOTO) ===
+Topic: Lifestyle choice: City vs. Mountains
+Caption: Pick 1 life.
+Where would you thrive?
+Concrete jungle or serene peaks?
+Tag a friend who lives there.
+
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
+Place in: generated_images/pending/cw-008/1.jpg, 2.jpg, ...
+On-screen hooks: ['City life?', 'Or mountain calm?', 'Choose your vibe.']
+
+--- Photo 1 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Slide 1: 'City Nights.' (Visual: Dynamic shot of a bustling city street at night, neon signs, taxis, energetic crowd motion blur) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Photo 2 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Slide 2: 'Mountain Stars.' (Visual: A wide shot of a clear night sky over a rugged mountain landscape, thousands of stars visible, maybe a distant campfire glow) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

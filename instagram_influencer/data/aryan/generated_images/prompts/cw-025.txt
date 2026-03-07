@@ -1,0 +1,19 @@
+=== cw-025 | REEL (HOOK-PHOTO) ===
+Topic: Rs 500 date vs Rs 50,000 date — which one is better?
+Caption: Rs 500 date. Rs 50,000 date.
+Same couple. Different budget.
+Which date is actually better?
+Tag someone and debate this.
+
+HOOK-PHOTO REEL — 3 photos (text hooks auto-generated)
+Place in: generated_images/pending/cw-025/1.jpg, 2.jpg, ...
+On-screen hooks: ['Rs 500 vs Rs 50,000.', 'Same date. Different budget.', 'Tag someone. Debate this.']
+
+--- Photo 1 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Vibrant Mumbai street food date — two people sharing pani puri at a colorful street stall, fairy string lights above, laughing together, warm chaotic energy, evening Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Photo 2 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 2 of a carousel post.) Scene: Luxury fine dining restaurant — candlelit table for two, ocean view through floor-to-ceiling windows, wine glasses, white tablecloth, elegant but slightly formal atmosphere Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Photo 3 ---
+Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 3 of a carousel post.) Scene: Couple walking hand-in-hand through a bustling Mumbai night market — fairy lights, street vendors, genuine joy and connection, the Rs 500 date vibes Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

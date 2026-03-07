@@ -5,12 +5,19 @@
       "status": "approved",
       "topic": "5 exercises you're doing wrong in the gym",
       "caption": "5 exercises. You're doing ALL of them wrong.\nI wasted 2 years before someone told me.\nWhich one surprised you most?\nSend this to your gym partner before they hurt themselves.",
-      "image_url": "data/aryan/generated_images/pending/aryan-001/1.jpg",
-      "video_url": null,
+      "image_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
+      "video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.mp4",
       "is_reel": true,
       "post_type": "reel",
       "reel_format": "hook_photo",
-      "carousel_images": null,
+      "carousel_images": [
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/2.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/3.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/4.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/5.jpg",
+        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/6.jpg"
+      ],
       "scheduled_at": "2026-03-09T11:30:00Z",
       "notes": "gym setting, demonstrating form, good lighting",
       "slides": [
