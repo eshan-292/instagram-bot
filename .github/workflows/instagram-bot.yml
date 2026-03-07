@@ -3,21 +3,15 @@ name: Instagram Bot (Maya)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # Strategy: packed IG engagement — many small sessions = human phone-check pattern
+    # Strategy: packed IG engagement — 28 daytime sessions = human phone-check pattern
     # 1 post/day at prime time (publishes to both IG + YT) + engagement spread throughout
     # Each session has 0-4min startup jitter built into the code
     #
     # PARALLEL: YouTube engagement runs on a SEPARATE workflow (youtube-bot.yml)
     # so IG and YT never block each other.
     #
-    # OVERNIGHT — lighter sessions every ~90 min (00:00-06:00 IST)
-    - cron: '30 18 * * *'  # 00:00 IST — explore (late night scroll)
-    - cron: '0 20 * * *'   # 01:30 IST — warm_audience
-    - cron: '30 21 * * *'  # 03:00 IST — hashtags
-    - cron: '0 23 * * *'   # 04:30 IST — explore
-    - cron: '30 0 * * *'   # 06:00 IST — warm_audience (early morning)
-    #
-    # DAYTIME — ~28 IG sessions, 07:00 to 23:15 IST, every 30-45 min
+    # DAYTIME ONLY — ~28 IG sessions, 07:00 to 23:15 IST, every 30-45 min
+    # (no overnight sessions — sleeping 00:00-07:00 IST)
     - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
     - cron: '10 2 * * *'   # 07:40 IST — explore (morning scroll)
     - cron: '45 2 * * *'   # 08:15 IST — commenter_target (high-ROI targeting)
@@ -138,12 +132,6 @@ jobs:
             # Scheduled run — map exact cron expression to session type
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              # Overnight sessions (00:00-06:00 IST)
-              "30 18 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 20 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 21 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 23 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 0 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               # Daytime sessions (07:00-23:15 IST)
               "30 1 * * *")   echo "type=morning"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "10 2 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
@@ -206,7 +194,7 @@ jobs:
 
       # Save updated session to cache
       - name: Save session cache
-        if: steps.bot.outcome == 'success'
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: instagram_influencer/data/maya/.ig_session.json

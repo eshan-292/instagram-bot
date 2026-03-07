@@ -3,14 +3,7 @@ name: Instagram Bot (Choose Wisely)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # 30 sessions/day — aggressive growth mode
-    #
-    # OVERNIGHT — 5 sessions
-    - cron: '3 19 * * *'   # 00:33 IST — explore
-    - cron: '3 21 * * *'   # 02:33 IST — warm_audience
-    - cron: '3 23 * * *'   # 04:33 IST — hashtags
-    - cron: '3 0 * * *'    # 05:33 IST — commenter_target
-    - cron: '3 1 * * *'    # 06:33 IST — warm_audience
+    # 25 daytime sessions — no overnight (sleeping 00:00-07:00 IST)
     #
     # DAYTIME — 25 sessions
     - cron: '3 2 * * *'    # 07:33 IST — morning
@@ -128,12 +121,6 @@ jobs:
           else
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              # Overnight
-              "3 19 * * *")   echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "3 21 * * *")   echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "3 23 * * *")   echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "3 0 * * *")    echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "3 1 * * *")    echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               # Daytime
               "3 2 * * *")    echo "type=morning"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "3 3 * * *")    echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
@@ -190,7 +177,7 @@ jobs:
 
       # Save updated session to cache
       - name: Save session cache
-        if: steps.bot.outcome == 'success'
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: instagram_influencer/data/choosewisely/.ig_session.json

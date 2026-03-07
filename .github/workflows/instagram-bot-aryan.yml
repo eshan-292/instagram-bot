@@ -5,14 +5,8 @@ on:
     # All cron times in UTC. IST = UTC + 5:30
     # Staggered +15 min from Maya's schedule to avoid overlap
     #
-    # OVERNIGHT — lighter sessions every ~90 min (00:15-06:15 IST)
-    - cron: '45 18 * * *'  # 00:15 IST — explore (late night scroll)
-    - cron: '15 20 * * *'  # 01:45 IST — warm_audience
-    - cron: '45 21 * * *'  # 03:15 IST — hashtags
-    - cron: '15 23 * * *'  # 04:45 IST — explore
-    - cron: '45 0 * * *'   # 06:15 IST — warm_audience (early morning)
-    #
-    # DAYTIME — ~28 IG sessions, 07:15 to 23:30 IST, every 30-45 min
+    # DAYTIME ONLY — ~28 IG sessions, 07:15 to 23:30 IST, every 30-45 min
+    # (no overnight sessions — sleeping 00:00-07:00 IST)
     - cron: '45 1 * * *'   # 07:15 IST — morning engagement (wake up)
     - cron: '25 2 * * *'   # 07:55 IST — explore (morning scroll)
     - cron: '0 3 * * *'    # 08:30 IST — commenter_target (highest ROI)
@@ -134,12 +128,6 @@ jobs:
           else
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              # Overnight
-              "45 18 * * *")  echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "15 20 * * *")  echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 21 * * *")  echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "15 23 * * *")  echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 0 * * *")   echo "type=warm_audience" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               # Daytime
               "45 1 * * *")  echo "type=morning"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "25 2 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
@@ -201,7 +189,7 @@ jobs:
 
       # Save updated session to cache
       - name: Save session cache
-        if: steps.bot.outcome == 'success'
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: instagram_influencer/data/aryan/.ig_session.json

@@ -3,16 +3,9 @@ name: Instagram Bot (Rhea)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # 30 sessions/day — aggressive growth mode
+    # 25 daytime sessions — no overnight (sleeping 00:00-07:00 IST)
     # Minute offsets: 23 and 53
-
-    # OVERNIGHT — 5 sessions
-    - cron: '23 19 * * *'  # 00:53 IST — explore
-    - cron: '23 21 * * *'  # 02:53 IST — warm_audience
-    - cron: '23 23 * * *'  # 04:53 IST — hashtags
-    - cron: '23 0 * * *'   # 05:53 IST — commenter_target
-    - cron: '23 1 * * *'   # 06:53 IST — warm_audience
-
+    #
     # DAYTIME — 25 sessions
     - cron: '23 2 * * *'   # 07:53 IST — morning
     - cron: '23 3 * * *'   # 08:53 IST — explore
@@ -129,12 +122,6 @@ jobs:
             # Scheduled run — map exact cron expression to session type
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              # Overnight
-              "23 19 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "23 21 * * *")  echo "type=warm_audience"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "23 23 * * *")  echo "type=hashtags"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "23 0 * * *")   echo "type=commenter_target"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "23 1 * * *")   echo "type=warm_audience"     >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               # Daytime
               "23 2 * * *")   echo "type=morning"           >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
               "23 3 * * *")   echo "type=explore"           >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
@@ -191,7 +178,7 @@ jobs:
 
       # Save updated session to cache
       - name: Save session cache
-        if: steps.bot.outcome == 'success'
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: instagram_influencer/data/rhea/.ig_session.json
