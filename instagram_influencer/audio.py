@@ -27,15 +27,8 @@ MUSIC_DIR = GENERATED_IMAGES_DIR / "music"
 # Supported audio formats
 _AUDIO_EXTENSIONS = {".mp3", ".wav", ".aac", ".m4a", ".ogg", ".flac"}
 
-# Pixabay Music API — free, no attribution required, huge royalty-free library
-_PIXABAY_API_URL = "https://pixabay.com/api/"
-
-# Genre/mood queries for fashion/lifestyle Shorts background music
-_PIXABAY_QUERIES = [
-    "upbeat fashion", "trendy pop", "chill lo-fi", "aesthetic vibes",
-    "indian pop", "modern bollywood", "stylish beat", "confident walk",
-    "runway music", "urban lifestyle", "groovy beat", "feel good pop",
-]
+# External music API support — set MUSIC_API_URL env var to a self-hosted
+# CC0 music endpoint (JSON or direct MP3). Falls back to generated lo-fi.
 
 
 def _get_ffmpeg() -> str:
@@ -47,66 +40,50 @@ def _get_ffmpeg() -> str:
         return "ffmpeg"
 
 
-def _fetch_pixabay_track(duration: float) -> str | None:
-    """Fetch a royalty-free track from Pixabay Music API.
+def _fetch_external_track(duration: float) -> str | None:
+    """Fetch a royalty-free track from an external music API.
 
-    Returns path to downloaded audio file (temp), or None on failure.
+    Checks for MUSIC_API_URL env var (e.g., a self-hosted library of CC0 tracks).
+    Returns path to downloaded audio file (temp), or None if not configured.
+
+    To use: Set MUSIC_API_URL to a URL that returns an MP3 file.
+    Example: A JSON endpoint that returns {"url": "https://..."} or a direct MP3 link.
     """
-    api_key = os.getenv("PIXABAY_API_KEY", "").strip()
-    if not api_key:
-        log.debug("PIXABAY_API_KEY not set, skipping Pixabay audio")
+    api_url = os.getenv("MUSIC_API_URL", "").strip()
+    if not api_url:
         return None
 
-    query = random.choice(_PIXABAY_QUERIES)
-    min_dur = max(5, int(duration) - 5)
-    max_dur = int(duration) + 30  # allow slightly longer (we'll trim)
-
-    params = {
-        "key": api_key,
-        "q": query,
-        "audio_type": "music",
-        "min_duration": min_dur,
-        "max_duration": max_dur,
-        "per_page": 10,
-        "safesearch": "true",
-        "order": "popular",
-    }
-
     try:
-        resp = http_requests.get(_PIXABAY_API_URL, params=params, timeout=15)
+        resp = http_requests.get(api_url, timeout=15)
         if resp.status_code != 200:
-            log.debug("Pixabay API returned %d for '%s'", resp.status_code, query)
             return None
 
-        data = resp.json()
-        hits = data.get("hits", [])
-        if not hits:
-            log.debug("No Pixabay results for '%s'", query)
+        # Check if response is JSON (returns a download URL) or direct audio
+        content_type = resp.headers.get("content-type", "")
+        if "json" in content_type:
+            data = resp.json()
+            audio_url = data.get("url") or data.get("download_url") or ""
+            if not audio_url:
+                return None
+            dl = http_requests.get(audio_url, timeout=30)
+            content = dl.content
+        elif "audio" in content_type or "mpeg" in content_type:
+            content = resp.content
+        else:
             return None
 
-        # Pick random track from top results
-        track = random.choice(hits[:5])
-        audio_url = track.get("audio", "") or track.get("previewURL", "")
-        if not audio_url:
+        if len(content) < 5000:
             return None
 
-        # Download the audio file
-        dl = http_requests.get(audio_url, timeout=30)
-        if dl.status_code != 200 or len(dl.content) < 5000:
-            return None
-
-        suffix = ".mp3" if "mp3" in audio_url else ".wav"
-        fd, tmp_path = tempfile.mkstemp(suffix=suffix, prefix="pixabay_")
+        fd, tmp_path = tempfile.mkstemp(suffix=".mp3", prefix="ext_music_")
         os.close(fd)
         with open(tmp_path, "wb") as f:
-            f.write(dl.content)
+            f.write(content)
 
-        log.info("Fetched Pixabay track: '%s' (%d bytes, query='%s')",
-                 track.get("title", "unknown"), len(dl.content), query)
+        log.info("Fetched external music track: %d bytes", len(content))
         return tmp_path
-
     except Exception as exc:
-        log.debug("Pixabay fetch failed: %s", exc)
+        log.debug("External music fetch failed: %s", exc)
         return None
 
 
@@ -114,18 +91,13 @@ def get_background_track(duration: float) -> str | None:
     """Get a background audio track for video overlay (YouTube Shorts).
 
     Priority:
-      1. Pixabay royalty-free track (trending, fresh, varied)
-      2. User-provided track from generated_images/music/
-      3. FFmpeg-generated ambient lo-fi pad (last resort)
+      1. User-provided track from generated_images/music/ (best quality)
+      2. Pixabay CC0 royalty-free track (downloaded from CDN)
+      3. FFmpeg-generated lo-fi beat (synthesized, always available)
 
     Returns path to audio file, or None if everything fails.
     """
-    # 1. Try Pixabay royalty-free music
-    pixabay_track = _fetch_pixabay_track(duration)
-    if pixabay_track:
-        return pixabay_track
-
-    # 2. Check for user-provided music files
+    # 1. Check for user-provided music files (highest priority — curated quality)
     if MUSIC_DIR.exists():
         tracks = [
             f for f in MUSIC_DIR.iterdir()
@@ -133,10 +105,17 @@ def get_background_track(duration: float) -> str | None:
         ]
         if tracks:
             chosen = random.choice(tracks)
-            log.info("Using user-provided track: %s", chosen.name)
+            log.info("YT audio: user-provided track '%s'", chosen.name)
             return str(chosen)
 
-    # 3. Generate ambient audio with ffmpeg (fallback)
+    # 2. Try external music API (if configured via MUSIC_API_URL env var)
+    ext_track = _fetch_external_track(duration)
+    if ext_track:
+        log.info("YT audio: external music API track")
+        return ext_track
+
+    # 3. Generate lo-fi beat with ffmpeg (always available — no API needed)
+    log.info("YT audio: generating lo-fi beat (%.0fs)", duration)
     return _generate_ambient(duration)
 
 
@@ -217,6 +196,7 @@ def _generate_ambient(duration: float) -> str | None:
 
     # Build chord pad expression: detuned oscillators for warmth
     # Each note gets a main + slightly detuned copy (±2Hz) for chorus effect
+    # Volume: loud enough to be clearly audible as background music
     chord_parts = []
     for i, chord_freqs in enumerate(chords):
         t_start = i * chord_dur
@@ -227,7 +207,7 @@ def _generate_ambient(duration: float) -> str | None:
             f"{t_start},{t_end}),1,0)"
         )
         for freq in chord_freqs:
-            amp = 0.04
+            amp = 0.10  # 2.5x louder than before (was 0.04)
             detune = 1.5  # Hz detune for chorus width
             chord_parts.append(
                 f"{amp}*sin({freq}*2*PI*t)*{window}"
@@ -247,41 +227,41 @@ def _generate_ambient(duration: float) -> str | None:
             f"if(between(t-floor(t/{n_chords * chord_dur})*{n_chords * chord_dur},"
             f"{t_start},{t_end}),1,0)"
         )
-        bass_parts.append(f"0.06*sin({bass_freq}*2*PI*t)*{window}")
+        bass_parts.append(f"0.14*sin({bass_freq}*2*PI*t)*{window}")  # 2x louder bass
 
     bass_expr = "+".join(bass_parts)
     bass_input = f"aevalsrc='{bass_expr}':s=44100:d={duration}"
 
-    # Pink noise: vinyl texture — very quiet, band-passed
+    # Pink noise: vinyl texture — audible warmth
     noise_input = (
         f"anoisesrc=d={duration}:c=pink:r=44100,"
-        f"lowpass=f=800,highpass=f=200,volume=0.04"
+        f"lowpass=f=800,highpass=f=200,volume=0.07"
     )
 
     # Lo-fi drum pattern: kick (low thump) + hi-hat (high click)
     # BPM ~75 (lo-fi tempo), kick on 1 & 3, hat on every beat
     bpm = 75
     beat_dur = 60.0 / bpm
-    # Kick: low freq burst every 2 beats
+    # Kick: punchy low freq burst every 2 beats
     kick_expr = (
-        f"0.12*sin(55*2*PI*t)*exp(-8*mod(t,{2 * beat_dur}))"
+        f"0.22*sin(55*2*PI*t)*exp(-8*mod(t,{2 * beat_dur}))"
         f"*if(lt(mod(t,{2 * beat_dur}),0.15),1,0)"
     )
     kick_input = f"aevalsrc='{kick_expr}':s=44100:d={duration}"
 
-    # Hi-hat: filtered white noise — constant gentle shimmer
-    # (simpler approach: just very quiet high-freq noise, no gating needed)
+    # Hi-hat: filtered white noise shimmer — audible rhythm
     hat_input = (
         f"anoisesrc=d={duration}:c=white:r=44100,"
         f"highpass=f=7000,lowpass=f=14000,"
-        f"volume=0.012"
+        f"volume=0.025"
     )
 
-    # Mix all 5 layers with fades
+    # Mix all 5 layers with fades + loudness normalization
     filter_complex = (
-        f"[0:a][1:a][2:a][3:a][4:a]amix=inputs=5:duration=shortest:weights=1 0.8 0.5 0.6 0.3,"
+        f"[0:a][1:a][2:a][3:a][4:a]amix=inputs=5:duration=shortest:weights=1 0.8 0.5 0.7 0.4,"
         f"lowpass=f=12000,"  # lo-fi: cut harsh highs
-        f"equalizer=f=400:width_type=o:width=2:g=2,"  # warm mid boost
+        f"equalizer=f=400:width_type=o:width=2:g=3,"  # warm mid boost
+        f"loudnorm=I=-16:TP=-1.5:LRA=11,"  # broadcast loudness normalization
         f"afade=t=in:d=0.8,"
         f"afade=t=out:st={fade_out_start}:d=1.2"
     )
@@ -329,33 +309,34 @@ def _generate_simple_ambient(duration: float) -> str | None:
     fade_out_start = max(0, duration - 0.8)
 
     # Warm evolving pad: Am7 chord with slow LFO modulation for movement
-    # Main tones + detuned copies for width
+    # Main tones + detuned copies for width — loud enough to be clearly audible
     chord_expr = (
         # A3 (root) — with slow volume LFO
-        "0.05*(1+0.3*sin(0.4*2*PI*t))*sin(220*2*PI*t)"
-        "+0.035*sin(222*2*PI*t)"  # detuned copy for width
+        "0.12*(1+0.3*sin(0.4*2*PI*t))*sin(220*2*PI*t)"
+        "+0.08*sin(222*2*PI*t)"  # detuned copy for width
         # C4 (minor 3rd)
-        "+0.04*(1+0.3*sin(0.5*2*PI*t))*sin(261.6*2*PI*t)"
-        "+0.028*sin(263.6*2*PI*t)"
+        "+0.10*(1+0.3*sin(0.5*2*PI*t))*sin(261.6*2*PI*t)"
+        "+0.07*sin(263.6*2*PI*t)"
         # E4 (5th)
-        "+0.035*(1+0.3*sin(0.6*2*PI*t))*sin(329.6*2*PI*t)"
-        "+0.025*sin(331.6*2*PI*t)"
+        "+0.09*(1+0.3*sin(0.6*2*PI*t))*sin(329.6*2*PI*t)"
+        "+0.06*sin(331.6*2*PI*t)"
         # G4 (7th) — gentler
-        "+0.025*(1+0.3*sin(0.35*2*PI*t))*sin(392*2*PI*t)"
+        "+0.06*(1+0.3*sin(0.35*2*PI*t))*sin(392*2*PI*t)"
         # Sub-bass: A2 with gentle pulse
-        "+0.04*(1+0.2*sin(0.3*2*PI*t))*sin(110*2*PI*t)"
+        "+0.10*(1+0.2*sin(0.3*2*PI*t))*sin(110*2*PI*t)"
     )
     chord_input = f"aevalsrc='{chord_expr}':s=44100:d={duration}"
 
     # Pink noise: warm texture
     noise_input = (
         f"anoisesrc=d={duration}:c=pink:r=44100,"
-        f"lowpass=f=600,highpass=f=100,volume=0.06"
+        f"lowpass=f=600,highpass=f=100,volume=0.08"
     )
 
     filter_complex = (
         f"[0:a][1:a]amix=inputs=2:duration=shortest,"
         f"lowpass=f=10000,"
+        f"loudnorm=I=-16:TP=-1.5:LRA=11,"  # broadcast loudness normalization
         f"afade=t=in:d=0.6,"
         f"afade=t=out:st={fade_out_start}:d=0.8"
     )

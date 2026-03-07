@@ -361,11 +361,11 @@ _MUSIC_QUERIES = [
 def _find_trending_track(cl: Client) -> Any | None:
     """Search for a trending track to overlay on the Reel.
 
-    Tries up to 5 different queries with retry delays for 429/500 errors.
+    Tries up to 8 different queries with retry delays for 429/500 errors.
     Returns an Instagram music track object or None.
     """
     import random as _rnd
-    queries = _rnd.sample(_MUSIC_QUERIES, min(5, len(_MUSIC_QUERIES)))
+    queries = _rnd.sample(_MUSIC_QUERIES, min(8, len(_MUSIC_QUERIES)))
     last_exc = None
     for attempt, query in enumerate(queries):
         try:
@@ -375,9 +375,13 @@ def _find_trending_track(cl: Client) -> Any | None:
             tracks = cl.search_music(query)
             if tracks:
                 track = _rnd.choice(tracks[:5])
-                log.info("Found trending track: '%s' (query='%s')",
-                         getattr(track, "title", "unknown"), query)
+                log.info("Found trending track: '%s' by '%s' (query='%s')",
+                         getattr(track, "title", "unknown"),
+                         getattr(track, "display_artist", "unknown"),
+                         query)
                 return track
+            else:
+                log.debug("Music search '%s' returned 0 valid tracks", query)
         except Exception as exc:
             if _is_challenge_error(exc):
                 raise ChallengeAbort(str(exc)) from exc

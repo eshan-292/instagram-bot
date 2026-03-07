@@ -250,6 +250,64 @@ def _patch_reels_timeline_media() -> None:
     log.debug("Patched reels_timeline_media with fixed pagination")
 
 
+def _patch_search_music() -> None:
+    """Fix search_music to handle None items in Instagram's music API response.
+
+    Instagram's music/audio_global_search/ endpoint sometimes returns items
+    where the "track" field is None (instead of a dict). The original
+    search_music does:
+        [extract_track(item["track"]) for item in result["items"]]
+    which crashes with 'NoneType' object has no attribute 'get' when
+    item["track"] is None.
+
+    Fix: Filter out None tracks and wrap extract_track in try/except.
+    """
+    try:
+        from instagrapi import Client
+        from instagrapi.extractors import extract_track
+    except ImportError:
+        return
+
+    _original_search = getattr(Client, "search_music", None)
+    if not _original_search:
+        return
+
+    def _resilient_search_music(self, query: str):
+        params = {
+            "query": query,
+            "browse_session_id": self.generate_uuid(),
+        }
+        result = self.private_request("music/audio_global_search/", params=params)
+
+        items = result.get("items") or []
+        tracks = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            track_data = item.get("track")
+            if not track_data or not isinstance(track_data, dict):
+                continue
+            # dash_manifest is required for extract_track — skip if missing
+            if not track_data.get("dash_manifest"):
+                continue
+            try:
+                track = extract_track(track_data)
+                if track:
+                    tracks.append(track)
+            except Exception as exc:
+                log.debug("extract_track failed for '%s': %s",
+                          track_data.get("title", "?"), exc)
+                continue
+
+        if tracks:
+            log.debug("search_music: %d/%d items parsed for query='%s'",
+                      len(tracks), len(items), query)
+        return tracks
+
+    Client.search_music = _resilient_search_music
+    log.debug("Patched search_music with None-safe item filtering")
+
+
 def apply_patches() -> None:
     """Apply all patches. Safe to call multiple times (idempotent)."""
     global _PATCHED
@@ -260,6 +318,7 @@ def apply_patches() -> None:
     _patch_models()
     _patch_extract_media_v1()
     _patch_reels_timeline_media()
+    _patch_search_music()
 
 
 # Auto-apply on import
