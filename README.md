@@ -222,19 +222,26 @@ The unfollow system now checks the followers API before unfollowing:
 - **100/day limit** — sustainable pace to make room for new growth follows
 - Refreshes followers list from API + cached file for accuracy
 
-## Audio Strategy (2026)
+## Music & Audio System
 
-- **Instagram Reels:** SILENT videos -- trending music overlaid at publish time via Instagram's music API
-  - 30+ trending music search queries (Bollywood, Indian pop, fashion, viral)
-  - Auto-retry with backoff on 429/500 server errors
-  - Falls back to no-music upload if trending audio unavailable
-- **YouTube Shorts:** Background music baked into video
-  - Priority 1: Pixabay royalty-free tracks (needs API key)
-  - Priority 2: User-provided tracks from `generated_images/music/`
-  - Priority 3: Lo-fi beat generator (chord progressions + bass + drums + vinyl noise)
-    - 4 random chord progressions for variety (classic, emotional, uplifting, jazzy)
-    - Sub-bass following root notes, lo-fi kick pattern, hi-hat shimmer
-    - Warm mixing with mid-boost and high-cut for lo-fi feel
+### Instagram Reels — Trending Music Overlay
+- Reels are published as **SILENT videos**
+- At publish time, trending music is searched via Instagram's music API (`cl.search_music()`)
+- The bot tries **8 different trending queries** (Bollywood, desi pop, viral audio, etc.)
+- Music is overlaid using `cl.clip_upload_as_reel_with_music()`
+- Falls back to no-music upload if search fails
+- The `instagrapi_patch.py` patches `search_music` to handle Instagram API response changes (None items)
+
+### YouTube Shorts — Background Music
+- YouTube videos have background music **BAKED INTO the video**
+- Audio priority:
+  1. **User-provided tracks** — Place `.mp3`/`.wav` files in `generated_images/music/` directory
+  2. **External music API** — Set `MUSIC_API_URL` env var to a CC0 music endpoint
+  3. **Generated lo-fi beats** — FFmpeg-synthesized beats with chord progressions, sub-bass, drums, vinyl texture
+- Lo-fi beat generator details:
+  - 4 chord progressions: lo-fi classic, emotional, uplifting, jazzy
+  - Loudness-normalized to **-16 LUFS** (YouTube broadcast standard)
+  - Lo-fi drum pattern at **75 BPM**
 
 ## Quick Start
 
@@ -605,13 +612,13 @@ Named series create audience anticipation and train followers to return on speci
 
 ## Video & Audio
 
-- **Instagram Reels:** 1080x1350 (4:5), 7 seconds, Ken Burns zoom effect, SILENT (trending audio added at publish)
-- **YouTube Shorts:** 1080x1920 (9:16), 10 seconds, Ken Burns zoom effect, WITH audio
+- **Instagram Reels:** 1080x1350 (4:5), 7 seconds, Ken Burns zoom effect, SILENT (trending music overlaid at publish via `cl.search_music()`)
+- **YouTube Shorts:** 1080x1920 (9:16), 10 seconds, Ken Burns zoom effect, WITH baked-in audio
 - **YouTube audio priority:**
-  1. Pixabay royalty-free tracks (if `PIXABAY_API_KEY` set)
-  2. Custom tracks from `data/{persona}/generated_images/music/`
-  3. Auto-generated ambient lo-fi pad (pink noise + Am7 chord)
-- **Instagram audio:** Trending music overlay via Instagram music search API (30+ queries)
+  1. User-provided tracks from `data/{persona}/generated_images/music/`
+  2. External music API (CC0 endpoint via `MUSIC_API_URL` env var)
+  3. Auto-generated lo-fi beats (FFmpeg-synthesized, -16 LUFS, 75 BPM)
+- **Instagram audio:** Trending music overlay via `cl.clip_upload_as_reel_with_music()` (8 search queries, falls back to silent)
 
 ## Stories
 
