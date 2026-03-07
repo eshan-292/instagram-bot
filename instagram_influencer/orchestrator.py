@@ -79,68 +79,303 @@ def _find_oldest_repostable(posts: list[dict[str, Any]]) -> tuple[int, dict[str,
     return oldest
 
 
+
+# ---------------------------------------------------------------------------
+# Hardcoded viral repost content — on-screen text + caption per persona.
+# Each entry: video_text=[hook, bridge, cta], caption=str
+# These are image-agnostic so they work on ANY reposted photo.
+# ---------------------------------------------------------------------------
+_REPOST_CONTENT: dict[str, list[dict[str, Any]]] = {
+    "aryan": [
+        {
+            "video_text": ["Your gym crush trains like this.", "Would you survive this?", "Send to your gym partner."],
+            "caption": "Your gym crush trains like this.\nMost people quit in week 2. Still here.\nCould you keep up?\nSend this to your gym buddy — dare them.",
+        },
+        {
+            "video_text": ["I wasted 2 years on this.", "Nobody warned me.", "Save this. Seriously."],
+            "caption": "I wasted 2 years doing this wrong.\nOne fix changed everything.\nWhat's the worst gym advice you got?\nSave this before you make the same mistake.",
+        },
+        {
+            "video_text": ["Rs 100 vs Rs 1000 protein.", "Same results?", "Comment your pick."],
+            "caption": "Rs 100 vs Rs 1000 protein.\nI tested both. The results will surprise you.\nWhich do you use?\nSend to the friend who wastes money on supplements.",
+        },
+        {
+            "video_text": ["Your trainer won't show this.", "Free. No equipment.", "Screenshot this now."],
+            "caption": "Your trainer won't show you this.\nBecause it's free and it works.\nWhy pay when this exists?\nScreenshot and try tomorrow morning.",
+        },
+        {
+            "video_text": ["Day 1 vs Day 365.", "Same guy. Different beast.", "Tag someone who needs this."],
+            "caption": "Day 1 vs Day 365.\nSame mirror. Different person staring back.\nCould you commit for a year?\nTag someone who keeps saying 'Monday se start karunga'.",
+        },
+        {
+            "video_text": ["This exercise is killing your gains.", "Stop immediately.", "Share before it's too late."],
+            "caption": "This exercise is destroying your progress.\nI did it for months. Zero results.\nAre you making this mistake?\nSend to your gym partner before they hurt themselves.",
+        },
+        {
+            "video_text": ["5 AM. No alarm needed.", "Discipline hits different.", "Send to your lazy friend."],
+            "caption": "5 AM. Eyes open. No alarm.\nWhen discipline becomes habit, motivation becomes irrelevant.\nWhat time do you train?\nSend to the friend who snoozes 10 times.",
+        },
+        {
+            "video_text": ["Skinny to strong in 180 days.", "No steroids. No shortcuts.", "Save this transformation."],
+            "caption": "Skinny to strong. 180 days.\nNo steroids. No shortcuts. Just showing up.\nThink you could do it?\nSave this as your daily reminder.",
+        },
+        {
+            "video_text": ["Your push-up is 100% wrong.", "Here's the proof.", "Send to your gym bro."],
+            "caption": "Your push-up is completely wrong.\n99% of people make this mistake.\nDid you know this?\nSend to your gym bro — watch them get defensive.",
+        },
+        {
+            "video_text": ["Indian diet. 150g protein.", "No supplements needed.", "Save this meal plan."],
+            "caption": "Indian food. 150g protein. Zero supplements.\nDaal, paneer, eggs. That's it.\nStill think you need imported whey?\nSave this — your wallet will thank you.",
+        },
+        {
+            "video_text": ["3 exercises. 15 minutes.", "No gym required.", "Try this tonight."],
+            "caption": "3 exercises. 15 minutes. No gym.\nYour excuse just expired.\nWould you try this at home?\nSend to someone who says they don't have time.",
+        },
+        {
+            "video_text": ["Biggest mistake in every gym.", "I see it daily.", "Stop doing this."],
+            "caption": "I see this mistake in every gym. Every single day.\nNobody corrects them.\nAre you doing this?\nTag your gym partner — one of you is guilty.",
+        },
+        {
+            "video_text": ["Creatine truth nobody tells you.", "Is it worth it?", "Comment yes or no."],
+            "caption": "The creatine truth nobody tells you.\nI spent Rs 3000 to find out.\nDo you take creatine?\nComment YES or NO — let's settle this.",
+        },
+        {
+            "video_text": ["Your legs are embarrassing.", "Skip leg day one more time.", "I dare you."],
+            "caption": "Your legs are embarrassing.\nChicken legs and a massive chest is not a physique.\nDo you skip leg day?\nSend this to the friend who only trains arms.",
+        },
+        {
+            "video_text": ["This physique took 6 months.", "Not 6 years.", "Here's how."],
+            "caption": "This physique took 6 months. Not 6 years.\nConsistency beats intensity every time.\nWould you trade 6 months of discipline?\nSave this — come back in 180 days.",
+        },
+    ],
+    "maya": [
+        {
+            "video_text": ["This outfit costs Rs 800.", "You'd never guess.", "Send to your bestie."],
+            "caption": "This entire outfit? Rs 800.\nLooking expensive is a skill, not a salary.\nCould you tell it was budget?\nSend to your bestie who says she has nothing to wear.",
+        },
+        {
+            "video_text": ["Delete half your wardrobe.", "You only need 10 pieces.", "Save this list."],
+            "caption": "Delete half your wardrobe.\nYou're wearing 20% of it anyway.\nHow many pieces do you actually wear?\nSave this — your closet needs this intervention.",
+        },
+        {
+            "video_text": ["Stop buying Zara basics.", "They fall apart.", "Here's what to buy instead."],
+            "caption": "Stop buying Zara basics.\n2 washes and it's done.\nWhere do you shop for basics?\nSend to your friend who buys a new Zara haul every month.",
+        },
+        {
+            "video_text": ["One kurta. Five outfits.", "No new shopping needed.", "Screenshot all 5."],
+            "caption": "One kurta. Five completely different vibes.\nYour wardrobe has more potential than you think.\nWhich style is your vibe?\nScreenshot this for your next outfit crisis.",
+        },
+        {
+            "video_text": ["Rs 1500. Full look.", "Looking expensive is free.", "Tag your shopping buddy."],
+            "caption": "Rs 1500. Full look. Head to toe.\nExpensive taste doesn't need an expensive budget.\nWould you wear this?\nTag your shopping buddy — you're going this weekend.",
+        },
+        {
+            "video_text": ["Your bestie styled you.", "POV: she snapped.", "Send this to her."],
+            "caption": "POV: your bestie finally styled you.\nAnd she absolutely destroyed it.\nWho's your go-to stylist friend?\nSend this to her — she deserves the credit.",
+        },
+        {
+            "video_text": ["This thrift find? Rs 300.", "Colaba magic.", "Comment your best thrift find."],
+            "caption": "This entire piece? Rs 300. Colaba Causeway.\nMumbai streets > any mall in this country.\nWhat's your best thrift find?\nComment the price — let's see who won.",
+        },
+        {
+            "video_text": ["3 outfits. 1 suitcase.", "Travel packing hack.", "Save for your next trip."],
+            "caption": "3 outfits. 1 suitcase. Zero outfit panics.\nTravel packing is an art form.\nAre you an overpacker?\nSave this for your next trip — thank me later.",
+        },
+        {
+            "video_text": ["Mumbai monsoon outfit.", "Cute AND waterproof.", "Your rainy day saviour."],
+            "caption": "Monsoon but make it fashion.\nBecause Mumbai rains don't care about your outfit.\nHow do you dress for monsoon?\nSend to the friend who wears white in July.",
+        },
+        {
+            "video_text": ["Styling mom's old saree.", "2024 version hits different.", "Tag your mom."],
+            "caption": "Styled my mom's old saree. Her jaw dropped.\nVintage is not old — it's iconic.\nHave you tried your mom's wardrobe?\nTag your mom — show her this.",
+        },
+        {
+            "video_text": ["This colour is your personality.", "Choose wisely.", "Comment yours."],
+            "caption": "Your outfit colour says everything about you.\nBlack = don't talk to me. Yellow = chaos energy.\nWhich colour is YOU?\nComment your go-to colour — let's psychoanalyse you.",
+        },
+        {
+            "video_text": ["College to cafe to date.", "Same outfit. 3 vibes.", "Save this hack."],
+            "caption": "College. Cafe. Date night. Same outfit.\n3 vibes, zero wardrobe changes.\nCould you pull this off?\nSave this for those 3-plan days.",
+        },
+        {
+            "video_text": ["5 things to never wear.", "I'm sorry but no.", "Send to that friend."],
+            "caption": "5 things I'm begging you to stop wearing.\nNo hate. Just facts.\nAre you guilty of any?\nSend to the friend who needs a gentle intervention.",
+        },
+        {
+            "video_text": ["Airport look under Rs 3000.", "Comfortable AND cute.", "Screenshot this."],
+            "caption": "Airport look. Under Rs 3000.\nBecause you never know who's watching at departures.\nWhat's your airport uniform?\nScreenshot this for your next flight.",
+        },
+        {
+            "video_text": ["I wore this to work.", "HR said nothing.", "Would you risk it?"],
+            "caption": "Wore this to work. HR said nothing.\nThe line between bold and boardroom is thinner than you think.\nWould you risk this outfit?\nSend to your work bestie — dare her.",
+        },
+    ],
+    "rhea": [
+        {
+            "video_text": ["Your workout is useless.", "Here's the truth.", "Save this."],
+            "caption": "Your workout is useless.\nHarsh? Yes. True? Also yes.\nAre you making this mistake?\nSave this — fix it before your next session.",
+        },
+        {
+            "video_text": ["She's not lucky.", "She's consistent.", "That's the difference."],
+            "caption": "She's not lucky. She's consistent.\nConsistency is boring. Results aren't.\nWhat keeps you going when motivation dies?\nScreenshot this for the days you want to quit.",
+        },
+        {
+            "video_text": ["2500 calories. Still lean.", "Your diet is the problem.", "Not the food."],
+            "caption": "2500 calories. Still lean.\nIt was never about eating less. It's about eating right.\nHow many calories do you eat?\nSend to the friend who's scared of carbs.",
+        },
+        {
+            "video_text": ["Stop doing 100 squats.", "It's not working.", "Do this instead."],
+            "caption": "Stop doing 100 squats.\nMore reps ≠ more results.\nAre you guilty of this?\nSend to your gym friend who does infinite squats.",
+        },
+        {
+            "video_text": ["4 AM. Gym empty.", "This is where it starts.", "No excuses."],
+            "caption": "4 AM. Gym is empty. Just me and discipline.\nMost people are still dreaming about the body they want.\nWhat time do you train?\nSend to someone who needs a wake-up call.",
+        },
+        {
+            "video_text": ["Girls don't need pink dumbbells.", "Train heavy.", "I said what I said."],
+            "caption": "Girls don't need pink dumbbells.\nHeavy weights won't make you bulky. That's a myth.\nDo you train heavy?\nTag a girl who needs to hear this.",
+        },
+        {
+            "video_text": ["This one exercise changed my body.", "Took 3 months.", "Try it yourself."],
+            "caption": "One exercise. Three months. Completely different body.\nSometimes less is more.\nHave you tried this?\nSave this and try it for 90 days — then thank me.",
+        },
+        {
+            "video_text": ["Your glutes need THIS.", "Not what you're doing.", "Screenshot this routine."],
+            "caption": "Your glute routine is probably wrong.\nBooty bands alone won't build anything.\nWhat's your go-to glute exercise?\nScreenshot this routine — your glutes will thank you.",
+        },
+        {
+            "video_text": ["Discipline over motivation.", "Every single time.", "This is the way."],
+            "caption": "Discipline over motivation. Every single time.\nMotivation is a feeling. Discipline is a decision.\nWhich drives you more?\nSend to someone who only trains when they 'feel like it'.",
+        },
+        {
+            "video_text": ["130g protein. All vegetarian.", "It's possible.", "Save this meal plan."],
+            "caption": "130g protein. Fully vegetarian.\nPaneer, dal, curd, soya chunks. Done.\nStill think you need chicken?\nSave this meal plan — vegetarian gains are real.",
+        },
+        {
+            "video_text": ["POV: you stopped making excuses.", "Day 1 to Day 90.", "Your turn."],
+            "caption": "POV: you stopped making excuses.\nDay 1 was the hardest. Day 90 was the proudest.\nWhen did you start?\nTag someone who keeps saying 'tomorrow'.",
+        },
+        {
+            "video_text": ["Cardio is killing your gains.", "Stop running.", "Here's why."],
+            "caption": "Cardio is killing your gains.\n45 minutes on the treadmill ≠ results.\nDo you do too much cardio?\nSend to the friend who runs for an hour daily.",
+        },
+        {
+            "video_text": ["3 moves. 12 minutes.", "Better than your 1-hour session.", "Prove me wrong."],
+            "caption": "3 moves. 12 minutes. Done.\nBetter than your 1-hour session.\nDon't believe me? Try it.\nSend to someone who says they don't have time.",
+        },
+        {
+            "video_text": ["The glow-up nobody talks about.", "It's not what you think.", "This changes everything."],
+            "caption": "The real glow-up nobody talks about.\nIt's not the body. It's the discipline behind it.\nWhat changed YOU the most?\nSend to someone going through their glow-up.",
+        },
+        {
+            "video_text": ["Your form is embarrassing.", "Fix it now.", "Send to your gym partner."],
+            "caption": "Your form is embarrassing. Sorry not sorry.\nBad form = zero results + injury.\nHave you checked your form lately?\nSend to your gym partner — one of you needs this.",
+        },
+    ],
+    "sofia": [
+        {
+            "video_text": ["This costs more than your rent.", "Still worth it.", "Send to someone with taste."],
+            "caption": "This costs more than your rent.\nAnd I'd buy it again.\nWould you spend this much on one piece?\nSend to someone with expensive taste.",
+        },
+        {
+            "video_text": ["Not everyone's invited.", "That's the point.", "Save this look."],
+            "caption": "Not everyone's invited.\nLuxury isn't about showing off. It's about knowing your worth.\nDo you dress for yourself or others?\nSave this — elegance is a lifestyle.",
+        },
+        {
+            "video_text": ["Old money vs new money.", "One screams. One whispers.", "Which are you?"],
+            "caption": "Old money whispers. New money screams.\nLogos everywhere? That's not wealth. That's insecurity.\nWhich side are you on?\nSend to someone who needs this lesson.",
+        },
+        {
+            "video_text": ["Rich vs looking rich.", "Know the difference.", "Most people don't."],
+            "caption": "Rich vs looking rich.\nOne wears logos. The other wears confidence.\nCan you tell the difference?\nTag someone who gets confused.",
+        },
+        {
+            "video_text": ["Penthouse mornings.", "Mumbai skyline.", "You can look but not touch."],
+            "caption": "Penthouse mornings. Mumbai skyline. Coffee.\nThis is not a vacation. This is Tuesday.\nWhat does your morning look like?\nShare this with someone who deserves this life.",
+        },
+        {
+            "video_text": ["She walked in. Everyone stared.", "It's the outfit.", "No. It's the energy."],
+            "caption": "She walked in. Everyone stared.\nThey thought it was the outfit. It wasn't.\nIt's never the clothes — it's the woman wearing them.\nSend to the woman who commands every room.",
+        },
+        {
+            "video_text": ["All black. All power.", "No colour needed.", "This is elegance."],
+            "caption": "All black. All power.\nWhen you're the statement, you don't need colour.\nCould you pull this off?\nTag someone who only wears black.",
+        },
+        {
+            "video_text": ["From Russia with style.", "Moscow to Mumbai.", "Different city. Same standards."],
+            "caption": "From Russia with style.\nMoscow taught me elegance. Mumbai taught me boldness.\nWhich city is more stylish?\nComment — I want to hear this debate.",
+        },
+        {
+            "video_text": ["This is real luxury.", "Not the logo. The quality.", "You either get it or you don't."],
+            "caption": "This is real luxury.\nNo logos. No labels. Just quality you can feel.\nDo you know the difference?\nSend to someone who thinks Gucci = luxury.",
+        },
+        {
+            "video_text": ["Rs 5000 looks Rs 50,000.", "The trick is confidence.", "Save this formula."],
+            "caption": "Rs 5000 but looks Rs 50,000.\nLuxury isn't a price tag — it's a formula.\nWant to know the secret?\nSave this — your next outfit needs this energy.",
+        },
+        {
+            "video_text": ["Main character energy.", "Every single day.", "Not everyone can handle it."],
+            "caption": "Main character energy. Every single day.\nSome people blend in. I was never built for that.\nDo you walk into rooms or disappear in them?\nSend to the main character in your life.",
+        },
+        {
+            "video_text": ["Quiet luxury.", "The ones who know, know.", "If you know, save this."],
+            "caption": "Quiet luxury.\nThe ones who know, know. No explanation needed.\nDo you dress loud or quiet?\nSave this — this is the only aesthetic that ages well.",
+        },
+        {
+            "video_text": ["Elegance is non-negotiable.", "Born or learned?", "Comment your take."],
+            "caption": "Elegance is non-negotiable.\nSome say you're born with it. I say you choose it daily.\nIs elegance born or learned?\nComment — this debate never ends.",
+        },
+        {
+            "video_text": ["Mumbai at night.", "Heels on. Standards higher.", "This city deserves effort."],
+            "caption": "Mumbai at night. Heels on. Standards higher.\nThis city rewards those who show up looking like they mean it.\nWhat's your Mumbai night uniform?\nSend to your going-out partner.",
+        },
+        {
+            "video_text": ["Designer vs dupe.", "Can you tell?", "Comment which is which."],
+            "caption": "Designer vs dupe. One costs 50x more.\nCan you actually tell the difference?\nWhich one would you pick?\nComment 1 or 2 — let's see who has the eye.",
+        },
+    ],
+}
+
+
 def _create_repost(posts: list[dict[str, Any]], source: dict[str, Any],
                    cfg: Config) -> dict[str, Any]:
     """Create a fresh hook-photo reel from an old posted entry's images.
 
     Reuses original images but generates completely new:
-      - video_text (hook/bridge/CTA from persona config)
-      - caption (via Gemini or template fallback)
+      - video_text (hook/bridge/CTA from hardcoded viral sets)
+      - caption (matched to video_text — no Gemini needed)
       - video (re-rendered with new text frames)
     """
     persona = get_persona()
-    content = persona.get("content", {})
+    persona_id = str(persona.get("id", "")).strip().lower()
 
-    # Pick fresh hooks from persona config
-    vt_hooks = content.get("video_text_hooks", [])
-    bridges = [
-        "Can you guess?", "Wait. It gets better.", "Which one wins?",
-        "Would you try this?", "The secret nobody shares.",
-        "Nobody talks about this.", "Think you could?",
-    ]
-    ctas = [
-        "Send to your bestie.", "Save this. Trust me.",
-        "Tag who needs this.", "Share before it's gone.",
-        "Screenshot this now.", "Send to that friend.",
-    ]
-
-    hook = random.choice(vt_hooks) if vt_hooks else "Wait for it."
-    bridge = random.choice(bridges)
-    cta = random.choice(ctas)
-
-    # Try Gemini for a fresh caption
-    topic = str(source.get("topic", "")).strip()
-    new_caption = None
-    if cfg.gemini_api_key:
-        try:
-            from gemini_helper import generate as gemini_generate
-            voice = persona.get("voice", {})
-            identity = voice.get("gemini_identity", "an influencer")
-            tone = voice.get("tone", "confident")
-            prompt = (
-                f"Write a NEW Instagram caption for {identity}.\n"
-                f"Topic: {topic}\n"
-                f"Voice: {tone}\n"
-                f"Rules:\n"
-                f"- Hook in first line (max 6 words, pattern interrupt)\n"
-                f"- Relatable question in middle\n"
-                f"- Send/save CTA as last line\n"
-                f"- Max 4 lines, no hashtags, max 1 emoji\n"
-                f"- Must feel completely different from: {source.get('caption', '')[:80]}\n"
-                f"Return ONLY the caption text."
-            )
-            raw = gemini_generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
-            if raw and len(raw.strip()) > 20:
-                new_caption = raw.strip()
-        except Exception as exc:
-            log.debug("Gemini repost caption failed: %s", exc)
-
-    if not new_caption:
+    # Pick a random hardcoded viral content set for this persona
+    content_sets = _REPOST_CONTENT.get(persona_id, [])
+    if content_sets:
+        chosen_set = random.choice(content_sets)
+        video_text = list(chosen_set["video_text"])
+        new_caption = str(chosen_set["caption"])
+    else:
+        # Fallback for personas without hardcoded sets
+        content = persona.get("content", {})
+        vt_hooks = content.get("video_text_hooks", [])
+        hook = random.choice(vt_hooks) if vt_hooks else "Wait for it."
+        bridges = [
+            "Can you guess?", "Wait. It gets better.", "Which one wins?",
+            "Would you try this?", "The secret nobody shares.",
+        ]
+        ctas = [
+            "Send to your bestie.", "Save this. Trust me.",
+            "Tag who needs this.", "Screenshot this now.",
+        ]
+        video_text = [hook, random.choice(bridges), random.choice(ctas)]
+        topic = str(source.get("topic", "")).strip()
         new_caption = f"{hook}\n{topic}.\nWould you try this?\nSend to someone who needs to see this."
 
     # Build repost entry
     from persona import next_post_id
     post_id = next_post_id(posts)
+    topic = str(source.get("topic", "")).strip()
 
     carousel_images = source.get("carousel_images") or []
     image_url = str(source.get("image_url", "")).strip()
@@ -152,7 +387,7 @@ def _create_repost(posts: list[dict[str, Any]], source: dict[str, Any],
         "caption": new_caption,
         "alt_text": str(source.get("alt_text", "")).strip(),
         "youtube_title": "",
-        "video_text": [hook, bridge, cta],
+        "video_text": video_text,
         "image_url": image_url,
         "video_url": None,
         "is_reel": True,

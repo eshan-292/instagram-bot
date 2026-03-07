@@ -83,9 +83,11 @@ When no new content is ready to publish, the bot **automatically reposts old ima
 
 1. **Trigger:** At publish time, if `find_eligible()` returns no posts → repost fallback activates
 2. **Selection:** Picks the **oldest** posted entry (not the most recent) with valid images still on disk
-3. **Fresh content:** Generates new `video_text` hooks from persona config + new caption via Gemini
+3. **Fresh content:** Picks from **15 hardcoded viral hook+caption sets per persona** — no Gemini needed, zero API dependency
 4. **New video:** Re-renders the reel with new text frames (different hook/bridge/CTA)
 5. **Publishes:** Same images, completely different reel — algorithm treats it as new content
+
+Each persona has 15 curated viral content sets with matched on-screen text + caption (send/save CTAs, pattern interrupts, controversy angles). Defined in `_REPOST_CONTENT` dict in `orchestrator.py`.
 
 **Safety guards:**
 - Only reposts content older than 7 days (`REPOST_MIN_AGE_DAYS`)
@@ -265,10 +267,11 @@ The unfollow system now checks the followers API before unfollowing:
 
 ### YouTube Shorts — Background Music
 - YouTube videos have background music **BAKED INTO the video**
-- Audio priority:
-  1. **User-provided tracks** — Place `.mp3`/`.wav` files in `generated_images/music/` directory
-  2. **External music API** — Set `MUSIC_API_URL` env var to a CC0 music endpoint
-  3. **Generated lo-fi beats** — FFmpeg-synthesized beats with chord progressions, sub-bass, drums, vinyl texture
+- **User-provided audio clips are NOT used for YouTube** (copyright strike risk)
+- Audio priority for YouTube:
+  1. **External music API** — Set `MUSIC_API_URL` env var to a CC0 music endpoint
+  2. **Generated lo-fi beats** — FFmpeg-synthesized beats with chord progressions, sub-bass, drums, vinyl texture
+- User-provided clips in `generated_images/music/` are only used for Instagram (non-YouTube) audio if needed
 - Lo-fi beat generator details:
   - 4 chord progressions: lo-fi classic, emotional, uplifting, jazzy
   - Loudness-normalized to **-16 LUFS** (YouTube broadcast standard)
@@ -357,7 +360,7 @@ That's it. The bot will now upload every post to YouTube Shorts alongside Instag
 
 ### Custom Background Music
 
-Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/` and the bot will use them as background tracks for YouTube Shorts. If no custom music is provided, it fetches royalty-free tracks from Pixabay, or falls back to a generated ambient lo-fi pad.
+Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/` for Instagram audio fallback. **These are NOT used for YouTube Shorts** to avoid copyright strikes — YouTube always uses generated lo-fi beats or royalty-free tracks from an external API.
 
 ### Image Notes
 - Image filenames must match the post ID exactly (e.g., `maya-042.jpg` for post `maya-042`)
@@ -648,10 +651,9 @@ Named series create audience anticipation and train followers to return on speci
 
 - **Instagram Reels:** 1080x1350 (4:5), 7 seconds, Ken Burns zoom effect, SILENT (trending music overlaid at publish via `cl.search_music()`)
 - **YouTube Shorts:** 1080x1920 (9:16), 10 seconds, Ken Burns zoom effect, WITH baked-in audio
-- **YouTube audio priority:**
-  1. User-provided tracks from `data/{persona}/generated_images/music/`
-  2. External music API (CC0 endpoint via `MUSIC_API_URL` env var)
-  3. Auto-generated lo-fi beats (FFmpeg-synthesized, -16 LUFS, 75 BPM)
+- **YouTube audio priority** (user clips skipped — copyright risk):
+  1. External music API (CC0 endpoint via `MUSIC_API_URL` env var)
+  2. Auto-generated lo-fi beats (FFmpeg-synthesized, -16 LUFS, 75 BPM)
 - **Instagram audio:** Trending music overlay via `cl.clip_upload_as_reel_with_music()` (8 search queries, falls back to silent)
 
 ## Stories

@@ -87,35 +87,36 @@ def _fetch_external_track(duration: float) -> str | None:
         return None
 
 
-def get_background_track(duration: float) -> str | None:
-    """Get a background audio track for video overlay (YouTube Shorts).
+def get_background_track(duration: float, *, for_youtube: bool = True) -> str | None:
+    """Get a background audio track for video overlay.
 
     Priority:
-      1. User-provided track from generated_images/music/ (best quality)
-      2. Pixabay CC0 royalty-free track (downloaded from CDN)
-      3. FFmpeg-generated lo-fi beat (synthesized, always available)
+      1. User-provided track from generated_images/music/ — ONLY for Instagram
+         (skipped for YouTube to avoid copyright strikes)
+      2. External royalty-free track via MUSIC_API_URL (safe for all platforms)
+      3. FFmpeg-generated lo-fi beat (synthesized, always available, copyright-free)
 
     Returns path to audio file, or None if everything fails.
     """
-    # 1. Check for user-provided music files (highest priority — curated quality)
-    if MUSIC_DIR.exists():
+    # 1. User-provided music — Instagram only (copyright issues on YouTube)
+    if not for_youtube and MUSIC_DIR.exists():
         tracks = [
             f for f in MUSIC_DIR.iterdir()
             if f.suffix.lower() in _AUDIO_EXTENSIONS and f.stat().st_size > 1000
         ]
         if tracks:
             chosen = random.choice(tracks)
-            log.info("YT audio: user-provided track '%s'", chosen.name)
+            log.info("IG audio: user-provided track '%s'", chosen.name)
             return str(chosen)
 
     # 2. Try external music API (if configured via MUSIC_API_URL env var)
     ext_track = _fetch_external_track(duration)
     if ext_track:
-        log.info("YT audio: external music API track")
+        log.info("Audio: external music API track (copyright-free)")
         return ext_track
 
     # 3. Generate lo-fi beat with ffmpeg (always available — no API needed)
-    log.info("YT audio: generating lo-fi beat (%.0fs)", duration)
+    log.info("Audio: generating lo-fi beat (%.0fs)", duration)
     return _generate_ambient(duration)
 
 
