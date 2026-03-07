@@ -187,12 +187,39 @@ The dominant content format — bold text hooks interleaved with 1-2 photos. Max
 
 To create hook-photo reels: set `post_type: "reel"` + `reel_format: "hook_photo"` in content queue. Include `slides` (1-2 photo descriptions) and `video_text` (hook/bridge/CTA text). Place photos in `pending/{post-id}/1.jpg` (single) or `pending/{post-id}/1.jpg, 2.jpg` (double).
 
+### Anti-Detection System (Avoid Account Bans)
+
+Comprehensive anti-detection measures to prevent Instagram from flagging automated behavior:
+
+**Per-persona device fingerprints** — each account uses a different phone model:
+| Account | Device | Why |
+|---------|--------|-----|
+| Maya | Samsung Galaxy S24 | Different manufacturer per account |
+| Aryan | Google Pixel 8 Pro | Avoids "same device, multiple accounts" flag |
+| Sofia | Samsung Galaxy S23 Ultra | Different resolution/DPI |
+| Rhea | OnePlus 12 | Different CPU architecture |
+| ChooseWisely | Samsung Galaxy A54 | Mid-range device (more common) |
+| ModernTruths | Xiaomi 14 | Different manufacturer entirely |
+
+**Human-like timing:**
+- Action delays: 15-75 seconds between actions (not 2-8s like bots)
+- 15% chance of 60-180 second "micro-breaks" (checking another app)
+- 1-5 minute startup jitter (real humans don't open Instagram at exact times)
+- No overnight sessions (sleep gap 11PM-7AM IST — humans sleep)
+- instagrapi API delay: 3-7 seconds between raw API calls
+
+**Safe daily limits:**
+- 200 likes/day (Instagram safe zone for established accounts)
+- 60 comments/day (comments are most-monitored by Instagram)
+- 100 follows/day (aggressive but sustainable)
+- Session saved on every run (not just success) to prevent stale session relogins
+
 ### Smart Unfollow (Non-Followers Only)
 
 The unfollow system now checks the followers API before unfollowing:
 - **Only unfollows non-followers** — people who didn't follow back after 2 days
 - **Keeps mutual followers** — preserves relationships with people who followed back
-- **150/day limit** — aggressive pace to make room for new growth follows
+- **100/day limit** — sustainable pace to make room for new growth follows
 - Refreshes followers list from API + cached file for accuracy
 
 ## Audio Strategy (2026)
