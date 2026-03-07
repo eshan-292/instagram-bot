@@ -77,6 +77,24 @@ All 6 main accounts aggressively promote ALL other 5 accounts:
 
 Post lifecycle: `draft` -> `approved` -> `ready` -> `posted` (IG + YT simultaneously)
 
+### Repost System (Auto-Recycle Old Content)
+
+When no new content is ready to publish, the bot **automatically reposts old images as fresh hook-photo reels** with completely new hooks and captions:
+
+1. **Trigger:** At publish time, if `find_eligible()` returns no posts → repost fallback activates
+2. **Selection:** Picks the **oldest** posted entry (not the most recent) with valid images still on disk
+3. **Fresh content:** Generates new `video_text` hooks from persona config + new caption via Gemini
+4. **New video:** Re-renders the reel with new text frames (different hook/bridge/CTA)
+5. **Publishes:** Same images, completely different reel — algorithm treats it as new content
+
+**Safety guards:**
+- Only reposts content older than 7 days (`REPOST_MIN_AGE_DAYS`)
+- Never reposts a repost (avoids infinite chains)
+- Skips posts whose images were deleted from disk
+- Tags repost in `notes` field for tracking: `repost:{original_id}`
+
+This means accounts **never go silent** — even without manual image generation, the bot keeps posting fresh reels from existing photos.
+
 ## Viral Content Engine (Gemini Text API → Automatic)
 
 The viral content engine runs **automatically** — no extra setup needed beyond a `GEMINI_API_KEY`. Every time the bot generates new content, it produces algorithm-optimized viral posts.

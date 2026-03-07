@@ -31,6 +31,147 @@ from post_queue import (
 
 log = logging.getLogger(__name__)
 
+# ---------------------------------------------------------------------------
+# Repost system — reuse old posted images with fresh hooks when queue is empty
+# ---------------------------------------------------------------------------
+
+REPOST_MIN_AGE_DAYS = 7  # Don't repost content younger than this
+
+
+def _find_oldest_repostable(posts: list[dict[str, Any]]) -> tuple[int, dict[str, Any]] | None:
+    """Find the oldest posted entry with valid images for reposting.
+
+    Picks the oldest post (by posted_at) that:
+      - Has status "posted"
+      - Has valid image files still on disk
+      - Was posted >= REPOST_MIN_AGE_DAYS ago
+      - Is not itself a repost (avoids infinite repost chains)
+    """
+    now = datetime.now(timezone.utc)
+    oldest: tuple[int, dict[str, Any]] | None = None
+    oldest_dt: datetime | None = None
+
+    for idx, item in enumerate(posts):
+        if str(item.get("status", "")).strip().lower() != "posted":
+            continue
+        # Skip reposts to avoid chains
+        if str(item.get("notes", "")).startswith("repost:"):
+            continue
+        # Must have images on disk
+        carousel_images = item.get("carousel_images") or []
+        image_url = str(item.get("image_url", "")).strip()
+        has_images = False
+        if carousel_images and all(os.path.exists(str(p)) for p in carousel_images):
+            has_images = True
+        elif image_url and os.path.exists(image_url):
+            has_images = True
+        if not has_images:
+            continue
+        # Must be old enough
+        posted_at = parse_scheduled_at(item.get("posted_at"))
+        if posted_at and (now - posted_at).days < REPOST_MIN_AGE_DAYS:
+            continue
+        # Track oldest
+        if oldest is None or (posted_at and (oldest_dt is None or posted_at < oldest_dt)):
+            oldest = (idx, item)
+            oldest_dt = posted_at
+
+    return oldest
+
+
+def _create_repost(posts: list[dict[str, Any]], source: dict[str, Any],
+                   cfg: Config) -> dict[str, Any]:
+    """Create a fresh hook-photo reel from an old posted entry's images.
+
+    Reuses original images but generates completely new:
+      - video_text (hook/bridge/CTA from persona config)
+      - caption (via Gemini or template fallback)
+      - video (re-rendered with new text frames)
+    """
+    persona = get_persona()
+    content = persona.get("content", {})
+
+    # Pick fresh hooks from persona config
+    vt_hooks = content.get("video_text_hooks", [])
+    bridges = [
+        "Can you guess?", "Wait. It gets better.", "Which one wins?",
+        "Would you try this?", "The secret nobody shares.",
+        "Nobody talks about this.", "Think you could?",
+    ]
+    ctas = [
+        "Send to your bestie.", "Save this. Trust me.",
+        "Tag who needs this.", "Share before it's gone.",
+        "Screenshot this now.", "Send to that friend.",
+    ]
+
+    hook = random.choice(vt_hooks) if vt_hooks else "Wait for it."
+    bridge = random.choice(bridges)
+    cta = random.choice(ctas)
+
+    # Try Gemini for a fresh caption
+    topic = str(source.get("topic", "")).strip()
+    new_caption = None
+    if cfg.gemini_api_key:
+        try:
+            from gemini_helper import generate as gemini_generate
+            voice = persona.get("voice", {})
+            identity = voice.get("gemini_identity", "an influencer")
+            tone = voice.get("tone", "confident")
+            prompt = (
+                f"Write a NEW Instagram caption for {identity}.\n"
+                f"Topic: {topic}\n"
+                f"Voice: {tone}\n"
+                f"Rules:\n"
+                f"- Hook in first line (max 6 words, pattern interrupt)\n"
+                f"- Relatable question in middle\n"
+                f"- Send/save CTA as last line\n"
+                f"- Max 4 lines, no hashtags, max 1 emoji\n"
+                f"- Must feel completely different from: {source.get('caption', '')[:80]}\n"
+                f"Return ONLY the caption text."
+            )
+            raw = gemini_generate(cfg.gemini_api_key, prompt, cfg.gemini_model)
+            if raw and len(raw.strip()) > 20:
+                new_caption = raw.strip()
+        except Exception as exc:
+            log.debug("Gemini repost caption failed: %s", exc)
+
+    if not new_caption:
+        new_caption = f"{hook}\n{topic}.\nWould you try this?\nSend to someone who needs to see this."
+
+    # Build repost entry
+    from persona import next_post_id
+    post_id = next_post_id(posts)
+
+    carousel_images = source.get("carousel_images") or []
+    image_url = str(source.get("image_url", "")).strip()
+
+    repost: dict[str, Any] = {
+        "id": post_id,
+        "status": "draft",
+        "topic": topic,
+        "caption": new_caption,
+        "alt_text": str(source.get("alt_text", "")).strip(),
+        "youtube_title": "",
+        "video_text": [hook, bridge, cta],
+        "image_url": image_url,
+        "video_url": None,
+        "is_reel": True,
+        "post_type": "reel",
+        "reel_format": "hook_photo",
+        "scheduled_at": format_utc(datetime.now(timezone.utc)),
+        "notes": f"repost:{source.get('id', 'unknown')} | fresh hooks",
+    }
+
+    # Reuse images
+    if carousel_images:
+        valid = [str(p) for p in carousel_images if os.path.exists(str(p))]
+        repost["carousel_images"] = valid or [image_url]
+        repost["image_url"] = valid[0] if valid else image_url
+    elif image_url:
+        repost["carousel_images"] = [image_url]
+
+    return repost
+
 
 def _should_generate(posts: list[dict[str, Any]], cfg: Config) -> bool:
     return publishable_count(posts) < cfg.min_ready_queue
@@ -522,6 +663,26 @@ def main() -> int:
             else:
                 # Normal flow: Instagram + YouTube
                 chosen = find_eligible(posts)
+                if chosen is None:
+                    # --- Repost fallback: recycle oldest posted images with fresh hooks ---
+                    log.info("No eligible posts — checking for repostable content")
+                    repostable = _find_oldest_repostable(posts)
+                    if repostable:
+                        _, source = repostable
+                        repost = _create_repost(posts, source, cfg)
+                        posts.append(repost)
+                        # Convert to video immediately
+                        convert_posts_to_video(posts, youtube=cfg.youtube_enabled)
+                        # Promote to ready so it publishes this run
+                        repost["status"] = cfg.auto_promote_status
+                        write_queue(args.queue_file, posts)
+                        log.info("Created repost %s from %s with fresh hooks",
+                                 repost["id"], source.get("id"))
+                        # Re-find — should now pick up the repost
+                        chosen = find_eligible(posts)
+                    else:
+                        log.info("No repostable content found either")
+
                 if chosen is None:
                     log.info("No eligible posts to publish")
                 else:
