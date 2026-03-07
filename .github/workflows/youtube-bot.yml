@@ -3,36 +3,25 @@ name: YouTube Bot (Maya)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # ~22 YT sessions/day — 06:00 to 22:30 IST, every ~45 min
-    # Alternates yt_engage (niche browsing) and yt_replies (respond to comments)
-    # 2 publish windows (lunch + prime time) — fits within 10k quota/day
+    # 12 YT sessions/day — 07:00 to 23:00 IST, every ~90 min
+    # Maya has her own Google Cloud project (solo 10k quota/day)
     #
-    # Quota budget (10k units/day):
+    # Quota budget (10k units/day — solo):
     #   2 uploads × 1,650 = 3,300 units
-    #   20 engagement sessions × ~200 = 4,000 units
-    #   Total: ~7,300 units ✓
-    - cron: '30 0 * * *'   # 06:00 IST — yt_engage (early morning)
-    - cron: '15 1 * * *'   # 06:45 IST — yt_replies
-    - cron: '0 2 * * *'    # 07:30 IST — yt_engage
-    - cron: '45 2 * * *'   # 08:15 IST — yt_replies
-    - cron: '30 3 * * *'   # 09:00 IST — yt_engage
-    - cron: '15 4 * * *'   # 09:45 IST — yt_replies
-    - cron: '0 5 * * *'    # 10:30 IST — yt_engage
-    - cron: '45 5 * * *'   # 11:15 IST — yt_replies
-    - cron: '30 6 * * *'   # 12:00 IST — yt_engage (lunch)
-    - cron: '15 7 * * *'   # 12:45 IST — YT PUBLISH + yt_replies (lunch publish)
-    - cron: '0 8 * * *'    # 13:30 IST — yt_engage
-    - cron: '45 8 * * *'   # 14:15 IST — yt_replies
-    - cron: '30 9 * * *'   # 15:00 IST — yt_engage
-    - cron: '15 10 * * *'  # 15:45 IST — yt_replies
-    - cron: '0 11 * * *'   # 16:30 IST — yt_engage
-    - cron: '45 11 * * *'  # 17:15 IST — yt_replies
-    - cron: '30 12 * * *'  # 18:00 IST — yt_engage (pre-prime)
-    - cron: '15 13 * * *'  # 18:45 IST — yt_replies
-    - cron: '0 14 * * *'   # 19:30 IST — YT PUBLISH + yt_engage (prime time publish)
-    - cron: '45 14 * * *'  # 20:15 IST — yt_replies
-    - cron: '30 15 * * *'  # 21:00 IST — yt_engage (evening)
-    - cron: '15 16 * * *'  # 21:45 IST — yt_replies (last pass)
+    #   12 engagement sessions × ~300 = 3,600 units
+    #   Total: ~6,900 units ✓
+    - cron: '30 1 * * *'   # 07:00 IST — yt_engage (morning)
+    - cron: '0 3 * * *'    # 08:30 IST — yt_replies
+    - cron: '30 4 * * *'   # 10:00 IST — yt_engage
+    - cron: '0 6 * * *'    # 11:30 IST — yt_replies
+    - cron: '30 7 * * *'   # 13:00 IST — YT PUBLISH + yt_engage (lunch)
+    - cron: '0 9 * * *'    # 14:30 IST — yt_replies
+    - cron: '30 10 * * *'  # 16:00 IST — yt_engage
+    - cron: '0 12 * * *'   # 17:30 IST — yt_replies
+    - cron: '30 13 * * *'  # 19:00 IST — YT PUBLISH + yt_engage (prime time)
+    - cron: '0 15 * * *'   # 20:30 IST — yt_replies
+    - cron: '30 16 * * *'  # 22:00 IST — yt_engage (evening)
+    - cron: '0 17 * * *'   # 22:30 IST — yt_replies (last pass)
 
   workflow_dispatch:
     inputs:
@@ -97,28 +86,18 @@ jobs:
             CRON="${{ github.event.schedule }}"
             YT_PUB="false"
             case "${CRON}" in
-              "30 0 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 1 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "0 2 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "45 2 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 3 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 4 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "0 5 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "45 5 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 6 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 7 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # lunch publish
-              "0 8 * * *")   echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "45 8 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 9 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 10 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "0 11 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "45 11 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 12 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 13 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "0 14 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # prime time publish
-              "45 14 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
-              "30 15 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
-              "15 16 * * *") echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 1 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 3 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 4 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 6 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 7 * * *")  echo "type=yt_engage"   >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # lunch publish
+              "0 9 * * *")   echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 10 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 12 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 13 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT; YT_PUB="true" ;;  # prime time publish
+              "0 15 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
+              "30 16 * * *") echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
+              "0 17 * * *")  echo "type=yt_replies"  >> $GITHUB_OUTPUT ;;
               *)             echo "type=yt_engage"   >> $GITHUB_OUTPUT ;;
             esac
             echo "yt_publish=${YT_PUB}" >> $GITHUB_OUTPUT
