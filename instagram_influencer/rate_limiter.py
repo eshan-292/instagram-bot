@@ -31,12 +31,14 @@ class _LazyLogFile:
 
 LOG_FILE = _LazyLogFile()
 
-# Maximum growth defaults — warmup multiplier keeps these safe for new accounts.
+# Sustainable growth defaults — high enough for aggressive growth, low enough
+# to avoid Instagram's velocity-based detection. Previous values (500/250/400)
+# triggered constant bans. These are the max safe limits for established accounts.
 # Override via Config fields.
 DAILY_LIMITS = {
-    "likes": 500,
-    "comments": 250,
-    "follows": 400,
+    "likes": 200,
+    "comments": 60,
+    "follows": 100,
     "dm_replies": 25,
 }
 
@@ -128,12 +130,12 @@ def random_delay(min_s: int = 30, max_s: int = 90) -> None:
     centered between min and max, so most delays cluster near the middle
     with occasional short or long waits — like a real person scrolling.
 
-    15% chance of a 'micro-break' (90-300s) — simulates getting distracted,
+    15% chance of a 'micro-break' (60-180s) — simulates getting distracted,
     checking another app, replying to a text, etc.
     """
-    # Micro-break: simulate getting distracted (very rare, short)
-    if random.random() < 0.01:
-        pause = random.uniform(10, 25)
+    # Micro-break: simulate getting distracted (fairly common for real users)
+    if random.random() < 0.15:
+        pause = random.uniform(60, 180)
         log.debug("Micro-break: %.0fs", pause)
         time.sleep(pause)
         return
@@ -155,10 +157,10 @@ def session_startup_jitter() -> None:
     """Random delay at session start to avoid running at exact cron times.
 
     Real people don't open Instagram at exactly :00 or :30. This adds
-    0-4 minutes of jitter so sessions start at varied times.
+    1-5 minutes of jitter so sessions start at varied, human-like times.
     """
-    jitter = random.uniform(3, 30)  # 3-30s jitter
-    log.info("Session startup jitter: %.0fs", jitter)
+    jitter = random.uniform(60, 300)  # 1-5 minutes jitter
+    log.info("Session startup jitter: %.0fs (%.1f min)", jitter, jitter / 60)
     time.sleep(jitter)
 
 

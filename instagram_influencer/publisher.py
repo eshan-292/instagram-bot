@@ -37,40 +37,61 @@ def _challenge_handler(username: str, choice) -> str:
     )
 
 
-_DEVICE_SETTINGS = {
-    "app_version": "418.0.0.51.77",
-    "android_version": 34,
-    "android_release": "14",
-    "dpi": "480dpi",
-    "resolution": "1080x2340",
-    "manufacturer": "Samsung",
-    "device": "dm1q",
-    "model": "SM-S911B",
-    "cpu": "qcom",
-    "version_code": "659489002",
+# Per-persona device fingerprints — each account uses a different phone model
+# to avoid Instagram flagging multiple accounts from the same device.
+_DEVICE_PROFILES = {
+    "maya": {
+        "settings": {"app_version": "418.0.0.51.77", "android_version": 34, "android_release": "14", "dpi": "480dpi", "resolution": "1080x2340", "manufacturer": "Samsung", "device": "dm1q", "model": "SM-S911B", "cpu": "qcom", "version_code": "659489002"},
+        "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)",
+    },
+    "aryan": {
+        "settings": {"app_version": "418.0.0.51.77", "android_version": 34, "android_release": "14", "dpi": "420dpi", "resolution": "1080x2400", "manufacturer": "Google", "device": "husky", "model": "Pixel 8 Pro", "cpu": "tensor", "version_code": "659489002"},
+        "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 420dpi; 1080x2400; Google; Pixel 8 Pro; husky; tensor; en_IN; 659489002)",
+    },
+    "sofia": {
+        "settings": {"app_version": "418.0.0.51.77", "android_version": 34, "android_release": "14", "dpi": "480dpi", "resolution": "1440x3088", "manufacturer": "Samsung", "device": "dm2q", "model": "SM-S918B", "cpu": "qcom", "version_code": "659489002"},
+        "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1440x3088; samsung; SM-S918B; dm2q; qcom; en_IN; 659489002)",
+    },
+    "rhea": {
+        "settings": {"app_version": "418.0.0.51.77", "android_version": 34, "android_release": "14", "dpi": "450dpi", "resolution": "1240x2772", "manufacturer": "OnePlus", "device": "CPH2581", "model": "CPH2581", "cpu": "qcom", "version_code": "659489002"},
+        "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 450dpi; 1240x2772; OnePlus; CPH2581; CPH2581; qcom; en_IN; 659489002)",
+    },
+    "choosewisely": {
+        "settings": {"app_version": "418.0.0.51.77", "android_version": 34, "android_release": "14", "dpi": "400dpi", "resolution": "1080x2340", "manufacturer": "Samsung", "device": "a54x", "model": "SM-A546B", "cpu": "exynos", "version_code": "659489002"},
+        "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 400dpi; 1080x2340; samsung; SM-A546B; a54x; exynos; en_IN; 659489002)",
+    },
+    "moderntruths": {
+        "settings": {"app_version": "418.0.0.51.77", "android_version": 34, "android_release": "14", "dpi": "440dpi", "resolution": "1080x2400", "manufacturer": "Xiaomi", "device": "shennong", "model": "2401CPX3DC", "cpu": "qcom", "version_code": "659489002"},
+        "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 440dpi; 1080x2400; Xiaomi; 2401CPX3DC; shennong; qcom; en_IN; 659489002)",
+    },
 }
 
-_USER_AGENT = (
-    "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; "
-    "samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)"
-)
+# Fallback for satellite and unknown accounts
+_DEFAULT_DEVICE = _DEVICE_PROFILES["maya"]
+
+
+def _get_device_profile() -> dict:
+    """Get device profile for current persona."""
+    persona_id = os.getenv("PERSONA", "maya").lower()
+    return _DEVICE_PROFILES.get(persona_id, _DEFAULT_DEVICE)
 
 
 def _apply_device_settings(cl: Client) -> None:
-    """Apply current device settings and user agent to a client.
+    """Apply persona-specific device settings and user agent to a client.
 
     Must be called AFTER load_settings() because load_settings() overwrites
     device settings with whatever was saved in the session file (potentially
     an old app version that Instagram 403s).
     """
-    cl.set_device(_DEVICE_SETTINGS)
-    cl.set_user_agent(_USER_AGENT)
+    profile = _get_device_profile()
+    cl.set_device(profile["settings"])
+    cl.set_user_agent(profile["user_agent"])
 
 
 def _new_client() -> Client:
     """Create a fresh Client with realistic, up-to-date device settings."""
     cl = Client()
-    cl.delay_range = [1, 3]  # minimal delay between API calls
+    cl.delay_range = [3, 7]  # human-like delay between API calls
     cl.set_locale("en_IN")
     cl.set_country_code(91)
     cl.set_timezone_offset(19800)  # IST = UTC+5:30

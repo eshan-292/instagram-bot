@@ -458,7 +458,7 @@ def run_auto_unfollow(cl: Any, data: dict[str, Any]) -> int:
             record_action(data, "unfollows", user_id)
             unfollowed += 1
             log.debug("Unfollowed non-follower %s", user_id)
-            random_delay(3, 8)  # aggressive unfollow pace
+            random_delay(15, 40)  # human unfollow pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("Unfollow failed for %s: %s", user_id, exc)
@@ -532,7 +532,7 @@ def run_welcome_dms(cl: Any, cfg: Config) -> int:
             cl.direct_send(dm_text, user_ids=[int(uid)])
             sent += 1
             log.info("Welcome DM sent to @%s", username)
-            random_delay(8, 20)  # fast DM pace
+            random_delay(20, 50)  # human DM pace
         except Exception as exc:
             _check_challenge(exc)
             log.warning("DM failed for @%s: %s", username, exc)
@@ -616,7 +616,7 @@ def run_reply_to_comments(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
                 replied_set.add(comment_id)
                 replied += 1
                 log.debug("Replied to comment %s: %s", comment_id, reply[:40])
-                random_delay(4, 12)  # fast reply pace
+                random_delay(25, 75)  # human reply pace
             except Exception as exc:
                 _check_challenge(exc)
                 log.warning("Reply failed for comment %s: %s", comment_id, exc)
@@ -715,7 +715,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(2, 8)  # fast pace
+        random_delay(20, 60)  # human browsing pace
 
     if any(v > 0 for v in stats.values()):
         log.info("Explore engagement: %s", stats)
@@ -851,7 +851,7 @@ def _run_hashtag_engagement(
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(2, 8)  # fast pace
+        random_delay(20, 60)  # human browsing pace
 
         if (
             not can_act(data, "likes", like_limit)
@@ -911,7 +911,7 @@ def run_warm_audience_session(
         except Exception as exc:
             _check_challenge(exc)
             log.warning("Could not resolve @%s: %s — trying next target", candidate, exc)
-            random_delay(2, 5)
+            random_delay(15, 40)
             continue
 
     if target_id is None:
@@ -1005,7 +1005,7 @@ def run_warm_audience_session(
             stats["warm_story_views"] = stats.get("story_views", 0)
 
         save_log(LOG_FILE, data)
-        random_delay(3, 10)  # fast pace
+        random_delay(20, 60)  # human browsing pace
 
         # Check daily limits
         if (not can_act(data, "likes", cfg.engagement_daily_likes)
@@ -1085,7 +1085,7 @@ def run_commenter_targeting_session(
             except Exception as exc:
                 _check_challenge(exc)
                 log.debug("Could not fetch comments: %s", exc)
-            random_delay(1, 3)
+            random_delay(10, 30)
 
     if not all_commenter_ids:
         log.info("Commenter targeting: no commenters found")
@@ -1159,7 +1159,7 @@ def run_commenter_targeting_session(
             stats["ct_story_views"] = stats.get("story_views", 0)
 
         save_log(LOG_FILE, data)
-        random_delay(2, 8)
+        random_delay(20, 60)
 
         # Check daily limits
         if (not can_act(data, "likes", cfg.engagement_daily_likes)
@@ -1249,7 +1249,7 @@ def run_post_publish_burst(
         except Exception as exc:
             log.warning("Self-comment failed on %s: %s", post_id, exc)
 
-    random_delay(3, 8)
+    random_delay(15, 45)
 
     # 2. Reshare post to story (native post card with link sticker)
     if post_id and post_id != "unknown":
@@ -1261,7 +1261,7 @@ def run_post_publish_burst(
         except Exception as exc:
             log.debug("Post-publish story failed: %s", exc)
 
-    random_delay(3, 10)
+    random_delay(15, 45)
 
     # 3. Mini engagement burst — 8-12 likes on hashtag content (natural activity)
     data = load_log(LOG_FILE)
@@ -1381,7 +1381,7 @@ def run_viral_detection(
             except Exception:
                 pass
 
-        random_delay(5, 15)
+        random_delay(20, 50)
 
     if stats["viral_detected"]:
         log.info("Viral detection results: %s", stats)
@@ -1507,7 +1507,7 @@ def run_comment_followup_dms(
                 except Exception as exc:
                     _follow_failed(exc)
 
-            random_delay(5, 15)  # DM pace
+            random_delay(20, 50)  # DM pace
 
     if dm_count:
         log.info("Comment follow-up DMs sent: %d", dm_count)
@@ -1666,7 +1666,7 @@ def run_dm_replies(cl: Any, cfg: Config, data: dict[str, Any]) -> int:
             _check_challenge(exc)
             log.warning("DM reply failed for thread %s: %s", thread_id, exc)
 
-        random_delay(5, 15)
+        random_delay(20, 50)
 
     if replied:
         log.info("Replied to %d incoming DMs", replied)
@@ -1743,7 +1743,7 @@ def _boost_fresh_partner_posts(cl: Any, cfg: Config, data: dict[str, Any]) -> di
                 stats["pod_likes"] += 1
             except Exception:
                 pass
-            random_delay(1, 3)
+            random_delay(10, 30)
 
             # Save it (strongest algorithm signal)
             try:
@@ -1752,7 +1752,7 @@ def _boost_fresh_partner_posts(cl: Any, cfg: Config, data: dict[str, Any]) -> di
                 stats["pod_saves"] += 1
             except Exception:
                 pass
-            random_delay(1, 3)
+            random_delay(10, 30)
 
             # Comment on it
             from cross_promo import _generate_partner_comment
@@ -1770,7 +1770,7 @@ def _boost_fresh_partner_posts(cl: Any, cfg: Config, data: dict[str, Any]) -> di
             # Record boost to avoid re-boosting
             record_action(data, "pod_boost", media_id)
             save_log(LOG_FILE, data)
-            random_delay(1, 3)
+            random_delay(10, 30)
 
         except Exception as exc:
             _check_challenge(exc)
@@ -1883,15 +1883,15 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     else:  # "full" — all phases (used sparingly, 1x/day max)
         stats["unfollows"] = run_auto_unfollow(cl, data)
         save_log(LOG_FILE, data)
-        random_delay(3, 10)
+        random_delay(15, 45)
         stats["dm_replies"] = run_dm_replies(cl, cfg, data)
         save_log(LOG_FILE, data)
-        random_delay(3, 10)
+        random_delay(15, 45)
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
-        random_delay(3, 10)
+        random_delay(15, 45)
         _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
-        random_delay(3, 10)
+        random_delay(15, 45)
         explore_stats = run_explore_engagement(cl, cfg, data)
         stats.update(explore_stats)
 
