@@ -40,10 +40,26 @@ for pair in \
   secret_name="${pair##*:}"
   config_file="wg_${persona}.conf"
 
+  # Check for wrong format (.ovpn = OpenVPN, we need WireGuard .conf)
+  if [ -f "wg_${persona}.ovpn" ] && [ ! -f "$config_file" ]; then
+    echo "ERROR: wg_${persona}.ovpn is OpenVPN format — wireproxy needs WireGuard!"
+    echo "       Go to account.protonvpn.com/downloads → 'WireGuard configuration'"
+    echo "       Generate a .conf file (starts with [Interface]), not .ovpn"
+    missing=$((missing + 1))
+    continue
+  fi
+
   if [ -f "$config_file" ]; then
-    echo "Uploading $config_file → secret $secret_name"
-    gh secret set "$secret_name" --repo "$REPO" < "$config_file"
-    uploaded=$((uploaded + 1))
+    # Verify it's actually WireGuard format
+    if grep -q "\[Interface\]" "$config_file" 2>/dev/null; then
+      echo "Uploading $config_file → secret $secret_name"
+      gh secret set "$secret_name" --repo "$REPO" < "$config_file"
+      uploaded=$((uploaded + 1))
+    else
+      echo "ERROR: $config_file doesn't look like WireGuard format (missing [Interface])"
+      echo "       Make sure you downloaded the WireGuard config, not OpenVPN"
+      missing=$((missing + 1))
+    fi
   else
     echo "SKIP: $config_file not found"
     missing=$((missing + 1))
