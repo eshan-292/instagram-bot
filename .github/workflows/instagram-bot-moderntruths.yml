@@ -3,34 +3,21 @@ name: Instagram Bot (Modern Truths)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # 25 daytime sessions — no overnight (sleeping 00:00-07:00 IST)
     #
-    # DAYTIME — 25 sessions
-    - cron: '9 2 * * *'    # 07:39 IST — morning
-    - cron: '9 3 * * *'    # 08:39 IST — explore
-    - cron: '39 3 * * *'   # 09:09 IST — replies
-    - cron: '9 4 * * *'    # 09:39 IST — hashtags
-    - cron: '9 5 * * *'    # 10:39 IST — warm_audience
-    - cron: '39 5 * * *'   # 11:09 IST — explore
-    - cron: '9 6 * * *'    # 11:39 IST — hashtags
-    - cron: '9 7 * * *'    # 12:39 IST — BACKUP PUBLISH + explore (lunch fallback)
-    - cron: '9 8 * * *'    # 13:39 IST — hashtags
-    - cron: '9 9 * * *'    # 14:39 IST — warm_audience
-    - cron: '39 9 * * *'   # 15:09 IST — commenter_target
-    - cron: '9 10 * * *'   # 15:39 IST — explore
-    - cron: '39 10 * * *'  # 16:09 IST — warm_audience
-    - cron: '9 11 * * *'   # 16:39 IST — hashtags
-    - cron: '9 12 * * *'   # 17:39 IST — warm_audience
-    - cron: '39 12 * * *'  # 18:09 IST — explore
-    - cron: '9 13 * * *'   # 18:39 IST — stories
-    - cron: '9 14 * * *'   # 19:39 IST — PUBLISH + explore (PRIME TIME)
-    - cron: '39 14 * * *'  # 20:09 IST — hashtags
-    - cron: '9 15 * * *'   # 20:39 IST — boost
-    - cron: '39 15 * * *'  # 21:09 IST — replies
-    - cron: '9 16 * * *'   # 21:39 IST — cross_promo
-    - cron: '39 16 * * *'  # 22:09 IST — maintenance
-    - cron: '9 17 * * *'   # 22:39 IST — maintenance
-    - cron: '39 17 * * *'  # 23:09 IST — report
+    # ~12 IG sessions, 07:00 to 23:15 IST, every ~90 min
+    # (no overnight sessions — sleeping 00:00-07:00 IST)
+    - cron: '30 1 * * *'   # 07:00 IST — morning engagement
+    - cron: '0 3 * * *'    # 08:30 IST — hashtags
+    - cron: '30 4 * * *'   # 10:00 IST — explore
+    - cron: '0 6 * * *'    # 11:30 IST — warm_audience
+    - cron: '0 7 * * *'    # 12:30 IST — BACKUP PUBLISH + replies
+    - cron: '30 8 * * *'   # 14:00 IST — commenter_target
+    - cron: '0 10 * * *'   # 15:30 IST — hashtags
+    - cron: '30 11 * * *'  # 17:00 IST — explore
+    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH (prime time)
+    - cron: '30 14 * * *'  # 20:00 IST — boost
+    - cron: '0 16 * * *'   # 21:30 IST — maintenance
+    - cron: '45 17 * * *'  # 23:15 IST — daily report
 
   workflow_dispatch:
     inputs:
@@ -121,33 +108,19 @@ jobs:
           else
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              # Daytime
-              "9 2 * * *")    echo "type=morning"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 3 * * *")    echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 3 * * *")   echo "type=replies"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 4 * * *")    echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 5 * * *")    echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 5 * * *")   echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 6 * * *")    echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 7 * * *")    echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;  # backup publish
-              "9 8 * * *")    echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 9 * * *")    echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 9 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 10 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 10 * * *")  echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 11 * * *")   echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 12 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 12 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 13 * * *")   echo "type=stories"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 14 * * *")   echo "type=explore"       >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
-              "39 14 * * *")  echo "type=hashtags"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 15 * * *")   echo "type=boost"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 15 * * *")  echo "type=replies"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 16 * * *")   echo "type=cross_promo"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 16 * * *")  echo "type=maintenance"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "9 17 * * *")   echo "type=maintenance"   >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "39 17 * * *")  echo "type=report"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              *)              echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 1 * * *")   echo "type=morning"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 3 * * *")    echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 4 * * *")   echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 6 * * *")    echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 7 * * *")    echo "type=replies"          >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              "30 8 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 10 * * *")   echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 11 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 13 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
+              "30 14 * * *")  echo "type=boost"            >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 16 * * *")   echo "type=maintenance"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 17 * * *")  echo "type=report"           >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              *)              echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
             esac
           fi
 
@@ -209,9 +182,19 @@ jobs:
           git diff --staged --name-only || true
           git diff --staged --quiet || (
             git commit -m "bot: moderntruths state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
-            for attempt in 1 2 3; do
-              git pull --rebase origin main 2>/dev/null && git push && break
-              echo "Push attempt $attempt failed, retrying..."
-              sleep 2
+            for attempt in 1 2 3 4 5; do
+              if git pull --rebase origin main; then
+                git push && break
+              else
+                echo "Rebase conflict on attempt $attempt — resetting and re-staging"
+                git rebase --abort 2>/dev/null || true
+                git reset --soft HEAD~1
+                git stash
+                git pull origin main
+                git stash pop || true
+                git add -A
+                git commit -m "bot: moderntruths state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+              fi
+              sleep $((attempt * 2))
             done
           )
