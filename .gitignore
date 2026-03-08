@@ -2,6 +2,7 @@
 .env
 *.env.local
 env-templates/
+wg_*.conf
 
 # Session (contains auth tokens — persisted via GitHub Actions cache)
 .ig_session.json
