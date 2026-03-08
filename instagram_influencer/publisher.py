@@ -88,13 +88,18 @@ def _apply_device_settings(cl: Client) -> None:
     cl.set_user_agent(profile["user_agent"])
 
 
-def _new_client() -> Client:
+def _new_client(proxy_url: str = "") -> Client:
     """Create a fresh Client with realistic, up-to-date device settings."""
     cl = Client()
     cl.delay_range = [5, 12]  # human-like delay between API calls
     cl.set_locale("en_IN")
     cl.set_country_code(91)
     cl.set_timezone_offset(19800)  # IST = UTC+5:30
+
+    # Route through proxy if configured (anti-detection: avoids datacenter IPs)
+    if proxy_url:
+        cl.set_proxy(proxy_url)
+        log.info("Proxy configured: %s", proxy_url.split("@")[-1] if "@" in proxy_url else proxy_url)
 
     # Non-interactive challenge handler (avoids input() blocking in CI)
     cl.challenge_code_handler = _challenge_handler
@@ -204,11 +209,12 @@ def _get_client(cfg: Config) -> Client:
     """
     session_path = str(SESSION_FILE)
     is_ci = bool(os.getenv("CI") or os.getenv("GITHUB_ACTIONS"))
+    proxy = getattr(cfg, "proxy_url", "") or os.getenv("PROXY_URL", "")
 
     # ── 1. Try silent restore (no login() call) ──────────────────────
     if os.path.exists(session_path):
         try:
-            cl = _new_client()
+            cl = _new_client(proxy_url=proxy)
             cl.load_settings(session_path)
             _apply_device_settings(cl)  # load_settings overwrites device; re-apply current version
             cl.challenge_code_handler = _challenge_handler
@@ -231,7 +237,7 @@ def _get_client(cfg: Config) -> Client:
     #    so Instagram sees "same device, different IP" = usually OK.
     if os.path.exists(session_path) and cfg.instagram_username and cfg.instagram_password:
         try:
-            cl = _new_client()
+            cl = _new_client(proxy_url=proxy)
             cl.load_settings(session_path)
             _apply_device_settings(cl)  # load_settings overwrites device; re-apply current version
             cl.challenge_code_handler = _challenge_handler
@@ -284,7 +290,7 @@ def _get_client(cfg: Config) -> Client:
         )
 
     _delete_session()
-    cl = _new_client()
+    cl = _new_client(proxy_url=proxy)
     try:
         cl.login(cfg.instagram_username, cfg.instagram_password)
     except ChallengeRequired as exc:

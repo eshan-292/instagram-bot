@@ -93,6 +93,21 @@ jobs:
           # Also export PERSONA to the environment for reliability
           echo "PERSONA=rhea" >> $GITHUB_ENV
 
+      # Route traffic through VPN proxy (anti-detection: avoids datacenter IPs)
+      - name: Setup proxy
+        id: proxy
+        if: ${{ secrets.WG_CONFIG_RHEA != '' }}
+        uses: ./.github/actions/setup-proxy
+        with:
+          wireguard_config: ${{ secrets.WG_CONFIG_RHEA }}
+          proxy_port: '10805'
+
+      - name: Inject proxy URL
+        if: steps.proxy.outputs.proxy_url != ''
+        run: |
+          echo "PROXY_URL=${{ steps.proxy.outputs.proxy_url }}" >> instagram_influencer/.env
+          echo "Proxy enabled: ${{ steps.proxy.outputs.proxy_url }}"
+
       # Determine which session to run based on the trigger
       - name: Determine session
         id: session

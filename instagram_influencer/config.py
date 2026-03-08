@@ -140,6 +140,9 @@ class Config:
     engagement_dm_replies_enabled: bool
     engagement_daily_dm_replies: int
 
+    # Proxy (anti-detection — routes traffic through VPN/proxy instead of datacenter IP)
+    proxy_url: str  # e.g. socks5://127.0.0.1:10801 or http://user:pass@host:port
+
     # YouTube Shorts
     youtube_enabled: bool
     youtube_client_id: str
@@ -204,6 +207,8 @@ def load_config() -> Config:
         # DM replies
         engagement_dm_replies_enabled=_bool(os.getenv("ENGAGEMENT_DM_REPLIES_ENABLED"), True),
         engagement_daily_dm_replies=_int(os.getenv("ENGAGEMENT_DAILY_DM_REPLIES"), 25, minimum=0),
+        # Proxy
+        proxy_url=_str(os.getenv("PROXY_URL")),
         # YouTube
         youtube_enabled=_bool(os.getenv("YOUTUBE_ENABLED")),
         youtube_client_id=_str(os.getenv("YOUTUBE_CLIENT_ID")),

@@ -1,0 +1,68 @@
+name: Setup Proxy (wireproxy + WireGuard)
+description: Start a SOCKS5 proxy via wireproxy using a WireGuard config stored as a secret
+
+inputs:
+  wireguard_config:
+    description: WireGuard config file contents (from secret)
+    required: true
+  proxy_port:
+    description: Local SOCKS5 port to expose
+    required: false
+    default: '10801'
+
+outputs:
+  proxy_url:
+    description: SOCKS5 proxy URL to pass to the bot
+    value: ${{ steps.start.outputs.proxy_url }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install wireproxy
+      shell: bash
+      run: |
+        WIREPROXY_VERSION="1.0.9"
+        curl -sSL "https://github.com/pufferffish/wireproxy/releases/download/v${WIREPROXY_VERSION}/wireproxy_linux_amd64.tar.gz" \
+          | tar xz -C /usr/local/bin wireproxy
+        chmod +x /usr/local/bin/wireproxy
+
+    - name: Start wireproxy
+      id: start
+      shell: bash
+      env:
+        WG_CONFIG: ${{ inputs.wireguard_config }}
+        PROXY_PORT: ${{ inputs.proxy_port }}
+      run: |
+        # Write WireGuard config
+        mkdir -p /tmp/wg
+        echo "$WG_CONFIG" > /tmp/wg/wg.conf
+
+        # Create wireproxy config that wraps the WireGuard tunnel as a SOCKS5 proxy
+        cat > /tmp/wg/wireproxy.conf << WPEOF
+        WGConfig = /tmp/wg/wg.conf
+
+        [Socks5]
+        BindAddress = 127.0.0.1:${PROXY_PORT}
+        WPEOF
+
+        # Start wireproxy in the background
+        wireproxy -c /tmp/wg/wireproxy.conf &
+        WIREPROXY_PID=$!
+        echo "wireproxy_pid=${WIREPROXY_PID}" >> $GITHUB_OUTPUT
+
+        # Wait for proxy to be ready
+        for i in $(seq 1 15); do
+          if curl -s --socks5 "127.0.0.1:${PROXY_PORT}" --connect-timeout 3 "https://api.ipify.org" 2>/dev/null; then
+            echo ""
+            echo "Proxy is ready on port ${PROXY_PORT}"
+            break
+          fi
+          echo "Waiting for proxy to start (attempt $i)..."
+          sleep 2
+        done
+
+        # Get the exit IP
+        EXIT_IP=$(curl -s --socks5 "127.0.0.1:${PROXY_PORT}" --connect-timeout 5 "https://api.ipify.org" 2>/dev/null || echo "unknown")
+        echo "Exit IP: ${EXIT_IP}"
+
+        echo "proxy_url=socks5://127.0.0.1:${PROXY_PORT}" >> $GITHUB_OUTPUT

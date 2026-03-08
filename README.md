@@ -264,6 +264,21 @@ Comprehensive anti-detection measures to prevent Instagram from flagging automat
 - Partner boost only runs during 3 specific sessions (morning, cross_promo, boost)
 - Previously ran 25+ times/day, creating an obvious coordinated network signal
 
+**VPN proxy (Proton VPN Free + wireproxy):**
+- Each persona routes through a different VPN exit IP (no more datacenter IPs)
+- Uses [wireproxy](https://github.com/pufferffish/wireproxy) — userspace WireGuard client exposing SOCKS5 proxy
+- Runs on GitHub Actions with no root required
+- **Free**: Proton VPN Free = unlimited bandwidth, no credit card, 5 countries
+- Each persona gets a different server (US, NL, JP, RO, PL) = 6 unique exit IPs
+- Graceful fallback: if `WG_CONFIG_*` secret not set, runs without proxy
+
+**Setup (5 min):**
+1. Create free account at [Proton VPN](https://account.protonvpn.com/signup)
+2. Go to Downloads → WireGuard → generate 6 configs (different servers)
+3. Save as `wg_maya.conf`, `wg_aryan.conf`, etc.
+4. Run `bash setup_proxy.sh` — uploads configs as GitHub secrets
+5. Next workflow run will automatically route through VPN
+
 ### Smart Unfollow (Non-Followers Only)
 
 The unfollow system now checks the followers API before unfollowing:

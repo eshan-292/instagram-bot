@@ -92,6 +92,21 @@ jobs:
           # Also export PERSONA to the environment for reliability
           echo "PERSONA=choosewisely" >> $GITHUB_ENV
 
+      # Route traffic through VPN proxy (anti-detection: avoids datacenter IPs)
+      - name: Setup proxy
+        id: proxy
+        if: ${{ secrets.WG_CONFIG_CHOOSEWISELY != '' }}
+        uses: ./.github/actions/setup-proxy
+        with:
+          wireguard_config: ${{ secrets.WG_CONFIG_CHOOSEWISELY }}
+          proxy_port: '10803'
+
+      - name: Inject proxy URL
+        if: steps.proxy.outputs.proxy_url != ''
+        run: |
+          echo "PROXY_URL=${{ steps.proxy.outputs.proxy_url }}" >> instagram_influencer/.env
+          echo "Proxy enabled: ${{ steps.proxy.outputs.proxy_url }}"
+
       # Determine which session to run based on the trigger
       # Uses github.event.schedule (exact cron expression) instead of wall-clock time
       # to avoid misrouting due to GitHub Actions cron delays (can be 10-20+ min)
