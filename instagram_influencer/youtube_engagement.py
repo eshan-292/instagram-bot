@@ -9,13 +9,17 @@ Follows the same human-like patterns as Instagram engagement:
   - AI-generated comments via Gemini
 
 API Quota Budget (10,000 units/day default):
-  - 1 video upload = 1,600 units
-  - search.list = 100 units per call
-  - commentThreads.list = 1 unit
+  - 1 video upload       = 1,600 units
+  - search.list          = 100 units per call
+  - commentThreads.list  = 1 unit per call
   - commentThreads.insert = 50 units
-  - videos.rate (like) = 50 units
-  Budget: 1 upload + 6×engage(12 searches + 50 likes + 20 comments)
-          + 6×replies(30 list + 30 replies) ≈ 7,330 units (73% of quota)
+  - videos.rate (like)   = 50 units
+  - comments.insert      = 50 units
+
+Quota strategy: PUBLISHING FIRST, engagement with what's left.
+  - Reserve 1,700 units per remaining publish window (upload + creator comment)
+  - Engagement sessions self-limit based on remaining budget
+  - Abort immediately on quotaExceeded (no wasted API calls)
 """
 
 from __future__ import annotations
@@ -24,6 +28,7 @@ import logging
 import os
 import random
 import time
+from datetime import datetime, timezone
 from typing import Any
 
 from config import Config
@@ -43,10 +48,100 @@ log = logging.getLogger(__name__)
 
 # YouTube daily limits — MAXED OUT (no action blocks on YouTube unlike Instagram)
 # YouTube API quota: 10,000 units/day per key. Like=50u, comment=50u, reply=50u, search=100u
-# Will hit quota errors eventually — that's fine, they're non-fatal
 YT_DAILY_LIKES = 500
 YT_DAILY_COMMENTS = 200
 YT_DAILY_REPLIES = 250
+
+# ---------------------------------------------------------------------------
+# Quota budget system — publishing always gets priority over engagement
+# ---------------------------------------------------------------------------
+
+# Cost per API operation (YouTube Data API v3)
+_QUOTA_COST = {
+    "upload": 1600,
+    "search": 100,
+    "like": 50,
+    "comment": 50,
+    "reply": 50,
+    "list_comments": 1,
+    "creator_comment": 50,
+}
+
+# Reserve this many units per publish window (upload + creator comment + thumbnail)
+_PUBLISH_RESERVE = 1700
+
+# Total daily quota per Google Cloud project
+_DAILY_QUOTA = int(os.getenv("YOUTUBE_DAILY_QUOTA", "10000"))
+
+# Flag: set to True when we get a quotaExceeded error — skip all further calls
+_quota_exhausted = False
+
+
+def _estimate_units_used(data: dict[str, Any]) -> int:
+    """Estimate YouTube API quota units consumed today from the action log."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    units = 0
+    for a in data.get("actions", []):
+        if not str(a.get("at", "")).startswith(today):
+            continue
+        action_type = a.get("type", "")
+        if action_type == "yt_likes":
+            units += _QUOTA_COST["like"]
+        elif action_type == "yt_comments":
+            units += _QUOTA_COST["comment"]
+        elif action_type == "yt_replies":
+            units += _QUOTA_COST["reply"]
+        elif action_type == "yt_search":
+            units += _QUOTA_COST["search"]
+        elif action_type == "yt_upload":
+            units += _QUOTA_COST["upload"]
+        elif action_type == "yt_creator_comment":
+            units += _QUOTA_COST["creator_comment"]
+    return units
+
+
+def _remaining_publish_windows() -> int:
+    """Count how many YT publish windows remain today (UTC).
+
+    Publish windows are at fixed IST hours. We check which haven't fired yet.
+    Typically 2 per day: lunch (~13:00 IST) and prime time (~19:00-20:00 IST).
+    """
+    now_utc = datetime.now(timezone.utc)
+    # IST = UTC + 5:30. Publish windows vary by persona but are typically
+    # around 13:00 IST (07:30 UTC) and 19:00-20:00 IST (13:30-14:30 UTC)
+    # Use conservative estimates — assume 2 windows if before 08:00 UTC,
+    # 1 window if before 14:30 UTC, 0 after that.
+    hour_utc = now_utc.hour + now_utc.minute / 60.0
+    if hour_utc < 8.0:
+        return 2  # Both lunch and prime time remain
+    elif hour_utc < 14.5:
+        return 1  # Only prime time remains
+    return 0  # All windows passed
+
+
+def quota_budget_remaining(data: dict[str, Any]) -> int:
+    """Return how many quota units are available for engagement today.
+
+    Subtracts already-used units and reserves for remaining publish windows.
+    """
+    used = _estimate_units_used(data)
+    reserved = _remaining_publish_windows() * _PUBLISH_RESERVE
+    remaining = _DAILY_QUOTA - used - reserved
+    return max(0, remaining)
+
+
+def _handle_quota_error(exc: Exception) -> bool:
+    """Check if an exception is a YouTube quota error. If so, mark exhausted.
+
+    Returns True if it was a quota error (caller should abort).
+    """
+    global _quota_exhausted
+    err_str = str(exc).lower()
+    if "quotaexceeded" in err_str or "quota" in err_str:
+        _quota_exhausted = True
+        log.warning("YouTube quota EXHAUSTED — skipping all remaining API calls")
+        return True
+    return False
 
 # Search queries for finding niche Shorts to engage with
 def _niche_queries():
@@ -164,8 +259,19 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
 
     Mimics a real person browsing YouTube Shorts: scroll, watch some,
     like a few, comment on ones that genuinely resonate.
+
+    Respects quota budget — reserves units for publishing first.
     """
+    global _quota_exhausted
     stats: dict[str, int] = {"yt_likes": 0, "yt_comments": 0}
+
+    # Check quota budget before starting
+    budget = quota_budget_remaining(data)
+    if budget < 200 or _quota_exhausted:
+        log.info("YouTube quota budget too low for engagement (%d units left, "
+                 "%d reserved for publishing) — skipping", budget,
+                 _remaining_publish_windows() * _PUBLISH_RESERVE)
+        return stats
 
     try:
         youtube = _get_youtube_service()
@@ -173,12 +279,16 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
         log.warning("YouTube auth failed (skipping engagement): %s", exc)
         return stats
 
-    # Pick 3-4 search queries — cast a wide net
+    # Pick 2-3 search queries (reduced from 4 to save quota — each costs 100 units)
     nq = _niche_queries()
-    queries = random.sample(nq, min(4, len(nq)))
+    max_queries = min(3, max(1, budget // 1500))  # fewer queries when budget tight
+    queries = random.sample(nq, min(max_queries, len(nq)))
     all_videos: list[dict] = []
+    units_spent = 0
 
     for query in queries:
+        if _quota_exhausted:
+            break
         try:
             response = youtube.search().list(
                 part="snippet",
@@ -190,6 +300,8 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                 relevanceLanguage="en",
                 regionCode="IN",
             ).execute()
+            units_spent += _QUOTA_COST["search"]
+            record_action(data, "yt_search", query)
 
             for item in response.get("items", []):
                 video_id = item.get("id", {}).get("videoId", "")
@@ -202,9 +314,15 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                         "channel_id": channel_id,
                     })
         except Exception as exc:
+            if _handle_quota_error(exc):
+                break
             log.debug("YouTube search '%s' failed: %s", query, exc)
 
         time.sleep(random.uniform(1, 3))
+
+    if _quota_exhausted:
+        save_log(LOG_FILE, data)
+        return stats
 
     # Deduplicate and shuffle
     seen_ids: set[str] = set()
@@ -215,10 +333,17 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
             videos.append(v)
     random.shuffle(videos)
 
-    session_size = _randomize_size(60)
-    log.info("YouTube niche engagement: %d videos to browse", min(session_size, len(videos)))
+    # Cap session size based on remaining budget (each video = ~100 units: like+comment)
+    budget_after_search = budget - units_spent
+    max_by_budget = max(5, budget_after_search // 100)
+    session_size = min(_randomize_size(60), max_by_budget)
+    log.info("YouTube niche engagement: %d videos (budget: %d units, %d reserved for publishing)",
+             min(session_size, len(videos)), budget_after_search,
+             _remaining_publish_windows() * _PUBLISH_RESERVE)
 
     for video in videos[:session_size]:
+        if _quota_exhausted:
+            break
         if _should_skip():
             time.sleep(random.uniform(0.5, 1.5))
             continue
@@ -236,10 +361,13 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                 stats["yt_likes"] += 1
                 log.debug("Liked YT Short: %s", video["title"][:50])
             except Exception as exc:
+                if _handle_quota_error(exc):
+                    break
                 log.debug("YT like failed: %s", exc)
 
         # Comment on ~80% (quality comments drive subscribers — no restrictions on YT)
-        if (random.random() < 0.80
+        if (not _quota_exhausted
+                and random.random() < 0.80
                 and can_act(data, "yt_comments", YT_DAILY_COMMENTS)):
             comment = _generate_yt_comment(cfg, video["title"])
             if comment:
@@ -261,6 +389,8 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
                     stats["yt_comments"] += 1
                     log.debug("Commented on YT Short: %s", comment[:40])
                 except Exception as exc:
+                    if _handle_quota_error(exc):
+                        break
                     log.debug("YT comment failed: %s", exc)
 
         save_log(LOG_FILE, data)
@@ -276,8 +406,18 @@ def run_yt_niche_engagement(cfg: Config, data: dict[str, Any]) -> dict[str, int]
 # ---------------------------------------------------------------------------
 
 def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
-    """Reply to comments on our own recent YouTube videos. Returns reply count."""
+    """Reply to comments on our own recent YouTube videos. Returns reply count.
+
+    Respects quota budget — reserves units for publishing first.
+    """
+    global _quota_exhausted
     replied = 0
+
+    # Check quota budget
+    budget = quota_budget_remaining(data)
+    if budget < 100 or _quota_exhausted:
+        log.info("YouTube quota budget too low for replies (%d units left) — skipping", budget)
+        return 0
 
     try:
         youtube = _get_youtube_service()
@@ -293,7 +433,12 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
         log.info("No recent YouTube videos to check for comments")
         return 0
 
-    log.info("yt_replies: checking %d recent videos for comments", len(videos))
+    # Cap replies by budget (each reply = 50 units)
+    max_replies_by_budget = max(2, budget // _QUOTA_COST["reply"])
+    reply_limit = min(YT_DAILY_REPLIES, max_replies_by_budget)
+
+    log.info("yt_replies: checking %d recent videos (budget: %d units, max %d replies)",
+             len(videos), budget, reply_limit)
 
     # Track which comments we've already replied to
     replied_set: set[str] = {
@@ -301,7 +446,7 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
     }
 
     for video in videos:
-        if replied >= YT_DAILY_REPLIES:
+        if replied >= reply_limit or _quota_exhausted:
             break
 
         video_id = video.get("video_id", "")
@@ -318,6 +463,8 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
                 order="time",  # newest first
             ).execute()
         except Exception as exc:
+            if _handle_quota_error(exc):
+                break
             log.info("Could not fetch comments for %s: %s", video_id, exc)
             continue
 
@@ -328,13 +475,12 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
             log.info("yt_replies: video %s (%s) has %d comments", video_id, video_title[:40], comment_count)
 
         for item in response.get("items", []):
-            if replied >= YT_DAILY_REPLIES:
+            if replied >= reply_limit or _quota_exhausted:
                 break
 
             comment_id = item.get("id", "")
             snippet = item.get("snippet", {}).get("topLevelComment", {}).get("snippet", {})
             comment_text = snippet.get("textOriginal", "")
-            author_channel = snippet.get("authorChannelId", {}).get("value", "")
 
             if not comment_id or not comment_text:
                 continue
@@ -342,9 +488,6 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
                 continue
             if len(comment_text) < 3:
                 continue
-
-            # Skip our own comments
-            # (We'd need our channel ID to check, but most won't match)
 
             # Reply to ALL eligible comments — every reply drives algorithm signal
             reply = _generate_yt_reply(cfg, video_title, comment_text)
@@ -367,6 +510,8 @@ def run_yt_reply_to_comments(cfg: Config, data: dict[str, Any]) -> int:
                 log.debug("Replied to YT comment: %s → %s", comment_text[:30], reply[:30])
                 random_delay(1, 4)  # blitz — YouTube has no action blocks
             except Exception as exc:
+                if _handle_quota_error(exc):
+                    break
                 log.warning("YT reply failed for %s: %s", comment_id, exc)
 
     if replied:
@@ -385,11 +530,15 @@ def run_yt_post_publish_replies(cfg: Config, video_ids: list[str]) -> int:
     60 minutes is a critical algorithm signal — it shows the creator is
     active and sparks conversations that boost the video's distribution.
 
+    This is NOT budget-capped since it's part of the publish cycle
+    (publish quota was already reserved and spent).
+
     Args:
         video_ids: List of YouTube video IDs that were just published.
 
     Returns count of replies sent.
     """
+    global _quota_exhausted
     if not video_ids:
         return 0
 
@@ -407,6 +556,8 @@ def run_yt_post_publish_replies(cfg: Config, video_ids: list[str]) -> int:
     }
 
     for video_id in video_ids:
+        if _quota_exhausted:
+            break
         log.info("Post-publish reply blitz: checking comments on %s", video_id)
 
         try:
@@ -417,10 +568,14 @@ def run_yt_post_publish_replies(cfg: Config, video_ids: list[str]) -> int:
                 order="time",
             ).execute()
         except Exception as exc:
+            if _handle_quota_error(exc):
+                break
             log.info("Could not fetch comments for %s: %s", video_id, exc)
             continue
 
         for item in response.get("items", []):
+            if _quota_exhausted:
+                break
             comment_id = item.get("id", "")
             snippet = item.get("snippet", {}).get("topLevelComment", {}).get("snippet", {})
             comment_text = snippet.get("textOriginal", "")
@@ -450,6 +605,8 @@ def run_yt_post_publish_replies(cfg: Config, video_ids: list[str]) -> int:
                 log.debug("Post-publish reply: %s → %s", comment_text[:30], reply[:30])
                 random_delay(1, 3)
             except Exception as exc:
+                if _handle_quota_error(exc):
+                    break
                 log.warning("Post-publish reply failed: %s", exc)
 
     save_log(LOG_FILE, data)
@@ -465,13 +622,25 @@ def run_yt_session(cfg: Config, session_type: str = "yt_engage") -> dict[str, in
       yt_engage   - Like + comment on niche Shorts
       yt_replies  - Reply to comments on own videos
       yt_full     - Both engagement and replies
+
+    All engagement respects the quota budget — publishing always gets
+    priority over engagement. Sessions self-limit when budget is low.
     """
+    global _quota_exhausted
+    _quota_exhausted = False  # Reset per session (quota resets daily)
+
     data = load_log(LOG_FILE)
     stats: dict[str, int] = {}
 
     session_startup_jitter()
 
-    log.info("Starting YouTube session: %s", session_type)
+    budget = quota_budget_remaining(data)
+    used = _estimate_units_used(data)
+    pub_windows = _remaining_publish_windows()
+    log.info("YouTube session: %s | quota: %d/%d used, %d available for engagement "
+             "(%d reserved for %d publish window(s))",
+             session_type, used, _DAILY_QUOTA, budget,
+             pub_windows * _PUBLISH_RESERVE, pub_windows)
 
     if session_type == "yt_engage":
         engage_stats = run_yt_niche_engagement(cfg, data)
@@ -483,8 +652,9 @@ def run_yt_session(cfg: Config, session_type: str = "yt_engage") -> dict[str, in
     elif session_type == "yt_full":
         engage_stats = run_yt_niche_engagement(cfg, data)
         stats.update(engage_stats)
-        random_delay(3, 10)
-        stats["yt_replies"] = run_yt_reply_to_comments(cfg, data)
+        if not _quota_exhausted:
+            random_delay(3, 10)
+            stats["yt_replies"] = run_yt_reply_to_comments(cfg, data)
 
     save_log(LOG_FILE, data)
     log.info("YouTube session '%s' done: %s (daily: %s)", session_type, stats, daily_summary(data))

@@ -221,6 +221,15 @@ def publish_short(
             video_id, title,
         )
 
+        # Track upload in engagement log for quota budget tracking
+        try:
+            from rate_limiter import LOG_FILE, load_log, record_action, save_log
+            yt_data = load_log(LOG_FILE)
+            record_action(yt_data, "yt_upload", video_id)
+            save_log(LOG_FILE, yt_data)
+        except Exception:
+            pass  # Non-fatal — don't fail upload tracking
+
         # Set thumbnail if available
         if thumbnail_path and os.path.exists(thumbnail_path):
             _set_thumbnail(youtube, video_id, thumbnail_path)
@@ -287,6 +296,16 @@ def post_creator_comment(
 
         comment_id = response.get("id", "")
         log.info("Posted creator comment on %s: %s", video_id, comment_text[:50])
+
+        # Track in engagement log for quota budget
+        try:
+            from rate_limiter import LOG_FILE, load_log, record_action, save_log
+            yt_data = load_log(LOG_FILE)
+            record_action(yt_data, "yt_creator_comment", video_id)
+            save_log(LOG_FILE, yt_data)
+        except Exception:
+            pass
+
         return comment_id
     except Exception as exc:
         log.warning("Creator comment failed for %s: %s", video_id, exc)

@@ -446,9 +446,16 @@ Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**.
 
 Maya, Aryan, and Rhea each get 22 YT sessions/day (alternating engage/replies every 45 min, 6 AM to 10 PM IST). Aryan's are staggered +15 min, Rhea's offset by +10 min. Daily limits: 500 likes, 200 comments, 250 replies. YouTube has no action blocks so engagement is fully maxed out.
 
-**Aryan + Rhea share the same Google Cloud project** (shared 10K quota/day). Maya has her own project. Each persona publishes max 1 Short per publish window.
+**Aryan + Rhea share the same Google Cloud project** (shared 10K quota/day → set `YOUTUBE_DAILY_QUOTA=5000` in each .env). Maya has her own project (10K solo).
 
 **YouTube publishing is fully independent of Instagram.** Each YT workflow has **2 publish windows** (lunch + prime time) using `--yt-publish-only`, each publishing 1 Short per window. If Instagram is disabled or broken, YouTube Shorts still get published on schedule.
+
+**Quota budget system (publishing-first):**
+- **Publishing always gets priority** — 1,700 units reserved per remaining publish window (upload + creator comment)
+- **Engagement self-limits** — sessions check budget before starting, cap actions when budget is low
+- **Instant abort on quotaExceeded** — no wasted API calls after quota is hit
+- **Quota tracking** — uploads and creator comments are tracked in engagement_log.json for accurate budget estimation
+- Set `YOUTUBE_DAILY_QUOTA` env var for shared projects (default: 10000)
 
 **YouTube growth optimizations (2026):**
 - **Auto-pin creator comment** — After every YT Short publish, a discussion-sparking comment is posted (Gemini-generated, e.g. "Which one was your favorite? Drop a number"). Creator comments show prominently with a badge, driving 30%+ more replies
@@ -758,6 +765,7 @@ End-of-day summary at 23:15 IST with engagement stats, posts published, YouTube 
 | `YOUTUBE_CLIENT_SECRET` | Google OAuth2 client secret |
 | `YOUTUBE_REFRESH_TOKEN` | OAuth2 refresh token (from `make yt-auth`) |
 | `YOUTUBE_ENGAGEMENT_ENABLED` | `true` to enable YouTube engagement automation |
+| `YOUTUBE_DAILY_QUOTA` | `10000` — daily API quota units. Set to `5000` for shared projects (Aryan+Rhea) |
 
 **Engagement:**
 | Variable | Default | Description |
