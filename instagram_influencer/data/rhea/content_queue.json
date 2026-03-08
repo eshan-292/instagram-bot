@@ -104,7 +104,7 @@
     },
     {
       "id": "rhea-004",
-      "status": "approved",
+      "status": "posted",
       "topic": "Morning gym routine \u2014 5 AM club no excuses",
       "caption": "5 AM. Dark outside. Gym lights on.\nThis is where it starts.\nWhat time do you train? Comment below.\nSend to someone who keeps saying 'tomorrow'.",
       "alt_text": "Young Indian woman working out in early morning at a gym",
@@ -562,88 +562,5 @@
         "Photo 3: Close-up of her hands gripping a barbell with chalk, gym lights behind \u2014 '180 days. That's all it took.'"
       ]
     },
-    {
-      "id": "aryan-001",
-      "status": "approved",
-      "topic": "5 exercises you're doing wrong in the gym",
-      "caption": "5 exercises. You're doing ALL of them wrong.\nI wasted 2 years before someone told me.\nWhich one surprised you most?\nSend this to your gym partner before they hurt themselves.",
-      "alt_text": "Muscular Indian man demonstrating correct exercise form in a gym",
-      "youtube_title": "5 Exercises You're Doing Wrong - Fix Your Form Today",
-      "video_text": [
-        "5 exercises. All wrong.",
-        "I wasted 2 years.",
-        "Send to your gym partner"
-      ],
-      "image_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-07T16:07:13Z",
-      "notes": "gym setting, demonstrating form, good lighting | generated_by=template",
-      "slides": [
-        "Hook slide: Aryan shaking head at bad form, text '5 exercises. You're doing ALL wrong.'",
-        "Exercise 1: Bicep curls -- wrong vs right form side by side",
-        "Exercise 2: Lat pulldowns -- common mistake highlighted",
-        "Exercise 3: Squats -- knee tracking error shown",
-        "Exercise 4: Bench press -- arch and grip correction",
-        "Final: All 5 exercises summarized, CTA energy"
-      ],
-      "carousel_images": [
-        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
-        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/2.jpg",
-        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/3.jpg",
-        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/4.jpg",
-        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/5.jpg",
-        "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/6.jpg"
-      ],
-      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4"
-    },
-    {
-      "id": "aryan-002",
-      "status": "draft",
-      "topic": "Full day of eating -- high protein under Rs 500",
-      "caption": "Full day of eating. Rs 500. 150g protein.\nNo supplements. No chicken breast every meal.\nWhat's your go-to cheap protein source?\nSave this -- your wallet and gains will thank you.",
-      "alt_text": "Indian man showing budget-friendly high-protein Indian meals",
-      "youtube_title": "Full Day of Eating - 150g Protein Under Rs 500",
-      "video_text": [
-        "Rs 500. 150g protein. Zero supplements.",
-        "What's your go-to source?",
-        "Save this for your next meal prep"
-      ],
-      "image_url": "",
-      "video_url": null,
-      "is_reel": false,
-      "post_type": "carousel",
-      "scheduled_at": "2026-03-07T20:07:13Z",
-      "notes": "kitchen/meal prep setting, food close-ups, clean layout | generated_by=template",
-      "slides": [
-        "Hook: Aryan with plate of food, text 'Rs 500. 150g protein. No supplements.'",
-        "Meal 1: Breakfast -- eggs + oats + banana, macro breakdown",
-        "Meal 2: Lunch -- rajma chawal + curd, protein count",
-        "Meal 3: Snack -- peanut butter sandwich + milk",
-        "Meal 4: Dinner -- paneer bhurji + roti, full macro count",
-        "Total macros summary card, save CTA"
-      ]
-    },
-    {
-      "id": "aryan-003",
-      "status": "approved",
-      "topic": "Push day complete routine -- chest and shoulders",
-      "caption": "Push day. 45 minutes. No fluff.\nThis routine added 2 inches to my chest in 3 months.\nWhat's your push day split?\nSend to someone who needs a real push day routine.",
-      "alt_text": "Muscular Indian man performing chest press exercise in a well-lit gym",
-      "youtube_title": "Complete Push Day Routine - Chest & Shoulders in 45 Min",
-      "video_text": [
-        "Push day. 45 min. No fluff.",
-        "+2 inches in 3 months.",
-        "Send to your gym buddy"
-      ],
-      "image_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003.jpg",
-      "video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003.mp4",
-      "is_reel": true,
-      "post_type": "reel",
-      "scheduled_at": "2026-03-08T00:07:13Z",
-      "notes": "gym setting, mid-workout, pump visible, energetic | generated_by=template",
-      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-003_yt.mp4"
-    }
   ]
 }

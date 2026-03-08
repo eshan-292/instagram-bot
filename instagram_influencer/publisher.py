@@ -91,7 +91,7 @@ def _apply_device_settings(cl: Client) -> None:
 def _new_client() -> Client:
     """Create a fresh Client with realistic, up-to-date device settings."""
     cl = Client()
-    cl.delay_range = [3, 7]  # human-like delay between API calls
+    cl.delay_range = [5, 12]  # human-like delay between API calls
     cl.set_locale("en_IN")
     cl.set_country_code(91)
     cl.set_timezone_offset(19800)  # IST = UTC+5:30

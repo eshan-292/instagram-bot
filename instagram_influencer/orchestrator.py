@@ -673,12 +673,19 @@ def _build_hashtags(caption: str, topic: str, post_type: str = "reel",
 # YouTube Shorts publishing
 # ---------------------------------------------------------------------------
 
+class _QuotaExhaustedError(Exception):
+    """Raised when YouTube API quota is exceeded — abort all further uploads."""
+
+
 def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
                         posts: list[dict[str, Any]], queue_file: str) -> None:
     """Publish a post to YouTube Shorts alongside Instagram.
 
     Uses the YouTube-optimized 9:16 video if available, otherwise falls back
     to the Instagram 4:5 video.
+
+    Raises _QuotaExhaustedError if the upload fails due to quota limits so
+    callers can stop trying additional posts immediately.
     """
     if not cfg.youtube_enabled:
         return
@@ -723,6 +730,10 @@ def _publish_to_youtube(cfg: Config, item: dict[str, Any], idx: int,
         else:
             log.warning("YouTube upload returned no ID for %s", item.get("id"))
     except Exception as exc:
+        err_str = str(exc).lower()
+        if "quotaexceeded" in err_str or "quota" in err_str:
+            log.error("YouTube QUOTA EXHAUSTED on %s — aborting all uploads", item.get("id"))
+            raise _QuotaExhaustedError(str(exc)) from exc
         log.error("YouTube publish failed for %s: %s", item.get("id"), exc)
 
 
@@ -765,7 +776,11 @@ def _yt_only_publish(cfg: Config, posts: list[dict[str, Any]],
             continue
 
         log.info("YT-only publish: found eligible post %s (status=%s)", item.get("id"), status)
-        _publish_to_youtube(cfg, item, idx, posts, queue_file)
+        try:
+            _publish_to_youtube(cfg, item, idx, posts, queue_file)
+        except _QuotaExhaustedError:
+            log.warning("Quota exhausted — stopping all YouTube uploads for today")
+            break
 
         # Track published video IDs for post-publish reply blitz
         yt_id = posts[idx].get("youtube_video_id")

@@ -235,17 +235,34 @@ Comprehensive anti-detection measures to prevent Instagram from flagging automat
 | ModernTruths | Xiaomi 14 | Different manufacturer entirely |
 
 **Human-like timing:**
-- Action delays: 15-75 seconds between actions (not 2-8s like bots)
+- Action delays: 30-90 seconds between posts (gaussian distribution)
+- 3-8 second delay between actions on the SAME post (like → comment → follow)
+- 3-8 seconds spent "watching" each post/reel before engaging
+- 2-5 seconds browsing a profile before following
 - 15% chance of 60-180 second "micro-breaks" (checking another app)
 - 1-5 minute startup jitter (real humans don't open Instagram at exact times)
 - No overnight sessions (sleep gap 11PM-7AM IST — humans sleep)
-- instagrapi API delay: 3-7 seconds between raw API calls
+- instagrapi API delay: 5-12 seconds between raw API calls
 
-**Safe daily limits:**
+**Conservative daily limits:**
 - 200 likes/day (Instagram safe zone for established accounts)
 - 60 comments/day (comments are most-monitored by Instagram)
 - 100 follows/day (aggressive but sustainable)
+- 12 sessions/day per account (~90 min gaps, like real phone checks)
+- 20 max posts per hashtag session (was 50, too aggressive)
+- ~30% of posts randomly skipped (humans don't engage with everything)
 - Session saved on every run (not just success) to prevent stale session relogins
+
+**Gradual warmup for new accounts:**
+- Days 1-3: 20% of limits (very cautious)
+- Days 4-7: 40% of limits
+- Days 8-14: 60% of limits
+- Days 15-30: 80% of limits
+- Days 31+: 100% (full limits)
+
+**Pod boost throttling:**
+- Partner boost only runs during 3 specific sessions (morning, cross_promo, boost)
+- Previously ran 25+ times/day, creating an obvious coordinated network signal
 
 ### Smart Unfollow (Non-Followers Only)
 
@@ -378,20 +395,20 @@ Place your own `.mp3` or `.wav` files in `data/{persona}/generated_images/music/
 
 | Workflow | Sessions/Day | Concurrency Group | Purpose |
 |----------|-------------|-------------------|---------|
-| `instagram-bot.yml` | 33 | `instagram-bot-maya` | Maya IG |
-| `youtube-bot.yml` | 22 | `youtube-bot` | Maya YT |
-| `instagram-bot-aryan.yml` | 33 | `instagram-bot-aryan` | Aryan IG |
-| `youtube-bot-aryan.yml` | 22 | `youtube-bot-aryan` | Aryan YT |
-| `instagram-bot-choosewisely.yml` | 30 | `instagram-bot-choosewisely` | Choose Wisely IG |
-| `instagram-bot-moderntruths.yml` | 30 | `instagram-bot-moderntruths` | Modern Truths IG |
-| `instagram-bot-sofia.yml` | 30 | `instagram-bot-sofia` | Sofia IG |
-| `instagram-bot-rhea.yml` | 30 | `instagram-bot-rhea` | Rhea IG |
-| `youtube-bot-rhea.yml` | 22 | `youtube-bot-rhea` | Rhea YT |
+| `instagram-bot.yml` | 12 | `instagram-bot-maya` | Maya IG |
+| `youtube-bot.yml` | 12 | `youtube-bot` | Maya YT |
+| `instagram-bot-aryan.yml` | 12 | `instagram-bot-aryan` | Aryan IG |
+| `youtube-bot-aryan.yml` | 12 | `youtube-bot-aryan` | Aryan YT |
+| `instagram-bot-choosewisely.yml` | 12 | `instagram-bot-choosewisely` | Choose Wisely IG |
+| `instagram-bot-moderntruths.yml` | 12 | `instagram-bot-moderntruths` | Modern Truths IG |
+| `instagram-bot-sofia.yml` | 12 | `instagram-bot-sofia` | Sofia IG |
+| `instagram-bot-rhea.yml` | 12 | `instagram-bot-rhea` | Rhea IG |
+| `youtube-bot-rhea.yml` | 12 | `youtube-bot-rhea` | Rhea YT |
 | `satellite-1.yml` | 9 | `satellite-1` | Satellite 1 |
 | `satellite-2.yml` | 9 | `satellite-2` | Satellite 2 |
 | `satellite-3.yml` | 9 | `satellite-3` | Satellite 3 |
 
-**Total: ~283 sessions/day** across all accounts (12 workflows).
+**Total: ~135 sessions/day** across all accounts (12 workflows). Reduced from ~283 to avoid automation detection.
 
 **1 post/day per main account** with 2 publish windows (backup at lunch if evening fails):
 - **Primary (7 PM IST):** Maya 19:00, Aryan 19:15, CW 19:33, MT 19:39, Sofia 19:47, Rhea 19:53
@@ -401,50 +418,32 @@ The orchestrator publishes at most 1 post/day — if the lunch window publishes,
 
 **New accounts (Choose Wisely, Modern Truths, Sofia, Rhea):** Workflows are disabled until sessions are seeded locally via `seed_session.py`.
 
-**Reliability:** Session routing uses `github.event.schedule` (the exact cron expression) instead of wall-clock time, making it immune to GitHub Actions cron delays (which can be 10-20+ minutes). State commits add each file individually (avoiding failures from missing files), use `git pull --rebase` before push, and retry up to 3 times on push failure to handle parallel workflow race conditions.
+**Reliability:** Session routing uses `github.event.schedule` (the exact cron expression) instead of wall-clock time, making it immune to GitHub Actions cron delays (which can be 10-20+ minutes). State commits add each file individually (avoiding failures from missing files), use `git pull --rebase` before push with conflict-recovery logic, and retry up to 5 times on push failure to handle parallel workflow race conditions.
 
-### Maya Instagram Schedule (29 sessions)
+### Instagram Schedule (12 sessions/day — all accounts)
+
+All 6 main accounts use the same 12-session schedule (~90 min gaps), staggered by persona:
 
 | IST Time | Session | Notes |
 |----------|---------|-------|
-| 07:00 | Morning engagement | Wake up, check overnight |
-| 07:40 | Explore | Morning scroll |
-| 08:15 | Commenter target | Highest-ROI targeting |
-| 08:50 | Hashtags | |
-| 09:30 | Replies | |
-| 10:05 | Stories | |
-| 10:40 | Explore | |
-| 11:15 | Hashtags | |
-| 11:50 | Warm audience | Pre-lunch targeting |
-| 12:30 | **BACKUP PUBLISH** + Explore | Lunch fallback if 7 PM fails |
-| 13:05 | Hashtags | |
-| 13:40 | Replies | |
-| 14:15 | Warm audience | Afternoon targeting |
-| 14:50 | Commenter target | Afternoon targeting |
+| 07:00 | Morning engagement | Wake up |
+| 08:30 | Hashtags | |
+| 10:00 | Explore | |
+| 11:30 | Warm audience | |
+| 12:30 | **BACKUP PUBLISH** + Replies | Lunch fallback if 7 PM fails |
+| 14:00 | Commenter target | High-ROI targeting |
 | 15:30 | Hashtags | |
-| 16:10 | Stories | |
-| 16:45 | Explore | |
-| 17:20 | Warm audience | |
-| 18:00 | Hashtags | |
-| 18:35 | Stories | |
-| **19:00** | **PUBLISH + explore** | **PRIME TIME** |
-| 19:40 | Hashtags | Post-publish engagement boost |
-| **20:00** | **Boost** | **Viral detection -- auto-boost** |
-| 20:15 | Replies | |
-| 20:50 | Explore | Evening wind-down |
-| **21:00** | **Cross-promo** | **Engage partner's latest post** |
-| 21:30 | Warm audience | |
-| 22:05 | Maintenance | Unfollow (DMs disabled) |
-| 22:45 | Maintenance | Second pass |
+| 17:00 | Explore | |
+| **19:00** | **PUBLISH** | **PRIME TIME** |
+| **20:00** | **Boost** | **Viral detection — auto-boost** |
+| 21:30 | Maintenance | Unfollow + welcome DMs |
 | 23:15 | Daily report | |
 
-### Aryan Instagram Schedule (29 sessions)
+Aryan sessions staggered +15 min, other personas at similar offsets.
 
-Same session pattern as Maya, staggered +15 minutes. Publishes at **19:15 IST**. Cross-promo at **20:45 IST** (1.75hrs after Maya publishes).
+### YouTube Schedules (12 sessions each — INDEPENDENT PUBLISHING)
 
-### YouTube Schedules (22 sessions each — INDEPENDENT PUBLISHING)
-
-Maya, Aryan, and Rhea each get 22 YT sessions/day (alternating engage/replies every 45 min, 6 AM to 10 PM IST). Aryan's are staggered +15 min, Rhea's offset by +10 min. Daily limits: 500 likes, 200 comments, 250 replies. YouTube has no action blocks so engagement is fully maxed out.
+Maya, Aryan, and Rhea each get 12 YT sessions/day (alternating engage/replies every 90 min, 7 AM to 10:30 PM IST). Daily limits: 500 likes, 200 comments, 250 replies.
 
 **Aryan + Rhea share the same Google Cloud project** (shared 10K quota/day → set `YOUTUBE_DAILY_QUOTA=5000` in each .env). Maya has her own project (10K solo).
 

@@ -3,44 +3,25 @@ name: Instagram Bot (Maya)
 on:
   schedule:
     # All cron times in UTC. IST = UTC + 5:30
-    # Strategy: packed IG engagement — 28 daytime sessions = human phone-check pattern
-    # 1 post/day at prime time (publishes to both IG + YT) + engagement spread throughout
-    # Each session has 0-4min startup jitter built into the code
+    # Strategy: conservative IG engagement — 12 sessions/day with human-like gaps
+    # 28 sessions was causing constant bans. Real humans check IG 6-12x/day.
+    # 1 post/day at prime time + engagement spread throughout
+    # Each session has 1-5min startup jitter built into the code
     #
     # PARALLEL: YouTube engagement runs on a SEPARATE workflow (youtube-bot.yml)
-    # so IG and YT never block each other.
     #
-    # DAYTIME ONLY — ~28 IG sessions, 07:00 to 23:15 IST, every 30-45 min
-    # (no overnight sessions — sleeping 00:00-07:00 IST)
+    # DAYTIME ONLY — 12 IG sessions, 07:00 to 23:00 IST, every ~90 min
     - cron: '30 1 * * *'   # 07:00 IST — morning engagement (wake up)
-    - cron: '10 2 * * *'   # 07:40 IST — explore (morning scroll)
-    - cron: '45 2 * * *'   # 08:15 IST — commenter_target (high-ROI targeting)
-    - cron: '20 3 * * *'   # 08:50 IST — hashtags
-    - cron: '0 4 * * *'    # 09:30 IST — replies
-    - cron: '35 4 * * *'   # 10:05 IST — stories
-    - cron: '10 5 * * *'   # 10:40 IST — explore
-    - cron: '45 5 * * *'   # 11:15 IST — hashtags
-    - cron: '20 6 * * *'   # 11:50 IST — warm_audience (pre-lunch targeting)
-    - cron: '0 7 * * *'    # 12:30 IST — BACKUP PUBLISH + explore (lunch fallback)
-    - cron: '35 7 * * *'   # 13:05 IST — hashtags
-    - cron: '10 8 * * *'   # 13:40 IST — replies
-    - cron: '45 8 * * *'   # 14:15 IST — warm_audience (afternoon targeting)
-    - cron: '20 9 * * *'   # 14:50 IST — commenter_target
+    - cron: '0 3 * * *'    # 08:30 IST — hashtags
+    - cron: '30 4 * * *'   # 10:00 IST — explore
+    - cron: '0 6 * * *'    # 11:30 IST — warm_audience
+    - cron: '0 7 * * *'    # 12:30 IST — BACKUP PUBLISH + replies
+    - cron: '30 8 * * *'   # 14:00 IST — commenter_target
     - cron: '0 10 * * *'   # 15:30 IST — hashtags
-    - cron: '40 10 * * *'  # 16:10 IST — stories
-    - cron: '15 11 * * *'  # 16:45 IST — explore
-    - cron: '50 11 * * *'  # 17:20 IST — warm_audience
-    - cron: '30 12 * * *'  # 18:00 IST — hashtags
-    - cron: '5 13 * * *'   # 18:35 IST — stories
-    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH (videos pre-rendered, --no-generate)
-    - cron: '10 14 * * *'  # 19:40 IST — hashtags (post-publish engagement boost)
-    - cron: '30 14 * * *'  # 20:00 IST — boost (viral detection, 1hr after publish)
-    - cron: '45 14 * * *'  # 20:15 IST — replies
-    - cron: '20 15 * * *'  # 20:50 IST — explore (evening wind-down)
-    - cron: '30 15 * * *'  # 21:00 IST — cross_promo (engage partner's latest post)
-    - cron: '0 16 * * *'   # 21:30 IST — warm_audience
-    - cron: '35 16 * * *'  # 22:05 IST — maintenance (unfollow + welcome DMs)
-    - cron: '15 17 * * *'  # 22:45 IST — maintenance (second pass)
+    - cron: '30 11 * * *'  # 17:00 IST — explore
+    - cron: '30 13 * * *'  # 19:00 IST — PUBLISH (prime time)
+    - cron: '30 14 * * *'  # 20:00 IST — boost (1hr post-publish)
+    - cron: '0 16 * * *'   # 21:30 IST — maintenance (unfollow + DMs)
     - cron: '45 17 * * *'  # 23:15 IST — daily report
 
   workflow_dispatch:
@@ -132,38 +113,20 @@ jobs:
             # Scheduled run — map exact cron expression to session type
             CRON="${{ github.event.schedule }}"
             case "${CRON}" in
-              # Daytime sessions (07:00-23:15 IST)
-              "30 1 * * *")   echo "type=morning"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "10 2 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 2 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 3 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 4 * * *")    echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "35 4 * * *")   echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "10 5 * * *")   echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 5 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 6 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 7 * * *")    echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;  # backup publish
-              "35 7 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "10 8 * * *")   echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 8 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 9 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 10 * * *")   echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "40 10 * * *")  echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "15 11 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "50 11 * * *")  echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 12 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "5 13 * * *")   echo "type=stories"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 13 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;
-              "10 14 * * *")  echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 14 * * *")  echo "type=boost"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 14 * * *")  echo "type=replies"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "20 15 * * *")  echo "type=explore"        >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "30 15 * * *")  echo "type=cross_promo"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "0 16 * * *")   echo "type=warm_audience"  >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "35 16 * * *")  echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "15 17 * * *")  echo "type=maintenance"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              "45 17 * * *")  echo "type=report"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
-              *)              echo "type=hashtags"       >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              # 12 daytime sessions (07:00-23:15 IST, ~90min gaps)
+              "30 1 * * *")   echo "type=morning"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 3 * * *")    echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 4 * * *")   echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 6 * * *")    echo "type=warm_audience"    >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 7 * * *")    echo "type=replies"          >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;  # backup publish
+              "30 8 * * *")   echo "type=commenter_target" >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 10 * * *")   echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 11 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "30 13 * * *")  echo "type=explore"          >> $GITHUB_OUTPUT; echo "publish=true"  >> $GITHUB_OUTPUT ;;  # prime time publish
+              "30 14 * * *")  echo "type=boost"            >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "0 16 * * *")   echo "type=maintenance"      >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              "45 17 * * *")  echo "type=report"           >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
+              *)              echo "type=hashtags"         >> $GITHUB_OUTPUT; echo "publish=false" >> $GITHUB_OUTPUT ;;
             esac
           fi
 
@@ -223,9 +186,19 @@ jobs:
             git add -f "instagram_influencer/data/maya/generated_images/pending/" 2>/dev/null || true
           git diff --staged --quiet || (
             git commit -m "bot: maya state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
-            for attempt in 1 2 3; do
-              git pull --rebase origin main 2>/dev/null && git push && break
-              echo "Push attempt $attempt failed, retrying..."
-              sleep 2
+            for attempt in 1 2 3 4 5; do
+              if git pull --rebase origin main; then
+                git push && break
+              else
+                echo "Rebase conflict on attempt $attempt — resetting and re-staging"
+                git rebase --abort 2>/dev/null || true
+                git reset --soft HEAD~1
+                git stash
+                git pull origin main
+                git stash pop || true
+                git add -A
+                git commit -m "bot: maya state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+              fi
+              sleep $((attempt * 2))
             done
           )

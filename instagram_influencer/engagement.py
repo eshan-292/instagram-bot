@@ -97,8 +97,12 @@ def _parse_hashtags(raw: str) -> list[str]:
 
 
 def _should_skip_post() -> bool:
-    """Skip disabled — engage with everything to maximize growth."""
-    return False
+    """Randomly skip ~30% of posts — humans don't engage with everything.
+
+    Instagram's ML detects 100% engagement rates as bot behavior.
+    Real users scroll past most content; this simulates selective engagement.
+    """
+    return random.random() < 0.30
 
 
 def _randomize_session_size(base: int) -> int:
@@ -117,11 +121,20 @@ def _browse_before_engage(cl: Any, user_id: str) -> Optional[Any]:
     """
     try:
         user_info = cl.user_info_v1(int(user_id))
-        # Short pause like reading their bio
-        time.sleep(random.uniform(0.3, 1))
+        # Pause like actually reading their bio/recent posts (2-5s)
+        time.sleep(random.uniform(2, 5))
         return user_info
     except Exception:
         return None
+
+
+def _between_actions_delay() -> None:
+    """Small delay between actions on the SAME post (like → comment → follow).
+
+    Real humans don't fire 4 API actions in <1 second on the same post.
+    This adds 3-8 seconds between each action to look natural.
+    """
+    time.sleep(random.uniform(3, 8))
 
 
 def _is_quality_follow_target(user_info: Any) -> bool:
@@ -666,8 +679,8 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
         media_id = str(media.pk)
         user_id = str(media.user.pk) if media.user else None
 
-        # Pause like actually watching the reel
-        time.sleep(random.uniform(0.5, 2))
+        # Pause like actually watching the reel (3-8s, not instant)
+        time.sleep(random.uniform(3, 8))
 
         # Like — big accounts first for visibility
         if can_act(data, "likes", cfg.engagement_daily_likes):
@@ -678,6 +691,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
             except Exception as exc:
                 _check_challenge(exc)
                 log.debug("Explore like failed: %s", exc)
+            _between_actions_delay()
 
         # Comment on big accounts — our comment visible to their audience
         if (cfg.engagement_comment_enabled
@@ -692,6 +706,7 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                 except Exception as exc:
                     _check_challenge(exc)
                     log.debug("Explore comment failed: %s", exc)
+                _between_actions_delay()
 
         # Smart follow — only quality targets (1K-50K, active, public)
         if (cfg.engagement_follow_enabled
@@ -709,13 +724,14 @@ def run_explore_engagement(cl: Any, cfg: Config, data: dict[str, Any]) -> dict[s
                     _check_challenge(exc)
                     _follow_failed(exc)
                     log.debug("Explore follow failed: %s", exc)
+                _between_actions_delay()
 
         # View stories from explore too
         if user_id and can_act(data, "story_views", 150):
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(20, 60)  # human browsing pace
+        random_delay(30, 90)  # human browsing pace (was 20-60, too fast)
 
     if any(v > 0 for v in stats.values()):
         log.info("Explore engagement: %s", stats)
@@ -797,8 +813,8 @@ def _run_hashtag_engagement(
         media_id = str(media.pk)
         user_id = str(media.user.pk) if media.user else None
 
-        # Pause like actually looking at the post
-        time.sleep(random.uniform(0.5, 2))
+        # Pause like actually watching the post/reel (3-8s, not instant)
+        time.sleep(random.uniform(3, 8))
 
         # Like (most common action) — prioritize big accounts for visibility
         if can_act(data, "likes", like_limit):
@@ -809,6 +825,7 @@ def _run_hashtag_engagement(
             except Exception as exc:
                 _check_challenge(exc)
                 log.warning("Like failed for %s: %s", media_id, exc)
+            _between_actions_delay()
 
         # Comment on big accounts' posts — our comment visible to their audience
         if (cfg.engagement_comment_enabled
@@ -823,6 +840,7 @@ def _run_hashtag_engagement(
                 except Exception as exc:
                     _check_challenge(exc)
                     log.warning("Comment failed for %s: %s", media_id, exc)
+                _between_actions_delay()
 
         # Smart follow — only follow quality targets (1K-50K followers, active, public)
         # We like/comment on big accounts for visibility, but only FOLLOW accounts
@@ -843,15 +861,16 @@ def _run_hashtag_engagement(
                     _check_challenge(exc)
                     _follow_failed(exc)
                     log.warning("Follow failed for %s: %s", user_id, exc)
+                _between_actions_delay()
             else:
                 log.debug("Skipped follow for %s — not a quality target", user_id)
 
-        # View stories more aggressively
+        # View stories
         if user_id and can_act(data, "story_views", story_limit):
             _view_user_stories(cl, user_id, data, stats)
 
         save_log(LOG_FILE, data)
-        random_delay(20, 60)  # human browsing pace
+        random_delay(30, 90)  # human browsing pace (was 20-60, too fast)
 
         if (
             not can_act(data, "likes", like_limit)
@@ -1821,9 +1840,10 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
     cl = _get_client(cfg)
     log.info("Starting engagement session: %s", session_type)
 
-    # Pod boost: auto-boost fresh partner posts at the start of every session
-    # (skip for report, maintenance, stories — those aren't engagement sessions)
-    if session_type not in ("report", "maintenance", "stories", "dm_replies"):
+    # Pod boost: auto-boost fresh partner posts — but ONLY during a few sessions
+    # to avoid creating an obvious coordinated network pattern.
+    # Running partner boost 25+ times/day is a major detection signal.
+    if session_type in ("morning", "cross_promo", "boost"):
         try:
             pod_stats = _boost_fresh_partner_posts(cl, cfg, data)
             stats.update(pod_stats)
@@ -1832,15 +1852,15 @@ def run_session(cfg: Config, session_type: str = "full") -> dict[str, int]:
             log.debug("Pod boost failed: %s", exc)
 
     if session_type == "morning":
-        # Morning: max growth start — hashtags
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=50)
+        # Morning: moderate engagement start (was 50, too aggressive)
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=20)
 
     elif session_type == "replies":
         stats["replies"] = run_reply_to_comments(cl, cfg, data)
         save_log(LOG_FILE, data)
 
     elif session_type == "hashtags":
-        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=45)  # max growth
+        _run_hashtag_engagement(cl, cfg, data, stats, max_posts=20)  # safe growth
 
     elif session_type == "explore":
         explore_stats = run_explore_engagement(cl, cfg, data)

@@ -141,9 +141,19 @@ jobs:
           done
           git diff --staged --quiet || (
             git commit -m "bot: maya yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
-            for attempt in 1 2 3; do
-              git pull --rebase origin main 2>/dev/null && git push && break
-              echo "Push attempt $attempt failed, retrying..."
-              sleep 2
+            for attempt in 1 2 3 4 5; do
+              if git pull --rebase origin main; then
+                git push && break
+              else
+                echo "Rebase conflict on attempt $attempt — resetting and re-staging"
+                git rebase --abort 2>/dev/null || true
+                git reset --soft HEAD~1
+                git stash
+                git pull origin main
+                git stash pop || true
+                git add -A
+                git commit -m "bot: maya yt state update $(date -u +%Y-%m-%dT%H:%M:%SZ) [${{ steps.session.outputs.type }}]"
+              fi
+              sleep $((attempt * 2))
             done
           )
