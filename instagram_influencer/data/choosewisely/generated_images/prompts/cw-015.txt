@@ -1,27 +1,27 @@
 === cw-015 | CAROUSEL ===
-Topic: Build your starter pack — 6 life categories
-Caption: Build your starter pack.
-Pick ONE from each category. No extras.
-Screenshot your pack.
-Send to your bestie — see how different you are.
+Topic: Rate your discipline — 8 categories, no lying
+Caption: Rate your discipline. Be brutal.
+Swipe and score yourself 1-10.
+Total in comments. Under 50? You're lying to yourself.
+Send to someone who needs a wake-up call.
 
 CAROUSEL — 6 slides
 Place in: generated_images/pending/cw-015/1.jpg, 2.jpg, ...
 
 --- Slide 1 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'BUILD YOUR STARTER PACK' in bold Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: 'Rate Your Discipline. No lying. Total in comments.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 --- Slide 2 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Drink: Coffee / Chai / Juice / Water Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Wake-up time consistency: 1-10? | Gym consistency: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 --- Slide 3 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Music: Bollywood / Hip-hop / Lo-fi / Classical Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Screen time control: 1-10? | Savings discipline: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 --- Slide 4 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Hobby: Gym / Reading / Gaming / Travel Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Diet consistency: 1-10? | Reading habit: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 --- Slide 5 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Food: Street food / Home cooked / Fine dining / Fast food Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Sleep schedule: 1-10? | Daily productivity: 1-10? Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 --- Slide 6 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Superpower: Time travel / Mind reading / Invisibility / Flying Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Add it up. Comment your total. Under 50 = reality check needed.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

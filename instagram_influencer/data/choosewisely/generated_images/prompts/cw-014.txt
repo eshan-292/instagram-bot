@@ -1,27 +1,13 @@
-=== cw-014 | CAROUSEL ===
-Topic: Elimination bracket — 8 foods, only 1 survives
-Caption: 8 foods. Only 1 survives.
-Eliminate one each round. No cheating.
-Comment your final answer.
-Send to a friend — see if they pick the same.
+=== cw-014 | REEL (HOOK-PHOTO) ===
+Topic: You can only keep 3 people in your life. Everyone else gone.
+Caption: Keep only 3 people.
+Everyone else disappears tomorrow.
+Who made your list?
+Send this to all 3. If they send it back, you're real.
 
-CAROUSEL — 6 slides
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
 Place in: generated_images/pending/cw-014/1.jpg, 2.jpg, ...
+On-screen hooks: ['3 people stay.', 'Everyone else gone.', 'Send this to your 3.']
 
---- Slide 1 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Hook: '8 FOODS. 1 SURVIVES.' in bold neon text Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 2 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Round 1: Pizza vs Biryani vs Butter Chicken vs Momos Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 3 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Round 1: Sushi vs Tacos vs Pasta vs Dosa Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 4 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Round 2: Winners face off Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 5 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Semi-final: 2 remaining Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 6 ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: CTA: 'Who won? Comment your champion. Tag a foodie.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+--- Photo 1 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: You can only keep 3 people in your life. Everyone else gone. - Cinematic feel. Start with a crowd of silhouettes, then they fade one by one until only 3 remain, lit by warm spotlight. Emotional piano  Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

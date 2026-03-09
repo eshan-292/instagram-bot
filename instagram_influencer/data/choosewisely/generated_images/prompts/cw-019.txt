@@ -1,11 +1,13 @@
-=== cw-019 | REEL ===
-Topic: Old money vs New money aesthetic
-Caption: Old money or New money.
-Which vibe are you?
-Comment 1 or 2.
-Send this to someone who needs a reality check.
+=== cw-019 | REEL (HOOK-PHOTO) ===
+Topic: Money or time? 90% of people answer this wrong.
+Caption: Money or time.
+90% say time. Then spend 10 hours doom-scrolling.
+Be honest. Which do you actually chase?
+Send to someone who needs to hear this.
 
-Place at: generated_images/pending/cw-019.jpg
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
+Place in: generated_images/pending/cw-019/1.jpg, 2.jpg, ...
+On-screen hooks: ['Money or time?', 'You say time.', 'But you chase money.']
 
---- Prompt ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Old money vs New money aesthetic. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: left=subtle luxury/quiet wealth, right=flashy/designer logos, contrasting aesthetics.
+--- Photo 1 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Money or time? 90% of people answer this wrong. - Contrarian hook format. Split screen: left=stacks of money/luxury lifestyle, right=hourglass/sunset/family moments. Twist: show people saying 'time' t Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

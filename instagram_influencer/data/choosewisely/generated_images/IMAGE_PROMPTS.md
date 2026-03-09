@@ -351,3 +351,69 @@ Tag someone and debate this.
 **Photo 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Couple walking hand-in-hand through a bustling Mumbai night market — fairy lights, street vendors, genuine joy and connection, the Rs 500 date vibes Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
+
+## aryan-001 — REEL (HOOK-PHOTO)
+**Topic:** Correcting common squat form mistakes for better leg day gains.
+**Caption:** Your squat form. It's probably costing you more than you think. Bad technique means wasted effort, zero gains, and potential injuries.
+
+Are you compromising depth for weight?
+
+This isn't about lifting heavy, it's about lifting smart. Get it right or stay small. Period.
+
+Tag the friend who needs this form check ASAP.
+
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-001/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Your squat form. Wrong.', 'This costs you gains.', 'Tag the friend who needs this.']
+
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Aryan Dhar in a gym performing a shallow squat with rounded back and caving knees. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Aryan Dhar immediately transitioning to a perfect, deep squat with chest up, stable core, and knees tracking properly. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-002 — REEL (HOOK-PHOTO)
+**Topic:** Full day of protein-rich Indian meals under Rs 200 without supplements.
+**Caption:** Rs 180. That's all it takes for a full day of solid protein. No fancy powders, no expensive supplements.
+
+Struggling to hit your protein goals on a budget?
+
+You don't need to break the bank to build muscle. Real food, real gains. Simple.
+
+Send this to your broke friend who thinks protein is expensive.
+
+**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-002/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Rs 180. Full day protein.', 'No supplements needed.', 'Send to your broke friend.']
+
+**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Overhead shot of a plate with chana masala, brown rice, and a small salad, looking fresh and appetizing. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Close-up of a bowl of dal tadka with a side of whole wheat roti, steam rising slightly. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-003 — CAROUSEL
+**Topic:** Correcting 5 common gym exercises for beginners and intermediates.
+**Caption:** 5 exercises. You're doing them wrong. Seriously.
+
+Think your form is perfect? Most people are leaving gains on the table and risking injury by not mastering the basics.
+
+Which of these are you guilty of?
+
+Stop the ego lifting, focus on technique, and watch your progress explode. It's tough love, but you need it.
+
+Save this for your next workout, it’s a cheat sheet for real gains.
+
+**Place 6 images in:** `generated_images/pending/aryan-003/1.jpg`, `2.jpg`, ...
+
+**Slide 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Slide 1: Title card '5 Gym Mistakes Sabotaging Gains' with Aryan Dhar in a confident pose. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Slide 2: Split screen: Left side shows Aryan doing an incorrect bicep curl (swinging, back arching). Right side shows a perfect, strict bicep curl. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 3:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 3 of a carousel post.) Scene: Slide 3: Split screen: Left side shows Aryan doing an incorrect lateral raise (shrugging, using momentum). Right side shows a controlled lateral raise targeting delts. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 4:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 4 of a carousel post.) Scene: Slide 4: Split screen: Left side shows Aryan doing an incorrect push-up (sagging hips, flared elbows). Right side shows a perfect push-up with straight body and tucked elbows. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 5:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 5 of a carousel post.) Scene: Slide 5: Split screen: Left side shows Aryan doing an incorrect cable row (rounding back, jerking). Right side shows a controlled cable row with straight back and chest out. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+**Slide 6:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 6 of a carousel post.) Scene: Slide 6: Split screen: Left side shows Aryan doing an incorrect crunch (pulling neck, shallow). Right side shows a controlled crunch focusing on abdominal contraction. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---

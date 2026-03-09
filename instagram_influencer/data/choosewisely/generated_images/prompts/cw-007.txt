@@ -1,11 +1,13 @@
-=== cw-007 | REEL ===
+=== cw-007 | REEL (HOOK-PHOTO) ===
 Topic: Life choice: Rich vs. Friends
 Caption: 1 crucial decision.
 Your true priority?
 What defines a good life?
 Send this to see if your friend picks the same.
 
-Place at: generated_images/pending/cw-007.jpg
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
+Place in: generated_images/pending/cw-007/1.jpg, 2.jpg, ...
+On-screen hooks: ['Rich and alone?', 'Or broke with friends?', 'Send to your real ones.']
 
---- Prompt ---
-Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. Scene: Life choice: Rich vs. Friends. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vibrant group of diverse friends laughing, eating street food or at a casual gathering (dynamic, close-up shots). Quick cuts between the two contrasting scenes for the reel..
+--- Photo 1 ---
+Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Life choice: Rich vs. Friends - Dramatic split screen. Left side: opulent, modern, empty mansion interior (clean lines, muted tones, maybe one person looking out a window alone). Right side: warm, vib Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
