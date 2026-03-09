@@ -13,17 +13,10 @@
     "ig_www_claim": null,
     "authorization_data": {
         "ds_user_id": "77928342121",
-<<<<<<< Updated upstream
-        "sessionid": "77928342121%3AdzbUWB1ETYg90X%3A29%3AAYhPOl_IYpbzXb6LdKN1iUIOKwMETFXo7R1liNGvHg"
-    },
-    "cookies": {},
-    "last_login": 1773075302.6932802,
-=======
         "sessionid": "77928342121%3AuOLoqiOmtYfhpQ%3A14%3AAYgv1yBdfSjE2xgmfET5wlKSmEACYttPs-cS5ZYUtQ"
     },
     "cookies": {},
     "last_login": 1773076093.0104718,
->>>>>>> Stashed changes
     "device_settings": {
         "android_version": 34,
         "android_release": "14",
