@@ -1,11 +1,16 @@
-=== sofia-014 | SINGLE ===
-Topic: All-black luxury outfit — power dressing
-Caption: All black. All power.
-Sometimes the best outfit says nothing — but everyone notices.
-Could you pull this off?
-Tag someone who only wears black.
+=== sofia-014 | REEL (HOOK-PHOTO) ===
+Topic: Designer vs street market — can you tell the difference?
+Caption: One is designer. One is from a Mumbai street market.
+Can you tell which is which? Most people cannot.
+Guess in the comments. Reveal on the last slide.
+Send to your fashion friend and test them.
 
-Place at: generated_images/pending/sofia-014.jpg
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
+Place in: generated_images/pending/sofia-014/1.jpg, 2.jpg, ...
+On-screen hooks: ['Designer or street market?', 'Can you tell?', 'Most people cannot.']
 
---- Prompt ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. Scene: All-black luxury outfit — power dressing. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: minimalist backdrop, all-black outfit, confident powerful energy.
+--- Photo 1 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: Hook: two similar bags side by side, 'One costs 50x more. Can you tell?' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Photo 2 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 2 of a carousel post.) Scene: 1: Two structured leather tote bags — A vs B, guess which is designer Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

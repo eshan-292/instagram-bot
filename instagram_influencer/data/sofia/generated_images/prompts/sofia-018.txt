@@ -1,27 +1,16 @@
-=== sofia-018 | CAROUSEL ===
-Topic: Russian girl in Mumbai — 5 things that surprised me
-Caption: 5 things that surprised me about Mumbai.
-From Moscow to Maximum City.
-What would surprise YOU about Russia?
-Comment — I want to know.
+=== sofia-018 | REEL (HOOK-PHOTO) ===
+Topic: 3 Mumbai cafes that feel like Paris
+Caption: Three cafes in Mumbai that made me forget I left Paris.
+The croissants. The light. The feeling.
+Your cafe-hopping friend needs to see this.
+Send it now.
 
-CAROUSEL — 6 slides
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
 Place in: generated_images/pending/sofia-018/1.jpg, 2.jpg, ...
+On-screen hooks: ['Mumbai or Paris?', 'Three cafes. One feeling.', 'Your friend needs this.']
 
---- Slide 1 ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: Hook: Sofia looking amazed at Mumbai skyline, 'Moscow to Mumbai' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+--- Photo 1 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: Hook: Sofia at a marble cafe table, morning light, 'Mumbai or Paris?' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
---- Slide 2 ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 2 of a carousel post.) Scene: 1: The kindness of strangers (auto drivers, shopkeepers) Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 3 ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 3 of a carousel post.) Scene: 2: Street food that beats any Moscow restaurant Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 4 ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 4 of a carousel post.) Scene: 3: Mumbai never sleeps — truly 24/7 Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 5 ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 5 of a carousel post.) Scene: 4: The fashion is incredibly bold and colorful Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 6 ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 6 of a carousel post.) Scene: 5: How fast Mumbai becomes home Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+--- Photo 2 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 2 of a carousel post.) Scene: Cafe 1: French-inspired interiors, croissant and cappuccino flat lay, arched mirrors Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

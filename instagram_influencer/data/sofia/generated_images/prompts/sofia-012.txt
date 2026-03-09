@@ -1,11 +1,16 @@
-=== sofia-012 | REEL ===
-Topic: GRWM for a luxury dinner at Taj Mumbai
-Caption: Getting ready for Taj.
-Because first impressions are the only impressions.
-What would you wear to a 5-star dinner?
-Send this to someone who gets it.
+=== sofia-012 | REEL (HOOK-PHOTO) ===
+Topic: 5 styling mistakes that instantly make you look cheap
+Caption: Five mistakes that make any outfit look cheap instantly.
+Number three is the one most people refuse to fix.
+Defend yourself in the comments. I dare you.
+Send to your honest friend who needs this.
 
-Place at: generated_images/pending/sofia-012.jpg
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
+Place in: generated_images/pending/sofia-012/1.jpg, 2.jpg, ...
+On-screen hooks: ['Five mistakes. Instantly cheap.', 'Number three? Unforgivable.', 'Fix it today.']
 
---- Prompt ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. Scene: GRWM for a luxury dinner at Taj Mumbai. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: vanity/bathroom setting, warm lighting, luxury products visible.
+--- Photo 1 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: Hook: Sofia with arms crossed, bold text '5 mistakes that make you look cheap' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Photo 2 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 2 of a carousel post.) Scene: 1: Visible brand logos everywhere vs clean minimal pieces with no logos Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

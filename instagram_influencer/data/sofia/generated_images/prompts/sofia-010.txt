@@ -1,11 +1,16 @@
-=== sofia-010 | REEL ===
-Topic: Day in my life — luxury Mumbai edition
-Caption: Mumbai mornings hit different from a penthouse.
-Coffee. Outfit. Skyline.
-What does your morning look like?
-Share this with someone who deserves this life.
+=== sofia-010 | REEL (HOOK-PHOTO) ===
+Topic: Old money vs new money — 5 outfit comparisons
+Caption: Old money whispers. New money screams.
+Five outfits. Same occasion. Completely different energy.
+Which side are you? Be honest.
+Send to your friend and see if they agree.
 
-Place at: generated_images/pending/sofia-010.jpg
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
+Place in: generated_images/pending/sofia-010/1.jpg, 2.jpg, ...
+On-screen hooks: ['Old money whispers.', 'New money screams.', 'Which side are you?']
 
---- Prompt ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. Scene: Day in my life — luxury Mumbai edition. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: morning routine vibes, penthouse, luxury breakfast, getting ready.
+--- Photo 1 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: Hook: Sofia split down the middle — old money left, new money right, 'Which are you?' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+--- Photo 2 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 2 of a carousel post.) Scene: 1 Brunch: cream knit + pearl studs vs neon bodycon + chunky gold chain Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

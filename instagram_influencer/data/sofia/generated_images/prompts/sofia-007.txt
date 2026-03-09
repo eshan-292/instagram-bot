@@ -1,11 +1,13 @@
-=== sofia-007 | REEL ===
-Topic: GRWM for a luxury dinner at Taj Mumbai
-Caption: Getting ready for Taj.
-Because first impressions are the only impressions.
-What would you wear to a 5-star dinner?
-Send this to someone who gets it.
+=== sofia-007 | REEL (HOOK-PHOTO) ===
+Topic: Fast fashion is embarrassing — invest in quality
+Caption: Fast fashion is embarrassing. I said what I said.
+Five real pieces will outlast fifty cheap ones.
+Fight me in the comments or finally admit it.
+Send this to someone who needs to hear it.
 
-Place at: generated_images/pending/sofia-007.jpg
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
+Place in: generated_images/pending/sofia-007/1.jpg, 2.jpg, ...
+On-screen hooks: ['Fast fashion? Embarrassing.', 'Five pieces. Not fifty.', 'I said what I said.']
 
---- Prompt ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. Scene: GRWM for a luxury dinner at Taj Mumbai. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: vanity/bathroom setting, warm lighting, luxury products visible.
+--- Photo 1 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: Fast fashion is embarrassing — invest in quality - editorial pose, arms crossed, confident expression, luxury cashmere and silk textures in focus, minimalist white/cream backdrop, side-by-side moment  Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

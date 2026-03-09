@@ -1,11 +1,13 @@
-=== sofia-009 | SINGLE ===
-Topic: All-black luxury outfit — power dressing
-Caption: All black. All power.
-Sometimes the best outfit says nothing — but everyone notices.
-Could you pull this off?
-Tag someone who only wears black.
+=== sofia-009 | REEL (HOOK-PHOTO) ===
+Topic: Rs 5,000 outfit styled to look like Rs 50,000
+Caption: This entire outfit cost Rs 5,000. You thought it was 50.
+Styling is the cheat code nobody taught you.
+Watch till the end. The secret is embarrassingly simple.
+Send to your friend who overspends.
 
-Place at: generated_images/pending/sofia-009.jpg
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
+Place in: generated_images/pending/sofia-009/1.jpg, 2.jpg, ...
+On-screen hooks: ['Rs 5,000. You thought 50.', 'Styling cheat code.', 'Watch till the end.']
 
---- Prompt ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. Scene: All-black luxury outfit — power dressing. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: minimalist backdrop, all-black outfit, confident powerful energy.
+--- Photo 1 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: Rs 5,000 outfit styled to look like Rs 50,000 - before/after transformation energy, first frame in basic unstyled outfit then quick transition to fully styled look, side-by-side comparison moment, foc Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

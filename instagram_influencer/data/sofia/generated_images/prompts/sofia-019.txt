@@ -1,11 +1,13 @@
-=== sofia-019 | SINGLE ===
-Topic: All-black luxury outfit — power dressing
-Caption: All black. All power.
-Sometimes the best outfit says nothing — but everyone notices.
-Could you pull this off?
-Tag someone who only wears black.
+=== sofia-019 | REEL (HOOK-PHOTO) ===
+Topic: The perfume rule rich women never share
+Caption: There is one perfume rule wealthy women never share.
+I learned it in Moscow. Changed everything.
+Watch to the end. You will never apply perfume the same way.
+Send to someone who deserves to know.
 
-Place at: generated_images/pending/sofia-019.jpg
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
+Place in: generated_images/pending/sofia-019/1.jpg, 2.jpg, ...
+On-screen hooks: ['One rule. Never shared.', 'Learned it in Moscow.', 'Changed everything.']
 
---- Prompt ---
-Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. Scene: All-black luxury outfit — power dressing. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: minimalist backdrop, all-black outfit, confident powerful energy.
+--- Photo 1 ---
+Sofia Petrova, a 24-year-old Russian woman living in Mumbai. She has porcelain fair skin, sharp blue-green eyes, platinum blonde straight hair past shoulders, high cheekbones, slim tall figure, elegant model-like posture, subtle mysterious expression. (Slide 1 of a carousel post.) Scene: The perfume rule rich women never share - extreme close-up perfume application on wrist and behind ears, luxury glass perfume bottle with amber liquid, soft diffused lighting, shallow depth of field,  Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
