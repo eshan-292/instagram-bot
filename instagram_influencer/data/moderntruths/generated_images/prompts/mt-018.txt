@@ -1,8 +1,10 @@
-=== mt-018 | REEL ===
+=== mt-018 | REEL (HOOK-PHOTO) ===
 Topic: Why being alone beats being in the wrong relationship
 Caption: If this offends you — good. Being alone is better than the 5 compromises you're making. Stop sacrificing your peace for validation. Are you choosing comfort over your own peace? Send this to the friend who needs to walk away.
 
-Place at: generated_images/pending/mt-018.jpg
+HOOK-PHOTO REEL — 1 photos (text hooks auto-generated)
+Place in: generated_images/pending/mt-018/1.jpg, 2.jpg, ...
+On-screen hooks: ['Alone > Wrong Partner.', '5 compromises you tolerate.', 'Send to the friend who knows.']
 
---- Prompt ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. Scene: Why being alone beats being in the wrong relationship. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio. Framing/mood: dual_format:reel | Person standing confidently alone on a mountain peak, looking out at a vast landscape. Mood: empowered, serene..
+--- Photo 1 ---
+Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Why being alone beats being in the wrong relationship - dual_format:reel | Person standing confidently alone on a mountain peak, looking out at a vast landscape. Mood: empowered, serene. | generated_b Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

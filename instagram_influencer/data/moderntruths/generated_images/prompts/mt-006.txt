@@ -1,24 +1,13 @@
-=== mt-006 | CAROUSEL ===
+=== mt-006 | REEL (HOOK-PHOTO) ===
 Topic: Red Flag Friday: Situationships
 Caption: Red Flag Friday: 7 signs you're stuck in a situationship. This will hurt, but he's not confused. Does avoiding labels benefit anyone but the commitment-phobe? Send this to someone who needs to escape the situationship limbo.
 
-CAROUSEL — 6 slides
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
 Place in: generated_images/pending/mt-006/1.jpg, 2.jpg, ...
+On-screen hooks: ["Red Flag Friday: 7 signs you're stuck in", 'Think about it.', 'Send this.']
 
---- Slide 1 ---
+--- Photo 1 ---
 Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: He only texts you late at night. Woman looking at phone with a single notification from a specific contact, dark room. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
---- Slide 2 ---
+--- Photo 2 ---
 Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You've never met his friends or family. Woman looking confused while seeing a group photo on social media where he's present without her. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 3 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: He avoids making future plans. Calendar showing a tentative event, then crossed out with a 'maybe' text. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 4 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: He calls you 'friend' or 'buddy' in front of others. Woman looking visibly uncomfortable as a man puts his arm around her like a friend. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 5 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: He gets jealous, but won't commit. Man with a stern face, looking suspiciously at her phone, but refusing to label their relationship. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 6 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 6 of a carousel post.) Scene: Slide 6: Your conversations lack depth beyond surface level. Couple sitting on a couch, both scrolling on their phones, no eye contact. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

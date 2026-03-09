@@ -1,21 +1,13 @@
-=== mt-010 | CAROUSEL ===
+=== mt-010 | REEL (HOOK-PHOTO) ===
 Topic: 5 signs you're the backup option
 Caption: This will hurt: 5 undeniable signs you're just their backup option. They keep you on the hook for emergencies. Are you hoping for more, or are you actively settling for less? Send this to someone who needs to stop being a second choice.
 
-CAROUSEL — 5 slides
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
 Place in: generated_images/pending/mt-010/1.jpg, 2.jpg, ...
+On-screen hooks: ["This will hurt: 5 undeniable signs you're just", 'Think about it.', 'Send this.']
 
---- Slide 1 ---
+--- Photo 1 ---
 Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: They only contact you when lonely or bored. Close-up of a text message screen showing an apology for a last-minute cancellation, but suggesting meeting later tonight. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
---- Slide 2 ---
+--- Photo 2 ---
 Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: You're never their priority for important events. A person sitting alone at a restaurant table, looking at their phone, while couples dine happily in the background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 3 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: They avoid defining the relationship. Two hands clasped, but one hand looks reluctant or less engaged than the other, pulling away slightly. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 4 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: Their effort is inconsistent and minimal. A calendar with one specific day circled, then crossed out with 'maybe' written over it, indicating flakiness. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 5 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: You feel constantly anxious about their interest. A lone figure walking away from a group of friends laughing together, looking isolated and worried. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.

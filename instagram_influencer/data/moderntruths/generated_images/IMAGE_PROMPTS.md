@@ -256,3 +256,58 @@ Generate these images in the Gemini app and place them at the paths shown.
 **Photo 2:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Key point: Why being alone beats being in the wrong Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
 ---
+
+## aryan-001 — REEL (HOOK-PHOTO)
+**Topic:** Full day of eating under Rs 300 in Delhi
+**Caption:** Stop eating junk. Seriously. This is your full day of protein-rich Indian meals for under Rs 300.  How many calories do you think this is? Your budget-friendly fitness guide is here. Send this to someone who needs to eat clean on a budget.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-001/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Rs 300. Full day. Protein.', 'Can you guess the calories?', 'Send this to your gym bro.']
+
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Close-up shot of a hearty bowl of dal and rice, steam rising. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-002 — REEL (HOOK-PHOTO)
+**Topic:** 5 exercises you're doing WRONG (and how to fix them)
+**Caption:** Your form is wrong. Here's proof. Are you making these common mistakes in the gym?  This is why you're not seeing results. Fix these and watch your gains explode. Screenshot this before you hit the gym next.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-002/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Your form is wrong. Proof.', 'Are you making this mistake?', 'Save this. Trust me.']
+
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Medium shot of Aryan doing a flawed bench press, chest slumped. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-003 — REEL (HOOK-PHOTO)
+**Topic:** Delhi Gym Culture: What no one tells you
+**Caption:** Biggest gym mistake I see daily. You're not alone if you've felt this way.  Delhi's fitness scene is wild, but are you playing it right?  Tag your gym buddy who always complains about this.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-003/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Biggest gym mistake I see.', 'Can you relate to this?', 'Tag your gym buddy.']
+
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Shot of a crowded gym floor with people working out, blurry in the background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-004 — CAROUSEL (HOOK-PHOTO)
+**Topic:** 5 exercises you're doing WRONG (and how to fix them)
+**Caption:** Your form is wrong. Here's proof. Are you making these common mistakes in the gym?  This is why you're not seeing results. Fix these and watch your gains explode. Screenshot this before you hit the gym next.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-004/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Your form is wrong. Proof.', 'Are you making this mistake?', 'Save this. Trust me.']
+
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Medium shot of Aryan doing a flawed bench press, chest slumped. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---
+
+## aryan-005 — CAROUSEL (HOOK-PHOTO)
+**Topic:** Delhi Gym Culture: What no one tells you
+**Caption:** Biggest gym mistake I see daily. You're not alone if you've felt this way.  Delhi's fitness scene is wild, but are you playing it right?  Tag your gym buddy who always complains about this.
+
+**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-005/1.jpg`, `2.jpg`, ...
+**On-screen hooks (auto-generated):** ['Biggest gym mistake I see.', 'Can you relate to this?', 'Tag your gym buddy.']
+
+**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Shot of a crowded gym floor with people working out, blurry in the background. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
+
+---

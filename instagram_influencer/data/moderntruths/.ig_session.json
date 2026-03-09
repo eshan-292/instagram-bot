@@ -8,28 +8,28 @@
         "request_id": "dcf9242f-a99d-4a50-8708-54479c9c5aac",
         "tray_session_id": "e62d8da6-c7de-40ed-b7bc-b48fb13474f1"
     },
-    "mid": "aav5zgABAAGj6oftSs3pktKiGQ09",
+    "mid": "aae1CwABAAGigtqAXAQmwmF5_LWZ",
     "ig_u_rur": null,
     "ig_www_claim": null,
     "authorization_data": {
         "ds_user_id": "46206754789",
-        "sessionid": "46206754789%3AOmxGeLb7izIR55%3A10%3AAYjmwCkG1gNgHPOZjKtlbBVvXjAD9_vX7E3JkZ_uWg"
+        "sessionid": "46206754789%3AmYdQSPPoV6icsz%3A3%3AAYgQz668DxkhQTEOzmBcV5PK6YgQj78lSMjP9MtcDA"
     },
     "cookies": {},
-    "last_login": 1772878308.5732968,
+    "last_login": 1772598559.668109,
     "device_settings": {
-        "app_version": "418.0.0.51.77",
         "android_version": 34,
         "android_release": "14",
-        "dpi": "480dpi",
-        "resolution": "1080x2340",
-        "manufacturer": "Samsung",
-        "device": "dm1q",
-        "model": "SM-S911B",
+        "dpi": "440dpi",
+        "resolution": "1080x2400",
+        "manufacturer": "Xiaomi",
+        "device": "shennong",
+        "model": "2401CPX3DC",
         "cpu": "qcom",
+        "app_version": "418.0.0.51.77",
         "version_code": "659489002"
     },
-    "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)",
+    "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 440dpi; 1080x2400; Xiaomi; 2401CPX3DC; shennong; qcom; en_IN; 659489002)",
     "country": "IN",
     "country_code": 91,
     "locale": "en_IN",

@@ -1,21 +1,13 @@
-=== mt-019 | CAROUSEL ===
+=== mt-019 | REEL (HOOK-PHOTO) ===
 Topic: The truth about modern dating apps
 Caption: Harsh truth: Modern dating apps are engineered for 3 painful outcomes you ignore. They thrive on endless scrolling, not connection. Are you using the app, or is the app using you? Tag the friend who's still swiping for love.
 
-CAROUSEL — 5 slides
+HOOK-PHOTO REEL — 2 photos (text hooks auto-generated)
 Place in: generated_images/pending/mt-019/1.jpg, 2.jpg, ...
+On-screen hooks: ['Harsh truth: Modern dating apps are engineered for', 'Think about it.', 'Send this.']
 
---- Slide 1 ---
+--- Photo 1 ---
 Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Slide 1: Endless shallow connections. A person looking overwhelmed by an endless stream of profiles on a dating app. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
 
---- Slide 2 ---
+--- Photo 2 ---
 Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 2 of a carousel post.) Scene: Slide 2: Designed for addiction, not commitment. A phone screen showing a chat with no replies, or very generic, unengaging messages, fostering a cycle of disappointment. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 3 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 3 of a carousel post.) Scene: Slide 3: Commodification of people. A person swiping left and right rapidly, treating profiles like products in an online store. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 4 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 4 of a carousel post.) Scene: Slide 4: Exaggerated self-presentation. Close-up of a person taking multiple selfies, heavily filtered, attempting to create an 'ideal' online persona. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
---- Slide 5 ---
-Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 5 of a carousel post.) Scene: Slide 5: Superficial matching based on appearance. A split screen, one side showing a user's highly edited profile photo, the other showing a bewildered face after meeting in person. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
