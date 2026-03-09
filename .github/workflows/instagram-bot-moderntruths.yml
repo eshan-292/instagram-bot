@@ -93,9 +93,17 @@ jobs:
           echo "PERSONA=moderntruths" >> $GITHUB_ENV
 
       # Route traffic through VPN proxy (anti-detection: avoids datacenter IPs)
+      - name: Check proxy config
+        run: |
+          if [ -n "$WG_CONFIG" ]; then
+            echo "HAS_WG_CONFIG=true" >> $GITHUB_ENV
+          fi
+        env:
+          WG_CONFIG: ${{ secrets.WG_CONFIG_MODERNTRUTHS }}
+
       - name: Setup proxy
         id: proxy
-        if: ${{ secrets.WG_CONFIG_MODERNTRUTHS != '' }}
+        if: env.HAS_WG_CONFIG == 'true'
         uses: ./.github/actions/setup-proxy
         with:
           wireguard_config: ${{ secrets.WG_CONFIG_MODERNTRUTHS }}
