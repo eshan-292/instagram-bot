@@ -13,23 +13,23 @@
     "ig_www_claim": null,
     "authorization_data": {
         "ds_user_id": "77928342121",
-        "sessionid": "77928342121%3AFZLMehEWnKQre1%3A24%3AAYgO-TrhYJb6eHKfDxtzfsMuQKTbPoAHIeKoe6L_Sw"
+        "sessionid": "77928342121%3AdzbUWB1ETYg90X%3A29%3AAYhPOl_IYpbzXb6LdKN1iUIOKwMETFXo7R1liNGvHg"
     },
     "cookies": {},
-    "last_login": 1772953002.264095,
+    "last_login": 1773075302.6932802,
     "device_settings": {
-        "app_version": "418.0.0.51.77",
         "android_version": 34,
         "android_release": "14",
-        "dpi": "480dpi",
-        "resolution": "1080x2340",
-        "manufacturer": "Samsung",
-        "device": "dm1q",
-        "model": "SM-S911B",
-        "cpu": "qcom",
+        "dpi": "420dpi",
+        "resolution": "1080x2400",
+        "manufacturer": "Google",
+        "device": "husky",
+        "model": "Pixel 8 Pro",
+        "cpu": "tensor",
+        "app_version": "418.0.0.51.77",
         "version_code": "659489002"
     },
-    "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 480dpi; 1080x2340; samsung; SM-S911B; dm1q; qcom; en_IN; 659489002)",
+    "user_agent": "Instagram 418.0.0.51.77 Android (34/14; 420dpi; 1080x2400; Google; Pixel 8 Pro; husky; tensor; en_IN; 659489002)",
     "country": "IN",
     "country_code": 91,
     "locale": "en_IN",
