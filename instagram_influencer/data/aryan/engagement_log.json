@@ -1,3 +1,39 @@
 {
-  "actions": []
+  "actions": [
+    {
+      "type": "yt_upload",
+      "target": "AC1a0NWy7O8",
+      "at": "2026-03-10T07:58:06Z"
+    },
+    {
+      "type": "yt_creator_comment",
+      "target": "AC1a0NWy7O8",
+      "at": "2026-03-10T07:58:14Z"
+    },
+    {
+      "type": "yt_replies",
+      "target": "Ugwzg-YW_Qsu0GQr9vR4AaABAg",
+      "at": "2026-03-10T08:02:55Z"
+    },
+    {
+      "type": "yt_replies",
+      "target": "Ugw0YfQj0Vp9-Qt55EV4AaABAg",
+      "at": "2026-03-10T08:03:06Z"
+    },
+    {
+      "type": "yt_replies",
+      "target": "UgzkbHoVeXDdYVjGGX94AaABAg",
+      "at": "2026-03-10T08:03:15Z"
+    },
+    {
+      "type": "yt_replies",
+      "target": "Ugy-CG5PgBz5Ph2iKFB4AaABAg",
+      "at": "2026-03-10T08:05:40Z"
+    },
+    {
+      "type": "yt_replies",
+      "target": "UgzAXm9v0ApzOufbJM94AaABAg",
+      "at": "2026-03-10T08:05:51Z"
+    }
+  ]
 }
