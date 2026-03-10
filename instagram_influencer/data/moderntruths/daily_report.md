@@ -1,36 +1,29 @@
-# 📊 Daily Report — March 06, 2026
+# 📊 Daily Report — March 11, 2026
 
-*Generated at 12:30 AM IST*
+*Generated at 12:04 AM IST*
 
 ## Engagement
 
 | Action | Count |
 |--------|-------|
-| ❤️ Likes | 303 |
-| 💬 Comments | 4 |
-| ➕ Follows | 1 |
-| ➖ Unfollows | 2 |
-| 👁️ Story Views | 90 |
-| **Total** | **400** |
+| ➖ Unfollows | 11 |
+| **Total** | **11** |
 
 ## Posts Published Today
 
-- **mt-004**: Woman looking contemplative, possibly at a crossroads, overw
-  - IG: https://instagram.com/p/3845985410590042932/
-- **mt-005**: Man persistently trying to get attention from a woman who is
-  - IG: https://instagram.com/p/3846200578787827952/
+*No posts published today*
 
 ## Content Pipeline
 
-- Draft: 0
-- Approved: 0
+- Draft: 23
+- Approved: 1
 - Posted: 4
 
 ## Growth Signals
 
-- Net follows sent today: **-1**
-- Engagement actions: **400**
-- Account age: **2 days**
+- Net follows sent today: **-11**
+- Engagement actions: **11**
+- Account age: **7 days**
 - Warmup multiplier: **0.6x**
 
 ---
