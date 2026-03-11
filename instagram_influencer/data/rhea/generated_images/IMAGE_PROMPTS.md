@@ -4,20 +4,6 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## rhea-005 — REEL (HOOK-PHOTO)
-**Topic:** Upper body workout for toned arms — complete routine
-**Caption:** Upper body day.
-Because strong arms never go out of style.
-Save this for your next arm day.
-Tag someone who skips upper body.
-
-**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/rhea-005/1.jpg`, `2.jpg`, ...
-**On-screen hooks (auto-generated):** ['Upper body day.', 'Strong arms never go out of style.', 'Save this for arm day.']
-
-**Photo 1:** Rhea, a 23-year-old Indian fitness creator from Gurgaon. She has warm tan Indian skin, strong defined features, dark brown eyes with thick brows, long dark hair usually in a ponytail or bun, athletic toned build with visible muscle definition, confident calm expression, natural minimal makeup. (Slide 1 of a carousel post.) Scene: Photo 1: Rhea doing dumbbell shoulder press in gym, arms and shoulders pumped, focused expression — 'Upper body day. Strong arms never go out of style.' Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
 ## rhea-006 — REEL (HOOK-PHOTO)
 **Topic:** Workout Wednesday: Complete ab workout — no crunches
 **Caption:** Crunches are lazy. Your abs deserve better.
