@@ -244,6 +244,11 @@ def publish_short(
                 error_detail = err.get("error", {}).get("message", "")
             except Exception:
                 pass
+        # Re-raise quota errors so the caller can stop the publish loop
+        err_str = str(exc).lower() + error_detail.lower()
+        if "quotaexceeded" in err_str or "quota" in err_str:
+            log.error("YouTube QUOTA exceeded during upload: %s %s", exc, error_detail)
+            raise
         log.error("YouTube upload failed: %s %s", exc, error_detail)
         return None
     except Exception as exc:

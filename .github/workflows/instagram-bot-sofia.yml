@@ -88,7 +88,8 @@ jobs:
       - name: Create .env
         run: |
           echo "${{ secrets.DOTENV_SOFIA }}" > instagram_influencer/.env
-          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=sofia" >> instagram_influencer/.env
+          sed -i '/^PERSONA=/d' instagram_influencer/.env
+          echo "PERSONA=sofia" >> instagram_influencer/.env
           # Also export PERSONA to the environment for reliability
           echo "PERSONA=sofia" >> $GITHUB_ENV
 
@@ -185,6 +186,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Merge YouTube fields from remote to prevent IG/YT race condition
+          git fetch origin main 2>/dev/null || true
+          python instagram_influencer/merge_yt_state.py sofia 2>/dev/null || true
           # Add each file individually to avoid one missing file blocking all staging
           for f in \
             instagram_influencer/data/sofia/engagement_log.json \

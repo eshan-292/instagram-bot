@@ -50,7 +50,8 @@ jobs:
       - name: Create .env
         run: |
           echo "${{ secrets.DOTENV_SAT1 }}" > instagram_influencer/.env
-          grep -q "^PERSONA=" instagram_influencer/.env || echo "PERSONA=sat1" >> instagram_influencer/.env
+          sed -i '/^PERSONA=/d' instagram_influencer/.env
+          echo "PERSONA=sat1" >> instagram_influencer/.env
           echo "PERSONA=sat1" >> $GITHUB_ENV
 
       - name: Seed session from secret
