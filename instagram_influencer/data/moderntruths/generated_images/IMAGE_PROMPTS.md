@@ -257,17 +257,6 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## aryan-001 — REEL (HOOK-PHOTO)
-**Topic:** Full day of eating under Rs 300 in Delhi
-**Caption:** Stop eating junk. Seriously. This is your full day of protein-rich Indian meals for under Rs 300.  How many calories do you think this is? Your budget-friendly fitness guide is here. Send this to someone who needs to eat clean on a budget.
-
-**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-001/1.jpg`, `2.jpg`, ...
-**On-screen hooks (auto-generated):** ['Rs 300. Full day. Protein.', 'Can you guess the calories?', 'Send this to your gym bro.']
-
-**Photo 1:** Not a person — a bold digital commentary page. Dark moody aesthetic with sharp typography. Content features stark text overlays on cinematic dark backgrounds, red/white accent colors, masculine authority energy. (Slide 1 of a carousel post.) Scene: Close-up shot of a hearty bowl of dal and rice, steam rising. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
 ## aryan-002 — REEL (HOOK-PHOTO)
 **Topic:** 5 exercises you're doing WRONG (and how to fix them)
 **Caption:** Your form is wrong. Here's proof. Are you making these common mistakes in the gym?  This is why you're not seeing results. Fix these and watch your gains explode. Screenshot this before you hit the gym next.
