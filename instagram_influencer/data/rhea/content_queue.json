@@ -128,7 +128,7 @@
     },
     {
       "id": "rhea-005",
-      "status": "approved",
+      "status": "failed",
       "topic": "Upper body workout for toned arms \u2014 complete routine",
       "caption": "Upper body day.\nBecause strong arms never go out of style.\nSave this for your next arm day.\nTag someone who skips upper body.",
       "alt_text": "Athletic Indian woman performing upper body exercises in gym",
@@ -148,7 +148,8 @@
       "youtube_video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/rhea/generated_images/pending/rhea-005_yt.mp4",
       "slides": [
         "Photo 1: Rhea doing dumbbell shoulder press in gym, arms and shoulders pumped, focused expression \u2014 'Upper body day. Strong arms never go out of style.'"
-      ]
+      ],
+      "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
     },
     {
       "id": "rhea-006",
