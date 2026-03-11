@@ -140,7 +140,7 @@
     },
     {
       "id": "aryan-006",
-      "status": "approved",
+      "status": "failed",
       "topic": "Desi protein sources ranked -- best bang for your buck",
       "caption": "Every Indian gym bro asks the same question.\n\"Bhai protein kahan se laaun?\"\nHere's your answer. Ranked by Rs per gram of protein.\nSave this. Screenshot this. Send this.",
       "image_url": "data/aryan/generated_images/pending/aryan-006/1.jpg",
@@ -165,7 +165,8 @@
       "youtube_video_url": "data/aryan/generated_images/pending/aryan-006/1_yt.mp4",
       "youtube_video_id": null,
       "youtube_posted_at": null,
-      "youtube_pin_comment_id": null
+      "youtube_pin_comment_id": null,
+      "publish_error": "Reel post has no video_url \u2014 cannot publish as photo fallback"
     },
     {
       "id": "aryan-007",
