@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "aryan-001",
-      "status": "approved",
+      "status": "failed",
       "topic": "5 exercises you're doing wrong in the gym",
       "caption": "5 exercises. You're doing ALL of them wrong.\nI wasted 2 years before someone told me.\nWhich one surprised you most?\nSend this to your gym partner before they hurt themselves.",
       "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.jpg",
@@ -34,7 +34,8 @@
       "youtube_video_url": "data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
       "youtube_video_id": "AC1a0NWy7O8",
       "youtube_posted_at": "2026-03-10T07:58:06Z",
-      "youtube_pin_comment_id": "Ugwzg-YW_Qsu0GQr9vR4AaABAg"
+      "youtube_pin_comment_id": "Ugwzg-YW_Qsu0GQr9vR4AaABAg",
+      "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /rupload_igvideo/1773215114834_0_5914042965 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)')))"
     },
     {
       "id": "aryan-002",
