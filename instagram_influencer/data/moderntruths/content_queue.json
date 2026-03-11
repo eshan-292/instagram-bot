@@ -693,6 +693,29 @@
       "slides": [
         "Shot of a crowded gym floor with people working out, blurry in the background."
       ]
+    },
+    {
+      "id": "mt-025",
+      "status": "approved",
+      "topic": "Woman sitting alone in a bustling cafe, waiting, looking at her phone expectantly, feeling like a backup option.",
+      "caption": "Uncomfortable fact:\nWoman sitting alone in a bustling cafe, waiting, looking at her phone expectantly, feeling like a backup option..\nWould you try this?\nSend to someone who needs to see this.",
+      "alt_text": "A woman looking dejected, sitting alone in a bustling cafe, scrolling on her phone, illustrating the feeling of being a backup option.",
+      "youtube_title": "",
+      "video_text": [
+        "Uncomfortable fact:",
+        "The secret nobody shares.",
+        "Send to your bestie."
+      ],
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-002.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-002.mp4",
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "scheduled_at": "2026-03-11T14:26:13Z",
+      "notes": "repost:mt-002 | fresh hooks",
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-002.jpg"
+      ]
     }
   ]
 }
