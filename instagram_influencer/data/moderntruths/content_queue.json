@@ -571,7 +571,7 @@
     },
     {
       "id": "aryan-001",
-      "status": "approved",
+      "status": "failed",
       "topic": "Full day of eating under Rs 300 in Delhi",
       "caption": "Stop eating junk. Seriously. This is your full day of protein-rich Indian meals for under Rs 300.  How many calories do you think this is? Your budget-friendly fitness guide is here. Send this to someone who needs to eat clean on a budget.",
       "alt_text": "Aryan Dhar showcasing a spread of Indian meals including dal, rice, chicken curry, and roti.",
@@ -599,7 +599,8 @@
         "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/5.jpg",
         "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/6.jpg"
       ],
-      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4"
+      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
+      "publish_error": "Local file not found: /Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.mp4"
     },
     {
       "id": "aryan-002",
