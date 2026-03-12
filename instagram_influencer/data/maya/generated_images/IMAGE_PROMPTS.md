@@ -4,17 +4,6 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## maya-017 — REEL (HOOK-PHOTO)
-**Topic:** Power suit strut on a busy Mumbai street.
-**Caption:** Mumbai moves with my rhythm. You just watch.
-
-**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/maya-017/1.jpg`, `2.jpg`, ...
-**On-screen hooks (auto-generated):** ['Mumbai moves with my rhythm', 'You just watch', 'Save this for later.']
-
-**Photo 1:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 1 of a carousel post.) Scene: Photo 1: Full-body shot. Maya in a sharp, tailored power suit (e.g., emerald green, deep navy). Walking purposefully on a busy street (Colaba or Fort area, subtle vintage architecture in background). Golden hour sunlight hitting her face and suit, casting long shadows. Slightly low angle to emphasize height and power. Confident, direct gaze. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
 ## maya-018 — REEL (HOOK-PHOTO)
 **Topic:** Lounging elegantly in a luxurious apartment with a city skyline view.
 **Caption:** It’s called effortless. Maybe you’ve heard of it.
