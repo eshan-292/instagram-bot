@@ -20,20 +20,6 @@ Save this -- your wallet and gains will thank you.
 
 ---
 
-## aryan-007 — REEL (HOOK-PHOTO)
-**Topic:** Shoulder workout for a broader look -- 4 exercises
-**Caption:** Shoulders make or break your physique.
-4 exercises. 30 minutes. Wider by next month.
-Which exercise hits hardest for you?
-Save this for your next shoulder day.
-
-**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/aryan-007/1.jpg`, `2.jpg`, ...
-**On-screen hooks (auto-generated):** ['Shoulders make or break it.', '4 exercises. 30 min.', 'Save for shoulder day']
-
-**Photo 1:** Aryan Dhar, a 25-year-old Indian fitness influencer. He has fair skin, muscular athletic build, sharp jawline, short styled dark hair, confident intense expression, well-groomed stubble, broad shoulders. (Slide 1 of a carousel post.) Scene: Photo 1: Aryan mid-rep lateral raise in gym, shoulder definition visible, intense focus. Text overlay 'Shoulders make or break it.' Good gym lighting. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
 ## aryan-008 — REEL (HOOK-PHOTO)
 **Topic:** Leg day you can't skip -- complete routine
 **Caption:** "I train legs." No you don't.
