@@ -166,7 +166,7 @@
       "youtube_video_id": null,
       "youtube_posted_at": null,
       "youtube_pin_comment_id": null,
-      "publish_error": "Reel post has no video_url \u2014 cannot publish as photo fallback"
+      "publish_error": "Reel post has no video_url — cannot publish as photo fallback"
     },
     {
       "id": "aryan-007",
@@ -196,7 +196,7 @@
     },
     {
       "id": "aryan-008",
-      "status": "approved",
+      "status": "failed",
       "topic": "Leg day you can't skip -- complete routine",
       "caption": "\"I train legs.\" No you don't.\nThis is what a real leg day looks like.\nWhy do 90% of guys skip this?\nSend to the friend with the chicken legs.",
       "image_url": "data/aryan/generated_images/pending/aryan-008.jpg",
@@ -218,6 +218,10 @@
         "Send to chicken legs guy"
       ],
       "youtube_video_url": "data/aryan/generated_images/pending/aryan-008_yt.mp4",
+<<<<<<< Updated upstream
+=======
+      "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))",
+>>>>>>> Stashed changes
       "youtube_video_id": "EKNqRQW5GAw",
       "youtube_posted_at": "2026-03-12T15:10:45Z",
       "youtube_pin_comment_id": "UgyIxLQtEW7qilwwXMh4AaABAg"
@@ -226,7 +230,7 @@
       "id": "aryan-009",
       "status": "approved",
       "topic": "Gym selfie -- consistency check",
-      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a \ud83d\udcaa if you showed up today.",
+      "caption": "No filter. No pump edit. Just 365 days of not quitting.\nYour body keeps a diary. What's yours saying?\nDrop a 💪 if you showed up today.",
       "image_url": "data/aryan/generated_images/pending/aryan-009.jpg",
       "video_url": null,
       "is_reel": false,
@@ -239,7 +243,7 @@
       "video_text": [
         "No filter. No edit.",
         "365 days. No quitting.",
-        "Drop a \ud83d\udcaa"
+        "Drop a 💪"
       ]
     },
     {
