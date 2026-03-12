@@ -170,7 +170,7 @@
     },
     {
       "id": "aryan-007",
-      "status": "approved",
+      "status": "failed",
       "topic": "Shoulder workout for a broader look -- 4 exercises",
       "caption": "Shoulders make or break your physique.\n4 exercises. 30 minutes. Wider by next month.\nWhich exercise hits hardest for you?\nSave this for your next shoulder day.",
       "image_url": "data/aryan/generated_images/pending/aryan-007.jpg",
@@ -191,7 +191,8 @@
         "4 exercises. 30 min.",
         "Save for shoulder day"
       ],
-      "youtube_video_url": "data/aryan/generated_images/pending/aryan-007_yt.mp4"
+      "youtube_video_url": "data/aryan/generated_images/pending/aryan-007_yt.mp4",
+      "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
     },
     {
       "id": "aryan-008",
