@@ -298,7 +298,7 @@
     },
     {
       "id": "maya-018",
-      "status": "approved",
+      "status": "failed",
       "topic": "Lounging elegantly in a luxurious apartment with a city skyline view.",
       "caption": "It\u2019s called effortless. Maybe you\u2019ve heard of it.",
       "image_url": "data/maya/generated_images/pending/maya-018.jpg",
@@ -316,7 +316,8 @@
         "It\u2019s called effortless",
         "Maybe you\u2019ve heard of it",
         "Save this for later."
-      ]
+      ],
+      "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
     },
     {
       "id": "maya-019",
