@@ -1,3 +1,19 @@
 {
-  "actions": []
+  "actions": [
+    {
+      "type": "yt_replies",
+      "target": "UgzisQ3n67t5soaLuGh4AaABAg",
+      "at": "2026-03-12T12:33:58Z"
+    },
+    {
+      "type": "yt_replies",
+      "target": "Ugxqasz4zRDX0_UXckl4AaABAg",
+      "at": "2026-03-12T12:34:02Z"
+    },
+    {
+      "type": "yt_replies",
+      "target": "Ugx1XyNslK8TCHfsR8Z4AaABAg",
+      "at": "2026-03-12T12:34:05Z"
+    }
+  ]
 }
