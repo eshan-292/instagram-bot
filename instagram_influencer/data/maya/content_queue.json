@@ -325,7 +325,7 @@
     },
     {
       "id": "maya-019",
-      "status": "approved",
+      "status": "failed",
       "topic": "Making an unforgettable entrance at an exclusive club or event.",
       "caption": "My presence is the only invitation needed.",
       "image_url": "data/maya/generated_images/pending/maya-019.jpg",
@@ -343,7 +343,8 @@
         "My presence is the only invitation needed",
         "Watch till the end.",
         "Save this for later."
-      ]
+      ],
+      "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /rupload_igvideo/1773391024668_0_5384780348 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)')))"
     },
     {
       "id": "maya-020",
