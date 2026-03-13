@@ -647,7 +647,7 @@
     },
     {
       "id": "aryan-001",
-      "status": "approved",
+      "status": "failed",
       "topic": "Correcting common squat form mistakes for better leg day gains.",
       "caption": "Your squat form. It's probably costing you more than you think. Bad technique means wasted effort, zero gains, and potential injuries.\n\nAre you compromising depth for weight?\n\nThis isn't about lifting heavy, it's about lifting smart. Get it right or stay small. Period.\n\nTag the friend who needs this form check ASAP.",
       "alt_text": "Aryan Dhar demonstrating incorrect squat form, then transitioning to perfect, deep squat form in a gym.",
@@ -676,7 +676,8 @@
         "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/5.jpg",
         "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/6.jpg"
       ],
-      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4"
+      "youtube_video_url": "/Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1_yt.mp4",
+      "publish_error": "Local file not found: /Users/eshan/Eshan/AI projects/openclaw_instagram_influencer_bot/instagram_influencer/data/aryan/generated_images/pending/aryan-001/1.mp4"
     },
     {
       "id": "aryan-002",
