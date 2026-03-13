@@ -101,7 +101,7 @@
     {
       "id": "maya-007",
       "status": "posted",
-      "topic": "Mumbai rooftop soirée, commanding attention.",
+      "topic": "Mumbai rooftop soir\u00e9e, commanding attention.",
       "caption": "They thought the skyline was the view.\nSweetie, I am the view.",
       "image_url": "data/maya/generated_images/pending/maya-007.jpg",
       "video_url": "data/maya/generated_images/pending/maya-007.mp4",
@@ -197,13 +197,15 @@
       "youtube_video_url": "data/maya/generated_images/pending/maya-012_yt.mp4",
       "posted_at": "2026-03-05T14:13:18Z",
       "platform_post_id": "3846176200830275414",
-      "publish_error": null
+      "publish_error": null,
+      "youtube_video_id": "hUsZgMxM0Uc",
+      "youtube_posted_at": "2026-03-13T14:13:09Z"
     },
     {
       "id": "maya-013",
       "status": "posted",
       "topic": "Owning the night at a luxury Mumbai rooftop bar.",
-      "caption": "The city lights are pretty. I think I know why they’re looking this way.",
+      "caption": "The city lights are pretty. I think I know why they\u2019re looking this way.",
       "image_url": "data/maya/generated_images/pending/maya-013.jpg",
       "video_url": "data/maya/generated_images/pending/maya-013.mp4",
       "is_reel": true,
@@ -304,7 +306,7 @@
       "id": "maya-018",
       "status": "failed",
       "topic": "Lounging elegantly in a luxurious apartment with a city skyline view.",
-      "caption": "It’s called effortless. Maybe you’ve heard of it.",
+      "caption": "It\u2019s called effortless. Maybe you\u2019ve heard of it.",
       "image_url": "data/maya/generated_images/pending/maya-018.jpg",
       "video_url": "data/maya/generated_images/pending/maya-018.mp4",
       "is_reel": true,
@@ -317,8 +319,8 @@
         "Photo 1: Mid-shot. Maya in a luxurious yet relaxed silk coord set or a chic loungewear dress. Reclining elegantly on a plush sofa or by a large window overlooking the Mumbai skyline (sea view if possible). Soft, natural light filtering in. Calm, serene, slightly playful expression. Elegant, understated jewelry."
       ],
       "video_text": [
-        "It’s called effortless",
-        "Maybe you’ve heard of it",
+        "It\u2019s called effortless",
+        "Maybe you\u2019ve heard of it",
         "Save this for later."
       ],
       "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
@@ -415,8 +417,8 @@
     {
       "id": "maya-023",
       "status": "draft",
-      "topic": "3 budget looks under ₹2000 — Mumbai street style",
-      "caption": "Mumbai street style under ₹2000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
+      "topic": "3 budget looks under \u20b92000 \u2014 Mumbai street style",
+      "caption": "Mumbai street style under \u20b92000.\nThree looks. One rule: don't look broke.\nSave this for your next shopping trip.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -424,11 +426,11 @@
       "scheduled_at": "2026-02-27T10:31:30Z",
       "notes": "full-body frame, bright Mumbai street background | generated_by=template",
       "slides": [
-        "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '₹2000. 3 outfits. No compromises.'",
-        "Look 1: casual chic — white linen coord set, gold hoops, kolhapuri chappals",
-        "Look 2: street glam — floral co-ord in rust tones, minimal jewelry, white sneakers",
-        "Look 3: indo-western fusion — cropped kurta with wide-leg jeans, block print dupatta",
-        "Outfit detail close-up — accessories and fabric texture",
+        "Hook slide: Maya holding up 3 fingers, playful confident expression, text overlay '\u20b92000. 3 outfits. No compromises.'",
+        "Look 1: casual chic \u2014 white linen coord set, gold hoops, kolhapuri chappals",
+        "Look 2: street glam \u2014 floral co-ord in rust tones, minimal jewelry, white sneakers",
+        "Look 3: indo-western fusion \u2014 cropped kurta with wide-leg jeans, block print dupatta",
+        "Outfit detail close-up \u2014 accessories and fabric texture",
         "Final pose: all three outfits side by side, confidence energy"
       ]
     },
@@ -457,8 +459,8 @@
     {
       "id": "maya-025",
       "status": "draft",
-      "topic": "One kurta, 5 ways — ethnic modern fusion",
-      "caption": "One kurta. Five personalities. Which one are you?\nSave this — you'll need it.",
+      "topic": "One kurta, 5 ways \u2014 ethnic modern fusion",
+      "caption": "One kurta. Five personalities. Which one are you?\nSave this \u2014 you'll need it.",
       "image_url": "",
       "video_url": null,
       "is_reel": false,
@@ -467,17 +469,17 @@
       "notes": "clean studio-style background, full-body each look | generated_by=template",
       "slides": [
         "Hook: Maya with kurta on hanger, caption '1 piece. 5 vibes.'",
-        "Style 1: classic — kurta with palazzo and kolhapuris",
-        "Style 2: fusion — kurta belted with straight jeans and boots",
-        "Style 3: street — kurta knotted, denim shorts, sneakers",
-        "Style 4: evening — kurta with statement earrings, heels, minimal clutch",
-        "Style 5: lounge — oversized kurta as a dress, slides"
+        "Style 1: classic \u2014 kurta with palazzo and kolhapuris",
+        "Style 2: fusion \u2014 kurta belted with straight jeans and boots",
+        "Style 3: street \u2014 kurta knotted, denim shorts, sneakers",
+        "Style 4: evening \u2014 kurta with statement earrings, heels, minimal clutch",
+        "Style 5: lounge \u2014 oversized kurta as a dress, slides"
       ]
     },
     {
       "id": "maya-026",
       "status": "draft",
-      "topic": "Bandra Budget Brunch Looks Under ₹2000",
+      "topic": "Bandra Budget Brunch Looks Under \u20b92000",
       "caption": "Bandra brunch on a budget? No problem. These 3 looks prove style isn't about the price tag, darling. You're welcome. Save this for your next Sunday outing.",
       "image_url": "",
       "video_url": null,
@@ -622,7 +624,7 @@
     {
       "id": "maya-033",
       "status": "draft",
-      "topic": "Wedding guest outfit under Rs 3000 — budget queen",
+      "topic": "Wedding guest outfit under Rs 3000 \u2014 budget queen",
       "caption": "Your friend's wedding invite just dropped and your bank account is crying.\nRelax. Rs 3000 and you'll outshine half the guest list. I said what I said.\nWho else needs a budget wedding outfit rescue?\nSave this before shaadi season hits.",
       "alt_text": "Maya Varma in an elegant wedding guest outfit under Rs 3000, featuring a modern lehenga-style skirt and embroidered blouse in warm festive tones.",
       "youtube_title": "Wedding Guest Outfit Under Rs 3000! Budget Shaadi Style That Slays",
@@ -637,10 +639,10 @@
       "post_type": "reel",
       "carousel_images": [],
       "scheduled_at": "2026-03-10T13:00:00Z",
-      "notes": "Fast transitions. GRWM style — plain clothes to full glam reveal. Warm festive lighting, mirror shots, jewelry close-ups. | generated_by=viral-claude",
+      "notes": "Fast transitions. GRWM style \u2014 plain clothes to full glam reveal. Warm festive lighting, mirror shots, jewelry close-ups. | generated_by=viral-claude",
       "reel_format": "hook_photo",
       "slides": [
-        "Photo 1: Fast transitions. GRWM style — plain clothes to full glam reveal. Warm festive lighting, mirror shots, jewelry close-ups."
+        "Photo 1: Fast transitions. GRWM style \u2014 plain clothes to full glam reveal. Warm festive lighting, mirror shots, jewelry close-ups."
       ]
     },
     {
@@ -664,7 +666,7 @@
       "notes": "One Piece 5 Ways series. Clean neutral backgrounds, full-body shots, same shirt clearly recognizable in each styling. Focus on versatility. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya holding white shirt on hanger, confident look, text 'One shirt. Five personalities. Zero excuses.'",
-        "Style 1 — Casual: White shirt unbuttoned over a black bralette, high-waisted blue jeans, white sneakers. Street style vibes."
+        "Style 1 \u2014 Casual: White shirt unbuttoned over a black bralette, high-waisted blue jeans, white sneakers. Street style vibes."
       ],
       "reel_format": "hook_photo"
     },
@@ -696,7 +698,7 @@
       "id": "maya-036",
       "status": "draft",
       "topic": "Mumbai GRWM: Colaba cafe date",
-      "caption": "Getting ready for a Colaba cafe date and no, I'm not dressing down.\nIf he can't handle the outfit, he can't handle me. Simple math.\nWhat's your go-to date outfit energy — overdressed or effortless?\nTag your date-night bestie who takes 3 hours to get ready.",
+      "caption": "Getting ready for a Colaba cafe date and no, I'm not dressing down.\nIf he can't handle the outfit, he can't handle me. Simple math.\nWhat's your go-to date outfit energy \u2014 overdressed or effortless?\nTag your date-night bestie who takes 3 hours to get ready.",
       "alt_text": "Maya Varma getting ready for a cafe date in Colaba, showing skincare, makeup, and final outfit reveal in a warm-lit Mumbai apartment.",
       "youtube_title": "Mumbai GRWM: Colaba Cafe Date Outfit That Makes Him Nervous",
       "video_text": [
@@ -720,9 +722,9 @@
       "id": "maya-037",
       "status": "draft",
       "topic": "Style Debate: Heels vs sneakers for dates",
-      "caption": "Heels on a date = effort. Sneakers on a date = confidence.\nBut here's the thing — the right sneakers with the right outfit hit HARDER than any heel ever could.\nHeels gang or sneakers gang? Pick your side.\nSend this to your heels-obsessed friend.",
+      "caption": "Heels on a date = effort. Sneakers on a date = confidence.\nBut here's the thing \u2014 the right sneakers with the right outfit hit HARDER than any heel ever could.\nHeels gang or sneakers gang? Pick your side.\nSend this to your heels-obsessed friend.",
       "alt_text": "Maya Varma in a split-screen comparison wearing the same date outfit with heels on one side and styled sneakers on the other.",
-      "youtube_title": "Style Debate: Heels vs Sneakers for Dates — Which Wins?",
+      "youtube_title": "Style Debate: Heels vs Sneakers for Dates \u2014 Which Wins?",
       "video_text": [
         "Heels or sneakers?",
         "Same outfit. Two vibes.",
@@ -737,7 +739,7 @@
       "notes": "Style Debate series. Split-screen format, same outfit with both shoe options. Clean background, full-body shots emphasizing footwear styling. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya holding one heel and one sneaker, raised eyebrows, text 'Heels vs Sneakers. Let's settle this.'",
-        "Outfit with heels — front view: Fitted midi dress, strappy black heels, delicate chain. Elegant, polished energy."
+        "Outfit with heels \u2014 front view: Fitted midi dress, strappy black heels, delicate chain. Elegant, polished energy."
       ],
       "reel_format": "hook_photo"
     },
@@ -745,8 +747,8 @@
       "id": "maya-038",
       "status": "draft",
       "topic": "5 wardrobe basics every Indian girl needs",
-      "caption": "You have 50 outfits and nothing to wear because you skipped the basics.\nThese 5 pieces will fix 80% of your wardrobe problems. Permanently.\nWhich one is missing from YOUR closet?\nSave this — your future self will be grateful.",
-      "alt_text": "Maya Varma presenting five essential wardrobe basics laid out neatly — white shirt, black jeans, kurta, blazer, and gold hoops.",
+      "caption": "You have 50 outfits and nothing to wear because you skipped the basics.\nThese 5 pieces will fix 80% of your wardrobe problems. Permanently.\nWhich one is missing from YOUR closet?\nSave this \u2014 your future self will be grateful.",
+      "alt_text": "Maya Varma presenting five essential wardrobe basics laid out neatly \u2014 white shirt, black jeans, kurta, blazer, and gold hoops.",
       "youtube_title": "5 Wardrobe Basics Every Indian Girl Is Missing (Fix Your Closet)",
       "video_text": [
         "5 basics you're missing.",
@@ -762,15 +764,15 @@
       "notes": "Educational carousel. Clean flat-lay style mixed with Maya wearing each piece. Minimal background, focus on quality and versatility. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya standing in front of a messy closet, arms crossed, text '50 outfits. Nothing to wear. Sound familiar?'",
-        "Basic 1: Perfect white button-down — Maya wearing it tucked into jeans. Text: 'Works with literally everything.'"
+        "Basic 1: Perfect white button-down \u2014 Maya wearing it tucked into jeans. Text: 'Works with literally everything.'"
       ],
       "reel_format": "hook_photo"
     },
     {
       "id": "maya-039",
       "status": "draft",
-      "topic": "Thrift haul Mumbai — Rs 2000 for 5 pieces",
-      "caption": "Rs 2000. Five pieces. All from Mumbai thrift stores.\nThe fashion industry doesn't want you to know that the best style costs almost nothing.\nGuess the total for each piece — answers in comments.\nSend to the friend who thinks thrifting is 'not for them.'",
+      "topic": "Thrift haul Mumbai \u2014 Rs 2000 for 5 pieces",
+      "caption": "Rs 2000. Five pieces. All from Mumbai thrift stores.\nThe fashion industry doesn't want you to know that the best style costs almost nothing.\nGuess the total for each piece \u2014 answers in comments.\nSend to the friend who thinks thrifting is 'not for them.'",
       "alt_text": "Maya Varma excitedly showing off five thrifted clothing pieces from Mumbai markets, bright colorful backdrop with price tags visible.",
       "youtube_title": "Mumbai Thrift Haul: Rs 2000 for 5 Pieces That Look Designer",
       "video_text": [
@@ -793,7 +795,7 @@
     {
       "id": "maya-040",
       "status": "draft",
-      "topic": "Monsoon outfit survival guide — Mumbai edition",
+      "topic": "Monsoon outfit survival guide \u2014 Mumbai edition",
       "caption": "Mumbai monsoon destroyed your outfit? That's a you problem.\nHere's 5 rain-proof looks that actually look good when everything's wet and chaotic.\nDrop your worst monsoon outfit disaster below.\nSave this before July hits and you're crying in ruined white sneakers.",
       "alt_text": "Maya Varma in five different monsoon-ready outfits styled for Mumbai rains, featuring waterproof fabrics and smart layering.",
       "youtube_title": "Mumbai Monsoon Outfit Guide: 5 Looks That Survive The Rain",
@@ -819,7 +821,7 @@
       "id": "maya-041",
       "status": "draft",
       "topic": "Recreating Alia Bhatt's airport look for Rs 1500",
-      "caption": "Alia Bhatt's airport look probably costs more than my rent.\nRecreated it for Rs 1500 and honestly? I might have done it better.\nWho wore it better — be honest.\nTag someone who needs this budget dupe energy.",
+      "caption": "Alia Bhatt's airport look probably costs more than my rent.\nRecreated it for Rs 1500 and honestly? I might have done it better.\nWho wore it better \u2014 be honest.\nTag someone who needs this budget dupe energy.",
       "alt_text": "Maya Varma recreating Alia Bhatt's famous airport outfit using affordable Rs 1500 alternatives, side-by-side comparison style.",
       "youtube_title": "Recreating Alia Bhatt's Airport Look for Just Rs 1500!",
       "video_text": [
@@ -866,8 +868,8 @@
     {
       "id": "maya-043",
       "status": "draft",
-      "topic": "Zara vs street market — who wins?",
-      "caption": "Zara charges you Rs 3000 for a basic crop top that a Mumbai street market sells for Rs 300.\nI bought both. Compared both. The results will make Zara fans uncomfortable.\nZara loyalty or street market hustle — where do you stand?\nSend to your Zara-obsessed friend. They need to see this.",
+      "topic": "Zara vs street market \u2014 who wins?",
+      "caption": "Zara charges you Rs 3000 for a basic crop top that a Mumbai street market sells for Rs 300.\nI bought both. Compared both. The results will make Zara fans uncomfortable.\nZara loyalty or street market hustle \u2014 where do you stand?\nSend to your Zara-obsessed friend. They need to see this.",
       "alt_text": "Maya Varma comparing identical-looking Zara and Mumbai street market clothing pieces side by side with price tags visible.",
       "youtube_title": "Zara vs Mumbai Street Market: Same Look, 10x Price Difference?",
       "video_text": [
@@ -884,16 +886,16 @@
       "notes": "CONTROVERSY POST. Side-by-side comparison carousel. Clean photography, both items shot identically. Price reveals on each slide. Should trigger debate and shares. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya holding up two identical-looking crop tops, text 'One is Rs 3000. One is Rs 300. Can you tell?'",
-        "Round 1 — Crop tops: Zara ribbed crop top Rs 2499 vs market ribbed crop top Rs 250. Close-up texture comparison."
+        "Round 1 \u2014 Crop tops: Zara ribbed crop top Rs 2499 vs market ribbed crop top Rs 250. Close-up texture comparison."
       ],
       "reel_format": "hook_photo"
     },
     {
       "id": "maya-044",
       "status": "draft",
-      "topic": "Office-to-party transition — 1 outfit, 2 vibes",
+      "topic": "Office-to-party transition \u2014 1 outfit, 2 vibes",
       "caption": "9 AM: corporate. 9 PM: dangerous.\nSame outfit. Different energy. Different accessories. That's the cheat code nobody teaches you.\nAre you an office girlie or a party girlie? Wrong answer: both.\nSend this to your work bestie who changes outfits in the office bathroom.",
-      "alt_text": "Maya Varma showing the same black blazer dress styled two ways — corporate with pumps for day, edgy with boots and bold jewelry for night.",
+      "alt_text": "Maya Varma showing the same black blazer dress styled two ways \u2014 corporate with pumps for day, edgy with boots and bold jewelry for night.",
       "youtube_title": "Office to Party: 1 Outfit, 2 Completely Different Vibes",
       "video_text": [
         "9 AM: Corporate.",
@@ -915,7 +917,7 @@
     {
       "id": "maya-045",
       "status": "draft",
-      "topic": "College capsule wardrobe — 10 pieces, 30 outfits",
+      "topic": "College capsule wardrobe \u2014 10 pieces, 30 outfits",
       "caption": "10 pieces. 30 outfits. Zero repeats.\nYour hostel closet is tiny. Your budget is tinier. But your style doesn't have to be.\nHow many outfits can YOU make from 10 pieces? Count and comment.\nSave this if you're heading to college this year.",
       "alt_text": "Maya Varma surrounded by 10 clothing pieces laid out flat, with multiple styled outfit combinations shown in a grid format.",
       "youtube_title": "College Capsule Wardrobe: 10 Pieces = 30 Outfits (Budget Friendly)",
@@ -933,7 +935,7 @@
       "notes": "Educational carousel. Flat-lay of all 10 pieces, then outfit combinations. Clean white/neutral background. Numbered outfits for easy reference. High save potential. | generated_by=viral-claude",
       "slides": [
         "Hook slide: Maya next to a tiny hostel closet, text '10 pieces. 30 outfits. Your hostel closet is enough.'",
-        "The 10 Pieces: Flat lay — white tee, black jeans, blue denim, white shirt, cotton kurta, black blazer, floral skirt, neutral co-ord top, co-ord bottom, denim jacket."
+        "The 10 Pieces: Flat lay \u2014 white tee, black jeans, blue denim, white shirt, cotton kurta, black blazer, floral skirt, neutral co-ord top, co-ord bottom, denim jacket."
       ],
       "reel_format": "hook_photo"
     },
@@ -960,7 +962,7 @@
     {
       "id": "maya-047",
       "status": "draft",
-      "topic": "Rs 500 outfit vs Rs 5000 outfit — budget vs splurge comparison",
+      "topic": "Rs 500 outfit vs Rs 5000 outfit \u2014 budget vs splurge comparison",
       "caption": "Rs 500 outfit vs Rs 5000 outfit. Same girl. Same confidence. Different bank balance.\nThe internet will tell you style costs money. I'm here to tell you that's a lie.\nWhich one looks more expensive? Be brutally honest.\nSend this to every girl who thinks she needs to spend more to look better.",
       "alt_text": "Maya Varma in a side-by-side comparison wearing a Rs 500 budget outfit and a Rs 5000 splurge outfit, both looking equally styled and confident.",
       "youtube_title": "Rs 500 vs Rs 5000 Outfit: Can You Tell The Difference?",
@@ -978,15 +980,15 @@
       "scheduled_at": "2026-03-15T07:30:00Z",
       "notes": "Hook-photo reel. Budget vs splurge side-by-side. First photo = Rs 500 look (thrifted crop top, market jeans, oxidized earrings). Second photo = Rs 5000 look (Zara top, branded jeans, gold earrings). Reveal that both look fire. High share potential. | generated_by=viral-claude",
       "slides": [
-        "Photo 1: Maya in Rs 500 outfit — thrifted white crop top, street market blue jeans, oxidized silver earrings, kolhapuri chappals. Full body, confident pose on a colorful Bandra street. Natural sunlight.",
-        "Photo 2: Maya in Rs 5000 outfit — Zara fitted white blouse, branded straight-leg denim, gold layered necklace, block heels. Same street, same pose, same confidence. Natural sunlight.",
-        "Photo 3: Split comparison — both outfits side by side, price tags overlaid. Maya shrugging with a smirk. Text: 'Style isn't a price tag.'"
+        "Photo 1: Maya in Rs 500 outfit \u2014 thrifted white crop top, street market blue jeans, oxidized silver earrings, kolhapuri chappals. Full body, confident pose on a colorful Bandra street. Natural sunlight.",
+        "Photo 2: Maya in Rs 5000 outfit \u2014 Zara fitted white blouse, branded straight-leg denim, gold layered necklace, block heels. Same street, same pose, same confidence. Natural sunlight.",
+        "Photo 3: Split comparison \u2014 both outfits side by side, price tags overlaid. Maya shrugging with a smirk. Text: 'Style isn't a price tag.'"
       ]
     },
     {
       "id": "maya-048",
       "status": "draft",
-      "topic": "What I ordered vs What I got — thrift edition",
+      "topic": "What I ordered vs What I got \u2014 thrift edition",
       "caption": "Ordered the Pinterest vision. Got the Mumbai thrift version.\nPlot twist: the thrift version actually ate.\nHave you had a thrift win or a thrift disaster? Spill below.\nSend to your friend who's scared of thrifting.",
       "alt_text": "Maya Varma showing a Pinterest inspiration image next to her thrifted Mumbai version of the same outfit, looking equally stylish.",
       "youtube_title": "What I Ordered vs What I Got: Mumbai Thrift Edition (Honest Review)",
@@ -1002,11 +1004,11 @@
       "reel_format": "hook_photo",
       "carousel_images": [],
       "scheduled_at": "2026-03-15T13:00:00Z",
-      "notes": "Hook-photo reel. Expectation vs reality format but with a positive twist — thrift version wins. Photo 1 = Pinterest inspo screenshot aesthetic. Photo 2 = Maya in the thrifted recreation. | generated_by=viral-claude",
+      "notes": "Hook-photo reel. Expectation vs reality format but with a positive twist \u2014 thrift version wins. Photo 1 = Pinterest inspo screenshot aesthetic. Photo 2 = Maya in the thrifted recreation. | generated_by=viral-claude",
       "slides": [
-        "Photo 1: 'The Pinterest inspo' — a clean, aspirational outfit flat-lay in soft tones. Beige linen co-ord set, gold minimalist jewelry, woven bag. Aesthetic, curated, expensive-looking mood board style.",
-        "Photo 2: 'What I got from Linking Road' — Maya wearing a nearly identical thrifted beige linen co-ord, market-bought gold hoops, canvas tote. Full body pose at a Mumbai cafe. Bright, real, unfiltered but gorgeous.",
-        "Photo 3: Side-by-side reveal — Pinterest inspo vs Maya's thrift version. Price comparison overlay: Inspo estimated Rs 8000+ vs Thrift total Rs 900. Maya winking at camera."
+        "Photo 1: 'The Pinterest inspo' \u2014 a clean, aspirational outfit flat-lay in soft tones. Beige linen co-ord set, gold minimalist jewelry, woven bag. Aesthetic, curated, expensive-looking mood board style.",
+        "Photo 2: 'What I got from Linking Road' \u2014 Maya wearing a nearly identical thrifted beige linen co-ord, market-bought gold hoops, canvas tote. Full body pose at a Mumbai cafe. Bright, real, unfiltered but gorgeous.",
+        "Photo 3: Side-by-side reveal \u2014 Pinterest inspo vs Maya's thrift version. Price comparison overlay: Inspo estimated Rs 8000+ vs Thrift total Rs 900. Maya winking at camera."
       ]
     }
   ]
