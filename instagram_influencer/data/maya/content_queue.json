@@ -180,7 +180,9 @@
       "youtube_video_url": "data/maya/generated_images/pending/maya-011_yt.mp4",
       "posted_at": "2026-03-05T07:39:24Z",
       "platform_post_id": "3845977965759097799",
-      "publish_error": null
+      "publish_error": null,
+      "youtube_video_id": "yGg97C9tw8w",
+      "youtube_posted_at": "2026-03-13T08:01:19Z"
     },
     {
       "id": "maya-012",
