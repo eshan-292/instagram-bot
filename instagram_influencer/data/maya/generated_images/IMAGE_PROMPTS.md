@@ -4,17 +4,6 @@ Generate these images in the Gemini app and place them at the paths shown.
 
 ---
 
-## maya-019 — REEL (HOOK-PHOTO)
-**Topic:** Making an unforgettable entrance at an exclusive club or event.
-**Caption:** My presence is the only invitation needed.
-
-**HOOK-PHOTO REEL — Place 1 photos in:** `generated_images/pending/maya-019/1.jpg`, `2.jpg`, ...
-**On-screen hooks (auto-generated):** ['My presence is the only invitation needed', 'Watch till the end.', 'Save this for later.']
-
-**Photo 1:** Maya Varma, a 23-year-old Indian fashion influencer from Mumbai. She has warm light-olive brown skin, large dark expressive eyes, long dark wavy hair past her shoulders, slim petite build, natural minimal makeup, soft confident expression. (Slide 1 of a carousel post.) Scene: Photo 1: Dynamic shot. Maya pausing dramatically at the entrance of a high-end club or bar. Dressed in a striking evening gown or a chic, edgy party outfit (e.g., sequined mini dress, sharp cut-out details). Low, ambient lighting with neon accents or a spotlight on her. Her back is slightly turned, looking over her shoulder with a captivating, almost mischievous smirk. Focus on the silhouette and sparkle. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
 ## maya-020 — REEL (HOOK-PHOTO)
 **Topic:** Monsoon glam in Mumbai
 **Caption:** They said rain ruins everything. Clearly, they haven't seen me in it.
