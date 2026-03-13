@@ -352,25 +352,6 @@ Tag someone and debate this.
 
 ---
 
-## aryan-001 — REEL (HOOK-PHOTO)
-**Topic:** Correcting common squat form mistakes for better leg day gains.
-**Caption:** Your squat form. It's probably costing you more than you think. Bad technique means wasted effort, zero gains, and potential injuries.
-
-Are you compromising depth for weight?
-
-This isn't about lifting heavy, it's about lifting smart. Get it right or stay small. Period.
-
-Tag the friend who needs this form check ASAP.
-
-**HOOK-PHOTO REEL — Place 2 photos in:** `generated_images/pending/aryan-001/1.jpg`, `2.jpg`, ...
-**On-screen hooks (auto-generated):** ['Your squat form. Wrong.', 'This costs you gains.', 'Tag the friend who needs this.']
-
-**Photo 1:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 1 of a carousel post.) Scene: Aryan Dhar in a gym performing a shallow squat with rounded back and caving knees. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
-**Photo 2:** Not a person — a bold graphic-design page. Content uses split-screen comparisons, bold typography, contrasting color blocks, clean modern Instagram graphic design. (Slide 2 of a carousel post.) Scene: Aryan Dhar immediately transitioning to a perfect, deep squat with chest up, stable core, and knees tracking properly. Photography style: shot on iPhone 15 Pro, natural ambient lighting, candid real-photo feel, visible skin texture, warm natural color grading, slight bokeh background. No airbrushing, no heavy filters, portrait 3:4 ratio.
-
----
-
 ## aryan-002 — REEL (HOOK-PHOTO)
 **Topic:** Full day of protein-rich Indian meals under Rs 200 without supplements.
 **Caption:** Rs 180. That's all it takes for a full day of solid protein. No fancy powders, no expensive supplements.
