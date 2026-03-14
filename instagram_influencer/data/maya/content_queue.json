@@ -350,7 +350,7 @@
     },
     {
       "id": "maya-020",
-      "status": "approved",
+      "status": "failed",
       "topic": "Monsoon glam in Mumbai",
       "caption": "They said rain ruins everything. Clearly, they haven't seen me in it.",
       "image_url": "data/maya/generated_images/pending/maya-020.jpg",
@@ -368,7 +368,8 @@
         "They said rain ruins everything",
         "Clearly, they haven't seen me in it",
         "Save this for later."
-      ]
+      ],
+      "publish_error": "No valid session in CI. Fresh login from datacenter IPs triggers 'new device' blocks. Run seed_session.py locally."
     },
     {
       "id": "maya-021",
