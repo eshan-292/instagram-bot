@@ -753,6 +753,29 @@
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-001.jpg"
       ],
       "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /rupload_igvideo/1773475646906_0_5764604866 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)')))"
+    },
+    {
+      "id": "cw-027",
+      "status": "approved",
+      "topic": "Gym or Party \u2014 which defines your weekends?",
+      "caption": "Would you rather...\nGym or Party \u2014 which defines your weekends?.\nWould you try this?\nSend to someone who needs to see this.",
+      "alt_text": "Split-screen graphic comparing gym lifestyle versus party lifestyle with bold text",
+      "youtube_title": "",
+      "video_text": [
+        "Would you rather...",
+        "Wait. It gets better.",
+        "Send to your bestie."
+      ],
+      "image_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-001.jpg",
+      "video_url": "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-001.mp4",
+      "is_reel": true,
+      "post_type": "reel",
+      "reel_format": "hook_photo",
+      "scheduled_at": "2026-03-14T13:58:49Z",
+      "notes": "repost:cw-001 | fresh hooks",
+      "carousel_images": [
+        "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/choosewisely/generated_images/pending/cw-001.jpg"
+      ]
     }
   ]
 }
