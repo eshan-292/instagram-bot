@@ -696,7 +696,7 @@
     },
     {
       "id": "mt-025",
-      "status": "approved",
+      "status": "failed",
       "topic": "Woman sitting alone in a bustling cafe, waiting, looking at her phone expectantly, feeling like a backup option.",
       "caption": "Uncomfortable fact:\nWoman sitting alone in a bustling cafe, waiting, looking at her phone expectantly, feeling like a backup option..\nWould you try this?\nSend to someone who needs to see this.",
       "alt_text": "A woman looking dejected, sitting alone in a bustling cafe, scrolling on her phone, illustrating the feeling of being a backup option.",
@@ -715,7 +715,8 @@
       "notes": "repost:mt-002 | fresh hooks",
       "carousel_images": [
         "/home/runner/work/instagram-bot/instagram-bot/instagram_influencer/data/moderntruths/generated_images/pending/mt-002.jpg"
-      ]
+      ],
+      "publish_error": "SOCKSHTTPSConnectionPool(host='i.instagram.com', port=443): Max retries exceeded with url: /api/v1/media/configure_to_clips/?video=1 (Caused by ResponseError('too many 500 error responses'))"
     }
   ]
 }
