@@ -1,6 +1,6 @@
-# 📊 Daily Report — March 11, 2026
+# 📊 Daily Report — March 14, 2026
 
-*Generated at 12:04 AM IST*
+*Generated at 11:27 PM IST*
 
 ## Engagement
 
@@ -16,14 +16,14 @@
 ## Content Pipeline
 
 - Draft: 23
-- Approved: 1
+- Approved: 0
 - Posted: 4
 
 ## Growth Signals
 
 - Net follows sent today: **-11**
 - Engagement actions: **11**
-- Account age: **7 days**
+- Account age: **11 days**
 - Warmup multiplier: **0.6x**
 
 ---
